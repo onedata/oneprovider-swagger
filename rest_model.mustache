@@ -1,0 +1,34 @@
+-module(rest_model).
+
+%
+% Definitions of records for REST API
+%
+
+
+{{#models}}
+{{#model}}
+%
+% {{classname}}
+%
+% {{description}}
+%
+-record({{classname}}, {
+{{#vars}}
+	% {{description}}
+    {{name}} :: {{datatype}}(), 
+{{/vars}} }).
+
+%
+% Record schema for validation of JSON strings received via REST API. 
+%
+-{{classname}}_schema() ->
+	#{
+	{{#vars}}
+	<<"{{name}}">> => { {{datatypeWithEnum}}, {{#required}}true{{/required}}{{^required}}false{{/required}} },
+	{{/vars}}
+	}
+	.
+
+
+{{/model}}
+{{/models}}

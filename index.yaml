@@ -1,0 +1,8 @@
+swagger: '2.0'
+basePath: /api/v3/oneprovider
+info:
+  $ref: ./info/index.yaml
+paths:
+  $ref: ./paths/index.yaml
+definitions:
+  $ref: ./definitions/index.yaml

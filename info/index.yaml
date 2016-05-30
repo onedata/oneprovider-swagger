@@ -1,0 +1,30 @@
+version: 3.0.0
+title: Onezone
+description: |
+ This is the RESTful API definition of Oneprovider component of Onedata data management system [http://www.onedata.org].
+
+ This API provides methods for file management using REST protocol.
+
+ ## Authentication
+ In order to be able to use this API the REST client must be able to authenticate with the Onezone service.
+
+ Currently this is supported through authentication token which can be generate using the Onedata user interface. 
+ The token must be added to the request header:
+  - TODO
+
+ In addition please take into account, that depending on your account authorization rights, not all operations
+ may be possible. In particular, some operations depend on whether a particular request is initiated by a regular
+ user or by another storage provider within a zone.
+
+ ## API structure
+ The Oneprovider API reflects the fact that most operations deal directly with virtual file paths relative to
+ user spaces, which are provided as part of the paths in the REST calls.
+
+ 
+contact:
+  name: Onedata support
+  url: https://onedata.org/support
+  email: info@onedata.org
+license:
+  name: Apache 2.0
+  url: http://www.apache.org/licenses/LICENSE-2.0.html

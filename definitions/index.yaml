@@ -1,0 +1,7 @@
+#
+# This file groups the type definitions for Onezone REST API
+#
+
+error:
+  $ref: ./error.yaml
+
