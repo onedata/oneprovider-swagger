@@ -1,0 +1,12 @@
+type: object
+description: File distribution information
+properties:
+  path:
+    type: string
+    description: The path to the file.
+required:
+  - path
+example:
+  path: /My Private Space/folder1/file2.txt
+
+

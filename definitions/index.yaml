@@ -5,3 +5,14 @@
 error:
   $ref: ./error.yaml
 
+filedistribution:
+  $ref: ./filedistribution.yaml
+
+posixmode:
+  $ref: ./posixmode.yaml
+
+replicationrequest:
+  $ref: ./replicationrequest.yaml
+
+readevent:
+  $ref: ./readevent.yaml

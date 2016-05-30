@@ -1,7 +1,19 @@
 #
-# This file groups path definitions for Onezone API
+# This file groups path definitions for Oneprovider API
 # defined in separate files for each path
 #
+
+/file_distribution/{path}:
+  $ref: ./file_distribution.yaml
+
+/replicate_file/{path}:
+  $ref: ./replicate_file.yaml
+
+/posix_mode/{path}:
+  $ref: ./posix_mode.yaml
+
+/read_event/{path}:
+  $ref: ./read_event.yaml
 
 
 

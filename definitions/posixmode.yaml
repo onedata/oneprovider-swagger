@@ -1,0 +1,11 @@
+type: object
+description: The POSIX mode information.
+properties:
+  posix_mode:
+    type: boolean
+    description: When true, the file under requested path is in POSIX mode.
+required:
+  - posix_mode
+
+
+

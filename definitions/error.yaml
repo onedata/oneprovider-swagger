@@ -1,0 +1,15 @@
+type: object
+description: Generic error model for REST requests.
+properties:
+  id:
+    description: Unique error Id for reference.
+    type: string
+  status:
+    description: HTTP error code.
+    type: integer
+  title:
+    description: Short error title.
+    type: string
+  message:
+    description: Detailed error message.
+    type: string

@@ -1,0 +1,8 @@
+type: object
+description: Replication request definition.
+properties:
+  provider_id:
+    type: string
+    description: The ID of the storage provider to which the file should be replicated.
+required:
+  - provider_id
