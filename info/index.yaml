@@ -5,6 +5,12 @@ description: |
 
  This API provides methods for file management using REST protocol.
 
+ All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
+ query for 'posix_mode' file attributes would be:
+  ```
+  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=posix_mode
+  ```
+
  ## Authentication
  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
 
@@ -18,6 +24,26 @@ description: |
  ## API structure
  The Oneprovider API reflects the fact that most operations deal directly with virtual file paths relative to
  user spaces, which are provided as part of the paths in the REST calls.
+
+ The API provides the following functionality:
+
+ ### File attributes
+ The `/attributes/` operation group provides GET and PUT methods enable querying
+ for file attributes, such as 'posix_mode' file permissions and updating them.
+
+ ### Events subscription
+ The `/events/` group provide means for subscribing (through HTTP long-polling technique) for
+ file related events such as reads, writes or deletes.
+
+ ### Monitoring metrics
+ The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
+ All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/) 
+ database files, with resolution determined by the `step` query parameter.
+
+ ### Replica management
+ The `/replicas/` methods allow retrieving of information about file replica distribution
+ among Onedata providers as well as requesting specific file replication to selected
+ providers.
 
  
 contact:

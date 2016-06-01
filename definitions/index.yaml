@@ -2,17 +2,14 @@
 # This file groups the type definitions for Onezone REST API
 #
 
-error:
+Error:
   $ref: ./error.yaml
 
-filedistribution:
+FileDistribution:
   $ref: ./filedistribution.yaml
 
-posixmode:
-  $ref: ./posixmode.yaml
+FileAttribute:
+  $ref: ./fileattribute.yaml
 
-replicationrequest:
-  $ref: ./replicationrequest.yaml
-
-readevent:
-  $ref: ./readevent.yaml
+FileEvent:
+  $ref: ./fileevent.yaml

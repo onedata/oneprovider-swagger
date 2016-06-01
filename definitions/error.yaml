@@ -13,3 +13,8 @@ properties:
   message:
     description: Detailed error message.
     type: string
+example:
+  id: GUID-56asd7a9-asd57as-asdcs6
+  status: 400
+  title: Invalid metric type
+  message: Please check the API definition for a list of metrics supported for given scope.

@@ -1,12 +1,38 @@
-type: object
-description: File distribution information
-properties:
-  path:
-    type: string
-    description: The path to the file.
-required:
-  - path
+type: array
+description: >
+  Describes distribution of a single file among different storage providers.
+  For each provider, this data type provides a list of byte ranges which reflect
+  which blocks of a given file are stored at which provider.
+items:
+  type: object
+  properties: 
+    provider: 
+      type: string
+      description: ID of the provider
+    blocks:
+      type: array
+      description: The list of blocks in byte ranges stored at that provider.
+      items:
+        type: array
+        description: File block range in bytes.
+        items:
+          type: integer
+        maxItems: 2
+        minItems: 2
 example:
-  path: /My Private Space/folder1/file2.txt
-
-
+  - provider: "UMa3Dg7iliXbAYsQ10f7L0ZZFJlNKDYYY62LQy9HW4k"
+    blocks:
+      - 
+        - 0
+        - 4
+      - 
+        - 10
+        - 20
+  - provider: "34fgtYRDD5rhg5e1W4t4gt557VSffsDDAJTTS31SHRS"
+    blocks:
+      - 
+        - 1024
+        - 2048
+      - 
+        - 4096
+        - 1048576

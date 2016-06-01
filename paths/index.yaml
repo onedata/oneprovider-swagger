@@ -3,18 +3,26 @@
 # defined in separate files for each path
 #
 
-/file_distribution/{path}:
-  $ref: ./file_distribution.yaml
-
-/replicate_file/{path}:
-  $ref: ./replicate_file.yaml
-
-/posix_mode/{path}:
-  $ref: ./posix_mode.yaml
-
-/read_event/{path}:
-  $ref: ./read_event.yaml
 
 
+/replicas:
+  $ref: ./replicas.yaml
 
+/replicas/{path}:
+  $ref: ./replicas-path.yaml
+
+/events/{path}:
+  $ref: ./events-path.yaml
+
+/metrics/space/{sid}:
+  $ref: ./metrics-space-sid.yaml
+
+/attributes/{path}:
+  $ref: ./attributes-path.yaml
+
+/metrics/provider/{pid}:
+  $ref: ./metrics-provider-pid.yaml
+
+/metrics/user/{uid}:
+  $ref: ./metrics-user-uid.yaml
 
