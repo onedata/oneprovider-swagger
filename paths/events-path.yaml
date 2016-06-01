@@ -1,0 +1,46 @@
+get:
+  operationId: get_file_events
+  x-onedata-service: oneprovider
+  x-onedata-module: events
+  x-onedata-resource: file
+  x-onedata-method: get_file_events
+  summary: Subscribe to file events.
+  description: This method subscribes through HTTP long-polling on events of specific type for a given path.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Subscription to events has been successful.
+      schema:
+        $ref: '#/definitions/FileEvent'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: event_type
+    in: query
+    description: Event type to subscribe to.
+    type: string
+    required: true
+    enum:
+      - read_event
+      - write_event
+      - delete_event

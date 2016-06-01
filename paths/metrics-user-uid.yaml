@@ -1,0 +1,64 @@
+get:
+  operationId: get_user_metrics
+  x-onedata-service: oneprovider
+  x-onedata-module: metrics
+  x-onedata-resource: user
+  x-onedata-method: get_user_metrics
+  summary: Get user metrics.
+  description: Returns user related metrics of specified type.
+  produces:
+    - application/x-gzip
+  responses:
+    '200':
+      description: The monitoring data retrieved in the form of a RRD database file.
+      schema:
+        type: file
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: uid
+    in: path
+    description: ID of a specific user for which the monitoring metrics should be retrieved.
+    type: string
+    required: true
+  - name: metric
+    in: query
+    description: The type of metrics to retrieve.
+    type: string
+    required: true
+    enum:
+      - storage_quota
+      - storage_used
+      - data_access_kbs
+      - block_access_iops
+      - block_access_latency
+      - remote_transfer_kbs
+      - connected_users
+      - remote_access_kbs
+      - metada_access_ops
+  - name: step
+    in: query
+    description: The resolution of the monitoring data to return - default is 5m [5 minutes].
+    type: string
+    required: false
+    enum:
+      - 5m
+      - 1h
+      - 1d
+      - 1m
+      - 1y
+

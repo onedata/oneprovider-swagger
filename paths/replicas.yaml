@@ -1,0 +1,41 @@
+get:
+  operationId: get_all_files
+  x-onedata-service: oneprovider
+  x-onedata-module: file_distribution
+  x-onedata-resource: file
+  x-onedata-method: get_files_distribution
+  summary: Get all files.
+  description: Returns the list of all user files.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of all user files, with complete paths.
+      schema:
+        type: array
+        items: 
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: provider_id
+    in: query
+    description: >
+      Allows to limit the returned list of files to a specific provider, 
+      which stores at least some blocks of a file.
+    type: string
+    required: false
