@@ -6,7 +6,7 @@ properties:
     description: Name of the attribute (e.g. 'posix_mode')
   value:
     type: string
-    description: Value of the file attribute (e.g. '0444')
+    description: Value of the file attribute (e.g. '0444') in octal notation.
 example:
   name: 'posix_mode'
   value: '0444'

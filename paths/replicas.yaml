@@ -4,13 +4,13 @@ get:
   x-onedata-module: file_distribution
   x-onedata-resource: file
   x-onedata-method: get_files_distribution
-  summary: Get all files.
-  description: Returns the list of all user files.
+  summary: Get all spaces.
+  description: Returns the list of all user spaces.
   produces:
     - application/json
   responses:
     '200':
-      description: The list of all user files, with complete paths.
+      description: The list of all user spaces.
       schema:
         type: array
         items: 

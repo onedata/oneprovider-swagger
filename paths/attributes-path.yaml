@@ -10,7 +10,7 @@ get:
     - application/json
   responses:
     '200':
-      description: Subscription to events has been successful.
+      description: Returns the requested file attributes.
       schema:
         $ref: '#/definitions/FileAttribute'
     '400':
@@ -22,7 +22,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Oneprovider REST API not available.
+      description: File not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -54,7 +54,7 @@ put:
   produces:
     - application/json
   responses:
-    '200':
+    '204':
       description: File attributes where update successfuly.
     '400':
       description: Invalid request.

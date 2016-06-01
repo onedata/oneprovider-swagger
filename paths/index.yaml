@@ -5,8 +5,8 @@
 
 
 
-/replicas:
-  $ref: ./replicas.yaml
+/files:
+  $ref: ./files.yaml
 
 /replicas/{path}:
   $ref: ./replicas-path.yaml

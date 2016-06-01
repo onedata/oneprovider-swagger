@@ -2,7 +2,7 @@ type: object
 description: Generic error model for REST requests.
 properties:
   id:
-    description: Unique error Id for reference.
+    description: Identifier representing internal error code.
     type: string
   status:
     description: HTTP error code.

@@ -5,7 +5,8 @@ get:
   x-onedata-resource: file
   x-onedata-method: get_file_distribution
   summary: Get file distribution information.
-  description: Returns file distribution information about a specific file replicated at this provider.
+  description: >
+    Returns file distribution information about a specific file replicated at this provider.
   produces:
     - application/json
   responses:
@@ -50,8 +51,8 @@ post:
   produces:
     - application/json
   responses:
-    '200':
-      description: The replication request was successful.
+    '204':
+      description: The replication request was accepted.
     '400':
       description: Invalid request.
       schema:
@@ -76,7 +77,9 @@ post:
     required: true
   - name: provider_id
     in: query
-    description: The ID of the provider to which the file should be replicated.
-    required: true
+    description: >
+      The ID of the provider to which the file should be replicated.
+      By default the file will be replicated to the provided handling this REST call.
+    required: false
     type: string
 
