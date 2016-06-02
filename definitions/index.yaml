@@ -13,3 +13,9 @@ FileAttribute:
 
 FileEvent:
   $ref: ./fileevent.yaml
+
+FileTransferStatus:
+  $ref: ./filetransferstatus.yaml
+
+Callback:
+  $ref: ./callback.yaml

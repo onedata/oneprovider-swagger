@@ -1,0 +1,80 @@
+get:
+  operationId: get_transfer_status
+  x-onedata-service: oneprovider
+  x-onedata-module: transfers
+  x-onedata-resource: transfer
+  x-onedata-method: get_transfer_status
+  summary: Get transfer status.
+  description: >
+    Returns status of specific transfer. In case the transfer has been scheduled
+    for entire folder, the result is a list of transfer statuses for each item in the folder.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of transfer statuses.
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/FileTransferStatus'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Transfer with provided ID was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: tid
+    in: path
+    description: Transfer ID.
+    type: string
+    required: true
+
+delete:
+  operationId: cancel_transfer
+  x-onedata-service: oneprovider
+  x-onedata-module: transfers
+  x-onedata-resource: transfer
+  x-onedata-method: cancel_transfer
+  summary: Cancel specific transfer.
+  description: >
+    Cancels a scheduled or active transfer. Returns 400 in case the
+    transfer is already completed, canceled or failed.
+  produces:
+    - application/json
+  responses:
+    '204':
+      description: The transfer has been canceled.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Transfer with provided ID was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: tid
+    in: path
+    description: Transfer ID.
+    type: string
+    required: true
+

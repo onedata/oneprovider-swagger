@@ -1,0 +1,53 @@
+get:
+  operationId: get_all_transfers
+  x-onedata-service: oneprovider
+  x-onedata-module: transfers
+  x-onedata-resource: file
+  x-onedata-method: get_all_transfers
+  summary: Get all user transfers.
+  description: Returns the list of all transfer IDs.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of transfer IDs.
+      schema:
+        type: array
+        items: 
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: status
+    in: query
+    description: >
+      Allows to limit the returned transfers only to transfers with specific status.
+    type: array
+    items:
+      type: string
+      enum:
+        - scheduled
+        - active
+        - completed
+        - cancelled
+        - failed
+    required: false
+  - name: limit
+    in: query
+    description: >
+      Allows to limit the number of returned transfers only to the last N transfers.
+    type: integer

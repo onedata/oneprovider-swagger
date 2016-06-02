@@ -46,13 +46,26 @@ post:
   x-onedata-module: replicate_file
   x-onedata-resource: file
   x-onedata-method: replicate_file
-  summary: Replicate file.
-  description: Replicates a file to a specified provider.
+  summary: Replicate file or folder.
+  description: >
+    Replicates a file to a specified provider. This operation is asynchronous as it can 
+    take a long time depending on the size of the data to move. 
+
+    If the `path` parameter specifies a folder, entire folder is replicated to 
+    requested provider.
   produces:
     - application/json
   responses:
-    '204':
-      description: The replication request was accepted.
+    '200':
+      description: >
+        The replication request was accepted and the result is the transfer ID, which
+        can be used for monitoring of the transfer status.
+      schema:
+        type: object
+        properties:
+          transferId: 
+            type: string
+            description: Transfer ID.
     '400':
       description: Invalid request.
       schema:
@@ -82,4 +95,12 @@ post:
       By default the file will be replicated to the provided handling this REST call.
     required: false
     type: string
+  - name: callback
+    in: body
+    description: >
+      This parameter allows the user to specify a REST callback URL, which will be called
+      when the transfer is complete
+    required: false
+    schema:
+      $ref: '#/definitions/Callback'
 

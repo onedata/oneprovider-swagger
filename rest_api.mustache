@@ -27,7 +27,7 @@ routes() ->
     [
 {{#operations}}
 {{#operation}}
-      { <<"{{basePathWithoutHost}}{{path}}">>, {{operationId}}, S#rstate{resource = hosts, method = '{{httpMethod}}' }{{#hasMore}},{{/hasMore}}
+      { <<"{{basePathWithoutHost}}{{path}}">>, #{handler => '{{operationId}}' }{{#hasMore}},{{/hasMore}}
 {{/operation}}
 {{/operations}}
 	].

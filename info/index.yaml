@@ -10,7 +10,7 @@ description: |
   ```
   https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=posix_mode
   ```
-
+ Please note that currently the default port for Oneprovider instances is `8443`.
  ## Authentication
  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
 
@@ -52,6 +52,9 @@ description: |
  among Onedata providers as well as requesting specific file replication to selected
  providers.
 
+ ### Transfer management
+ The `/transfer/` provides basic transfer management functionality based on the ID of transfer
+ returned by `/replicas/{path} [POST]` operation. 
  
 contact:
   name: Onedata support

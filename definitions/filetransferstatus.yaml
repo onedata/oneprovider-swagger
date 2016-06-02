@@ -1,0 +1,25 @@
+type: object
+description: File transfer status.
+properties:
+  path:
+    type: string
+    description: Path to the file or folder in the virtual file system.
+  status:
+    type: string
+    description: Current status of the transfer.
+    enum:
+      - scheduled
+      - active
+      - completed
+      - cancelled
+      - failed
+  targetProvider:
+    type: string
+    description: The ID of the target provider to which the replication was requested.
+  progress:
+    type: integer
+    description: The progress of the transfer in %.
+example:
+  path: /My Space 1/Folder2/file3.txt
+  status: scheduled
+  targetProvider: GUID-AS786ASD-ASDASD-7ASDd7
