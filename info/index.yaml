@@ -15,8 +15,10 @@ description: |
  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
 
  Currently this is supported through authentication token which can be generate using the Onedata user interface. 
- The token must be added to the request header:
-  - TODO
+ The token must be added to the request header like this:
+  ```
+  X-Auth-Header: 106d802a-4bc6-468b-106d802a-4bc6-468b-9895-23ac29507a73-9895-23ac29507a73
+  ```
 
  In addition please take into account, that depending on your account authorization rights, not all operations
  may be possible.
@@ -35,6 +37,11 @@ description: |
  The `/events/` group provide means for subscribing (through HTTP long-polling technique) for
  file related events such as reads, writes or deletes.
 
+ ### File browser
+ The `/files/` path methods provide basic capability for browsing files in spaces and folders.
+ Currently no wildcards are possible, thus paths must be complete up to a folder whose
+ contents are needed and start with the name of the space containing the requested folders and files.
+ 
  ### Monitoring metrics
  The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/) 
