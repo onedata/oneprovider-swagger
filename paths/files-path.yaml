@@ -1,0 +1,43 @@
+get:
+  operationId: list_files
+  x-onedata-service: oneprovider
+  x-onedata-module: files
+  x-onedata-resource: file
+  x-onedata-method: list_files
+  summary: List files and folders.
+  description: >
+    Returns the list of folders and files directly under specified path.
+    If the path points to a file, the result array will consist only
+    of the single item with the path to the file requested, confirming
+    it exists.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of files and folders under specified path.
+      schema:
+        type: array
+        items:
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: Directory path (e.g. '/My Private Space/testfiles')
+    type: string
+    required: true
