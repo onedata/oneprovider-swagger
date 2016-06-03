@@ -41,16 +41,8 @@ properties:
   xattrs:
     type: array
     items:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the attribute.
-        value:
-          type: string
-          description: Value of the attribute.
+      $ref: '#/definitions/FileAttribute'
 example:
-  name: /Space1/folder2/file1.txt
   type: reg
   mode: 511
   atime: 1464958683054

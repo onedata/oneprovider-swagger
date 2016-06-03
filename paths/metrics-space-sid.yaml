@@ -7,10 +7,11 @@ get:
   summary: Get space metrics.
   description: Returns space related metrics of specified type.
   produces:
-    - application/x-gzip
+    - application/json
+    - application/xml
   responses:
     '200':
-      description: The monitoring data retrieved in the form of a RRD database file.
+      description: The monitoring data retrieved in the form of RRD record exported to JSON or XML.
       schema:
         type: file
     '400':

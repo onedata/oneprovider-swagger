@@ -7,7 +7,7 @@ description: >
 items:
   type: object
   properties: 
-    provider: 
+    providerId: 
       type: string
       description: ID of the provider
     blocks:

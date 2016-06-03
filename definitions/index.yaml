@@ -23,5 +23,11 @@ Callback:
 FileMetadata:
   $ref: ./filemetadata.yaml
 
+FileMetadataChange:
+  $ref: ./filemetadatachange.yaml
+
 Space:
   $ref: ./space.yaml
+
+Provider:
+  $ref: ./provider.yaml

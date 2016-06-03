@@ -11,14 +11,15 @@ properties:
     type: array
     description: The list of providers who support this space.
     items:
-      type: object
-      properties:
-        providerId:
-          type: string
-          description: The ID of the provider supporting the space.
-        providerName:
-          type: string
-          description: The name of the provider
+      $ref: '#/definitions/Provider'
+      # type: object
+      # properties:
+      #   providerId:
+      #     type: string
+      #     description: The ID of the provider supporting the space.
+      #   providerName:
+      #     type: string
+      #     description: The name of the provider
 example:
   spaceId: KJHJASD-798756876-ASDBKASD-6876
   name: My Space 1

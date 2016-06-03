@@ -1,0 +1,12 @@
+type: object
+description: Provider instance definitions.
+properties:
+  providerId:
+    type: string
+    description: The ID of the provider supporting the space.
+  providerName:
+    type: string
+    description: The name of the provider
+example:
+  providerId: ASDASD-876786-LKJHASD-070-ASDAS
+  providerName: MyFavouriteCloudProvider

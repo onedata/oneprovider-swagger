@@ -1,6 +1,9 @@
 type: object
 description: File transfer status.
 properties:
+  fileId:
+    type: string
+    description: Id of the file or directory being transferred.
   path:
     type: string
     description: Path to the file or folder in the virtual file system.

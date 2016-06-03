@@ -33,9 +33,10 @@ description: |
  The `/attributes/` operation group provides GET and PUT methods enable querying
  for file attributes, such as 'posix_mode' file permissions and updating them.
 
- ### Events subscription
- The `/events/` group provide means for subscribing (through HTTP long-polling technique) for
- file related events such as reads, writes or deletes.
+ ### Changes subscription
+ The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
+ file related events such as reads, writes or deletes which are returned as complete file metadata
+ records with sequence numbers representing their current version.
 
  ### File browser
  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
@@ -56,7 +57,7 @@ description: |
  For convenience, `/space/` methods provider means for getting basic information about
  spaces directly from the Oneprovider service. For more comprehensive operations
  on spaces please use the Onezone API.
- 
+
  ### Transfer management
  The `/transfer/` provides basic transfer management functionality based on the ID of transfer
  returned by `/replicas/{path} [POST]` operation. 

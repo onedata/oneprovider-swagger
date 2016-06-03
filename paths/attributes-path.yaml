@@ -18,7 +18,9 @@ get:
     '200':
       description: Returns the requested file attributes.
       schema:
-        $ref: '#/definitions/FileAttribute'
+        type: array
+        items:
+          $ref: '#/definitions/FileAttribute'
     '400':
       description: Invalid request.
       schema:

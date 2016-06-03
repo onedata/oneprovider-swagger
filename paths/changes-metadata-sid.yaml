@@ -16,7 +16,7 @@ get:
     '200':
       description: Subscription to events has been successful.
       schema:
-        $ref: '#/definitions/FileMetadata'
+        $ref: '#/definitions/FileMetadataChange'
     '400':
       description: Invalid request.
       schema:
