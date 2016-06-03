@@ -1,10 +1,10 @@
 get:
-  operationId: get_file_replicas
+  operationId: get_file_replicas_by_id
   x-onedata-service: oneprovider
   x-onedata-module: file_distribution
   x-onedata-resource: file
   x-onedata-method: get_file_distribution
-  summary: Get file distribution information by path.
+  summary: Get file distribution information by ID.
   description: >
     Returns file distribution information about a specific file replicated at this provider.
   produces:
@@ -33,9 +33,9 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: fid
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: The ID of the file
     type: string
     required: true
 
@@ -46,9 +46,9 @@ post:
   x-onedata-module: replicate_file
   x-onedata-resource: file
   x-onedata-method: replicate_file
-  summary: Replicate file or folder by path.
+  summary: Replicate file or folder by ID.
   description: >
-    Replicates a file to a specified provider. This operation is asynchronous as it can 
+    Replicates a file with ID to a specified provider. This operation is asynchronous as it can 
     take a long time depending on the size of the data to move. 
 
     If the `path` parameter specifies a folder, entire folder is replicated to 
@@ -83,9 +83,9 @@ post:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: fid
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: ID of the file.
     type: string
     required: true
   - name: provider_id

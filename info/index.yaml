@@ -52,6 +52,11 @@ description: |
  among Onedata providers as well as requesting specific file replication to selected
  providers.
 
+ ### Space information
+ For convenience, `/space/` methods provider means for getting basic information about
+ spaces directly from the Oneprovider service. For more comprehensive operations
+ on spaces please use the Onezone API.
+ 
  ### Transfer management
  The `/transfer/` provides basic transfer management functionality based on the ID of transfer
  returned by `/replicas/{path} [POST]` operation. 

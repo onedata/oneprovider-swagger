@@ -5,7 +5,13 @@ get:
   x-onedata-resource: file
   x-onedata-method: get_file_attributes
   summary: Get file attributes.
-  description: This method returns selected file attributes.
+  description: |
+    This method returns selected file attributes.
+    
+    By default the method returns regular file attributes.
+
+    The exteded attributes are accessed by setting `extended` flag 
+    in the request query to `true`.
   produces:
     - application/json
   responses:
@@ -42,6 +48,12 @@ get:
     required: false
     enum:
       - posix_mode
+  - name: extended
+    in: query
+    description: >
+      Whether we want to access extended attributes or regular.
+    type: boolean
+    required: false
 
 put:
   operationId: set_file_attribute
@@ -50,7 +62,17 @@ put:
   x-onedata-resource: file
   x-onedata-method: set_file_attribute
   summary: Set file attribute.
-  description: This method allows to set a value of a specific file attribute (e.g. posix_mode).
+  description: |
+    This method allows to set a value of a regular and extended file attributes.
+    
+    For regular file attributes, currently only POSIX mode can be changed by sending:
+      ```
+      { name: "mode", value: "0777"}
+      ```
+    where the POSIX mode is specified in octal notation.
+
+    For extended attributes any string value can be send. The exteded attributes are 
+    accessed by setting `extended` flag in the request query to `true`.
   produces:
     - application/json
   responses:
@@ -83,4 +105,10 @@ put:
     description: Attribute name and value.
     schema:
       $ref: '#/definitions/FileAttribute'
+  - name: extended
+    in: query
+    description: >
+      Whether this is an extended or regular attribute. Default is false.
+    type: boolean
+    required: false
 

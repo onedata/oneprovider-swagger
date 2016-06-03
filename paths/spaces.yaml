@@ -1,0 +1,41 @@
+get:
+  operationId: get_all_spaces
+  x-onedata-service: oneprovider
+  x-onedata-module: files
+  x-onedata-resource: file
+  x-onedata-method: get_all_spaces
+  summary: Get all spaces.
+  description: Returns the list of all user spaces.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of all user spaces - containining their names and ID's.
+      schema:
+        type: array
+        items: 
+          type: object
+          properties:
+              name:
+                type: string
+                description: Space name.
+              spaceId:
+                type: string
+                description: Space ID.
+    
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'

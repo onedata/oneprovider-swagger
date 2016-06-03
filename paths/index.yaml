@@ -5,8 +5,11 @@
 
 
 
-/files:
-  $ref: ./files.yaml
+/spaces:
+  $ref: ./spaces.yaml
+
+/spaces/{sid}:
+  $ref: ./spaces-sid.yaml
 
 /files/{path}:
   $ref: ./files-path.yaml
@@ -14,14 +17,17 @@
 /replicas/{path}:
   $ref: ./replicas-path.yaml
 
+/replicas-id/{fid}:
+  $ref: ./replicas_id-fid.yaml
+
 /transfers:
   $ref: ./transfers.yaml
 
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
-    
-/events/{path}:
-  $ref: ./events-path.yaml
+
+# /events/{path}:
+#   $ref: ./events-path.yaml
 
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
@@ -29,9 +35,11 @@
 /attributes/{path}:
   $ref: ./attributes-path.yaml
 
-/metrics/provider/{pid}:
-  $ref: ./metrics-provider-pid.yaml
+# /metrics/provider/{pid}:
+#   $ref: ./metrics-provider-pid.yaml
 
-/metrics/user/{uid}:
-  $ref: ./metrics-user-uid.yaml
+# /metrics/user/{uid}:
+#   $ref: ./metrics-user-uid.yaml
 
+/changes/metadata/{sid}:
+  $ref: ./changes-metadata-sid.yaml

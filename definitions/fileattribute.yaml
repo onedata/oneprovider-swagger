@@ -3,10 +3,10 @@ description: File attribute.
 properties:
   name:
     type: string
-    description: Name of the attribute (e.g. 'posix_mode')
+    description: Name of the attribute (e.g. 'mode')
   value:
     type: string
-    description: Value of the file attribute (e.g. '0444') in octal notation.
+    description: Value of the file attribute. Can be 
 example:
-  name: 'posix_mode'
+  name: 'mode'
   value: '0444'

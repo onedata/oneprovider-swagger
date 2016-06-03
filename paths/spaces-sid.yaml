@@ -1,20 +1,19 @@
 get:
-  operationId: get_all_spaces
+  operationId: get_space
   x-onedata-service: oneprovider
-  x-onedata-module: files
-  x-onedata-resource: file
-  x-onedata-method: get_all_spaces
-  summary: Get all spaces.
-  description: Returns the list of all user spaces.
+  x-onedata-module: spaces
+  x-onedata-resource: space
+  x-onedata-method: get_space
+  summary: Get basic space information.
+  description: >
+    Returns the basic information about space with given ID.
   produces:
     - application/json
   responses:
     '200':
-      description: The list of all user spaces.
+      description: The space information.
       schema:
-        type: array
-        items: 
-          type: string
+        $ref: '#/definitions/Space'
     '400':
       description: Invalid request.
       schema:
@@ -32,10 +31,8 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: provider_id
-    in: query
-    description: >
-      Allows to limit the returned list of files to a specific provider, 
-      which stores at least some blocks of a file.
+  - name: sid
+    in: path
+    description: Space ID.
     type: string
-    required: false
+    required: true

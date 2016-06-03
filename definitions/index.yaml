@@ -19,3 +19,9 @@ FileTransferStatus:
 
 Callback:
   $ref: ./callback.yaml
+
+FileMetadata:
+  $ref: ./filemetadata.yaml
+
+Space:
+  $ref: ./space.yaml
