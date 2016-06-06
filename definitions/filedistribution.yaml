@@ -21,7 +21,7 @@ items:
         maxItems: 2
         minItems: 2
 example:
-  - provider: "UMa3Dg7iliXbAYsQ10f7L0ZZFJlNKDYYY62LQy9HW4k"
+  - providerId: "UMa3Dg7iliXbAYsQ10f7L0ZZFJlNKDYYY62LQy9HW4k"
     blocks:
       - 
         - 0
@@ -29,7 +29,7 @@ example:
       - 
         - 10
         - 20
-  - provider: "34fgtYRDD5rhg5e1W4t4gt557VSffsDDAJTTS31SHRS"
+  - providerId: "34fgtYRDD5rhg5e1W4t4gt557VSffsDDAJTTS31SHRS"
     blocks:
       - 
         - 1024
