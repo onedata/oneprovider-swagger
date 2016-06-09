@@ -11,8 +11,8 @@ FileDistribution:
 FileAttribute:
   $ref: ./fileattribute.yaml
 
-FileEvent:
-  $ref: ./fileevent.yaml
+# FileEvent:
+#   $ref: ./fileevent.yaml
 
 FileTransferStatus:
   $ref: ./filetransferstatus.yaml

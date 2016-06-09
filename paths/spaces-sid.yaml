@@ -4,6 +4,8 @@ get:
   x-onedata-module: spaces
   x-onedata-resource: space
   x-onedata-method: get_space
+  tags:
+    - Data
   summary: Get basic space information.
   description: >
     Returns the basic information about space with given ID.

@@ -5,6 +5,8 @@ get:
   x-onedata-resource: file
   x-onedata-method: get_files_distribution
   summary: Get all spaces.
+  tags:
+    - Replication
   description: Returns the list of all user spaces.
   produces:
     - application/json

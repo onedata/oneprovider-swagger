@@ -6,3 +6,10 @@ paths:
   $ref: ./paths/index.yaml
 definitions:
   $ref: ./definitions/index.yaml
+tags:
+  - name: Data
+    description: Space and file related operations
+  - name: Replication
+    description: Replication, file distribution and transfer control operations
+  - name: Monitoring
+    description: Metrics and change events monitoring related operations

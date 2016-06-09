@@ -5,6 +5,7 @@
 
 
 
+# tag Data
 /spaces:
   $ref: ./spaces.yaml
 
@@ -14,6 +15,10 @@
 /files/{path}:
   $ref: ./files-path.yaml
 
+/attributes/{path}:
+  $ref: ./attributes-path.yaml
+
+# tag Replication
 /replicas/{path}:
   $ref: ./replicas-path.yaml
 
@@ -29,11 +34,10 @@
 # /events/{path}:
 #   $ref: ./events-path.yaml
 
+# tag Monitoring
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
 
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
 
 # /metrics/provider/{pid}:
 #   $ref: ./metrics-provider-pid.yaml

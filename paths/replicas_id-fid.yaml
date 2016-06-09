@@ -4,6 +4,8 @@ get:
   x-onedata-module: file_distribution
   x-onedata-resource: file
   x-onedata-method: get_file_distribution
+  tags:
+    - Replication
   summary: Get file distribution information by ID.
   description: >
     Returns file distribution information about a specific file replicated at this provider.
@@ -41,11 +43,13 @@ get:
 
 
 post:
-  operationId: replicate_file
+  operationId: replicate_file_by_id
   x-onedata-service: oneprovider
   x-onedata-module: replicate_file
   x-onedata-resource: file
   x-onedata-method: replicate_file
+  tags:
+    - Replication
   summary: Replicate file or folder by ID.
   description: >
     Replicates a file with ID to a specified provider. This operation is asynchronous as it can 

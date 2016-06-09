@@ -4,6 +4,8 @@ get:
   x-onedata-module: transfers
   x-onedata-resource: file
   x-onedata-method: get_all_transfers
+  tags:
+    - Replication
   summary: Get all user transfers.
   description: Returns the list of all transfer IDs.
   produces:

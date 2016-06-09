@@ -5,6 +5,8 @@ get:
   x-onedata-resource: file
   x-onedata-method: get_file_attributes
   summary: Get file attributes.
+  tags:
+    - Data
   description: |
     This method returns selected file attributes.
     
@@ -64,6 +66,8 @@ put:
   x-onedata-resource: file
   x-onedata-method: set_file_attribute
   summary: Set file attribute.
+  tags:
+    - Data
   description: |
     This method allows to set a value of a regular and extended file attributes.
     

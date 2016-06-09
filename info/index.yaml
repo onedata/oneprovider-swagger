@@ -17,7 +17,7 @@ description: |
  Currently this is supported through authentication token which can be generate using the Onedata user interface. 
  The token must be added to the request header like this:
   ```
-  X-Auth-Header: 106d802a-4bc6-468b-106d802a-4bc6-468b-9895-23ac29507a73-9895-23ac29507a73
+  macaroon: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
   ```
 
  In addition please take into account, that depending on your account authorization rights, not all operations

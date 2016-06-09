@@ -4,6 +4,8 @@ get:
   x-onedata-module: metrics
   x-onedata-resource: provider
   x-onedata-method: get_provider_metrics
+  tags:
+    - Monitoring
   summary: Get provider metrics.
   description: Returns provider related metrics of specified type.
   produces:

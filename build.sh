@@ -15,3 +15,5 @@ docker run --rm -v `pwd`:/swagger -t docker.onedata.org/swagger-codegen:1.2.0 ge
 # Generate the static documentation
 docker run --rm -v `pwd`:/swagger -t docker.onedata.org/swagger-bootprint:1.1.0 swagger ./swagger.json generated/static
 
+sed -n '/<body>/,/<\/body>/p' generated/static/index.html | sed -e '1s/.*<body>//' -e '$s/<\/body>.*//' > generated/static/oneprovider-static.html
+

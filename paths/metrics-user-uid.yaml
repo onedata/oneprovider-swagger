@@ -4,6 +4,8 @@ get:
   x-onedata-module: metrics
   x-onedata-resource: user
   x-onedata-method: get_user_metrics
+  tags:
+    - Monitoring
   summary: Get user metrics.
   description: Returns user related metrics of specified type.
   produces:

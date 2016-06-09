@@ -4,6 +4,8 @@ get:
   x-onedata-module: transfers
   x-onedata-resource: transfer
   x-onedata-method: get_transfer_status
+  tags:
+    - Replication
   summary: Get transfer status.
   description: >
     Returns status of specific transfer. In case the transfer has been scheduled
@@ -46,6 +48,8 @@ delete:
   x-onedata-module: transfers
   x-onedata-resource: transfer
   x-onedata-method: cancel_transfer
+  tags:
+    - Replication
   summary: Cancel specific transfer.
   description: >
     Cancels a scheduled or active transfer. Returns 400 in case the

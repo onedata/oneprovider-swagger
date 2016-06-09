@@ -4,6 +4,8 @@ get:
   x-onedata-module: files
   x-onedata-resource: file
   x-onedata-method: list_files
+  tags:
+    - Data
   summary: List files and folders.
   description: >
     Returns the list of folders and files directly under specified path.
