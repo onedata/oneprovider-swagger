@@ -6,9 +6,9 @@ description: |
  This API provides methods for file management using REST protocol.
 
  All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
- query for 'posix_mode' file attributes would be:
+ query for 'mode' file attributes would be:
   ```
-  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=posix_mode
+  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=mode
   ```
  Please note that currently the default port for Oneprovider instances is `8443`.
  ## Authentication
@@ -31,7 +31,7 @@ description: |
 
  ### File attributes
  The `/attributes/` operation group provides GET and PUT methods enable querying
- for file attributes, such as 'posix_mode' file permissions and updating them.
+ for file attributes, such as 'mode' file permissions and updating them.
 
  ### Changes subscription
  The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
