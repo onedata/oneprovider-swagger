@@ -49,7 +49,7 @@ get:
     type: string
     required: false
     enum:
-      - posix_mode
+      - mode
   - name: extended
     in: query
     description: >
