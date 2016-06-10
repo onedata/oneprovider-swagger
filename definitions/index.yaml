@@ -11,9 +11,6 @@ FileDistribution:
 FileAttribute:
   $ref: ./fileattribute.yaml
 
-# FileEvent:
-#   $ref: ./fileevent.yaml
-
 FileTransferStatus:
   $ref: ./filetransferstatus.yaml
 
@@ -31,3 +28,9 @@ Space:
 
 Provider:
   $ref: ./provider.yaml
+
+Metrics:
+  $ref: ./metrics.yaml
+
+RRD:
+  $ref: ./rrd.yaml

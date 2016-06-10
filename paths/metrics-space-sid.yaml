@@ -15,7 +15,9 @@ get:
     '200':
       description: The monitoring data retrieved in the form of RRD record exported to JSON or XML.
       schema:
-        type: file
+        type: array
+        items:
+          $ref: '#/definitions/Metrics'
     '400':
       description: Invalid request.
       schema:

@@ -1,0 +1,52 @@
+type: object
+description: RRD database export.
+properties:
+  about:
+    type: string
+    description: Name of the RRD database
+  meta:
+    type: object
+    properties:
+      start:
+        type: number
+        description: Start timestamp of the metrics.
+      end:
+        type: number
+        description: End timestamp of the metrics.
+      step:
+        type: number
+        description: Step of the metrics.
+      legend:
+        type: array
+        description: Names of the columns in the exported array
+        items: 
+          type: string
+  data:
+    type: array
+    items: 
+      type: array
+      items:
+        type: number
+example:
+  about: RRDtool graph JSON output
+  meta:
+    start: 1465466700
+    end: 1465553100
+    step: 300
+    legend: 
+      - storage_quota
+      - storage_used
+      - storage_free
+  data:
+    - 
+      - 5.6435528434
+      - 2.6435528434
+      - 4.6435528434
+    - 
+      - 5.6435528434
+      - 2.6435528434
+      - 4.6435528434
+    - 
+      - 5.6435528434
+      - 2.6435528434
+      - 4.6435528434

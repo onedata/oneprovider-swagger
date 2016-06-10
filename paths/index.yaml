@@ -31,9 +31,6 @@
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
 
-# /events/{path}:
-#   $ref: ./events-path.yaml
-
 # tag Monitoring
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml

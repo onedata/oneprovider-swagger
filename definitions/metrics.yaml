@@ -1,0 +1,27 @@
+type: object
+description: Export of monitoring metrics for specific provider.
+properties:
+  providerId:
+    type: string
+    description: The ID of the provider.
+  rrd:
+    description: RRD database export.
+    $ref: '#/definitions/RRD'
+example:
+  providerId: ASDASD-876786-LKJHASD-070-ASDAS
+  rrd:
+    about: RRDtool graph JSON output
+    meta:
+      start: 1465466700
+      end: 1465553100
+      step: 300
+      legend: 
+        - storage_free
+    data:
+      - 
+        - 5.6435528434
+      - 
+        - 2.6435528434
+      -
+        - 4.6435528434
+    
