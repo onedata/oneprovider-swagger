@@ -1,5 +1,4 @@
-### 3.0.0-beta6
-
+### New Version Tag do not change this line
 
 
 # Release notes for project 
@@ -7,6 +6,12 @@
 
 CHANGELOG
 ---------
+
+### 3.0.0-beta6-1
+
+* Updated summary to better match Markdown generator
+* Updated build script to generated direct Gitbook markdown
+
 
 ### 3.0.0-beta6
 
