@@ -4,7 +4,7 @@ get:
   x-onedata-module: metrics
   x-onedata-resource: space
   x-onedata-method: get_space_metrics
-  summary: Get space metrics.
+  summary: Get space metrics
   tags:
     - Monitoring
   description: Returns space related metrics of specified type.

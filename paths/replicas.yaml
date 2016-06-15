@@ -4,15 +4,15 @@ get:
   x-onedata-module: file_distribution
   x-onedata-resource: file
   x-onedata-method: get_files_distribution
-  summary: Get all spaces.
+  summary: Get replicas
   tags:
     - Replication
-  description: Returns the list of all user spaces.
+  description: Returns the list of all user replicas.
   produces:
     - application/json
   responses:
     '200':
-      description: The list of all user spaces.
+      description: The list of all user replicas.
       schema:
         type: array
         items: 

@@ -6,7 +6,7 @@ get:
   x-onedata-method: get_all_transfers
   tags:
     - Replication
-  summary: Get all user transfers.
+  summary: Get all transfers
   description: Returns the list of all transfer IDs.
   produces:
     - application/json

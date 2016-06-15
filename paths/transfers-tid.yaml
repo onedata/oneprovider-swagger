@@ -6,7 +6,7 @@ get:
   x-onedata-method: get_transfer_status
   tags:
     - Replication
-  summary: Get transfer status.
+  summary: Get transfer status
   description: >
     Returns status of specific transfer. In case the transfer has been scheduled
     for entire folder, the result is a list of transfer statuses for each item in the folder.
@@ -50,7 +50,7 @@ delete:
   x-onedata-method: cancel_transfer
   tags:
     - Replication
-  summary: Cancel specific transfer.
+  summary: Cancel specific transfer
   description: >
     Cancels a scheduled or active transfer. Returns 400 in case the
     transfer is already completed, canceled or failed.

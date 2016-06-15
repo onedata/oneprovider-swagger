@@ -4,7 +4,7 @@ get:
   x-onedata-module: attributes
   x-onedata-resource: file
   x-onedata-method: get_file_attributes
-  summary: Get file attributes.
+  summary: Get file attributes
   tags:
     - Data
   description: |
@@ -65,7 +65,7 @@ put:
   x-onedata-module: attributes
   x-onedata-resource: file
   x-onedata-method: set_file_attribute
-  summary: Set file attribute.
+  summary: Set file attribute
   tags:
     - Data
   description: |

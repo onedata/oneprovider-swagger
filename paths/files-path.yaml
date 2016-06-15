@@ -6,7 +6,7 @@ get:
   x-onedata-method: list_files
   tags:
     - Data
-  summary: List files and folders.
+  summary: List files and folders
   description: >
     Returns the list of folders and files directly under specified path.
     If the path points to a file, the result array will consist only
