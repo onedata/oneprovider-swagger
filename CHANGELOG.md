@@ -1,3 +1,7 @@
+### 3.0.0-beta6-2
+
+
+
 ### 3.0.0-beta6-1
 
 * Updated changelog
