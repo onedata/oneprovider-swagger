@@ -6,7 +6,7 @@ get:
   x-onedata-method: get_file_distribution
   tags:
     - Replication
-  summary: Get file distribution information by path.
+  summary: Get replicas by path
   description: >
     Returns file distribution information about a specific file replicated at this provider.
   produces:
@@ -50,7 +50,7 @@ post:
   x-onedata-method: replicate_file
   tags:
     - Replication
-  summary: Replicate file or folder by path.
+  summary: Replicate file or folder by path
   description: >
     Replicates a file to a specified provider. This operation is asynchronous as it can 
     take a long time depending on the size of the data to move. 

@@ -1,19 +1,22 @@
 #!/bin/bash
 
 # Generate aggregate JSON file from YAML
-docker run --rm -v `pwd`:/swagger docker.onedata.org/swagger-aggregator:1.4.0
+docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger docker.onedata.org/swagger-aggregator:1.5.0
 
 # Validate the JSON
-docker run --rm -v `pwd`:/swagger docker.onedata.org/swagger-cli:1.2.0 validate /swagger/swagger.json
+docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger docker.onedata.org/swagger-cli:1.5.0 validate /swagger/swagger.json
 
 # Generate the Cowboy server stub
-docker run --rm -v `pwd`:/swagger -t docker.onedata.org/swagger-codegen:1.2.0 generate -i ./swagger.json -l cowboy -o ./generated/cowboy
+docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t docker.onedata.org/swagger-codegen:1.5.0 generate -i ./swagger.json -l cowboy -o ./generated/cowboy
 
 # Generate C# stub to get all moustache tempalte keywords
 #swagger-codegen-dbg generate -i ./swagger.json -l csharp -o ./generated/csharp -o tmp > model.json
 
 # Generate the static documentation
-docker run --rm -v `pwd`:/swagger -t docker.onedata.org/swagger-bootprint:1.1.0 swagger ./swagger.json generated/static
+docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t docker.onedata.org/swagger-bootprint:1.5.0 swagger ./swagger.json generated/static
 
-sed -n '/<body>/,/<\/body>/p' generated/static/index.html | sed -e '1s/.*<body>//' -e '$s/<\/body>.*//' > generated/static/oneprovider-static.html
+sed -n '/<body>/,/<\/body>/p' generated/static/index.html | sed -e '1s/.*<body>//' -e '$s/<\/body>.*//' -e 's/\/definitions\//definitions--/g' -e 's/<div class=\"container\"/<div class=\"container swagger\"/' > generated/static/oneprovider-static.html
 
+# Generate Markdown for direct Gitbook integration
+# The output from generated/gitbook should be copied to onedata-documentation/doc/advanced/rest/oneprovider folder
+docker run --rm -v `pwd`:/swagger -t docker.onedata.org/swagger-gitbook:1.1.0 convert -i ./swagger.json -d ./generated/gitbook -c ./gitbook.properties

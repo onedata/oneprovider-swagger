@@ -6,15 +6,18 @@ get:
   x-onedata-method: get_user_metrics
   tags:
     - Monitoring
-  summary: Get user metrics.
+  summary: Get user metrics
   description: Returns user related metrics of specified type.
   produces:
-    - application/x-gzip
+    - application/json
+    - application/xml
   responses:
     '200':
       description: The monitoring data retrieved in the form of a RRD database file.
       schema:
-        type: file
+        type: array
+        items:
+          $ref: '#/definitions/Metrics'
     '400':
       description: Invalid request.
       schema:

@@ -1,4 +1,4 @@
-version: 3.0.0
+version: 3.0.0-beta6
 title: Oneprovider
 description: |
  This is the RESTful API definition of Oneprovider component of Onedata data management system [http://www.onedata.org].
@@ -29,38 +29,46 @@ description: |
 
  The API provides the following functionality:
 
- ### File attributes
+ ### Data
+ 
+ #### File attributes
  The `/attributes/` operation group provides GET and PUT methods enable querying
  for file attributes, such as 'mode' file permissions and updating them.
 
- ### Changes subscription
- The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
- file related events such as reads, writes or deletes which are returned as complete file metadata
- records with sequence numbers representing their current version.
-
- ### File browser
+ #### File browser
  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
  Currently no wildcards are possible, thus paths must be complete up to a folder whose
  contents are needed and start with the name of the space containing the requested folders and files.
- 
- ### Monitoring metrics
- The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
- All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/) 
- database files, with resolution determined by the `step` query parameter.
 
- ### Replica management
- The `/replicas/` methods allow retrieving of information about file replica distribution
- among Onedata providers as well as requesting specific file replication to selected
- providers.
-
- ### Space information
+ #### Space information
  For convenience, `/space/` methods provider means for getting basic information about
  spaces directly from the Oneprovider service. For more comprehensive operations
  on spaces please use the Onezone API.
 
- ### Transfer management
+ ### Replication
+
+ #### Replica management
+ The `/replicas/` methods allow retrieving of information about file replica distribution
+ among Onedata providers as well as requesting specific file replication to selected
+ providers.
+
+ #### Transfer management
  The `/transfer/` provides basic transfer management functionality based on the ID of transfer
  returned by `/replicas/{path} [POST]` operation. 
+ 
+ ### Monitoring
+
+ #### Changes subscription
+ The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
+ file related events such as reads, writes or deletes which are returned as complete file metadata
+ records with sequence numbers representing their current version.
+
+ #### Monitoring metrics
+ The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
+ All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/) 
+ database files, with resolution determined by the `step` query parameter.
+
+
  
 contact:
   name: Onedata support

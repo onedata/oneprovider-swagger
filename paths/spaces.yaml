@@ -6,7 +6,7 @@ get:
   x-onedata-method: get_all_spaces
   tags:
     - Data
-  summary: Get all spaces.
+  summary: Get all spaces
   description: Returns the list of all user spaces.
   produces:
     - application/json
