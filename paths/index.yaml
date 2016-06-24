@@ -35,6 +35,8 @@
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
 
+/metrics/space/{sid}/user/{uid}:
+  $ref: ./metrics-space-sid-user-uid.yaml
 
 # /metrics/provider/{pid}:
 #   $ref: ./metrics-provider-pid.yaml
