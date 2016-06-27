@@ -48,13 +48,9 @@ get:
     enum:
       - storage_quota
       - storage_used
-      - data_access_kbs
-      - block_access_iops
-      - block_access_latency
-      - remote_transfer_kbs
+      - data_access
+      - block_access
       - connected_users
-      - remote_access_kbs
-      - metada_access_ops
   - name: step
     in: query
     description: The resolution of the monitoring data to return - default is 5m [5 minutes].
