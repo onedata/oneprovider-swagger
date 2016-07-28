@@ -53,7 +53,7 @@ description: |
  providers.
 
  #### Transfer management
- The `/transfer/` provides basic transfer management functionality based on the ID of transfer
+ The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
  returned by `/replicas/{path} [POST]` operation. 
  
  ### Monitoring
