@@ -7,8 +7,27 @@ get:
   tags:
     - Replication
   summary: Get replicas by path
-  description: >
+  description: |
     Returns file distribution information about a specific file replicated at this provider.
+
+    ***Example cURL requests***
+
+    **Get file distribution map by path**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST:8443/replicas/MySpace1/MyFile1.txt"
+
+    [
+      {
+        "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
+        "providerId": "784dae9d-34a3-4aef-ab4b-2c6c60b74e27"
+      },
+      {
+        "blocks": [ [ 5, 9 ] ],
+        "providerId": "b296ab05-3d62-4755-be46-c57ced411ff1"
+      }
+    ]
+    ```
   produces:
     - application/json
   responses:
@@ -51,12 +70,31 @@ post:
   tags:
     - Replication
   summary: Replicate file or folder by path
-  description: >
-    Replicates a file to a specified provider. This operation is asynchronous as it can 
-    take a long time depending on the size of the data to move. 
+  description: |
+    Replicates a file to a specified provider. This operation is asynchronous as it can take a long time depending on the size of the data to move. 
 
-    If the `path` parameter specifies a folder, entire folder is replicated to 
-    requested provider.
+    If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+
+    ***Example cURL requests***
+
+    **Replicate file by path to any provider**
+    ```bash
+    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST:8443/replicas/MySpace1/MyFile1.txt"
+
+
+    { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
+    ```
+    
+    **Replicate file by path to specific storage provider with URL callback**
+    ```bash
+    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    -d "http://example.com/transfer_complete" \
+    "https://$HOST:8443/replicas/MySpace1/MyFile1.txt?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+
+
+    { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
+    ```
   produces:
     - application/json
   responses:

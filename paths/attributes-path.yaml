@@ -14,6 +14,34 @@ get:
 
     The exteded attributes are accessed by setting `extended` flag 
     in the request query to `true`.
+
+    ***Example cURL requests***
+
+    **Get file POSIX mode**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST:8443/attributes/MySpace1/File2.txt?attribute=mode"
+
+    [
+      { 
+        "name": "mode",
+        "value": "0777" 
+      }
+    ]
+    ```
+
+    **Get extended file attributes**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    "https://$HOST:8443/attributes/MySpace1/File2.txt?extended=true&attribute=license"
+
+    [
+      { 
+        "name": "license",
+        "value": "CC-0" 
+      }
+    ]
+    ```
   produces:
     - application/json
   responses:
@@ -59,6 +87,7 @@ get:
     type: boolean
     required: false
 
+
 put:
   operationId: set_file_attribute
   x-onedata-service: oneprovider
@@ -79,6 +108,22 @@ put:
 
     For extended attributes any string value can be send. The exteded attributes are 
     accessed by setting `extended` flag in the request query to `true`.
+
+    ***Example cURL requests***
+
+    **Set file POSIX mode**
+    ```bash
+    curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
+    -d '{ "name": "mode", "value": "0777" }'
+    "https://$HOST:8443/attributes/MySpace1/File2.txt"
+    ```
+
+    **Set extended file attribute**
+    ```bash
+    curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
+    -d '{ "name": "license", "value": "CC-0" }' \
+    "https://$HOST:8443/attributes/MySpace1/File2.txt?extended=true"
+    ```
   produces:
     - application/json
   responses:
@@ -117,4 +162,5 @@ put:
       Whether this is an extended or regular attribute. Default is false.
     type: boolean
     required: false
+    default: false
 

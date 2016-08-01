@@ -7,12 +7,27 @@ get:
   summary: Get replicas
   tags:
     - Replication
-  description: Returns the list of all user replicas.
+  description: |
+    Returns the list of all user files.
+
+    ***Example cURL requests***
+
+    **Get all user files stored by specific provider**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST:8443/replicas/MySpace1/MyFile1.txt?provider_id=31375b96-52ca-44f5-8a9c-7a56989fc893"
+
+    [
+      "ad13761a-96af-48be-b737-0266e88cde89",
+      "f4f1799f-4954-4d7a-bc31-630998883296",
+      "3f04b8a0-f5e4-400d-a152-924bfb1d0d85"
+    ]
+    ```
   produces:
     - application/json
   responses:
     '200':
-      description: The list of all user replicas.
+      description: The list of all file replicas.
       schema:
         type: array
         items: 
