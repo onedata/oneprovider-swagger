@@ -20,7 +20,7 @@ get:
     **Get file POSIX mode**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/attributes/MySpace1/File2.txt?attribute=mode"
+    "https://$HOST:8443/api/v3/oneprovider/attributes/MySpace1/File2.txt?attribute=mode"
 
     [
       { 
@@ -33,7 +33,7 @@ get:
     **Get extended file attributes**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST:8443/attributes/MySpace1/File2.txt?extended=true&attribute=license"
+    "https://$HOST:8443/api/v3/oneprovider/attributes/MySpace1/File2.txt?extended=true&attribute=license"
 
     [
       { 
@@ -114,15 +114,15 @@ put:
     **Set file POSIX mode**
     ```bash
     curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
-    -d '{ "name": "mode", "value": "0777" }'
-    "https://$HOST:8443/attributes/MySpace1/File2.txt"
+    -H 'Content-type: application/json' -d '{ "name": "mode", "value": "0777" }'
+    "https://$HOST:8443/api/v3/oneprovider/attributes/MySpace1/File2.txt"
     ```
 
     **Set extended file attribute**
     ```bash
     curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
-    -d '{ "name": "license", "value": "CC-0" }' \
-    "https://$HOST:8443/attributes/MySpace1/File2.txt?extended=true"
+    -H 'Content-type: application/json' -d '{ "name": "license", "value": "CC-0" }' \
+    "https://$HOST:8443/api/v3/oneprovider/attributes/MySpace1/File2.txt?extended=true"
     ```
   produces:
     - application/json

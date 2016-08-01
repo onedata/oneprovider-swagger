@@ -15,7 +15,7 @@ get:
     **Get all user files stored by specific provider**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/replicas/MySpace1/MyFile1.txt?provider_id=31375b96-52ca-44f5-8a9c-7a56989fc893"
+    "https://$HOST:8443/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=31375b96-52ca-44f5-8a9c-7a56989fc893"
 
     [
       "ad13761a-96af-48be-b737-0266e88cde89",
