@@ -1,0 +1,136 @@
+get:
+  operationId: get_space_indexes
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: get_space_indexes
+  summary: Get index list for space
+  tags:
+    - Data
+  description: |
+    This method returns the list of user defined index functions.
+
+    The result can be limited to specific space using query parameter `space_id`.    
+
+
+    ***Example cURL requests***
+
+    **Get list of indexes for space**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    https://$HOST:8443/api/v1/oneprovider/index?space_id=2e462492-a4d7-46b9-8641-abfdf50f06af
+
+    [
+      {
+        "spaceId": "2e462492-a4d7-46b9-8641-abfdf50f06af",
+        "name": "My index",
+        "indexId": "fdecdf35-5e18-4a9b-a01a-1702acd4d274"
+      }
+    ]
+    ```
+ 
+
+  produces:
+    - application/json
+    - application/rdf+xml
+  responses:
+    '200':
+      description: Index list returned successfully.
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/Index'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: space_id
+    in: query
+    description: Id of the space to query.
+    type: string
+    required: false
+
+
+post:
+  operationId: add_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: add_space_index
+  summary: Create index for space
+  tags:
+    - Data
+  description: |
+    This method allows to create a new index for space.
+
+    Indexes allow creating custom views on data which enable efficient searching through data.
+
+    Currently indexes are created per space, i.e. the `space_id` query parameter is required.
+
+    The operation returns the created index ID in the response `Location` header.
+
+    ***Example cURL requests***
+
+    **Set JSON metadata for file**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d "@./my_index_1.js"
+    https://$HOST:8443/api/v1/oneprovider/index?space_id=7f85c115-8631-4602-b7d5-47cd969280a2&name=MyIndex1
+    ```
+
+  consumes:
+    - text/javascript
+  responses:
+    '204':
+      description: Metadata document updated successfully.
+      headers:
+        Location:
+          type: string
+          description: >
+            The path to the index resource, including it's assigned identifier.
+
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: space_id
+    in: query
+    description: File or folder path or space id.
+    type: string
+    required: true
+  - name: name
+    in: query
+    description: >
+      The user friendly name of the index (can be used to assign names to 'smart folders' in the GUI).
+      If not provider an auto generated name will be assigned.
+    type: string
+    required: false
+
+

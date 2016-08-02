@@ -1,0 +1,20 @@
+type: object
+description: The basic index information.
+properties:
+  indexId:
+    description: The unique identifier of the index.
+    type: string
+  name:
+    description: The user friendly index name.
+    type: string
+  spaceId:
+    description: The space on which the index is defined.
+    type: string
+required:
+  - indexId
+  - name
+  - spaceId
+example:
+  indexId: c9e7a9d6-8d09-42d7-ab5e-d48b86ed645e
+  name: My Index 1
+  spaceId: ee4ac5df-095c-4760-bee9-a9bd2f37e508
