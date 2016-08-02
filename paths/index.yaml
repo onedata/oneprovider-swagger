@@ -18,6 +18,9 @@
 /attributes/{path}:
   $ref: ./attributes-path.yaml
 
+/metadata/{path}:
+  $ref: ./metadata-path.yaml
+
 # tag Replication
 /replicas/{path}:
   $ref: ./replicas-path.yaml
