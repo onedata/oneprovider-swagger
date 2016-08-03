@@ -82,10 +82,6 @@ put:
     -d "@./my_improved_index1.js" \
     https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
     ```
-
-  produces:
-    - application/json
-    - application/rdf+xml
   responses:
     '204':
       description: Index updated successfully.

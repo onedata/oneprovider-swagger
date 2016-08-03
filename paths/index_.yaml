@@ -129,7 +129,7 @@ post:
     in: query
     description: >
       The user friendly name of the index (can be used to assign names to 'smart folders' in the GUI).
-      If not provider an auto generated name will be assigned.
+      If not provided, an auto generated name will be assigned.
     type: string
     required: false
 
