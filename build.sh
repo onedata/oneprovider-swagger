@@ -16,6 +16,7 @@ fi
 
 # Generate the Cowboy server stub
 docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t docker.onedata.org/swagger-codegen:1.5.3 generate -i ./swagger.json -l cowboy -o ./generated/cowboy
+./fix_generated.py
 
 # Generate C# stub to get all moustache tempalte keywords
 #swagger-codegen-dbg generate -i ./swagger.json -l csharp -o ./generated/csharp -o tmp > model.json
