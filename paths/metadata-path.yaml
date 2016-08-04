@@ -86,7 +86,13 @@ get:
     description: The filter to apply to the metadata document before returning.
     type: string
     required: false
-
+  - name: inherited
+    in: query
+    description: >
+      When set to true, this operation will merge the metadata documents from 
+      parent folders as well as entire space into a single JSON or RDF document.
+    type: boolean
+    required: false
 
 put:
   operationId: set_file_metadata
