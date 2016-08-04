@@ -34,3 +34,6 @@ Metrics:
 
 RRD:
   $ref: ./rrd.yaml
+
+Index:
+  $ref: ./index_type.yaml

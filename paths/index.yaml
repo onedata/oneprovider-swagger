@@ -18,6 +18,22 @@
 /attributes/{path}:
   $ref: ./attributes-path.yaml
 
+/metadata/{path}:
+  $ref: ./metadata-path.yaml
+
+/metadata-id/{id}:
+  $ref: ./metadata_id-id.yaml
+
+/index:
+  $ref: ./index_.yaml
+
+/index/{iid}:
+  $ref: ./index-iid.yaml
+
+/query-index/{iid}:
+  $ref: ./query_index-iid.yaml
+
+
 # tag Replication
 /replicas/{path}:
   $ref: ./replicas-path.yaml

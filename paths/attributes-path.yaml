@@ -86,6 +86,15 @@ get:
       Whether we want to access extended attributes or regular.
     type: boolean
     required: false
+  - name: inherited
+    in: query
+    description: >
+      When set to true, this operation will return all non-masking attributes
+      from parent folders as well as entire space attributes. When the same attribute
+      is set on multiple levels, the lowest level attribute value will be returned (e.g.
+      attribute set on file will have precedence over attribute set on folder).
+    type: boolean
+    required: false
 
 
 put:

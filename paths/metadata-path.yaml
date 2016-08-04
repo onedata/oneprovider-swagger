@@ -1,0 +1,172 @@
+get:
+  operationId: get_file_metadata
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: file
+  x-onedata-method: get_file_metadata
+  summary: Get metadata
+  tags:
+    - Data
+  description: |
+    This method returns the metadata document for specified file, folder or space. Onedata supports multiple metadata backends in parallell.
+    
+    The currently supported metadata stores include:
+     * JSON
+     * RDF
+
+    The metadata source will be selected automatically based on the "Accept: " header in the request, or from the optional `metadata_type` query parameter.
+
+    By default the method returns the complete metadata document of requested type. It is possible to request only a part of the document by specifying `filter_type` and `filter` attributes in the query.
+
+    Supported filter types are currently supported only for JSON backend:
+      * **keypath** - list of JSON keys which point to requested JSON object, separated by `.`, array elements should be expressed as `[i]` (e.g. `key1.key2.[2].key3`)
+
+
+    ***Example cURL requests***
+
+    **Get complete RDF metadata document for File2.txt**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    -H "Accept: application/rdf+xml" \
+    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt
+    ```
+
+    **Get specific JSON value from metadata document**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    -H "Accept: application/json" \
+    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
+    ```    
+
+  produces:
+    - application/json
+    - application/rdf+xml
+  responses:
+    '200':
+      description: Metadata returned successfully.
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: metadata_type
+    in: query
+    description: Type of metadata backend (if not specified in `Accept` header)
+    type: string
+    required: false
+    enum:
+      - JSON
+      - RDF
+  - name: filter_type
+    in: query
+    description: The type of filter to apply to the metadata document.
+    type: string
+    required: false
+  - name: filter
+    in: query
+    description: The filter to apply to the metadata document before returning.
+    type: string
+    required: false
+  - name: inherited
+    in: query
+    description: >
+      When set to true, this operation will merge the metadata documents from 
+      parent folders as well as entire space into a single JSON or RDF document.
+    type: boolean
+    required: false
+
+put:
+  operationId: set_file_metadata
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: file
+  x-onedata-method: set_file_metadata
+  summary: Set metadata
+  tags:
+    - Data
+  description: |
+    This method allows to set specific metadata document for a file, folder or space specified in the request path.
+    
+    The currently supported metadata stores include:
+     * JSON
+     * RDF
+
+    The metadata source will be selected automatically based on the "Content-type: " header in the request, or from the optional `metadata_type` query parameter.
+
+    This operation will replace the entire metadata document in the specified metadata backend.
+
+    ***Example cURL requests***
+
+    **Set JSON metadata for file**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/json" \
+    -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
+    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt
+    ```
+
+    **Set RDF metadata for space from RDF file**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/rdf+xml" \
+    -d "@./space1_dublincore.rdf"
+    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1
+    ```    
+
+  consumes:
+    - application/json
+    - application/rdf+xml
+  responses:
+    '204':
+      description: Metadata document updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: metadata_type
+    in: query
+    description: Type of metadata backend (if not specified in `Accept` header)
+    type: string
+    required: false
+    enum:
+      - JSON
+      - RDF
+
+
