@@ -158,10 +158,13 @@ get:
   - name: stale
     in: query
     description: >
-      Allow records from a stale view to be used.
-    type: boolean
+      Allow records from a stale view to be used. Allowed values are `ok` and `update_after`.
+    type: string
     required: false
-    default: false
+    default: ok
+    enum:
+      - ok
+      - update_after
   - name: bbox
     in: query
     description: >
