@@ -101,7 +101,7 @@ get:
   - name: keys
     in: query
     description: >
-        Return only documents that match each of keys specified within the given array. 
+        Return only documents that match any of the keys specified within the given array. 
         Key must be specified as a JSON value. 
         Sorting is not applied when using this option.
     type: array
@@ -158,13 +158,14 @@ get:
   - name: stale
     in: query
     description: >
-      Allow records from a stale view to be used. Allowed values are `ok` and `update_after`.
+      Allow records from a stale view to be used. Allowed values are `ok`, `update_after` or `false`.
     type: string
     required: false
-    default: ok
+    default: update_after
     enum:
       - ok
       - update_after
+      - false
   - name: bbox
     in: query
     description: >

@@ -4,7 +4,7 @@ get:
   x-onedata-module: metadata
   x-onedata-resource: file
   x-onedata-method: get_file_metadata_by_id
-  summary: Get metadata
+  summary: Get file metadata by ID
   tags:
     - Data
   description: |
@@ -112,7 +112,7 @@ put:
   x-onedata-module: metadata
   x-onedata-resource: file
   x-onedata-method: set_file_metadata_by_id
-  summary: Set metadata
+  summary: Set file metadata by ID
   tags:
     - Data
   description: |

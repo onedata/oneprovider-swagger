@@ -4,7 +4,7 @@ get:
   x-onedata-module: metadata
   x-onedata-resource: file
   x-onedata-method: get_file_metadata
-  summary: Get metadata
+  summary: Get file metadata
   tags:
     - Data
   description: |
@@ -110,7 +110,7 @@ put:
   x-onedata-module: metadata
   x-onedata-resource: file
   x-onedata-method: set_file_metadata
-  summary: Set metadata
+  summary: Set file metadata
   tags:
     - Data
   description: |
