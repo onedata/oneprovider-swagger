@@ -165,7 +165,7 @@ get:
     enum:
       - ok
       - update_after
-      - false
+      - "false"
   - name: bbox
     in: query
     description: >
