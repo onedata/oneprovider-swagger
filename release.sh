@@ -14,8 +14,9 @@ Example usage:
 sr-publish -m "major changes!" -b master
 
 Options:
-  -h,--branch        branch name in a target repo (default is "develop")
-  -m,--message       commit message that will be seen in a target repo
+  -h,--help					 This help message
+  -b,--branch        Branch name in a target repo (default is "develop")
+  -m,--message       Commit message that will be seen in a target repo
 EOF
 }
 
@@ -39,7 +40,7 @@ flag=$1
 	  shift
 	  ;;
 	*)
-	  echo "no opntion ${flag}"
+	  echo "no option ${flag}"
 	  exit 1
 	  ;;
 	esac
