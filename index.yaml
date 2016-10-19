@@ -13,3 +13,10 @@ tags:
     description: Replication, file distribution and transfer control operations
   - name: Monitoring
     description: Metrics and change events monitoring related operations
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: X-Auth-Key
+    in: header
+  basic:
+    type: basic

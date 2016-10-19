@@ -141,7 +141,6 @@ put:
     -d "@./space1_dublincore.rdf"
     https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1
     ```    
-
   consumes:
     - application/json
     - application/rdf+xml
@@ -188,4 +187,10 @@ put:
     description: The filter allowing to set specific metadata document key.
     type: string
     required: false
+  - name: body
+    in: body
+    description: The metadata document in one of accepted formats.
+    required: true
+    schema:
+      type: string
 
