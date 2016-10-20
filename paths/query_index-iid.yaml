@@ -7,6 +7,24 @@ get:
   summary: Query index
   tags:
     - Data
+  x-bash-codegen-description: |
+    This method returns the list of files which match the query on a 
+    predefined index.
+
+    Currently, indexes are defined per space, i.e. the result will be limited 
+    to files and folders in a space for which the index was defined.   
+
+    This operation supports also custom index query attributes as provided by 
+    Couchbase:
+      [http://docs.couchbase.com/admin/admin/Views/views-querying.html].
+
+    Additionaly, Couchbase spatial queries:
+      [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are 
+
+    possible using `bbox` query parameter.
+    These queries are possible on indexes which emit values conforming to the 
+    [http://geojson.org/] format.
+
   description: |
     This method returns the list of files which match the query on a predefined index.
 

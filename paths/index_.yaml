@@ -7,11 +7,14 @@ get:
   summary: Get index list for space
   tags:
     - Data
+  x-bash-codegen-description: |
+    This method returns the list of user defined index functions.
+
+    The result can be limited to specific space using query parameter `space_id`.
   description: |
     This method returns the list of user defined index functions.
 
-    The result can be limited to specific space using query parameter `space_id`.    
-
+    The result can be limited to specific space using query parameter `space_id`.
 
     ***Example cURL requests***
 
@@ -75,6 +78,15 @@ post:
   summary: Create index for space
   tags:
     - Data
+  x-bash-codegen-description: |
+    This method allows to create a new index for space.
+
+    Indexes allow creating custom views on data which enable efficient searching 
+    through data. Currently indexes are created per space, i.e. the `space_id` 
+    query parameter is required.
+
+    The operation returns the created index ID in the response `Location` 
+    header.
   description: |
     This method allows to create a new index for space.
 

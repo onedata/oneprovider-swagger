@@ -7,6 +7,8 @@ get:
   tags:
     - Replication
   summary: Get all transfers
+  x-bash-codegen-description: |
+    Returns the list of all transfer IDs.
   description: |
     Returns the list of all transfer IDs.
 

@@ -7,6 +7,8 @@ get:
   tags:
     - Monitoring
   summary: Get provider metrics
+  x-bash-codegen-description: |
+    Returns provider related metrics of specified type.
   description: |
     Returns provider related metrics of specified type.
 

@@ -7,7 +7,10 @@ get:
   tags:
     - Monitoring
   summary: Get user metrics
-  description: Returns user related metrics of specified type.
+  x-bash-codegen-description: |
+    Returns user related metrics of specified type.
+  description: |
+    Returns user related metrics of specified type.
   produces:
     - application/json
     - application/xml

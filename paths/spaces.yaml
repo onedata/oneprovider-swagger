@@ -7,6 +7,8 @@ get:
   tags:
     - Data
   summary: Get all spaces
+  x-bash-codegen-description: |
+    Returns the list of all user spaces.
   description: |
     Returns the list of all user spaces.
 

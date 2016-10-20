@@ -7,6 +7,26 @@ get:
   summary: Get file metadata by ID
   tags:
     - Data
+  x-bash-codegen-description: |
+    This method returns the metadata document for specified file, folder or 
+    space by ID. Onedata supports multiple metadata backends in parallell.
+
+    The currently supported metadata stores include:
+     * JSON
+     * RDF
+
+    The metadata source will be selected automatically based on the "Accept: " 
+    header in the request, or from the optional `metadata_type` query parameter.
+
+    By default the method returns the complete metadata document of requested 
+    type. It is possible to request only a part of the document by specifying 
+    filter_type` and `filter` attributes in the query.
+
+    Supported filter types are currently supported only for JSON backend:
+      * **keypath** - list of JSON keys which point to requested JSON object, 
+                    separated by `.`, array elements should be expressed as 
+                    `[i]` (e.g. `key1.key2.[2].key3`)
+
   description: |
     This method returns the metadata document for specified file, folder or space by ID. Onedata supports multiple metadata backends in parallell.
 

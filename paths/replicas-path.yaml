@@ -7,6 +7,9 @@ get:
   tags:
     - Replication
   summary: Get replicas by path
+  x-bash-codegen-description: |
+    Returns file distribution information about a specific file replicated at 
+    this provider.
   description: |
     Returns file distribution information about a specific file replicated at this provider.
 

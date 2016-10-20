@@ -7,6 +7,8 @@ get:
   summary: Get replicas
   tags:
     - Replication
+  x-bash-codegen-description: |
+    Returns the list of all user files.
   description: |
     Returns the list of all user files.
 
