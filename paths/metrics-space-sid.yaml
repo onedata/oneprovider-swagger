@@ -84,3 +84,6 @@ get:
       - 1h
       - 1d
       - 1m
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli -ac json getSpaceMetrics sid=ASJHDJHASD7132nasdlASD metric=storage_quota step=5m"

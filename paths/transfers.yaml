@@ -68,3 +68,6 @@ get:
     description: >
       Allows to limit the number of returned transfers only to the last N transfers.
     type: integer
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getAllTransfers status=active limit=20"

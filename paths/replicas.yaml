@@ -56,3 +56,6 @@ get:
       which stores at least some blocks of a file.
     type: string
     required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getAllFiles provider_id=SADLKJHALSKDH88ASDLKJASD"

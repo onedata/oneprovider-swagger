@@ -13,7 +13,7 @@ get:
     By default the method returns regular file attributes.
 
     The exteded attributes are accessed by setting `extended` flag 
-    in the request query to `true`.  
+    in the request query to `true`.
   description: |
     This method returns selected file attributes as a JSON object.
     
@@ -96,7 +96,9 @@ get:
       attribute set on file will have precedence over attribute set on folder).
     type: boolean
     required: false
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileAttributes path='/My Space 1/Folder 2/file3.txt' attribute=license extended=true"
 
 put:
   operationId: set_file_attribute
@@ -110,14 +112,15 @@ put:
   x-bash-codegen-description: |
     This method allows to set a value of a regular and extended file attributes.
 
-    For regular file attributes, currently only POSIX mode can be changed by sending:
-      ```
-      { name: "mode", value: "0777"}
-      ```
+    For regular file attributes, currently only POSIX mode can be changed by 
+    sending:
+    ```
+     mode:=0777
+    ```
     where the POSIX mode is specified in octal notation.
 
-    For extended attributes any string value can be send. The exteded attributes are 
-    accessed by setting `extended` flag in the request query to `true`.
+    For extended attributes any string value can be send. The exteded attributes 
+    are accessed by setting `extended` flag in the request query to `true`.
   description: |
     This method allows to set a value of a regular and extended file attributes.
     
@@ -186,4 +189,6 @@ put:
     type: boolean
     required: false
     default: false
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli setFileAttribute path='/My Space 1/Folder 2/file3.txt' license:=CC-0 extended=true"

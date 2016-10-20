@@ -105,6 +105,10 @@ get:
       parent folders as well as entire space into a single JSON or RDF document.
     type: boolean
     required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli -ac rdf getFileMetadata id=ASJHDJHASD7132nasdlASD"
+
 
 put:
   operationId: set_file_metadata_by_id
@@ -196,3 +200,7 @@ put:
     required: true
     schema:
       type: string
+  x-code-samples:
+  - lang: Shell
+    source: "cat metadata.json | oneprovider-rest-cli -ct json setFileMetadataById id=ALKSJDHKASD7687asDBASDDsd"
+

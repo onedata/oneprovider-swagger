@@ -55,6 +55,9 @@ get:
     description: Transfer ID.
     type: string
     required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getTransferStatus tid=ASLDKAJSD764ASDLnaAsd"
 
 
 delete:
@@ -102,4 +105,7 @@ delete:
     description: Transfer ID.
     type: string
     required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli cancelTransfer tid=ASLDKAJSD764ASDLnaAsd"
 

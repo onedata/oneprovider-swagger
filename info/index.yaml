@@ -1,4 +1,4 @@
-version: 3.0.0-rc9
+version: 3.0.0-rc10
 title: Oneprovider
 description: |
   This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://www.onedata.org).
@@ -96,14 +96,17 @@ description: |
   More detailed examples are available in the documentation of each operation.
 
 x-bash-codegen-description: |
-  This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://www.onedata.org).
+  This is the RESTful API definition of Oneprovider component of Onedata data 
+  management system [onedata.org](http://www.onedata.org).
 
 
   ## Authentication
-  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
+  In order to be able to use this API the REST client must be able to 
+  authenticate with the Oneprovider service.
 
-  Currently this is supported through authentication token which can be generate using the Onedata user interface. 
-  The token must be added to the request header like this:
+  Currently this is supported through authentication token which can be 
+  generate using the Onedata user interface. The token must be added to the 
+  request header like this:
   ```
   X-Auth-Token:LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK
   ```
@@ -112,18 +115,20 @@ x-bash-codegen-description: |
   export ONEPROVIDER_API_KEY=LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK
   ```
 
-  In addition please take into account, that depending on your account authorization rights, not all operations
-  may be possible.
+  In addition please take into account, that depending on your account 
+  authorization rights, not all operations may be possible.
 
   ## API structure
-  The Oneprovider API reflects the fact that most operations deal directly with virtual file paths relative to
-  user spaces, which are provided as part of the paths in the REST calls.
+  The Oneprovider API reflects the fact that most operations deal directly 
+  with virtual file paths relative to user spaces, which are provided as part 
+  of the paths in the REST calls.
 
   The API provides the following functionality:
 
   ### Data
 
-  Basic data management including getting information about data objects (files or folders).
+  Basic data management including getting information about data objects (
+  files or folders).
 
   ### Replication
 
@@ -131,7 +136,8 @@ x-bash-codegen-description: |
 
   ### Monitoring
 
-  Monitoring of changes performed in folders and files and getting metrics history.
+  Monitoring of changes performed in folders and files and getting metrics 
+  history.
 
   ## Example usage
 
@@ -146,13 +152,16 @@ x-bash-codegen-description: |
     oneprovider-rest-cli getAllSpaces
 
     # Get file POSIX mode
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" attribute=mode
+    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" 
+    attribute=mode
 
     # Get some extended attribute value
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" attribute=license extended=true
+    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" 
+    attribute=license extended=true
 
     # Get JSON metadata attached to the file
-    oneprovider-rest-cli getFileMetadata -ac json path="/Space 1/Folder2/file3.txt"
+    oneprovider-rest-cli getFileMetadata -ac json 
+    path="/Space 1/Folder2/file3.txt"
 
     # List files in a space
     oneprovider-rest-cli listFiles path="/OxfordFlowerDataset"
@@ -167,3 +176,6 @@ contact:
 license:
   name: Apache 2.0
   url: http://www.apache.org/licenses/LICENSE-2.0.html
+x-logo:
+  url: https://onedata.org/docs/doc/img/heading.png
+  backgroundColor: "#FFFFFF"

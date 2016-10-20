@@ -61,3 +61,7 @@ get:
     description: Space ID.
     type: string
     required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getSpace sid=ASLDKAJSD764ASDLnaAsd"
+

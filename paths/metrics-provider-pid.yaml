@@ -15,7 +15,7 @@ get:
     **Get storage space used metrics**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/metrics/MySpace1?"
+    "https://$HOST:8443/metrics/MySpace1"
     ```
   produces:
     - application/json
@@ -63,7 +63,7 @@ get:
       - remote_transfer_kbs
       - connected_users
       - remote_access_kbs
-      - metada_access_ops
+      - metadata_access_ops
   - name: step
     in: query
     description: The resolution of the monitoring data to return - default is 5m [5 minutes].
@@ -74,4 +74,7 @@ get:
       - 1h
       - 1d
       - 1m
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli -ac xml getProviderMetrics pid=ASJHDJHASD7132nasdlASD metric=metadata_access_ops step=1h"
 

@@ -59,6 +59,9 @@ get:
     description: File path (e.g. '/My Private Space/testfiles/file1.txt')
     type: string
     required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileReplicas path='/Space 1/Folder 2/file.txt' key=value1"
 
 
 post:
@@ -145,4 +148,6 @@ post:
     required: false
     schema:
       $ref: '#/definitions/Callback'
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli replicateFile path='/Space 1/Folder 2/file.txt' provider_id=SADLKJHALSKDH88ASDLKJASD"

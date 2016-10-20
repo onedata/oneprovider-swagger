@@ -7,6 +7,12 @@ get:
   tags:
     - Data
   summary: List files and folders
+  x-bash-codegen-description: |
+    Returns the list of folders and files directly under specified path.
+    
+    If the path points to a file, the result array will consist only of the 
+    single item with the path to the file requested, confirming it exists.
+  
   description: |
     Returns the list of folders and files directly under specified path.
     
@@ -90,4 +96,6 @@ get:
     type: integer
     required: false
     minimum: 0
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listFiles path='/My Space/Folder1' limit=100 offset=300"

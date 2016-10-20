@@ -169,4 +169,6 @@ get:
       Specify the bounding box for a spatial query (e.g. ?bbox=-180,-90,0,0)
     type: string
     required: false
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli querySpaceIndexes iid=ASJHDJHASD7132nasdlASD key=value1"

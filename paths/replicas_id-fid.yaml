@@ -59,7 +59,9 @@ get:
     description: The ID of the file
     type: string
     required: true
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileReplicasById fid=ASLDKAJSD764ASDLnaAsd"
 
 post:
   operationId: replicate_file_by_id
@@ -145,4 +147,6 @@ post:
     required: false
     schema:
       $ref: '#/definitions/Callback'
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli replicateFileById fid=ASLDKAJSD764ASDLnaAsd provider_id=SADLKJHALSKDH88ASDLKJASD"

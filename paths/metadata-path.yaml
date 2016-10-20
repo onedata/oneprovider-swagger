@@ -103,6 +103,10 @@ get:
       parent folders as well as entire space into a single JSON or RDF document.
     type: boolean
     required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli -ac json getFileMetadata path='/Space 1/Folder 2/file3.txt' inherited=false"
+
 
 put:
   operationId: set_file_metadata
@@ -193,4 +197,7 @@ put:
     required: true
     schema:
       type: string
+  x-code-samples:
+  - lang: Shell
+    source: "cat metadata.rdf | oneprovider-rest-cli -ct rdf setFileMetadata path='/Space 1/Folder 2/file3.txt'"
 

@@ -61,6 +61,9 @@ get:
     description: Id of the space to query.
     type: string
     required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getSpaceIndexes space_id=ASLDJLASKJDLADkhhasdaksdaADS"
 
 
 post:
@@ -137,4 +140,7 @@ post:
     schema:
       type: string
     required: true
+  x-code-samples:
+  - lang: Shell
+    source: "cat index.js | oneprovider-rest-cli addSpaceIndex space_id=ASLDJLASKJDLADkhhasdaksdaADS name=MyIndex1"
 

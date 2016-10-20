@@ -56,7 +56,9 @@ get:
     description: Id of the index to return.
     type: string
     required: true
-
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS"
 
 put:
   operationId: update_space_index
@@ -116,4 +118,6 @@ put:
     schema:
       type: string
     required: true
-    
+  x-code-samples:
+  - lang: Shell
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS limit=100 offset=300"
