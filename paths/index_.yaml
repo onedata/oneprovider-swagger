@@ -28,7 +28,6 @@ get:
       }
     ]
     ```
- 
 
   produces:
     - application/json
@@ -87,7 +86,7 @@ post:
     **Set JSON metadata for file**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-    -H "Content-type: application/json" \
+    -H "Content-type: text/javascript" \
     -d "@./my_index_1.js"
     https://$HOST:8443/api/v1/oneprovider/index?space_id=7f85c115-8631-4602-b7d5-47cd969280a2&name=MyIndex1
     ```
@@ -132,5 +131,10 @@ post:
       If not provided, an auto generated name will be assigned.
     type: string
     required: false
-
+  - name: body
+    in: body
+    description: The index function.
+    schema:
+      type: string
+    required: true
 

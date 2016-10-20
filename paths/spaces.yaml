@@ -28,6 +28,8 @@ get:
       }
     ]
     ```
+  x-bash-codegen-description:
+    Returns the list of all user spaces.
   produces:
     - application/json
   responses:

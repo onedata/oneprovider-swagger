@@ -82,6 +82,9 @@ put:
     -d "@./my_improved_index1.js" \
     https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
     ```
+
+  consumes:
+    - text/javascript
   responses:
     '204':
       description: Index updated successfully.
@@ -107,3 +110,10 @@ put:
     description: Id of the index to update.
     type: string
     required: true
+  - name: body
+    in: body
+    description: The index function.
+    schema:
+      type: string
+    required: true
+    

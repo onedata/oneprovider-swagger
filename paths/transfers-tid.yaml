@@ -23,6 +23,7 @@ get:
       "targetProviderId": "b3c85b99-44db-4277-8c66-2ccd50888565"
     }
     ```
+    
   produces:
     - application/json
   responses:
@@ -55,6 +56,7 @@ get:
     type: string
     required: true
 
+
 delete:
   operationId: cancel_transfer
   x-onedata-service: oneprovider
@@ -74,8 +76,7 @@ delete:
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
     "https://$HOST:8443/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
     ```
-  produces:
-    - application/json
+
   responses:
     '204':
       description: The transfer has been canceled.
