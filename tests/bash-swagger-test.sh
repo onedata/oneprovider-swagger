@@ -13,14 +13,14 @@ export ONEPROVIDER_CLI=generated/bash/oneprovider-rest-cli
     run bash $ONEPROVIDER_CLI getAllSpaces --dry-run X-Auth-Key:SECRET
     [[ "$output" =~ "${ONEPROVIDER_HOST}/api/v3/oneprovider/spaces" ]]
     [[ "$output" =~ "-X GET" ]]
-    [[ "$output" =~ "X-Auth-Key: SECRET" ]]
+    [[ "$output" =~ "X-Auth-Token: SECRET" ]]
 }
 
 @test "getAllSpaces Api key from environment variable" {
     run bash $ONEPROVIDER_CLI getAllSpaces --dry-run
     [[ "$output" =~ "${ONEPROVIDER_HOST}/api/v3/oneprovider/spaces" ]]
     [[ "$output" =~ "-X GET" ]]
-    [[ "$output" =~ "X-Auth-Key: SECRET" ]]
+    [[ "$output" =~ "X-Auth-Token: SECRET" ]]
 }
 
 @test "getAllSpaces username and password" {

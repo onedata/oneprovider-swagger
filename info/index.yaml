@@ -23,7 +23,7 @@ description: |
   Currently this is supported through authentication token which can be generate using the Onedata user interface. 
   The token must be added to the request header like this:
   ```
-  macaroon: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
+  X-Auth-Token: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
   ```
 
   In addition please take into account, that depending on your account authorization rights, not all operations
@@ -84,13 +84,13 @@ description: |
   **Create replica of file at specific storage provider**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER:8443/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
+  "https://$PROVIDER:8443/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
   ```
 
   **Get space storage qouta metric**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-  "https://$PROVIDER:8443/metrics/space/MySpace1?metric=storage_qouta"
+  "https://$PROVIDER:8443/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
   ```
 
   More detailed examples are available in the documentation of each operation.

@@ -116,7 +116,6 @@ post:
           type: string
           description: >
             The path to the index resource, including it's assigned identifier.
-
     '400':
       description: Invalid request.
       schema:
@@ -148,11 +147,11 @@ post:
     required: false
   - name: body
     in: body
-    description: The index function.
+    description: >
+      The index function.
     schema:
       type: string
     required: true
   x-code-samples:
   - lang: Shell
     source: "cat index.js | oneprovider-rest-cli addSpaceIndex space_id=ASLDJLASKJDLADkhhasdaksdaADS name=MyIndex1"
-

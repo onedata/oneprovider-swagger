@@ -76,6 +76,13 @@ post:
   tags:
     - Replication
   summary: Replicate file or folder by path
+  x-bash-codegen-description: |
+    Replicates a file to a specified provider. This operation is asynchronous 
+    as it can take a long time depending on the size of the data to move. 
+
+    If the `path` parameter specifies a folder, entire folder is replicated to 
+    requested provider.
+
   description: |
     Replicates a file to a specified provider. This operation is asynchronous as it can take a long time depending on the size of the data to move. 
 
@@ -101,7 +108,7 @@ post:
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
     ```
-  produces:
+  consumes:
     - application/json
   responses:
     '200':

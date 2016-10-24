@@ -16,7 +16,7 @@ tags:
 securityDefinitions:
   api_key:
     type: apiKey
-    name: X-Auth-Key
+    name: X-Auth-Token
     in: header
   basic:
     type: basic
