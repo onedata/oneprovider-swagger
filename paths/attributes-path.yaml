@@ -191,4 +191,4 @@ put:
     default: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli setFileAttribute path='/My Space 1/Folder 2/file3.txt' license:=CC-0 extended=true"
+    source: "oneprovider-rest-cli setFileAttribute path='/My Space 1/Folder 2/file3.txt' license==CC-0 extended=true"

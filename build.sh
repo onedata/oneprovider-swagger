@@ -1,5 +1,9 @@
 #!/bin/bash
 
+rm -rf generated
+rm swagger.json
+
+
 # Generate aggregate JSON file from YAML
 docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger docker.onedata.org/swagger-aggregator:1.5.0
 
