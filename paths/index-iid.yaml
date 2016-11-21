@@ -32,8 +32,7 @@ get:
     ```
  
   produces:
-    - application/json
-    - application/rdf+xml
+    - application/javascript
   responses:
     '200':
       description: Index source returned successfully.
