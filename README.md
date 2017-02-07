@@ -53,7 +53,7 @@ export ONEPROVIDER_BASIC_AUTH="username:password"
 
 ./oneprovider-rest-cli -ac json getFileMetadataById id=0000000000917733836803640004677569646D0000005254576F796132686E575530775331424F516B5534646B5A4963565678644545795746684F616E646B5157466A615531484D565A33516E42785A794D6A6E7A69434565634B2D494A4679387770456E6E3850776D0000002B6136552D334675766A6A6C465A7251576D7639584256304E454448594A615A4C4D6132725A566F704F746B
 
-echo '{"name":"Flower2","genus":"Astragalus"}' | ./oneprovider-rest-cli -ct json setFileMetadata path="/OxfordFlowerDataset/FlowerSet1/image_0801.jpg"
+echo '{"name":"Flower2","genus":"Astragalus"}' | ./oneprovider-rest-cli -ct json setFileMetadata path="/OxfordFlowerDataset/FlowerSet1/image_0801.jpg -"
 
 ./oneprovider-rest-cli getAllTransfers
 

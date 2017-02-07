@@ -32,7 +32,7 @@ get:
       description: The list of all file replicas.
       schema:
         type: array
-        items: 
+        items:
           type: string
     '400':
       description: Invalid request.
@@ -54,7 +54,7 @@ get:
   - name: provider_id
     in: query
     description: >
-      Allows to limit the returned list of files to a specific provider, 
+      Allows to limit the returned list of files to a specific provider,
       which stores at least some blocks of a file.
     type: string
     required: false

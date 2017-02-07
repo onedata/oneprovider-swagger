@@ -8,14 +8,14 @@ get:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method returns a specific index source code.  
+    This method returns a specific index source code.
 
-    The indexes are defined as JavaScript functions which are executed 
-    on the database backend. 
+    The indexes are defined as JavaScript functions which are executed
+    on the database backend.
   description: |
-    This method returns a specific index source code.  
+    This method returns a specific index source code.
 
-    The indexes are defined as JavaScript functions which are executed 
+    The indexes are defined as JavaScript functions which are executed
     on the database backend.
 
     ***Example cURL requests***
@@ -30,7 +30,7 @@ get:
       ...
     }
     ```
- 
+
   produces:
     - application/javascript
   responses:
@@ -74,16 +74,16 @@ put:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method replaces an existing index code with request body content.  
+    This method replaces an existing index code with request body content.
 
-    The indexes are defined as JavaScript functions which are executed 
+    The indexes are defined as JavaScript functions which are executed
     on the database backend.
   description: |
-    This method replaces an existing index code with request body content.  
+    This method replaces an existing index code with request body content.
 
-    The indexes are defined as JavaScript functions which are executed 
+    The indexes are defined as JavaScript functions which are executed
     on the database backend.
-    
+
     ***Example cURL requests***
 
     **Get list of indexes for space**
@@ -129,4 +129,4 @@ put:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS limit=100 offset=300"
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS limit=100 offset=300 -"

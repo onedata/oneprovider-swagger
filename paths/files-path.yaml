@@ -9,15 +9,15 @@ get:
   summary: List files and folders
   x-bash-codegen-description: |
     Returns the list of folders and files directly under specified path.
-    
-    If the path points to a file, the result array will consist only of the 
+
+    If the path points to a file, the result array will consist only of the
     single item with the path to the file requested, confirming it exists.
-  
+
   description: |
     Returns the list of folders and files directly under specified path.
-    
+
     If the path points to a file, the result array will consist only of the single item with the path to the file requested, confirming it exists.
-  
+
     ***Example cURL requests***
 
     **Get files in space subfolder**
@@ -26,16 +26,16 @@ get:
     "https://$HOST:8443/api/v3/oneprovider/files/MySpace1/MyFolder2"
 
     [
-      { 
-        "id": "c4798eb2-dbd2-486f-ae94-0e6fa0a5071d", 
+      {
+        "id": "c4798eb2-dbd2-486f-ae94-0e6fa0a5071d",
         "path": "/MySpace1/MyFolder2/File1.txt"
       },
-      { 
-        "id": "620e1642-4f2d-45f2-b4eb-37f8a958b46f", 
+      {
+        "id": "620e1642-4f2d-45f2-b4eb-37f8a958b46f",
         "path": "/MySpace1/MyFolder2/Folder3"
       },
-      { 
-        "id": "55ac4ed3-a723-47ab-a892-638578b9cad7", 
+      {
+        "id": "55ac4ed3-a723-47ab-a892-638578b9cad7",
         "path": "/MySpace1/MyFolder2/File3.txt"
       }
     ]
@@ -83,7 +83,7 @@ get:
     in: query
     description: >
       Allows to specify maximum number of files that should be returned. If there are more files,
-      they can be retrieved using `offset` query parameter. 
+      they can be retrieved using `offset` query parameter.
     type: integer
     required: false
     maximum: 1000
@@ -91,7 +91,7 @@ get:
   - name: offset
     in: query
     description: >
-      Index of the partial result, can be used to get subset of the result, 
+      Index of the partial result, can be used to get subset of the result,
       when the number of files and folders under given path exceeds 1000.
     type: integer
     required: false

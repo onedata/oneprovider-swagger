@@ -81,11 +81,11 @@ post:
   x-bash-codegen-description: |
     This method allows to create a new index for space.
 
-    Indexes allow creating custom views on data which enable efficient searching 
-    through data. Currently indexes are created per space, i.e. the `space_id` 
+    Indexes allow creating custom views on data which enable efficient searching
+    through data. Currently indexes are created per space, i.e. the `space_id`
     query parameter is required.
 
-    The operation returns the created index ID in the response `Location` 
+    The operation returns the created index ID in the response `Location`
     header.
   description: |
     This method allows to create a new index for space.
@@ -154,4 +154,4 @@ post:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli addSpaceIndex space_id=ASLDJLASKJDLADkhhasdaksdaADS name=MyIndex1"
+    source: "cat index.js | oneprovider-rest-cli addSpaceIndex space_id=ASLDJLASKJDLADkhhasdaksdaADS name=MyIndex1 -"

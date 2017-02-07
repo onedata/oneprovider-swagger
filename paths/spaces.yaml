@@ -39,7 +39,7 @@ get:
       description: The list of all user spaces - containining their names and ID's.
       schema:
         type: array
-        items: 
+        items:
           type: object
           properties:
               name:
@@ -48,7 +48,7 @@ get:
               spaceId:
                 type: string
                 description: Space ID.
-    
+
     '400':
       description: Invalid request.
       schema:

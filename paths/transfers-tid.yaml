@@ -8,12 +8,12 @@ get:
     - Replication
   summary: Get transfer status
   x-bash-codegen-description: |
-    Returns status of specific transfer. In case the transfer has been 
-    scheduled for entire folder, the result is a list of transfer statuses 
+    Returns status of specific transfer. In case the transfer has been
+    scheduled for entire folder, the result is a list of transfer statuses
     for each item in the folder.
   description: |
     Returns status of specific transfer. In case the transfer has been scheduled for entire folder, the result is a list of transfer statuses for each item in the folder.
-  
+
     ***Example cURL requests***
 
     **Get status of specific transfer**
@@ -27,7 +27,7 @@ get:
       "targetProviderId": "b3c85b99-44db-4277-8c66-2ccd50888565"
     }
     ```
-    
+
   produces:
     - application/json
   responses:
@@ -74,7 +74,7 @@ delete:
     - Replication
   summary: Cancel specific transfer
   x-bash-codegen-description: |
-    Cancels a scheduled or active transfer. Returns 400 in case the transfer 
+    Cancels a scheduled or active transfer. Returns 400 in case the transfer
     is already completed, canceled or failed.
   description: |
     Cancels a scheduled or active transfer. Returns 400 in case the transfer is already completed, canceled or failed.
@@ -115,4 +115,3 @@ delete:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli cancelTransfer tid=ASLDKAJSD764ASDLnaAsd"
-

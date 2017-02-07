@@ -8,7 +8,7 @@ get:
     - Replication
   summary: Get replicas by ID
   x-bash-codegen-description: |
-    Returns file distribution information about a specific file replicated at 
+    Returns file distribution information about a specific file replicated at
     this provider.
   description: |
     Returns file distribution information about a specific file replicated at this provider.
@@ -76,15 +76,15 @@ post:
     - Replication
   summary: Replicate file or folder by ID
   x-bash-codegen-description: |
-    Replicates a file with ID to a specified provider. This operation is 
-    asynchronous as it can take a long time depending on the size of the data 
-    to move. 
+    Replicates a file with ID to a specified provider. This operation is
+    asynchronous as it can take a long time depending on the size of the data
+    to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to 
+    If the `path` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
   description: |
-    Replicates a file with ID to a specified provider. This operation is asynchronous as it can take a long time depending on the size of the data to move. 
+    Replicates a file with ID to a specified provider. This operation is asynchronous as it can take a long time depending on the size of the data to move.
 
     If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
 
@@ -98,7 +98,7 @@ post:
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
     ```
-    
+
     **Replicate file by ID to specific storage provider with URL callback**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
@@ -118,7 +118,7 @@ post:
       schema:
         type: object
         properties:
-          transferId: 
+          transferId:
             type: string
             description: Transfer ID.
     '400':

@@ -66,4 +66,3 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getSpace sid=ASLDKAJSD764ASDLnaAsd"
-
