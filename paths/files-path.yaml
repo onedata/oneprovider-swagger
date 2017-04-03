@@ -16,7 +16,8 @@ get:
   description: |
     Returns the list of folders and files directly under specified path.
 
-    If the path points to a file, the result array will consist only of the single item with the path to the file requested, confirming it exists.
+    If the path points to a file, the result array will consist only of the
+    single item with the path to the file requested, confirming it exists.
 
     ***Example cURL requests***
 
@@ -48,15 +49,7 @@ get:
       schema:
         type: array
         items:
-          type: object
-          properties:
-            id:
-              type: string
-              description: Id of the file or folder.
-            path:
-              type: string
-              description: Path to the file or folder.
-
+          $ref: '#/definitions/FilePath'
     '400':
       description: Invalid request.
       schema:

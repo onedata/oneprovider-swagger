@@ -27,7 +27,10 @@ get:
 
 
     function(x) {
-      ...
+      if(meta['onedata_json']['key1'] && meta['onedata_json']['key2']) {
+        return [meta['onedata_json']['key1'], meta['onedata_json']['key2']];
+      }
+      return null;
     }
     ```
 
@@ -86,7 +89,7 @@ put:
 
     ***Example cURL requests***
 
-    **Get list of indexes for space**
+    **Update space index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
@@ -129,4 +132,59 @@ put:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS limit=100 offset=300 -"
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS -"
+
+
+delete:
+  operationId: remove_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: update_space_index
+  summary: Update index
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    This method removes an existing index.
+
+  description: |
+    This method replaces an existing index code with request body content.
+
+    ***Example cURL requests***
+
+    **Remove existing index**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
+    ```
+
+  consumes:
+    - application/javascript
+  responses:
+    '204':
+      description: Index updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: iid
+    in: path
+    description: Id of the index to update.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli removeSpaceIndex iid=ASLDJLASKJDLADkhhasdaksdaADS"
