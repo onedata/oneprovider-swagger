@@ -141,7 +141,7 @@ delete:
   x-onedata-module: metadata
   x-onedata-resource: index
   x-onedata-method: update_space_index
-  summary: Update index
+  summary: Remove index
   tags:
     - Data
   x-bash-codegen-description: |
