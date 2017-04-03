@@ -148,7 +148,7 @@ delete:
     This method removes an existing index.
 
   description: |
-    This method replaces an existing index code with request body content.
+    This method removes an existing index.
 
     ***Example cURL requests***
 
@@ -162,7 +162,7 @@ delete:
     - application/javascript
   responses:
     '204':
-      description: Index updated successfully.
+      description: Index removed successfully.
     '400':
       description: Invalid request.
       schema:
