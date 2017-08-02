@@ -1,4 +1,4 @@
-version: 17.06.0-beta6
+version: 17.06.0-rc2
 title: Oneprovider
 description: |
   # Overview
@@ -145,36 +145,6 @@ x-bash-codegen-description: |
 
   Monitoring of changes performed in folders and files and getting metrics
   history.
-
-  ## Example usage
-
-    export ONEPROVIDER_API_KEY=ASDKjhajksdlGDALHJsgDJHAGSDKJHAGSD
-
-    export ONEPROVIDER_HOST=https://<provider_hostname>:8443
-
-    # Print detailed help on operation
-    oneprovider-rest-cli getAllSpaces -h
-
-    # Call operation
-    oneprovider-rest-cli getAllSpaces
-
-    # Get file POSIX mode
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt"
-    attribute=mode
-
-    # Get some extended attribute value
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt"
-    attribute=license extended=true
-
-    # Get JSON metadata attached to the file
-    oneprovider-rest-cli getFileMetadata -ac json
-    path="/Space 1/Folder2/file3.txt"
-
-    # List files in a space
-    oneprovider-rest-cli listFiles path="/OxfordFlowerDataset"
-
-    # Get the list of file replicas
-    oneprovider-rest-cli getFileReplicas path="/Space 1/Folder2/file3.txt"
 
 contact:
   name: Onedata support
