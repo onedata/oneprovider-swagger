@@ -63,20 +63,69 @@ properties:
     type: array
     description: Byte transfer per day histogram for last 30 days.
 example:
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   path: /My Space 1/Folder2/file3.txt
-  transferStatus: scheduled
-  targetProviderId: 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8
+  transferStatus: completed
+  invalidationStatus: skipped
+  targetProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
   filesToTransfer: 1
-  filesTransferred: 0
-  bytesTransferred: 10000
-  bytesToTransfer: 1000000
-  startTime: 1504789855
-  lastUpdate: 1504789855
+  filesTransferred: 1
+  bytesTransferred: 10485760000
+  bytesToTransfer: 10485760000
+  startTime: 1504688814
+  lastUpdate: 1504988814
   minHist:
-    - 1024
-    - 1000
-    - 100
-    - 1089
+    - 419430400
+    - 1153433600
+    - 1258291200
+    - 1468006400
+    - 1048576000
+    - 1048576000
+    - 1048576000
+    - 1153433600
+    - 629145600
+    - 1258291200
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     - 0
     - 0
     - 0
@@ -87,6 +136,16 @@ example:
     - 0
     - 0
   hrHist:
+    - 10485760000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     - 0
     - 0
     - 0
@@ -102,6 +161,7 @@ example:
     - 0
     - 0
   dyHist:
+    - 10485760000
     - 0
     - 0
     - 0
@@ -131,4 +191,3 @@ example:
     - 0
     - 0
     - 0
-
