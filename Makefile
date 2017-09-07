@@ -63,8 +63,8 @@ bash-packages:
 		docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_AGGREGATOR_IMAGE};\
 		docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_BASH_CLIENT_IMAGE} generate -i ./swagger.json -l bash -o ./generated/bash -c bash-config.json;\
 		mkdir -p "packages/bash/$$release_branch";\
-		cp generated/bash/onezone-rest-cli "packages/bash/$$release_branch/";\
-		cp generated/bash/_onezone-rest-cli "packages/bash/$$release_branch/";\
-		cp generated/bash/onezone-rest-cli.bash-completion "packages/bash/$$release_branch/";\
+		cp generated/bash/oneprovider-rest-cli "packages/bash/$$release_branch/";\
+		cp generated/bash/_oneprovider-rest-cli "packages/bash/$$release_branch/";\
+		cp generated/bash/oneprovider-rest-cli.bash-completion "packages/bash/$$release_branch/";\
 	done
 	@git checkout master
