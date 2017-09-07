@@ -161,3 +161,85 @@ post:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli replicateFileById fid=ASLDKAJSD764ASDLnaAsd provider_id=SADLKJHALSKDH88ASDLKJASD"
+
+delete:
+  operationId: delete_replica_by_id
+  x-onedata-service: oneprovider
+  x-onedata-module: replicate_file
+  x-onedata-resource: file
+  x-onedata-method: delete_replica
+  tags:
+    - Replication
+  summary: Remove existing replica by file ID
+  x-bash-codegen-description: |
+    Removes a specific replica of a file - which is hosted by this Oneprovider.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    removed from this provider.
+
+    If the `path` parameter specifies a folder, entire folder is removed from
+    this provider requested provider.
+
+  description: |
+    Removes a specific replica of a file - which is hosted by this Oneprovider.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    removed from this provider.
+
+    If the path specifies a folder, entire folder is removed from
+    this provider requested provider.
+
+    ***Example cURL requests***
+
+    **Remove file replica by ID from specific storage provider**
+    ```bash
+    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    "https://$HOST:8443/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+
+
+    { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: >
+        The replica removal has been accepted is the transfer ID, which
+        can be used for monitoring of the transfer status.
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: Transfer ID.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: fid
+    in: path
+    description: ID of the file.
+    type: string
+    required: true
+  - name: migration_provider_id
+    in: query
+    description: >
+      The ID of the provider to which the file should be replicated before being deleted.
+    required: false
+    type: string
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli deleteReplicaByID fid=ASLDKAJSD764ASDLnaAsd migration_provider_id=SADLKJHALSKDH88ASDLKJASD"
