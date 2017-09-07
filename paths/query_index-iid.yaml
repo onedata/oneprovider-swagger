@@ -72,6 +72,12 @@ get:
       "6c2e5abd-0495-4fec-95b7-f8601e244b45",
     ]
     ```
+
+    **Get file popularity for a specific space**
+    In
+    ```bash
+    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST:8443/api/v3/oneprovider/query-index/file-popularity-9JO5__9nL1b01YEvwnft1r20gwgwlkIp19ND_n8hgxs?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    ```
   produces:
     - application/json
   responses:
@@ -187,6 +193,21 @@ get:
       Specify the bounding box for a spatial query (e.g. ?bbox=-180,-90,0,0)
     type: string
     required: false
+  - name: spatial
+    in: query
+    description: Enable spatial type of query.
+    type: boolean
+    required: false
+  - name: start_range
+    in: query
+    type: string
+    required: false
+    description: Array specifying the range in spatial queries (e.g. `start_range=[1,0,0,0,0,0]`).
+  - name: end_range
+    in: query
+    type: string
+    required: false
+    description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli querySpaceIndexes iid=ASJHDJHASD7132nasdlASD key=value1"

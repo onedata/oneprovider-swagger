@@ -7,11 +7,22 @@ properties:
   path:
     type: string
     description: Path to the file or folder in the virtual file system.
-  status:
+  transferStatus:
     type: string
     description: Current status of the transfer.
     enum:
       - scheduled
+      - skipped
+      - active
+      - completed
+      - cancelled
+      - failed
+  invalidationStatus:
+    type: string
+    description: The status of transfer invalidation request.
+    enum:
+      - scheduled
+      - skipped
       - active
       - completed
       - cancelled
@@ -19,10 +30,105 @@ properties:
   targetProviderId:
     type: string
     description: The ID of the target provider to which the replication was requested.
-  progress:
+  callback:
+    type: string
+    description: Optional callback URL, which will be invoked on transfer completion.
+  filesToTransfer:
     type: integer
-    description: The progress of the transfer in %.
+    description: Total number of files in this transfer.
+  filesTransferred:
+    type: integer
+    description: Number of files already transferred.
+  bytesToTransfer:
+    type: integer
+    description: Total number of bytes in this transfer.
+  bytesTransferred:
+    type: integer
+    description: Number of bytes already transferred.
+  startTime:
+    type: integer
+    description: Start time in seconds (POSIX epoch timestamp).
+  lastUpdate:
+    type: integer
+    description: Last transfer update time in seconds (POSIX epoch timestamp).
+  minHist:
+    type: array
+    description: Byte transfer per minute histogram for last hour.
+    items:
+      type: integer
+  hrHist:
+    type: array
+    description: Byte transfer per hour histogram for last 24 hours.
+  dyHist:
+    type: array
+    description: Byte transfer per day histogram for last 30 days.
 example:
   path: /My Space 1/Folder2/file3.txt
-  status: scheduled
+  transferStatus: scheduled
   targetProviderId: 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8
+  filesToTransfer: 1
+  filesTransferred: 0
+  bytesTransferred: 10000
+  bytesToTransfer: 1000000
+  startTime: 1504789855
+  lastUpdate: 1504789855
+  minHist:
+    - 1024
+    - 1000
+    - 100
+    - 1089
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  hrHist:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  dyHist:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+
