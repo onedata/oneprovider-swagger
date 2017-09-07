@@ -195,7 +195,10 @@ get:
     required: false
   - name: spatial
     in: query
-    description: Enable spatial type of query.
+    description: |
+      Enable spatial type of query. When querying the file-popularity index, the `start_range` and
+      `end_range` constraints should be specified as 6-dimensional arrays, with the following fields:
+      `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit, HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
     type: boolean
     required: false
   - name: start_range
