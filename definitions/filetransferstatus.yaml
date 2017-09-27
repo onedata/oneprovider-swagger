@@ -59,9 +59,13 @@ properties:
   hrHist:
     type: array
     description: Byte transfer per hour histogram for last 24 hours.
+    items:
+      type: integer
   dyHist:
     type: array
     description: Byte transfer per day histogram for last 30 days.
+    items:
+      type: integer
 example:
   fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   path: /My Space 1/Folder2/file3.txt
