@@ -48,7 +48,6 @@ get:
               spaceId:
                 type: string
                 description: Space ID.
-
     '400':
       description: Invalid request.
       schema:
