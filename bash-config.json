@@ -5,5 +5,6 @@
   "generateBashCompletion": true,
   "generateZshCompletion": true,
   "hostEnvironmentVariable": "ONEPROVIDER_HOST",
+  "basicAuthEnvironmentVariable": "ONEPROVIDER_BASIC_AUTH",
   "apiKeyAuthEnvironmentVariable": "ONEPROVIDER_API_KEY"
 }
