@@ -23,7 +23,7 @@ get:
     **Get list of indexes for space**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
+    https://$HOST/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
 
 
     function(x) {
@@ -94,7 +94,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_index1.js" \
-    https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
+    https://$HOST/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
     ```
 
   consumes:
@@ -155,7 +155,7 @@ delete:
     **Remove existing index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST:8443/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
+    https://$HOST/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a
     ```
 
   consumes:

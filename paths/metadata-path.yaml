@@ -49,14 +49,14 @@ get:
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
     -H "Accept: application/rdf+xml" \
-    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt
+    https://$HOST/api/v1/oneprovider/metadata/MySpace1/File2.txt
     ```
 
     **Get specific JSON value from metadata document**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
     -H "Accept: application/json" \
-    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
+    https://$HOST/api/v1/oneprovider/metadata/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
     ```
 
     **Set specific JSON value in metadata document using key path**
@@ -67,7 +67,7 @@ get:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{"new_key": "new_value"}'
-    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
+    https://$HOST/api/v1/oneprovider/metadata/MySpace1/File2.txt-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
     ```
   produces:
     - application/json
@@ -170,7 +170,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
-    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1/File2.txt
+    https://$HOST/api/v1/oneprovider/metadata/MySpace1/File2.txt
     ```
 
     **Set RDF metadata for space from RDF file**
@@ -178,7 +178,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
-    https://$HOST:8443/api/v1/oneprovider/metadata/MySpace1
+    https://$HOST/api/v1/oneprovider/metadata/MySpace1
     ```
   consumes:
     - application/json

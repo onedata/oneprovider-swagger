@@ -17,7 +17,7 @@ get:
     **Get storage space used metrics**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/metrics/MySpace1"
+    "https://$HOST/metrics/MySpace1"
     ```
   produces:
     - application/json

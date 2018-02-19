@@ -40,7 +40,7 @@ get:
     **Get list of files matching index with `value1` for `key` attribute**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST:8443/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?key=value1
+    https://$HOST/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?key=value1
 
     [
       "2013f807-a25e-4a55-92bb-113ab46efd12",
@@ -51,7 +51,7 @@ get:
     **Get a 100 files from index skipping first 200**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST:8443/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?skip=200&limit=100
+    https://$HOST/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?skip=200&limit=100
 
     [
       "30518c78-6def-40e0-9a85-c90e7efe7ffc",
@@ -65,7 +65,7 @@ get:
     **Get list of files associated with geospatial coordinates located in Europe**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST:8443/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?bbox=81.008797,39.869301,27.636311,-31.266001
+    https://$HOST/api/v1/oneprovider/query-index/2e462492-a4d7-46b9-8641-abfdf50f06af?bbox=81.008797,39.869301,27.636311,-31.266001
 
     [
       "5145c581-af6f-4add-b3c0-d6e0253e8862",
@@ -76,7 +76,7 @@ get:
     **Get file popularity for a specific space**
     In
     ```bash
-    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST:8443/api/v3/oneprovider/query-index/file-popularity-9JO5__9nL1b01YEvwnft1r20gwgwlkIp19ND_n8hgxs?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/query-index/file-popularity-9JO5__9nL1b01YEvwnft1r20gwgwlkIp19ND_n8hgxs?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json

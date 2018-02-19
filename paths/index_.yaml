@@ -21,7 +21,7 @@ get:
     **Get list of indexes for space**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST:8443/api/v1/oneprovider/index?space_id=2e462492-a4d7-46b9-8641-abfdf50f06af
+    https://$HOST/api/v1/oneprovider/index?space_id=2e462492-a4d7-46b9-8641-abfdf50f06af
 
     [
       {
@@ -103,7 +103,7 @@ post:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: text/javascript" \
     -d "@./my_index_1.js"
-    https://$HOST:8443/api/v1/oneprovider/index?space_id=7f85c115-8631-4602-b7d5-47cd969280a2&name=MyIndex1
+    https://$HOST/api/v1/oneprovider/index?space_id=7f85c115-8631-4602-b7d5-47cd969280a2&name=MyIndex1
     ```
 
   consumes:

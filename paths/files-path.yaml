@@ -24,7 +24,7 @@ get:
     **Get files in space subfolder**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/files/MySpace1/MyFolder2"
+    "https://$HOST/api/v3/oneprovider/files/MySpace1/MyFolder2"
 
     [
       {
