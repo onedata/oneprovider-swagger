@@ -1,0 +1,58 @@
+post:
+  operationId: rerun_transfer
+  x-onedata-service: oneprovider
+  x-onedata-module: transfers
+  x-onedata-resource: transfer
+  x-onedata-method: rerun_transfer
+  tags:
+    - Replication
+  summary: Rerun finished transfer
+  x-bash-codegen-description: |
+    Reruns specific finished trasnfer.
+  description: |
+    Reruns specific finished trasnfer.
+  
+    ***Example cURL requests***
+
+    **Rerun finished transfer**
+    ```bash
+    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69/rerun"
+    ```
+
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        URI of the cloned transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the cloned transfer.
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Transfer with provided ID was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: tid
+    in: path
+    description: Transfer ID.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli rerunTransfer tid=ASLDKAJSD764ASDLnaAsd"
