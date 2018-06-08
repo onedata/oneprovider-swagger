@@ -6,11 +6,11 @@ post:
   x-onedata-method: rerun_transfer
   tags:
     - Replication
-  summary: Rerun finished transfer
+  summary: Rerun ended transfer
   x-bash-codegen-description: |
-    Reruns specific finished trasnfer.
+    Reruns ended transfer by creating a new, identical transfer.
   description: |
-    Reruns specific finished trasnfer.
+    Reruns ended transfer by creating a new, identical transfer.
   
     ***Example cURL requests***
 
@@ -25,11 +25,11 @@ post:
   responses:
     '201':
       description: >
-        URI of the cloned transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
         returned in the response `Location` header.
       headers:
         Location:
-          description: URI of the cloned transfer.
+          description: URI of the new transfer.
           type: string
     '400':
       description: Invalid request.
