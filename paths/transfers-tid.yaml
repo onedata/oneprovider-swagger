@@ -22,21 +22,38 @@ get:
     "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
 
     {
-      "transferStatus":"completed",
-      "targetProviderId":"HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
-      "startTime":1504688814,
+      "fileId": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
+      "userId": "admin",
+      "rerunId": null,
       "path":"/space/tmp",
-      "minHist":[419430400,1153433600,1258291200,1468006400,1048576000,1048576000,1048576000,1153433600,629145600,1258291200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      "lastUpdate":1504689377,
-      "invalidationStatus":"skipped",
-      "hrHist":[10485760000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      "filesTransferred":1,
-      "filesToTransfer":1,
-      "fileId":"00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
-      "dyHist":[10485760000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "replicationStatus": "completed",
+      "invalidationStatus": "skipped",
+      "replicatingProviderId": "HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
+      "invalidatingProviderId": null,
       "callback":null,
-      "bytesTransferred":10485760000,
-      "bytesToTransfer":10485760000
+      "filesToProcess": 1,
+      "filesProcessed": 1,
+      "filesTransferred": 1,
+      "failedFiles": 0,
+      "filesInvalidated": 0,
+      "filesProcessed": 1,
+      "bytesTransferred": 10485760000,
+      "scheduleTime": 1504688800,
+      "startTime": 15046888765,
+      "finishTime": 1504688814,
+      "lastUpdate": 1504988814,
+      "minHist": {
+        "ASDxicvuisodr78w979879wer": [419430400, 1153433600, 1258291200, 1468006400, 1048576000, 1048576000, 1048576000, 1153433600, 629145600, 1258291200, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "hrHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "dyHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "mthHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
     }
     ```
   produces:
