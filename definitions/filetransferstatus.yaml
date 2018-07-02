@@ -9,13 +9,13 @@ properties:
     description: Id of the user that started the transfer.
   rerunId:
     type: string
-    description: Id of the transfer being copy of this transfer.
+    description: If the transfer was rerun, this field contains the Id of the new transfer, otherwise null.
   path:
     type: string
     description: Path to the file or folder in the virtual file system.
   replicationStatus:
     type: string
-    description: The status of transfer replication request.
+    description: The status of replication request.
     enum:
       - scheduled
       - enqueued
@@ -27,7 +27,7 @@ properties:
       - failed
   invalidationStatus:
     type: string
-    description: The status of transfer invalidation request.
+    description: The status of invalidation request.
     enum:
       - scheduled
       - enqueued
@@ -39,10 +39,10 @@ properties:
       - failed
   replicatingProviderId:
     type: string
-    description: The ID of the target provider to which the replication was requested.
+    description: The Id of the target provider to which the replication was requested.
   invalidatingProviderId:
     type: string
-    description: The ID of the source provider to which the invalidation was requested.
+    description: The Id of the provider whose file replica will be invalidated.
   callback:
     type: string
     description: Optional callback URL, which will be invoked on transfer completion.
@@ -52,18 +52,18 @@ properties:
   filesProcessed:
     type: integer
     description: Number of files already processed.
-  filesTransferred:
+  filesReplicated:
     type: integer
-    description: Number of files already transferred.
+    description: Number of files already replicated.
   failedFiles:
     type: integer
-    description: Number of files which invalidation or transfer failed.
+    description: Number of files for which invalidation or replication has failed.
   filesInvalidated:
     type: integer
     description: Number of files already invalidated.
-  bytesTransferred:
+  bytesReplicated:
     type: integer
-    description: Number of bytes already transferred.
+    description: Number of bytes already replicated.
   scheduleTime:
     type: integer
     description: Schedule time in seconds (POSIX epoch timestamp).
@@ -78,34 +78,34 @@ properties:
     description: Last transfer update time in seconds (POSIX epoch timestamp).
   minHist:
     type: object
-    description: Mapping of prvoider to bytes sent statistics for last minute.
+    description: Replication statistics within the last minute, per provider.
     additionalProperties:
       type: array
-      description: Byte transfer per hour histogram for last minute.
+      description: Bytes replicated histogram for the last minute with 5 seconds window.
       items:
         type: integer
   hrHist:
     type: object
-    description: Mapping of prvoider to bytes sent statistics for last hour.
+    description: Replication statistics within the last hour, per provider.
     additionalProperties:
       type: array
-      description: Byte transfer per hour histogram for last hour.
+      description: Bytes replicated histogram for the last hour with 1 minute window.
       items:
         type: integer
   dyHist:
     type: object
-    description: Mapping of prvoider to bytes sent statistics for last day.
+    description: Replication statistics within the last day, per provider.
     additionalProperties:
       type: array
-      description: Byte transfer per day histogram for last day.
+      description: Bytes replicated histogram for the last day with 1 hour window.
       items:
         type: integer
   mthHist:
     type: object
-    description: Mapping of prvoider to bytes sent statistics for last month.
+    description: Replication statistics within the last month, per provider.
     additionalProperties:
       type: array
-      description: Byte transfer per day histogram for last month.
+      description: Bytes replicated histogram for the last month with 1 day window.
       items:
         type: integer
 example:
@@ -119,11 +119,11 @@ example:
   invalidatingProviderId: null
   filesToProcess: 1
   filesProcessed: 1
-  filesTransferred: 1
+  filesReplicated: 1
   failedFiles: 0
   filesInvalidated: 0
   filesProcessed: 1
-  bytesTransferred: 10485760000
+  bytesReplicated: 10485760000
   scheduleTime: 1504688800
   startTime: 15046888765
   finishTime: 1504688814
