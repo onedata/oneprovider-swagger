@@ -13,6 +13,18 @@ properties:
   path:
     type: string
     description: Path to the file or folder in the virtual file system.
+  transferStatus:
+    type: string
+    description: The status of replication request. This field is `depracated` and it might be removed in future release. Please refer to `replicationStatus`.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - active
+      - completed
+      - aborting
+      - cancelled
+      - failed
   replicationStatus:
     type: string
     description: The status of replication request.
@@ -37,6 +49,9 @@ properties:
       - aborting
       - cancelled
       - failed
+  targetProviderId:
+    type: string
+    description: The Id of the target provider to which the replication was requested. This field is `depracated` and it might be removed in future release. Please refer to `replicatingProviderId`.
   replicatingProviderId:
     type: string
     description: The Id of the target provider to which the replication was requested.
@@ -52,6 +67,9 @@ properties:
   filesProcessed:
     type: integer
     description: Number of files already processed.
+  filesTransferred:
+    type: integer
+    description: Number of files already replicated. This field is `depracated` and it might be removed in future release. Please refer to `filesReplicated`.
   filesReplicated:
     type: integer
     description: Number of files already replicated.
@@ -61,6 +79,9 @@ properties:
   filesInvalidated:
     type: integer
     description: Number of files already invalidated.
+  bytesTransferred:
+    type: integer
+    description: Number of bytes already replicated. This field is `depracated` and it might be removed in future release. Please refer to `bytesReplicated`.
   bytesReplicated:
     type: integer
     description: Number of bytes already replicated.
@@ -113,16 +134,20 @@ example:
   userId: admin
   rerunId: null
   path: /My Space 1/Folder2/file3.txt
+  transferStatus: completed
   replicationStatus: completed
   invalidationStatus: skipped
+  targetProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
   replicatingProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
   invalidatingProviderId: null
   filesToProcess: 1
   filesProcessed: 1
+  filesTransferred: 1
   filesReplicated: 1
   failedFiles: 0
   filesInvalidated: 0
   filesProcessed: 1
+  bytesTransferred: 10485760000
   bytesReplicated: 10485760000
   scheduleTime: 1504688800
   startTime: 15046888765
