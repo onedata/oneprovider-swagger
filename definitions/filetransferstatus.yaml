@@ -39,7 +39,19 @@ properties:
       - failed
   invalidationStatus:
     type: string
-    description: The status of invalidation request.
+    description: The status of replica eviction request. This field is `depracated` and it might be removed in future release. Please refer to `replicaEvictionStatus`.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - active
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  replicaEvictionStatus:
+    type: string
+    description: The status of replica eviction request.
     enum:
       - scheduled
       - enqueued
@@ -55,9 +67,9 @@ properties:
   replicatingProviderId:
     type: string
     description: The Id of the target provider to which the replication was requested.
-  invalidatingProviderId:
+  evictingProviderId:
     type: string
-    description: The Id of the provider whose file replica will be invalidated.
+    description: The Id of the provider whose file replica will be evicted.
   callback:
     type: string
     description: Optional callback URL, which will be invoked on transfer completion.
@@ -78,7 +90,10 @@ properties:
     description: Number of files for which invalidation or replication has failed.
   filesInvalidated:
     type: integer
-    description: Number of files already invalidated.
+    description: Number of files already evicted. This field is `depracated` and it might be removed in future release. Please refer to `fileReplicasEvicted`.
+  fileReplicasEvicted:
+    type: integer
+    description: Number of files already evicted.
   bytesTransferred:
     type: integer
     description: Number of bytes already replicated. This field is `depracated` and it might be removed in future release. Please refer to `bytesReplicated`.
