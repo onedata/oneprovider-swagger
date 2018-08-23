@@ -47,6 +47,9 @@
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
 
+/transfers/{tid}/rerun:
+  $ref: ./transfers-tid-rerun.yaml
+
 # tag Monitoring
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
