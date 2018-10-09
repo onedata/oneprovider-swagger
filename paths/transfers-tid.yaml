@@ -66,11 +66,9 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of transfer statuses.
+      description: Transfer status.
       schema:
-        type: array
-        items:
-          $ref: '#/definitions/FileTransferStatus'
+        $ref: '#/definitions/FileTransferStatus'
     '400':
       description: Invalid request.
       schema:

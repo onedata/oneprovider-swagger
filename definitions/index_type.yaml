@@ -1,20 +1,35 @@
 type: object
 description: The basic index information.
 properties:
-  indexId:
-    description: The unique identifier of the index.
+  spatial:
+    description: Whether given index is spatial or not.
+    type: boolean
+  mapFunction:
+    description: Index mapping function.
     type: string
-  name:
-    description: The user friendly index name.
+  reduceFunction:
+    description: Index reduce function or null if there is none.
     type: string
-  spaceId:
-    description: The space on which the index is defined.
-    type: string
+  indexOptions:
+    description: Options specified during creation or update of index.
+    type: object
+  providers:
+    description: List of providers on which index can be queried.
+    type: array
+    items:
+        type: string
 required:
-  - indexId
-  - name
-  - spaceId
+  - spatial
+  - mapFunction
+  - reduceFunction
+  - indexOptions
+  - providers
 example:
-  indexId: c9e7a9d6-8d09-42d7-ab5e-d48b86ed645e
-  name: My Index 1
+  spatial: false
+  mapFunction: "function (id, meta) {\\n        if(meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
   spaceId: ee4ac5df-095c-4760-bee9-a9bd2f37e508
+  reduceFunction: null,
+  indexOptions:
+    update_min_changes: 100
+  providers:
+    - ASIOdhxckvufysd78f9w394356yisudfsduuzxch
