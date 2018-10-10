@@ -172,7 +172,7 @@ delete:
     - Replication
   summary: Remove existing replica by file ID
   x-bash-codegen-description: |
-    Removes a specific replica of a file - which is hosted by this Oneprovider.
+    Removes a specific replica of a file.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     removed from this provider.
@@ -234,6 +234,13 @@ delete:
     description: ID of the file.
     type: string
     required: true
+  - name: provider_id
+    in: query
+    description: >
+      The ID of the provider in which the replica should be evicted.
+      By default the file will be replicated to the provider handling this REST call.
+    required: false
+    type: string
   - name: migration_provider_id
     in: query
     description: >

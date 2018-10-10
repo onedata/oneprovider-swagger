@@ -44,6 +44,9 @@
 /replicas-id/{fid}:
   $ref: ./replicas_id-fid.yaml
 
+/replicas-index/{index_name}:
+  $ref: ./replicas_index-index_name.yaml
+
 /spaces/{sid}/transfers:
   $ref: ./spaces-sid-transfers.yaml
 
