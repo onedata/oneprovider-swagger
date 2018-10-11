@@ -127,7 +127,7 @@ get:
 
     **Get file popularity for a specific space**
     ```bash
-    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/file-popularity?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json
