@@ -8,12 +8,12 @@ put:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method replaces an existing index reduce function code with request body content.
+    This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
     on the database backend.
   description: |
-    This method replaces an existing index reduce function code with request body content.
+    This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
     on the database backend.
@@ -82,10 +82,10 @@ delete:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method removes an index reduce function.
+    This method removes the index reduce function.
 
   description: |
-    This method removes an index reduce function.
+    This method removes the index reduce function.
 
     ***Example cURL requests***
 

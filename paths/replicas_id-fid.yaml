@@ -236,7 +236,7 @@ delete:
   - name: provider_id
     in: query
     description: >
-      The Id of the provider in which the replica will be evicted from.
+      The Id of the provider from which the replica will be evicted.
       By default the replica will be evicted in the provider handling this REST call.
     required: false
     type: string

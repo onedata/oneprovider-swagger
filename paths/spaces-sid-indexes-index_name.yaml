@@ -83,9 +83,9 @@ put:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method creates or replaces an existing index with new one.
+    This method creates or replaces an existing index with a new one.
   description: |
-    This method creates or replaces an existing index with new one.
+    This method creates or replaces an existing index with a new one.
 
     ***Example cURL requests***
 
@@ -142,12 +142,12 @@ put:
     required: false
   - name: update_min_changes
     in: query
-    description: Number of document changes that occur before re-indexing occurs.
+    description: Minimum number of document changes to trigger re-indexing.
     type: integer
     required: false
   - name: replica_update_min_changes
     in: query
-    description: Number of document changes that occur before replica index re-indexing occurs.
+    description: Minimum number of document changes to trigger re-indexing of a replica index.
     type: integer
     required: false
   - name: providers[]
@@ -175,11 +175,11 @@ patch:
   x-bash-codegen-description: |
     This method updates existing index definition. 
     
-    It takes the same arguments as PUT. If they are not specified old values are kept.
+    It takes the same arguments as PUT. Only specified parameters will be overwritten.
   description: |
     This method updates existing index definition. 
     
-    It takes the same arguments as PUT. If they are not specified old values are kept.
+    It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
     ***Example cURL requests***
 
@@ -236,12 +236,12 @@ patch:
     required: false
   - name: update_min_changes
     in: query
-    description: Number of document changes that occur before re-indexing occurs.
+    description: Minimum number of document changes to trigger re-indexing.
     type: integer
     required: false
   - name: replica_update_min_changes
     in: query
-    description: Number of document changes that occur before replica index re-indexing occurs.
+    description: Minimum number of document changes to trigger re-indexing of a replica index.
     type: integer
     required: false
   - name: providers[]
