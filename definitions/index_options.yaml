@@ -1,0 +1,12 @@
+type: object
+description: Options specified during creation or update of index.
+properties:
+  update_min_changes:
+    description: Number of document changes that occur before re-indexing occurs.
+    type: integer
+  replica_update_min_changes:
+    description: Number of document changes that occur before replica index re-indexing occurs.
+    type: integer
+example:
+  update_min_changes: 100
+ 

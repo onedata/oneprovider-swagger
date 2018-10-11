@@ -1,54 +1,53 @@
 post:
-  operationId: replicate_file_by_index
+  operationId: replicate_files_by_index
   x-onedata-service: oneprovider
   x-onedata-module: replicate_file
   x-onedata-resource: file
-  x-onedata-method: replicate_file_by_index
+  x-onedata-method: replicate_files_by_index
   summary: Replicate files by index
   tags:
     - Replication
   x-bash-codegen-description: |
-    Replicates a files indicated by index to a specified provider. This operation is
-    asynchronous as it can take a long time depending on the size of the data
+    Queries the specified index and replicates the resulting list of files to specified provider. 
+    This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
 
-    This operation supports also custom index query attributes as provided by
+    This operation supports custom index query attributes as provided by
     Couchbase:
       [http://docs.couchbase.com/admin/admin/Views/views-querying.html].
 
-    Additionaly, Couchbase spatial queries:
+    Additionally, Couchbase spatial queries:
       [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are
-
-    possible using `bbox` query parameter.
+    possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
   description: |
-    Replicates a files indicated by index to a specified provider. This operation is
-    asynchronous as it can take a long time depending on the size of the data
+    Queries the specified index and replicates the resulting list of files to specified provider. 
+    This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
 
-    This operation supports also custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
+    This operation supports custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
-    Additionaly, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using `bbox` query parameter.
+    Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
     ***Example cURL requests***
 
-    **Replicate file by index within specified space to any provider**
+    **Replicate files returned by index within specified space to any provider**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-index/custom_index?space_id=AUISyuidfysidufy8768437yu"
+    "https://$HOST/api/v3/oneprovider/replicas-index/my-index?space_id=AUISyuidfysidufy8768437yu"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0"}
     ```
 
-    **Replicate 100 files from index skipping first 200 to specific storage provider with URL callback**
+    **Replicate 100 files (skipping the first 200) returned by index within specified space to any provider with URL callback**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas-index/custom_index?space_id=AUISyuidfysidufy8768437yu&provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb&skip=200&limit=100"
+    "https://$HOST/api/v3/oneprovider/replicas-index/my-index?space_id=AUISyuidfysidufy8768437yu&provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb&skip=200&limit=100"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -59,14 +58,14 @@ post:
   responses:
     '200':
       description: >
-        The replication request was accepted and the result is the transfer ID, which
-        can be used for monitoring of the transfer status.
+        The replication request was accepted and the result is the transfer Id, which
+        can be used for monitoring the transfer status.
       schema:
         type: object
         properties:
           transferId:
             type: string
-            description: Transfer ID.
+            description: Transfer Id.
     '400':
       description: Invalid request.
       schema:
@@ -91,27 +90,27 @@ post:
     required: true
   - name: space_id
     in: query
-    description: Space ID in which index exist.
+    description: Space Id in which index exist.
     type: string
     required: true
   - name: provider_id
     in: query
     description: >
-      The ID of the provider to which the file should be replicated.
-      By default the file will be replicated to the provided handling this REST call.
+      The Id of the provider to which the files will be replicated.
+      By default the files will be replicated to the provided handling this REST call.
     required: false
     type: string
   - name: callback
     in: body
     description: >
-      This parameter allows the user to specify a REST callback URL, which will be called
+      This parameter allows the user to specify a REST callback URL which will be called
       when the transfer is complete
     required: false
     schema:
       $ref: '#/definitions/Callback'
   - name: descending
     in: query
-    description: Return the documents in descending by key order.
+    description: Return the documents in descending order (by key).
     type: boolean
     required: false
     default: false
@@ -144,7 +143,7 @@ post:
   - name: startkey_docid
     in: query
     description: >
-      Return records starting with the specified document ID.
+      Return records starting with the specified document Id.
     type: string
     required: false
   - name: endkey
@@ -157,7 +156,7 @@ post:
   - name: endkey_docid
     in: query
     description: >
-        Stop returning records when the specified document ID is reached.
+        Stop returning records when the specified document Id is reached.
     type: string
     required: false
   - name: inclusive_end
@@ -205,47 +204,48 @@ post:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFileByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
+    source: "oneprovider-rest-cli replicateFilesByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
 
 
 delete:
-  operationId: delete_replica_by_index
+  operationId: evict_replicas_by_index
   x-onedata-service: oneprovider
   x-onedata-module: replicate_file
   x-onedata-resource: file
-  x-onedata-method: delete_replica_by_index
-  summary: Remove existing replicas by index
+  x-onedata-method: evict_replicas_by_index
+  summary: Evict existing replicas by index
   tags:
     - Replication
   x-bash-codegen-description: |
-    Removes a specific replica of a file. This operation is
-    asynchronous as it can take a long time depending on the size of the data
-    to move.
+    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    evicted from this provider.
 
-    This operation supports also custom index query attributes as provided by
+    This operation supports custom index query attributes as provided by
     Couchbase:
       [http://docs.couchbase.com/admin/admin/Views/views-querying.html].
 
-    Additionaly, Couchbase spatial queries:
+    Additionally, Couchbase spatial queries:
       [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are
-
-    possible using `bbox` query parameter.
+    possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
   description: |
-    Removes a specific replica of a file. This operation is
-    asynchronous as it can take a long time depending on the size of the data
-    to move.
+    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    evicted from this provider.
 
-    This operation supports also custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
+    This operation supports custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
-    Additionaly, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using `bbox` query parameter.
+    Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
     ***Example cURL requests***
 
-    **Removes 100 replicas from index skipping first 200 from specific storage provider**
+    **Evicts 100 replicas (skipping the first 200) returned by index within specified space from specific provider**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas-index/custom_index?space_id=AUISyuidfysidufy8768437yu&provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb&skip=200&limit=100"
@@ -259,14 +259,14 @@ delete:
   responses:
     '200':
       description: >
-        The replication request was accepted and the result is the transfer ID, which
-        can be used for monitoring of the transfer status.
+        The replication request was accepted and the result is the transfer Id, which
+        can be used for monitoring the transfer status.
       schema:
         type: object
         properties:
           transferId:
             type: string
-            description: Transfer ID.
+            description: Transfer Id.
     '400':
       description: Invalid request.
       schema:
@@ -291,25 +291,25 @@ delete:
     required: true
   - name: space_id
     in: query
-    description: Space ID in which index exist.
+    description: Space Id in which index exist.
     type: string
     required: true
   - name: provider_id
     in: query
     description: >
-      The ID of the provider in which the replica should be evicted.
-      By default the file will be replicated to the provider handling this REST call.
+      The Id of the provider in which the replicas will be evicted from.
+      By default the replicas will be evicted in the provider handling this REST call.
     required: false
     type: string
   - name: migration_provider_id
     in: query
     description: >
-      The ID of the provider to which the replica should be synchronized before replica eviction.
+      The Id of the provider to which the replicas should be synchronized before being evicted.
     required: false
     type: string
   - name: descending
     in: query
-    description: Return the documents in descending by key order.
+    description: Return the documents in descending order (by key).
     type: boolean
     required: false
     default: false
@@ -342,7 +342,7 @@ delete:
   - name: startkey_docid
     in: query
     description: >
-      Return records starting with the specified document ID.
+      Return records starting with the specified document Id.
     type: string
     required: false
   - name: endkey
@@ -355,7 +355,7 @@ delete:
   - name: endkey_docid
     in: query
     description: >
-        Stop returning records when the specified document ID is reached.
+        Stop returning records when the specified document Id is reached.
     type: string
     required: false
   - name: inclusive_end
@@ -403,4 +403,4 @@ delete:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli deleteReplicaByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
+    source: "oneprovider-rest-cli evictReplicasByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"

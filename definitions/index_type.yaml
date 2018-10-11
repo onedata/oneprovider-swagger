@@ -11,8 +11,7 @@ properties:
     description: Index reduce function or null if there is none.
     type: string
   indexOptions:
-    description: Options specified during creation or update of index.
-    type: object
+    $ref: '#/definitions/IndexOptions'
   providers:
     description: List of providers on which index can be queried.
     type: array
