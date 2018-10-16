@@ -40,3 +40,6 @@ RRD:
 
 Index:
   $ref: ./index_type.yaml
+
+IndexOptions:
+  $ref: ./index_options.yaml
