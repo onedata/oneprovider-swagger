@@ -8,10 +8,9 @@ get:
     - Replication
   summary: Get replicas by Id
   x-bash-codegen-description: |
-    Returns file distribution information about a specific file replicated at
-    this provider.
+    Returns file distribution information about a specific file.
   description: |
-    Returns file distribution information about a specific file replicated at this provider.
+    Returns file distribution information about a specific file.
 
     ***Example cURL requests***
 
@@ -76,15 +75,15 @@ post:
     - Replication
   summary: Replicate file or folder by Id
   x-bash-codegen-description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider. 
-    This operation is asynchronous and it can take a long time depending on 
+    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on
     the size of the data to move.
 
     If the `fid` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
   description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider.  
+    Replicates a file specified by Id in `fid` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `fid` parameter specifies a folder, entire folder is replicated to requested provider.

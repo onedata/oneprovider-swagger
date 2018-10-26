@@ -8,10 +8,9 @@ get:
     - Replication
   summary: Get replicas by path
   x-bash-codegen-description: |
-    Returns file distribution information about a specific file replicated at
-    this provider.
+    Returns file distribution information about a specific file.
   description: |
-    Returns file distribution information about a specific file replicated at this provider.
+    Returns file distribution information about a specific file.
 
     ***Example cURL requests***
 
@@ -77,14 +76,14 @@ post:
     - Replication
   summary: Replicate file or folder by path
   x-bash-codegen-description: |
-    Replicates a file specified by absolute path in `path` parameter to a specified provider. 
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `path` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
   description: |
-    Replicates a file specified by absolute path in `path` parameter to a specified provider. 
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
@@ -173,7 +172,7 @@ delete:
     - Replication
   summary: Evict existing replica by file path
   x-bash-codegen-description: |
-    Removes a replica of a file specified by absolute path in `path` parameter 
+    Removes a replica of a file specified by absolute path in `path` parameter
     from a specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
@@ -183,7 +182,7 @@ delete:
     this provider requested provider.
 
   description: |
-    Removes a replica of a file specified by absolute path in `path` parameter 
+    Removes a replica of a file specified by absolute path in `path` parameter
     from a specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being

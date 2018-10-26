@@ -25,7 +25,7 @@ required:
   - providers
 example:
   spatial: false
-  mapFunction: "function (id, meta) {\\n        if(meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
+  mapFunction: "function (id, type, meta, ctx) {\\n        if(type == \\'custom_metadata\\' && meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
   spaceId: ee4ac5df-095c-4760-bee9-a9bd2f37e508
   reduceFunction: null,
   indexOptions:

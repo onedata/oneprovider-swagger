@@ -17,12 +17,12 @@ get:
     **Get information about specific index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
 
 
     {
         "spatial": false,
-        "mapFunction": "function (id, meta) {\\n        if(meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }",
+        "mapFunction": "function (id, type, meta, ctx) {\\n        if(type == \\'custom_metadata\\' && meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
         "reduceFunction": null,
         "indexOptions": {
             "update_min_changes": 100
@@ -94,7 +94,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_index1.js" \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?spatial=false&providers[]=SDUIFYIUXcyv7862873467878sdt&providers[]=ioysdfuyisdFITSDHX89754
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?spatial=false&providers[]=SDUIFYIUXcyv7862873467878sdt&providers[]=ioysdfuyisdFITSDHX89754
     ```
 
   responses:
@@ -187,7 +187,7 @@ patch:
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/javascript" \
-    https://$HOST/api/v1/oneprovider/index/f209c965-e212-4149-af72-860faea4187a?update_min_changes=10
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?update_min_changes=10
     ```
 
   consumes:
@@ -277,7 +277,7 @@ delete:
     **Remove existing index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
     ```
 
   responses:

@@ -50,17 +50,17 @@ get:
 
     With example map function used:
     ```javascript
-    function (id, meta) {
-        if(meta["onexattr"]) {
-            return [meta["onexattr"], id];
-        }
-        return null;    
+    function (id, type, meta, ctx) {
+      if(type == 'custom_metadata' && meta['onexattr']) {
+        return [meta['onexattr'], id];
+      }
+      return null;
     }
     ```
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?skip=10&limit=4
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?skip=10&limit=4
 
     [
       {
@@ -91,17 +91,17 @@ get:
 
     With example spatial function used:
     ```javascript
-    function (id, meta) {
-        if(meta['onedata_json'] && meta['onedata_json']['loc']) {
-            return [meta['onedata_json']['loc'], id];
-        }
-        return null;
+    function (id, type, meta, ctx) {
+      if(type == 'custom_metadata' && meta['onexattr']) {
+        return [meta['onexattr'], id];
+      }
+      return null;
     }
     ```
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?spatial=true&stale=false
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?spatial=true&stale=false
 
     [
       {
