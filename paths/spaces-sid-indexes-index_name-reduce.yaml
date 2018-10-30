@@ -25,7 +25,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
     ```
 
   consumes:
@@ -92,7 +92,7 @@ delete:
     **Remove index reduce function**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v1/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
     ```
 
   consumes:
