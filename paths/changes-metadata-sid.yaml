@@ -25,7 +25,7 @@ get:
     **Listen to space change events**
     ```bash
     curl --tlsv1.2 -N -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/changes/metadata/MySpace1"
+    "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID"
     ```
   produces:
     - application/json
@@ -71,4 +71,4 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: oneprovider-rest-cli setSpaceChanges sid=ASLJDJASHD timeout=10000 last_seq=124721
+    source: oneprovider-rest-cli setSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721

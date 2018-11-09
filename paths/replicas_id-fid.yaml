@@ -17,7 +17,7 @@ get:
     **Get file distribution map by Id**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-id/63aaab32-f5b0-41e6-b5f4-5a902ccf9c77"
+    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID"
 
     [
       {
@@ -63,7 +63,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileReplicasById fid=ASLDKAJSD764ASDLnaAsd"
+    source: "oneprovider-rest-cli getFileReplicasById fid=$FILE_ID"
 
 post:
   operationId: replicate_file_by_id
@@ -93,7 +93,7 @@ post:
     **Replicate file by Id to any provider**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-id/da426f74-5770-42a1-b799-354a3c4c154b"
+    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
@@ -103,7 +103,7 @@ post:
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -160,7 +160,7 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFileById fid=ASLDKAJSD764ASDLnaAsd provider_id=SADLKJHALSKDH88ASDLKJASD"
+    source: "oneprovider-rest-cli replicateFileById fid=$FILE_ID provider_id=$PROVIDER_ID"
 
 delete:
   operationId: evict_replica_by_id
@@ -192,7 +192,7 @@ delete:
     **Evict file replica by Id from specific storage provider**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
-    "https://$HOST/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -247,4 +247,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplicaById fid=ASLDKAJSD764ASDLnaAsd migration_provider_id=SADLKJHALSKDH88ASDLKJASD"
+    source: "oneprovider-rest-cli evictReplicaById fid=$FILE_ID migration_provider_id=$MIGRATION_PROVIDER_ID"

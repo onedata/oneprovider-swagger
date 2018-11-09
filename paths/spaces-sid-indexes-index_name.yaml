@@ -17,7 +17,7 @@ get:
     **Get information about specific index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
 
 
     {
@@ -70,7 +70,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+    source: "oneprovider-rest-cli getSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
 
 
 put:
@@ -94,9 +94,11 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_index1.js" \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?spatial=false&providers[]=SDUIFYIUXcyv7862873467878sdt&providers[]=ioysdfuyisdFITSDHX89754
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
     ```
 
+  consumes:
+    - application/javascript
   responses:
     '200':
       description: Index created successfully.
@@ -160,7 +162,7 @@ put:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 spatial=false -"
+    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
 
 
 patch:
@@ -187,7 +189,7 @@ patch:
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/javascript" \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?update_min_changes=10
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME?update_min_changes=10
     ```
 
   consumes:
@@ -254,7 +256,7 @@ patch:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 -"
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
 
 
 delete:
@@ -277,7 +279,7 @@ delete:
     **Remove existing index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
     ```
 
   responses:
@@ -313,4 +315,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+    source: "oneprovider-rest-cli removeSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
