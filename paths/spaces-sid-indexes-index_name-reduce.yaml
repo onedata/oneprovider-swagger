@@ -25,7 +25,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
     ```
 
   consumes:
@@ -69,7 +69,7 @@ put:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunction sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 -"
+    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME -"
 
 
 delete:
@@ -92,7 +92,7 @@ delete:
     **Remove index reduce function**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
     ```
 
   consumes:
@@ -130,4 +130,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeIndexReduceFunction sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+    source: "oneprovider-rest-cli removeIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME"

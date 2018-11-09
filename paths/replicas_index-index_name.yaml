@@ -37,7 +37,7 @@ post:
     **Replicate files returned by index within specified space to any provider**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-index/my-index?space_id=AUISyuidfysidufy8768437yu"
+    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0"}
@@ -47,7 +47,7 @@ post:
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas-index/my-index?space_id=AUISyuidfysidufy8768437yu&provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb&skip=200&limit=100"
+    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -204,7 +204,7 @@ post:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFilesByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
+    source: "oneprovider-rest-cli replicateFilesByIndex space_id=$SPACE_ID index_name=$INDEX_NAME key=value1"
 
 
 delete:
@@ -248,7 +248,7 @@ delete:
     **Evicts 100 replicas (skipping the first 200) returned by index within specified space from specific provider**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
-    "https://$HOST/api/v3/oneprovider/replicas-index/custom_index?space_id=AUISyuidfysidufy8768437yu&provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb&skip=200&limit=100"
+    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -403,4 +403,4 @@ delete:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplicasByIndex space_id='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
+    source: "oneprovider-rest-cli evictReplicasByIndex space_id=$SPACE_ID index_name=$INDEX_NAME key=value1"

@@ -19,7 +19,7 @@ get:
     **Get status of specific transfer**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
+    "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
 
     {
       "fileId": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
@@ -93,7 +93,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getTransferStatus tid=ASLDKAJSD764ASDLnaAsd"
+    source: "oneprovider-rest-cli getTransferStatus tid=$TRANSFER_ID"
 
 
 delete:
@@ -116,7 +116,7 @@ delete:
     **Cancel specific transfer**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
+    "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
     ```
 
   responses:
@@ -146,4 +146,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli cancelTransfer tid=ASLDKAJSD764ASDLnaAsd"
+    source: "oneprovider-rest-cli cancelTransfer tid=$TRANSFER_ID"

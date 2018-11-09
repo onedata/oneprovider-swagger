@@ -17,7 +17,7 @@ get:
     **Get information about specific index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
 
 
     {
@@ -70,7 +70,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+    source: "oneprovider-rest-cli getSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
 
 
 put:
@@ -279,7 +279,7 @@ delete:
     **Remove existing index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
     ```
 
   responses:
@@ -315,4 +315,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+    source: "oneprovider-rest-cli removeSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"

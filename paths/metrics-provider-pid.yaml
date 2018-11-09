@@ -78,4 +78,4 @@ get:
       - 1m
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli -ac xml getProviderMetrics pid=ASJHDJHASD7132nasdlASD metric=metadata_access_ops step=1h"
+    source: "oneprovider-rest-cli -ac xml getProviderMetrics pid=$PROVIDER_ID metric=metadata_access_ops step=1h"
