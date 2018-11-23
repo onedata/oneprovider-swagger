@@ -26,6 +26,9 @@ FileMetadata:
 FileMetadataChange:
   $ref: ./filemetadatachange.yaml
 
+MetadataChangesStreamRequest:
+  $ref: ./metadatachangesstreamrequest.yaml
+
 Space:
   $ref: ./space.yaml
 

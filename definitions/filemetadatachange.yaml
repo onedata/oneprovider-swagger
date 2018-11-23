@@ -1,48 +1,179 @@
 type: object
-description: File metadata record
+description: Metadata changes.
 properties:
+  fileId: 
+    type: string
+    description: Unique ID of the file.
+  filePath:
+    type: string
+    description: Absolute path to the file (starting with the Space name).
   seq: 
     type: string
     description: Sequence number (version) of the metadata document.
-  file_id: 
-    type: string
-    description: Unique ID of the file.
-  file_path:
-    type: string
-    description: Absolute path to the file (starting with the Space name).
-  deleted: 
-    type: boolean
-    description: If true, it means the file has been already deleted.
-  changes:
-    type: array
-    description: >
-      The list of changes representing current status of the file metadata.
-      If only 1 change is in the list, then it represents the current metadata state.
-      If more than 1 change is present, it means there is a conflict which needs
-      to be resolved.
-    items:
-      $ref: '#/definitions/FileMetadata'
+  fileMeta:
+    type: object
+    description: Requested fileMeta fields and additional information.
+    properties:
+      rev:
+        type: string
+        description: Last revision of fileMeta.
+      mutators:
+        type: array
+        items:
+          type: string
+          description: Providers that changed this metadata.
+      deleted:
+        type: boolean
+        description: Indicates whether this dmetadata was deleted or not.
+      changed: 
+        type: boolean
+        description: Indicates whether changes occured to this dmetadata or not.
+      fields:
+        type: object
+        properties:
+          name:
+            type: string
+            description: File name.
+          type:
+            type: string
+            description: File type.
+            enum:
+              - REG
+              - DIR
+          mode:
+            type: integer
+            description: POSIX file permissions.
+          owner:
+            type: string
+            description: File owner.
+          group_owner:
+            type: string
+            description: File group owner.
+          provider_id:
+            type: string
+            description: Id of provider which created this file.
+          shares:
+            type: array
+            description: Array of this file shares Ids.
+            items:
+              type: string
+              description: Share Id.
+          deleted:
+            type: boolean
+            description: Indicates whether this file was deleted.
+  fileLocation:
+    type: object
+    description: Requested fileLocation fields and additional information.
+    properties:
+      rev:
+        type: string
+        description: Last revision of fileLocation.
+      mutators:
+        type: array
+        items:
+          type: string
+          description: Providers that changed this metadata.
+      deleted:
+        type: boolean
+        description: Indicates whether this dmetadata was deleted or not.
+      changed: 
+        type: boolean
+        description: Indicates whether changes occured to this dmetadata or not.
+      fields:
+        type: object
+        properties:
+          provider_id:
+            type: string
+            description: Provider Id in which change occured.
+          storage_id:
+            type: string
+            description: Storage Id in which file exists.
+          size:
+            type: integer
+            description: File size.
+          space_id:
+            type: string
+            description: Space Id in which space exists.
+          storage_file_created:
+            type: boolean
+            description: Indicates whether file was created on storage or only metadata exists.
+  times:
+    type: object
+    description: Requested times fields and additional information.
+    properties:
+      rev:
+        type: string
+        description: Last revision of times.
+      mutators:
+        type: array
+        items:
+          type: string
+          description: Providers that changed this metadata.
+      deleted:
+        type: boolean
+        description: Indicates whether this dmetadata was deleted or not.
+      changed: 
+        type: boolean
+        description: Indicates whether changes occured to this dmetadata or not.
+      fields:
+        type: object
+        properties:
+          atime:
+            type: integer
+            description: POSIX atime.
+          mtime:
+            type: integer
+            description: POSIX mtime.
+          ctime:
+            type: integer
+            description: POSIX ctime.
+  customMetadata:
+    type: object
+    description: Requested customMetadata fields and additional information.
+    properties:
+      rev:
+        type: string
+        description: Last revision of customMetadata.
+      mutators:
+        type: array
+        items:
+          type: string
+          description: Providers that changed this metadata.
+      deleted:
+        type: boolean
+        description: Indicates whether this dmetadata was deleted or not.
+      changed: 
+        type: boolean
+        description: Indicates whether changes occured to this dmetadata or not.
+      fields:
+        type: object
+        description: >
+          Retrieved xattr values. In case of missing fields `null` values are returned.
+      exists:
+        type: object
+        description: >
+          Map indicating whether given xattrs exists or not.
+required:
+  - fileId
+  - filePath
+  - seq
 example:
+  fileId: 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8
+  filePath: /Space1/folder2/file1.txt
   seq: 123
-  file_id: 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8
-  file_path: /Space1/folder2/file1.txt
-  name: file1.txt
-  deleted: false
-  changes:
-  - type: reg
-    mode: 511
-    atime: 1464958683054
-    mtime: 1464958683051
-    ctime: 1464958681054
-    uid: f986246a-4d95-46ae-b3b9-e00172767e88
-    size: 1024
-    version: 1
-    is_scope: false
-    scope: a0274289-6f8a-482f-86f8-4a518760749c
-    xattrs:
-      - name: mime_type
-        value: application/text
-      - name: dc.language
-        value: en
-      - name: dc.identifier
-        value: doi:10.1002/0470123
+  fileMeta:
+    rev: 2-c500a5eb026d9474429903d47841f9c5
+    mutators: [<<"p1.1542789098.test">>]
+    changed: true
+    deleted: false
+    fields:
+      owner: john
+  customMetadata:
+    rev: 1-09f941b4e8452ef6a244c5181d894814
+    mutators: [<<"p1.1542789098.test">>]
+    changed: false
+    deleted: false
+    exists:
+      onedata_json: true
+    fields:
+      key1: value1
