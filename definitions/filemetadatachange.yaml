@@ -24,10 +24,10 @@ properties:
           description: Providers that changed this metadata.
       deleted:
         type: boolean
-        description: Indicates whether this dmetadata was deleted or not.
+        description: Indicates whether this metadata was deleted or not.
       changed: 
         type: boolean
-        description: Indicates whether changes occured to this dmetadata or not.
+        description: Indicates whether changes occured to this metadata or not.
       fields:
         type: object
         properties:
@@ -60,7 +60,7 @@ properties:
               description: Share Id.
           deleted:
             type: boolean
-            description: Indicates whether this file was deleted.
+            description: Set to 'true' when file itself was deleted but file metadata must remain for some time. Otherwise false.
   fileLocation:
     type: object
     description: Requested fileLocation fields and additional information.
@@ -75,10 +75,10 @@ properties:
           description: Providers that changed this metadata.
       deleted:
         type: boolean
-        description: Indicates whether this dmetadata was deleted or not.
+        description: Indicates whether this metadata was deleted or not.
       changed: 
         type: boolean
-        description: Indicates whether changes occured to this dmetadata or not.
+        description: Indicates whether changes occured to this metadata or not.
       fields:
         type: object
         properties:
@@ -111,10 +111,10 @@ properties:
           description: Providers that changed this metadata.
       deleted:
         type: boolean
-        description: Indicates whether this dmetadata was deleted or not.
+        description: Indicates whether this metadata was deleted or not.
       changed: 
         type: boolean
-        description: Indicates whether changes occured to this dmetadata or not.
+        description: Indicates whether changes occured to this metadata or not.
       fields:
         type: object
         properties:
@@ -141,10 +141,10 @@ properties:
           description: Providers that changed this metadata.
       deleted:
         type: boolean
-        description: Indicates whether this dmetadata was deleted or not.
+        description: Indicates whether this metadata was deleted or not.
       changed: 
         type: boolean
-        description: Indicates whether changes occured to this dmetadata or not.
+        description: Indicates whether changes occured to this metadata or not.
       fields:
         type: object
         description: >
