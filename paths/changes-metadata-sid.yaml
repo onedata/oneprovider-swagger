@@ -1,9 +1,9 @@
-get:
+post:
   operationId: get_space_changes
   x-onedata-service: oneprovider
   x-onedata-module: events
   x-onedata-resource: space
-  x-onedata-method: get_space_changes
+  x-onedata-method: stream_space_changes
   tags:
     - Monitoring
   summary: Subscribe to file events
@@ -12,7 +12,7 @@ get:
     for a given space.
 
     Until the connection is kept alive, the events will be streamed to
-    subscribers as soon as they are occur. The optional `timeout` parameter
+    subscribers as soon as they occur. The optional `timeout` parameter
     can be used to automatically disconnect  when no events occur in a
     given time window.
   description: |
@@ -24,9 +24,12 @@ get:
 
     **Listen to space change events**
     ```bash
-    curl --tlsv1.2 -N -X GET -H "X-Auth-Token: $TOKEN" \
+    curl --tlsv1.2 -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID"
     ```
+
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
@@ -56,6 +59,12 @@ get:
     description: Space ID.
     type: string
     required: true
+  - name: body
+    in: body
+    description: Specification of metadata changes to observe.
+    schema:
+      $ref: '#/definitions/MetadataChangesStreamRequest'
+    required: true
   - name: timeout
     in: query
     description: >
@@ -71,4 +80,4 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: oneprovider-rest-cli setSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721
+    source: cat changes_req.json | oneprovider-rest-cli streamSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721 -
