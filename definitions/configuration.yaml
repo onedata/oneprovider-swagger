@@ -1,0 +1,36 @@
+description: Public information about Oneprovider configuration and version.
+type: object
+properties:
+  providerId:
+    type: string
+    description: Id of the Oneprovider
+  name:
+    type: string
+    description: Oneprovider's name
+  domain:
+    type: string
+    description: Oneprovider's domain
+  onezoneDomain:
+    type: string
+    description: Domain of the Onezone where this Oneprovider is registered
+  version:
+    type: string
+    description: Version of this Oneprovider
+  build:
+    type: string
+    description: Build number of this Oneprovider
+  compatibleOnezoneVersions:
+    type: array
+    description: List of compatible Onezone versions
+    items:
+      type: string
+  compatibleOneproviderVersions:
+    type: array
+    description: List of compatible Oneprovider versions
+    items:
+      type: string
+  compatibleOneclientVersions:
+    type: array
+    description: List of compatible Oneclient versions
+    items:
+      type: string

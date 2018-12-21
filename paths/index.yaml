@@ -4,6 +4,8 @@
 #
 
 
+/configuration:
+  $ref: ./configuration.yaml
 
 # tag Data
 /spaces:
