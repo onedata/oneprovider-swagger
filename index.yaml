@@ -7,6 +7,8 @@ paths:
 definitions:
   $ref: ./definitions/index.yaml
 tags:
+  - name: Oneprovider
+    description: Information about the Oneprovider service
   - name: Data
     description: Space and file related operations
   - name: Replication
@@ -14,6 +16,9 @@ tags:
   - name: Monitoring
     description: Metrics and change events monitoring related operations
 x-tagGroups:
+  - name: Service information
+    tags:
+      - Oneprovider
   - name: Data access and management
     tags:
       - Data

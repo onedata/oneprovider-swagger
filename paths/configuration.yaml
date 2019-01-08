@@ -1,0 +1,25 @@
+get:
+  operationId: get_configuration
+  x-onedata-service: oneprovider
+  x-onedata-module: configuration
+  x-onedata-resource: configuration
+  x-onedata-method: get_configuration
+  summary: Get public information
+  tags:
+    - Oneprovider
+  x-bash-codegen-description: |
+    Returns public information about the Oneprovider service.
+  description: >
+    Returns public information about the Oneprovider service.
+    This endpoint does not require authentication.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Configuration returned successfully.
+      schema:
+        $ref: '#/definitions/Configuration'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
