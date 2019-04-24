@@ -15,7 +15,7 @@ description: |
   ```
   Please note that currently the default port for Oneprovider instances is `443`.
 
-  In addition to REST API, Oneprovider also provides support for [CDMI](../../cdmi.html) protocol,
+  In addition to REST API, Oneprovider also provides support for [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol,
   and some of data management operations are currently only possible via CDMI.
 
 
