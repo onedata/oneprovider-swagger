@@ -14,6 +14,9 @@ FileAttribute:
 FileTransferStatus:
   $ref: ./filetransferstatus.yaml
 
+FilePath:
+  $ref: ./filepath.yaml
+
 Callback:
   $ref: ./callback.yaml
 
@@ -37,3 +40,6 @@ RRD:
 
 Index:
   $ref: ./index_type.yaml
+
+IndexOptions:
+  $ref: ./index_options.yaml

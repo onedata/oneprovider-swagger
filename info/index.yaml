@@ -1,6 +1,8 @@
-version: 3.0.0-rc10
+version: 18.02.1
 title: Oneprovider
 description: |
+  # Overview
+
   This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://www.onedata.org).
 
   > This API is defined using [Swagger](http://swagger.io/), the JSON specification can be used to automatically generate
@@ -11,21 +13,26 @@ description: |
   ```
   https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=mode
   ```
-  Please note that currently the default port for Oneprovider instances is `8443`.
+  Please note that currently the default port for Oneprovider instances is `443`.
 
-  In addition to REST API, Oneprovider also provides support for [CDMI](../../cdmi.html) protocol, 
+  In addition to REST API, Oneprovider also provides support for [CDMI](../../cdmi.html) protocol,
   and some of data management operations are currently only possible via CDMI.
 
 
   ## Authentication
   In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
 
-  Currently this is supported through authentication token which can be generate using the Onedata user interface. 
+  Currently this is supported through authentication token which can be generate using the Onedata user interface.
   The token must be added to the request header like this:
   ```
   X-Auth-Token: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
   ```
-
+  In case this Onedata deployment supports authentication delegation other IdP's,
+  the `X-Auth-Token` field can contain token from such IdP with appropriate prefix,
+  as configured by Onezone administrators, e.g.:
+  ```
+    X-Auth-Token: github:GST5aasdA7asdAASFG7asdasaAS
+  ```
   In addition please take into account, that depending on your account authorization rights, not all operations
   may be possible.
 
@@ -65,7 +72,7 @@ description: |
 
   #### Transfer management
   The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
-  returned by `/replicas/{path} [POST]` operation. 
+  returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring
 
@@ -76,7 +83,7 @@ description: |
 
   #### Monitoring metrics
   The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
-  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/) 
+  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/)
   database files, with resolution determined by the `step` query parameter.
 
   ## Examples
@@ -84,43 +91,43 @@ description: |
   **Create replica of file at specific storage provider**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER:8443/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
+  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
   ```
 
   **Get space storage qouta metric**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-  "https://$PROVIDER:8443/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
+  "https://$PROVIDER/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
   ```
 
   More detailed examples are available in the documentation of each operation.
 
 x-bash-codegen-description: |
-  This is the RESTful API definition of Oneprovider component of Onedata data 
+  This is the RESTful API definition of Oneprovider component of Onedata data
   management system [onedata.org](http://www.onedata.org).
 
 
   ## Authentication
-  In order to be able to use this API the REST client must be able to 
+  In order to be able to use this API the REST client must be able to
   authenticate with the Oneprovider service.
 
-  Currently this is supported through authentication token which can be 
-  generate using the Onedata user interface. The token must be added to the 
+  Currently this is supported through authentication token which can be
+  generate using the Onedata user interface. The token must be added to the
   request header like this:
   ```
-  X-Auth-Token:LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK
+  X-Auth-Token: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK
   ```
-  or exported as an environment variable: 
+  or exported as an environment variable:
   ```
   export ONEPROVIDER_API_KEY=LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK
   ```
 
-  In addition please take into account, that depending on your account 
+  In addition please take into account, that depending on your account
   authorization rights, not all operations may be possible.
 
   ## API structure
-  The Oneprovider API reflects the fact that most operations deal directly 
-  with virtual file paths relative to user spaces, which are provided as part 
+  The Oneprovider API reflects the fact that most operations deal directly
+  with virtual file paths relative to user spaces, which are provided as part
   of the paths in the REST calls.
 
   The API provides the following functionality:
@@ -136,38 +143,8 @@ x-bash-codegen-description: |
 
   ### Monitoring
 
-  Monitoring of changes performed in folders and files and getting metrics 
+  Monitoring of changes performed in folders and files and getting metrics
   history.
-
-  ## Example usage
-
-    export ONEPROVIDER_API_KEY=ASDKjhajksdlGDALHJsgDJHAGSDKJHAGSD
-
-    export ONEPROVIDER_HOST=https://<provider_hostname>:8443
-
-    # Print detailed help on operation
-    oneprovider-rest-cli getAllSpaces -h
-
-    # Call operation
-    oneprovider-rest-cli getAllSpaces
-
-    # Get file POSIX mode
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" 
-    attribute=mode
-
-    # Get some extended attribute value
-    oneprovider-rest-cli getFileAttributes path="/Space 1/Folder2/file3.txt" 
-    attribute=license extended=true
-
-    # Get JSON metadata attached to the file
-    oneprovider-rest-cli getFileMetadata -ac json 
-    path="/Space 1/Folder2/file3.txt"
-
-    # List files in a space
-    oneprovider-rest-cli listFiles path="/OxfordFlowerDataset"
-
-    # Get the list of file replicas
-    oneprovider-rest-cli getFileReplicas path="/Space 1/Folder2/file3.txt"
 
 contact:
   name: Onedata support
@@ -177,5 +154,5 @@ license:
   name: Apache 2.0
   url: http://www.apache.org/licenses/LICENSE-2.0.html
 x-logo:
-  url: https://onedata.org/docs/doc/img/heading.png
+  url: https://onedata.org/assets/images/api/oneprovider-logo.svg
   backgroundColor: "#FFFFFF"

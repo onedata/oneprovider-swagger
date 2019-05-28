@@ -6,19 +6,18 @@ get:
   x-onedata-method: get_file_distribution
   tags:
     - Replication
-  summary: Get replicas by ID
+  summary: Get replicas by Id
   x-bash-codegen-description: |
-    Returns file distribution information about a specific file replicated at 
-    this provider.
+    Returns file distribution information about a specific file.
   description: |
-    Returns file distribution information about a specific file replicated at this provider.
+    Returns file distribution information about a specific file.
 
     ***Example cURL requests***
 
-    **Get file distribution map by ID**
+    **Get file distribution map by Id**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/replicas-id/63aaab32-f5b0-41e6-b5f4-5a902ccf9c77"
+    "https://$HOST/api/v3/oneprovider/replicas-id/63aaab32-f5b0-41e6-b5f4-5a902ccf9c77"
 
     [
       {
@@ -59,7 +58,7 @@ get:
   parameters:
   - name: fid
     in: path
-    description: The ID of the file
+    description: The Id of the file
     type: string
     required: true
   x-code-samples:
@@ -74,36 +73,37 @@ post:
   x-onedata-method: replicate_file
   tags:
     - Replication
-  summary: Replicate file or folder by ID
+  summary: Replicate file or folder by Id
   x-bash-codegen-description: |
-    Replicates a file with ID to a specified provider. This operation is 
-    asynchronous as it can take a long time depending on the size of the data 
-    to move. 
+    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on
+    the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to 
+    If the `fid` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
   description: |
-    Replicates a file with ID to a specified provider. This operation is asynchronous as it can take a long time depending on the size of the data to move. 
+    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+    If the `fid` parameter specifies a folder, entire folder is replicated to requested provider.
 
     ***Example cURL requests***
 
-    **Replicate file by ID to any provider**
+    **Replicate file by Id to any provider**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/replicas-id/da426f74-5770-42a1-b799-354a3c4c154b"
+    "https://$HOST/api/v3/oneprovider/replicas-id/da426f74-5770-42a1-b799-354a3c4c154b"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
     ```
-    
-    **Replicate file by ID to specific storage provider with URL callback**
+
+    **Replicate file by Id to specific storage provider with URL callback**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST:8443/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+    "https://$HOST/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -113,14 +113,14 @@ post:
   responses:
     '200':
       description: >
-        The replication request was accepted and the result is the transfer ID, which
-        can be used for monitoring of the transfer status.
+        The replication request was accepted and the result is the transfer Id, which
+        can be used for monitoring the transfer status.
       schema:
         type: object
         properties:
-          transferId: 
+          transferId:
             type: string
-            description: Transfer ID.
+            description: Transfer Id.
     '400':
       description: Invalid request.
       schema:
@@ -140,20 +140,20 @@ post:
   parameters:
   - name: fid
     in: path
-    description: ID of the file.
+    description: Id of the file.
     type: string
     required: true
   - name: provider_id
     in: query
     description: >
-      The ID of the provider to which the file should be replicated.
+      The Id of the provider to which the file will be replicated.
       By default the file will be replicated to the provided handling this REST call.
     required: false
     type: string
   - name: callback
     in: body
     description: >
-      This parameter allows the user to specify a REST callback URL, which will be called
+      This parameter allows the user to specify a REST callback URL which will be called
       when the transfer is complete
     required: false
     schema:
@@ -161,3 +161,90 @@ post:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli replicateFileById fid=ASLDKAJSD764ASDLnaAsd provider_id=SADLKJHALSKDH88ASDLKJASD"
+
+delete:
+  operationId: evict_replica_by_id
+  x-onedata-service: oneprovider
+  x-onedata-module: replicate_file
+  x-onedata-resource: file
+  x-onedata-method: evict_replica
+  tags:
+    - Replication
+  summary: Evict existing replica by file Id
+  x-bash-codegen-description: |
+    Evicts a replica of a file specified by Id in `fid` parameter.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the replica has to be replicated before being
+    evicted from this provider.
+
+    If the `fid` parameter specifies a folder, entire folder is evicted.
+
+  description: |
+    Evicts a replica of a file specified by file Id in `fid` parameter.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    evicted from this provider.
+
+    If the `fid` parameter specifies a folder, entire folder is evicted.
+
+    ***Example cURL requests***
+
+    **Evict file replica by Id from specific storage provider**
+    ```bash
+    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    "https://$HOST/api/v3/oneprovider/replicas-id/5d071d11-d355-4918-ade3-dd255b91547d?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+
+
+    { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: >
+        The replica eviction has been accepted is the transfer Id, which
+        can be used for monitoring the transfer status.
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: Transfer Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: fid
+    in: path
+    description: Id of the file.
+    type: string
+    required: true
+  - name: provider_id
+    in: query
+    description: >
+      The Id of the provider from which the replica will be evicted.
+      By default the replica will be evicted in the provider handling this REST call.
+    required: false
+    type: string
+  - name: migration_provider_id
+    in: query
+    description: >
+      The Id of the provider to which the file should be replicated before being evicted.
+    required: false
+    type: string
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli evictReplicaById fid=ASLDKAJSD764ASDLnaAsd migration_provider_id=SADLKJHALSKDH88ASDLKJASD"

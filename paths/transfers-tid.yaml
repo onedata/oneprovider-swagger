@@ -8,35 +8,67 @@ get:
     - Replication
   summary: Get transfer status
   x-bash-codegen-description: |
-    Returns status of specific transfer. In case the transfer has been 
-    scheduled for entire folder, the result is a list of transfer statuses 
+    Returns status of specific transfer. In case the transfer has been
+    scheduled for entire folder, the result is a list of transfer statuses
     for each item in the folder.
   description: |
-    Returns status of specific transfer. In case the transfer has been scheduled for entire folder, the result is a list of transfer statuses for each item in the folder.
-  
+    Returns status of specific transfer.
+
     ***Example cURL requests***
 
     **Get status of specific transfer**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
+    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
 
     {
-      "path": "/My Space 1/Folder2/file3.txt",
-      "status": "scheduled",
-      "targetProviderId": "b3c85b99-44db-4277-8c66-2ccd50888565"
+      "fileId": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
+      "userId": "admin",
+      "rerunId": null,
+      "path":"/space/tmp",
+      "transferStatus": "completed",
+      "replicationStatus": "completed",
+      "invalidationStatus": "skipped",
+      "replicaEvictionStatus": "skipped",
+      "targetProviderId": "HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
+      "replicatingProviderId": "HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
+      "evictingProviderId": null,
+      "callback":null,
+      "filesToProcess": 1,
+      "filesProcessed": 1,
+      "filesTransferred": 1,
+      "filesReplicated": 1,
+      "failedFiles": 0,
+      "filesInvalidated": 0,
+      "fileReplicasEvicted": 0,
+      "filesProcessed": 1,
+      "bytesTransferred": 10485760000,
+      "bytesReplicated": 10485760000,
+      "scheduleTime": 1504688800,
+      "startTime": 15046888765,
+      "finishTime": 1504688814,
+      "lastUpdate": 1504988814,
+      "minHist": {
+        "ASDxicvuisodr78w979879wer": [419430400, 1153433600, 1258291200, 1468006400, 1048576000, 1048576000, 1048576000, 1153433600, 629145600, 1258291200, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "hrHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "dyHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "mthHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
     }
     ```
-    
   produces:
     - application/json
   responses:
     '200':
-      description: The list of transfer statuses.
+      description: Transfer status.
       schema:
-        type: array
-        items:
-          $ref: '#/definitions/FileTransferStatus'
+        $ref: '#/definitions/FileTransferStatus'
     '400':
       description: Invalid request.
       schema:
@@ -74,7 +106,7 @@ delete:
     - Replication
   summary: Cancel specific transfer
   x-bash-codegen-description: |
-    Cancels a scheduled or active transfer. Returns 400 in case the transfer 
+    Cancels a scheduled or active transfer. Returns 400 in case the transfer
     is already completed, canceled or failed.
   description: |
     Cancels a scheduled or active transfer. Returns 400 in case the transfer is already completed, canceled or failed.
@@ -84,7 +116,7 @@ delete:
     **Cancel specific transfer**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
+    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69"
     ```
 
   responses:
@@ -115,4 +147,3 @@ delete:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli cancelTransfer tid=ASLDKAJSD764ASDLnaAsd"
-

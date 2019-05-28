@@ -17,7 +17,7 @@ get:
     **List all user spaces**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/spaces"
+    "https://$HOST/api/v3/oneprovider/spaces"
 
     [
       {
@@ -39,7 +39,7 @@ get:
       description: The list of all user spaces - containining their names and ID's.
       schema:
         type: array
-        items: 
+        items:
           type: object
           properties:
               name:
@@ -48,7 +48,7 @@ get:
               spaceId:
                 type: string
                 description: Space ID.
-    
+
     '400':
       description: Invalid request.
       schema:

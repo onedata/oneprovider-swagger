@@ -13,6 +13,16 @@ tags:
     description: Replication, file distribution and transfer control operations
   - name: Monitoring
     description: Metrics and change events monitoring related operations
+x-tagGroups:
+  - name: Data access and management
+    tags:
+      - Data
+  - name: Replication and transfer control
+    tags:
+      - Replication
+  - name: Monitoring and metrics
+    tags:
+      - Monitoring
 securityDefinitions:
   api_key:
     type: apiKey
@@ -20,3 +30,6 @@ securityDefinitions:
     in: header
   basic:
     type: basic
+security:
+  - basic: []
+  - api_key: []

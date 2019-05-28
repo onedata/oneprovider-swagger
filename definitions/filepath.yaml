@@ -1,0 +1,9 @@
+description: Mapping between file Id and file path.
+type: object
+properties:
+  id:
+    type: string
+    description: Id of the file or folder.
+  path:
+    type: string
+    description: Path to the file or folder.

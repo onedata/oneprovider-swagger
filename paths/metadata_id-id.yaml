@@ -8,23 +8,23 @@ get:
   tags:
     - Data
   x-bash-codegen-description: |
-    This method returns the metadata document for specified file, folder or 
+    This method returns the metadata document for specified file, folder or
     space by ID. Onedata supports multiple metadata backends in parallell.
 
     The currently supported metadata stores include:
      * JSON
      * RDF
 
-    The metadata source will be selected automatically based on the "Accept: " 
+    The metadata source will be selected automatically based on the "Accept: "
     header in the request, or from the optional `metadata_type` query parameter.
 
-    By default the method returns the complete metadata document of requested 
-    type. It is possible to request only a part of the document by specifying 
+    By default the method returns the complete metadata document of requested
+    type. It is possible to request only a part of the document by specifying
     filter_type` and `filter` attributes in the query.
 
     Supported filter types are currently supported only for JSON backend:
-      * **keypath** - list of JSON keys which point to requested JSON object, 
-                    separated by `.`, array elements should be expressed as 
+      * **keypath** - list of JSON keys which point to requested JSON object,
+                    separated by `.`, array elements should be expressed as
                     `[i]` (e.g. `key1.key2.[2].key3`)
 
   description: |
@@ -45,31 +45,31 @@ get:
     ***Example cURL requests***
 
     **Get complete RDF metadata document for file**
-    
+
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
     -H "Accept: application/rdf+xml" \
-    https://$HOST:8443/api/v1/oneprovider/metadata-id/6fd04d80-3856-4f82-8382-4fca29b1171d
+    https://$HOST/api/v3/oneprovider/metadata-id/6fd04d80-3856-4f82-8382-4fca29b1171d
     ```
 
     **Get specific JSON value from metadata document**
-    
+
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
     -H "Accept: application/json" \
-    https://$HOST:8443/api/v1/oneprovider/metadata-id/7f85c115-8631-4602-b7d5-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
-    ```    
+    https://$HOST/api/v3/oneprovider/metadata-id/7f85c115-8631-4602-b7d5-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
+    ```
 
     **Set specific JSON value in metadata document using key path**
-    In this example the contents of the PUT body will be assigned the 
+    In this example the contents of the PUT body will be assigned the
     value of "key3" in the metadata document.
-    
+
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{"new_key": "new_value"}'
-    https://$HOST:8443/api/v1/oneprovider/metadata-id/7f85c115-8631-4602-b7d5-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
-    ```  
+    https://$HOST/api/v3/oneprovider/metadata-id/7f85c115-8631-4602-b7d5-47cd969280a2?filter_type=keypath&filter=key1.key2.[2].key3
+    ```
   produces:
     - application/json
     - application/rdf+xml
@@ -121,7 +121,7 @@ get:
   - name: inherited
     in: query
     description: >
-      When set to true, this operation will merge the metadata documents from 
+      When set to true, this operation will merge the metadata documents from
       parent folders as well as entire space into a single JSON or RDF document.
     type: boolean
     required: false
@@ -141,7 +141,7 @@ put:
     - Data
   description: |
     This method allows to set specific metadata document for a file, folder or space specified by ID in the request path.
-    
+
     The currently supported metadata stores include:
      * JSON
      * RDF
@@ -157,7 +157,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
-    https://$HOST:8443/api/v1/oneprovider/metadata-id/9e91571f-9dc9-4cea-a86a-9e6bae5aaaca
+    https://$HOST/api/v3/oneprovider/metadata-id/9e91571f-9dc9-4cea-a86a-9e6bae5aaaca
     ```
 
     **Set RDF metadata for space from RDF file**
@@ -165,8 +165,8 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
-    https://$HOST:8443/api/v1/oneprovider/metadata-id/1e65d5f4-c49d-495a-a2b6-50acd02a25b1
-    ```    
+    https://$HOST/api/v3/oneprovider/metadata-id/1e65d5f4-c49d-495a-a2b6-50acd02a25b1
+    ```
 
   consumes:
     - application/json
@@ -222,5 +222,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.json | oneprovider-rest-cli -ct json setFileMetadataById id=ALKSJDHKASD7687asDBASDDsd"
-
+    source: "cat metadata.json | oneprovider-rest-cli -ct json setFileMetadataById id=ALKSJDHKASD7687asDBASDDsd -"

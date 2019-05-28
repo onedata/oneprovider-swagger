@@ -17,8 +17,8 @@ get:
     **Get user storage block access metrics with 1 hour resolution**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/metrics/space/fe14b4cc-bce0-4220-8394-a911d11a0a53/user/8fd85f71-3290-411d-ae3e-a65d48b5229c?metric=block_access&step=1h"
-    
+    "https://$HOST/api/v3/oneprovider/metrics/space/fe14b4cc-bce0-4220-8394-a911d11a0a53/user/8fd85f71-3290-411d-ae3e-a65d48b5229c?metric=block_access&step=1h"
+
     {
       "providerId": "4efc4a0c-0a61-4766-8fe9-c3d7fb414da8",
       "rrd": {
@@ -32,7 +32,7 @@ get:
           }
         }
     }
-    ```    
+    ```
   produces:
     - application/json
     - application/xml
@@ -92,4 +92,3 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli -ac xml getSpaceUserMetrics sid=ASJHDJHASD7132nasdlASD uid=ASD66ASDASDn7nasd metric=metadata_access_ops step=1h"
-

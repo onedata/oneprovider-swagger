@@ -24,14 +24,17 @@
 /metadata-id/{id}:
   $ref: ./metadata_id-id.yaml
 
-/index:
-  $ref: ./index_.yaml
+/spaces/{sid}/indexes:
+  $ref: ./spaces-sid-indexes.yaml
 
-/index/{iid}:
-  $ref: ./index-iid.yaml
+/spaces/{sid}/indexes/{index_name}:
+  $ref: ./spaces-sid-indexes-index_name.yaml
 
-/query-index/{iid}:
-  $ref: ./query_index-iid.yaml
+/spaces/{sid}/indexes/{index_name}/reduce:
+  $ref: ./spaces-sid-indexes-index_name-reduce.yaml
+
+/spaces/{sid}/indexes/{index_name}/query:
+  $ref: ./spaces-sid-indexes-index_name-query.yaml
 
 
 # tag Replication
@@ -41,11 +44,17 @@
 /replicas-id/{fid}:
   $ref: ./replicas_id-fid.yaml
 
-/transfers:
-  $ref: ./transfers.yaml
+/replicas-index/{index_name}:
+  $ref: ./replicas_index-index_name.yaml
+
+/spaces/{sid}/transfers:
+  $ref: ./spaces-sid-transfers.yaml
 
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
+
+/transfers/{tid}/rerun:
+  $ref: ./transfers-tid-rerun.yaml
 
 # tag Monitoring
 /metrics/space/{sid}:

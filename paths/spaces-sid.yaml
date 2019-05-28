@@ -17,7 +17,7 @@ get:
     **Get information about a specific space**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST:8443/api/v3/oneprovider/spaces/8f4b1e94-fdf8-4754-9962-edb01b2ee0f7"
+    "https://$HOST/api/v3/oneprovider/spaces/8f4b1e94-fdf8-4754-9962-edb01b2ee0f7"
 
     {
         "name": "My Space 1",
@@ -66,4 +66,3 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getSpace sid=ASLDKAJSD764ASDLnaAsd"
-

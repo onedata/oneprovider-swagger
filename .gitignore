@@ -5,3 +5,5 @@ packages
 
 dockerimage.report.txt
 dockerimage.sha
+
+.idea

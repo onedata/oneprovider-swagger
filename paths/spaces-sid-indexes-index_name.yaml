@@ -1,0 +1,316 @@
+get:
+  operationId: get_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: get_space_index
+  summary: Get index
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    This method returns a JSON describing specific index.
+  description: |
+    This method returns a JSON describing specific index.
+
+    ***Example cURL requests***
+
+    **Get information about specific index**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+
+
+    {
+        "spatial": false,
+        "mapFunction": "function (id, type, meta, ctx) {\\n        if(type == \\'custom_metadata\\' && meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
+        "reduceFunction": null,
+        "indexOptions": {
+            "update_min_changes": 100
+        },
+        "providers": [
+            "ASIOdhxckvufysd78f9w394356yisudfsduuzxch"
+        ]
+    }
+    ```
+
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Information about index.
+      schema:
+        $ref: '#/definitions/Index'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: sid
+    in: path
+    description: >
+      Space ID in which index exist.
+    type: string
+    required: true
+  - name: index_name
+    in: path
+    description: Name of the index.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
+
+
+put:
+  operationId: create_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: create_space_index
+  summary: Create index
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    This method creates or replaces an existing index with a new one.
+  description: |
+    This method creates or replaces an existing index with a new one.
+
+    ***Example cURL requests***
+
+    **Create space index**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/javascript" \
+    -d "@./my_improved_index1.js" \
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?spatial=false&providers[]=SDUIFYIUXcyv7862873467878sdt&providers[]=ioysdfuyisdFITSDHX89754
+    ```
+
+  responses:
+    '200':
+      description: Index created successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: sid
+    in: path
+    description: >
+      Space ID in which index will be created.
+    type: string
+    required: true
+  - name: index_name
+    in: path
+    description: Name of the index.
+    type: string
+    required: true
+  - name: body
+    in: body
+    description: The index map function.
+    schema:
+      type: string
+    required: true
+  - name: spatial
+    in: query
+    description: Specifies whether index is spatial or not.
+    type: boolean
+    default: false
+    required: false
+  - name: update_min_changes
+    in: query
+    description: Minimum number of document changes to trigger re-indexing.
+    type: integer
+    required: false
+  - name: replica_update_min_changes
+    in: query
+    description: Minimum number of document changes to trigger re-indexing of a replica index.
+    type: integer
+    required: false
+  - name: providers[]
+    in: query
+    description: Providers which will create index.
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    required: false
+  x-code-samples:
+  - lang: Shell
+    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 spatial=false -"
+
+
+patch:
+  operationId: update_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: update_space_index
+  summary: Update index
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    This method updates existing index definition. 
+    
+    It takes the same arguments as PUT. Only specified parameters will be overwritten.
+  description: |
+    This method updates existing index definition. 
+    
+    It takes the same arguments as PUT. Only specified parameters will be overwritten.
+
+    ***Example cURL requests***
+
+    **Update space index**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
+    -H "Content-type: application/javascript" \
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1?update_min_changes=10
+    ```
+
+  consumes:
+    - application/javascript
+  responses:
+    '200':
+      description: Index updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: sid
+    in: path
+    description: >
+      Space ID in which index exist.
+    type: string
+    required: true
+  - name: index_name
+    in: path
+    description: Name of the index.
+    type: string
+    required: true
+  - name: body
+    in: body
+    description: The index map function.
+    schema:
+      type: string
+    required: false
+  - name: spatial
+    in: query
+    description: Specifies whether index is spatial or not.
+    type: boolean
+    required: false
+  - name: update_min_changes
+    in: query
+    description: Minimum number of document changes to trigger re-indexing.
+    type: integer
+    required: false
+  - name: replica_update_min_changes
+    in: query
+    description: Minimum number of document changes to trigger re-indexing of a replica index.
+    type: integer
+    required: false
+  - name: providers[]
+    in: query
+    description: Providers which will create index.
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    required: false
+  x-code-samples:
+  - lang: Shell
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 -"
+
+
+delete:
+  operationId: remove_space_index
+  x-onedata-service: oneprovider
+  x-onedata-module: metadata
+  x-onedata-resource: index
+  x-onedata-method: remove_space_index
+  summary: Remove index
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    This method removes an existing index.
+
+  description: |
+    This method removes an existing index.
+
+    ***Example cURL requests***
+
+    **Remove existing index**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1
+    ```
+
+  responses:
+    '204':
+      description: Index removed successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: sid
+    in: path
+    description: >
+      Space ID in which index exist.
+    type: string
+    required: true
+  - name: index_name
+    in: path
+    description: Name of the index.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli removeSpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1"
