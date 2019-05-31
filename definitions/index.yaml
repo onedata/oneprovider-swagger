@@ -49,3 +49,6 @@ Index:
 
 IndexOptions:
   $ref: ./index_options.yaml
+
+Share:
+  $ref: ./share.yaml
