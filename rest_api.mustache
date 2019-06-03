@@ -2,87 +2,47 @@
 %%% This file has been automatically generated from Swagger
 %%% specification - DO NOT EDIT!
 %%%
-%%% @copyright (C) 2016 ACK CYFRONET AGH
-%%% This software is released under the MIT license cited i
-%%% in 'LICENSE.txt'.
+%%% @copyright (C) 2019 ACK CYFRONET AGH
+%%% This software is released under the MIT license
+%%% cited in 'LICENSE.txt'.
 %%% @end
 %%%--------------------------------------------------------------------
-%%% @doc REST API definitions for {{#operations}}{{classVarName}}{{/operations}}.
+%%% @doc This module contains definitions of {{#operations}}{{classVarName}}{{/operations}} REST methods.
 %%% @end
 %%%--------------------------------------------------------------------
--module({{#operations}}{{classVarName}}_api{{/operations}}).
--author("Krzysztof Trzepla").
+-module({{#operations}}{{classVarName}}{{apiFileNameSuffix}}{{/operations}}).
 
--include("http/rest.hrl").
+-include("rest.hrl").
 
-%% API
 -export([routes/0]).
 
 %%%===================================================================
-%%% API functions
+%%% API
 %%%===================================================================
 
 %%--------------------------------------------------------------------
-%% @doc Returns a list of tuples consisting of a path, a handler module and
-%% an initial request state.
+%% @doc
+%% Definitions of {{classVarName}} REST paths.
 %% @end
 %%--------------------------------------------------------------------
--spec routes() ->
-    [{Path :: binary(), Module :: module(), State :: rest_handler:state()}].
-routes() -> 
-    [
+-spec routes() -> [{binary(), #rest_req{}}].
+routes() -> [
 {{#operations}}
-    {{#operation}}
-    {{#summary}}
-        %% {{{summary}}}
-    {{/summary}}
-        {<<"{{basePathWithoutHost}}{{path}}">>, rest_handler, #rstate{
-            version = {{#vendorExtensions}}{{x-onedata-version}}{{/vendorExtensions}},
-            module = {{#vendorExtensions}}{{x-onedata-module}}{{/vendorExtensions}},
-            resource = {{#vendorExtensions}}{{x-onedata-resource}}{{/vendorExtensions}},
-            methods = [#rmethod{
-                type = '{{httpMethod}}',
-        {{#hasBodyParam}}
-            {{#bodyParam}}
-                {{#description}}
-                %% {{description}}
-                {{/description}}
-                args_spec = rest_model:{{dataType}}_model(),
-            {{/bodyParam}}
-        {{/hasBodyParam}}
-        {{#hasQueryParams}}
-            {{#queryParams}}
-                params_spec = #{
-                {{#description}}
-                    %% {{description}}
-                {{/description}}
-                {{#required}}
-                    {{paramName}} => {{dataType}}{{#hasMore}},{{/hasMore}}
-                {{/required}}
-                {{^required}}
-                    {{#defaultValue}}
-                        {{#x-onedata-default-value}}
-                    {{paramName}} => { {{dataType}}, {optional, {{x-onedata-default-value}} } }{{#hasMore}},{{/hasMore}}
-                        {{/x-onedata-default-value}}
-                        {{^x-onedata-default-value}}
-                    {{paramName}} => { {{dataType}}, {optional, {{defaultValue}} } }{{#hasMore}},{{/hasMore}}
-                        {{/x-onedata-default-value}}
-                    {{/defaultValue}}
-                    {{^defaultValue}}
-                    {{paramName}} => { {{dataType}}, optional }{{#hasMore}},{{/hasMore}}
-                    {{/defaultValue}}
-                {{/required}}
-                },
-            {{/queryParams}}
-        {{/hasQueryParams}}
+{{#operation}}
+{{#summary}}
+    %% {{{summary}}}
+{{/summary}}
+    {<<"{{path}}">>, #rest_req{
+        method = '{{httpMethod}}',
         {{#vendorExtensions}}
-            {{#x-onedata-noauth}}
-                noauth = true,
-            {{/x-onedata-noauth}}
-        {{/vendorExtensions}} 
-            }]
-        }}{{#hasMore}},{{/hasMore}}
-
-    {{/operation}}
+        {{#x-onedata-parse_body}}
+        parse_body = {{{x-onedata-parse_body}}},
+        {{/x-onedata-parse_body}}
+        {{#x-onedata-gri}}
+        b_gri = #b_gri{type = {{type}}, id = {{{id}}}{{^id}}undefined{{/id}}, aspect = {{{aspect}}}},
+        {{/x-onedata-gri}}
+        {{/vendorExtensions}}
+    }},
+{{/operation}}
 {{/operations}}
-    ].
+].
