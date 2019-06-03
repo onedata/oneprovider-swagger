@@ -8,9 +8,28 @@ get:
     - Oneprovider
   x-bash-codegen-description: |
     Returns public information about the Oneprovider service.
-  description: >
+  description: |
     Returns public information about the Oneprovider service.
     This endpoint does not require authentication.
+
+    ***Example cURL requests***
+
+    **Get Oneprovider public information**
+    ```bash
+    curl --tlsv1.2 -X GET "https://$HOST/api/v3/oneprovider/configuration"
+
+    {
+      "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
+      "name": "ProviderName",
+      "domain": "zone.domain.org",
+      "onezoneDomain": "example.domain.org",
+      "version": "19.02.0-beta1",
+      "build": "19-g0d0fd5b",
+      "compatibleOnezoneVersions": ["19.02.0-beta1"],
+      "compatibleOneproviderVersions": ["19.02.0-beta1"],
+      "compatibleOneclientVersions": ["18.02.1", "19.02.0-beta1"]
+    }
+    ```
   produces:
     - application/json
   responses:

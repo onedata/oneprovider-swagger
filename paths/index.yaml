@@ -18,6 +18,23 @@
   $ref: ./metadata_id-id.yaml
 
 
+# tag Monitoring
+/metrics/space/{sid}:
+  $ref: ./metrics-space-sid.yaml
+
+/metrics/space/{sid}/user/{uid}:
+  $ref: ./metrics-space-sid-user-uid.yaml
+
+# /metrics/provider/{pid}:
+#   $ref: ./metrics-provider-pid.yaml
+
+# /metrics/user/{uid}:
+#   $ref: ./metrics-user-uid.yaml
+
+/changes/metadata/{sid}:
+  $ref: ./changes-metadata-sid.yaml
+
+
 # tag Oneprovider
 /configuration:
   $ref: ./configuration.yaml
@@ -74,21 +91,3 @@
 
 /transfers/{tid}/rerun:
   $ref: ./transfers-tid-rerun.yaml
-
-
-
-# tag Monitoring
-/metrics/space/{sid}:
-  $ref: ./metrics-space-sid.yaml
-
-/metrics/space/{sid}/user/{uid}:
-  $ref: ./metrics-space-sid-user-uid.yaml
-
-# /metrics/provider/{pid}:
-#   $ref: ./metrics-provider-pid.yaml
-
-# /metrics/user/{uid}:
-#   $ref: ./metrics-user-uid.yaml
-
-/changes/metadata/{sid}:
-  $ref: ./changes-metadata-sid.yaml
