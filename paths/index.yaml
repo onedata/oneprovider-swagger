@@ -32,6 +32,14 @@
   $ref: ./spaces-sid-transfers.yaml
 
 
+# tag Transfer
+/transfers/{tid}:
+  $ref: ./transfers-tid.yaml
+
+/transfers/{tid}/rerun:
+  $ref: ./transfers-tid-rerun.yaml
+
+
 # tag Data
 /files/{path}:
   $ref: ./files-path.yaml
@@ -54,12 +62,6 @@
 
 /replicas-index/{index_name}:
   $ref: ./replicas_index-index_name.yaml
-
-/transfers/{tid}:
-  $ref: ./transfers-tid.yaml
-
-/transfers/{tid}/rerun:
-  $ref: ./transfers-tid-rerun.yaml
 
 # tag Monitoring
 /metrics/space/{sid}:

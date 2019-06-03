@@ -1,11 +1,11 @@
 get:
   operationId: get_transfer_status
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: get_transfer_status
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: instance
   tags:
-    - Replication
+    - Transfer
   summary: Get transfer status
   x-bash-codegen-description: |
     Returns status of specific transfer. In case the transfer has been
@@ -98,12 +98,12 @@ get:
 
 delete:
   operationId: cancel_transfer
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: cancel_transfer
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: instance
   tags:
-    - Replication
+    - Transfer
   summary: Cancel specific transfer
   x-bash-codegen-description: |
     Cancels a scheduled or active transfer. Returns 400 in case the transfer

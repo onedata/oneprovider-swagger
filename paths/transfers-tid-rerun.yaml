@@ -1,11 +1,11 @@
 post:
   operationId: rerun_transfer
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: rerun_transfer
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: rerun
   tags:
-    - Replication
+    - Transfer
   summary: Rerun ended transfer
   x-bash-codegen-description: |
     Reruns ended transfer by creating a new, identical transfer.
