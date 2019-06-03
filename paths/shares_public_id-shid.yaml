@@ -1,12 +1,12 @@
 get:
   operationId: get_share_by_public_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: get_share_by_public_id
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
   summary: Get share info by public share ID
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Returns the basic information about shared folder specified by public share ID.
   description: |
@@ -67,13 +67,14 @@ get:
 
 patch:
   operationId: update_share_name_by_public_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: update_share_name_by_public_id
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
   summary: Rename share by public share ID
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Changes name of the shared folder specified by public share ID.
   description: |
@@ -123,21 +124,18 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: >
-  x-code-samples:
-    - lang: Shell
       source: "oneprovider-rest-cli updateShareNameByPublicID shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
 
 
 delete:
   operationId: remove_share_by_public_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: remove_share_by_public_id
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
   summary: Unshare a folder by public share ID
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Unshares a folder by public share ID. This operation will not remove
     data from folder but data will not be accessible through public url anymore.

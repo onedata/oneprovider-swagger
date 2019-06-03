@@ -1,12 +1,12 @@
 get:
   operationId: get_share_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: get_share_by_id
+  x-onedata-gri:
+    type: op_share
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
   summary: Get share info by folder id
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Returns the basic information about shared folder specified by ID.
   description: |
@@ -77,13 +77,14 @@ get:
 
 post:
   operationId: create_share_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: create_share_by_id
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
   summary: Share a folder by ID
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Shares a folder specified by ID. Shared folder can be viewed by everyone
     through public URL. This operation assigns a public share ID that can be
@@ -165,13 +166,14 @@ post:
 
 patch:
   operationId: update_share_name_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: update_share_name_by_id
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
   summary: Rename share by folder id
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Changes name of the shared folder specified by ID.
   description: |
@@ -236,13 +238,13 @@ patch:
 
 delete:
   operationId: remove_share_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: remove_share_by_id
+  x-onedata-gri:
+    type: op_share
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
   summary: Unshare a folder by ID
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Unshares a folder by ID. This operation will not remove data from folder
     but data will not be accessible through public url anymore.
