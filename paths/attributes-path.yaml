@@ -1,12 +1,12 @@
 get:
   operationId: get_file_attributes
-  x-onedata-service: oneprovider
-  x-onedata-module: attributes
-  x-onedata-resource: file
-  x-onedata-method: get_file_attributes
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: attributes
   summary: Get file attributes
   tags:
-    - Data
+    - File
   x-bash-codegen-description: |
     This method returns selected file attributes as a JSON object.
 
@@ -102,13 +102,14 @@ get:
 
 put:
   operationId: set_file_attribute
-  x-onedata-service: oneprovider
-  x-onedata-module: attributes
-  x-onedata-resource: file
-  x-onedata-method: set_file_attribute
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: attributes
   summary: Set file attribute
   tags:
-    - Data
+    - File
   x-bash-codegen-description: |
     This method allows to set a value of a regular and extended file attributes.
 

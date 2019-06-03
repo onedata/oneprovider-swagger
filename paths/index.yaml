@@ -4,6 +4,20 @@
 #
 
 
+# tag File
+/files/{path}:
+  $ref: ./files-path.yaml
+
+/attributes/{path}:
+  $ref: ./attributes-path.yaml
+
+/metadata/{path}:
+  $ref: ./metadata-path.yaml
+
+/metadata-id/{id}:
+  $ref: ./metadata_id-id.yaml
+
+
 # tag Oneprovider
 /configuration:
   $ref: ./configuration.yaml
@@ -62,18 +76,6 @@
   $ref: ./transfers-tid-rerun.yaml
 
 
-# tag Data
-/files/{path}:
-  $ref: ./files-path.yaml
-
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
-
-/metadata/{path}:
-  $ref: ./metadata-path.yaml
-
-/metadata-id/{id}:
-  $ref: ./metadata_id-id.yaml
 
 # tag Monitoring
 /metrics/space/{sid}:

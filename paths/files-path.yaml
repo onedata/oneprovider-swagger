@@ -1,11 +1,11 @@
 get:
   operationId: list_files
-  x-onedata-service: oneprovider
-  x-onedata-module: files
-  x-onedata-resource: file
-  x-onedata-method: list_files
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: list
   tags:
-    - Data
+    - File
   summary: List files and folders
   x-bash-codegen-description: |
     Returns the list of folders and files directly under specified path.

@@ -1,12 +1,12 @@
 get:
   operationId: get_file_metadata
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: file
-  x-onedata-method: get_file_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: metadata
   summary: Get file metadata
   tags:
-    - Data
+    - File
   x-bash-codegen-description: |
     This method returns the metadata document for specified file, folder or
     space. Onedata supports multiple metadata backends in parallell.
@@ -131,13 +131,14 @@ get:
 
 put:
   operationId: set_file_metadata
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: file
-  x-onedata-method: set_file_metadata
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: metadata
   summary: Set file metadata
   tags:
-    - Data
+    - File
   x-bash-codegen-description: |
     This method allows to set specific metadata document for a file, folder or
     space specified in the request path.
