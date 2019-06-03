@@ -1,11 +1,11 @@
 get:
   operationId: get_space_indexes
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: get_space_indexes
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: indexes
   tags:
-    - Data
+    - Space
   summary: Get all space indexes
   x-bash-codegen-description: |
     Returns the list of all index names in a space.

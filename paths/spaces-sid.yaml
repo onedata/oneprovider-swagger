@@ -1,11 +1,11 @@
 get:
   operationId: get_space
-  x-onedata-service: oneprovider
-  x-onedata-module: spaces
-  x-onedata-resource: space
-  x-onedata-method: get_space
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: instance
   tags:
-    - Data
+    - Space
   summary: Get basic space information
   x-bash-codegen-description: |
     Returns the basic information about space with given ID.

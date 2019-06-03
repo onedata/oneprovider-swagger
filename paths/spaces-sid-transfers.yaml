@@ -1,11 +1,11 @@
 get:
   operationId: get_all_transfers
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: file
-  x-onedata-method: get_all_transfers
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: transfers
   tags:
-    - Replication
+    - Space
   summary: Get all transfers
   x-bash-codegen-description: |
     Returns the list of all transfer IDs in a space with given state.

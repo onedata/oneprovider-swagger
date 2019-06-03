@@ -1,12 +1,13 @@
 put:
   operationId: update_index_reduce_function
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: update_index_reduce_function
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index_reduce_function, ?BINDING(index_name)}"
   summary: Update index reduce function
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method replaces the existing index reduce function code with the request body.
 
@@ -74,13 +75,13 @@ put:
 
 delete:
   operationId: remove_index_reduce_function
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: remove_index_reduce_function
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index_reduce_function, ?BINDING(index_name)}"
   summary: Remove index reduce function
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method removes the index reduce function.
 

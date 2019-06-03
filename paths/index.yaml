@@ -4,27 +4,17 @@
 #
 
 
+# tag Oneprovider
 /configuration:
   $ref: ./configuration.yaml
 
-# tag Data
+
+# tag Space
 /spaces:
   $ref: ./spaces.yaml
 
 /spaces/{sid}:
   $ref: ./spaces-sid.yaml
-
-/files/{path}:
-  $ref: ./files-path.yaml
-
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
-
-/metadata/{path}:
-  $ref: ./metadata-path.yaml
-
-/metadata-id/{id}:
-  $ref: ./metadata_id-id.yaml
 
 /spaces/{sid}/indexes:
   $ref: ./spaces-sid-indexes.yaml
@@ -38,6 +28,22 @@
 /spaces/{sid}/indexes/{index_name}/query:
   $ref: ./spaces-sid-indexes-index_name-query.yaml
 
+/spaces/{sid}/transfers:
+  $ref: ./spaces-sid-transfers.yaml
+
+
+# tag Data
+/files/{path}:
+  $ref: ./files-path.yaml
+
+/attributes/{path}:
+  $ref: ./attributes-path.yaml
+
+/metadata/{path}:
+  $ref: ./metadata-path.yaml
+
+/metadata-id/{id}:
+  $ref: ./metadata_id-id.yaml
 
 # tag Replication
 /replicas/{path}:
@@ -48,9 +54,6 @@
 
 /replicas-index/{index_name}:
   $ref: ./replicas_index-index_name.yaml
-
-/spaces/{sid}/transfers:
-  $ref: ./spaces-sid-transfers.yaml
 
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml

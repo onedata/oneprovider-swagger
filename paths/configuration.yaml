@@ -1,9 +1,8 @@
 get:
   operationId: get_configuration
-  x-onedata-service: oneprovider
-  x-onedata-module: configuration
-  x-onedata-resource: configuration
-  x-onedata-method: get_configuration
+  x-onedata-gri:
+    type: op_provider
+    aspect: configuration
   summary: Get public information
   tags:
     - Oneprovider

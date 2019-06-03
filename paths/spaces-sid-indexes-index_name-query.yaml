@@ -1,12 +1,12 @@
 get:
   operationId: query_space_index
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: query_space_index
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index_query, ?BINDING(index_name)}"
   summary: Query index
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method returns the list of result objects for files which match the query 
     on a predefined index. 

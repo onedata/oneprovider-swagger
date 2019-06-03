@@ -1,12 +1,12 @@
 get:
   operationId: get_space_index
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: get_space_index
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index, ?BINDING(index_name)}"
   summary: Get index
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method returns a JSON describing specific index.
   description: |
@@ -75,13 +75,14 @@ get:
 
 put:
   operationId: create_space_index
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: create_space_index
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index, ?BINDING(index_name)}"
   summary: Create index
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method creates or replaces an existing index with a new one.
   description: |
@@ -167,13 +168,14 @@ put:
 
 patch:
   operationId: update_space_index
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: update_space_index
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index, ?BINDING(index_name)}"
   summary: Update index
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method updates existing index definition. 
     
@@ -261,13 +263,13 @@ patch:
 
 delete:
   operationId: remove_space_index
-  x-onedata-service: oneprovider
-  x-onedata-module: metadata
-  x-onedata-resource: index
-  x-onedata-method: remove_space_index
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: "{index, ?BINDING(index_name)}"
   summary: Remove index
   tags:
-    - Data
+    - Space
   x-bash-codegen-description: |
     This method removes an existing index.
 
