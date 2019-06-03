@@ -1,9 +1,9 @@
 get:
   operationId: get_space_user_metrics
-  x-onedata-service: oneprovider
-  x-onedata-module: metrics
-  x-onedata-resource: space
-  x-onedata-method: get_space_user_metrics
+  x-onedata-gri:
+    type: op_metric
+    id: ?BINDING(sid)
+    aspect: "{user_metrics, ?BINDING(uid)}"
   summary: Get space user metrics
   tags:
     - Monitoring

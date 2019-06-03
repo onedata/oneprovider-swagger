@@ -12,7 +12,7 @@
 %%%--------------------------------------------------------------------
 -module({{#operations}}{{classVarName}}{{apiFileNameSuffix}}{{/operations}}).
 
--include("rest.hrl").
+-include("http/rest/rest.hrl").
 
 -export([routes/0]).
 
@@ -38,6 +38,12 @@ routes() -> [
         {{#x-onedata-parse_body}}
         parse_body = {{{x-onedata-parse_body}}},
         {{/x-onedata-parse_body}}
+        {{#hasConsumes}}
+        consumes = [{{#consumes}}<<"{{{mediaType}}}">>{{#hasMore}}, {{/hasMore}}{{/consumes}}],
+        {{/hasConsumes}}
+        {{#hasProduces}}
+        produces = [{{#produces}}<<"{{{mediaType}}}">>{{#hasMore}}, {{/hasMore}}{{/produces}}],
+        {{/hasProduces}}
         {{#x-onedata-gri}}
         b_gri = #b_gri{type = {{type}}, id = {{{id}}}{{^id}}undefined{{/id}}, aspect = {{{aspect}}}},
         {{/x-onedata-gri}}

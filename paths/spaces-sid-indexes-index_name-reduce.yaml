@@ -96,8 +96,6 @@ delete:
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
     ```
 
-  consumes:
-    - application/javascript
   responses:
     '204':
       description: Index reduce function removed successfully.

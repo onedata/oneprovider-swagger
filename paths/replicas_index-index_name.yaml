@@ -54,6 +54,8 @@ post:
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
     ```
 
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
