@@ -1,9 +1,9 @@
 get:
   operationId: get_file_replicas
-  x-onedata-service: oneprovider
-  x-onedata-module: file_distribution
-  x-onedata-resource: file
-  x-onedata-method: get_file_distribution
+  x-onedata-gri:
+    type: op_replication
+    id: ?PATH_BINDING
+    aspect: replicas
   tags:
     - Replication
   summary: Get replicas by path
@@ -68,10 +68,11 @@ get:
 
 post:
   operationId: replicate_file
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: replicate_file
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replication
+    id: ?PATH_BINDING
+    aspect: replication
   tags:
     - Replication
   summary: Replicate file or folder by path
@@ -164,10 +165,10 @@ post:
 
 delete:
   operationId: evict_replica
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: evict_replica
+  x-onedata-gri:
+    type: op_replication
+    id: ?PATH_BINDING
+    aspect: eviction
   tags:
     - Replication
   summary: Evict existing replica by file path

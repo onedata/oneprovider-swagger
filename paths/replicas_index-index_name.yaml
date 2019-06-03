@@ -1,9 +1,10 @@
 post:
   operationId: replicate_files_by_index
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: replicate_files_by_index
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replication
+    id: ?BINDING(index_name)
+    aspect: replication_by_index
   summary: Replicate files by index
   tags:
     - Replication
@@ -209,10 +210,10 @@ post:
 
 delete:
   operationId: evict_replicas_by_index
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: evict_replicas_by_index
+  x-onedata-gri:
+    type: op_replication
+    id: ?BINDING(index_name)
+    aspect: eviction_by_index
   summary: Evict existing replicas by index
   tags:
     - Replication
