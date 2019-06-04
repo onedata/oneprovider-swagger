@@ -1,9 +1,9 @@
 get:
   operationId: get_space_metrics
   x-onedata-gri:
-    type: op_metric
+    type: op_metrics
     id: ?BINDING(sid)
-    aspect: metrics
+    aspect: space
   summary: Get space metrics
   tags:
     - Monitoring

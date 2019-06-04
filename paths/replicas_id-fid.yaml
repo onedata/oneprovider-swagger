@@ -1,11 +1,11 @@
 get:
   operationId: get_file_replicas_by_id
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?OBJECTID_BINDING(fid)
-    aspect: replicas
+    aspect: distribution
   tags:
-    - Replication
+    - Replica
   summary: Get replicas by Id
   x-bash-codegen-description: |
     Returns file distribution information about a specific file.
@@ -69,11 +69,11 @@ post:
   operationId: replicate_file_by_id
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?OBJECTID_BINDING(fid)
-    aspect: replication
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Replicate file or folder by Id
   x-bash-codegen-description: |
     Replicates a file specified by Id in `fid` parameter to a specified provider.
@@ -168,11 +168,11 @@ post:
 delete:
   operationId: evict_replica_by_id
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?OBJECTID_BINDING(fid)
-    aspect: eviction
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Evict existing replica by file Id
   x-bash-codegen-description: |
     Evicts a replica of a file specified by Id in `fid` parameter.

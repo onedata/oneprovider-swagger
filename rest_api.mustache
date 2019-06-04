@@ -33,7 +33,7 @@ routes() -> [
     %% {{{summary}}}
 {{/summary}}
     {{#vendorExtensions}}
-    {<<"{{path}}">>, {{{x-onedata-module}}}{{^x-onedata-module}}rest_handler{{/x-onedata-module}}, #rest_req{
+    {<<"{{path}}">>, {{{x-onedata-custom-handler}}}{{^x-onedata-custom-handler}}rest_handler{{/x-onedata-custom-handler}}, #rest_req{
         method = '{{httpMethod}}',
         {{#x-onedata-parse_body}}
         parse_body = {{{x-onedata-parse_body}}},

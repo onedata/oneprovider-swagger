@@ -1,11 +1,11 @@
 get:
   operationId: get_file_replicas
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?PATH_BINDING
-    aspect: replicas
+    aspect: distribution
   tags:
-    - Replication
+    - Replica
   summary: Get replicas by path
   x-bash-codegen-description: |
     Returns file distribution information about a specific file.
@@ -70,11 +70,11 @@ post:
   operationId: replicate_file
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?PATH_BINDING
-    aspect: replication
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Replicate file or folder by path
   x-bash-codegen-description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
@@ -168,11 +168,11 @@ post:
 delete:
   operationId: evict_replica
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?PATH_BINDING
-    aspect: eviction
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Evict existing replica by file path
   x-bash-codegen-description: |
     Removes a replica of a file specified by absolute path in `path` parameter

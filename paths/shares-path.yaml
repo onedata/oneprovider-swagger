@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_share
     id: ?PATH_BINDING
-    aspect: instance
+    aspect: shared_dir
   summary: Get share info by folder path
   tags:
     - Share
@@ -73,7 +73,7 @@ post:
   x-onedata-gri:
     type: op_share
     id: ?PATH_BINDING
-    aspect: instance
+    aspect: shared_dir
   summary: Share a folder by path
   tags:
     - Share
@@ -152,7 +152,7 @@ patch:
   x-onedata-gri:
     type: op_share
     id: ?PATH_BINDING
-    aspect: instance
+    aspect: shared_dir
   summary: Rename share by folder path
   tags:
     - Share
@@ -215,7 +215,7 @@ delete:
   x-onedata-gri:
     type: op_share
     id: ?PATH_BINDING
-    aspect: instance
+    aspect: shared_dir
   summary: Unshare a folder by path
   tags:
     - Share

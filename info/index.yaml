@@ -1,4 +1,4 @@
-version: 19.02.0
+version: 19.02.0-beta1
 title: Oneprovider
 description: |
   # Overview
@@ -55,11 +55,13 @@ description: |
 
   #### Metadata
   Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or folders (under `/metata` path)
+  arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
   as well as create indexes (`/index`) and query them based on the metadata (`/query-index`).
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
+  Shares are folders that were made publicly available, so they can be viewed by everyone
+  through public URL.
 
   #### Space information
   The `/space/` methods provide means for getting basic information about
@@ -94,7 +96,7 @@ description: |
   **Create replica of file at specific storage provider**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
+  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
   ```
 
   **Get space storage qouta metric**
@@ -187,7 +189,7 @@ x-bash-codegen-description: |
   **Create replica of file at specific storage provider**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
+  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
   ```
 
   **Get space storage qouta metric**

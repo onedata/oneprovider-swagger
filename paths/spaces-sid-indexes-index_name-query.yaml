@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{index_query, ?BINDING(index_name)}"
+    aspect: "{query_index, ?BINDING(index_name)}"
   summary: Query index
   tags:
     - Space

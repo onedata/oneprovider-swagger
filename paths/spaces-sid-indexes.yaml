@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: indexes
+    aspect: indices
   tags:
     - Space
   summary: Get all space indexes

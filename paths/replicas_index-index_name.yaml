@@ -4,10 +4,10 @@ post:
   x-onedata-gri:
     type: op_replication
     id: ?BINDING(index_name)
-    aspect: replication_by_index
+    aspect: replicate_by_index
   summary: Replicate files by index
   tags:
-    - Replication
+    - Replica
   x-bash-codegen-description: |
     Queries the specified index and replicates the resulting list of files to specified provider. 
     This operation is asynchronous and it can take a long time depending on the size of the data
@@ -215,10 +215,10 @@ delete:
   x-onedata-gri:
     type: op_replication
     id: ?BINDING(index_name)
-    aspect: eviction_by_index
+    aspect: evict_by_index
   summary: Evict existing replicas by index
   tags:
-    - Replication
+    - Replica
   x-bash-codegen-description: |
     Queries the specified index and evicts the resulting list of replicas in specified provider. 
     This operation is asynchronous. Optional argument `migration_provider_id`

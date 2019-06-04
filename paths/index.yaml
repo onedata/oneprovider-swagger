@@ -34,7 +34,7 @@
   $ref: ./configuration.yaml
 
 
-# tag Replication
+# tag Replica
 /replicas/{path}:
   $ref: ./replicas-path.yaml
 
