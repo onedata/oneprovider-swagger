@@ -25,16 +25,16 @@
 %% Definitions of {{classVarName}} REST paths.
 %% @end
 %%--------------------------------------------------------------------
--spec routes() -> [{binary(), #rest_req{}}].
+-spec routes() -> [{binary(), module(), #rest_req{}}].
 routes() -> [
 {{#operations}}
 {{#operation}}
 {{#summary}}
     %% {{{summary}}}
 {{/summary}}
-    {<<"{{path}}">>, #rest_req{
+    {{#vendorExtensions}}
+    {<<"{{path}}">>, {{{x-onedata-module}}}{{^x-onedata-module}}rest_handler{{/x-onedata-module}}, #rest_req{
         method = '{{httpMethod}}',
-        {{#vendorExtensions}}
         {{#x-onedata-parse_body}}
         parse_body = {{{x-onedata-parse_body}}},
         {{/x-onedata-parse_body}}
@@ -47,8 +47,8 @@ routes() -> [
         {{#x-onedata-gri}}
         b_gri = #b_gri{type = {{type}}, id = {{{id}}}{{^id}}undefined{{/id}}, aspect = {{{aspect}}}},
         {{/x-onedata-gri}}
-        {{/vendorExtensions}}
     }},
+    {{/vendorExtensions}}
 {{/operation}}
 {{/operations}}
 ].

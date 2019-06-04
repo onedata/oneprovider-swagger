@@ -1,9 +1,10 @@
 post:
   operationId: get_space_changes
-  x-onedata-service: oneprovider
-  x-onedata-module: events
-  x-onedata-resource: space
-  x-onedata-method: stream_space_changes
+  x-onedata-module: changes_stream_handler
+  x-onedata-gri:
+    type: op_metric
+    id: ?BINDING(sid)
+    aspect: changes
   tags:
     - Monitoring
   summary: Subscribe to file events
