@@ -1,0 +1,182 @@
+get:
+  operationId: get_share_by_public_id
+  x-onedata-service: oneprovider
+  x-onedata-module: shares
+  x-onedata-resource: file
+  x-onedata-method: get_share_by_public_id
+  summary: Get share info by public share ID
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    Returns the basic information about shared folder specified by public share ID.
+  description: |
+    Returns the basic information about shared folder specified by public share ID.
+
+    ***Example cURL requests***
+
+    **Returns the basic information about shared folder specified by public share ID**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+
+    {
+      "shareId": "1f4b762b1380946e73aeca574c77f14c",
+      "name": "MyNewShare",
+      "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
+      "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
+      6266666164353939663761373734313235363166342336656331613534313362366634653\
+      2623031613563383561386664373937653223316634623736326231333830393436653733\
+      6165636135373463373766313463",
+      "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
+      "handleId" "doi:10.15911/MyShares.726855"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The share information.
+      schema:
+        $ref: '#/definitions/Share'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File or share not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getShareByPublicId shid='1f4b762b1380946e73aeca574c77f14c'"
+
+
+patch:
+  operationId: update_share_name_by_public_id
+  x-onedata-service: oneprovider
+  x-onedata-module: shares
+  x-onedata-resource: file
+  x-onedata-method: update_share_name_by_public_id
+  summary: Rename share by public share ID
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    Changes name of the shared folder specified by public share ID.
+  description: |
+    Changes name of the shared folder specified by public share ID.
+
+    ***Example cURL requests***
+
+    **Changes name of the shared folder specified by public share ID**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
+    -H "Content-type: application/json" \
+    -d '{ "name": "NewShareName" }' \
+    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+    ```
+  consumes:
+    - application/json
+  responses:
+    '200':
+      description: Share's name has been changed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+    - name: name
+      in: body
+      description: New name for the share.
+      schema:
+        type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: >
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli updateShareNameByPublicID shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
+
+
+delete:
+  operationId: remove_share_by_public_id
+  x-onedata-service: oneprovider
+  x-onedata-module: shares
+  x-onedata-resource: file
+  x-onedata-method: remove_share_by_public_id
+  summary: Unshare a folder by public share ID
+  tags:
+    - Data
+  x-bash-codegen-description: |
+    Unshares a folder by public share ID. This operation will not remove
+    data from folder but data will not be accessible through public url anymore.
+  description: |
+    Unshares a folder by public share ID. This operation will not remove
+    data from folder but data will not be accessible through public url anymore.
+
+    ***Example cURL requests***
+
+    **Unshares a folder by public share ID**
+    ```bash
+    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+    ```
+  responses:
+    '204':
+      description: Folder has been unshared.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File or share not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeShareByPublicId shid='1f4b762b1380946e73aeca574c77f14c'"
