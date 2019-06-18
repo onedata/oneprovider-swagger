@@ -92,7 +92,7 @@ patch:
   consumes:
     - application/json
   responses:
-    '200':
+    '204':
       description: Share's name has been changed.
     '400':
       description: Invalid request.

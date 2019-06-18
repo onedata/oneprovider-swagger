@@ -2,7 +2,7 @@ post:
   operationId: replicate_files_by_index
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?BINDING(index_name)
     aspect: replicate_by_index
   summary: Replicate files by index
@@ -213,7 +213,7 @@ post:
 delete:
   operationId: evict_replicas_by_index
   x-onedata-gri:
-    type: op_replication
+    type: op_replica
     id: ?BINDING(index_name)
     aspect: evict_by_index
   summary: Evict existing replicas by index

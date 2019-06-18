@@ -51,9 +51,9 @@ for n in os.listdir(GENERATED_FILES_DIR):
             try:
                 val = rest_routes[path]
             except KeyError:
-                rest_routes[path] = operation
+                rest_routes[path] = operation.replace(':path">>', '[...]">>')
             else:
-                rest_routes[path] = val + operation
+                rest_routes[path] = val + operation.replace(':path">>', '[...]">>')
         else:
             operations = ''.join(rest_routes[path]
                                  for path in ordered_paths
