@@ -9,9 +9,19 @@ get:
     - Oneprovider
   x-bash-codegen-description: |
     Returns public information about the Oneprovider service.
-  description: >
-    Returns public information about the Oneprovider service.
+
     This endpoint does not require authentication.
+  description: |
+    Returns public information about the Oneprovider service.
+
+    This endpoint does not require authentication.
+
+    ***Example cURL requests***
+
+    **Get public information about the Oneprovider service**
+    ```bash
+     curl https://$HOST/api/v3/oneprovider/configuration
+    ```
   produces:
     - application/json
   responses:
