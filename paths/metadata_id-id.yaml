@@ -106,8 +106,8 @@ get:
     type: string
     required: false
     enum:
-      - JSON
-      - RDF
+      - json
+      - rdf
   - name: filter_type
     in: query
     description: The type of filter to apply to the metadata document.
@@ -197,14 +197,6 @@ put:
     description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
     type: string
     required: true
-  - name: metadata_type
-    in: query
-    description: Type of metadata backend (if not specified in `Accept` header)
-    type: string
-    required: false
-    enum:
-      - JSON
-      - RDF
   - name: filter_type
     in: query
     description: The type of filter to apply to the metadata document.
@@ -212,7 +204,7 @@ put:
     required: false
   - name: filter
     in: query
-    description: The filter allowing to set specific metadata document key.
+    description: The filter allowing to set specific metadata document key. Required if filter_type is specified.
     type: string
     required: false
   - name: body
