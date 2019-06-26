@@ -4,6 +4,11 @@
 #
 
 
+# tag Oneprovider
+/configuration:
+  $ref: ./configuration.yaml
+
+
 # tag File
 /files/{path}:
   $ref: ./files-path.yaml
@@ -16,33 +21,6 @@
 
 /metadata-id/{id}:
   $ref: ./metadata_id-id.yaml
-
-
-# tag Monitoring
-/metrics/space/{sid}:
-  $ref: ./metrics-space-sid.yaml
-
-/metrics/space/{sid}/user/{uid}:
-  $ref: ./metrics-space-sid-user-uid.yaml
-
-/changes/metadata/{sid}:
-  $ref: ./changes-metadata-sid.yaml
-
-
-# tag Oneprovider
-/configuration:
-  $ref: ./configuration.yaml
-
-
-# tag Replica
-/replicas/{path}:
-  $ref: ./replicas-path.yaml
-
-/replicas-id/{fid}:
-  $ref: ./replicas_id-fid.yaml
-
-/replicas-index/{index_name}:
-  $ref: ./replicas_index-index_name.yaml
 
 
 # tag Share
@@ -79,9 +57,31 @@
   $ref: ./spaces-sid-transfers.yaml
 
 
+# tag Replica
+/replicas/{path}:
+  $ref: ./replicas-path.yaml
+
+/replicas-id/{fid}:
+  $ref: ./replicas_id-fid.yaml
+
+/replicas-index/{index_name}:
+  $ref: ./replicas_index-index_name.yaml
+
+
 # tag Transfer
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
 
 /transfers/{tid}/rerun:
   $ref: ./transfers-tid-rerun.yaml
+
+
+# tag Monitoring
+/metrics/space/{sid}:
+  $ref: ./metrics-space-sid.yaml
+
+/metrics/space/{sid}/user/{uid}:
+  $ref: ./metrics-space-sid-user-uid.yaml
+
+/changes/metadata/{sid}:
+  $ref: ./changes-metadata-sid.yaml

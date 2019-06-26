@@ -7,20 +7,20 @@ paths:
 definitions:
   $ref: ./definitions/index.yaml
 tags:
-  - name: File
-    description: Files and Directories related operations
-  - name: Monitoring
-    description: Metrics and change events monitoring related operations
   - name: Oneprovider
     description: Information about the Oneprovider service
-  - name: Replica
-    description: Replication and file distribution control operations
+  - name: File
+    description: Files and Directories related operations
   - name: Share
     description: Shares related operations
   - name: Space
     description: Spaces related operations
+  - name: Replica
+    description: Replication and file distribution control operations
   - name: Transfer
     description: Transfers related operations
+  - name: Monitoring
+    description: Metrics and change events monitoring related operations
 x-tagGroups:
   - name: Service information
     tags:
