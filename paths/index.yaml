@@ -13,14 +13,32 @@
 /files/{path}:
   $ref: ./files-path.yaml
 
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
+/files-id/{id}:
+  $ref: ./files_id-id.yaml
 
-/metadata/{path}:
-  $ref: ./metadata-path.yaml
+/metadata/attrs/{path}:
+  $ref: ./metadata-attrs-path.yaml
 
-/metadata-id/{id}:
-  $ref: ./metadata_id-id.yaml
+/metadata/xattrs/{path}:
+  $ref: ./metadata-xattrs-path.yaml
+
+/metadata/json/{path}:
+  $ref: ./metadata-json-path.yaml
+
+/metadata/rdf/{path}:
+  $ref: ./metadata-rdf-path.yaml
+
+/metadata-id/attrs/{id}:
+  $ref: ./metadata_id-attrs-id.yaml
+
+/metadata-id/xattrs/{id}:
+  $ref: ./metadata_id-xattrs-id.yaml
+
+/metadata-id/json/{id}:
+  $ref: ./metadata_id-json-id.yaml
+
+/metadata-id/rdf/{id}:
+  $ref: ./metadata_id-rdf-id.yaml
 
 
 # tag Share

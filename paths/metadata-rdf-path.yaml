@@ -1,0 +1,124 @@
+get:
+  operationId: get_file_rdf_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: rdf_metadata
+  summary: Get file rdf metadata
+  tags:
+    - File
+  x-bash-codegen-description: |
+    This method returns the rdf metadata associated with specified file, folder or space.
+
+  description: |
+    This method returns the rdf metadata associated with specified file, folder or space.
+
+    ***Example cURL requests***
+
+    **Get complete RDF metadata document for File2.txt**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    -H "Accept: application/rdf+xml" \
+    https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1/File2.txt
+    ```
+  produces:
+    - application/rdf+xml
+  responses:
+    '200':
+      description: Rdf metadata returned successfully.
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileRdfMetadata path='/Space 1/Folder 2/file3.txt'"
+
+
+put:
+  operationId: set_file_rdf_metadata
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: rdf_metadata
+  summary: Set file rdf metadata
+  tags:
+    - File
+  x-bash-codegen-description: |
+    This method allows to set specific rdf metadata for a file, folder or
+    space specified in the request path.
+
+    This operation will replace the previous rdf metadata if any.
+
+  description: |
+    This method allows to set specific rdf metadata for a file, folder or
+    space specified in the request path.
+
+    This operation will replace the previous rdf metadata if any.
+
+    ***Example cURL requests***
+
+    **Set RDF metadata for space from RDF file**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/rdf+xml" \
+    -d "@./space1_dublincore.rdf"
+    https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1
+    ```
+  consumes:
+    - application/rdf+xml
+  responses:
+    '204':
+      description: Rdf metadata updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: body
+    in: body
+    description: The rdf metadata.
+    required: true
+    schema:
+      type: string
+  x-code-samples:
+  - lang: Shell
+    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadata path='/Space 1/Folder 2/file3.txt' -"
