@@ -18,7 +18,7 @@ get:
     **Get file POSIX mode**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/metadata-id/attrs/6fd04d80-3856-4f82-8382-4fca29b1171d?attribute=mode"
+    "https://$HOST/api/v3/oneprovider/metadata-id/attrs/$FILE_ID?attribute=mode"
 
     {
       "mode": "0777"
@@ -75,7 +75,7 @@ get:
       - file_id
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileAttrsById id='6fd04d80-3856-4f82-8382-4fca29b1171d'"
+    source: "oneprovider-rest-cli getFileAttrsById id=$FILE_ID"
 
 
 put:
@@ -113,7 +113,7 @@ put:
     ```bash
     curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "mode": "0777" }'
-    "https://$HOST/api/v3/oneprovider/metadata-id/attrs/6fd04d80-3856-4f82-8382-4fca29b1171d"
+    "https://$HOST/api/v3/oneprovider/metadata-id/attrs/$FILE_ID"
     ```
   consumes:
     - application/json
@@ -151,4 +151,4 @@ put:
         type: string
   x-code-samples:
   - lang: Shell
-    source: "cat attr.json | oneprovider-rest-cli setFileAttrById id='6fd04d80-3856-4f82-8382-4fca29b1171d' -"
+    source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setFileAttrById id=$FILE_ID -"

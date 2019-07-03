@@ -58,12 +58,12 @@ get:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileReplicas path='/Space 1/Folder 2/file.txt' key=value1"
+    source: "oneprovider-rest-cli getFileReplicas path='/MySpace/testfiles/file1.txt' key=value1"
 
 
 post:
@@ -143,7 +143,7 @@ post:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
@@ -163,7 +163,7 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFile path='/Space 1/Folder 2/file.txt' provider_id=$PROVIDER_ID"
+    source: "oneprovider-rest-cli replicateFile path='/MySpace/testfiles/file1.txt' provider_id=$PROVIDER_ID"
 
 delete:
   operationId: evict_replica
@@ -236,7 +236,7 @@ delete:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
@@ -254,4 +254,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplica path='/Space 1/Folder 2/file.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"
+    source: "oneprovider-rest-cli evictReplica path='/MySpace/testfiles/file1.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"

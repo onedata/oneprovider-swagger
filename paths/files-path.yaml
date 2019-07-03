@@ -69,7 +69,7 @@ get:
   parameters:
   - name: path
     in: path
-    description: Directory path (e.g. '/My Private Space/testfiles')
+    description: Directory path (e.g. '/MySpace/testfiles')
     type: string
     required: true
   - name: limit
@@ -92,4 +92,4 @@ get:
     minimum: 0
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listFiles path='/My Space/Folder1' limit=100 offset=300"
+    source: "oneprovider-rest-cli listFiles path='/MySpace/testfiles' limit=100 offset=300"

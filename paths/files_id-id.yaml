@@ -24,7 +24,7 @@ get:
     **Get files in space subfolder**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/files-id/ALKSJDHKASD7687asDBASDDsd"
+    "https://$HOST/api/v3/oneprovider/files-id/$FILE_ID"
 
     [
       {
@@ -92,4 +92,4 @@ get:
     minimum: 0
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listFilesById id=ALKSJDHKASD7687asDBASDDsd limit=100 offset=300"
+    source: "oneprovider-rest-cli listFilesById id=$FILE_ID limit=100 offset=300"

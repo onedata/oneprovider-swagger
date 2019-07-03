@@ -25,7 +25,9 @@ get:
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     Supported filter types are:
-      * **keypath** - list of JSON keys which point to requested JSON object, separated by `.`, array elements should be expressed as `[i]` (e.g. `key1.key2.[2].key3`)
+      * **keypath** - list of JSON keys which point to requested JSON object,
+                    separated by `.`, array elements should be expressed as
+                    `[i]` (e.g. `key1.key2.[2].key3`)
 
 
     ***Example cURL requests***
@@ -33,7 +35,6 @@ get:
     **Get specific JSON value from metadata document**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    -H "Accept: application/json" \
     https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
     ```
   produces:
@@ -62,7 +63,7 @@ get:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: filter_type
@@ -84,7 +85,7 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileJsonMetadata path='/Space 1/Folder 2/file3.txt' inherited=false"
+    source: "oneprovider-rest-cli getFileJsonMetadata path='/MySpace/testfiles/file1.txt' inherited=false"
 
 
 put:
@@ -142,7 +143,7 @@ put:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: filter_type
@@ -163,4 +164,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileJsonMetadata path='/Space 1/Folder 2/file3.txt' -"
+    source: "cat metadata.json | oneprovider-rest-cli setFileJsonMetadata path='/MySpace/testfiles/file1.txt' -"

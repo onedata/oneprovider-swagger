@@ -18,7 +18,6 @@ get:
     **Get complete RDF metadata document for File2.txt**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    -H "Accept: application/rdf+xml" \
     https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1/File2.txt
     ```
   produces:
@@ -47,12 +46,12 @@ get:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileRdfMetadata path='/Space 1/Folder 2/file3.txt'"
+    source: "oneprovider-rest-cli getFileRdfMetadata path='/MySpace/testfiles/file1.txt'"
 
 
 put:
@@ -110,7 +109,7 @@ put:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: body
@@ -121,4 +120,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadata path='/Space 1/Folder 2/file3.txt' -"
+    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadata path='/MySpace/testfiles/file1.txt' -"

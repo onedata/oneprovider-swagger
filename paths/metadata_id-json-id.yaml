@@ -25,7 +25,9 @@ get:
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     Supported filter types are:
-      * **keypath** - list of JSON keys which point to requested JSON object, separated by `.`, array elements should be expressed as `[i]` (e.g. `key1.key2.[2].key3`)
+      * **keypath** - list of JSON keys which point to requested JSON object,
+                    separated by `.`, array elements should be expressed as
+                    `[i]` (e.g. `key1.key2.[2].key3`)
 
 
     ***Example cURL requests***
@@ -33,8 +35,7 @@ get:
     **Get specific JSON value from metadata document**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    -H "Accept: application/json" \
-    https://$HOST/api/v3/oneprovider/metadata-id/json/6fd04d80-3856-4f82-8382-4fca29b1171d?filter_type=keypath&filter=key1.key2.[2].key3
+    https://$HOST/api/v3/oneprovider/metadata-id/json/$FILE_ID?filter_type=keypath&filter=key1.key2.[2].key3
     ```
   produces:
     - application/json
@@ -84,7 +85,7 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileJsonMetadataById id='6fd04d80-3856-4f82-8382-4fca29b1171d' inherited=false"
+    source: "oneprovider-rest-cli getFileJsonMetadataById id=$FILE_ID inherited=false"
 
 
 put:
@@ -116,7 +117,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
-    https://$HOST/api/v3/oneprovider/metadata-id/json/6fd04d80-3856-4f82-8382-4fca29b1171d
+    https://$HOST/api/v3/oneprovider/metadata-id/json/$FILE_ID
     ```
   consumes:
     - application/json
@@ -163,4 +164,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileJsonMetadataById id='6fd04d80-3856-4f82-8382-4fca29b1171d' -"
+    source: "cat metadata.json | oneprovider-rest-cli setFileJsonMetadataById id=$FILE_ID -"

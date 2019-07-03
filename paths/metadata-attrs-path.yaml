@@ -52,7 +52,7 @@ get:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: attribute
@@ -75,7 +75,7 @@ get:
       - file_id
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileAttrs path='/Space 1/Folder 2/file3.txt'"
+    source: "oneprovider-rest-cli getFileAttrs path='/MySpace/testfiles/file1.txt'"
 
 
 put:
@@ -139,7 +139,7 @@ put:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: attribute
@@ -151,4 +151,4 @@ put:
         type: string
   x-code-samples:
   - lang: Shell
-    source: "cat attr.json | oneprovider-rest-cli setFileAttr path='/Space 1/Folder 2/file3.txt' -"
+    source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setFileAttr path='/MySpace/testfiles/file1.txt' -"

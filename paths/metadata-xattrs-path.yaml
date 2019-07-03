@@ -52,7 +52,7 @@ get:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: attribute
@@ -73,7 +73,7 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileXattrs path='/Space 1/Folder 2/file3.txt'"
+    source: "oneprovider-rest-cli getFileXattrs path='/MySpace/testfiles/file1.txt'"
 
 
 put:
@@ -87,10 +87,12 @@ put:
   tags:
     - File
   x-bash-codegen-description: |
-    This method allows to set a value of a extended file attribute.
+    This method allows to set a value of a specified extended file attribute
+    leaving other ones intact.
 
   description: |
-    This method allows to set a value of a extended file attribute.
+    This method allows to set a value of a specified extended file attribute
+    leaving other ones intact.
 
     ***Example cURL requests***
 
@@ -124,7 +126,7 @@ put:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: attribute
@@ -136,4 +138,4 @@ put:
         type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli setFileXattr path='/Space 1/Folder 2/file3.txt' license==CC-0"
+    source: "oneprovider-rest-cli setFileXattr path='/MySpace/testfiles/file1.txt' license==CC-0"

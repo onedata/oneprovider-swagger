@@ -18,7 +18,7 @@ get:
     **Get extended file attributes**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/ALKSJDHKASD7687asDBASDDsd?extended=true&attribute=license"
+    "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/$FILE_ID?extended=true&attribute=license"
 
     {
       "license": "CC-0"
@@ -73,7 +73,7 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileXattrsById id=ALKSJDHKASD7687asDBASDDsd"
+    source: "oneprovider-rest-cli getFileXattrsById id=$FILE_ID"
 
 
 put:
@@ -87,10 +87,12 @@ put:
   tags:
     - File
   x-bash-codegen-description: |
-    This method allows to set a value of a extended file attribute.
+    This method allows to set a value of a specified extended file attribute
+    leaving other ones intact.
 
   description: |
-    This method allows to set a value of a extended file attribute.
+    This method allows to set a value of a specified extended file attribute
+    leaving other ones intact.
 
     ***Example cURL requests***
 
@@ -98,7 +100,7 @@ put:
     ```bash
     curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "license": "CC-0" }' \
-    "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/ALKSJDHKASD7687asDBASDDsd?extended=true"
+    "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/$FILE_ID?extended=true"
     ```
   consumes:
     - application/json
@@ -136,4 +138,4 @@ put:
         type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli setFileXattrById id=ALKSJDHKASD7687asDBASDDsd license==CC-0"
+    source: "oneprovider-rest-cli setFileXattrById id=$FILE_ID license==CC-0"

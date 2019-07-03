@@ -19,8 +19,7 @@ get:
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    -H "Accept: application/rdf+xml" \
-    https://$HOST/api/v3/oneprovider/metadata-id/rdf/6fd04d80-3856-4f82-8382-4fca29b1171d
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```
   produces:
     - application/rdf+xml
@@ -53,7 +52,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileRdfMetadataById id=ASJHDJHASD7132nasdlASD"
+    source: "oneprovider-rest-cli getFileRdfMetadataById id=$FILE_ID"
 
 
 put:
@@ -78,7 +77,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
-    https://$HOST/api/v3/oneprovider/metadata-id/rdf/1e65d5f4-c49d-495a-a2b6-50acd02a25b1
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```
   consumes:
     - application/rdf+xml
@@ -115,4 +114,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadataById id=ALKSJDHKASD7687asDBASDDsd -"
+    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadataById id=$FILE_ID -"
