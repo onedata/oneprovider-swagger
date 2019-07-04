@@ -80,7 +80,7 @@ get:
 
 put:
   operationId: set_file_attr_by_id
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
