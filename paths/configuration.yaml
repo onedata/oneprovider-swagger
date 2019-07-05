@@ -8,15 +8,18 @@ get:
     - Oneprovider
   x-bash-codegen-description: |
     Returns public information about the Oneprovider service.
+
+    This endpoint does not require authentication.
   description: |
     Returns public information about the Oneprovider service.
+
     This endpoint does not require authentication.
 
     ***Example cURL requests***
 
-    **Get Oneprovider public information**
+    **Get public information about the Oneprovider service**
     ```bash
-    curl --tlsv1.2 -X GET "https://$HOST/api/v3/oneprovider/configuration"
+    curl "https://$HOST/api/v3/oneprovider/configuration"
 
     {
       "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
