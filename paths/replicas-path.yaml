@@ -103,7 +103,7 @@ post:
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -160,7 +160,7 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFile path='/Space 1/Folder 2/file.txt' provider_id=SADLKJHALSKDH88ASDLKJASD"
+    source: "oneprovider-rest-cli replicateFile path='/Space 1/Folder 2/file.txt' provider_id=$PROVIDER_ID"
 
 delete:
   operationId: evict_replica
@@ -196,7 +196,7 @@ delete:
     **Remove file replica by path from specific storage provider**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
-    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=7a0d2c4d-aa00-43df-9e96-cac98b2816bb"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -251,4 +251,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplica path='/Space 1/Folder 2/file.txt' migration_provider_id=SADLKJHALSKDH88ASDLKJASD"
+    source: "oneprovider-rest-cli evictReplica path='/Space 1/Folder 2/file.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"

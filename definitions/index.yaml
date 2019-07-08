@@ -2,6 +2,9 @@
 # This file groups the type definitions for Onezone REST API
 #
 
+Configuration:
+  $ref: ./configuration.yaml
+
 Error:
   $ref: ./error.yaml
 
@@ -25,6 +28,9 @@ FileMetadata:
 
 FileMetadataChange:
   $ref: ./filemetadatachange.yaml
+
+MetadataChangesStreamRequest:
+  $ref: ./metadatachangesstreamrequest.yaml
 
 Space:
   $ref: ./space.yaml

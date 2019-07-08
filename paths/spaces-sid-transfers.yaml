@@ -21,7 +21,7 @@ get:
     **List at most 3 ongoing transfers starting from page id 757136151113c2f**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/spaces/8f4b1e94-fdf8-4754-9962-edb01b2ee0f7/transfers?state=ongoing&limit=3&page_token=757136151113c2f"
+    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/transfers?state=ongoing&limit=3&page_token=757136151113c2f"
 
     {
       "transfers": [
@@ -88,4 +88,4 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli sid=ASLDKAJSD764ASDLnaAsd getAllTransfers state=ongoing limit=20 page_token=757136151113c2f"
+    source: "oneprovider-rest-cli sid=$SPACE_ID getAllTransfers state=ongoing limit=20 page_token=757136151113c2f"

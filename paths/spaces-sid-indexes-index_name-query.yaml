@@ -60,7 +60,7 @@ get:
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?skip=10&limit=4
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?skip=10&limit=4
 
     [
       {
@@ -101,7 +101,7 @@ get:
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/index1/query?spatial=true&stale=false
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?spatial=true&stale=false
 
     [
       {
@@ -127,7 +127,7 @@ get:
 
     **Get file popularity for a specific space**
     ```bash
-    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/f209c965-e212-4149-af72-860faea4187a/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json
@@ -269,4 +269,4 @@ get:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli querySpaceIndex sid='f209c965-e212-4149-af72-860faea4187a' index_name=name1 key=value1"
+    source: "oneprovider-rest-cli querySpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME key=value1"

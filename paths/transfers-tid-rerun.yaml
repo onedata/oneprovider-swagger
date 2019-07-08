@@ -17,7 +17,7 @@ post:
     **Rerun finished transfer**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/transfers/3b6a31fb-ca87-4ea6-8526-fbf5a0773d69/rerun"
+    "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID/rerun"
     ```
 
   produces:
@@ -55,4 +55,4 @@ post:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli rerunTransfer tid=ASLDKAJSD764ASDLnaAsd"
+    source: "oneprovider-rest-cli rerunTransfer tid=$TRANSFER_ID"
