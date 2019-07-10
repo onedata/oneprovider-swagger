@@ -1,5 +1,4 @@
 put:
-  deprecated: true
   operationId: update_index_reduce_function
   x-onedata-parse_body: as_is
   x-onedata-gri:
@@ -31,7 +30,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/reduce
     ```
 
   consumes:
@@ -79,7 +78,6 @@ put:
 
 
 delete:
-  deprecated: true
   operationId: remove_index_reduce_function
   x-onedata-gri:
     type: op_space
@@ -102,7 +100,7 @@ delete:
     **Remove index reduce function**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/reduce
     ```
 
   responses:

@@ -1,13 +1,12 @@
 get:
-  deprecated: true
-  operationId: get_space_indexes
+  operationId: get_space_indices
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: indices
   tags:
     - Space
-  summary: Get all space indexes
+  summary: Get all space indices
   x-bash-codegen-description: |
     Returns the list of all index names in a space.
     The list is broken down into pages, each with length less or equal to the
@@ -30,7 +29,7 @@ get:
     **List at most 3 index names starting from page id 757136151113c2f**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes?limit=3&page_token=757136151113c2f"
+    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices?limit=3&page_token=757136151113c2f"
 
     {
       "indices": [
@@ -73,13 +72,13 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which to list indexes.
+      Space ID in which to list indices.
     type: string
     required: true
   - name: limit
     in: query
     description: >
-      Allows to limit the number of returned indexes.
+      Allows to limit the number of returned indices.
     type: integer
     required: false
   - name: page_token
@@ -90,4 +89,4 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli sid=$SPACE_ID getSpaceIndexes limit=20 page_token=757136151113c2f"
+    source: "oneprovider-rest-cli sid=$SPACE_ID getSpaceIndices limit=20 page_token=757136151113c2f"

@@ -1,5 +1,4 @@
 get:
-  deprecated: true
   operationId: query_space_index
   x-onedata-gri:
     type: op_space
@@ -15,9 +14,9 @@ get:
     - id - for use as `startkey_docid` or `endkey_docid` in following queries
     - key - the first element of list returned by user defined mapping/spatial function
     - value - the second element of list returned by user defined mapping/spatial function
-    - geometry - describes geometry of data (only available in case of spatial indexes)
+    - geometry - describes geometry of data (only available in case of spatial indices)
 
-    Currently, indexes are defined per space, i.e. the result will be limited
+    Currently, indices are defined per space, i.e. the result will be limited
     to files and folders in a space for which the index was defined.
 
     This operation supports custom index query attributes as provided by
@@ -27,7 +26,7 @@ get:
     Additionally, Couchbase spatial queries:
       [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are
     possible using the `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the
+    These queries are possible on indices which emit values conforming to the
     [http://geojson.org/] format.
 
     This operation requires `space_query_indices` privilege.
@@ -37,14 +36,14 @@ get:
     * ``id`` - for use as `startkey_docid` or `endkey_docid` in following queries
     * ``key`` - the first element of list returned by user defined mapping/spatial function
     * ``value`` - the second element of list returned by user defined mapping/spatial function
-    * ``geometry`` - describes geometry of data (only available in case of spatial indexes)
+    * ``geometry`` - describes geometry of data (only available in case of spatial indices)
 
-    Currently, indexes are defined per space, i.e. the result will be limited to files and folders in a space for which the index was defined.
+    Currently, indices are defined per space, i.e. the result will be limited to files and folders in a space for which the index was defined.
 
     This operation supports also custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
     Additionaly, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+    These queries are possible on indices which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
     This operation requires `space_query_indices` privilege.
 
@@ -64,7 +63,7 @@ get:
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?skip=10&limit=4
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/query?skip=10&limit=4
 
     [
       {
@@ -105,7 +104,7 @@ get:
 
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?spatial=true&stale=false
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/query?spatial=true&stale=false
 
     [
       {
@@ -131,7 +130,7 @@ get:
 
     **Get file popularity for a specific space**
     ```bash
-    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json
