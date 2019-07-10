@@ -9,12 +9,20 @@ get:
   summary: Get all transfers
   x-bash-codegen-description: |
     Returns the list of all transfer IDs in a space with given state.
+    The list is broken down into pages, each with length less or equal to the
+    limit parameter. If the nextPageToken is present in the response, there are
+    more transfers to list - provide the token in the page_token parameter in
+    the following request.
+
+    This operation requires `space_view_transfers` privilege.
   description: |
     Returns the list of all transfer IDs in a space with given state.
     The list is broken down into pages, each with length less or equal to the
     limit parameter. If the nextPageToken is present in the response, there are
     more transfers to list - provide the token in the page_token parameter in
     the following request.
+
+    This operation requires `space_view_transfers` privilege.
 
     ***Example cURL requests***
 

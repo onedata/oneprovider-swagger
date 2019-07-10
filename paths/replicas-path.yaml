@@ -83,11 +83,15 @@ post:
     If the `path` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
+    This operation requires `space_schedule_replication` privilege.
+
   description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
 
     ***Example cURL requests***
 
@@ -184,6 +188,9 @@ delete:
     If the `path` parameter specifies a folder, entire folder is evicted from
     this provider requested provider.
 
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
   description: |
     Removes a replica of a file specified by absolute path in `path` parameter
     from a specified provider.
@@ -193,6 +200,9 @@ delete:
 
     If the `path` parameter specifies a folder, entire folder is evicted from
     this provider requested provider.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
 
     ***Example cURL requests***
 

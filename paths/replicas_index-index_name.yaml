@@ -23,6 +23,8 @@ post:
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
+    This operation requires `space_schedule_replication` and `space_query_indices` privileges.
+
   description: |
     Queries the specified index and replicates the resulting list of files to specified provider. 
     This operation is asynchronous and it can take a long time depending on the size of the data
@@ -32,6 +34,8 @@ post:
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+
+    This operation requires `space_schedule_replication` and `space_query_indices` privileges.
 
     ***Example cURL requests***
 
@@ -235,6 +239,10 @@ delete:
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
+    This operation requires:
+      * `space_query_indices` and `space_schedule_eviction` when scheduling eviction
+      * `space_query_indices`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
+
   description: |
     Queries the specified index and evicts the resulting list of replicas in specified provider. 
     This operation is asynchronous. Optional argument `migration_provider_id`
@@ -245,6 +253,10 @@ delete:
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+
+    This operation requires:
+      * `space_query_indices` and `space_schedule_eviction` when scheduling eviction
+      * `space_query_indices`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
 
     ***Example cURL requests***
 
