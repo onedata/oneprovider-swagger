@@ -1,6 +1,6 @@
 get:
   deprecated: true
-  operationId: get_space_index
+  operationId: get_space_index_deprecated
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -9,11 +9,15 @@ get:
   tags:
     - Space
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_space_index).
+
     This method returns a JSON describing specific index.
 
     This operation requires `space_view_indices` privilege.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_space_index).
+
     This method returns a JSON describing specific index.
 
     This operation requires `space_view_indices` privilege.
@@ -76,12 +80,12 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli getSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"
 
 
 put:
   deprecated: true
-  operationId: create_space_index
+  operationId: create_space_index_deprecated
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
@@ -91,10 +95,14 @@ put:
   tags:
     - Space
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_space_index).
+
     This method creates or replaces an existing index with a new one.
 
     This operation requires `space_manage_indices` privilege.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/create_space_index).
+
     This method creates or replaces an existing index with a new one.
 
     This operation requires `space_manage_indices` privilege.
@@ -174,12 +182,12 @@ put:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
+    source: "cat index.js | oneprovider-rest-cli createSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
 
 
 patch:
   deprecated: true
-  operationId: update_space_index
+  operationId: update_space_index_deprecated
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
@@ -189,13 +197,17 @@ patch:
   tags:
     - Space
   x-bash-codegen-description: |
-    This method updates existing index definition. 
+    This enpoint is deprecated, please use [this one](#operation/update_space_index).
+
+    This method updates existing index definition.
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This method updates existing index definition. 
+    This enpoint is deprecated, please use [this one](#operation/update_space_index).
+
+    This method updates existing index definition.
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
@@ -274,12 +286,12 @@ patch:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
 
 
 delete:
   deprecated: true
-  operationId: remove_space_index
+  operationId: remove_space_index_deprecated
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -288,10 +300,14 @@ delete:
   tags:
     - Space
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/remove_space_index).
+
     This method removes an existing index.
 
     This operation requires `space_manage_indices` privilege.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/remove_space_index).
+
     This method removes an existing index.
 
     This operation requires `space_manage_indices` privilege.
@@ -337,4 +353,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"

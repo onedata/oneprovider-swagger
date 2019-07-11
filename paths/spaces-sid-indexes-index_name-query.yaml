@@ -1,6 +1,6 @@
 get:
   deprecated: true
-  operationId: query_space_index
+  operationId: query_space_index_deprecated
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -9,7 +9,9 @@ get:
   tags:
     - Space
   x-bash-codegen-description: |
-    This method returns the list of result objects for files which match the query 
+    This enpoint is deprecated, please use [this one](#operation/query_space_index).
+
+    This method returns the list of result objects for files which match the query
     on a predefined index. 
     Those objects contains following fields:
     - id - for use as `startkey_docid` or `endkey_docid` in following queries
@@ -32,7 +34,9 @@ get:
 
     This operation requires `space_query_indices` privilege.
   description: |
-    This method returns the list of result objects for files which match the query on a predefined index. 
+    This enpoint is deprecated, please use [this one](#operation/query_space_index).
+
+    This method returns the list of result objects for files which match the query on a predefined index.
     Those objects contains following fields:
     * ``id`` - for use as `startkey_docid` or `endkey_docid` in following queries
     * ``key`` - the first element of list returned by user defined mapping/spatial function
@@ -273,4 +277,4 @@ get:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli querySpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME key=value1"
+    source: "oneprovider-rest-cli querySpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME key=value1"

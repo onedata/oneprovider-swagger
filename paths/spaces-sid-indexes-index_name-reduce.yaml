@@ -1,6 +1,6 @@
 put:
   deprecated: true
-  operationId: update_index_reduce_function
+  operationId: update_index_reduce_function_deprecated
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
@@ -10,6 +10,8 @@ put:
   tags:
     - Space
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/update_index_reduce_function).
+
     This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
@@ -17,6 +19,8 @@ put:
 
     This operation requires `space_manage_indices` privilege.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/update_index_reduce_function).
+
     This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
@@ -75,12 +79,12 @@ put:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME -"
+    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunctionDeprecated sid=$SPACE_ID index_name=$INDEX_NAME -"
 
 
 delete:
   deprecated: true
-  operationId: remove_index_reduce_function
+  operationId: remove_index_reduce_function_deprecated
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -89,10 +93,14 @@ delete:
   tags:
     - Space
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/remove_index_reduce_function).
+
     This method removes the index reduce function.
 
     This operation requires `space_manage_indices` privilege.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/remove_index_reduce_function).
+
     This method removes the index reduce function.
 
     This operation requires `space_manage_indices` privilege.
@@ -138,4 +146,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeIndexReduceFunctionDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"
