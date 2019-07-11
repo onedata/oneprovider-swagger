@@ -6,7 +6,7 @@ put:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index_reduce_function, ?BINDING(index_name)}"
-  summary: Update index reduce function
+  summary: Update index reduce function (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
@@ -84,7 +84,7 @@ put:
 
 delete:
   deprecated: true
-  operationId: remove_index_reduce_function_deprecated
+  operationId: remove_index_reduce_function_deprecated (deprecated)
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)

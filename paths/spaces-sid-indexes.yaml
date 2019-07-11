@@ -7,7 +7,7 @@ get:
     aspect: indices
   tags:
     - Space
-  summary: Get all space indexes
+  summary: Get all space indexes (deprecated)
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_space_indices).
 
@@ -47,7 +47,7 @@ get:
         "index11",
         "index111"
       ],
-      "nextPageToken": "8471726779817b3a"
+      "nextPageToken": "index1111"
     }
     ```
   produces:

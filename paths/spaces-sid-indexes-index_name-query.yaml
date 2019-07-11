@@ -5,7 +5,7 @@ get:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{query_index, ?BINDING(index_name)}"
-  summary: Query index
+  summary: Query index (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |

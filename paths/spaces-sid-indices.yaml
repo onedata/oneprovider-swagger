@@ -42,7 +42,7 @@ get:
         "index11",
         "index111"
       ],
-      "nextPageToken": "8471726779817b3a"
+      "nextPageToken": "index1111"
     }
     ```
   produces:
