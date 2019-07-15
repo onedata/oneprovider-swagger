@@ -1,5 +1,5 @@
 type: object
-description: Basic information about space.
+description: The list of indices names, nextPageToken is present when there is more to list.
 properties:
   indices:
     type: array
