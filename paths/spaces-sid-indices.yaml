@@ -1,54 +1,57 @@
 get:
-  operationId: get_all_transfers
+  operationId: get_space_indices
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: transfers
+    aspect: indices
   tags:
     - Space
-  summary: Get all transfers
+  summary: Get all space indices
   x-bash-codegen-description: |
-    Returns the list of all transfer IDs in a space with given state.
+    Returns the list of all index names in a space.
     The list is broken down into pages, each with length less or equal to the
     limit parameter. If the nextPageToken is present in the response, there are
-    more transfers to list - provide the token in the page_token parameter in
+    more names to list - provide the token in the page_token parameter in
     the following request.
 
-    This operation requires `space_view_transfers` privilege.
+    This operation requires `space_view_indices` privilege.
   description: |
-    Returns the list of all transfer IDs in a space with given state.
+    Returns the list of all index names in a space.
     The list is broken down into pages, each with length less or equal to the
     limit parameter. If the nextPageToken is present in the response, there are
-    more transfers to list - provide the token in the page_token parameter in
+    more names to list - provide the token in the page_token parameter in
     the following request.
 
-    This operation requires `space_view_transfers` privilege.
+    This operation requires `space_view_indices` privilege.
 
     ***Example cURL requests***
 
-    **List at most 3 ongoing transfers starting from page id 757136151113c2f**
+    **List at most 3 index names starting from page id 757136151113c2f**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/transfers?state=ongoing&limit=3&page_token=757136151113c2f"
+    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices?limit=3&page_token=757136151113c2f"
 
     {
-      "transfers": [
-        "3b6a31fb-ca87-4ea6-8526-fbf5a0773d69",
-        "29fa94de-33ad-4347-9cbe-3d8faa9422dd",
-        "da426f74-5770-42a1-b799-354a3c4c154b"
+      "indices": [
+        "index1",
+        "index11",
+        "index111"
       ],
-      "nextPageToken": "8471726779817b3a"
+      "indexes": [
+        "index1",
+        "index11",
+        "index111"
+      ],
+      "nextPageToken": "index1111"
     }
     ```
   produces:
     - application/json
   responses:
     '200':
-      description: The list of transfer IDs, nextPageToken is present when there is more to list.
+      description: The list of index names, nextPageToken is present when there is more to list.
       schema:
-        type: array
-        items:
-          type: string
+        $ref: '#/definitions/Indices'
     '400':
       description: Invalid request.
       schema:
@@ -69,26 +72,15 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which to list transfers.
+      Space ID in which to list indices.
     type: string
     required: true
-  - name: state
-    in: query
-    description: >
-      Specifies the state of transfers to list. The default is "ongoing".
-    type: string
-    enum:
-      - waiting
-      - ongoing
-      - ended
-    required: false
   - name: limit
     in: query
     description: >
-      Allows to limit the number of returned transfers.
+      Allows to limit the number of returned indices.
     type: integer
     required: false
-    default: 1000
   - name: page_token
     in: query
     description: >
@@ -97,4 +89,4 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli sid=$SPACE_ID getAllTransfers state=ongoing limit=20 page_token=757136151113c2f"
+    source: "oneprovider-rest-cli sid=$SPACE_ID getSpaceIndices limit=20 page_token=757136151113c2f"

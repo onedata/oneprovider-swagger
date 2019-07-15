@@ -1,17 +1,14 @@
 put:
-  deprecated: true
-  operationId: update_index_reduce_function_deprecated
+  operationId: update_index_reduce_function
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index_reduce_function, ?BINDING(index_name)}"
-  summary: Update index reduce function (deprecated)
+  summary: Update index reduce function
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/update_index_reduce_function).
-
     This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
@@ -19,8 +16,6 @@ put:
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/update_index_reduce_function).
-
     This method replaces the existing index reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
@@ -35,7 +30,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/reduce
     ```
 
   consumes:
@@ -79,12 +74,11 @@ put:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunctionDeprecated sid=$SPACE_ID index_name=$INDEX_NAME -"
+    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME -"
 
 
 delete:
-  deprecated: true
-  operationId: remove_index_reduce_function_deprecated (deprecated)
+  operationId: remove_index_reduce_function
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -93,14 +87,10 @@ delete:
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_index_reduce_function).
-
     This method removes the index reduce function.
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_index_reduce_function).
-
     This method removes the index reduce function.
 
     This operation requires `space_manage_indices` privilege.
@@ -110,7 +100,7 @@ delete:
     **Remove index reduce function**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME/reduce
     ```
 
   responses:
@@ -146,4 +136,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeIndexReduceFunctionDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME"

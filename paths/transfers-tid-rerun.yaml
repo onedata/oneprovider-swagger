@@ -9,9 +9,23 @@ post:
   summary: Rerun ended transfer
   x-bash-codegen-description: |
     Reruns ended transfer by creating a new, identical transfer.
+
+    This operation requires:
+      * `space_schedule_replication` when rerunning replication
+      * `space_schedule_eviction` when rerunning eviction
+      * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
+
+    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
   description: |
     Reruns ended transfer by creating a new, identical transfer.
-  
+
+    This operation requires:
+      * `space_schedule_replication` when rerunning replication
+      * `space_schedule_eviction` when rerunning eviction
+      * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
+
+    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
+
     ***Example cURL requests***
 
     **Rerun finished transfer**

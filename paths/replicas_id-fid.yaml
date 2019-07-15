@@ -83,11 +83,15 @@ post:
     If the `fid` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
+    This operation requires `space_schedule_replication` privilege.
+
   description: |
     Replicates a file specified by Id in `fid` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `fid` parameter specifies a folder, entire folder is replicated to requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
 
     ***Example cURL requests***
 
@@ -182,6 +186,9 @@ delete:
 
     If the `fid` parameter specifies a folder, entire folder is evicted.
 
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
   description: |
     Evicts a replica of a file specified by file Id in `fid` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
@@ -189,6 +196,9 @@ delete:
     evicted from this provider.
 
     If the `fid` parameter specifies a folder, entire folder is evicted.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
 
     ***Example cURL requests***
 

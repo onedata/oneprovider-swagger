@@ -71,6 +71,18 @@
 /spaces/{sid}/indexes/{index_name}/query:
   $ref: ./spaces-sid-indexes-index_name-query.yaml
 
+/spaces/{sid}/indices:
+  $ref: ./spaces-sid-indices.yaml
+
+/spaces/{sid}/indices/{index_name}:
+  $ref: ./spaces-sid-indices-index_name.yaml
+
+/spaces/{sid}/indices/{index_name}/reduce:
+  $ref: ./spaces-sid-indices-index_name-reduce.yaml
+
+/spaces/{sid}/indices/{index_name}/query:
+  $ref: ./spaces-sid-indices-index_name-query.yaml
+
 /spaces/{sid}/transfers:
   $ref: ./spaces-sid-transfers.yaml
 

@@ -9,8 +9,12 @@ get:
     - Monitoring
   x-bash-codegen-description: |
     Returns space related metrics of specified type for specific user.
+
+    This operation requires `space_view_statistics` privilege.
   description: |
     Returns space related metrics of specified type for specific user.
+
+    This operation requires `space_view_statistics` privilege.
 
     ***Example cURL requests***
 
