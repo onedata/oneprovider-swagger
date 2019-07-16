@@ -1,0 +1,21 @@
+description: Basic information about QoS requirement.
+type: object
+properties:
+  qosId:
+    type: string
+    description: ID of QoS requirement.
+  qosExpression:
+    type: string
+    description: Expression used to select storages on which file should be replicated.
+  replicasNum:
+    type: integer
+    description: Number of required file replicas.
+    default: 1
+  fulfilled:
+    type: boolean
+    description: Indicates whether QoS requirement is fulfilled.
+example:
+  qosId: c84f669f9522c46976fee490d80651f0
+  qosExpression: country=FR
+  replicasNum: 2
+  fulfilled: true

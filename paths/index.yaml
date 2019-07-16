@@ -115,3 +115,14 @@
 
 /changes/metadata/{sid}:
   $ref: ./changes-metadata-sid.yaml
+
+
+# tag QoS
+/qos/{path}:
+  $ref: ./qos-path.yaml
+
+/qos-id/{id}:
+  $ref: ./qos_id-id.yaml
+
+/qos-public-id/{shid}:
+  $ref: ./qos_public_id-qid.yaml

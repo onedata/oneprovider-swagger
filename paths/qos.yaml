@@ -1,0 +1,137 @@
+get:
+  operationId: get_file_qos
+  x-onedata-gri:
+    type: op_qos
+    id: ?PATH_BINDING
+    aspect: effective_file_qos
+  tags:
+    - QoS
+  summary: Get effective QoS for file
+  x-bash-codegen-description: |
+    Returns effective QoS for file or directory specified by path.
+  description: |
+    Returns effective QoS for file or directory specified by path.
+
+    ***Example cURL requests***
+
+    **Get effective QoS for file specified by path**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
+
+    {
+      "targetStorages": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
+      "qosList": ["fc05cfc92eda7a054b835bc1ee4a1372"],
+      "fulfilled": false
+    }
+
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description:
+      schema:
+        $ref: '#/definitions/FileQos'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: path
+      in: path
+      description: >
+        Full path to the folder, starting with space name (e.g. '/MySpace1/Folder2').
+        The whole space can also be shared (e.g. '/MySpace1').
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileQos path='/MySpace1/Folder2'"
+
+
+post:
+  operationId: add_qos
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_qos
+    id: ?PATH_BINDING
+    aspect: instance
+  summary: Add QoS for file
+  tags:
+    - QoS
+  x-bash-codegen-description: |
+    Adds QoS requirement for file or directory specified by path.
+  description: |
+    Adds QoS requirement for file or directory specified by path.
+
+    ***Example cURL requests***
+
+    **Add QoS for file specified by path**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "expression": "country=FR", "replicasNum": 2 }' \
+    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
+    ```
+  consumes:
+    - application/json
+  responses:
+    '200':
+      description: Id of added QoS (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: path
+      in: path
+      description: >
+        Full path to the folder, starting with space name (e.g. '/MySpace1/Folder2').
+        QoS can be also added for whole space (e.g. '/MySpace1').
+      type: string
+      required: true
+    - name: expression
+      in: body
+      description: QoS expression.
+      schema:
+        type: string
+      required: true
+    - name: replicasNum
+      in: body
+      description: Number of required file replicas.
+      schema:
+        type: integer
+      required: false
+      default: 1
+  x-code-samples:
+    - lang: Shell
+      source: >
+      "oneprovider-rest-cli addQoS path='/MySpace1/Folder2'
+      expression='country=FR' replicasNum=2"

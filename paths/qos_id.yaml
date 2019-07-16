@@ -1,0 +1,137 @@
+get:
+  operationId: get_file_qos_by_id
+  x-onedata-gri:
+    type: op_qos
+    id: ?OBJECTID_BINDING(id)
+    aspect: effective_file_qos
+  summary: Get effective QoS for file by id
+  tags:
+    - QoS
+  x-bash-codegen-description: |
+    Returns effective QoS for file or directory specified by ID.
+  description: |
+    Returns effective QoS for file or directory specified by ID.
+
+    ***Example cURL requests***
+
+    **Get effective QoS for file specified by ID**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/qos-id/000000000046761E6775696423333\
+    9643236366165646365626666616435393966376137373431323536316634233665633161\
+    353431336236663465326230316135633835613866643739376532"
+
+    {
+      "targetStorages": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
+      "qosList": ["fc05cfc92eda7a054b835bc1ee4a1372"],
+      "fulfilled": false
+    }
+
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description:
+      schema:
+        $ref: '#/definitions/FileQos'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileQosById"
+
+
+post:
+  operationId: add_qos_by_id
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_qos
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
+  summary: Add QoS for file by id
+  tags:
+    - QoS
+  x-bash-codegen-description: |
+    Adds QoS requirement for file or directory specified by ID.
+  description: |
+    Adds QoS requirement for file or directory specified by ID.
+
+    ***Example cURL requests***
+
+    **Add QoS for file specified by ID**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "expression": "country=FR", "replicasNum": 2 }' \
+    "https://$HOST/api/v3/oneprovider/qos-id/000000000046761E6775696423333\
+    9643236366165646365626666616435393966376137373431323536316634233665633161\
+    35343133623666346532623031613563383561386664373937653"
+    ```
+  consumes:
+    - application/json
+  responses:
+    '200':
+      description: Id of added QoS (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: >
+        Id of the file for which QoS will be added (e.g. '000000000046761E677
+        569642333396432363661656463656266666164353939663761373734313235363166
+        34233665633161353431336236663465326230316135633835613866643739376532').
+        Can be the root space folder.
+      type: string
+      required: true
+    - name: expression
+      in: body
+      description: QoS expression.
+      schema:
+        type: string
+      required: true
+    - name: replicasNum
+      in: body
+      description: Number of required file replicas.
+      schema:
+        type: integer
+      required: false
+      default: 1
+  x-code-samples:
+    - lang: Shell
+      source: >
+        "oneprovider-rest-cli addQoSById
+        id='000000000046761E67756964233339643236366165646365626666616435393966
+        3761373734313235363166342336656331613534313362366634653262303161356338
+        35613866643739376532' expression='country=FR' replicasNum=2"

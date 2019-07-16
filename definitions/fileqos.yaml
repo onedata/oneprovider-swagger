@@ -1,0 +1,22 @@
+description: Information about effective QoS for file or directory.
+type: object
+properties:
+  targetStorages:
+    type: object
+    description: >
+      Mapping between storage ID and list of QoS IDs that requires
+      replica on that storage
+  qosList:
+    type: array
+    description: List of QoS IDs.
+    items:
+      type: string
+  fulfilled:
+    type: boolean
+    description: >
+      Indicates whether all QoS requirements for given file or directory
+      are fulfilled.
+example:
+  targetStorages: {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]}
+  qosList: ["c84f669f9522c46976fee490d80651f0"]
+  fulfilled: true
