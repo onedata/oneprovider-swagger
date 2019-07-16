@@ -8,6 +8,8 @@
 /configuration:
   $ref: ./configuration.yaml
 
+/test_image:
+  $ref: ./test_image.yaml
 
 # tag File
 /files/{path}:
