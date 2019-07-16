@@ -4,27 +4,60 @@
 #
 
 
+# tag Oneprovider
 /configuration:
   $ref: ./configuration.yaml
 
-# tag Data
+
+# tag File
+/files/{path}:
+  $ref: ./files-path.yaml
+
+/files-id/{id}:
+  $ref: ./files_id-id.yaml
+
+/metadata/attrs/{path}:
+  $ref: ./metadata-attrs-path.yaml
+
+/metadata/xattrs/{path}:
+  $ref: ./metadata-xattrs-path.yaml
+
+/metadata/json/{path}:
+  $ref: ./metadata-json-path.yaml
+
+/metadata/rdf/{path}:
+  $ref: ./metadata-rdf-path.yaml
+
+/metadata-id/attrs/{id}:
+  $ref: ./metadata_id-attrs-id.yaml
+
+/metadata-id/xattrs/{id}:
+  $ref: ./metadata_id-xattrs-id.yaml
+
+/metadata-id/json/{id}:
+  $ref: ./metadata_id-json-id.yaml
+
+/metadata-id/rdf/{id}:
+  $ref: ./metadata_id-rdf-id.yaml
+
+
+# tag Share
+/shares/{path}:
+  $ref: ./shares-path.yaml
+
+/shares-id/{id}:
+  $ref: ./shares_id-id.yaml
+
+/shares-public-id/{shid}:
+  $ref: ./shares_public_id-shid.yaml
+
+
+# tag Space
 /spaces:
   $ref: ./spaces.yaml
 
 /spaces/{sid}:
   $ref: ./spaces-sid.yaml
-
-/files/{path}:
-  $ref: ./files-path.yaml
-
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
-
-/metadata/{path}:
-  $ref: ./metadata-path.yaml
-
-/metadata-id/{id}:
-  $ref: ./metadata_id-id.yaml
 
 /spaces/{sid}/indexes:
   $ref: ./spaces-sid-indexes.yaml
@@ -38,8 +71,23 @@
 /spaces/{sid}/indexes/{index_name}/query:
   $ref: ./spaces-sid-indexes-index_name-query.yaml
 
+/spaces/{sid}/indices:
+  $ref: ./spaces-sid-indices.yaml
 
-# tag Replication
+/spaces/{sid}/indices/{index_name}:
+  $ref: ./spaces-sid-indices-index_name.yaml
+
+/spaces/{sid}/indices/{index_name}/reduce:
+  $ref: ./spaces-sid-indices-index_name-reduce.yaml
+
+/spaces/{sid}/indices/{index_name}/query:
+  $ref: ./spaces-sid-indices-index_name-query.yaml
+
+/spaces/{sid}/transfers:
+  $ref: ./spaces-sid-transfers.yaml
+
+
+# tag Replica
 /replicas/{path}:
   $ref: ./replicas-path.yaml
 
@@ -49,14 +97,14 @@
 /replicas-index/{index_name}:
   $ref: ./replicas_index-index_name.yaml
 
-/spaces/{sid}/transfers:
-  $ref: ./spaces-sid-transfers.yaml
 
+# tag Transfer
 /transfers/{tid}:
   $ref: ./transfers-tid.yaml
 
 /transfers/{tid}/rerun:
   $ref: ./transfers-tid-rerun.yaml
+
 
 # tag Monitoring
 /metrics/space/{sid}:
@@ -65,20 +113,5 @@
 /metrics/space/{sid}/user/{uid}:
   $ref: ./metrics-space-sid-user-uid.yaml
 
-# /metrics/provider/{pid}:
-#   $ref: ./metrics-provider-pid.yaml
-
-# /metrics/user/{uid}:
-#   $ref: ./metrics-user-uid.yaml
-
 /changes/metadata/{sid}:
   $ref: ./changes-metadata-sid.yaml
-
-/shares/{path}:
-  $ref: ./shares-path.yaml
-
-/shares-id/{id}:
-  $ref: ./shares_id-id.yaml
-
-/shares-public-id/{shid}:
-  $ref: ./shares_public_id-shid.yaml

@@ -1,12 +1,12 @@
 get:
   operationId: get_share
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: get_share
+  x-onedata-gri:
+    type: op_share
+    id: ?PATH_BINDING
+    aspect: shared_dir
   summary: Get share info by folder path
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Returns the basic information about shared folder specified by path.
   description: |
@@ -69,13 +69,14 @@ get:
 
 post:
   operationId: create_share
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: create_share
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?PATH_BINDING
+    aspect: shared_dir
   summary: Share a folder by path
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Shares a folder specified by path. Shared folder can be viewed by everyone
     through public URL. This operation assigns a public share ID that can be
@@ -147,13 +148,14 @@ post:
 
 patch:
   operationId: update_share_name
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: update_share_name
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?PATH_BINDING
+    aspect: shared_dir
   summary: Rename share by folder path
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Changes name of the shared folder specified by path.
   description: |
@@ -171,7 +173,7 @@ patch:
   consumes:
     - application/json
   responses:
-    '200':
+    '204':
       description: Share's name has been changed.
     '400':
       description: Invalid request.
@@ -210,13 +212,13 @@ patch:
 
 delete:
   operationId: remove_share
-  x-onedata-service: oneprovider
-  x-onedata-module: shares
-  x-onedata-resource: file
-  x-onedata-method: remove_share
+  x-onedata-gri:
+    type: op_share
+    id: ?PATH_BINDING
+    aspect: shared_dir
   summary: Unshare a folder by path
   tags:
-    - Data
+    - Share
   x-bash-codegen-description: |
     Unshares a folder by path. This operation will not remove data from folder
     but data will not be accessible through public url anymore.

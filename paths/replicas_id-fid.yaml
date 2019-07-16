@@ -1,11 +1,11 @@
 get:
   operationId: get_file_replicas_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: file_distribution
-  x-onedata-resource: file
-  x-onedata-method: get_file_distribution
+  x-onedata-gri:
+    type: op_replica
+    id: ?OBJECTID_BINDING(fid)
+    aspect: distribution
   tags:
-    - Replication
+    - Replica
   summary: Get replicas by Id
   x-bash-codegen-description: |
     Returns file distribution information about a specific file.
@@ -67,12 +67,13 @@ get:
 
 post:
   operationId: replicate_file_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: replicate_file
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replica
+    id: ?OBJECTID_BINDING(fid)
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Replicate file or folder by Id
   x-bash-codegen-description: |
     Replicates a file specified by Id in `fid` parameter to a specified provider.
@@ -82,11 +83,15 @@ post:
     If the `fid` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
+    This operation requires `space_schedule_replication` privilege.
+
   description: |
     Replicates a file specified by Id in `fid` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `fid` parameter specifies a folder, entire folder is replicated to requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
 
     ***Example cURL requests***
 
@@ -108,6 +113,8 @@ post:
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
     ```
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
@@ -164,12 +171,12 @@ post:
 
 delete:
   operationId: evict_replica_by_id
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: evict_replica
+  x-onedata-gri:
+    type: op_replica
+    id: ?OBJECTID_BINDING(fid)
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Evict existing replica by file Id
   x-bash-codegen-description: |
     Evicts a replica of a file specified by Id in `fid` parameter.
@@ -179,6 +186,9 @@ delete:
 
     If the `fid` parameter specifies a folder, entire folder is evicted.
 
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
   description: |
     Evicts a replica of a file specified by file Id in `fid` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
@@ -186,6 +196,9 @@ delete:
     evicted from this provider.
 
     If the `fid` parameter specifies a folder, entire folder is evicted.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
 
     ***Example cURL requests***
 

@@ -5,7 +5,7 @@ SWAGGER_AGGREGATOR_IMAGE    ?= docker.onedata.org/swagger-aggregator:1.5.0
 SWAGGER_CLI_IMAGE           ?= docker.onedata.org/swagger-cli:1.5.0
 SWAGGER_BOOTPRINT_IMAGE     ?= docker.onedata.org/swagger-bootprint:1.5.0
 SWAGGER_MARKDOWN_IMAGE      ?= docker.onedata.org/swagger-gitbook:1.4.1
-SWAGGER_COWBOY_SERVER_IMAGE ?= docker.onedata.org/swagger-codegen:2.3.0-cowboy
+SWAGGER_COWBOY_SERVER_IMAGE ?= docker.onedata.org/swagger-codegen:2.3.1-cowboy
 SWAGGER_PYTHON_CLIENT_IMAGE ?= docker.onedata.org/swagger-codegen-official:ID-507bde287c
 SWAGGER_BASH_CLIENT_IMAGE   ?= docker.onedata.org/swagger-codegen:ID-2fc8126ac8
 SWAGGER_REDOC_IMAGE         ?= docker.onedata.org/swagger-redoc:1.0.0
@@ -29,7 +29,7 @@ validate: swagger.json
 	fi
 
 cowboy-server: validate
-	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/swagger -t ${SWAGGER_COWBOY_SERVER_IMAGE} generate -i ./swagger.json -l cowboy -o ./generated/cowboy
+	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/swagger -t ${SWAGGER_COWBOY_SERVER_IMAGE} generate -Dapis -DapiFileNameSuffix="_routes" -i ./swagger.json -l cowboy -o ./generated/cowboy
 	./fix_generated.py
 
 python-client: validate

@@ -1,12 +1,13 @@
 post:
   operationId: replicate_files_by_index
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: replicate_files_by_index
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replica
+    id: ?BINDING(index_name)
+    aspect: replicate_by_index
   summary: Replicate files by index
   tags:
-    - Replication
+    - Replica
   x-bash-codegen-description: |
     Queries the specified index and replicates the resulting list of files to specified provider. 
     This operation is asynchronous and it can take a long time depending on the size of the data
@@ -22,6 +23,8 @@ post:
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
+    This operation requires `space_schedule_replication` and `space_query_indices` privileges.
+
   description: |
     Queries the specified index and replicates the resulting list of files to specified provider. 
     This operation is asynchronous and it can take a long time depending on the size of the data
@@ -31,6 +34,8 @@ post:
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+
+    This operation requires `space_schedule_replication` and `space_query_indices` privileges.
 
     ***Example cURL requests***
 
@@ -53,6 +58,8 @@ post:
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
     ```
 
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
@@ -209,13 +216,13 @@ post:
 
 delete:
   operationId: evict_replicas_by_index
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: evict_replicas_by_index
+  x-onedata-gri:
+    type: op_replica
+    id: ?BINDING(index_name)
+    aspect: evict_by_index
   summary: Evict existing replicas by index
   tags:
-    - Replication
+    - Replica
   x-bash-codegen-description: |
     Queries the specified index and evicts the resulting list of replicas in specified provider. 
     This operation is asynchronous. Optional argument `migration_provider_id`
@@ -232,6 +239,10 @@ delete:
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
+    This operation requires:
+      * `space_query_indices` and `space_schedule_eviction` when scheduling eviction
+      * `space_query_indices`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
+
   description: |
     Queries the specified index and evicts the resulting list of replicas in specified provider. 
     This operation is asynchronous. Optional argument `migration_provider_id`
@@ -242,6 +253,10 @@ delete:
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+
+    This operation requires:
+      * `space_query_indices` and `space_schedule_eviction` when scheduling eviction
+      * `space_query_indices`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
 
     ***Example cURL requests***
 

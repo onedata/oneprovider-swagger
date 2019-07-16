@@ -1,11 +1,11 @@
 get:
   operationId: get_file_replicas
-  x-onedata-service: oneprovider
-  x-onedata-module: file_distribution
-  x-onedata-resource: file
-  x-onedata-method: get_file_distribution
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: distribution
   tags:
-    - Replication
+    - Replica
   summary: Get replicas by path
   x-bash-codegen-description: |
     Returns file distribution information about a specific file.
@@ -58,22 +58,23 @@ get:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileReplicas path='/Space 1/Folder 2/file.txt' key=value1"
+    source: "oneprovider-rest-cli getFileReplicas path='/MySpace/testfiles/file1.txt' key=value1"
 
 
 post:
   operationId: replicate_file
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: replicate_file
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Replicate file or folder by path
   x-bash-codegen-description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
@@ -82,11 +83,15 @@ post:
     If the `path` parameter specifies a folder, entire folder is replicated to
     requested provider.
 
+    This operation requires `space_schedule_replication` privilege.
+
   description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
     If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
 
     ***Example cURL requests***
 
@@ -109,6 +114,8 @@ post:
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
     ```
   consumes:
+    - application/json
+  produces:
     - application/json
   responses:
     '200':
@@ -140,7 +147,7 @@ post:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
@@ -160,16 +167,16 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFile path='/Space 1/Folder 2/file.txt' provider_id=$PROVIDER_ID"
+    source: "oneprovider-rest-cli replicateFile path='/MySpace/testfiles/file1.txt' provider_id=$PROVIDER_ID"
 
 delete:
   operationId: evict_replica
-  x-onedata-service: oneprovider
-  x-onedata-module: replicate_file
-  x-onedata-resource: file
-  x-onedata-method: evict_replica
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: instance
   tags:
-    - Replication
+    - Replica
   summary: Evict existing replica by file path
   x-bash-codegen-description: |
     Removes a replica of a file specified by absolute path in `path` parameter
@@ -181,6 +188,9 @@ delete:
     If the `path` parameter specifies a folder, entire folder is evicted from
     this provider requested provider.
 
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
   description: |
     Removes a replica of a file specified by absolute path in `path` parameter
     from a specified provider.
@@ -190,6 +200,9 @@ delete:
 
     If the `path` parameter specifies a folder, entire folder is evicted from
     this provider requested provider.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
 
     ***Example cURL requests***
 
@@ -233,7 +246,7 @@ delete:
   parameters:
   - name: path
     in: path
-    description: File path (e.g. '/My Private Space/testfiles/file1.txt')
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
@@ -251,4 +264,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplica path='/Space 1/Folder 2/file.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"
+    source: "oneprovider-rest-cli evictReplica path='/MySpace/testfiles/file1.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"

@@ -1,18 +1,20 @@
 get:
   operationId: get_transfer_status
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: get_transfer_status
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: instance
   tags:
-    - Replication
+    - Transfer
   summary: Get transfer status
   x-bash-codegen-description: |
-    Returns status of specific transfer. In case the transfer has been
-    scheduled for entire folder, the result is a list of transfer statuses
-    for each item in the folder.
+    Returns status of specific transfer.
+
+    This operation requires `space_view_transfers` privilege.
   description: |
     Returns status of specific transfer.
+
+    This operation requires `space_view_transfers` privilege.
 
     ***Example cURL requests***
 
@@ -98,18 +100,30 @@ get:
 
 delete:
   operationId: cancel_transfer
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: cancel_transfer
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: instance
   tags:
-    - Replication
+    - Transfer
   summary: Cancel specific transfer
   x-bash-codegen-description: |
     Cancels a scheduled or active transfer. Returns 400 in case the transfer
     is already completed, canceled or failed.
+
+    This operation requires `space_cancel_replication` privilege in case of canceling replication,
+    `space_cancel_eviction` privilege in case of canceling eviction and both of them when
+    canceling migration.
+
+    However, canceling your own transfers does not require any privileges.
   description: |
     Cancels a scheduled or active transfer. Returns 400 in case the transfer is already completed, canceled or failed.
+
+    This operation requires `space_cancel_replication` privilege in case of canceling replication,
+    `space_cancel_eviction` privilege in case of canceling eviction and both of them when
+    canceling migration.
+
+    However, canceling your own transfers does not require any privileges.
 
     ***Example cURL requests***
 

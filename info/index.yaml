@@ -44,29 +44,33 @@ description: |
 
   ### Data
 
+  #### File browsing
+  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
+  Paths must be complete up to a folder whose contents are needed and start with the name of the containing space.
+
   #### File attributes
   The `/attributes/` operation group provides GET and PUT methods enable querying
   for file attributes, such as 'mode' file permissions and updating them.
 
-  #### File browser
-  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
-  Currently no wildcards are possible, thus paths must be complete up to a folder whose
-  contents are needed and start with the name of the space containing the requested folders and files.
-
-  #### Space information
-  For convenience, `/space/` methods provider means for getting basic information about
-  spaces directly from the Oneprovider service. For more comprehensive operations
-  on spaces please use the Onezone API.
-
   #### Metadata
   Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or folders (under `/metata` path)
+  arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
   as well as create indexes (`/index`) and query them based on the metadata (`/query-index`).
+
+  #### Share information
+  The `/share/` methods enable creating, modyfying and deleting shares.
+  Shares are folders that were made publicly available, so they can be viewed by everyone
+  through public URL.
+
+  #### Space information
+  The `/space/` methods provide means for getting basic information about
+  spaces directly from the Oneprovider service but also allows to define indexes and
+  list transfers for specified space.
 
   ### Replication
 
   #### Replica management
-  The `/replicas/` methods allow retrieving of information about file replica distribution
+  The `/replicas/` methods allow retrieving information about file replica distribution
   among Onedata providers as well as requesting specific file replication to selected
   providers.
 
@@ -91,7 +95,7 @@ description: |
   **Create replica of file at specific storage provider**
   ```bash
   curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=ASDNKJASF"
+  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
   ```
 
   **Get space storage qouta metric**
@@ -134,17 +138,67 @@ x-bash-codegen-description: |
 
   ### Data
 
-  Basic data management including getting information about data objects (
-  files or folders).
+  #### File browsing
+  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
+  Paths must be complete up to a folder whose contents are needed and start with the name of the containing space.
+
+  #### File attributes
+  The `/attributes/` operation group provides GET and PUT methods enable querying
+  for file attributes, such as 'mode' file permissions and updating them.
+
+  #### Metadata
+  Oneprovider exposes an advanced metadata management mechanism allowing to attach
+  arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
+  as well as create indexes (`/index`) and query them based on the metadata (`/query-index`).
+
+  #### Share information
+  The `/share/` methods enable creating, modyfying and deleting shares.
+  Shares are folders that were made publicly available, so they can be viewed by everyone
+  through public URL.
+
+  #### Space information
+  The `/space/` methods provide means for getting basic information about
+  spaces directly from the Oneprovider service but also allows to define indexes and
+  list transfers for specified space.
 
   ### Replication
 
-  Data transfer management.
+  #### Replica management
+  The `/replicas/` methods allow retrieving information about file replica distribution
+  among Onedata providers as well as requesting specific file replication to selected
+  providers.
+
+  #### Transfer management
+  The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
+  returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring
 
-  Monitoring of changes performed in folders and files and getting metrics
-  history.
+  #### Changes subscription
+  The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
+  file related events such as reads, writes or deletes which are returned as complete file metadata
+  records with sequence numbers representing their current version.
+
+  #### Monitoring metrics
+  The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
+  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/)
+  database files, with resolution determined by the `step` query parameter.
+
+  ## Examples
+
+  **Create replica of file at specific storage provider**
+  ```bash
+  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
+  ```
+
+  **Get space storage qouta metric**
+  ```bash
+  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+  "https://$PROVIDER/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
+  ```
+
+  More detailed examples are available in the documentation of each operation.
 
 contact:
   name: Onedata support

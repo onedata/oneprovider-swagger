@@ -1,9 +1,8 @@
 get:
   operationId: get_configuration
-  x-onedata-service: oneprovider
-  x-onedata-module: configuration
-  x-onedata-resource: configuration
-  x-onedata-method: get_configuration
+  x-onedata-gri:
+    type: op_provider
+    aspect: configuration
   summary: Get public information
   tags:
     - Oneprovider
@@ -20,7 +19,19 @@ get:
 
     **Get public information about the Oneprovider service**
     ```bash
-     curl https://$HOST/api/v3/oneprovider/configuration
+    curl "https://$HOST/api/v3/oneprovider/configuration"
+
+    {
+      "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
+      "name": "ProviderName",
+      "domain": "zone.domain.org",
+      "onezoneDomain": "example.domain.org",
+      "version": "19.02.0-beta1",
+      "build": "19-g0d0fd5b",
+      "compatibleOnezoneVersions": ["19.02.0-beta1"],
+      "compatibleOneproviderVersions": ["19.02.0-beta1"],
+      "compatibleOneclientVersions": ["18.02.1", "19.02.0-beta1"]
+    }
     ```
   produces:
     - application/json

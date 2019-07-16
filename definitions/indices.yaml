@@ -1,0 +1,29 @@
+type: object
+description: The list of indices names, nextPageToken is present when there is more to list.
+properties:
+  indices:
+    type: array
+    description: List of space indices
+    items:
+      type: string
+  indexes:
+    type: array
+    description: List of space indices (deprecated)
+    items:
+      type: string
+  nextPageToken:
+    type: string
+    description: >
+      Can be used to list indices starting after the last on returned
+      list (present only when there is more indices to list)
+required:
+  - indices
+  - indexes
+example:
+  indices:
+    - index1
+    - index11
+  indexes:
+    - index1
+    - index11
+  nextPageToken: 8471726779817b3a

@@ -1,17 +1,31 @@
 post:
   operationId: rerun_transfer
-  x-onedata-service: oneprovider
-  x-onedata-module: transfers
-  x-onedata-resource: transfer
-  x-onedata-method: rerun_transfer
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: rerun
   tags:
-    - Replication
+    - Transfer
   summary: Rerun ended transfer
   x-bash-codegen-description: |
     Reruns ended transfer by creating a new, identical transfer.
+
+    This operation requires:
+      * `space_schedule_replication` when rerunning replication
+      * `space_schedule_eviction` when rerunning eviction
+      * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
+
+    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
   description: |
     Reruns ended transfer by creating a new, identical transfer.
-  
+
+    This operation requires:
+      * `space_schedule_replication` when rerunning replication
+      * `space_schedule_eviction` when rerunning eviction
+      * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
+
+    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
+
     ***Example cURL requests***
 
     **Rerun finished transfer**

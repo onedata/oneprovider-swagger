@@ -1,0 +1,167 @@
+get:
+  operationId: get_file_json_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: json_metadata
+  summary: Get file json metadata
+  tags:
+    - File
+  x-bash-codegen-description: |
+    This method returns the json metadata associated with specified file, folder or space.
+
+    By default the method returns the complete json metadata. But it is possible to request
+    only a part of the document by specifying `filter_type` and `filter` attributes in the query.
+
+    Supported filter types are:
+      * **keypath** - list of JSON keys which point to requested JSON object,
+                    separated by `.`, array elements should be expressed as
+                    `[i]` (e.g. `key1.key2.[2].key3`)
+
+  description: |
+    This method returns the json metadata associated with specified file, folder or space.
+
+    By default the method returns the complete json metadata. But it is possible to request
+    only a part of the document by specifying `filter_type` and `filter` attributes in the query.
+
+    Supported filter types are:
+      * **keypath** - list of JSON keys which point to requested JSON object,
+                    separated by `.`, array elements should be expressed as
+                    `[i]` (e.g. `key1.key2.[2].key3`)
+
+
+    ***Example cURL requests***
+
+    **Get specific JSON value from metadata document**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: JSON metadata returned successfully.
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: filter_type
+    in: query
+    description: The type of filter to apply to the metadata document.
+    type: string
+    required: false
+  - name: filter
+    in: query
+    description: The filter to apply to the metadata document before returning.
+    type: string
+    required: false
+  - name: inherited
+    in: query
+    description: >
+      When set to true, this operation will merge the metadata documents from
+      parent folders as well as entire space into a single JSON document.
+    type: boolean
+    required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileJsonMetadata path='/MySpace/testfiles/file1.txt' inherited=false"
+
+
+put:
+  operationId: set_file_json_metadata
+  x-onedata-parse_body: as_is
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: json_metadata
+  summary: Set file json metadata
+  tags:
+    - File
+  x-bash-codegen-description: |
+    This method allows to set json metadata for a file, folder or
+    space specified in the request path.
+
+    This operation will replace the previous json metadata if any.
+
+  description: |
+    This method allows to set json metadata for a file, folder or
+    space specified in the request path.
+
+    This operation will replace the previous json metadata if any.
+
+    ***Example cURL requests***
+
+    **Set JSON metadata for file**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/json" \
+    -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
+    https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: JSON metadata updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: filter_type
+    in: query
+    description: The type of filter to apply to the metadata document.
+    type: string
+    required: false
+  - name: filter
+    in: query
+    description: The filter allowing to set specific metadata document key. Required if filter_type is specified.
+    type: string
+    required: false
+  - name: body
+    in: body
+    description: The metadata document in one of accepted formats.
+    required: true
+    schema:
+      type: string
+  x-code-samples:
+  - lang: Shell
+    source: "cat metadata.json | oneprovider-rest-cli setFileJsonMetadata path='/MySpace/testfiles/file1.txt' -"

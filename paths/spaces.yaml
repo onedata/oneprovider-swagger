@@ -1,11 +1,10 @@
 get:
   operationId: get_all_spaces
-  x-onedata-service: oneprovider
-  x-onedata-module: files
-  x-onedata-resource: file
-  x-onedata-method: get_all_spaces
+  x-onedata-gri:
+    type: op_space
+    aspect: list
   tags:
-    - Data
+    - Space
   summary: Get all spaces
   x-bash-codegen-description: |
     Returns the list of all user spaces.
@@ -30,8 +29,6 @@ get:
       }
     ]
     ```
-  x-bash-codegen-description:
-    Returns the list of all user spaces.
   produces:
     - application/json
   responses:

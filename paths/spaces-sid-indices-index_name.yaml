@@ -1,23 +1,17 @@
 get:
-  deprecated: true
-  operationId: get_space_index_deprecated
+  operationId: get_space_index
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index, ?BINDING(index_name)}"
-  summary: Get index (deprecated)
+  summary: Get index
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/get_space_index).
-
     This method returns a JSON describing specific index.
 
     This operation requires `space_view_indices` privilege.
-
   description: |
-    This enpoint is deprecated, please use [this one](#operation/get_space_index).
-
     This method returns a JSON describing specific index.
 
     This operation requires `space_view_indices` privilege.
@@ -27,7 +21,7 @@ get:
     **Get information about specific index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME
 
 
     {
@@ -80,29 +74,24 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli getSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
 
 
 put:
-  deprecated: true
-  operationId: create_space_index_deprecated
+  operationId: create_space_index
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index, ?BINDING(index_name)}"
-  summary: Create index (deprecated)
+  summary: Create index
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/create_space_index).
-
     This method creates or replaces an existing index with a new one.
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/create_space_index).
-
     This method creates or replaces an existing index with a new one.
 
     This operation requires `space_manage_indices` privilege.
@@ -114,7 +103,7 @@ put:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_index1.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
     ```
 
   consumes:
@@ -182,32 +171,27 @@ put:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli createSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
+    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
 
 
 patch:
-  deprecated: true
-  operationId: update_space_index_deprecated
+  operationId: update_space_index
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index, ?BINDING(index_name)}"
-  summary: Update index (deprecated)
+  summary: Update index
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/update_space_index).
-
-    This method updates existing index definition.
+    This method updates existing index definition. 
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/update_space_index).
-
-    This method updates existing index definition.
+    This method updates existing index definition. 
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
@@ -219,7 +203,7 @@ patch:
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/javascript" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME?update_min_changes=10
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME?update_min_changes=10
     ```
 
   consumes:
@@ -286,28 +270,23 @@ patch:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
+    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
 
 
 delete:
-  deprecated: true
-  operationId: remove_space_index_deprecated
+  operationId: remove_space_index
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{index, ?BINDING(index_name)}"
-  summary: Remove index (deprecated)
+  summary: Remove index
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_space_index).
-
     This method removes an existing index.
 
     This operation requires `space_manage_indices` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_space_index).
-
     This method removes an existing index.
 
     This operation requires `space_manage_indices` privilege.
@@ -317,7 +296,7 @@ delete:
     **Remove existing index**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME
     ```
 
   responses:
@@ -353,4 +332,4 @@ delete:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeSpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
