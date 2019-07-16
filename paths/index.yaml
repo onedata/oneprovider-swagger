@@ -124,5 +124,5 @@
 /qos-id/{id}:
   $ref: ./qos_id-id.yaml
 
-/qos-public-id/{shid}:
+/qos-entry/{qid}:
   $ref: ./qos_public_id-qid.yaml

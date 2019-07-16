@@ -17,7 +17,7 @@ get:
     **Get detailed information about QoS**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos-public-id/c84f669f9522c46976fee490d80651f0"
+    "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
 
     {
       "qosId": "c84f669f9522c46976fee490d80651f0",
@@ -81,7 +81,7 @@ delete:
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
-    "https://$HOST/api/v3/oneprovider/qos-public-id/c84f669f9522c46976fee490d80651f0"
+    "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
     ```
   consumes:
     - application/json
