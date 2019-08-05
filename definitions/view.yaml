@@ -1,19 +1,21 @@
 type: object
-description: The basic index information.
+description: The basic view information.
 properties:
   spatial:
-    description: Whether given index is spatial or not.
+    description: Whether given view is spatial or not.
     type: boolean
   mapFunction:
-    description: Index mapping function.
+    description: View mapping function.
     type: string
   reduceFunction:
-    description: Index reduce function or null if there is none.
+    description: View reduce function or null if there is none.
     type: string
   indexOptions:
-    $ref: '#/definitions/IndexOptions'
+    $ref: '#/definitions/ViewOptions'
+  viewOptions:
+    $ref: '#/definitions/ViewOptions'
   providers:
-    description: List of providers on which index can be queried.
+    description: List of providers on which view can be queried.
     type: array
     items:
         type: string
@@ -22,6 +24,7 @@ required:
   - mapFunction
   - reduceFunction
   - indexOptions
+  - viewOptions
   - providers
 example:
   spatial: false
@@ -29,6 +32,8 @@ example:
   spaceId: ee4ac5df-095c-4760-bee9-a9bd2f37e508
   reduceFunction: null,
   indexOptions:
+    update_min_changes: 100
+  viewOptions:
     update_min_changes: 100
   providers:
     - ASIOdhxckvufysd78f9w394356yisudfsduuzxch

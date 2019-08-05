@@ -73,17 +73,17 @@
 /spaces/{sid}/indexes/{index_name}/query:
   $ref: ./spaces-sid-indexes-index_name-query.yaml
 
-/spaces/{sid}/indices:
-  $ref: ./spaces-sid-indices.yaml
+/spaces/{sid}/views:
+  $ref: ./spaces-sid-views.yaml
 
-/spaces/{sid}/indices/{index_name}:
-  $ref: ./spaces-sid-indices-index_name.yaml
+/spaces/{sid}/views/{view_name}:
+  $ref: ./spaces-sid-views-view_name.yaml
 
-/spaces/{sid}/indices/{index_name}/reduce:
-  $ref: ./spaces-sid-indices-index_name-reduce.yaml
+/spaces/{sid}/views/{view_name}/reduce:
+  $ref: ./spaces-sid-views-view_name-reduce.yaml
 
-/spaces/{sid}/indices/{index_name}/query:
-  $ref: ./spaces-sid-indices-index_name-query.yaml
+/spaces/{sid}/views/{view_name}/query:
+  $ref: ./spaces-sid-views-view_name-query.yaml
 
 /spaces/{sid}/transfers:
   $ref: ./spaces-sid-transfers.yaml
@@ -98,6 +98,9 @@
 
 /replicas-index/{index_name}:
   $ref: ./replicas_index-index_name.yaml
+
+/replicas-view/{view_name}:
+  $ref: ./replicas_view-view_name.yaml
 
 
 # tag Transfer
