@@ -1,15 +1,15 @@
 get:
   deprecated: true
-  operationId: query_space_index_deprecated
+  operationId: query_space_index
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{query_index, ?BINDING(index_name)}"
-  summary: Query index (deprecated)
+    aspect: "{query_view, ?BINDING(index_name)}"
+  summary: Query index
   tags:
     - Space
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/query_space_index).
+    This enpoint is deprecated, please use [this one](#operation/query_space_view).
 
     This method returns the list of result objects for files which match the query
     on a predefined index. 
@@ -32,9 +32,9 @@ get:
     These queries are possible on indexes which emit values conforming to the
     [http://geojson.org/] format.
 
-    This operation requires `space_query_indices` privilege.
+    This operation requires `space_query_views` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/query_space_index).
+    This enpoint is deprecated, please use [this one](#operation/query_space_view).
 
     This method returns the list of result objects for files which match the query on a predefined index.
     Those objects contains following fields:
@@ -50,7 +50,7 @@ get:
     Additionaly, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using `bbox` query parameter.
     These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
-    This operation requires `space_query_indices` privilege.
+    This operation requires `space_query_views` privilege.
 
     ***Example cURL requests***
 
@@ -277,4 +277,4 @@ get:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli querySpaceIndexDeprecated sid=$SPACE_ID index_name=$INDEX_NAME key=value1"
+    source: "oneprovider-rest-cli querySpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME key=value1"

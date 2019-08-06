@@ -55,7 +55,7 @@ description: |
   #### Metadata
   Oneprovider exposes an advanced metadata management mechanism allowing to attach
   arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
-  as well as create indexes (`/index`) and query them based on the metadata (`/query-index`).
+  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
@@ -64,7 +64,7 @@ description: |
 
   #### Space information
   The `/space/` methods provide means for getting basic information about
-  spaces directly from the Oneprovider service but also allows to define indexes and
+  spaces directly from the Oneprovider service but also allows to define views and
   list transfers for specified space.
 
   ### Replication
@@ -149,7 +149,7 @@ x-bash-codegen-description: |
   #### Metadata
   Oneprovider exposes an advanced metadata management mechanism allowing to attach
   arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
-  as well as create indexes (`/index`) and query them based on the metadata (`/query-index`).
+  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
@@ -158,7 +158,7 @@ x-bash-codegen-description: |
 
   #### Space information
   The `/space/` methods provide means for getting basic information about
-  spaces directly from the Oneprovider service but also allows to define indexes and
+  spaces directly from the Oneprovider service but also allows to define views and
   list transfers for specified space.
 
   ### Replication

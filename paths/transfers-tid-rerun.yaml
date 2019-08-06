@@ -15,7 +15,7 @@ post:
       * `space_schedule_eviction` when rerunning eviction
       * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
 
-    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
+    Additionally, rerunning transfers using views requires `space_query_views` privilege.
   description: |
     Reruns ended transfer by creating a new, identical transfer.
 
@@ -24,7 +24,7 @@ post:
       * `space_schedule_eviction` when rerunning eviction
       * `space_schedule_replication` and `space_schedule_eviction` when rerunning migration
 
-    Additionally, rerunning transfers using indices requires `space_query_indices` privilege.
+    Additionally, rerunning transfers using views requires `space_query_views` privilege.
 
     ***Example cURL requests***
 

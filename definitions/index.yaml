@@ -44,14 +44,14 @@ Metrics:
 RRD:
   $ref: ./rrd.yaml
 
-Index:
-  $ref: ./index_type.yaml
+View:
+  $ref: ./view.yaml
 
-Indices:
-  $ref: ./indices.yaml
+Views:
+  $ref: ./views.yaml
 
-IndexOptions:
-  $ref: ./index_options.yaml
+ViewOptions:
+  $ref: ./view_options.yaml
 
 Share:
   $ref: ./share.yaml

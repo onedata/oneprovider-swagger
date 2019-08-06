@@ -1,63 +1,58 @@
 post:
-  deprecated: true
-  operationId: replicate_files_by_index
+  operationId: replicate_files_by_view
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_replica
-    id: ?BINDING(index_name)
+    id: ?BINDING(view_name)
     aspect: replicate_by_view
-  summary: Replicate files by index
+  summary: Replicate files by view
   tags:
     - Replica
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/replicate_files_by_view).
-
-    Queries the specified index and replicates the resulting list of files to specified provider.
+    Queries the specified view and replicates the resulting list of files to specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
 
-    This operation supports custom index query attributes as provided by
+    This operation supports custom view query attributes as provided by
     Couchbase:
       [http://docs.couchbase.com/admin/admin/Views/views-querying.html].
 
     Additionally, Couchbase spatial queries:
       [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are
     possible using the `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the
+    These queries are possible on views which emit values conforming to the
     [http://geojson.org/] format.
 
     This operation requires `space_schedule_replication` and `space_query_views` privileges.
 
   description: |
-    This enpoint is deprecated, please use [this one](#operation/replicate_files_by_view).
-
-    Queries the specified index and replicates the resulting list of files to specified provider.
+    Queries the specified view and replicates the resulting list of files to specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
 
-    This operation supports custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
+    This operation supports custom view query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+    These queries are possible on views which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
     This operation requires `space_schedule_replication` and `space_query_views` privileges.
 
     ***Example cURL requests***
 
-    **Replicate files returned by index within specified space to any provider**
+    **Replicate files returned by view within specified space to any provider**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID"
+    "https://$HOST/api/v3/oneprovider/replicas-view/$VIEW_NAME?space_id=$SPACE_ID"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0"}
     ```
 
-    **Replicate 100 files (skipping the first 200) returned by index within specified space to any provider with URL callback**
+    **Replicate 100 files (skipping the first 200) returned by view within specified space to any provider with URL callback**
     ```bash
     curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
+    "https://$HOST/api/v3/oneprovider/replicas-view/$VIEW_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -95,14 +90,14 @@ post:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   - name: space_id
     in: query
-    description: Space Id in which index exist.
+    description: Space Id in which view exist.
     type: string
     required: true
   - name: provider_id
@@ -199,7 +194,7 @@ post:
   - name: spatial
     in: query
     description: |
-      Enable spatial type of query. When querying the file-popularity index, the `start_range` and
+      Enable spatial type of query. When querying the file-popularity view, the `start_range` and
       `end_range` constraints should be specified as 6-dimensional arrays, with the following fields:
       `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit, HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
     type: boolean
@@ -216,32 +211,32 @@ post:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFilesByIndex space_id=$SPACE_ID index_name=$INDEX_NAME key=value1"
+    source: "oneprovider-rest-cli replicateFilesByView space_id=$SPACE_ID view_name=$VIEW_NAME key=value1"
 
 
 delete:
-  operationId: evict_replicas_by_index
+  operationId: evict_replicas_by_view
   x-onedata-gri:
     type: op_replica
-    id: ?BINDING(index_name)
+    id: ?BINDING(view_name)
     aspect: evict_by_view
-  summary: Evict existing replicas by index
+  summary: Evict existing replicas by view
   tags:
     - Replica
   x-bash-codegen-description: |
-    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    Queries the specified view and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    This operation supports custom index query attributes as provided by
+    This operation supports custom view query attributes as provided by
     Couchbase:
       [http://docs.couchbase.com/admin/admin/Views/views-querying.html].
 
     Additionally, Couchbase spatial queries:
       [http://docs.couchbase.com/admin/admin/Views/views-geospatial.html] are
     possible using the `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the
+    These queries are possible on views which emit values conforming to the
     [http://geojson.org/] format.
 
     This operation requires:
@@ -249,15 +244,15 @@ delete:
       * `space_query_views`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
 
   description: |
-    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    Queries the specified view and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    This operation supports custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
+    This operation supports custom view query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
     Additionally, Couchbase [spatial queries](http://docs.couchbase.com/admin/admin/Views/views-geospatial.html) are possible using the `bbox` query parameter.
-    These queries are possible on indexes which emit values conforming to the [GeoJSON](http://geojson.org/) format.
+    These queries are possible on views which emit values conforming to the [GeoJSON](http://geojson.org/) format.
 
     This operation requires:
       * `space_query_views` and `space_schedule_eviction` when scheduling eviction
@@ -265,10 +260,10 @@ delete:
 
     ***Example cURL requests***
 
-    **Evicts 100 replicas (skipping the first 200) returned by index within specified space from specific provider**
+    **Evicts 100 replicas (skipping the first 200) returned by view within specified space from specific provider**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
-    "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
+    "https://$HOST/api/v3/oneprovider/replicas-view/$VIEW_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -304,14 +299,14 @@ delete:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   - name: space_id
     in: query
-    description: Space Id in which index exist.
+    description: Space Id in which view exist.
     type: string
     required: true
   - name: provider_id
@@ -406,7 +401,7 @@ delete:
   - name: spatial
     in: query
     description: |
-      Enable spatial type of query. When querying the file-popularity index, the `start_range` and
+      Enable spatial type of query. When querying the file-popularity view, the `start_range` and
       `end_range` constraints should be specified as 6-dimensional arrays, with the following fields:
       `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit, HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
     type: boolean
@@ -423,4 +418,4 @@ delete:
     description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplicasByIndex space_id=$SPACE_ID index_name=$INDEX_NAME key=value1"
+    source: "oneprovider-rest-cli evictReplicasByView space_id=$SPACE_ID view_name=$VIEW_NAME key=value1"

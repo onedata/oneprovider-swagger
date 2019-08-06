@@ -1,34 +1,36 @@
 get:
-  operationId: get_space_index
+  operationId: get_space_view
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{index, ?BINDING(index_name)}"
-  summary: Get index
+    aspect: "{view, ?BINDING(view_name)}"
+  summary: Get view
   tags:
     - Space
   x-bash-codegen-description: |
-    This method returns a JSON describing specific index.
+    This method returns a JSON describing specific view.
 
-    This operation requires `space_view_indices` privilege.
+    This operation requires `space_view_views` privilege.
   description: |
-    This method returns a JSON describing specific index.
+    This method returns a JSON describing specific view.
 
-    This operation requires `space_view_indices` privilege.
+    This operation requires `space_view_views` privilege.
 
     ***Example cURL requests***
 
-    **Get information about specific index**
+    **Get information about specific view**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME
-
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
 
     {
         "spatial": false,
         "mapFunction": "function (id, type, meta, ctx) {\\n        if(type == \\'custom_metadata\\' && meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
         "reduceFunction": null,
         "indexOptions": {
+            "update_min_changes": 100
+        },
+        "viewOptions": {
             "update_min_changes": 100
         },
         "providers": [
@@ -41,9 +43,9 @@ get:
     - application/json
   responses:
     '200':
-      description: Information about index.
+      description: Information about view.
       schema:
-        $ref: '#/definitions/Index'
+        $ref: '#/definitions/View'
     '400':
       description: Invalid request.
       schema:
@@ -64,53 +66,53 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space ID in which view exist.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli getSpaceView sid=$SPACE_ID view_name=$VIEW_NAME"
 
 
 put:
-  operationId: create_space_index
+  operationId: create_space_view
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{index, ?BINDING(index_name)}"
-  summary: Create index
+    aspect: "{view, ?BINDING(view_name)}"
+  summary: Create view
   tags:
     - Space
   x-bash-codegen-description: |
-    This method creates or replaces an existing index with a new one.
+    This method creates or replaces an existing view with a new one.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
   description: |
-    This method creates or replaces an existing index with a new one.
+    This method creates or replaces an existing view with a new one.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
 
     ***Example cURL requests***
 
-    **Create space index**
+    **Create space view**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
-    -d "@./my_improved_index1.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
+    -d "@./my_improved_view1.js" \
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
     ```
 
   consumes:
     - application/javascript
   responses:
     '204':
-      description: Index created successfully.
+      description: View created successfully.
     '400':
       description: Invalid request.
       schema:
@@ -131,39 +133,39 @@ put:
   - name: sid
     in: path
     description: >
-      Space ID in which index will be created.
+      Space ID in which view will be created.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   - name: body
     in: body
-    description: The index map function.
+    description: The view map function.
     schema:
       type: string
     required: true
   - name: spatial
     in: query
-    description: Specifies whether index is spatial or not.
+    description: Specifies whether view is spatial or not.
     type: boolean
     default: false
     required: false
   - name: update_min_changes
     in: query
-    description: Minimum number of document changes to trigger re-indexing.
+    description: Minimum number of document changes to trigger re-viewing.
     type: integer
     required: false
   - name: replica_update_min_changes
     in: query
-    description: Minimum number of document changes to trigger re-indexing of a replica index.
+    description: Minimum number of document changes to trigger re-viewing of a replica view.
     type: integer
     required: false
   - name: providers[]
     in: query
-    description: Providers which will create index.
+    description: Providers which will create view.
     type: array
     items:
       type: string
@@ -171,46 +173,46 @@ put:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli createSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
+    source: "cat view.js | oneprovider-rest-cli createSpaceView sid=$SPACE_ID view_name=$VIEW_NAME 'providers[]=$PROVIDER_ID_1' 'providers[]=$PROVIDER_ID_2' -"
 
 
 patch:
-  operationId: update_space_index
+  operationId: update_space_view
   x-onedata-parse_body: as_is
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{index, ?BINDING(index_name)}"
-  summary: Update index
+    aspect: "{view, ?BINDING(view_name)}"
+  summary: Update view
   tags:
     - Space
   x-bash-codegen-description: |
-    This method updates existing index definition. 
+    This method updates existing view definition.
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
   description: |
-    This method updates existing index definition. 
+    This method updates existing view definition.
     
     It takes the same arguments as PUT. Only specified parameters will be overwritten.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
 
     ***Example cURL requests***
 
-    **Update space index**
+    **Update space view**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/javascript" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME?update_min_changes=10
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10
     ```
 
   consumes:
     - application/javascript
   responses:
     '204':
-      description: Index updated successfully.
+      description: View updated successfully.
     '400':
       description: Invalid request.
       schema:
@@ -231,38 +233,38 @@ patch:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space ID in which view exist.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   - name: body
     in: body
-    description: The index map function.
+    description: The view map function.
     schema:
       type: string
     required: false
   - name: spatial
     in: query
-    description: Specifies whether index is spatial or not.
+    description: Specifies whether view is spatial or not.
     type: boolean
     required: false
   - name: update_min_changes
     in: query
-    description: Minimum number of document changes to trigger re-indexing.
+    description: Minimum number of document changes to trigger re-viewing.
     type: integer
     required: false
   - name: replica_update_min_changes
     in: query
-    description: Minimum number of document changes to trigger re-indexing of a replica index.
+    description: Minimum number of document changes to trigger re-viewing of a replica view.
     type: integer
     required: false
   - name: providers[]
     in: query
-    description: Providers which will create index.
+    description: Providers which will create view.
     type: array
     items:
       type: string
@@ -270,38 +272,38 @@ patch:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME 'providers[]=$PROVIDER_ID' -"
+    source: "cat view.js | oneprovider-rest-cli updateSpaceView sid=$SPACE_ID view_name=$VIEW_NAME 'providers[]=$PROVIDER_ID' -"
 
 
 delete:
-  operationId: remove_space_index
+  operationId: remove_space_view
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{index, ?BINDING(index_name)}"
-  summary: Remove index
+    aspect: "{view, ?BINDING(view_name)}"
+  summary: Remove view
   tags:
     - Space
   x-bash-codegen-description: |
-    This method removes an existing index.
+    This method removes an existing view.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
   description: |
-    This method removes an existing index.
+    This method removes an existing view.
 
-    This operation requires `space_manage_indices` privilege.
+    This operation requires `space_manage_views` privilege.
 
     ***Example cURL requests***
 
-    **Remove existing index**
+    **Remove existing view**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indices/$INDEX_NAME
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
     ```
 
   responses:
     '204':
-      description: Index removed successfully.
+      description: View removed successfully.
     '400':
       description: Invalid request.
       schema:
@@ -322,14 +324,14 @@ delete:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space ID in which view exist.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeSpaceIndex sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeSpaceView sid=$SPACE_ID view_name=$VIEW_NAME"
