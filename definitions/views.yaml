@@ -14,8 +14,8 @@ properties:
   nextPageToken:
     type: string
     description: >
-      Can be used to list indices starting after the last on returned
-      list (present only when there is more indices to list)
+      Can be used to list views starting after the last on returned
+      list (present only when there is more views to list)
 required:
   - views
   - indexes
