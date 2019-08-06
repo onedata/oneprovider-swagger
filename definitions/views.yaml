@@ -21,9 +21,9 @@ required:
   - indexes
 example:
   views:
-    - view1
-    - view11
+    - images
+    - videos
   indexes:
-    - view1
-    - view11
+    - images
+    - videos
   nextPageToken: 8471726779817b3a

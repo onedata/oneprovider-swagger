@@ -38,16 +38,16 @@ get:
 
     {
       "views": [
-        "view1",
-        "view11",
-        "view111"
+        "favourites",
+        "images",
+        "videos"
       ],
       "indexes": [
-        "view1",
-        "view11",
-        "view111"
+        "favourites",
+        "images",
+        "videos"
       ],
-      "nextPageToken": "view1111"
+      "nextPageToken": "8471726779817b3a"
     }
     ```
   produces:
