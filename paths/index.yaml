@@ -125,4 +125,4 @@
   $ref: ./qos_id-id.yaml
 
 /qos-entry/{qid}:
-  $ref: ./qos_public_id-qid.yaml
+  $ref: ./qos_entry-qid.yaml

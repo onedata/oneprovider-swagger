@@ -3,18 +3,18 @@ get:
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
-    aspect: qos
-  summary: Get QoS details
+    aspect: instance
+  summary: Get QoS entry
   tags:
     - QoS
   x-bash-codegen-description: |
-    Returns detailed information about particular QoS by its ID.
+    Returns detailed information about particular QoS entry by its ID.
   description: |
-    Returns detailed information about particular QoS by its ID.
+    Returns detailed information about particular QoS entry by its ID.
 
     ***Example cURL requests***
 
-    **Get detailed information about QoS**
+    **Get detailed information about QoS entry**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
@@ -31,9 +31,9 @@ get:
     - application/json
   responses:
     '200':
-      description:
+      description: Information about QoS entry.
       schema:
-        $ref: '#/definitions/Qos'
+        $ref: '#/definitions/QosEntry'
     '400':
       description: Invalid request.
       schema:
@@ -43,7 +43,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Oneprovider REST API not available.
+      description: QoS entry not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -53,12 +53,12 @@ get:
   parameters:
     - name: qid
       in: path
-      description: QoS ID (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS entry ID (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQos"
+      source: "oneprovider-rest-cli getQos qid='c84f669f9522c46976fee490d80651f0'"
 
 
 delete:
@@ -66,18 +66,18 @@ delete:
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
-    aspect: qos
-  summary: Remove QoS
+    aspect: instance
+  summary: Remove QoS entry
   tags:
     - QoS
   x-bash-codegen-description: |
-    Removes QoS requirement.
+    Removes QoS entry.
   description: |
-    Removes QoS requirement.
+    Removes QoS entry.
 
     ***Example cURL requests***
 
-    **Remove QoS.**
+    **Remove QoS entry.**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
@@ -87,7 +87,7 @@ delete:
     - application/json
   responses:
     '204':
-      description: QoS requirement has been deleted.
+      description: QoS entry has been deleted.
     '400':
       description: Invalid request.
       schema:
@@ -97,7 +97,7 @@ delete:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: QoS entry not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -107,7 +107,7 @@ delete:
   parameters:
     - name: qid
       in: path
-      description: QoS ID (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS entry ID (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:

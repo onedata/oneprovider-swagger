@@ -3,10 +3,10 @@ get:
   x-onedata-gri:
     type: op_qos
     id: ?PATH_BINDING
-    aspect: effective_file_qos
+    aspect: effective_qos
   tags:
     - QoS
-  summary: Get effective QoS for file
+  summary: Get effective QoS
   x-bash-codegen-description: |
     Returns effective QoS for file or directory specified by path.
   description: |
@@ -24,15 +24,14 @@ get:
       "qosList": ["fc05cfc92eda7a054b835bc1ee4a1372"],
       "fulfilled": false
     }
-
     ```
   produces:
     - application/json
   responses:
     '200':
-      description:
+      description: Effective QoS for file or directory.
       schema:
-        $ref: '#/definitions/FileQos'
+        $ref: '#/definitions/EffectiveQos'
     '400':
       description: Invalid request.
       schema:
@@ -42,7 +41,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Oneprovider REST API not available.
+      description: File not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -53,8 +52,7 @@ get:
     - name: path
       in: path
       description: >
-        Full path to the folder, starting with space name (e.g. '/MySpace1/Folder2').
-        The whole space can also be shared (e.g. '/MySpace1').
+        Full path to the file, starting with space name (e.g. '/MySpace1/Folder2').
       type: string
       required: true
   x-code-samples:
@@ -69,13 +67,13 @@ post:
     type: op_qos
     id: ?PATH_BINDING
     aspect: instance
-  summary: Add QoS for file
+  summary: Add QoS entry
   tags:
     - QoS
   x-bash-codegen-description: |
-    Adds QoS requirement for file or directory specified by path.
+    Adds QoS entry for file or directory specified by path.
   description: |
-    Adds QoS requirement for file or directory specified by path.
+    Adds QoS entry for file or directory specified by path.
 
     ***Example cURL requests***
 
@@ -85,12 +83,14 @@ post:
     -H "Content-type: application/json" \
     -d '{ "expression": "country=FR", "replicasNum": 2 }' \
     "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
+
+    {"qosId": "fc05cfc92eda7a054b835bc1ee4a1372"}
     ```
   consumes:
     - application/json
   responses:
     '200':
-      description: Id of added QoS (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      description: Id of added QoS entry (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
       schema:
         type: string
     '400':
@@ -113,25 +113,16 @@ post:
     - name: path
       in: path
       description: >
-        Full path to the folder, starting with space name (e.g. '/MySpace1/Folder2').
+        Full path to the file, starting with space name (e.g. '/MySpace1/Folder2').
         QoS can be also added for whole space (e.g. '/MySpace1').
       type: string
       required: true
-    - name: expression
+    - name: data
       in: body
-      description: QoS expression.
+      description: Data containig expression and required replicas number.
       schema:
-        type: string
+        $ref: '#/definitions/QosReq'
       required: true
-    - name: replicasNum
-      in: body
-      description: Number of required file replicas.
-      schema:
-        type: integer
-      required: false
-      default: 1
   x-code-samples:
     - lang: Shell
-      source: >
-      "oneprovider-rest-cli addQoS path='/MySpace1/Folder2'
-      expression='country=FR' replicasNum=2"
+      source: "oneprovider-rest-cli addQoS path='/MySpace1/Folder2' expression='country=FR' replicasNum=2"
