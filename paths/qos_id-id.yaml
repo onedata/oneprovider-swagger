@@ -1,16 +1,28 @@
 get:
-  operationId: get_file_qos_by_id
+  operationId: get_effective_qos_by_id
   x-onedata-gri:
     type: op_qos
     id: ?OBJECTID_BINDING(id)
     aspect: effective_qos
-  summary: Get effective QoS by id
+  summary: Get QoS summary (by id)
   tags:
     - QoS
   x-bash-codegen-description: |
-    Returns effective QoS for file or directory specified by ID.
+    Returns QoS summary for file or directory specified by ID. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    requirements defined directly for file with requirements defined for all
+    its parent. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
   description: |
-    Returns effective QoS for file or directory specified by ID.
+    Returns QoS summary for file or directory specified by ID. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    requirements defined directly for file with requirements defined for all
+    its parent. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
 
     ***Example cURL requests***
 
@@ -57,27 +69,29 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getFileQosById id=$FILE_ID"
+      source: "oneprovider-rest-cli getEffectiveQosById id=$FILE_ID"
 
 
 post:
-  operationId: add_qos_by_id
+  operationId: add_qos_entry_by_id
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_qos
     id: ?OBJECTID_BINDING(id)
     aspect: instance
-  summary: Add QoS entry by id
+  summary: Add QoS entry (by id)
   tags:
     - QoS
   x-bash-codegen-description: |
-    Adds QoS entry for file or directory specified by ID.
+    Adds new QoS entry for file or directory specified by ID. This triggers
+    data management based on requirements defined in new QoS entry.
   description: |
-    Adds QoS entry for file or directory specified by ID.
+    Adds new QoS entry for file or directory specified by ID. This triggers
+    data management based on requirements defined in new QoS entry.
 
     ***Example cURL requests***
 
-    **Add QoS for file specified by ID**
+    **Add QoS entry for file specified by ID**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
@@ -121,4 +135,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli addQoSById id=$FILE_ID expression='country=FR' replicasNum=2"
+      source: "oneprovider-rest-cli addQosEntryById id=$FILE_ID expression='country=FR' replicasNum=2"

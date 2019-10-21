@@ -1,16 +1,28 @@
 get:
-  operationId: get_file_qos
+  operationId: get_effective_qos
   x-onedata-gri:
     type: op_qos
     id: ?PATH_BINDING
     aspect: effective_qos
   tags:
     - QoS
-  summary: Get effective QoS
+  summary: Get QoS summary (by path)
   x-bash-codegen-description: |
-    Returns effective QoS for file or directory specified by path.
+    Returns QoS summary for file or directory specified by path. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    requirements defined directly for file with requirements defined for all
+    its parent. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
   description: |
-    Returns effective QoS for file or directory specified by path.
+    Returns QoS summary for file or directory specified by path. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    requirements defined directly for file with requirements defined for all
+    its parent. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
 
     ***Example cURL requests***
 
@@ -57,27 +69,29 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getFileQos path='/MySpace1/Folder2'"
+      source: "oneprovider-rest-cli getEffectiveQos path='/MySpace1/Folder2'"
 
 
 post:
-  operationId: add_qos
+  operationId: add_qos_entry
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_qos
     id: ?PATH_BINDING
     aspect: instance
-  summary: Add QoS entry
+  summary: Add QoS entry (by path)
   tags:
     - QoS
   x-bash-codegen-description: |
-    Adds QoS entry for file or directory specified by path.
+    Adds new QoS entry for file or directory specified by path. This triggers
+    data management based on requirements defined in new QoS entry.
   description: |
-    Adds QoS entry for file or directory specified by path.
+    Adds new QoS entry for file or directory specified by path. This triggers
+    data management based on requirements defined in new QoS entry.
 
     ***Example cURL requests***
 
-    **Add QoS for file specified by path**
+    **Add QoS entry for file specified by path**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
@@ -114,7 +128,7 @@ post:
       in: path
       description: >
         Full path to the file, starting with space name (e.g. '/MySpace1/Folder2').
-        QoS can be also added for whole space (e.g. '/MySpace1').
+        QoS entry can be also added for whole space (e.g. '/MySpace1').
       type: string
       required: true
     - name: data
@@ -125,4 +139,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli addQoS path='/MySpace1/Folder2' expression='country=FR' replicasNum=2"
+      source: "oneprovider-rest-cli addQosEntry path='/MySpace1/Folder2' expression='country=FR' replicasNum=2"

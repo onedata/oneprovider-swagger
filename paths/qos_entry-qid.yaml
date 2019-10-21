@@ -1,5 +1,5 @@
 get:
-  operationId: get_qos
+  operationId: get_qos_entry
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
@@ -58,11 +58,11 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQos qid='c84f669f9522c46976fee490d80651f0'"
+      source: "oneprovider-rest-cli getQosEntry qid='c84f669f9522c46976fee490d80651f0'"
 
 
 delete:
-  operationId: remove_qos
+  operationId: remove_qos_entry
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
@@ -112,4 +112,4 @@ delete:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeQos qid='c84f669f9522c46976fee490d80651f0'"
+      source: "oneprovider-rest-cli removeQosEntry qid='c84f669f9522c46976fee490d80651f0'"
