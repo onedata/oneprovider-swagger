@@ -10,7 +10,7 @@ get:
   x-bash-codegen-description: |
     Returns QoS summary for file or directory specified by ID. QoS summary
     contains information about effective QoS, which is calculated by merging
-    requirements defined directly for file with requirements defined for all
+    QoS entries defined directly for file with QoS entries defined for all
     its parent. Effective QoS contains list of all QoS entries that influences
     given file or directory and mapping that maps storage ID to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
@@ -18,7 +18,7 @@ get:
   description: |
     Returns QoS summary for file or directory specified by ID. QoS summary
     contains information about effective QoS, which is calculated by merging
-    requirements defined directly for file with requirements defined for all
+    QoS entries defined directly for file with QoS entries defined for all
     its parent. Effective QoS contains list of all QoS entries that influences
     given file or directory and mapping that maps storage ID to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
