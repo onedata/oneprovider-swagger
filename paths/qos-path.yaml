@@ -32,7 +32,7 @@ get:
     "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
 
     {
-      "targetStorages": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
+      "assignedEntries": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
       "qosList": ["fc05cfc92eda7a054b835bc1ee4a1372"],
       "fulfilled": false
     }
