@@ -11,7 +11,7 @@ get:
     Returns QoS summary for file or directory specified by path. QoS summary
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
-    its parent. Effective QoS contains list of all QoS entries that influences
+    its parents. Effective QoS contains list of all QoS entries that influences
     given file or directory and mapping that maps storage ID to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
@@ -19,7 +19,7 @@ get:
     Returns QoS summary for file or directory specified by path. QoS summary
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
-    its parent. Effective QoS contains list of all QoS entries that influences
+    its parents. Effective QoS contains list of all QoS entries that influences
     given file or directory and mapping that maps storage ID to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
@@ -84,10 +84,10 @@ post:
     - QoS
   x-bash-codegen-description: |
     Adds new QoS entry for file or directory specified by path. This triggers
-    data management based on requirements defined in new QoS entry.
+    data replication (in needed) based on requirements defined in new QoS entry.
   description: |
     Adds new QoS entry for file or directory specified by path. This triggers
-    data management based on requirements defined in new QoS entry.
+    data replication (in needed) based on requirements defined in new QoS entry.
 
     ***Example cURL requests***
 
