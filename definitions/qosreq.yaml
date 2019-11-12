@@ -1,0 +1,13 @@
+description: Object representing body of request that adds QoS entry for file or directory
+type: object
+properties:
+  expression:
+    type: string
+    description: Expression used to select storages on which file should be replicated.
+  replicasNum:
+    type: integer
+    description: Number of required file replicas.
+    default: 1
+example:
+  expression: country=FR
+  replicasNum: 2

@@ -1,0 +1,138 @@
+get:
+  operationId: get_effective_qos_by_id
+  x-onedata-gri:
+    type: op_qos
+    id: ?OBJECTID_BINDING(id)
+    aspect: effective_qos
+  summary: Get QoS summary (by id)
+  tags:
+    - QoS
+  x-bash-codegen-description: |
+    Returns QoS summary for file or directory specified by ID. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    QoS entries defined directly for file with QoS entries defined for all
+    its parents. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
+  description: |
+    Returns QoS summary for file or directory specified by ID. QoS summary
+    contains information about effective QoS, which is calculated by merging
+    QoS entries defined directly for file with QoS entries defined for all
+    its parents. Effective QoS contains list of all QoS entries that influences
+    given file or directory and mapping that maps storage ID to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
+
+    ***Example cURL requests***
+
+    **Get effective QoS for file specified by ID**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/qos-id/$FILE_ID"
+
+    {
+      "assignedEntries": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
+      "qosList": ["fc05cfc92eda7a054b835bc1ee4a1372"],
+      "fulfilled": false
+    }
+
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Effective QoS for file or directory.
+      schema:
+        $ref: '#/definitions/EffectiveQos'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getEffectiveQosById id=$FILE_ID"
+
+
+post:
+  operationId: add_qos_entry_by_id
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_qos
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
+  summary: Add QoS entry (by id)
+  tags:
+    - QoS
+  x-bash-codegen-description: |
+    Adds new QoS entry for file or directory specified by ID. This triggers
+    data replication (in needed) based on requirements defined in new QoS entry.
+  description: |
+    Adds new QoS entry for file or directory specified by ID. This triggers
+    data replication (in needed) based on requirements defined in new QoS entry.
+
+    ***Example cURL requests***
+
+    **Add QoS entry for file specified by ID**
+    ```bash
+    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "expression": "country=FR", "replicasNum": 2 }' \
+    "https://$HOST/api/v3/oneprovider/qos-id/$FILE_ID"
+    ```
+  consumes:
+    - application/json
+  responses:
+    '200':
+      description: Id of added QoS entry (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Data containig expression and required replicas number.
+      schema:
+        $ref: '#/definitions/QosReq'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli addQosEntryById id=$FILE_ID expression='country=FR' replicasNum=2"
