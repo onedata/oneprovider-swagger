@@ -7,7 +7,7 @@ get:
     aspect: views
   tags:
     - Space
-  summary: Get all space indexes
+  summary: Get all space indexes (deprecated)
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_space_views).
 

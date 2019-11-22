@@ -3,6 +3,7 @@ get:
   x-onedata-gri:
     type: op_provider
     aspect: test_image
+    scope: public
   summary: Get test image
   tags:
     - Oneprovider

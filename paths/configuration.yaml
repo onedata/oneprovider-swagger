@@ -3,6 +3,7 @@ get:
   x-onedata-gri:
     type: op_provider
     aspect: configuration
+    scope: public
   summary: Get public information
   tags:
     - Oneprovider
