@@ -4,17 +4,17 @@ get:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Get share info by public share ID
+  summary: Get share info by public share Id
   tags:
     - Share
   x-bash-codegen-description: |
-    Returns the basic information about shared folder specified by public share ID.
+    Returns the basic information about shared folder specified by public share Id.
   description: |
-    Returns the basic information about shared folder specified by public share ID.
+    Returns the basic information about shared folder specified by public share Id.
 
     ***Example cURL requests***
 
-    **Returns the basic information about shared folder specified by public share ID**
+    **Returns the basic information about shared folder specified by public share Id**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
@@ -57,7 +57,7 @@ get:
   parameters:
     - name: shid
       in: path
-      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
   x-code-samples:
@@ -72,17 +72,17 @@ patch:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Rename share by public share ID
+  summary: Rename share by public share Id
   tags:
     - Share
   x-bash-codegen-description: |
-    Changes name of the shared folder specified by public share ID.
+    Changes name of the shared folder specified by public share Id.
   description: |
-    Changes name of the shared folder specified by public share ID.
+    Changes name of the shared folder specified by public share Id.
 
     ***Example cURL requests***
 
-    **Changes name of the shared folder specified by public share ID**
+    **Changes name of the shared folder specified by public share Id**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/json" \
@@ -113,7 +113,7 @@ patch:
   parameters:
     - name: shid
       in: path
-      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
     - name: name
@@ -124,7 +124,7 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateShareNameByPublicID shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
+      source: "oneprovider-rest-cli updateShareNameByPublicId shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
 
 
 delete:
@@ -133,19 +133,19 @@ delete:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Unshare a folder by public share ID
+  summary: Unshare a folder by public share Id
   tags:
     - Share
   x-bash-codegen-description: |
-    Unshares a folder by public share ID. This operation will not remove
+    Unshares a folder by public share Id. This operation will not remove
     data from folder but data will not be accessible through public url anymore.
   description: |
-    Unshares a folder by public share ID. This operation will not remove
+    Unshares a folder by public share Id. This operation will not remove
     data from folder but data will not be accessible through public url anymore.
 
     ***Example cURL requests***
 
-    **Unshares a folder by public share ID**
+    **Unshares a folder by public share Id**
     ```bash
     curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
@@ -172,7 +172,7 @@ delete:
   parameters:
     - name: shid
       in: path
-      description: Public share ID (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
   x-code-samples:

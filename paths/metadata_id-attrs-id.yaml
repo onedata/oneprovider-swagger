@@ -52,7 +52,7 @@ get:
   parameters:
   - name: id
     in: path
-    description: File, folder or space ID
+    description: File, folder or space Id
     type: string
     required: true
   - name: attribute
@@ -139,7 +139,7 @@ put:
   parameters:
   - name: id
     in: path
-    description: File, folder or space ID
+    description: File, folder or space Id
     type: string
     required: true
   - name: attribute

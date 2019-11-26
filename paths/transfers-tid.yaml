@@ -80,7 +80,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Transfer with provided ID was not found.
+      description: Transfer with provided Id was not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -90,7 +90,7 @@ get:
   parameters:
   - name: tid
     in: path
-    description: Transfer ID.
+    description: Transfer Id.
     type: string
     required: true
   x-code-samples:
@@ -145,7 +145,7 @@ delete:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Transfer with provided ID was not found.
+      description: Transfer with provided Id was not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -155,7 +155,7 @@ delete:
   parameters:
   - name: tid
     in: path
-    description: Transfer ID.
+    description: Transfer Id.
     type: string
     required: true
   x-code-samples:

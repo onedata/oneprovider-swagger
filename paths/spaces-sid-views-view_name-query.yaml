@@ -160,7 +160,7 @@ get:
   parameters:
   - name: sid
     in: path
-    description: Space ID in which view exist.
+    description: Space Id in which view exist.
     type: string
     required: true
   - name: view_name
@@ -211,7 +211,7 @@ get:
   - name: startkey_docid
     in: query
     description: >
-      Return records starting with the specified document ID.
+      Return records starting with the specified document Id.
     type: string
     required: false
   - name: endkey
@@ -224,7 +224,7 @@ get:
   - name: endkey_docid
     in: query
     description: >
-        Stop returning records when the specified document ID is reached.
+        Stop returning records when the specified document Id is reached.
     type: string
     required: false
   - name: inclusive_end

@@ -72,7 +72,7 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space Id in which index exist.
     type: string
     required: true
   - name: index_name
@@ -144,7 +144,7 @@ put:
   - name: sid
     in: path
     description: >
-      Space ID in which index will be created.
+      Space Id in which index will be created.
     type: string
     required: true
   - name: index_name
@@ -249,7 +249,7 @@ patch:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space Id in which index exist.
     type: string
     required: true
   - name: index_name
@@ -345,7 +345,7 @@ delete:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space Id in which index exist.
     type: string
     required: true
   - name: index_name

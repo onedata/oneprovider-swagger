@@ -72,7 +72,7 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which to list views.
+      Space Id in which to list views.
     type: string
     required: true
   - name: limit

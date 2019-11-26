@@ -69,7 +69,7 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which to list transfers.
+      Space Id in which to list transfers.
     type: string
     required: true
   - name: state

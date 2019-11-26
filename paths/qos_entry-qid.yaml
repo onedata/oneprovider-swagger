@@ -8,9 +8,9 @@ get:
   tags:
     - QoS
   x-bash-codegen-description: |
-    Returns detailed information about particular QoS entry by its ID.
+    Returns detailed information about particular QoS entry by its Id.
   description: |
-    Returns detailed information about particular QoS entry by its ID.
+    Returns detailed information about particular QoS entry by its Id.
 
     ***Example cURL requests***
 
@@ -53,7 +53,7 @@ get:
   parameters:
     - name: qid
       in: path
-      description: QoS entry ID (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS entry Id (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:
@@ -107,7 +107,7 @@ delete:
   parameters:
     - name: qid
       in: path
-      description: QoS entry ID (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS entry Id (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:

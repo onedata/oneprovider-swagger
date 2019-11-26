@@ -31,7 +31,7 @@ get:
           "meta": {
               "start": 1465466700,
               "end": 1465553100,
-              "legend": ["space fe14b4cc-bce0-4220-8394-a911d11a0a53; metric storage_used; oneprovider ID 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
+              "legend": ["space fe14b4cc-bce0-4220-8394-a911d11a0a53; metric storage_used; oneprovider Id 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
               "step": 3600
           }
         }
@@ -66,12 +66,12 @@ get:
   parameters:
   - name: sid
     in: path
-    description: ID of a specific space for which the monitoring metrics should be retrieved.
+    description: Id of a specific space for which the monitoring metrics should be retrieved.
     type: string
     required: true
   - name: uid
     in: path
-    description: ID of a specific user within a space for which the monitoring metrics should be limited to.
+    description: Id of a specific user within a space for which the monitoring metrics should be limited to.
     type: string
     required: true
   - name: metric

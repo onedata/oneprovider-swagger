@@ -77,7 +77,7 @@ get:
   - name: sid
     in: path
     description: >
-      Space ID in which to list indexes.
+      Space Id in which to list indexes.
     type: string
     required: true
   - name: limit
