@@ -3,31 +3,46 @@
 
 import os
 import re
+from collections import defaultdict
 
 
-GENERATED_FILES_DIR = 'generated/cowboy/routes'
 PATHS_INDEX_FILE = 'paths/index.yaml'
-
-OPERATIONS_RE = re.compile(r'(?<=(\[|,)\n)'
-                           r'(?P<operation>\s+%%.+?\{<<"(?P<path>.+?)">>.+?\},?\n)'
-                           r'(?=\s*(%%|\]))', flags=re.DOTALL)
+GENERATED_FILES_DIR = 'generated/cowboy/routes'
 
 REST_API_RE = re.compile(r'^(?P<header>.*?\[\n).*\n(?P<footer>\s*]\..*)$',
                          flags=re.DOTALL)
 
-
-with open(PATHS_INDEX_FILE, 'r') as f:
-    ordered_paths = [re.sub(r'{(.*?)}', ':\g<1>', line.rstrip(':\n'))
-                     for line in f
-                     if line.startswith('/') and line.endswith(':\n')]
+OPERATIONS_RE = re.compile(r'(?<=(\[|,)\n)'
+                           r'(?P<operation>\s+%%.+?\{<<"(?P<path>.+?)">>.+?method = \'(?P<method>GET|DELETE|PATCH|POST|PUT)\',.+?\},?\n)'
+                           r'(?=\s*(%%|\]))', flags=re.DOTALL)
 
 
-routes_modules = []
-for n in os.listdir(GENERATED_FILES_DIR):
-    if not n.endswith('.erl'):
-        continue
-    with open(os.path.join(GENERATED_FILES_DIR, n), 'r+') as f:
-        routes_modules.append(n[:-4])
+def get_paths_ordering():
+    with open(PATHS_INDEX_FILE, 'r') as f:
+        return [re.sub(r'{(.*?)}', ':\g<1>', line.rstrip(':\n'))
+                for line in f
+                if line.startswith('/') and line.endswith(':\n')]
+
+
+def fix_paths_ordering(routes_module_content):
+    header, footer = REST_API_RE.match(routes_module_content).groups()
+
+    rest_routes = defaultdict(list)
+    for rest_route in OPERATIONS_RE.finditer(routes_module_content):
+        path = rest_route.group('path')
+        method = rest_route.group('method')
+        operation = rest_route.group('operation')
+        rest_routes[path].append((method, 
+                                  operation.replace(':path">>', '[...]">>')))
+
+    operations = ''.join(operation 
+                         for path in get_paths_ordering()
+                         for _, operation in sorted(rest_routes[path]))
+    return header + operations + footer
+
+
+def fix_generated_routes_module(routes_module_path):
+    with open(routes_module_path, 'r+') as f:
 
         # Fix multiline comments.
         lines = f.readlines()
@@ -43,36 +58,29 @@ for n in os.listdir(GENERATED_FILES_DIR):
                     new_lines.append(line)
             else:
                 new_lines.append(line)
-        lines = ''.join(new_lines)
 
-        # Fix paths ordering
-        header, footer = REST_API_RE.match(lines).groups()
-        rest_routes = {}
-        for rest_route in OPERATIONS_RE.finditer(lines):
-            path = rest_route.group('path')
-            operation = rest_route.group('operation')
-            try:
-                val = rest_routes[path]
-            except KeyError:
-                rest_routes[path] = operation.replace(':path">>', '[...]">>')
-            else:
-                rest_routes[path] = val + operation.replace(':path">>', '[...]">>')
-        else:
-            operations = ''.join(rest_routes[path]
-                                 for path in ordered_paths
-                                 if path in rest_routes)
-            lines = header + operations + footer
+        content = ''.join(new_lines)
+        content = fix_paths_ordering(content)
 
         # Fix syntax and substitute invalid character sequences.
-        lines = re.sub(r',(\s*[}\]\)])', '\g<1>', lines)
-        lines = re.sub('\\&\\#39\\;', '\'', lines)
-        lines = re.sub('\\&\\#x3D\\;\\&gt\\;', '=>', lines)
-        lines = re.sub('\\&\\#x60\\;', '`', lines)
+        content = re.sub(r',(\s*[}\]\)])', '\g<1>', content)
+        content = re.sub('\\&\\#39\\;', '\'', content)
+        content = re.sub('\\&\\#x3D\\;\\&gt\\;', '=>', content)
+        content = re.sub('\\&\\#x60\\;', '`', content)
 
         # Write new file.
         f.seek(0)
         f.truncate()
-        f.write(lines)
+        f.write(content)
+
+
+routes_modules = []
+for module in os.listdir(GENERATED_FILES_DIR):
+    if not module.endswith('.erl'):
+        continue
+
+    routes_modules.append(module[:-4])
+    fix_generated_routes_module(os.path.join(GENERATED_FILES_DIR, module))
 
 
 rest_routes_module_content = """%%%--------------------------------------------------------------------
