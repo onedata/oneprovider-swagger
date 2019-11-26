@@ -7,7 +7,8 @@
 %%% cited in 'LICENSE.txt'.
 %%% @end
 %%%--------------------------------------------------------------------
-%%% @doc This module contains definitions of {{#operations}}{{classVarName}}{{/operations}} REST methods.
+%%% @doc 
+%%% This module contains definitions of {{#operations}}{{classVarName}}{{/operations}} REST methods.
 %%% @end
 %%%--------------------------------------------------------------------
 -module({{#operations}}{{classVarName}}{{apiFileNameSuffix}}{{/operations}}).
@@ -16,9 +17,11 @@
 
 -export([routes/0]).
 
+
 %%%===================================================================
 %%% API
 %%%===================================================================
+
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -45,7 +48,12 @@ routes() -> [
         produces = [{{#produces}}<<"{{{mediaType}}}">>{{#hasMore}}, {{/hasMore}}{{/produces}}],
         {{/hasProduces}}
         {{#x-onedata-gri}}
-        b_gri = #b_gri{type = {{type}}, id = {{{id}}}{{^id}}undefined{{/id}}, aspect = {{{aspect}}}},
+        b_gri = #b_gri{
+            type = {{type}}, 
+            id = {{{id}}}{{^id}}undefined{{/id}}, 
+            aspect = {{{aspect}}}, 
+            scope = {{{scope}}}{{^scope}}private{{/scope}}
+        },
         {{/x-onedata-gri}}
     }},
     {{/vendorExtensions}}

@@ -6,7 +6,7 @@ put:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view_reduce_function, ?BINDING(index_name)}"
-  summary: Update index reduce function
+  summary: Update index reduce function (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
@@ -89,7 +89,7 @@ delete:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view_reduce_function, ?BINDING(index_name)}"
-  summary: Remove index reduce function
+  summary: Remove index reduce function (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |

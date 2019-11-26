@@ -5,7 +5,7 @@ get:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view, ?BINDING(index_name)}"
-  summary: Get index
+  summary: Get index (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
@@ -93,7 +93,7 @@ put:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view, ?BINDING(index_name)}"
-  summary: Create index
+  summary: Create index (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
@@ -195,7 +195,7 @@ patch:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view, ?BINDING(index_name)}"
-  summary: Update index
+  summary: Update index (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
@@ -298,7 +298,7 @@ delete:
     type: op_space
     id: ?BINDING(sid)
     aspect: "{view, ?BINDING(index_name)}"
-  summary: Remove index
+  summary: Remove index (deprecated)
   tags:
     - Space
   x-bash-codegen-description: |
