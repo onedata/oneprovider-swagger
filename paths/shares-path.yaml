@@ -79,7 +79,7 @@ post:
     - Share
   x-bash-codegen-description: |
     Shares a folder specified by path. Shared folder can be viewed by everyone
-    through public URL. This operation assigns a public share ID that can be
+    through public URL. This operation assigns a public share Id that can be
     used to manage share, see:
       * [Get basic information about shared folder](#operation/get_share_by_public_id)
       * [Change name of the shared folder](#operation/update_share_name_by_public_id)
@@ -88,7 +88,7 @@ post:
     Returns 400 if path points to a regular file.
   description: |
     Shares a folder specified by path. Shared folder can be viewed by everyone
-    through public URL. This operation assigns a public share ID that can be
+    through public URL. This operation assigns a public share Id that can be
     used to manage share, see:
       * [Get basic information about shared folder](#operation/get_share_by_public_id)
       * [Change name of the shared folder](#operation/update_share_name_by_public_id)
@@ -107,11 +107,24 @@ post:
     ```
   consumes:
     - application/json
+  produces:
+    - application/json
   responses:
     '200':
-      description: Id of the created share (public share ID)
+      description: >
+        The request has been accepted and the result is the public share Id.
+        Also URI of the Share in form https://$HOST/api/v3/oneprovider/shares-id/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Share.
+          type: string
       schema:
-        type: string
+        type: object
+        properties:
+          shareId:
+            type: string
+            description: Share Id.
     '400':
       description: Invalid request.
       schema:

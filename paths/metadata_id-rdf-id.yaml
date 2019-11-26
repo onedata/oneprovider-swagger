@@ -62,11 +62,11 @@ put:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Set file rdf metadata by ID
+  summary: Set file rdf metadata by Id
   tags:
     - File
   description: |
-    This method allows to set specific rdf metadata for a file, folder or space specified by ID in the request path.
+    This method allows to set specific rdf metadata for a file, folder or space specified by Id in the request path.
 
     This operation will replace the previous rdf metadata if any.
 

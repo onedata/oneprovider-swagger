@@ -12,7 +12,7 @@ get:
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its parents. Effective QoS contains list of all QoS entries that influences
-    given file or directory and mapping that maps storage ID to sublist of QoS
+    given file or directory and mapping that maps storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
   description: |
@@ -20,7 +20,7 @@ get:
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its parents. Effective QoS contains list of all QoS entries that influences
-    given file or directory and mapping that maps storage ID to sublist of QoS
+    given file or directory and mapping that maps storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
 
@@ -104,9 +104,21 @@ post:
     - application/json
   responses:
     '200':
-      description: Id of added QoS entry (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      description: >
+        The request has been accepted and the result is the QoS entry Id
+        (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
+        Also URI of the QoS entry in form https://$HOST/api/v3/oneprovider/qos-entry/{qid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the QoS entry.
+          type: string
       schema:
-        type: string
+        type: object
+        properties:
+          qosEntryId:
+            type: string
+            description: QoS entry Id.
     '400':
       description: Invalid request.
       schema:

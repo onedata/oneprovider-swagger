@@ -8,25 +8,25 @@ get:
   tags:
     - QoS
   x-bash-codegen-description: |
-    Returns QoS summary for file or directory specified by ID. QoS summary
+    Returns QoS summary for file or directory specified by Id. QoS summary
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its parents. Effective QoS contains list of all QoS entries that influences
-    given file or directory and mapping that maps storage ID to sublist of QoS
+    given file or directory and mapping that maps storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
   description: |
-    Returns QoS summary for file or directory specified by ID. QoS summary
+    Returns QoS summary for file or directory specified by Id. QoS summary
     contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its parents. Effective QoS contains list of all QoS entries that influences
-    given file or directory and mapping that maps storage ID to sublist of QoS
+    given file or directory and mapping that maps storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
 
     ***Example cURL requests***
 
-    **Get effective QoS for file specified by ID**
+    **Get effective QoS for file specified by Id**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/qos-id/$FILE_ID"
@@ -83,15 +83,15 @@ post:
   tags:
     - QoS
   x-bash-codegen-description: |
-    Adds new QoS entry for file or directory specified by ID. This triggers
+    Adds new QoS entry for file or directory specified by Id. This triggers
     data replication (in needed) based on requirements defined in new QoS entry.
   description: |
-    Adds new QoS entry for file or directory specified by ID. This triggers
+    Adds new QoS entry for file or directory specified by Id. This triggers
     data replication (in needed) based on requirements defined in new QoS entry.
 
     ***Example cURL requests***
 
-    **Add QoS entry for file specified by ID**
+    **Add QoS entry for file specified by Id**
     ```bash
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
@@ -100,11 +100,25 @@ post:
     ```
   consumes:
     - application/json
+  produces:
+    - application/json
   responses:
     '200':
-      description: Id of added QoS entry (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372')
+      description: >
+        The request has been accepted and the result is the QoS entry Id
+        (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
+        Also URI of the QoS entry in form https://$HOST/api/v3/oneprovider/qos-entry/{qid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the QoS entry.
+          type: string
       schema:
-        type: string
+        type: object
+        properties:
+          qosEntryId:
+            type: string
+            description: QoS entry Id.
     '400':
       description: Invalid request.
       schema:

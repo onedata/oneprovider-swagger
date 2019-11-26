@@ -122,6 +122,12 @@ post:
       description: >
         The replication request was accepted and the result is the transfer Id, which
         can be used for monitoring the transfer status.
+        Also URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the new transfer.
+          type: string
       schema:
         type: object
         properties:
@@ -219,8 +225,14 @@ delete:
   responses:
     '200':
       description: >
-        The replica removal has been accepted is the transfer Id, which
-        can be used for monitoring the transfer status.
+        The replica removal has been accepted and the result is the transfer Id,
+        which can be used for monitoring the transfer status.
+        Also URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the new transfer.
+          type: string
       schema:
         type: object
         properties:

@@ -36,7 +36,7 @@ put:
   consumes:
     - application/javascript
   responses:
-    '200':
+    '204':
       description: View reduce function updated successfully.
     '400':
       description: Invalid request.
@@ -58,7 +58,7 @@ put:
   - name: sid
     in: path
     description: >
-      Space ID in which view exist.
+      Space Id in which view exist.
     type: string
     required: true
   - name: view_name
@@ -126,7 +126,7 @@ delete:
   - name: sid
     in: path
     description: >
-      Space ID in which view exist.
+      Space Id in which view exist.
     type: string
     required: true
   - name: view_name

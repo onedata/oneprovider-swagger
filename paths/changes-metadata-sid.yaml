@@ -61,7 +61,7 @@ post:
   parameters:
   - name: sid
     in: path
-    description: Space ID.
+    description: Space Id.
     type: string
     required: true
   - name: body

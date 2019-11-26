@@ -41,7 +41,7 @@ put:
   consumes:
     - application/javascript
   responses:
-    '200':
+    '204':
       description: Index reduce function updated successfully.
     '400':
       description: Invalid request.
@@ -63,7 +63,7 @@ put:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space Id in which index exist.
     type: string
     required: true
   - name: index_name
@@ -136,7 +136,7 @@ delete:
   - name: sid
     in: path
     description: >
-      Space ID in which index exist.
+      Space Id in which index exist.
     type: string
     required: true
   - name: index_name

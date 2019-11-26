@@ -39,12 +39,20 @@ post:
   responses:
     '201':
       description: >
-        URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        The rerun request has been accepted and the result is the transfer Id,
+        which can be used for monitoring the new transfer status.
+        Also URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
         returned in the response `Location` header.
       headers:
         Location:
           description: URI of the new transfer.
           type: string
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: New transfer Id.
     '400':
       description: Invalid request.
       schema:
@@ -54,7 +62,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Transfer with provided ID was not found.
+      description: Transfer with provided Id was not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -64,7 +72,7 @@ post:
   parameters:
   - name: tid
     in: path
-    description: Transfer ID.
+    description: Transfer Id.
     type: string
     required: true
   x-code-samples:
