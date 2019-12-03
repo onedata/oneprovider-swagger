@@ -103,7 +103,7 @@ delete:
   x-onedata-gri:
     type: op_transfer
     id: ?BINDING(tid)
-    aspect: instance
+    aspect: cancel
   tags:
     - Transfer
   summary: Cancel specific transfer
