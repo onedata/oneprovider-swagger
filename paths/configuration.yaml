@@ -27,11 +27,11 @@ get:
       "name": "ProviderName",
       "domain": "zone.domain.org",
       "onezoneDomain": "example.domain.org",
-      "version": "19.02.0-rc1",
-      "build": "19-g0d0fd5b",
-      "compatibleOnezoneVersions": ["19.02.0-rc1"],
-      "compatibleOneproviderVersions": ["19.02.0-rc1"],
-      "compatibleOneclientVersions": ["18.02.1", "19.02.0-rc1"]
+      "version": "R14B04",
+      "build": "14-g0d0fd5b",
+      "compatibleOnezoneVersions": ["R13B04, R14B04"],
+      "compatibleOneproviderVersions": ["R14B04"],
+      "compatibleOneclientVersions": ["R14B04"]
     }
     ```
   produces:
