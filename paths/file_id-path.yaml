@@ -1,0 +1,62 @@
+get:
+  operationId: get_file_id
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: object_id
+  tags:
+    - File
+  summary: Get file id
+  x-bash-codegen-description: |
+    Returns Id of file specified by path.
+
+  description: |
+    Returns Id of file specified by path.
+
+    ***Example cURL requests***
+
+    **Get file id**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/file-id/MySpace/MyFile"
+
+    {
+      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: File Id.
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: File Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: path
+      in: path
+      description: File path (e.g. '/MySpace/testfile')
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileId path='/MySpace/testfile'"

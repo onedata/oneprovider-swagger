@@ -220,6 +220,7 @@ post:
 
 
 delete:
+  deprecated: true
   operationId: evict_replicas_by_index
   x-onedata-gri:
     type: op_replica

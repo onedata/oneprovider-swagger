@@ -75,7 +75,7 @@ post:
   parameters:
     - name: data
       in: body
-      description: Group properties.
+      description: Share properties.
       schema:
         $ref: '#/definitions/ShareCreateRequest'
       required: true
