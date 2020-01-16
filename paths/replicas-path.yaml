@@ -118,7 +118,7 @@ post:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replication request was accepted and the result is the transfer Id, which
         can be used for monitoring the transfer status.
@@ -223,7 +223,7 @@ delete:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replica removal has been accepted and the result is the transfer Id,
         which can be used for monitoring the transfer status.

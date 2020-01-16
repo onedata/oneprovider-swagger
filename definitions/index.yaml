@@ -56,6 +56,9 @@ Views:
 ViewOptions:
   $ref: ./view_options.yaml
 
+ShareCreateRequest:
+  $ref: ./sharecreaterequest.yaml
+
 Share:
   $ref: ./share.yaml
 

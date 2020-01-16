@@ -105,7 +105,7 @@ post:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The request has been accepted and the result is the QoS entry Id
         (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').

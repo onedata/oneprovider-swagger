@@ -44,14 +44,11 @@
 
 
 # tag Share
-/shares/{path}:
-  $ref: ./shares-path.yaml
+/shares:
+  $ref: ./shares.yaml
 
-/shares-id/{id}:
-  $ref: ./shares_id-id.yaml
-
-/shares-public-id/{shid}:
-  $ref: ./shares_public_id-shid.yaml
+/shares/{shid}:
+  $ref: ./shares-shid.yaml
 
 
 # tag Space

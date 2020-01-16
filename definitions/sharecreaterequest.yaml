@@ -1,0 +1,15 @@
+type: object
+description: Share create request.
+properties:
+  name:
+    type: string
+    description: The name of the share.
+  fileId:
+    type: string
+    description: Id of file to be shared. The whole space can also be shared.
+required:
+  - name
+  - fileId
+example:
+  name: MyShare
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
