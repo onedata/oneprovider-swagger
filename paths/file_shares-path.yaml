@@ -1,0 +1,62 @@
+get:
+  operationId: list_file_shares_by_path
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: shares
+  tags:
+    - File
+  summary: List shares associated with specified file or directory
+  x-bash-codegen-description: |
+    Returns the list of shares associated with specified by path file or directory.
+
+  description: |
+    Returns the list of shares associated with specified by path file or directory.
+
+    ***Example cURL requests***
+
+    **List shares associated with specified file or directory**
+    ```bash
+    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/file-shares/MySpace/testfile"
+
+    [
+      $SHARE_ID1,
+      $SHARE_ID2,
+      $SHARE_ID3
+    ]
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of share Ids associated with this file or directory.
+      schema:
+        type: array
+        items:
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: path
+      in: path
+      description: File or directory path (e.g. '/MySpace/testfile')
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listFileSharesByPath path='MySpace/testfile'"

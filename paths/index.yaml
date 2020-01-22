@@ -21,6 +21,12 @@
 /files-id/{id}:
   $ref: ./files_id-id.yaml
 
+/file-shares/{path}:
+  $ref: ./file_shares-path.yaml
+
+/file-id-shares/{id}:
+  $ref: ./file_id_shares-id.yaml
+
 /metadata/attrs/{path}:
   $ref: ./metadata-attrs-path.yaml
 
