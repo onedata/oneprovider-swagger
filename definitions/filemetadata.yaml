@@ -6,7 +6,7 @@ properties:
     description: File or directory path.
   type:
     type: string
-    description: Determines whether this a regular file or a folder.
+    description: Determines whether this a regular file or a directory.
     enum:
       - reg
       - dir
@@ -34,7 +34,7 @@ properties:
     description: Version of the current file snaphost.
   is_scope:
     type: boolean
-    description: True only when this is a space folder.
+    description: True only when this is a space directory.
   scope:
     type: string
     description: ID of the space in which this file is contained.

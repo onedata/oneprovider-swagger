@@ -12,7 +12,7 @@ properties:
     description: If the transfer was rerun, this field contains the Id of the new transfer, otherwise null.
   path:
     type: string
-    description: Path to the file or folder in the virtual file system.
+    description: Path to the file or directory in the virtual file system.
   transferStatus:
     type: string
     description: The status of replication request. This field is `deprecated` and it might be removed in future release. Please refer to `replicationStatus`.
@@ -148,7 +148,7 @@ example:
   fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   userId: admin
   rerunId: null
-  path: /My Space 1/Folder2/file3.txt
+  path: /My Space 1/Dir2/file3.txt
   transferStatus: completed
   replicationStatus: completed
   invalidationStatus: skipped
@@ -161,7 +161,6 @@ example:
   filesReplicated: 1
   failedFiles: 0
   filesInvalidated: 0
-  filesProcessed: 1
   bytesTransferred: 10485760000
   bytesReplicated: 10485760000
   scheduleTime: 1504688800

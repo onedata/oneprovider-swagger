@@ -8,10 +8,10 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the rdf metadata for specified file, folder or space by Id.
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
   description: |
-    This method returns the rdf metadata for specified file, folder or space by Id.
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
     ***Example cURL requests***
 
@@ -66,7 +66,7 @@ put:
   tags:
     - File
   description: |
-    This method allows to set specific rdf metadata for a file, folder or space specified by Id in the request path.
+    This method allows to set specific rdf metadata for a file, directory or space specified by Id in the request path.
 
     This operation will replace the previous rdf metadata if any.
 

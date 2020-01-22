@@ -74,13 +74,13 @@ post:
     aspect: instance
   tags:
     - Replica
-  summary: Replicate file or folder by Id
+  summary: Replicate file or directory by Id
   x-bash-codegen-description: |
     Replicates a file specified by Id in `fid` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on
     the size of the data to move.
 
-    If the `fid` parameter specifies a folder, entire folder is replicated to
+    If the `fid` parameter specifies a directory, entire directory is replicated to
     requested provider.
 
     This operation requires `space_schedule_replication` privilege.
@@ -89,7 +89,7 @@ post:
     Replicates a file specified by Id in `fid` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `fid` parameter specifies a folder, entire folder is replicated to requested provider.
+    If the `fid` parameter specifies a directory, entire directory is replicated to requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
@@ -190,7 +190,7 @@ delete:
     can be used to specify where the replica has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a folder, entire folder is evicted.
+    If the `fid` parameter specifies a directory, entire directory is evicted.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.
@@ -201,7 +201,7 @@ delete:
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a folder, entire folder is evicted.
+    If the `fid` parameter specifies a directory, entire directory is evicted.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.

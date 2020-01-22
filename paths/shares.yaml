@@ -8,24 +8,24 @@ post:
   tags:
     - Share
   x-bash-codegen-description: |
-    Shares a file or a folder specified by path. Shared files can be viewed by
-    everyone through public URL. This operation assigns a share Id that can be
-    used to manage share, see:
-      * [Get basic information about shared folder](#operation/get_share)
-      * [Change name of the shared folder](#operation/update_share)
-      * [Unshare folder](#operation/remove_share)
-
-    Files can be shared multiple times.
-
-  description: |
-    Shares a file or a folder specified by path. Shared files can be viewed by
+    Shares a file or a directory specified by path. Shared files can be viewed by
     everyone through public URL. This operation assigns a share Id that can be
     used to manage share, see:
       * [Get basic information about share](#operation/get_share)
       * [Change name of the share](#operation/update_share)
       * [Remove share](#operation/remove_share)
 
-    Files can be shared multiple times.
+    Any number of shares can be associated with each file or directory.
+
+  description: |
+    Shares a file or a directory specified by path. Shared files can be viewed by
+    everyone through public URL. This operation assigns a share Id that can be
+    used to manage share, see:
+      * [Get basic information about share](#operation/get_share)
+      * [Change name of the share](#operation/update_share)
+      * [Remove share](#operation/remove_share)
+
+    Any number of shares can be associated with each file or directory.
 
     ***Example cURL requests***
 

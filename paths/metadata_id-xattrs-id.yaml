@@ -8,10 +8,10 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file, folder or space by Id.
+    This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
   description: |
-    This method returns the selected extended attributes associated with specified file, folder or space by Id.
+    This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
 
@@ -64,9 +64,9 @@ get:
     in: query
     description: >
       When set to true, this operation will return all non-masking attributes
-      from parent folders as well as entire space attributes. When the same attribute
+      from parent directories as well as entire space attributes. When the same attribute
       is set on multiple levels, the lowest level attribute value will be returned (e.g.
-      attribute set on file will have precedence over attribute set on folder).
+      attribute set on file will have precedence over attribute set on directory).
     type: boolean
     required: false
   x-code-samples:

@@ -8,17 +8,17 @@ get:
     - File
   summary: Get file id
   x-bash-codegen-description: |
-    Returns Id of file specified by path.
+    Returns Id of file or directory specified by path.
 
   description: |
-    Returns Id of file specified by path.
+    Returns Id of file or directory specified by path.
 
     ***Example cURL requests***
 
     **Get file id**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/file-id/MySpace/MyFile"
+    "https://$HOST/api/v3/oneprovider/file-id/MySpace/dir/readme.txt"
 
     {
       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
@@ -59,4 +59,4 @@ get:
       required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileId path='/MySpace/testfile'"
+    source: "oneprovider-rest-cli getFileId path='/MySpace/dir/readme.txt'"

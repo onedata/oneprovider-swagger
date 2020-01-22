@@ -159,7 +159,7 @@ required:
   - seq
 example:
   fileId: 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8
-  filePath: /Space1/folder2/file1.txt
+  filePath: /Space1/dir2/file1.txt
   seq: 123
   fileMeta:
     rev: 2-c500a5eb026d9474429903d47841f9c5

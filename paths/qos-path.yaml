@@ -29,7 +29,7 @@ get:
     **Get effective QoS for file specified by path**
     ```bash
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
+    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Dir2"
 
     {
       "assignedEntries": {"6969ba86d2172e15f8156ccb32a58b92": ["fc05cfc92eda7a054b835bc1ee4a1372"]},
@@ -64,12 +64,12 @@ get:
     - name: path
       in: path
       description: >
-        Full path to the file, starting with space name (e.g. '/MySpace1/Folder2').
+        Full path to the file, starting with space name (e.g. '/MySpace1/Dir2').
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getEffectiveQos path='/MySpace1/Folder2'"
+      source: "oneprovider-rest-cli getEffectiveQos path='/MySpace1/Dir2'"
 
 
 post:
@@ -96,7 +96,7 @@ post:
     curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
     -d '{ "expression": "country=FR", "replicasNum": 2 }' \
-    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Folder2"
+    "https://$HOST/api/v3/oneprovider/qos/MySpace1/Dir2"
 
     {"qosId": "fc05cfc92eda7a054b835bc1ee4a1372"}
     ```
@@ -141,7 +141,7 @@ post:
     - name: path
       in: path
       description: >
-        Full path to the file, starting with space name (e.g. '/MySpace1/Folder2').
+        Full path to the file, starting with space name (e.g. '/MySpace1/Dir2').
         QoS entry can be also added for whole space (e.g. '/MySpace1').
       type: string
       required: true
@@ -153,4 +153,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli addQosEntry path='/MySpace1/Folder2' expression='country=FR' replicasNum=2"
+      source: "oneprovider-rest-cli addQosEntry path='/MySpace1/Dir2' expression='country=FR' replicasNum=2"

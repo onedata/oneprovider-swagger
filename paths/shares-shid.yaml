@@ -23,6 +23,7 @@ get:
       "shareId": "1f4b762b1380946e73aeca574c77f14c",
       "name": "MyNewShare",
       "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
+      "fileType": "dir",
       "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
       6266666164353939663761373734313235363166342336656331613534313362366634653\
       2623031613563383561386664373937653223316634623736326231333830393436653733\
@@ -62,7 +63,7 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getShare shid='1f4b762b1380946e73aeca574c77f14c'"
+      source: "oneprovider-rest-cli getShare shid=$SHARE_ID"
 
 
 patch:
@@ -124,7 +125,7 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateShare shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
+      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName"
 
 
 delete:
@@ -138,10 +139,10 @@ delete:
     - Share
   x-bash-codegen-description: |
     Removes a specific share. This operation will not remove data from shared
-    file or folder but it will not be accessible through public url anymore.
+    file or directory but it will not be accessible through public url anymore.
   description: |
     Removes a specific share. This operation will not remove data from shared
-    file or folder but it will not be accessible through public url anymore.
+    file or directory but it will not be accessible through public url anymore.
 
     ***Example cURL requests***
 
@@ -177,4 +178,4 @@ delete:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeShare shid='1f4b762b1380946e73aeca574c77f14c'"
+      source: "oneprovider-rest-cli removeShare shid=$SHARE_ID"

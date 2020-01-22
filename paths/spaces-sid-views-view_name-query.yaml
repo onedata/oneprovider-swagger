@@ -17,7 +17,7 @@ get:
     - geometry - describes geometry of data (only available in case of spatial views)
 
     Currently, views are defined per space, i.e. the result will be limited
-    to files and folders in a space for which the view was defined.
+    to files and directories in a space for which the view was defined.
 
     This operation supports custom view query attributes as provided by
     Couchbase:
@@ -38,7 +38,7 @@ get:
     * ``value`` - the second element of list returned by user defined mapping/spatial function
     * ``geometry`` - describes geometry of data (only available in case of spatial views)
 
-    Currently, views are defined per space, i.e. the result will be limited to files and folders in a space for which the view was defined.
+    Currently, views are defined per space, i.e. the result will be limited to files and directories in a space for which the view was defined.
 
     This operation supports also custom view query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 

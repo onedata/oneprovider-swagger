@@ -8,10 +8,10 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the selected attributes associated with specified file, folder or space by Id.
+    This method returns the selected attributes associated with specified file, directory or space by Id.
 
   description: |
-    This method returns the selected attributes associated with specified file, folder or space by Id.
+    This method returns the selected attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
 
@@ -52,7 +52,7 @@ get:
   parameters:
   - name: id
     in: path
-    description: File, folder or space Id
+    description: File, directory or space Id
     type: string
     required: true
   - name: attribute
@@ -139,7 +139,7 @@ put:
   parameters:
   - name: id
     in: path
-    description: File, folder or space Id
+    description: File, directory or space Id
     type: string
     required: true
   - name: attribute

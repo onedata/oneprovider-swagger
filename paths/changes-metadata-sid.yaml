@@ -85,4 +85,4 @@ post:
     required: false
   x-code-samples:
   - lang: Shell
-    source: cat changes_req.json | oneprovider-rest-cli streamSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721 -
+    source: "cat changes_req.json | oneprovider-rest-cli streamSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721 -"

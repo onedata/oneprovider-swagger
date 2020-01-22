@@ -75,12 +75,12 @@ post:
     aspect: instance
   tags:
     - Replica
-  summary: Replicate file or folder by path
+  summary: Replicate file or directory by path
   x-bash-codegen-description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to
+    If the `path` parameter specifies a directory, entire directory is replicated to
     requested provider.
 
     This operation requires `space_schedule_replication` privilege.
@@ -89,7 +89,7 @@ post:
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+    If the `path` parameter specifies a directory, entire directory is replicated to requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
@@ -191,7 +191,7 @@ delete:
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `path` parameter specifies a folder, entire folder is evicted from
+    If the `path` parameter specifies a directory, entire directory is evicted from
     this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
@@ -204,7 +204,7 @@ delete:
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `path` parameter specifies a folder, entire folder is evicted from
+    If the `path` parameter specifies a directory, entire directory is evicted from
     this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction

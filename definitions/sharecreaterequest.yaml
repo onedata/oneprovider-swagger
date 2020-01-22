@@ -6,7 +6,7 @@ properties:
     description: The name of the share.
   fileId:
     type: string
-    description: Id of file to be shared. The whole space can also be shared.
+    description: Id of file or directory to be shared. The whole space can also be shared.
 required:
   - name
   - fileId

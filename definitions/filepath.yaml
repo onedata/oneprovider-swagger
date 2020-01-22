@@ -3,7 +3,7 @@ type: object
 properties:
   id:
     type: string
-    description: Id of the file or folder.
+    description: Id of the file or directory.
   path:
     type: string
-    description: Path to the file or folder.
+    description: Path to the file or directory.

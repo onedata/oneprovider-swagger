@@ -8,10 +8,10 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the rdf metadata associated with specified file, folder or space.
+    This method returns the rdf metadata associated with specified file, directory or space.
 
   description: |
-    This method returns the rdf metadata associated with specified file, folder or space.
+    This method returns the rdf metadata associated with specified file, directory or space.
 
     ***Example cURL requests***
 
@@ -46,7 +46,7 @@ get:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   x-code-samples:
@@ -65,13 +65,13 @@ put:
   tags:
     - File
   x-bash-codegen-description: |
-    This method allows to set specific rdf metadata for a file, folder or
+    This method allows to set specific rdf metadata for a file, directory or
     space specified in the request path.
 
     This operation will replace the previous rdf metadata if any.
 
   description: |
-    This method allows to set specific rdf metadata for a file, folder or
+    This method allows to set specific rdf metadata for a file, directory or
     space specified in the request path.
 
     This operation will replace the previous rdf metadata if any.
@@ -109,7 +109,7 @@ put:
   parameters:
   - name: path
     in: path
-    description: File or folder path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: body
