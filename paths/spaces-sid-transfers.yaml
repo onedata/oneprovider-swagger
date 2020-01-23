@@ -46,9 +46,16 @@ get:
     '200':
       description: The list of transfer IDs, nextPageToken is present when there is more to list.
       schema:
-        type: array
-        items:
-          type: string
+        type: object
+        properties:
+          transfers:
+            type: array
+            description: The list of transfer Ids.
+            items:
+              type: string
+          nextPageToken:
+            type: string
+            description: Token which can be used to list next batch of transfer Ids.
     '400':
       description: Invalid request.
       schema:

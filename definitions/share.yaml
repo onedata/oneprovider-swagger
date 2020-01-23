@@ -12,7 +12,7 @@ properties:
     description: The publicly accessible URL for the share.
   fileType:
     type: string
-    description: The type of shared file.
+    description: Denotes the type of the shared element (file or directory)
     enum:
       - file
       - dir

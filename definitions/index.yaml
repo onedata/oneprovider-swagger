@@ -62,6 +62,9 @@ ShareCreateRequest:
 Share:
   $ref: ./share.yaml
 
+Shares:
+  $ref: ./shares.yaml
+
 QosEntry:
   $ref: ./qosentry.yaml
 

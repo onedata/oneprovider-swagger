@@ -6,7 +6,7 @@ get:
     aspect: shares
   tags:
     - File
-  summary: List shares associated with specified file or directory by Id
+  summary: List file shares by Id
   x-bash-codegen-description: |
     Returns the list of shares associated with specified by Id file or directory.
 
@@ -20,11 +20,13 @@ get:
     curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/file-id-shares/$FILE_ID"
 
-    [
-      $SHARE_ID1,
-      $SHARE_ID2,
-      $SHARE_ID3
-    ]
+    {
+      "shares": [
+        $SHARE_ID1,
+        $SHARE_ID2,
+        $SHARE_ID3
+      ]
+    }
     ```
   produces:
     - application/json
@@ -32,9 +34,7 @@ get:
     '200':
       description: The list of share Ids associated with this file or directory.
       schema:
-        type: array
-        items:
-          type: string
+        $ref: '#/definitions/Shares'
     '400':
       description: Invalid request.
       schema:
