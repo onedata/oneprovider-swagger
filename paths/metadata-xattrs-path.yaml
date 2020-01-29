@@ -76,7 +76,7 @@ get:
 
 put:
   operationId: set_file_xattr
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
@@ -127,7 +127,7 @@ put:
     description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
-  - name: attribute
+  - name: metadata
     in: body
     description: Extended attribute name and value.
     schema:

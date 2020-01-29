@@ -90,7 +90,7 @@ get:
 
 put:
   operationId: set_file_json_metadata
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
@@ -156,9 +156,9 @@ put:
     description: The filter allowing to set specific metadata document key. Required if filter_type is specified.
     type: string
     required: false
-  - name: body
+  - name: metadata
     in: body
-    description: The metadata document in one of accepted formats.
+    description: The json metadata.
     required: true
     schema:
       type: string

@@ -88,7 +88,7 @@ get:
 put:
   deprecated: true
   operationId: create_space_index
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -152,7 +152,7 @@ put:
     description: Name of the index.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The index map function.
     schema:
@@ -190,7 +190,7 @@ put:
 patch:
   deprecated: true
   operationId: update_space_index
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -257,7 +257,7 @@ patch:
     description: Name of the index.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The index map function.
     schema:

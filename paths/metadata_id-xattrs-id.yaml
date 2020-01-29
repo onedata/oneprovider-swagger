@@ -76,7 +76,7 @@ get:
 
 put:
   operationId: set_file_xattr_by_id
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -127,7 +127,7 @@ put:
     description: Id of the file.
     type: string
     required: true
-  - name: attribute
+  - name: metadata
     in: body
     description: Extended attribute name and value.
     schema:
