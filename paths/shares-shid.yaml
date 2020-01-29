@@ -16,7 +16,7 @@ get:
 
     **Returns the basic information about share**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
 
     {
@@ -85,7 +85,7 @@ patch:
 
     **Changes name of the share**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/json" \
     -d '{ "name": "NewShareName" }' \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
@@ -148,7 +148,7 @@ delete:
 
     **Removes share**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
     ```
   responses:

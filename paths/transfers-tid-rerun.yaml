@@ -30,7 +30,7 @@ post:
 
     **Rerun finished transfer**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID/rerun"
     ```
 

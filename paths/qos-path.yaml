@@ -28,7 +28,7 @@ get:
 
     **Get effective QoS for file specified by path**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/qos/MySpace1/Dir2"
 
     {
@@ -93,7 +93,7 @@ post:
 
     **Add QoS entry for file specified by path**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
+    curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
     -d '{ "expression": "country=FR", "replicasNum": 2 }' \
     "https://$HOST/api/v3/oneprovider/qos/MySpace1/Dir2"

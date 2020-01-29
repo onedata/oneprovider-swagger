@@ -17,7 +17,7 @@ get:
 
     **Get file POSIX mode**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metadata/attrs/MySpace1/File2.txt?attribute=mode"
 
     {
@@ -111,7 +111,7 @@ put:
 
     **Set file POSIX mode**
     ```bash
-    curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
+    curl -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "mode": "0777" }'
     "https://$HOST/api/v3/oneprovider/metadata/attrs/MySpace1/File2.txt"
     ```

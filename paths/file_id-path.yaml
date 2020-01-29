@@ -17,7 +17,7 @@ get:
 
     **Get file id**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/file-id/MySpace/dir/readme.txt"
 
     {
@@ -54,7 +54,7 @@ get:
   parameters:
     - name: path
       in: path
-      description: File path (e.g. '/MySpace/testfile')
+      description: File path (e.g. '/MySpace/dir/readme.txt')
       type: string
       required: true
   x-code-samples:

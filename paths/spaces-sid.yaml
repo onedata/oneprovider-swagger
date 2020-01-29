@@ -16,7 +16,7 @@ get:
 
     **Get information about a specific space**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID"
 
     {

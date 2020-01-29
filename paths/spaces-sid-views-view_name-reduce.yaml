@@ -27,7 +27,7 @@ put:
 
     **Update space view**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
@@ -99,7 +99,7 @@ delete:
 
     **Remove view reduce function**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
     ```
 

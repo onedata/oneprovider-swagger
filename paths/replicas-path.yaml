@@ -16,7 +16,7 @@ get:
 
     **Get file distribution map by path**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
     [
@@ -97,7 +97,7 @@ post:
 
     **Replicate file by path to any provider**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
 
@@ -106,7 +106,7 @@ post:
 
     **Replicate file by path to specific storage provider with URL callback**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
@@ -214,7 +214,7 @@ delete:
 
     **Remove file replica by path from specific storage provider**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 

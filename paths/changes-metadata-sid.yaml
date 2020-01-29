@@ -29,7 +29,7 @@ post:
 
     **Listen to space change events**
     ```bash
-    curl --tlsv1.2 -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
+    curl -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID"
     ```
 

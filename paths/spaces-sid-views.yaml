@@ -28,7 +28,7 @@ get:
 
     **List at most 3 view names starting from page id 757136151113c2f**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views?limit=3&page_token=757136151113c2f"
 
     {

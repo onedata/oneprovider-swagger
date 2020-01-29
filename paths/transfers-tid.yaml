@@ -20,7 +20,7 @@ get:
 
     **Get status of specific transfer**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
 
     {
@@ -129,7 +129,7 @@ delete:
 
     **Cancel specific transfer**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
     ```
 

@@ -17,7 +17,7 @@ get:
 
     **List shares associated with specified file or directory**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/file-id-shares/$FILE_ID"
 
     {

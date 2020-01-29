@@ -17,7 +17,7 @@ get:
 
     **Get complete RDF metadata document for File2.txt**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1/File2.txt
     ```
   produces:
@@ -80,7 +80,7 @@ put:
 
     **Set RDF metadata for space from RDF file**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
     https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1
