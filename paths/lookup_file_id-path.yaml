@@ -1,12 +1,12 @@
-get:
-  operationId: get_file_id
+post:
+  operationId: lookup_file_id
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
     aspect: object_id
   tags:
     - File
-  summary: Get file id
+  summary: Lookup file id
   x-bash-codegen-description: |
     Returns Id of file or directory specified by path.
 
@@ -15,10 +15,10 @@ get:
 
     ***Example cURL requests***
 
-    **Get file id**
+    **Lookup file id**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/file-id/MySpace/dir/readme.txt"
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/lookup-file-id/MySpace/dir/readme.txt"
 
     {
       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
@@ -35,6 +35,10 @@ get:
           fileId:
             type: string
             description: File Id.
+        required:
+          - fileId
+        example:
+          fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
     '400':
       description: Invalid request.
       schema:
@@ -59,4 +63,4 @@ get:
       required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileId path='/MySpace/dir/readme.txt'"
+    source: "oneprovider-rest-cli lookupFileId path='/MySpace/dir/readme.txt'"

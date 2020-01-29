@@ -12,8 +12,8 @@
   $ref: ./test_image.yaml
 
 # tag File
-/file-id/{path}:
-  $ref: ./file_id-path.yaml
+/lookup-file-id/{path}:
+  $ref: ./lookup_file_id-path.yaml
 
 /files/{path}:
   $ref: ./files-path.yaml
