@@ -63,11 +63,20 @@ get:
   - name: inherited
     in: query
     description: >
-      When set to true, this operation will return all non-masking attributes
+      When set to true, this operation will return all non-attributes
       from parent directories as well as entire space attributes. When the same attribute
       is set on multiple levels, the lowest level attribute value will be returned (e.g.
       attribute set on file will have precedence over attribute set on directory).
     type: boolean
+    default: false
+    required: false
+  - name: show_internal
+    in: query
+    description: >
+      When set to true, this operation will return all attributes including those
+      normally masked (e.g. json/rdf metadata).
+    type: boolean
+    default: false
     required: false
   x-code-samples:
   - lang: Shell
