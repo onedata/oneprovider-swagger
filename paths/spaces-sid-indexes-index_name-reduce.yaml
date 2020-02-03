@@ -1,7 +1,7 @@
 put:
   deprecated: true
   operationId: update_index_reduce_function
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"reduceFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -71,7 +71,7 @@ put:
     description: Name of the index.
     type: string
     required: true
-  - name: body
+  - name: reduceFunction
     in: body
     description: The index reduce function.
     schema:

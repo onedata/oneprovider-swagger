@@ -81,7 +81,7 @@ get:
 
 put:
   operationId: create_space_view
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -141,7 +141,7 @@ put:
     description: Name of the view.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The view map function.
     schema:
@@ -178,7 +178,7 @@ put:
 
 patch:
   operationId: update_space_view
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -241,7 +241,7 @@ patch:
     description: Name of the view.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The view map function.
     schema:
