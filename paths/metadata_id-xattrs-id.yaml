@@ -63,18 +63,18 @@ get:
   - name: inherited
     in: query
     description: >
-      When set to true, this operation will return all non-masking attributes
-      from parent directories as well as entire space attributes. When the same attribute
-      is set on multiple levels, the lowest level attribute value will be returned (e.g.
-      attribute set on file will have precedence over attribute set on directory).
+      When set to true, this operation returns attributes including those inherited from
+      parent directories and from the space root directory. If the same attribute is set
+      on different nesting levels, the lowest level takes precedence (e.g. file
+      attributes override the attributes from its parent directory).
     type: boolean
     default: false
     required: false
   - name: show_internal
     in: query
     description: >
-      When set to true, this operation will return all attributes including those
-      normally masked (e.g. json/rdf metadata).
+      When set to true, this operation returns all attributes including those
+      normally not shown (e.g. json/rdf metadata, acl and cdmi attributes).
     type: boolean
     default: false
     required: false
