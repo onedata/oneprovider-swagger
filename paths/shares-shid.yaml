@@ -1,28 +1,29 @@
 get:
-  operationId: get_share_by_public_id
+  operationId: get_share
   x-onedata-gri:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Get share info by public share Id
+  summary: Get share info
   tags:
     - Share
   x-bash-codegen-description: |
-    Returns the basic information about shared folder specified by public share Id.
+    Returns the basic information about share.
   description: |
-    Returns the basic information about shared folder specified by public share Id.
+    Returns the basic information about share.
 
     ***Example cURL requests***
 
-    **Returns the basic information about shared folder specified by public share Id**
+    **Returns the basic information about share**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
 
     {
       "shareId": "1f4b762b1380946e73aeca574c77f14c",
       "name": "MyNewShare",
       "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
+      "fileType": "dir",
       "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
       6266666164353939663761373734313235363166342336656331613534313362366634653\
       2623031613563383561386664373937653223316634623736326231333830393436653733\
@@ -57,37 +58,37 @@ get:
   parameters:
     - name: shid
       in: path
-      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getShareByPublicId shid='1f4b762b1380946e73aeca574c77f14c'"
+      source: "oneprovider-rest-cli getShare shid=$SHARE_ID"
 
 
 patch:
-  operationId: update_share_name_by_public_id
+  operationId: update_share
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Rename share by public share Id
+  summary: Rename share
   tags:
     - Share
   x-bash-codegen-description: |
-    Changes name of the shared folder specified by public share Id.
+    Changes name of the share.
   description: |
-    Changes name of the shared folder specified by public share Id.
+    Changes name of the share.
 
     ***Example cURL requests***
 
-    **Changes name of the shared folder specified by public share Id**
+    **Changes name of the share**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/json" \
     -d '{ "name": "NewShareName" }' \
-    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
     ```
   consumes:
     - application/json
@@ -103,7 +104,7 @@ patch:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: Share not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -113,7 +114,7 @@ patch:
   parameters:
     - name: shid
       in: path
-      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
     - name: name
@@ -124,35 +125,35 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateShareNameByPublicId shid='1f4b762b1380946e73aeca574c77f14c' NewShareName"
+      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName"
 
 
 delete:
-  operationId: remove_share_by_public_id
+  operationId: remove_share
   x-onedata-gri:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Unshare a folder by public share Id
+  summary: Remove a specific share
   tags:
     - Share
   x-bash-codegen-description: |
-    Unshares a folder by public share Id. This operation will not remove
-    data from folder but data will not be accessible through public url anymore.
+    Removes a specific share. This operation will not remove data from shared
+    file or directory but it will not be accessible through public url anymore.
   description: |
-    Unshares a folder by public share Id. This operation will not remove
-    data from folder but data will not be accessible through public url anymore.
+    Removes a specific share. This operation will not remove data from shared
+    file or directory but it will not be accessible through public url anymore.
 
     ***Example cURL requests***
 
-    **Unshares a folder by public share Id**
+    **Removes share**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/shares-public-id/1f4b762b1380946e73aeca574c77f14c"
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
     ```
   responses:
     '204':
-      description: Folder has been unshared.
+      description: Share has been removed.
     '400':
       description: Invalid request.
       schema:
@@ -162,7 +163,7 @@ delete:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File or share not found.
+      description: Share not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -172,9 +173,9 @@ delete:
   parameters:
     - name: shid
       in: path
-      description: Public share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeShareByPublicId shid='1f4b762b1380946e73aeca574c77f14c'"
+      source: "oneprovider-rest-cli removeShare shid=$SHARE_ID"

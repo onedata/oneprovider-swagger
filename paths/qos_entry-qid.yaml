@@ -16,7 +16,7 @@ get:
 
     **Get detailed information about QoS entry**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
 
     {
@@ -79,7 +79,7 @@ delete:
 
     **Remove QoS entry.**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
     "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
     ```

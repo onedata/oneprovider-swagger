@@ -1,7 +1,7 @@
 put:
   deprecated: true
   operationId: update_index_reduce_function
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"reduceFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -32,7 +32,7 @@ put:
 
     **Update space index**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
@@ -71,7 +71,7 @@ put:
     description: Name of the index.
     type: string
     required: true
-  - name: body
+  - name: reduceFunction
     in: body
     description: The index reduce function.
     schema:
@@ -109,7 +109,7 @@ delete:
 
     **Remove index reduce function**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
     ```
 

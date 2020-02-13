@@ -20,7 +20,7 @@ get:
     - geometry - describes geometry of data (only available in case of spatial indexes)
 
     Currently, indexes are defined per space, i.e. the result will be limited
-    to files and folders in a space for which the index was defined.
+    to files and directories in a space for which the index was defined.
 
     This operation supports custom index query attributes as provided by
     Couchbase:
@@ -43,7 +43,7 @@ get:
     * ``value`` - the second element of list returned by user defined mapping/spatial function
     * ``geometry`` - describes geometry of data (only available in case of spatial indexes)
 
-    Currently, indexes are defined per space, i.e. the result will be limited to files and folders in a space for which the index was defined.
+    Currently, indexes are defined per space, i.e. the result will be limited to files and directories in a space for which the index was defined.
 
     This operation supports also custom index query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html).
 
@@ -67,7 +67,7 @@ get:
     ```
 
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?skip=10&limit=4
 
     [
@@ -108,7 +108,7 @@ get:
     ```
 
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/query?spatial=true&stale=false
 
     [
@@ -135,7 +135,7 @@ get:
 
     **Get file popularity for a specific space**
     ```bash
-    curl --tlsv1.2 -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json

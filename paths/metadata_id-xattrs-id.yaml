@@ -8,16 +8,16 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file, folder or space by Id.
+    This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
   description: |
-    This method returns the selected extended attributes associated with specified file, folder or space by Id.
+    This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
 
     **Get extended file attributes**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/$FILE_ID?extended=true&attribute=license"
 
     {
@@ -63,11 +63,20 @@ get:
   - name: inherited
     in: query
     description: >
-      When set to true, this operation will return all non-masking attributes
-      from parent folders as well as entire space attributes. When the same attribute
-      is set on multiple levels, the lowest level attribute value will be returned (e.g.
-      attribute set on file will have precedence over attribute set on folder).
+      When set to true, this operation returns attributes including those inherited from
+      parent directories and from the space root directory. If the same attribute is set
+      on different nesting levels, the lowest level takes precedence (e.g. file
+      attributes override the attributes from its parent directory).
     type: boolean
+    default: false
+    required: false
+  - name: show_internal
+    in: query
+    description: >
+      When set to true, this operation returns all attributes including those
+      normally not shown (e.g. json/rdf metadata, acl and cdmi attributes).
+    type: boolean
+    default: false
     required: false
   x-code-samples:
   - lang: Shell
@@ -76,7 +85,7 @@ get:
 
 put:
   operationId: set_file_xattr_by_id
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -96,7 +105,7 @@ put:
 
     **Set extended file attribute**
     ```bash
-    curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
+    curl -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "license": "CC-0" }' \
     "https://$HOST/api/v3/oneprovider/metadata-id/xattrs/$FILE_ID?extended=true"
     ```
@@ -127,7 +136,7 @@ put:
     description: Id of the file.
     type: string
     required: true
-  - name: attribute
+  - name: metadata
     in: body
     description: Extended attribute name and value.
     schema:

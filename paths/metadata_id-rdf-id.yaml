@@ -8,17 +8,17 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the rdf metadata for specified file, folder or space by Id.
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
   description: |
-    This method returns the rdf metadata for specified file, folder or space by Id.
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
     ***Example cURL requests***
 
     **Get complete RDF metadata document for file**
 
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```
   produces:
@@ -57,7 +57,7 @@ get:
 
 put:
   operationId: set_file_rdf_metadata_by_id
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -66,7 +66,7 @@ put:
   tags:
     - File
   description: |
-    This method allows to set specific rdf metadata for a file, folder or space specified by Id in the request path.
+    This method allows to set specific rdf metadata for a file, directory or space specified by Id in the request path.
 
     This operation will replace the previous rdf metadata if any.
 
@@ -74,7 +74,7 @@ put:
 
     **Set RDF metadata for space from RDF file**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
     https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
@@ -106,7 +106,7 @@ put:
     description: Id of the file.
     type: string
     required: true
-  - name: body
+  - name: metadata
     in: body
     description: The rdf metadata.
     required: true

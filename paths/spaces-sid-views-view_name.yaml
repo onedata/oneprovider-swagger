@@ -20,7 +20,7 @@ get:
 
     **Get information about specific view**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
 
     {
@@ -81,7 +81,7 @@ get:
 
 put:
   operationId: create_space_view
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -102,7 +102,7 @@ put:
 
     **Create space view**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PUT \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_view1.js" \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
@@ -141,7 +141,7 @@ put:
     description: Name of the view.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The view map function.
     schema:
@@ -178,7 +178,7 @@ put:
 
 patch:
   operationId: update_space_view
-  x-onedata-parse_body: as_is
+  x-onedata-parse_body: '{as_is, <<"mapFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
@@ -203,7 +203,7 @@ patch:
 
     **Update space view**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X PATCH \
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/javascript" \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10
     ```
@@ -241,7 +241,7 @@ patch:
     description: Name of the view.
     type: string
     required: true
-  - name: body
+  - name: mapFunction
     in: body
     description: The view map function.
     schema:
@@ -297,7 +297,7 @@ delete:
 
     **Remove existing view**
     ```bash
-    curl --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X DELETE \
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
     ```
 

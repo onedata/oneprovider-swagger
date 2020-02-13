@@ -20,7 +20,7 @@ get:
 
     **Get storage space used metrics**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID?metric=storage_used"
 
     {

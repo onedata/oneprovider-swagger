@@ -8,16 +8,16 @@ get:
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the selected attributes associated with specified file, folder or space by Id.
+    This method returns the selected attributes associated with specified file, directory or space by Id.
 
   description: |
-    This method returns the selected attributes associated with specified file, folder or space by Id.
+    This method returns the selected attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
 
     **Get file POSIX mode**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metadata-id/attrs/$FILE_ID?attribute=mode"
 
     {
@@ -52,7 +52,7 @@ get:
   parameters:
   - name: id
     in: path
-    description: File, folder or space Id
+    description: File, directory or space Id
     type: string
     required: true
   - name: attribute
@@ -111,7 +111,7 @@ put:
 
     **Set file POSIX mode**
     ```bash
-    curl --tlsv1.2 -X PUT -H "X-Auth-Token: $TOKEN" \
+    curl -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "mode": "0777" }'
     "https://$HOST/api/v3/oneprovider/metadata-id/attrs/$FILE_ID"
     ```
@@ -139,7 +139,7 @@ put:
   parameters:
   - name: id
     in: path
-    description: File, folder or space Id
+    description: File, directory or space Id
     type: string
     required: true
   - name: attribute

@@ -20,7 +20,7 @@ get:
 
     **Get user storage block access metrics with 1 hour resolution**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID/user/$USER_ID?metric=block_access&step=1h"
 
     {

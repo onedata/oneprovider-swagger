@@ -29,7 +29,7 @@ post:
 
     **Listen to space change events**
     ```bash
-    curl --tlsv1.2 -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
+    curl -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID"
     ```
 
@@ -85,4 +85,4 @@ post:
     required: false
   x-code-samples:
   - lang: Shell
-    source: cat changes_req.json | oneprovider-rest-cli streamSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721 -
+    source: "cat changes_req.json | oneprovider-rest-cli streamSpaceChanges sid=$SPACE_ID timeout=10000 last_seq=124721 -"

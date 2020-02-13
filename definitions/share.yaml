@@ -10,9 +10,15 @@ properties:
   publicUrl:
     type: string
     description: The publicly accessible URL for the share.
+  fileType:
+    type: string
+    description: Denotes the type of the shared element (file or directory)
+    enum:
+      - file
+      - dir
   rootFileId:
     type: string
-    description: The ID of the shared folder.
+    description: The ID of the shared file or directory.
   spaceId:
     type: string
     description: The ID of the space in which the share was created.
@@ -23,12 +29,14 @@ required:
   - shareId
   - name
   - publicUrl
+  - fileType
   - rootFileId
   - spaceId
 example:
   shareId: 1f4b762b1380946e73aeca574c77f14c
   name: MyNewShare
   publicUrl: https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c
+  fileType: dir
   rootFileId: 00000000006CB663736861726547756964233339643236366165646365\
       6266666164353939663761373734313235363166342336656331613534313362366634653\
       2623031613563383561386664373937653223316634623736326231333830393436653733\

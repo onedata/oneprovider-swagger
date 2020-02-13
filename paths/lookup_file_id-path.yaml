@@ -1,0 +1,66 @@
+post:
+  operationId: lookup_file_id
+  x-onedata-gri:
+    type: op_file
+    id: ?PATH_BINDING
+    aspect: object_id
+  tags:
+    - File
+  summary: Lookup file id
+  x-bash-codegen-description: |
+    Returns Id of file or directory specified by path.
+
+  description: |
+    Returns Id of file or directory specified by path.
+
+    ***Example cURL requests***
+
+    **Lookup file id**
+    ```bash
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/lookup-file-id/MySpace/dir/readme.txt"
+
+    {
+      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: File Id.
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: File Id.
+        required:
+          - fileId
+        example:
+          fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: path
+      in: path
+      description: File path (e.g. '/MySpace/dir/readme.txt')
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli lookupFileId path='/MySpace/dir/readme.txt'"

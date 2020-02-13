@@ -46,7 +46,7 @@ post:
 
     **Replicate files returned by index within specified space to any provider**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID"
 
 
@@ -55,7 +55,7 @@ post:
 
     **Replicate 100 files (skipping the first 200) returned by index within specified space to any provider with URL callback**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
     "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
@@ -68,7 +68,7 @@ post:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replication request was accepted and the result is the transfer Id, which
         can be used for monitoring the transfer status.
@@ -220,6 +220,7 @@ post:
 
 
 delete:
+  deprecated: true
   operationId: evict_replicas_by_index
   x-onedata-gri:
     type: op_replica
@@ -267,7 +268,7 @@ delete:
 
     **Evicts 100 replicas (skipping the first 200) returned by index within specified space from specific provider**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas-index/$INDEX_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
@@ -277,7 +278,7 @@ delete:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replication request was accepted and the result is the transfer Id, which
         can be used for monitoring the transfer status.

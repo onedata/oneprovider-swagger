@@ -16,7 +16,7 @@ get:
 
     **Get file distribution map by path**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
     [
@@ -75,12 +75,12 @@ post:
     aspect: instance
   tags:
     - Replica
-  summary: Replicate file or folder by path
+  summary: Replicate file or directory by path
   x-bash-codegen-description: |
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to
+    If the `path` parameter specifies a directory, entire directory is replicated to
     requested provider.
 
     This operation requires `space_schedule_replication` privilege.
@@ -89,7 +89,7 @@ post:
     Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `path` parameter specifies a folder, entire folder is replicated to requested provider.
+    If the `path` parameter specifies a directory, entire directory is replicated to requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
@@ -97,7 +97,7 @@ post:
 
     **Replicate file by path to any provider**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
 
@@ -106,7 +106,7 @@ post:
 
     **Replicate file by path to specific storage provider with URL callback**
     ```bash
-    curl --tlsv1.2 -X POST -H "X-Auth-Token: $TOKEN" \
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
@@ -118,7 +118,7 @@ post:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replication request was accepted and the result is the transfer Id, which
         can be used for monitoring the transfer status.
@@ -191,7 +191,7 @@ delete:
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `path` parameter specifies a folder, entire folder is evicted from
+    If the `path` parameter specifies a directory, entire directory is evicted from
     this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
@@ -204,7 +204,7 @@ delete:
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `path` parameter specifies a folder, entire folder is evicted from
+    If the `path` parameter specifies a directory, entire directory is evicted from
     this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
@@ -214,7 +214,7 @@ delete:
 
     **Remove file replica by path from specific storage provider**
     ```bash
-    curl --tlsv1.2 -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
@@ -223,7 +223,7 @@ delete:
   produces:
     - application/json
   responses:
-    '200':
+    '201':
       description: >
         The replica removal has been accepted and the result is the transfer Id,
         which can be used for monitoring the transfer status.
