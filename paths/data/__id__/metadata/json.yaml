@@ -162,4 +162,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.json | oneprovider-rest-cli setJsonMetadataById id=$FILE_ID -"
+    source: "cat metadata.json | oneprovider-rest-cli setJsonMetadata id=$FILE_ID -"

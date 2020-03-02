@@ -55,7 +55,7 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileRdfMetadataById id=$FILE_ID"
+    source: "oneprovider-rest-cli getRdfMetadata id=$FILE_ID"
 
 
 put:
@@ -122,4 +122,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadataById id=$FILE_ID -"
+    source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"

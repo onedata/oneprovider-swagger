@@ -1,24 +1,26 @@
 get:
-  operationId: get_file_xattrs
+  operationId: get_xattrs
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: xattrs
   summary: Get file extended attributes
   tags:
-    - File
+    - Data
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file, directory or space.
+    This method returns the selected extended attributes associated with specified file,
+    directory or space.
 
   description: |
-    This method returns the selected extended attributes associated with specified file, directory or space.
+    This method returns the selected extended attributes associated with specified file,
+    directory or space.
 
     ***Example cURL requests***
 
     **Get extended file attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/metadata/xattrs/MySpace1/File2.txt?extended=true&attribute=license"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
       "license": "CC-0"
@@ -33,6 +35,8 @@ get:
         type: object
         additionalProperties:
           type: string
+      example:
+        licence: CC-0
     '400':
       description: Invalid request.
       schema:
@@ -50,14 +54,14 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   - name: attribute
     in: query
-    description: Type of attribute to query for.
+    description: Name of attribute to query for.
     type: string
     required: false
   - name: inherited
@@ -80,19 +84,19 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileXattrs path='/MySpace/testfiles/file1.txt'"
+    source: "oneprovider-rest-cli getXattrs id=$FILE_ID"
 
 
 put:
-  operationId: set_file_xattr
+  operationId: set_xattr
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: xattrs
   summary: Set file extended attribute
   tags:
-    - File
+    - Data
   x-bash-codegen-description: |
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.
@@ -107,7 +111,7 @@ put:
     ```bash
     curl -X PUT -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "license": "CC-0" }' \
-    "https://$HOST/api/v3/oneprovider/metadata/xattrs/MySpace1/File2.txt?extended=true"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs"
     ```
   consumes:
     - application/json
@@ -131,9 +135,9 @@ put:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   - name: metadata
@@ -143,6 +147,8 @@ put:
       type: object
       additionalProperties:
         type: string
+    example:
+      licence: CC-0
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli setFileXattr path='/MySpace/testfiles/file1.txt' license==CC-0"
+    source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"

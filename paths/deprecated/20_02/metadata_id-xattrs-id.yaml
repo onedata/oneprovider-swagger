@@ -1,16 +1,21 @@
 get:
+  deprecated: true
   operationId: get_file_xattrs_by_id
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: xattrs
-  summary: Get file extended attributes by Id
+  summary: Get file extended attributes by Id (deprecated)
   tags:
     - File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_xattrs).
+
     This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_xattrs).
+
     This method returns the selected extended attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
@@ -84,20 +89,25 @@ get:
 
 
 put:
+  deprecated: true
   operationId: set_file_xattr_by_id
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: xattrs
-  summary: Set file extended attribute by Id
+  summary: Set file extended attribute by Id (deprecated)
   tags:
     - File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/set_xattr).
+
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/set_xattr).
+
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.
 

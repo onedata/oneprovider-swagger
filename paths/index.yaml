@@ -22,6 +22,9 @@
 /data/{id}/metadata/rdf:
   $ref: ./data/metadata/rdf.yaml
 
+/data/{id}/metadata/xattrs:
+  $ref: ./data/metadata/xattrs.yaml
+
 
 # tag File
 /lookup-file-id/{path}:
