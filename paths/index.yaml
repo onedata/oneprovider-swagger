@@ -13,17 +13,20 @@
 
 
 # tag Data
+/data/{id}:
+  $ref: ./data/__id__.yaml
+
 /data/{id}/children:
-  $ref: ./data/children.yaml
+  $ref: ./data/__id__/children.yaml
 
 /data/{id}/metadata/json:
-  $ref: ./data/metadata/json.yaml
+  $ref: ./data/__id__/metadata/json.yaml
 
 /data/{id}/metadata/rdf:
-  $ref: ./data/metadata/rdf.yaml
+  $ref: ./data/__id__/metadata/rdf.yaml
 
 /data/{id}/metadata/xattrs:
-  $ref: ./data/metadata/xattrs.yaml
+  $ref: ./data/__id__/metadata/xattrs.yaml
 
 
 # tag File

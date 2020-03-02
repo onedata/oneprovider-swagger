@@ -1,4 +1,5 @@
 get:
+  deprecated: true
   operationId: list_file_shares_by_path
   x-onedata-gri:
     type: op_file
@@ -6,11 +7,15 @@ get:
     aspect: shares
   tags:
     - File
-  summary: List file shares by path
+  summary: List file shares by path (deprecated)
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
     Returns the list of shares associated with specified by path file or directory.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
     Returns the list of shares associated with specified by path file or directory.
 
     ***Example cURL requests***
