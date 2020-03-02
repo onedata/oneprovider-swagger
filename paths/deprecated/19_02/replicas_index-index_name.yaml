@@ -6,7 +6,7 @@ post:
     type: op_replica
     id: ?BINDING(index_name)
     aspect: replicate_by_view
-  summary: Replicate files by index
+  summary: Replicate files by index (deprecated)
   tags:
     - Replica
   x-bash-codegen-description: |
@@ -226,11 +226,13 @@ delete:
     type: op_replica
     id: ?BINDING(index_name)
     aspect: evict_by_view
-  summary: Evict existing replicas by index
+  summary: Evict existing replicas by index (deprecated)
   tags:
     - Replica
   x-bash-codegen-description: |
-    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    This enpoint is deprecated, please use [this one](#operation/evict_replicas_by_view).
+
+    Queries the specified index and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
@@ -250,7 +252,9 @@ delete:
       * `space_query_views`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
 
   description: |
-    Queries the specified index and evicts the resulting list of replicas in specified provider. 
+    This enpoint is deprecated, please use [this one](#operation/evict_replicas_by_view).
+
+    Queries the specified index and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.

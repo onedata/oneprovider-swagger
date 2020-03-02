@@ -68,16 +68,16 @@
   $ref: ./spaces-sid.yaml
 
 /spaces/{sid}/indexes:
-  $ref: ./spaces-sid-indexes.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes.yaml
 
 /spaces/{sid}/indexes/{index_name}:
-  $ref: ./spaces-sid-indexes-index_name.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes-index_name.yaml
 
 /spaces/{sid}/indexes/{index_name}/reduce:
-  $ref: ./spaces-sid-indexes-index_name-reduce.yaml
+  $ref: /deprecated/19_02./spaces-sid-indexes-index_name-reduce.yaml
 
 /spaces/{sid}/indexes/{index_name}/query:
-  $ref: ./spaces-sid-indexes-index_name-query.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes-index_name-query.yaml
 
 /spaces/{sid}/views:
   $ref: ./spaces-sid-views.yaml
@@ -103,7 +103,7 @@
   $ref: ./replicas_id-fid.yaml
 
 /replicas-index/{index_name}:
-  $ref: ./replicas_index-index_name.yaml
+  $ref: ./deprecated/19_02/replicas_index-index_name.yaml
 
 /replicas-view/{view_name}:
   $ref: ./replicas_view-view_name.yaml
