@@ -1,13 +1,16 @@
 get:
+  deprecated: true
   operationId: get_file_json_metadata
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
     aspect: json_metadata
-  summary: Get file json metadata
+  summary: Get file json metadata (deprecated)
   tags:
     - File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_json_metadata).
+
     This method returns the json metadata associated with specified file, directory or space.
 
     By default the method returns the complete json metadata. But it is possible to request
@@ -19,6 +22,8 @@ get:
                     `[i]` (e.g. `key1.key2.[2].key3`)
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_json_metadata).
+
     This method returns the json metadata associated with specified file, directory or space.
 
     By default the method returns the complete json metadata. But it is possible to request
@@ -89,22 +94,27 @@ get:
 
 
 put:
+  deprecated: true
   operationId: set_file_json_metadata
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
     aspect: json_metadata
-  summary: Set file json metadata
+  summary: Set file json metadata (deprecated)
   tags:
     - File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/set_json_metadata).
+
     This method allows to set json metadata for a file, directory or
     space specified in the request path.
 
     This operation will replace the previous json metadata if any.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/set_json_metadata).
+
     This method allows to set json metadata for a file, directory or
     space specified in the request path.
 

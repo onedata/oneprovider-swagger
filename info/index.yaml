@@ -11,7 +11,7 @@ description: |
   All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
   query for 'mode' file attributes would be:
   ```
-  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=mode
+  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/data/$FILE_ID?attribute=mode
   ```
   Please note that currently the default port for Oneprovider instances is `443`.
 

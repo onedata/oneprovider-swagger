@@ -11,15 +11,24 @@
 /test_image:
   $ref: ./test_image.yaml
 
+
+# tag Data
+/data/{id}/children:
+  $ref: ./data/children.yaml
+
+/data/{id}/metadata/json:
+  $ref: ./data/metadata/json.yaml
+
+
 # tag File
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
 /files/{path}:
-  $ref: ./files-path.yaml
+  $ref: ./deprecated/20_02/files-path.yaml
 
 /files-id/{id}:
-  $ref: ./files_id-id.yaml
+  $ref: ./deprecated/20_02/files_id-id.yaml
 
 /file-shares/{path}:
   $ref: ./file_shares-path.yaml
@@ -34,7 +43,7 @@
   $ref: ./metadata-xattrs-path.yaml
 
 /metadata/json/{path}:
-  $ref: ./metadata-json-path.yaml
+  $ref: ./deprecated/20_02/metadata-json-path.yaml
 
 /metadata/rdf/{path}:
   $ref: ./metadata-rdf-path.yaml
@@ -46,7 +55,7 @@
   $ref: ./metadata_id-xattrs-id.yaml
 
 /metadata-id/json/{id}:
-  $ref: ./metadata_id-json-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
 
 /metadata-id/rdf/{id}:
   $ref: ./metadata_id-rdf-id.yaml

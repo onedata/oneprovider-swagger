@@ -8,6 +8,9 @@ Configuration:
 Error:
   $ref: ./error.yaml
 
+DirectoryChildren:
+  $ref: ./directory_children.yaml
+
 FileDistribution:
   $ref: ./filedistribution.yaml
 
