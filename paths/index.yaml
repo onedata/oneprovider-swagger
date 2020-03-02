@@ -19,6 +19,9 @@
 /data/{id}/metadata/json:
   $ref: ./data/metadata/json.yaml
 
+/data/{id}/metadata/rdf:
+  $ref: ./data/metadata/rdf.yaml
+
 
 # tag File
 /lookup-file-id/{path}:
@@ -31,34 +34,34 @@
   $ref: ./deprecated/20_02/files_id-id.yaml
 
 /file-shares/{path}:
-  $ref: ./file_shares-path.yaml
+  $ref: ./deprecated/20_02/file_shares-path.yaml
 
 /file-id-shares/{id}:
-  $ref: ./file_id_shares-id.yaml
+  $ref: ./deprecated/20_02/file_id_shares-id.yaml
 
 /metadata/attrs/{path}:
-  $ref: ./metadata-attrs-path.yaml
+  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
 
 /metadata/xattrs/{path}:
-  $ref: ./metadata-xattrs-path.yaml
+  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
 
 /metadata/json/{path}:
   $ref: ./deprecated/20_02/metadata-json-path.yaml
 
 /metadata/rdf/{path}:
-  $ref: ./metadata-rdf-path.yaml
+  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
 
 /metadata-id/attrs/{id}:
-  $ref: ./metadata_id-attrs-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
 
 /metadata-id/xattrs/{id}:
-  $ref: ./metadata_id-xattrs-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
 
 /metadata-id/json/{id}:
   $ref: ./deprecated/20_02/metadata_id-json-id.yaml
 
 /metadata-id/rdf/{id}:
-  $ref: ./metadata_id-rdf-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
 
 
 # tag Share

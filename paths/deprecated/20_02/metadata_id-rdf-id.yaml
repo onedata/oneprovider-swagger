@@ -1,24 +1,30 @@
 get:
-  operationId: get_file_rdf_metadata
+  deprecated: true
+  operationId: get_file_rdf_metadata_by_id
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Get file rdf metadata
+  summary: Get file rdf metadata by Id (deprecated)
   tags:
     - File
   x-bash-codegen-description: |
-    This method returns the rdf metadata associated with specified file, directory or space.
+    This enpoint is deprecated, please use [this one](#operation/get_rdf_metadata).
+
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
   description: |
-    This method returns the rdf metadata associated with specified file, directory or space.
+    This enpoint is deprecated, please use [this one](#operation/get_rdf_metadata).
+
+    This method returns the rdf metadata for specified file, directory or space by Id.
 
     ***Example cURL requests***
 
-    **Get complete RDF metadata document for File2.txt**
+    **Get complete RDF metadata document for file**
+
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1/File2.txt
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```
   produces:
     - application/rdf+xml
@@ -44,35 +50,31 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileRdfMetadata path='/MySpace/testfiles/file1.txt'"
+    source: "oneprovider-rest-cli getFileRdfMetadataById id=$FILE_ID"
 
 
 put:
-  operationId: set_file_rdf_metadata
+  deprecated: true
+  operationId: set_file_rdf_metadata_by_id
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Set file rdf metadata
+  summary: Set file rdf metadata by Id (deprecated)
   tags:
     - File
-  x-bash-codegen-description: |
-    This method allows to set specific rdf metadata for a file, directory or
-    space specified in the request path.
-
-    This operation will replace the previous rdf metadata if any.
-
   description: |
-    This method allows to set specific rdf metadata for a file, directory or
-    space specified in the request path.
+    This enpoint is deprecated, please use [this one](#operation/set_rdf_metadata).
+
+    This method allows to set specific rdf metadata for a file, directory or space specified by Id in the request path.
 
     This operation will replace the previous rdf metadata if any.
 
@@ -83,7 +85,7 @@ put:
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
-    https://$HOST/api/v3/oneprovider/metadata/rdf/MySpace1
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```
   consumes:
     - application/rdf+xml
@@ -107,9 +109,9 @@ put:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   - name: metadata
@@ -120,4 +122,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadata path='/MySpace/testfiles/file1.txt' -"
+    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadataById id=$FILE_ID -"
