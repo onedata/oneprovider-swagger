@@ -92,7 +92,7 @@
   $ref: ./deprecated/19_02/spaces-sid-indexes-index_name.yaml
 
 /spaces/{sid}/indexes/{index_name}/reduce:
-  $ref: /deprecated/19_02./spaces-sid-indexes-index_name-reduce.yaml
+  $ref: /deprecated/19_02/spaces-sid-indexes-index_name-reduce.yaml
 
 /spaces/{sid}/indexes/{index_name}/query:
   $ref: ./deprecated/19_02/spaces-sid-indexes-index_name-query.yaml

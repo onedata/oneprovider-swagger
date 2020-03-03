@@ -78,7 +78,7 @@ get:
         when the number of files and directories under given path exceeds 1000.
       type: integer
       required: false
-      minimum: 0
+      default: 0
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listDirChildren id=$FILE_ID limit=100 offset=300"

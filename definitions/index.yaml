@@ -29,8 +29,8 @@ EffectiveQos:
 Callback:
   $ref: ./callback.yaml
 
-FileMetadata:
-  $ref: ./filemetadata.yaml
+FileAttributes:
+  $ref: ./file_attributes.yaml
 
 FileMetadataChange:
   $ref: ./filemetadatachange.yaml

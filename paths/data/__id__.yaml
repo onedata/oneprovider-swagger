@@ -74,6 +74,7 @@ get:
         - storage_group_id
         - storage_user_id
         - shares
+        - provider_id
         - file_id
     collectionFormat: multi
     required: false
@@ -153,8 +154,6 @@ put:
       type: object
       additionalProperties:
         type: string
-    example:
-      mode: 0777
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"

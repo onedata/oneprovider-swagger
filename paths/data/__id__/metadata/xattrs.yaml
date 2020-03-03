@@ -35,8 +35,6 @@ get:
         type: object
         additionalProperties:
           type: string
-      example:
-        licence: CC-0
     '400':
       description: Invalid request.
       schema:
@@ -147,8 +145,6 @@ put:
       type: object
       additionalProperties:
         type: string
-    example:
-      licence: CC-0
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"

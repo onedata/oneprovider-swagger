@@ -1,0 +1,64 @@
+type: object
+description: File or directory basic attributes.
+properties:
+  name:
+    type: string
+    description: File or directory name.
+  type:
+    type: string
+    description: Determines whether this is a regular file or a directory.
+    enum:
+      - REG
+      - DIR
+      - LNK
+  mode:
+    type: integer
+    description: POSIX file permissions in decimal format
+  size:
+    type: integer
+    description: Size of the file in bytes.
+  atime:
+    type: integer
+    description: Last access timestamp.
+  mtime:
+    type: integer
+    description: Last modification timestamp.
+  ctime:
+    type: integer
+    description: Last attributes modification timestamp.
+  owner_id:
+    type: string
+    description: ID of the owner of this file.
+  file_id:
+    type: string
+    description: ID of the file.
+  provider_id:
+    type: string
+    description: ID of the provider on which this file was created.
+  storage_user_id:
+    type: string
+    description: ID of the owner of this file on storage.
+  storage_group_id:
+    type: string
+    description: ID of the group owner of this file on storage.
+  shares:
+    type: array
+    description: The list of Ids of shares created for this file.
+    items:
+      type: string
+example:
+  name: File1.txt
+  type: REG
+  mode: 511
+  size: 1024
+  atime: 1464958683054
+  mtime: 1464958683051
+  ctime: 1464958681054
+  owner_id: 16cc75ea-7fc4-4cd1-9cc8-12fa31595c50
+  file_id: NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm
+  provider_id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
+  storage_user_id: 0
+  storage_group_id: 0
+  shares:
+    - 1d24c36707d99197c6cd995810a43aca
+    - 6825604b0eb6a47b8b7a04b6369eb24d
