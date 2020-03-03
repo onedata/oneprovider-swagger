@@ -44,18 +44,11 @@ description: |
 
   ### Data
 
-  #### File browsing
-  The `/files/` path methods provide basic capability for browsing files in spaces and directories.
-  Paths must be complete up to a directory whose contents are needed and start with the name of the containing space.
-
-  #### File attributes
-  The `/attributes/` operation group provides GET and PUT methods enable querying
-  for file attributes, such as 'mode' file permissions and updating them.
-
-  #### Metadata
-  Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or directories (under `/metadata` path)
-  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
+  #### File information
+  The `/data/` path methods provide basic capability for:
+    - browsing files in spaces and directories,
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing file metadata.
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
@@ -138,18 +131,11 @@ x-bash-codegen-description: |
 
   ### Data
 
-  #### File browsing
-  The `/files/` path methods provide basic capability for browsing files in spaces and directories.
-  Paths must be complete up to a directory whose contents are needed and start with the name of the containing space.
-
-  #### File attributes
-  The `/attributes/` operation group provides GET and PUT methods enable querying
-  for file attributes, such as 'mode' file permissions and updating them.
-
-  #### Metadata
-  Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or directories (under `/metadata` path)
-  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
+  #### File information
+  The `/data/` path methods provide basic capability for:
+    - browsing files in spaces and directories,
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing file metadata.
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
