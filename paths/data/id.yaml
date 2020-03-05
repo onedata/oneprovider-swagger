@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: instance
+    aspect: attrs
   summary: Get file attributes
   tags:
     - Data
