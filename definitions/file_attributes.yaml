@@ -57,8 +57,8 @@ example:
   owner_id: 16cc75ea-7fc4-4cd1-9cc8-12fa31595c50
   file_id: NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm
   provider_id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
-  storage_user_id: 0
-  storage_group_id: 0
+  storage_user_id: 1935313
+  storage_group_id: 1101841
   shares:
     - 1d24c36707d99197c6cd995810a43aca
     - 6825604b0eb6a47b8b7a04b6369eb24d
