@@ -3,7 +3,7 @@ type: object
 properties:
   qosId:
     type: string
-    description: ID of QoS entry.
+    description: Id of QoS entry.
   expression:
     type: string
     description: Expression used to select storages on which file should be replicated.

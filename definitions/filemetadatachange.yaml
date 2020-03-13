@@ -3,7 +3,7 @@ description: Metadata changes.
 properties:
   fileId: 
     type: string
-    description: Unique ID of the file.
+    description: Unique Id of the file.
   filePath:
     type: string
     description: Absolute path to the file (starting with the Space name).

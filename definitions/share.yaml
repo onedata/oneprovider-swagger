@@ -3,7 +3,7 @@ description: Basic information about a share.
 properties:
   shareId:
     type: string
-    description: Share ID.
+    description: Share Id.
   name:
     type: string
     description: The name of the share.
@@ -18,10 +18,10 @@ properties:
       - dir
   rootFileId:
     type: string
-    description: The ID of the shared file or directory.
+    description: The Id of the shared file or directory.
   spaceId:
     type: string
-    description: The ID of the space in which the share was created.
+    description: The Id of the space in which the share was created.
   handleId:
     type: string
     description: The Id of open data Handle (e.g. DOI or PID) assigned to this share or null.

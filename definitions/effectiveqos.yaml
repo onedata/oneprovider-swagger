@@ -4,11 +4,11 @@ properties:
   assignedEntries:
     type: object
     description: >
-      Mapping between storage ID and list of QoS IDs that require
+      Mapping between storage Id and list of QoS Ids that require
       replica on that storage
   qosList:
     type: array
-    description: List of effective QoS entry IDs.
+    description: List of effective QoS entry Ids.
     items:
       type: string
   fulfilled:

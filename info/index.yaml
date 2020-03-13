@@ -68,7 +68,7 @@ description: |
   providers.
 
   #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
+  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
   returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring
@@ -155,7 +155,7 @@ x-bash-codegen-description: |
   providers.
 
   #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
+  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
   returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring

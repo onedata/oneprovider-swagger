@@ -3,14 +3,14 @@ description: File or directory basic attributes.
 properties:
   name:
     type: string
-    description: File or directory name.
+    description: File name.
   type:
     type: string
-    description: Determines whether this is a regular file or a directory.
+    description: Type of the file.
     enum:
-      - REG
-      - DIR
-      - LNK
+      - reg
+      - dir
+      - lnk
   mode:
     type: integer
     description: POSIX file permissions in decimal format
@@ -28,19 +28,19 @@ properties:
     description: Last attributes modification timestamp.
   owner_id:
     type: string
-    description: ID of the owner of this file.
+    description: Id of the owner of this file.
   file_id:
     type: string
-    description: ID of the file.
+    description: Id of the file.
   provider_id:
     type: string
-    description: ID of the provider on which this file was created.
+    description: Id of the provider on which this file was created.
   storage_user_id:
     type: string
-    description: ID of the owner of this file on storage.
+    description: Id of the owner of this file on storage.
   storage_group_id:
     type: string
-    description: ID of the group owner of this file on storage.
+    description: Id of the group owner of this file on storage.
   shares:
     type: array
     description: The list of Ids of shares created for this file.
