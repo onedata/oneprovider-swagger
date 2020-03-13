@@ -19,13 +19,13 @@ properties:
     description: Size of the file in bytes.
   atime:
     type: integer
-    description: Last access timestamp.
+    description: Last access timestamp (in seconds).
   mtime:
     type: integer
-    description: Last modification timestamp.
+    description: Last modification timestamp (in seconds).
   ctime:
     type: integer
-    description: Last attributes modification timestamp.
+    description: Last attributes modification timestamp (in seconds).
   owner_id:
     type: string
     description: Id of the owner of this file.
@@ -54,7 +54,7 @@ example:
   atime: 1464958683054
   mtime: 1464958683051
   ctime: 1464958681054
-  owner_id: 16cc75ea-7fc4-4cd1-9cc8-12fa31595c50
+  owner_id: MTZjYzc1ZWEtN2ZjNC00Y2QxLTljYzgtMTJmYTMxNTk1YzUw
   file_id: NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm
   provider_id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
   storage_user_id: 1935313

@@ -9,11 +9,11 @@ get:
     - File Data
   x-bash-codegen-description: |
     This method returns either all or only selected basic attributes associated
-    with specified file, directory or space by Id.
+    with specified file, directory or space.
 
   description: |
     This method returns either all or only selected basic attributes associated
-    with specified file, directory or space by Id.
+    with specified file, directory or space.
 
     ***Example cURL requests***
 
