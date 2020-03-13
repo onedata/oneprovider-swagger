@@ -10,8 +10,12 @@ get:
   x-bash-codegen-description: |
     This method returns the rdf metadata for specified file, directory or space.
 
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
   description: |
     This method returns the rdf metadata for specified file, directory or space.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -73,10 +77,14 @@ put:
 
     This operation will replace the previous rdf metadata if any.
 
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
   description: |
     This method allows to set specific rdf metadata for a file, directory or space.
 
     This operation will replace the previous rdf metadata if any.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

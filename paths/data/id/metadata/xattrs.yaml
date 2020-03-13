@@ -11,9 +11,13 @@ get:
     This method returns the selected extended attributes associated with specified file,
     directory or space.
 
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
   description: |
     This method returns the selected extended attributes associated with specified file,
     directory or space.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -99,9 +103,13 @@ put:
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.
 
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
   description: |
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
