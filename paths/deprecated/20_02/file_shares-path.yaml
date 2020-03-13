@@ -6,7 +6,7 @@ get:
     id: ?PATH_BINDING
     aspect: shares
   tags:
-    - File
+    - Deprecated File
   summary: List file shares by path (deprecated)
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_attrs).

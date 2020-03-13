@@ -9,9 +9,13 @@ definitions:
 tags:
   - name: Oneprovider
     description: Information about the Oneprovider service
-  - name: Data
-    description: Files and Directories related operations
-  - name: File
+  - name: File Path
+    description: Files and Directories path related operations
+  - name: File Data
+    description: Files and Directories data related operations
+  - name: File Metadata
+    description: Files and Directories metadata related operations
+  - name: Deprecated File
     description: Files and Directories related operations (deprecated)
   - name: Share
     description: Shares related operations
@@ -29,8 +33,10 @@ x-tagGroups:
       - Oneprovider
   - name: Data access and management
     tags:
-      - Data
-      - File
+      - File Path
+      - File Data
+      - File Metadata
+      - Deprecated File
       - Share
       - Space
   - name: Replication and transfer control

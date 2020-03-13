@@ -6,7 +6,7 @@ get:
     aspect: rdf_metadata
   summary: Get file rdf metadata
   tags:
-    - Data
+    - File Metadata
   x-bash-codegen-description: |
     This method returns the rdf metadata for specified file, directory or space.
 
@@ -67,7 +67,7 @@ put:
     aspect: rdf_metadata
   summary: Set file rdf metadata
   tags:
-    - Data
+    - File Metadata
   x-bash-codegen-description: |
     This method allows to set specific rdf metadata for a file, directory or space.
 

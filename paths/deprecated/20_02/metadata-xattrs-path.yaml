@@ -7,7 +7,7 @@ get:
     aspect: xattrs
   summary: Get file extended attributes (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_xattrs).
 
@@ -98,7 +98,7 @@ put:
     aspect: xattrs
   summary: Set file extended attribute (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/set_xattr).
 

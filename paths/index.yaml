@@ -12,13 +12,20 @@
   $ref: ./test_image.yaml
 
 
-# tag Data
+# tag File Path
+/lookup-file-id/{path}:
+  $ref: ./lookup_file_id-path.yaml
+
+
+# tag File Data
 /data/{id}:
   $ref: ./data/id.yaml
 
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
+
+# tag File Metadata
 /data/{id}/metadata/json:
   $ref: ./data/id/metadata/json.yaml
 
@@ -29,10 +36,7 @@
   $ref: ./data/id/metadata/xattrs.yaml
 
 
-# tag File
-/lookup-file-id/{path}:
-  $ref: ./lookup_file_id-path.yaml
-
+# tag Deprecated File
 /files/{path}:
   $ref: ./deprecated/20_02/files-path.yaml
 

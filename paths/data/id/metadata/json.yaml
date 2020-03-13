@@ -6,7 +6,7 @@ get:
     aspect: json_metadata
   summary: Get file json metadata
   tags:
-    - Data
+    - File Metadata
   x-bash-codegen-description: |
     This method returns the json metadata associated with specified file, directory or space.
 
@@ -97,7 +97,7 @@ put:
     aspect: json_metadata
   summary: Set file json metadata
   tags:
-    - Data
+    - File Metadata
   x-bash-codegen-description: |
     This method allows to set json metadata for a file, directory or space.
 

@@ -7,7 +7,7 @@ get:
     aspect: attrs
   summary: Get file attributes by Id (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_attrs).
 
@@ -93,7 +93,7 @@ put:
     aspect: attrs
   summary: Set file attribute by Id (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/set_attr).
 
