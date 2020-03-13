@@ -1,5 +1,5 @@
 get:
-  operationId: list_dir_children
+  operationId: list_children
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -22,7 +22,7 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$SPACE_DIR_ID"
+    "https://$HOST/api/v3/oneprovider/data/$DIR_ID"
 
     {
       "children": [
@@ -73,6 +73,7 @@ get:
         they can be retrieved using `index` and `offset` query parameters.
       type: integer
       required: false
+      maximum: 1000
       minimum: 1
       default: 1000
     - name: offset
@@ -85,4 +86,4 @@ get:
       default: 0
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listDirChildren id=$FILE_ID limit=100 offset=300"
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"

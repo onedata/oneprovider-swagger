@@ -24,10 +24,11 @@ get:
     **Get extended file attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license&attribute=blocks"
 
     {
-      "license": "CC-0"
+      "license": "CC-0",
+      "blocks": 3
     }
     ```
   produces:
@@ -64,7 +65,10 @@ get:
   - name: attribute
     in: query
     description: Name of attribute to query for.
-    type: string
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
     required: false
   - name: inherited
     in: query
