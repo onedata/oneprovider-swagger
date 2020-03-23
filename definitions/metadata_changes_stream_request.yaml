@@ -1,6 +1,16 @@
 type: object
 description: Specification of metadata changes to observe and stream.
 properties:
+  filters:
+    type: array
+    description: List of documents which modifications should trigger sending changes.
+    items:
+      type: string
+      enum:
+        - fileMeta
+        - fileLocation
+        - times
+        - customMetadata
   fileMeta:
     type: object
     description: Specification of fileMeta fields to observe.
