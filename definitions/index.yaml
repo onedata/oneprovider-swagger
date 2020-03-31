@@ -71,5 +71,5 @@ Shares:
 QosEntry:
   $ref: ./qosentry.yaml
 
-QosReq:
-  $ref: ./qosreq.yaml
+QosCreateRequest:
+  $ref: ./qoscreaterequest.yaml

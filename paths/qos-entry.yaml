@@ -1,0 +1,72 @@
+post:
+  operationId: add_qos_entry
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_qos
+    aspect: instance
+  tags:
+    - QoS
+  summary: Add QoS entry
+  x-bash-codegen-description: |
+    Adds new QoS entry for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS entry.
+  description: |
+    Adds new QoS entry for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS entry.
+
+    ***Example cURL requests***
+
+    **Add QoS entry for file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "expression": "country=FR", "replicasNum": 2, "fileId": $FILE_ID }' \
+    "https://$HOST/api/v3/oneprovider/qos-entry"
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the QoS entry Id
+        (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
+        Also URI of the QoS entry in form https://$HOST/api/v3/oneprovider/qos-entry/{qid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the QoS entry.
+          type: string
+      schema:
+        type: object
+        properties:
+          qosEntryId:
+            type: string
+            description: QoS entry Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Data containig expression and required replicas number.
+      schema:
+        $ref: '#/definitions/QosCreateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli addQosEntry fileId=$FILE_ID expression='country=FR' replicasNum=2"

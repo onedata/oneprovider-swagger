@@ -15,6 +15,8 @@ tags:
     description: Files and Directories data related operations
   - name: File Metadata
     description: Files and Directories metadata related operations
+  - name: File QoS
+    description: Files and Directories QoS related operations
   - name: Deprecated File
     description: Files and Directories related operations (deprecated)
   - name: Share
@@ -36,6 +38,7 @@ x-tagGroups:
       - File Path
       - File Data
       - File Metadata
+      - File QoS
       - Deprecated File
       - Share
       - Space

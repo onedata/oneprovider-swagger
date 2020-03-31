@@ -1,6 +1,9 @@
 description: Object representing body of request that adds QoS entry for file or directory
 type: object
 properties:
+  fileId:
+    type: string
+    description: Id of file or directory entry is going to be created for.
   expression:
     type: string
     description: Expression used to select storages on which file should be replicated.
@@ -9,5 +12,6 @@ properties:
     description: Number of required file replicas.
     default: 1
 example:
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   expression: country=FR
   replicasNum: 2

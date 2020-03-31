@@ -4,23 +4,23 @@ get:
     type: op_qos
     id: ?BINDING(qid)
     aspect: instance
-  summary: Get QoS entry
   tags:
     - QoS
+  summary: Get QoS entry
   x-bash-codegen-description: |
-    Returns detailed information about particular QoS entry by its Id.
+    Returns detailed information about particular QoS entry.
   description: |
-    Returns detailed information about particular QoS entry by its Id.
+    Returns detailed information about particular QoS entry.
 
     ***Example cURL requests***
 
     **Get detailed information about QoS entry**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
+    "https://$HOST/api/v3/oneprovider/qos-entry/$QOS_ENTRY_ID"
 
     {
-      "qosId": "c84f669f9522c46976fee490d80651f0",
+      "fileId": "$FILE_ID",
       "qosExpression": "country=FR",
       "replicasNum": 2,
       "fulfilled": true
@@ -58,7 +58,7 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQosEntry qid='c84f669f9522c46976fee490d80651f0'"
+      source: "oneprovider-rest-cli getQosEntry qid=$QOS_ENTRY_ID"
 
 
 delete:
@@ -81,7 +81,7 @@ delete:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
-    "https://$HOST/api/v3/oneprovider/qos-entry/c84f669f9522c46976fee490d80651f0"
+    "https://$HOST/api/v3/oneprovider/qos-entry/$QOS_ENTRY_ID"
     ```
   consumes:
     - application/json
@@ -112,4 +112,4 @@ delete:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeQosEntry qid='c84f669f9522c46976fee490d80651f0'"
+      source: "oneprovider-rest-cli removeQosEntry qid=$QOS_ENTRY_ID"

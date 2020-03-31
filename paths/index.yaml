@@ -36,6 +36,11 @@
   $ref: ./data/id/metadata/xattrs.yaml
 
 
+# tag File Metadata
+/data/{id}/qos_entries:
+  $ref: ./data/id/qos-entries.yaml
+  
+
 # tag Deprecated File
 /files/{path}:
   $ref: ./deprecated/20_02/files-path.yaml
@@ -151,11 +156,8 @@
 
 
 # tag QoS
-/qos/{path}:
-  $ref: ./qos-path.yaml
-
-/qos-id/{id}:
-  $ref: ./qos_id-id.yaml
+/qos-entry:
+  $ref: ./qos-entry.yaml
 
 /qos-entry/{qid}:
-  $ref: ./qos_entry-qid.yaml
+  $ref: ./qos-entry/qid.yaml

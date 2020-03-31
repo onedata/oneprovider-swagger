@@ -1,0 +1,76 @@
+get:
+  operationId: get_effective_qos_entries
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: eff_qos
+  tags:
+    - File QoS
+  summary: Get QoS summary
+  x-bash-codegen-description: |
+    Returns QoS summary for file or directory.  
+    QoS summary contains information about effective QoS, which is calculated by merging
+    QoS entries defined directly for file with QoS entries defined for all
+    its ancestors.  
+    Effective QoS contains list of all QoS entries that influences
+    given file or directory and their fulfillment status for this file/directory.  
+    AssignedEntries is a mapping from storage Id to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
+  description: |
+    Returns QoS summary for file or directory.  
+    QoS summary contains information about effective QoS, which is calculated by merging
+    QoS entries defined directly for file with QoS entries defined for all
+    its ancestors.  
+    Effective QoS contains list of all QoS entries that influences
+    given file or directory and their fulfillment status for this file/directory.  
+    AssignedEntries is a mapping from storage Id to sublist of QoS
+    entries. This mapping shows which QoS entries requires file replica on given
+    storage (mapping is calculated by system using information stored in QoS entries).
+
+    ***Example cURL requests***
+
+    **Get effective QoS for file**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos-entries"
+
+    {
+      "assignedEntries": {"$STORAGE_ID": ["$QOS_ENTRY_ID"]},
+      "qosEntries": [{"$QOS_ENTRY_ID": false}],
+      "fulfilled": false
+    }
+
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Effective QoS for file or directory.
+      schema:
+        $ref: '#/definitions/EffectiveQos'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getEffectiveQosEntries id=$FILE_ID"
