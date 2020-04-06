@@ -63,7 +63,7 @@ post:
   parameters:
     - name: data
       in: body
-      description: Data containig expression and required replicas number.
+      description: QoS entry properties
       schema:
         $ref: '#/definitions/QosCreateRequest'
       required: true

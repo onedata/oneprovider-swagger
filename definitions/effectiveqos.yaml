@@ -1,7 +1,7 @@
 description: Information about effective QoS for file or directory.
 type: object
 properties:
-  qosList:
+  entries:
     type: object
     description: >
       List of all QoS entries that influences given file/directory 
