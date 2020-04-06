@@ -20,6 +20,7 @@ get:
     "https://$HOST/api/v3/oneprovider/qos-entry/$QOS_ENTRY_ID"
 
     {
+      "qosEntryId": "c84f669f9522c46976fee490d80651f0",
       "fileId": "$FILE_ID",
       "qosExpression": "country=FR",
       "replicasNum": 2,

@@ -1,18 +1,21 @@
 description: Information about effective QoS for file or directory.
 type: object
 properties:
+  qosList:
+    type: object
+    description: >
+      List of all QoS entries that influences given file/directory 
+      and foreach entry information whether it is fulfilled for this file/directory.  
   assignedEntries:
     type: object
     description: >
-      Mapping between storage Id and list of QoS Ids that require
-      replica on that storage
-  qosList:
-    type: object
-    description: List of effective QoS entry Ids and their fulfillment status for this file.
+      Mapping from storage Id to sublist of QoS entries. This mapping shows which QoS 
+      entries require file replica on given storage (mapping is calculated by system 
+      using information stored in QoS entries)
   fulfilled:
     type: boolean
     description: Indicates whether all QoS entries for given file or directory are fulfilled. 
 example:
+  entries: [{"c84f669f9522c46976fee490d80651f0": true}]
   assignedEntries: {"6969ba86d2172e15f8156ccb32a58b92": ["c84f669f9522c46976fee490d80651f0"]}
-  qosList: [{"c84f669f9522c46976fee490d80651f0": true}]
   fulfilled: true

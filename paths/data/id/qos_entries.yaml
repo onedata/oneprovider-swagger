@@ -1,22 +1,17 @@
 get:
-  operationId: get_effective_qos_entries
+  operationId: get_file_qos_summary
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: eff_qos
+    aspect: file_qos_summary
   tags:
     - File QoS
-  summary: Get QoS summary
+  summary: Get file QoS summary
   x-bash-codegen-description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its ancestors.  
-    Effective QoS contains list of all QoS entries that influences
-    given file or directory and their fulfillment status for this file/directory.  
-    AssignedEntries is a mapping from storage Id to sublist of QoS
-    entries. This mapping shows which QoS entries requires file replica on given
-    storage (mapping is calculated by system using information stored in QoS entries).
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
   description: |
@@ -24,24 +19,19 @@ get:
     QoS summary contains information about effective QoS, which is calculated by merging
     QoS entries defined directly for file with QoS entries defined for all
     its ancestors.  
-    Effective QoS contains list of all QoS entries that influences
-    given file or directory and their fulfillment status for this file/directory.  
-    AssignedEntries is a mapping from storage Id to sublist of QoS
-    entries. This mapping shows which QoS entries requires file replica on given
-    storage (mapping is calculated by system using information stored in QoS entries).
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
-    **Get effective QoS for file**
+    **Get file QoS summary**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos-entries"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos_entries"
 
     {
+      "entries": [{"$QOS_ENTRY_ID": false}],
       "assignedEntries": {"$STORAGE_ID": ["$QOS_ENTRY_ID"]},
-      "qosEntries": [{"$QOS_ENTRY_ID": false}],
       "fulfilled": false
     }
 
@@ -77,4 +67,4 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getEffectiveQosEntries id=$FILE_ID"
+      source: "oneprovider-rest-cli getFileQosSummary id=$FILE_ID"

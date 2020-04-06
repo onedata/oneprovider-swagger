@@ -38,7 +38,7 @@
 
 # tag File QoS
 /data/{id}/qos_entries:
-  $ref: ./data/id/qos-entries.yaml
+  $ref: ./data/id/qos_entries.yaml
   
 
 # tag Deprecated File
@@ -156,8 +156,8 @@
 
 
 # tag QoS
-/qos-entry:
-  $ref: ./qos-entry.yaml
+/qos_entry:
+  $ref: ./qos_entry.yaml
 
-/qos-entry/{qid}:
-  $ref: ./qos-entry/qid.yaml
+/qos_entry/{qid}:
+  $ref: ./qos_entry/qid.yaml
