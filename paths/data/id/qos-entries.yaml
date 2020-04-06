@@ -17,6 +17,8 @@ get:
     AssignedEntries is a mapping from storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
   description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
@@ -27,6 +29,8 @@ get:
     AssignedEntries is a mapping from storage Id to sublist of QoS
     entries. This mapping shows which QoS entries requires file replica on given
     storage (mapping is calculated by system using information stored in QoS entries).
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

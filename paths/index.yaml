@@ -36,7 +36,7 @@
   $ref: ./data/id/metadata/xattrs.yaml
 
 
-# tag File Metadata
+# tag File QoS
 /data/{id}/qos_entries:
   $ref: ./data/id/qos-entries.yaml
   
