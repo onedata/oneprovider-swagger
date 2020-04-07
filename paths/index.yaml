@@ -34,11 +34,6 @@
 
 /data/{id}/metadata/xattrs:
   $ref: ./data/id/metadata/xattrs.yaml
-
-
-# tag File QoS
-/data/{id}/qos_summary:
-  $ref: ./data/id/qos_summary.yaml
   
 
 # tag Deprecated File
@@ -161,3 +156,6 @@
 
 /qos_entry/{qid}:
   $ref: ./qos_entry/qid.yaml
+
+/data/{id}/qos_summary:
+  $ref: ./data/id/qos_summary.yaml

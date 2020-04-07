@@ -23,8 +23,8 @@ FileTransferStatus:
 FilePath:
   $ref: ./filepath.yaml
 
-EffectiveQos:
-  $ref: ./effectiveqos.yaml
+QosSummary:
+  $ref: ./qossummary.yaml
 
 Callback:
   $ref: ./callback.yaml

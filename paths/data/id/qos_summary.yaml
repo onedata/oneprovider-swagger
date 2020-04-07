@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: file_qos_summary
   tags:
-    - File QoS
+    - QoS
   summary: Get file QoS summary
   x-bash-codegen-description: |
     Returns QoS summary for file or directory.  
@@ -40,9 +40,9 @@ get:
     - application/json
   responses:
     '200':
-      description: Effective QoS for file or directory.
+      description: QoS summary for file or directory.
       schema:
-        $ref: '#/definitions/EffectiveQos'
+        $ref: '#/definitions/QosSummary'
     '400':
       description: Invalid request.
       schema:

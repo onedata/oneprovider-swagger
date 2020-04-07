@@ -1,4 +1,4 @@
-description: Information about effective QoS for file or directory.
+description: QoS summary for file or directory.
 type: object
 properties:
   entries:
