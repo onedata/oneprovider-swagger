@@ -8,6 +8,9 @@ Configuration:
 Error:
   $ref: ./error.yaml
 
+DirectoryChildren:
+  $ref: ./directory_children.yaml
+
 FileDistribution:
   $ref: ./filedistribution.yaml
 
@@ -26,8 +29,8 @@ EffectiveQos:
 Callback:
   $ref: ./callback.yaml
 
-FileMetadata:
-  $ref: ./filemetadata.yaml
+FileAttributes:
+  $ref: ./file_attributes.yaml
 
 FileMetadataChange:
   $ref: ./filemetadatachange.yaml

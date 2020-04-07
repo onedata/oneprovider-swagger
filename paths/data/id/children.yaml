@@ -1,55 +1,49 @@
 get:
-  operationId: list_files_by_id
+  operationId: list_children
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: list
+    aspect: children
   tags:
-    - File
-  summary: List files and directories by Id
+    - File Data
+  summary: List directory files and subdirectories
   x-bash-codegen-description: |
-    Returns the list of directories and files directly under directory specified by Id.
+    Returns the list of directory files and subdirectories.
 
-    If the Id points to a file, the result array will consist only of the
-    single item with the path to the file requested, confirming it exists.
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    Returns the list of directories and files directly under directory specified by Id.
+    Returns the list of directory files and subdirectories.
 
-    If the Id points to a file, the result array will consist only of the
-    single item with the path to the file requested, confirming it exists.
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
     **Get files in space subdirectory**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/files-id/$FILE_ID"
+    "https://$HOST/api/v3/oneprovider/data/$DIR_ID"
 
-    [
-      {
-        "id": "c4798eb2-dbd2-486f-ae94-0e6fa0a5071d",
-        "path": "/MySpace1/MyDir2/File1.txt"
-      },
-      {
-        "id": "620e1642-4f2d-45f2-b4eb-37f8a958b46f",
-        "path": "/MySpace1/MyDir2/Dir33"
-      },
-      {
-        "id": "55ac4ed3-a723-47ab-a892-638578b9cad7",
-        "path": "/MySpace1/MyDir2/File3.txt"
-      }
-    ]
+    {
+      "children": [
+        {
+          "id": "YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk",
+          "name": "File1.txt"
+        },
+        {
+          "id": "NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm",
+          "name": "Dir2"
+        }
+      ]
+    }
     ```
   produces:
     - application/json
   responses:
     '200':
-      description: The list of files and directories under specified path.
+      description: The list of directory files and subdirectories.
       schema:
-        type: array
-        items:
-          $ref: '#/definitions/FilePath'
+        $ref: '#/definitions/DirectoryChildren'
     '400':
       description: Invalid request.
       schema:
@@ -69,14 +63,14 @@ get:
   parameters:
     - name: id
       in: path
-      description: Id of the file.
+      description: Id of the directory.
       type: string
       required: true
     - name: limit
       in: query
       description: >
         Allows to specify maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
+        they can be retrieved using `index` and `offset` query parameters.
       type: integer
       required: false
       maximum: 1000
@@ -89,7 +83,7 @@ get:
         when the number of files and directories under given path exceeds 1000.
       type: integer
       required: false
-      minimum: 0
+      default: 0
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listFilesById id=$FILE_ID limit=100 offset=300"
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"

@@ -1,17 +1,21 @@
 get:
-  operationId: get_file_rdf_metadata_by_id
+  operationId: get_rdf_metadata
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Get file rdf metadata by Id
+  summary: Get file rdf metadata
   tags:
-    - File
+    - File Metadata
   x-bash-codegen-description: |
-    This method returns the rdf metadata for specified file, directory or space by Id.
+    This method returns the rdf metadata for specified file, directory or space.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    This method returns the rdf metadata for specified file, directory or space by Id.
+    This method returns the rdf metadata for specified file, directory or space.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -19,7 +23,9 @@ get:
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
+    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+
+    <RDF><homepage>https://www.onedata.org</homepage></RDF>
     ```
   produces:
     - application/rdf+xml
@@ -28,6 +34,7 @@ get:
       description: Rdf metadata returned successfully.
       schema:
         type: string
+        example: <RDF><homepage>https://www.onedata.org</homepage></RDF>
     '400':
       description: Invalid request.
       schema:
@@ -52,23 +59,32 @@ get:
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileRdfMetadataById id=$FILE_ID"
+    source: "oneprovider-rest-cli getRdfMetadata id=$FILE_ID"
 
 
 put:
-  operationId: set_file_rdf_metadata_by_id
+  operationId: set_rdf_metadata
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Set file rdf metadata by Id
+  summary: Set file rdf metadata
   tags:
-    - File
-  description: |
-    This method allows to set specific rdf metadata for a file, directory or space specified by Id in the request path.
+    - File Metadata
+  x-bash-codegen-description: |
+    This method allows to set specific rdf metadata for a file, directory or space.
 
     This operation will replace the previous rdf metadata if any.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
+  description: |
+    This method allows to set specific rdf metadata for a file, directory or space.
+
+    This operation will replace the previous rdf metadata if any.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -77,7 +93,7 @@ put:
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
-    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
+    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
     ```
   consumes:
     - application/rdf+xml
@@ -114,4 +130,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadataById id=$FILE_ID -"
+    source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"

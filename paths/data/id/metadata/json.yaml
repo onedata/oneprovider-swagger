@@ -1,12 +1,12 @@
 get:
-  operationId: get_file_json_metadata
+  operationId: get_json_metadata
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: json_metadata
   summary: Get file json metadata
   tags:
-    - File
+    - File Metadata
   x-bash-codegen-description: |
     This method returns the json metadata associated with specified file, directory or space.
 
@@ -17,6 +17,8 @@ get:
       * **keypath** - list of JSON keys which point to requested JSON object,
                     separated by `.`, array elements should be expressed as
                     `[i]` (e.g. `key1.key2.[2].key3`)
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
     This method returns the json metadata associated with specified file, directory or space.
@@ -29,13 +31,14 @@ get:
                     separated by `.`, array elements should be expressed as
                     `[i]` (e.g. `key1.key2.[2].key3`)
 
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
     **Get specific JSON value from metadata document**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt?filter_type=keypath&filter=key1.key2.[2].key3
+    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json?filter_type=keypath&filter=key1.key2.[2].key3
     ```
   produces:
     - application/json
@@ -61,9 +64,9 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   - name: filter_type
@@ -85,30 +88,32 @@ get:
     required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileJsonMetadata path='/MySpace/testfiles/file1.txt' inherited=false"
+    source: "oneprovider-rest-cli getJsonMetadata id=$FILE_ID inherited=false"
 
 
 put:
-  operationId: set_file_json_metadata
+  operationId: set_json_metadata
   x-onedata-parse_body: '{as_is, <<"metadata">>}'
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: json_metadata
   summary: Set file json metadata
   tags:
-    - File
+    - File Metadata
   x-bash-codegen-description: |
-    This method allows to set json metadata for a file, directory or
-    space specified in the request path.
+    This method allows to set json metadata for a file, directory or space.
 
     This operation will replace the previous json metadata if any.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    This method allows to set json metadata for a file, directory or
-    space specified in the request path.
+    This method allows to set json metadata for a file, directory or space.
 
     This operation will replace the previous json metadata if any.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -117,7 +122,7 @@ put:
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/json" \
     -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
-    https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt
+    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
     ```
   consumes:
     - application/json
@@ -141,9 +146,9 @@ put:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: path
+  - name: id
     in: path
-    description: File or directory path or space name (e.g. '/MySpace/testfiles/file1.txt')
+    description: Id of the file.
     type: string
     required: true
   - name: filter_type
@@ -164,4 +169,4 @@ put:
       type: string
   x-code-samples:
   - lang: Shell
-    source: "cat metadata.json | oneprovider-rest-cli setFileJsonMetadata path='/MySpace/testfiles/file1.txt' -"
+    source: "cat metadata.json | oneprovider-rest-cli setJsonMetadata id=$FILE_ID -"

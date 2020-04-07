@@ -1,16 +1,21 @@
 get:
+  deprecated: true
   operationId: get_file_attrs_by_id
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: attrs
-  summary: Get file attributes by Id
+  summary: Get file attributes by Id (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
     This method returns the selected attributes associated with specified file, directory or space by Id.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
     This method returns the selected attributes associated with specified file, directory or space by Id.
 
     ***Example cURL requests***
@@ -79,16 +84,19 @@ get:
 
 
 put:
+  deprecated: true
   operationId: set_file_attr_by_id
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: attrs
-  summary: Set file attribute by Id
+  summary: Set file attribute by Id (deprecated)
   tags:
-    - File
+    - Deprecated File
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/set_attr).
+
     This method allows to set a value of a regular file attribute.
 
     Currently only POSIX mode can be changed by
@@ -99,6 +107,8 @@ put:
     where the POSIX mode is specified in octal notation.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/set_attr).
+
     This method allows to set a value of a regular file attribute.
 
     Currently only POSIX mode can be changed by sending:

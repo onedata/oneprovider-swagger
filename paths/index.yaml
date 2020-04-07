@@ -11,45 +11,67 @@
 /test_image:
   $ref: ./test_image.yaml
 
-# tag File
+
+# tag File Path
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
+
+# tag File Data
+/data/{id}:
+  $ref: ./data/id.yaml
+
+/data/{id}/children:
+  $ref: ./data/id/children.yaml
+
+
+# tag File Metadata
+/data/{id}/metadata/json:
+  $ref: ./data/id/metadata/json.yaml
+
+/data/{id}/metadata/rdf:
+  $ref: ./data/id/metadata/rdf.yaml
+
+/data/{id}/metadata/xattrs:
+  $ref: ./data/id/metadata/xattrs.yaml
+
+
+# tag Deprecated File
 /files/{path}:
-  $ref: ./files-path.yaml
+  $ref: ./deprecated/20_02/files-path.yaml
 
 /files-id/{id}:
-  $ref: ./files_id-id.yaml
+  $ref: ./deprecated/20_02/files_id-id.yaml
 
 /file-shares/{path}:
-  $ref: ./file_shares-path.yaml
+  $ref: ./deprecated/20_02/file_shares-path.yaml
 
 /file-id-shares/{id}:
-  $ref: ./file_id_shares-id.yaml
+  $ref: ./deprecated/20_02/file_id_shares-id.yaml
 
 /metadata/attrs/{path}:
-  $ref: ./metadata-attrs-path.yaml
+  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
 
 /metadata/xattrs/{path}:
-  $ref: ./metadata-xattrs-path.yaml
+  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
 
 /metadata/json/{path}:
-  $ref: ./metadata-json-path.yaml
+  $ref: ./deprecated/20_02/metadata-json-path.yaml
 
 /metadata/rdf/{path}:
-  $ref: ./metadata-rdf-path.yaml
+  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
 
 /metadata-id/attrs/{id}:
-  $ref: ./metadata_id-attrs-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
 
 /metadata-id/xattrs/{id}:
-  $ref: ./metadata_id-xattrs-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
 
 /metadata-id/json/{id}:
-  $ref: ./metadata_id-json-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
 
 /metadata-id/rdf/{id}:
-  $ref: ./metadata_id-rdf-id.yaml
+  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
 
 
 # tag Share
@@ -68,16 +90,16 @@
   $ref: ./spaces-sid.yaml
 
 /spaces/{sid}/indexes:
-  $ref: ./spaces-sid-indexes.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes.yaml
 
 /spaces/{sid}/indexes/{index_name}:
-  $ref: ./spaces-sid-indexes-index_name.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes-index_name.yaml
 
 /spaces/{sid}/indexes/{index_name}/reduce:
-  $ref: ./spaces-sid-indexes-index_name-reduce.yaml
+  $ref: /deprecated/19_02/spaces-sid-indexes-index_name-reduce.yaml
 
 /spaces/{sid}/indexes/{index_name}/query:
-  $ref: ./spaces-sid-indexes-index_name-query.yaml
+  $ref: ./deprecated/19_02/spaces-sid-indexes-index_name-query.yaml
 
 /spaces/{sid}/views:
   $ref: ./spaces-sid-views.yaml
@@ -103,7 +125,7 @@
   $ref: ./replicas_id-fid.yaml
 
 /replicas-index/{index_name}:
-  $ref: ./replicas_index-index_name.yaml
+  $ref: ./deprecated/19_02/replicas_index-index_name.yaml
 
 /replicas-view/{view_name}:
   $ref: ./replicas_view-view_name.yaml

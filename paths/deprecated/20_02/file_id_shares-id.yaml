@@ -1,24 +1,29 @@
 get:
-  operationId: list_file_shares_by_path
+  deprecated: true
+  operationId: list_file_shares_by_id
   x-onedata-gri:
     type: op_file
-    id: ?PATH_BINDING
+    id: ?OBJECTID_BINDING(id)
     aspect: shares
   tags:
-    - File
-  summary: List file shares by path
+    - Deprecated File
+  summary: List file shares by Id (deprecated)
   x-bash-codegen-description: |
-    Returns the list of shares associated with specified by path file or directory.
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
+    Returns the list of shares associated with specified by Id file or directory.
 
   description: |
-    Returns the list of shares associated with specified by path file or directory.
+    This enpoint is deprecated, please use [this one](#operation/get_attrs).
+
+    Returns the list of shares associated with specified by Id file or directory.
 
     ***Example cURL requests***
 
     **List shares associated with specified file or directory**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/file-shares/MySpace/testfile"
+    "https://$HOST/api/v3/oneprovider/file-id-shares/$FILE_ID"
 
     {
       "shares": [
@@ -52,11 +57,11 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-    - name: path
+    - name: id
       in: path
-      description: File or directory path (e.g. '/MySpace/testfile')
+      description: Id of the file or directory.
       type: string
       required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listFileSharesByPath path='MySpace/testfile'"
+    source: "oneprovider-rest-cli listFileSharesById id=$FILE_ID"

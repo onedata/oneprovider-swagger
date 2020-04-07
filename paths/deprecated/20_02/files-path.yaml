@@ -1,19 +1,24 @@
 get:
+  deprecated: true
   operationId: list_files
   x-onedata-gri:
     type: op_file
     id: ?PATH_BINDING
     aspect: list
   tags:
-    - File
-  summary: List files and directories
+    - Deprecated File
+  summary: List files and directories (deprecated)
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/list_dir_children).
+
     Returns the list of directories and files directly under specified path.
 
     If the path points to a file, the result array will consist only of the
     single item with the path to the file requested, confirming it exists.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/list_dir_children).
+
     Returns the list of directories and files directly under specified path.
 
     If the path points to a file, the result array will consist only of the

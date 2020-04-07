@@ -9,7 +9,7 @@ items:
   properties: 
     providerId: 
       type: string
-      description: ID of the provider
+      description: Id of the provider
     blocks:
       type: array
       description: The list of blocks in byte ranges stored at that provider.
