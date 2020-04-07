@@ -6,18 +6,18 @@ get:
     aspect: file_qos_summary
   tags:
     - QoS
-  summary: Get file QoS summary
+  summary: Get QoS summary for file or directory
   x-bash-codegen-description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
-    QoS entries defined directly for file with QoS entries defined for all
+    QoS entries defined directly for file or directory with QoS entries defined for all
     its ancestors.  
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
   description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
-    QoS entries defined directly for file with QoS entries defined for all
+    QoS entries defined directly for file or directory with QoS entries defined for all
     its ancestors.  
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
@@ -52,7 +52,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: File or directory not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -62,7 +62,7 @@ get:
   parameters:
     - name: id
       in: path
-      description: Id of the file.
+      description: Id of the file or directory.
       type: string
       required: true
   x-code-samples:
