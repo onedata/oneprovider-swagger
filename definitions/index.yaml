@@ -23,9 +23,6 @@ FileTransferStatus:
 FilePath:
   $ref: ./filepath.yaml
 
-EffectiveQos:
-  $ref: ./effectiveqos.yaml
-
 Callback:
   $ref: ./callback.yaml
 
@@ -71,5 +68,8 @@ Shares:
 QosEntry:
   $ref: ./qosentry.yaml
 
-QosReq:
-  $ref: ./qosreq.yaml
+QosCreateRequest:
+  $ref: ./qoscreaterequest.yaml
+
+QosSummary:
+  $ref: ./qossummary.yaml

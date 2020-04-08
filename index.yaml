@@ -17,6 +17,8 @@ tags:
     description: Files and Directories metadata related operations
   - name: Deprecated File
     description: Files and Directories related operations (deprecated)
+  - name: QoS
+    description: QoS related operations
   - name: Share
     description: Shares related operations
   - name: Space

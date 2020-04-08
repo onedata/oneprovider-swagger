@@ -1,9 +1,9 @@
 description: Object representing a QoS entry.
 type: object
 properties:
-  qosId:
+  fileId:
     type: string
-    description: Id of QoS entry.
+    description: Id of file that entry was created for.
   expression:
     type: string
     description: Expression used to select storages on which file should be replicated.
@@ -17,7 +17,8 @@ properties:
       Indicates whether QoS requirement is fulfilled. QoS requirement comprise
       of QoS expression and number of required file replicas.
 example:
-  qosId: c84f669f9522c46976fee490d80651f0
+  qosEntryId: c84f669f9522c46976fee490d80651f0
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   expression: country=FR
   replicasNum: 2
   fulfilled: true

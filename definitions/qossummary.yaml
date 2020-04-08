@@ -1,0 +1,21 @@
+description: QoS summary for file or directory.
+type: object
+properties:
+  entries:
+    type: object
+    description: >
+      Mapping including all QoS entries (Ids) that influence given file/directory and corresponding 
+      information whether the entry is fulfilled for this file/directory (boolean).
+  assignedEntries:
+    type: object
+    description: >
+      Mapping from storage Id to sublist of QoS entries. This mapping shows which QoS 
+      entries require file replica on given storage (mapping is calculated by system 
+      using information stored in QoS entries)
+  fulfilled:
+    type: boolean
+    description: Indicates whether all QoS entries for given file or directory are fulfilled. 
+example:
+  entries: {"c84f669f9522c46976fee490d80651f0": true}
+  assignedEntries: {"6969ba86d2172e15f8156ccb32a58b92": ["c84f669f9522c46976fee490d80651f0"]}
+  fulfilled: true
