@@ -21,13 +21,12 @@ get:
 
     ***Example cURL requests***
 
-    **Get file POSIX mode and size**
+    **Get file size**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID?attribute=mode&attribute=size"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size"
 
     {
-      "mode": "0777",
       "size": 100
     }
     ```
@@ -62,25 +61,25 @@ get:
     required: true
   - name: attribute
     in: query
-    description: Type of attribute to query for.
-    type: array
-    items:
-      type: string
-      enum:
-        - name
-        - owner_id
-        - type
-        - mode
-        - size
-        - atime
-        - mtime
-        - ctime
-        - storage_group_id
-        - storage_user_id
-        - shares
-        - provider_id
-        - file_id
-    collectionFormat: multi
+    description: >
+      Name of attribute to query for. When accessing file via share mode
+      following attributes are unavailable: `owner_id`, `storage_group_id`,
+      `storage_user_id`, `provider_id`
+    type: string
+    enum:
+      - name
+      - owner_id
+      - type
+      - mode
+      - size
+      - atime
+      - mtime
+      - ctime
+      - storage_group_id
+      - storage_user_id
+      - shares
+      - provider_id
+      - file_id
     required: false
   x-code-samples:
   - lang: Shell
