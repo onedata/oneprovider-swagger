@@ -54,12 +54,14 @@ x-tagGroups:
 securityDefinitions:
   api_key1:
     type: apiKey
-    name: X-Auth-Token
+    name: Authorization  # Header value must start with "Bearer "
     in: header
   api_key2:
     type: apiKey
-    name: 'Authorization: Bearer'
+    name: X-Auth-Token
     in: header
 security:
-- api_key1: []
-- api_key2: []
+  - api_key1: []
+  - api_key2: []
+  # NOTE: The last key on this list is used by REST-CLI generator as 
+  # default authentication method, make sure it's X-Auth-Token
