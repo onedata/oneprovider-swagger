@@ -7,7 +7,7 @@ put:
     aspect: "{view_reduce_function, ?BINDING(view_name)}"
   summary: Update view reduce function
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method replaces the existing view reduce function code with the request body.
 
@@ -85,7 +85,7 @@ delete:
     aspect: "{view_reduce_function, ?BINDING(view_name)}"
   summary: Remove view reduce function
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method removes the view reduce function.
 

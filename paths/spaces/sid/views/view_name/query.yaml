@@ -6,7 +6,7 @@ get:
     aspect: "{query_view, ?BINDING(view_name)}"
   summary: Query view
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method returns the list of result objects for files which match the query 
     on a predefined view.

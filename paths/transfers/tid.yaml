@@ -70,7 +70,7 @@ get:
     '200':
       description: Transfer status.
       schema:
-        $ref: '#/definitions/FileTransferStatus'
+        $ref: '#/definitions/TransferStatus'
     '400':
       description: Invalid request.
       schema:

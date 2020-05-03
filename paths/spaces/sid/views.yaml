@@ -5,7 +5,7 @@ get:
     id: ?BINDING(sid)
     aspect: views
   tags:
-    - Space
+    - View
   summary: Get all space views
   x-bash-codegen-description: |
     Returns the list of all view names in a space.
@@ -33,11 +33,6 @@ get:
 
     {
       "views": [
-        "favourites",
-        "images",
-        "videos"
-      ],
-      "indexes": [
         "favourites",
         "images",
         "videos"

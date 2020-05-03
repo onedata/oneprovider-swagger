@@ -43,12 +43,6 @@
 /files-id/{id}:
   $ref: ./deprecated/20_02/files_id-id.yaml
 
-/file-shares/{path}:
-  $ref: ./deprecated/20_02/file_shares-path.yaml
-
-/file-id-shares/{id}:
-  $ref: ./deprecated/20_02/file_id_shares-id.yaml
-
 /metadata/attrs/{path}:
   $ref: ./deprecated/20_02/metadata-attrs-path.yaml
 
@@ -79,7 +73,7 @@
   $ref: ./shares.yaml
 
 /shares/{shid}:
-  $ref: ./shares-shid.yaml
+  $ref: ./shares/shid.yaml
 
 
 # tag Space
@@ -87,22 +81,22 @@
   $ref: ./spaces.yaml
 
 /spaces/{sid}:
-  $ref: ./spaces-sid.yaml
-
-/spaces/{sid}/views:
-  $ref: ./spaces-sid-views.yaml
-
-/spaces/{sid}/views/{view_name}:
-  $ref: ./spaces-sid-views-view_name.yaml
-
-/spaces/{sid}/views/{view_name}/reduce:
-  $ref: ./spaces-sid-views-view_name-reduce.yaml
-
-/spaces/{sid}/views/{view_name}/query:
-  $ref: ./spaces-sid-views-view_name-query.yaml
+  $ref: ./spaces/sid.yaml
 
 /spaces/{sid}/transfers:
-  $ref: ./spaces-sid-transfers.yaml
+  $ref: ./spaces/sid/transfers.yaml
+
+/spaces/{sid}/views:
+  $ref: ./spaces/sid/views.yaml
+
+/spaces/{sid}/views/{view_name}:
+  $ref: ./spaces/sid/views/view_name.yaml
+
+/spaces/{sid}/views/{view_name}/reduce:
+  $ref: ./spaces/sid/views/view_name/reduce.yaml
+
+/spaces/{sid}/views/{view_name}/query:
+  $ref: /spaces/sid/views/view_name/query.yaml
 
 
 # tag Replica
@@ -118,10 +112,10 @@
 
 # tag Transfer
 /transfers/{tid}:
-  $ref: ./transfers-tid.yaml
+  $ref: ./transfers/tid.yaml
 
 /transfers/{tid}/rerun:
-  $ref: ./transfers-tid-rerun.yaml
+  $ref: ./transfers/tid/rerun.yaml
 
 
 # tag Monitoring

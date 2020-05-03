@@ -5,7 +5,7 @@ get:
     aspect: list
   tags:
     - Space
-  summary: Get all spaces
+  summary: Get all user spaces
   x-bash-codegen-description: |
     Returns the list of all user spaces.
   description: |
@@ -45,7 +45,6 @@ get:
               spaceId:
                 type: string
                 description: Space Id.
-
     '400':
       description: Invalid request.
       schema:

@@ -9,6 +9,10 @@ definitions:
 tags:
   - name: Oneprovider
     description: Information about the Oneprovider service
+  - name: Space
+    description: Spaces related operations
+  - name: Views
+    description: Views related operations
   - name: File Path
     description: Files and Directories path related operations
   - name: File Data
@@ -21,8 +25,6 @@ tags:
     description: QoS related operations
   - name: Share
     description: Shares related operations
-  - name: Space
-    description: Spaces related operations
   - name: Replica
     description: Replication and file distribution control operations
   - name: Transfer
@@ -33,21 +35,24 @@ x-tagGroups:
   - name: Service information
     tags:
       - Oneprovider
-  - name: Data access and management
+  - name: Space management
+    tags:
+      - Space
+      - View
+  - name: File access and management
     tags:
       - File Path
       - File Data
       - File Metadata
       - Deprecated File
-      - Share
-      - Space
-  - name: Replication and transfer control
+  - name: Replica management
     tags:
       - Replica
       - Transfer
-  - name: QoS management
-    tags:
       - QoS
+  - name: Share management
+    tags:
+      - Share
   - name: Monitoring and metrics
     tags:
       - Monitoring
