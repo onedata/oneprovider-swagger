@@ -12,20 +12,42 @@
   $ref: ./test_image.yaml
 
 
-# tag File Path
+# tag Space
+/spaces:
+  $ref: ./spaces.yaml
+
+/spaces/{sid}:
+  $ref: ./spaces/sid.yaml
+
+
+# tag View
+/spaces/{sid}/views:
+  $ref: ./spaces/sid/views.yaml
+
+/spaces/{sid}/views/{view_name}:
+  $ref: ./spaces/sid/views/view_name.yaml
+
+/spaces/{sid}/views/{view_name}/reduce:
+  $ref: ./spaces/sid/views/view_name/reduce.yaml
+
+/spaces/{sid}/views/{view_name}/query:
+  $ref: /spaces/sid/views/view_name/query.yaml
+
+
+# tag Resolve File Path
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
 
-# tag File Data
-/data/{id}:
-  $ref: ./data/id.yaml
-
+# tag Basic File Operations
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
+/data/{id}:
+  $ref: ./data/id.yaml
 
-# tag File Metadata
+
+# tag Custom File Metadata
 /data/{id}/metadata/json:
   $ref: ./data/id/metadata/json.yaml
 
@@ -36,7 +58,7 @@
   $ref: ./data/id/metadata/xattrs.yaml
   
 
-# tag Deprecated File
+# tag Deprecated File Api
 /files/{path}:
   $ref: ./deprecated/20_02/files-path.yaml
 
@@ -68,37 +90,6 @@
   $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
 
 
-# tag Share
-/shares:
-  $ref: ./shares.yaml
-
-/shares/{shid}:
-  $ref: ./shares/shid.yaml
-
-
-# tag Space
-/spaces:
-  $ref: ./spaces.yaml
-
-/spaces/{sid}:
-  $ref: ./spaces/sid.yaml
-
-/spaces/{sid}/transfers:
-  $ref: ./spaces/sid/transfers.yaml
-
-/spaces/{sid}/views:
-  $ref: ./spaces/sid/views.yaml
-
-/spaces/{sid}/views/{view_name}:
-  $ref: ./spaces/sid/views/view_name.yaml
-
-/spaces/{sid}/views/{view_name}/reduce:
-  $ref: ./spaces/sid/views/view_name/reduce.yaml
-
-/spaces/{sid}/views/{view_name}/query:
-  $ref: /spaces/sid/views/view_name/query.yaml
-
-
 # tag Replica
 /replicas/{path}:
   $ref: ./replicas-path.yaml
@@ -111,22 +102,14 @@
 
 
 # tag Transfer
+/spaces/{sid}/transfers:
+  $ref: ./spaces/sid/transfers.yaml
+
 /transfers/{tid}:
   $ref: ./transfers/tid.yaml
 
 /transfers/{tid}/rerun:
   $ref: ./transfers/tid/rerun.yaml
-
-
-# tag Monitoring
-/metrics/space/{sid}:
-  $ref: ./metrics-space-sid.yaml
-
-/metrics/space/{sid}/user/{uid}:
-  $ref: ./metrics-space-sid-user-uid.yaml
-
-/changes/metadata/{sid}:
-  $ref: ./changes-metadata-sid.yaml
 
 
 # tag QoS
@@ -138,3 +121,22 @@
 
 /data/{id}/qos_summary:
   $ref: ./data/id/qos_summary.yaml
+
+
+# tag Share
+/shares:
+  $ref: ./shares.yaml
+
+/shares/{shid}:
+  $ref: ./shares/shid.yaml
+
+
+# tag Monitoring
+/metrics/space/{sid}:
+  $ref: ./metrics-space-sid.yaml
+
+/metrics/space/{sid}/user/{uid}:
+  $ref: ./metrics-space-sid-user-uid.yaml
+
+/changes/metadata/{sid}:
+  $ref: ./changes-metadata-sid.yaml

@@ -39,13 +39,13 @@ x-tagGroups:
     tags:
       - Space
       - View
-  - name: File access and management
+  - name: File access & management
     tags:
       - Resolve File Path
       - Basic File Operations
       - Custom File Metadata
       - Deprecated File Api
-  - name: Replica management
+  - name: Replica & QoS management
     tags:
       - Replica
       - Transfer
@@ -53,7 +53,7 @@ x-tagGroups:
   - name: Share management
     tags:
       - Share
-  - name: Monitoring and metrics
+  - name: Monitoring & metrics
     tags:
       - Monitoring
 securityDefinitions:
