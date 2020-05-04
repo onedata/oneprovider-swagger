@@ -9,20 +9,22 @@ definitions:
 tags:
   - name: Oneprovider
     description: Information about the Oneprovider service
-  - name: File Path
-    description: Files and Directories path related operations
-  - name: File Data
-    description: Files and Directories data related operations
-  - name: File Metadata
+  - name: Space
+    description: Spaces related operations
+  - name: View
+    description: Views related operations
+  - name: Resolve File Path
+    description: Files and Directories path resolution operations
+  - name: Basic File Operations
+    description: Files and Directories basic operations
+  - name: Custom File Metadata
     description: Files and Directories metadata related operations
-  - name: Deprecated File
+  - name: Deprecated File Api
     description: Files and Directories related operations (deprecated)
   - name: QoS
     description: QoS related operations
   - name: Share
     description: Shares related operations
-  - name: Space
-    description: Spaces related operations
   - name: Replica
     description: Replication and file distribution control operations
   - name: Transfer
@@ -33,22 +35,25 @@ x-tagGroups:
   - name: Service information
     tags:
       - Oneprovider
-  - name: Data access and management
+  - name: Space management
     tags:
-      - File Path
-      - File Data
-      - File Metadata
-      - Deprecated File
-      - Share
       - Space
-  - name: Replication and transfer control
+      - View
+  - name: File access & management
+    tags:
+      - Resolve File Path
+      - Basic File Operations
+      - Custom File Metadata
+      - Deprecated File Api
+  - name: Replica & QoS management
     tags:
       - Replica
       - Transfer
-  - name: QoS management
-    tags:
       - QoS
-  - name: Monitoring and metrics
+  - name: Share management
+    tags:
+      - Share
+  - name: Monitoring & metrics
     tags:
       - Monitoring
 securityDefinitions:

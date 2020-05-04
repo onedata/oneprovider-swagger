@@ -6,7 +6,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: list
   tags:
-    - Deprecated File
+    - Deprecated File Api
   summary: List files and directories by Id (deprecated)
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/list_dir_children).

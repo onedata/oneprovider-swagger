@@ -6,11 +6,6 @@ properties:
     description: List of space views
     items:
       type: string
-  indexes:
-    type: array
-    description: List of space views (deprecated)
-    items:
-      type: string
   nextPageToken:
     type: string
     description: >
@@ -18,12 +13,8 @@ properties:
       list (present only when there is more views to list)
 required:
   - views
-  - indexes
 example:
   views:
-    - images
-    - videos
-  indexes:
     - images
     - videos
   nextPageToken: 8471726779817b3a

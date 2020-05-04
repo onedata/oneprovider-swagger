@@ -6,7 +6,7 @@ get:
     aspect: json_metadata
   summary: Get file json metadata
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method returns the json metadata associated with specified file, directory or space.
 
@@ -73,6 +73,8 @@ get:
     in: query
     description: The type of filter to apply to the metadata document.
     type: string
+    enum:
+      - keypath
     required: false
   - name: filter
     in: query
@@ -100,7 +102,7 @@ put:
     aspect: json_metadata
   summary: Set file json metadata
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method allows to set json metadata for a file, directory or space.
 
@@ -155,6 +157,8 @@ put:
     in: query
     description: The type of filter to apply to the metadata document.
     type: string
+    enum:
+      - keypath
     required: false
   - name: filter
     in: query

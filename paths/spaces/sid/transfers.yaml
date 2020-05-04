@@ -5,8 +5,8 @@ get:
     id: ?BINDING(sid)
     aspect: transfers
   tags:
-    - Space
-  summary: Get all transfers
+    - Transfer
+  summary: Get all space transfers
   x-bash-codegen-description: |
     Returns the list of all transfer IDs in a space with given state.
     The list is broken down into pages, each with length less or equal to the

@@ -6,7 +6,7 @@ get:
     aspect: "{view, ?BINDING(view_name)}"
   summary: Get view
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method returns a JSON describing specific view.
 
@@ -27,9 +27,6 @@ get:
         "spatial": false,
         "mapFunction": "function (id, type, meta, ctx) {\\n        if(type == \\'custom_metadata\\' && meta[\\'onexattr\\']) {\\n            return [meta[\\'onexattr\\'], id];\\n        }\\n        return null;\\n    }"
         "reduceFunction": null,
-        "indexOptions": {
-            "update_min_changes": 100
-        },
         "viewOptions": {
             "update_min_changes": 100
         },
@@ -88,7 +85,7 @@ put:
     aspect: "{view, ?BINDING(view_name)}"
   summary: Create view
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method creates or replaces an existing view with a new one.
 
@@ -185,7 +182,7 @@ patch:
     aspect: "{view, ?BINDING(view_name)}"
   summary: Update view
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method updates existing view definition.
     
@@ -283,7 +280,7 @@ delete:
     aspect: "{view, ?BINDING(view_name)}"
   summary: Remove view
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
     This method removes an existing view.
 

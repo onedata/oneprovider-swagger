@@ -6,7 +6,7 @@ get:
     aspect: xattrs
   summary: Get file extended attributes
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method returns the selected extended attributes associated with specified file,
     directory or space.
@@ -24,11 +24,10 @@ get:
     **Get extended file attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license&attribute=blocks"
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
-      "license": "CC-0",
-      "blocks": 3
+      "license": "CC-0"
     }
     ```
   produces:
@@ -65,10 +64,7 @@ get:
   - name: attribute
     in: query
     description: Name of attribute to query for.
-    type: array
-    items:
-      type: string
-    collectionFormat: multi
+    type: string
     required: false
   - name: inherited
     in: query
@@ -102,7 +98,7 @@ put:
     aspect: xattrs
   summary: Set file extended attribute
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.

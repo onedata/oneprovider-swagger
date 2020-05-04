@@ -1,27 +1,22 @@
 put:
-  deprecated: true
-  operationId: update_index_reduce_function
+  operationId: update_view_reduce_function
   x-onedata-parse_body: '{as_is, <<"reduceFunction">>}'
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{view_reduce_function, ?BINDING(index_name)}"
-  summary: Update index reduce function (deprecated)
+    aspect: "{view_reduce_function, ?BINDING(view_name)}"
+  summary: Update view reduce function
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/update_view_reduce_function).
-
-    This method replaces the existing index reduce function code with the request body.
+    This method replaces the existing view reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
     on the database backend.
 
     This operation requires `space_manage_views` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/update_view_reduce_function).
-
-    This method replaces the existing index reduce function code with the request body.
+    This method replaces the existing view reduce function code with the request body.
 
     The reduce functions are defined as JavaScript functions which are executed
     on the database backend.
@@ -30,19 +25,19 @@ put:
 
     ***Example cURL requests***
 
-    **Update space index**
+    **Update space view**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
     -H "Content-type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
     ```
 
   consumes:
     - application/javascript
   responses:
     '204':
-      description: Index reduce function updated successfully.
+      description: View reduce function updated successfully.
     '400':
       description: Invalid request.
       schema:
@@ -63,59 +58,54 @@ put:
   - name: sid
     in: path
     description: >
-      Space Id in which index exist.
+      Space Id in which view exist.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   - name: reduceFunction
     in: body
-    description: The index reduce function.
+    description: The view reduce function.
     schema:
       type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "cat index.js | oneprovider-rest-cli updateIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME -"
+    source: "cat view.js | oneprovider-rest-cli updateViewReduceFunction sid=$SPACE_ID view_name=$VIEW_NAME -"
 
 
 delete:
-  deprecated: true
-  operationId: remove_index_reduce_function
+  operationId: remove_view_reduce_function
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
-    aspect: "{view_reduce_function, ?BINDING(index_name)}"
-  summary: Remove index reduce function (deprecated)
+    aspect: "{view_reduce_function, ?BINDING(view_name)}"
+  summary: Remove view reduce function
   tags:
-    - Space
+    - View
   x-bash-codegen-description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_view_reduce_function).
-
-    This method removes the index reduce function.
+    This method removes the view reduce function.
 
     This operation requires `space_manage_views` privilege.
   description: |
-    This enpoint is deprecated, please use [this one](#operation/remove_view_reduce_function).
-
-    This method removes the index reduce function.
+    This method removes the view reduce function.
 
     This operation requires `space_manage_views` privilege.
 
     ***Example cURL requests***
 
-    **Remove index reduce function**
+    **Remove view reduce function**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/indexes/$INDEX_NAME/reduce
+    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
     ```
 
   responses:
     '204':
-      description: Index reduce function removed successfully.
+      description: View reduce function removed successfully.
     '400':
       description: Invalid request.
       schema:
@@ -136,14 +126,14 @@ delete:
   - name: sid
     in: path
     description: >
-      Space Id in which index exist.
+      Space Id in which view exist.
     type: string
     required: true
-  - name: index_name
+  - name: view_name
     in: path
-    description: Name of the index.
+    description: Name of the view.
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli removeIndexReduceFunction sid=$SPACE_ID index_name=$INDEX_NAME"
+    source: "oneprovider-rest-cli removeViewReduceFunction sid=$SPACE_ID view_name=$VIEW_NAME"

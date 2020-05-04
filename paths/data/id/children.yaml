@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: children
   tags:
-    - File Data
+    - Basic File Operations
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories.

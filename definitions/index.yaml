@@ -12,16 +12,13 @@ DirectoryChildren:
   $ref: ./directory_children.yaml
 
 FileDistribution:
-  $ref: ./filedistribution.yaml
+  $ref: ./file_distribution.yaml
 
-FileAttribute:
-  $ref: ./fileattribute.yaml
-
-FileTransferStatus:
-  $ref: ./filetransferstatus.yaml
+TransferStatus:
+  $ref: ./transfer_status.yaml
 
 FilePath:
-  $ref: ./filepath.yaml
+  $ref: ./file_path.yaml
 
 Callback:
   $ref: ./callback.yaml
@@ -30,10 +27,10 @@ FileAttributes:
   $ref: ./file_attributes.yaml
 
 FileMetadataChange:
-  $ref: ./filemetadatachange.yaml
+  $ref: ./file_metadata_change.yaml
 
 MetadataChangesStreamRequest:
-  $ref: ./metadatachangesstreamrequest.yaml
+  $ref: ./metadata_changes_stream_request.yaml
 
 Space:
   $ref: ./space.yaml
@@ -57,7 +54,7 @@ ViewOptions:
   $ref: ./view_options.yaml
 
 ShareCreateRequest:
-  $ref: ./sharecreaterequest.yaml
+  $ref: ./share_create_request.yaml
 
 Share:
   $ref: ./share.yaml
@@ -66,10 +63,10 @@ Shares:
   $ref: ./shares.yaml
 
 QosEntry:
-  $ref: ./qosentry.yaml
+  $ref: ./qos_entry.yaml
 
 QosCreateRequest:
-  $ref: ./qoscreaterequest.yaml
+  $ref: ./qos_create_request.yaml
 
 QosSummary:
-  $ref: ./qossummary.yaml
+  $ref: ./qos_summary.yaml

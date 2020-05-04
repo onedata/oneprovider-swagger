@@ -134,7 +134,7 @@ delete:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Remove a specific share
+  summary: Remove share
   tags:
     - Share
   x-bash-codegen-description: |

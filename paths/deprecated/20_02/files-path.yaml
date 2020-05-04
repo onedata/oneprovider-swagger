@@ -6,7 +6,7 @@ get:
     id: ?PATH_BINDING
     aspect: list
   tags:
-    - Deprecated File
+    - Deprecated File Api
   summary: List files and directories (deprecated)
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/list_dir_children).
