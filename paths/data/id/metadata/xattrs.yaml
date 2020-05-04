@@ -6,7 +6,7 @@ get:
     aspect: xattrs
   summary: Get file extended attributes
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method returns the selected extended attributes associated with specified file,
     directory or space.
@@ -98,7 +98,7 @@ put:
     aspect: xattrs
   summary: Set file extended attribute
   tags:
-    - File Metadata
+    - Custom File Metadata
   x-bash-codegen-description: |
     This method allows to set a value of a specified extended file attribute
     leaving other ones intact.

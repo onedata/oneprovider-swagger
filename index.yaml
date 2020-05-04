@@ -11,15 +11,15 @@ tags:
     description: Information about the Oneprovider service
   - name: Space
     description: Spaces related operations
-  - name: Views
+  - name: View
     description: Views related operations
-  - name: File Path
-    description: Files and Directories path related operations
-  - name: File Data
-    description: Files and Directories data related operations
-  - name: File Metadata
+  - name: Resolve File Path
+    description: Files and Directories path resolution operations
+  - name: Basic File Operations
+    description: Files and Directories basic operations
+  - name: Custom File Metadata
     description: Files and Directories metadata related operations
-  - name: Deprecated File
+  - name: Deprecated File Api
     description: Files and Directories related operations (deprecated)
   - name: QoS
     description: QoS related operations
@@ -41,10 +41,10 @@ x-tagGroups:
       - View
   - name: File access and management
     tags:
-      - File Path
-      - File Data
-      - File Metadata
-      - Deprecated File
+      - Resolve File Path
+      - Basic File Operations
+      - Custom File Metadata
+      - Deprecated File Api
   - name: Replica management
     tags:
       - Replica

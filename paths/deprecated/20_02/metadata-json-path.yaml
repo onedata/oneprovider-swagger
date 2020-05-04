@@ -7,7 +7,7 @@ get:
     aspect: json_metadata
   summary: Get file json metadata (deprecated)
   tags:
-    - Deprecated File
+    - Deprecated File Api
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_json_metadata).
 
@@ -103,7 +103,7 @@ put:
     aspect: json_metadata
   summary: Set file json metadata (deprecated)
   tags:
-    - Deprecated File
+    - Deprecated File Api
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/set_json_metadata).
 

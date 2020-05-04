@@ -6,7 +6,7 @@ get:
     aspect: attrs
   summary: Get file attributes
   tags:
-    - File Data
+    - Basic File Operations
   x-bash-codegen-description: |
     This method returns either all or only selected basic attributes associated
     with specified file, directory or space.
@@ -95,7 +95,7 @@ put:
     aspect: attrs
   summary: Set file attribute
   tags:
-    - File Data
+    - Basic File Operations
   x-bash-codegen-description: |
     This method allows to set a value of a regular file attribute.
 

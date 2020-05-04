@@ -7,7 +7,7 @@ get:
     aspect: rdf_metadata
   summary: Get file rdf metadata by Id (deprecated)
   tags:
-    - Deprecated File
+    - Deprecated File Api
   x-bash-codegen-description: |
     This enpoint is deprecated, please use [this one](#operation/get_rdf_metadata).
 
@@ -70,7 +70,7 @@ put:
     aspect: rdf_metadata
   summary: Set file rdf metadata by Id (deprecated)
   tags:
-    - Deprecated File
+    - Deprecated File Api
   description: |
     This enpoint is deprecated, please use [this one](#operation/set_rdf_metadata).
 

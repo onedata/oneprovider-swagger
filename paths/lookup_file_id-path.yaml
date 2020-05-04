@@ -5,7 +5,7 @@ post:
     id: ?PATH_BINDING
     aspect: object_id
   tags:
-    - File Path
+    - Resolve File Path
   summary: Lookup file id
   x-bash-codegen-description: |
     Returns Id of file or directory specified by path.
