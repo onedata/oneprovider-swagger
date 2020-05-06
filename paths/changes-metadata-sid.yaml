@@ -64,7 +64,7 @@ post:
     description: Space Id.
     type: string
     required: true
-  - name: body
+  - name: changesSpecification
     in: body
     description: Specification of metadata changes to observe.
     schema:
