@@ -1,7 +1,7 @@
 type: object
 description: Specification of metadata changes to observe and stream.
 properties:
-  filters:
+  triggers:
     type: array
     description: List of documents which modifications should trigger sending changes.
     items:
