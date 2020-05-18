@@ -46,9 +46,6 @@ properties:
           owner:
             type: string
             description: File owner.
-          group_owner:
-            type: string
-            description: File group owner.
           provider_id:
             type: string
             description: Id of provider which created this file.
