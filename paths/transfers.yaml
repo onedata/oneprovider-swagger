@@ -63,7 +63,7 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
-    -d '{ "replicatingProviderId": $PROVIDER_ID, "dataSourceType": "file", "fileId": $FILE_ID }' \
+    -d '{ "type": "replication", "replicatingProviderId": $PROVIDER_ID, "dataSourceType": "file", "fileId": $FILE_ID }' \
     "https://$HOST/api/v3/oneprovider/transfers"
     ```
   consumes:
@@ -111,4 +111,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createTransfer replicatingProviderId==$PROVIDER_ID dataSourceType==file fileId==$FILE_ID"
+      source: "oneprovider-rest-cli createTransfer type==replication replicatingProviderId==$PROVIDER_ID dataSourceType==file fileId==$FILE_ID"

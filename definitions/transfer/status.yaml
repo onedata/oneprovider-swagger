@@ -1,45 +1,59 @@
 type: object
 description: File transfer status.
 properties:
-  fileId:
+  type:
     type: string
-    description: Id of the file or directory being transferred.
+    description: Requested type of transfer.
+    enum:
+      - replication
+      - eviction
+      - migration
   userId:
     type: string
     description: Id of the user that started the transfer.
   rerunId:
     type: string
     description: If the transfer was rerun, this field contains the Id of the new transfer, otherwise null.
+  spaceId:
+    type: string
+    description: Id of space in context of which transfer was performed.
+  dataSource:
+    type: string
+    description: Source of transferred data.
+    enum:
+      - file
+      - view
+  fileId:
+    type: string
+    description: Id of the file or directory being transferred.
   path:
     type: string
+    description: >
+      Path to the file or directory in the virtual file system.
+      This field is `deprecated` and it might be removed in future release. Please refer to `filePath`.
+  filePath:
+    type: string
     description: Path to the file or directory in the virtual file system.
+  viewName:
+    type: string
+  queryViewParams:
+    $ref: '#/definitions/QueryViewParams'
   transferStatus:
     type: string
-    description: The status of replication request. This field is `deprecated` and it might be removed in future release. Please refer to `replicationStatus`.
+    description: Overall status of transfer.
     enum:
       - scheduled
       - enqueued
       - skipped
-      - active
+      - replicating
+      - evicting
       - completed
       - aborting
       - cancelled
       - failed
   replicationStatus:
     type: string
-    description: The status of replication request.
-    enum:
-      - scheduled
-      - enqueued
-      - skipped
-      - active
-      - completed
-      - aborting
-      - cancelled
-      - failed
-  invalidationStatus:
-    type: string
-    description: The status of replica eviction request. This field is `deprecated` and it might be removed in future release. Please refer to `replicaEvictionStatus`.
+    description: The status of transfer replication phase.
     enum:
       - scheduled
       - enqueued
@@ -51,7 +65,7 @@ properties:
       - failed
   replicaEvictionStatus:
     type: string
-    description: The status of replica eviction request.
+    description: The status of replica eviction request. This field is `deprecated` and it might be removed in future release. Please refer to `evictionStatus`.
     enum:
       - scheduled
       - enqueued
@@ -61,9 +75,18 @@ properties:
       - aborting
       - cancelled
       - failed
-  targetProviderId:
+  evictionStatus:
     type: string
-    description: The Id of the target provider to which the replication was requested. This field is `deprecated` and it might be removed in future release. Please refer to `replicatingProviderId`.
+    description: The status of transfer eviction phase.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - active
+      - completed
+      - aborting
+      - cancelled
+      - failed
   replicatingProviderId:
     type: string
     description: The Id of the target provider to which the replication was requested.
@@ -79,24 +102,20 @@ properties:
   filesProcessed:
     type: integer
     description: Number of files already processed.
-  filesTransferred:
-    type: integer
-    description: Number of files already replicated. This field is `deprecated` and it might be removed in future release. Please refer to `filesReplicated`.
   filesReplicated:
     type: integer
     description: Number of files already replicated.
-  failedFiles:
-    type: integer
-    description: Number of files for which invalidation or replication has failed.
-  filesInvalidated:
-    type: integer
-    description: Number of files already evicted. This field is `deprecated` and it might be removed in future release. Please refer to `fileReplicasEvicted`.
   fileReplicasEvicted:
     type: integer
-    description: Number of files already evicted.
-  bytesTransferred:
+    description: >
+      Number of files already evicted. This field is `deprecated` and it might be
+      removed in future release. Please refer to `filesEvicted`.
+  filesEvicted:
     type: integer
-    description: Number of bytes already replicated. This field is `deprecated` and it might be removed in future release. Please refer to `bytesReplicated`.
+    description: Number of files already evicted.
+  failedFiles:
+    type: integer
+    description: Number of files for which eviction or replication has failed.
   bytesReplicated:
     type: integer
     description: Number of bytes already replicated.
@@ -144,24 +163,56 @@ properties:
       description: Bytes replicated histogram for the last month with 1 day window.
       items:
         type: integer
+required:
+  - type
+  - userId
+  - spaceId
+  - dataSource
+  - transferStatus
+  - replicationStatus
+  - replicaEvictionStatus
+  - evictionStatus
+  - replicatingProviderId
+  - evictingProviderId
+  - filesToProcess
+  - filesProcessed
+  - filesReplicated
+  - fileReplicasEvicted
+  - filesEvicted
+  - failedFiles
+  - bytesReplicated
+  - scheduleTime
+  - startTime
+  - finishTime
+  - lastUpdate
+  - minHist
+  - hrHist
+  - dyHist
+  - mthHist
 example:
-  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
+  type: replication
   userId: admin
   rerunId: null
+  spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
+  dataSource: file
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   path: /My Space 1/Dir2/file3.txt
+  filePath: /My Space 1/Dir2/file3.txt
+  viewName: null
+  queryViewParams: null
   transferStatus: completed
   replicationStatus: completed
-  invalidationStatus: skipped
-  targetProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
+  replicaEvictionStatus: skipped
+  evictionStatus: skipped
   replicatingProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
-  invalidatingProviderId: null
+  evictingProviderId: null
+  callback: null
   filesToProcess: 1
   filesProcessed: 1
-  filesTransferred: 1
   filesReplicated: 1
+  fileReplicasEvicted: 0
+  filesEvicted: 0
   failedFiles: 0
-  filesInvalidated: 0
-  bytesTransferred: 10485760000
   bytesReplicated: 10485760000
   scheduleTime: 1504688800
   startTime: 15046888765

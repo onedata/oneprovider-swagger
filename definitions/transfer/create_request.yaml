@@ -6,6 +6,15 @@ x-onedata-subclasses:
   - file
   - view
 properties:
+  type:
+    type: string
+    description: >
+      Requested type of transfer. Depending on value specified specifying also
+      `replicatingProviderId` or `evictingProviderId` or both may be required.
+    enum:
+      - replication
+      - eviction
+      - migration
   replicatingProviderId:
     type: string
     description: Id of provider to whom data will be copied.
@@ -23,4 +32,5 @@ properties:
     type: string
     description: Data source.
 required:
+  - type
   - dataSource

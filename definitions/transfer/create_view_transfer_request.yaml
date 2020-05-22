@@ -21,6 +21,7 @@ required:
   - spaceId
   - viewName
 example:
+  type: eviction
   evictingProviderId: ASIOdhxckvufysd78f9w394356yisudfsduuzxch
   dataSource: view
   spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
