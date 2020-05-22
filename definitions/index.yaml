@@ -70,3 +70,16 @@ QosCreateRequest:
 
 QosSummary:
   $ref: ./qos_summary.yaml
+
+
+# Transfer create request and its subclasses
+TransferCreateRequest:
+  $ref: ./transfers/transfer_create_request.yaml
+file:
+  $ref: ./transfers/file_transfer_create_request.yaml
+view:
+  $ref: ./transfers/view_transfer_create_request.yaml
+
+
+QueryViewParams:
+  $ref: ./transfers/query_view_params.yaml

@@ -105,6 +105,9 @@
 /spaces/{sid}/transfers:
   $ref: ./spaces/sid/transfers.yaml
 
+/transfers:
+  $ref: ./transfers.yaml
+
 /transfers/{tid}:
   $ref: ./transfers/tid.yaml
 

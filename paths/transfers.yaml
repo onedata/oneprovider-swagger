@@ -1,0 +1,114 @@
+post:
+  operationId: create_transfer
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_transfer
+    aspect: instance
+  summary: Create transfer
+  tags:
+    - Transfer
+  x-bash-codegen-description: |
+    Creates transfer, which is a process of data movement between providers.
+    This operation is asynchronous and it can take a long time depending on the
+    size of the data to move.
+
+    The following types of transfers are supported:
+    - `replication` - process of copying data to provider specified in `replicatingProviderId`.
+                      This operation requires `space_schedule_replication` privilege.
+    - `eviction` - process of removing data from provider specified in `evictingProviderId`
+                   but only if replicas of data exist on other providers.
+                   This operation requires `space_schedule_eviction` privilege.
+    - `migration` - `replication` preceded by `eviction`, which means that data will be first
+                    copied to `replicatingProviderId` (it will choose best source to copy from,
+                    which means it doesn't have to be `evictingProviderId`) and then removed
+                    from `evictingProviderId`. This operation requires both
+                    `space_schedule_replication` and `space_schedule_eviction` privileges.
+
+    Data to be moved can come from any of the following:
+    - file - depending on what is specified in `fileId` a single file or entire directory
+             with all of its subfiles and subdirectories will be moved.
+             In that case access to it is required.
+    - view - files obtained by querying the view will be moved. In this case
+             `space_query_views` privilege is additionally required.
+             Also view must be defined on all providers involved in the process.
+
+  description: |
+    Creates transfer, which is a process of data movement between providers.
+    This operation is asynchronous and it can take a long time depending on the
+    size of the data to move.
+
+    The following types of transfers are supported:
+    - `replication` - process of copying data to provider specified in `replicatingProviderId`.
+                      This operation requires `space_schedule_replication` privilege.
+    - `eviction` - process of removing data from provider specified in `evictingProviderId`
+                   but only if replicas of data exist on other providers.
+                   This operation requires `space_schedule_eviction` privilege.
+    - `migration` - `replication` preceded by `eviction`, which means that data will be first
+                    copied to `replicatingProviderId` (it will choose best source to copy from,
+                    which means it doesn't have to be `evictingProviderId`) and then removed
+                    from `evictingProviderId`. This operation requires both
+                    `space_schedule_replication` and `space_schedule_eviction` privileges.
+
+    Data to be moved can come from any of the following:
+    - file - depending on what is specified in `fileId` a single file or entire directory
+             with all of its subfiles and subdirectories will be moved.
+             In that case access to it is required.
+    - view - files obtained by querying the view will be moved. In this case
+             `space_query_views` privilege is additionally required.
+             Also view must be defined on all providers involved in the process.
+
+    ***Example cURL requests***
+
+    **Creates file replication**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "replicatingProviderId": $PROVIDER_ID, "dataSourceType": "file", "fileId": $FILE_ID }' \
+    "https://$HOST/api/v3/oneprovider/transfers"
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the transfer Id.
+        Also URI of the Transfer in form https://$HOST/api/v3/oneprovider/transfers/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Transfer.
+          type: string
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: Trasnfer Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Transfer properties.
+      schema:
+        $ref: '#/definitions/TransferCreateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli createTransfer replicatingProviderId==$PROVIDER_ID dataSourceType==file fileId==$FILE_ID"

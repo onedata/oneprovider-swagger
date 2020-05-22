@@ -1,0 +1,21 @@
+allOf:
+  - $ref: '#/definitions/TransferCreateRequest'
+  - type: object
+    properties:
+      dataSource:
+        type: string
+        enum: [file]
+        x-discriminator-value: "file"
+        description: |
+          Specifies file as source of data to be transfered.
+          In that case access to it is required.
+      fileId:
+        type: string
+        description: Id of file to be transfered.
+required:
+  - dataSource
+  - fileId
+example:
+  replicatingProviderId: ASIOdhxckvufysd78f9w394356yisudfsduuzxch
+  dataSource: file
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873

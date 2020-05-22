@@ -1,0 +1,27 @@
+allOf:
+  - $ref: '#/definitions/TransferCreateRequest'
+  - type: object
+    properties:
+      dataSource:
+        type: string
+        enum: [view]
+        x-discriminator-value: "view"
+        description: |
+          Specifies view as a source of data to be transfered.
+      spaceId:
+        type: string
+        description: Id of space containing view.
+      viewName:
+        type: string
+        description: Name of the view that transfer will be based on.
+      queryViewParams:
+        $ref: '#/definitions/QueryViewParams'
+required:
+  - dataSource
+  - spaceId
+  - viewName
+example:
+  evictingProviderId: ASIOdhxckvufysd78f9w394356yisudfsduuzxch
+  dataSource: view
+  spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
+  viewName: MyImages

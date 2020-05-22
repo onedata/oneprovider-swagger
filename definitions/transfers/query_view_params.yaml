@@ -1,0 +1,69 @@
+type: object
+description: View query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html)
+properties:
+  descending:
+    type: boolean
+    description: Return the documents in descending order (by key).
+    default: false
+  key:
+    type: string
+    description: >
+      Return only documents that match the specified key.
+      Key must be specified as a JSON value.
+  limit:
+    type: integer
+    description: >
+      Limit the number of the returned documents to the specified number.
+  skip:
+    type: integer
+    description: >
+      Skip this number of records before starting to return the results.
+  startkey:
+    type: string
+    description: >
+      Return records with a value equal to or greater than the specified key.
+      Key must be specified as a JSON value.
+  startkey_docid:
+    type: string
+    description: >
+      Return records starting with the specified document Id.
+  endkey:
+    type: string
+    description: >
+      Stop returning records when the specified key is reached.
+      Key must be specified as a JSON value.
+  endkey_docid:
+    type: string
+    description: >
+      Stop returning records when the specified document Id is reached.
+  inclusive_end:
+    type: boolean
+    description: >
+      Specifies whether the specified end key is included in the result.
+      ***Note:*** Do not use `inclusive_end` with `key` or `keys`.
+    default: false
+  stale:
+    type: string
+    description: >
+      Allow records from a stale view to be used. Allowed values are `ok`, `update_after` or `false`.
+    default: update_after
+    enum:
+      - ok
+      - update_after
+      - "false"
+  bbox:
+    type: string
+    description: >
+      Specify the bounding box for a spatial query (e.g. ?bbox=-180,-90,0,0)
+  spatial:
+    type: boolean
+    description: |
+      Enable spatial type of query. When querying the file-popularity view, the `start_range` and
+      `end_range` constraints should be specified as 6-dimensional arrays, with the following fields:
+      `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit, HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
+  start_range:
+    type: string
+    description: Array specifying the range in spatial queries (e.g. `start_range=[1,0,0,0,0,0]`).
+  end_range:
+    type: string
+    description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
