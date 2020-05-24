@@ -1,0 +1,66 @@
+get:
+  operationId: get_file_distribution
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: distribution
+  tags:
+    - Basic File Operations
+  summary: Get file distribution
+  x-bash-codegen-description: |
+    Returns file distribution information about a specific file.
+  description: |
+    Returns file distribution information about a specific file.
+
+    ***Example cURL requests***
+
+    **Get file distribution**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
+
+    [
+      {
+        "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
+        "providerId": "57ecb305-a097-4243-bd03-a995e78ab206"
+      },
+      {
+        "blocks": [ [ 5, 9 ] ],
+        "providerId": "7dedd2c7-dc58-4e62-925e-94663faa70fc"
+      }
+    ]
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of file blocks stored at each provider.
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/FileDistribution'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: The Id of the file
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileDistribution id=$FILE_ID"

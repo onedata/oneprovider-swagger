@@ -12,7 +12,7 @@ post:
     This operation is asynchronous and it can take a long time depending on the
     size of the data to move.
 
-    The following types of transfers are supported:
+    The following types of transfer are supported:
     - `replication` - process of copying data to provider specified in `replicatingProviderId`.
                       This operation requires `space_schedule_replication` privilege.
     - `eviction` - process of removing data from provider specified in `evictingProviderId`
@@ -24,9 +24,9 @@ post:
                     from `evictingProviderId`. This operation requires both
                     `space_schedule_replication` and `space_schedule_eviction` privileges.
 
-    Data to be moved can come from any of the following:
+    Data to be transferred can come from any of the following:
     - file - depending on what is specified in `fileId` a single file or entire directory
-             with all of its subfiles and subdirectories will be moved.
+             with all of its subfiles and subdirectories will be transferred.
              In that case access to it is required.
     - view - files obtained by querying the view will be moved. In this case
              `space_query_views` privilege is additionally required.
@@ -37,7 +37,7 @@ post:
     This operation is asynchronous and it can take a long time depending on the
     size of the data to move.
 
-    The following types of transfers are supported:
+    The following types of transfer are supported:
     - `replication` - process of copying data to provider specified in `replicatingProviderId`.
                       This operation requires `space_schedule_replication` privilege.
     - `eviction` - process of removing data from provider specified in `evictingProviderId`
@@ -49,9 +49,9 @@ post:
                     from `evictingProviderId`. This operation requires both
                     `space_schedule_replication` and `space_schedule_eviction` privileges.
 
-    Data to be moved can come from any of the following:
+    Data to be transferred can come from any of the following:
     - file - depending on what is specified in `fileId` a single file or entire directory
-             with all of its subfiles and subdirectories will be moved.
+             with all of its subfiles and subdirectories will be transferred.
              In that case access to it is required.
     - view - files obtained by querying the view will be moved. In this case
              `space_query_views` privilege is additionally required.
@@ -74,11 +74,11 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the transfer Id.
-        Also URI of the Transfer in form https://$HOST/api/v3/oneprovider/transfers/{id} is
+        Also URI of the transfer in form https://$HOST/api/v3/oneprovider/transfers/{id} is
         returned in the response `Location` header.
       headers:
         Location:
-          description: URI of the Transfer.
+          description: URI of the transfer.
           type: string
       schema:
         type: object

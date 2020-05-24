@@ -36,6 +36,7 @@ properties:
     description: Path to the file or directory in the virtual file system.
   viewName:
     type: string
+    description: Name of the view that transfer was based on.
   queryViewParams:
     $ref: '#/definitions/QueryViewParams'
   transferStatus:
@@ -65,7 +66,7 @@ properties:
       - failed
   replicaEvictionStatus:
     type: string
-    description: The status of replica eviction request. This field is `deprecated` and it might be removed in future release. Please refer to `evictionStatus`.
+    description: The status of transfer eviction phase. This field is `deprecated` and it might be removed in future release. Please refer to `evictionStatus`.
     enum:
       - scheduled
       - enqueued
@@ -166,6 +167,7 @@ properties:
 required:
   - type
   - userId
+  - rerunId
   - spaceId
   - dataSource
   - transferStatus

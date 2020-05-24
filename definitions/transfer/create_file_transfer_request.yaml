@@ -7,11 +7,11 @@ allOf:
         enum: [file]
         x-discriminator-value: "file"
         description: |
-          Specifies file as source of data to be transfered.
-          In that case access to it is required.
+          Specifies file as source of data to be transferred.
+          In this case user access to it is required.
       fileId:
         type: string
-        description: Id of file to be transfered.
+        description: Id of file to be transferred.
 required:
   - dataSource
   - fileId

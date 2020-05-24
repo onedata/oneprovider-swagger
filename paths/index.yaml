@@ -46,6 +46,9 @@
 /data/{id}:
   $ref: ./data/id.yaml
 
+/data/{id}/distribution:
+  $ref: ./data/id/distribution.yaml
+
 
 # tag Custom File Metadata
 /data/{id}/metadata/json:
@@ -92,13 +95,13 @@
 
 # tag Replica
 /replicas/{path}:
-  $ref: ./replicas-path.yaml
+  $ref: ./deprecated/20_02/replicas-path.yaml
 
 /replicas-id/{fid}:
-  $ref: ./replicas_id-fid.yaml
+  $ref: ./deprecated/20_02/replicas_id-fid.yaml
 
 /replicas-view/{view_name}:
-  $ref: ./replicas_view-view_name.yaml
+  $ref: ./deprecated/20_02/replicas_view-view_name.yaml
 
 
 # tag Transfer

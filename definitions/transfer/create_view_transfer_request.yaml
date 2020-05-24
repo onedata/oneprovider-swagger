@@ -7,7 +7,7 @@ allOf:
         enum: [view]
         x-discriminator-value: "view"
         description: |
-          Specifies view as a source of data to be transfered.
+          Specifies view as a source of data to be transferred.
       spaceId:
         type: string
         description: Id of space containing view.

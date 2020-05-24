@@ -1,4 +1,5 @@
 get:
+  deprecated: true
   operationId: get_file_replicas_by_id
   x-onedata-gri:
     type: op_replica
@@ -66,6 +67,7 @@ get:
     source: "oneprovider-rest-cli getFileReplicasById fid=$FILE_ID"
 
 post:
+  deprecated: true
   operationId: replicate_file_by_id
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
@@ -176,6 +178,7 @@ post:
     source: "oneprovider-rest-cli replicateFileById fid=$FILE_ID provider_id=$PROVIDER_ID"
 
 delete:
+  deprecated: true
   operationId: evict_replica_by_id
   x-onedata-gri:
     type: op_replica

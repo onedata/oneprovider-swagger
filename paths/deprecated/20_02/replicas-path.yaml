@@ -1,4 +1,5 @@
 get:
+  deprecated: true
   operationId: get_file_replicas
   x-onedata-gri:
     type: op_replica
@@ -67,6 +68,7 @@ get:
 
 
 post:
+  deprecated: true
   operationId: replicate_file
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
@@ -176,6 +178,7 @@ post:
     source: "oneprovider-rest-cli replicateFile path='/MySpace/testfiles/file1.txt' provider_id=$PROVIDER_ID"
 
 delete:
+  deprecated: true
   operationId: evict_replica
   x-onedata-gri:
     type: op_replica

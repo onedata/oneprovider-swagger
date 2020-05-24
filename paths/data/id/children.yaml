@@ -22,7 +22,7 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$DIR_ID"
+    "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
 
     {
       "children": [

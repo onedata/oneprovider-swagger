@@ -1,4 +1,5 @@
 post:
+  deprecated: true
   operationId: replicate_files_by_view
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
@@ -215,6 +216,7 @@ post:
 
 
 delete:
+  deprecated: true
   operationId: evict_replicas_by_view
   x-onedata-gri:
     type: op_replica
