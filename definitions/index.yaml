@@ -82,4 +82,4 @@ TransferStatus:
 
 
 QueryViewParams:
-  $ref: ./transfer/query_view_params.yaml
+  $ref: ./views/query_view_params.yaml

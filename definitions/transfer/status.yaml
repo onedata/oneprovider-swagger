@@ -17,7 +17,7 @@ properties:
   spaceId:
     type: string
     description: Id of space in context of which transfer was performed.
-  dataSource:
+  dataSourceType:
     type: string
     description: Source of transferred data.
     enum:
@@ -30,7 +30,8 @@ properties:
     type: string
     description: >
       Path to the file or directory in the virtual file system.
-      This field is `deprecated` and it might be removed in future release. Please refer to `filePath`.
+      This field is `deprecated` and it might be removed in future release.
+      Please refer to `filePath`.
   filePath:
     type: string
     description: Path to the file or directory in the virtual file system.
@@ -169,13 +170,14 @@ required:
   - userId
   - rerunId
   - spaceId
-  - dataSource
+  - dataSourceType
   - transferStatus
   - replicationStatus
   - replicaEvictionStatus
   - evictionStatus
   - replicatingProviderId
   - evictingProviderId
+  - callback
   - filesToProcess
   - filesProcessed
   - filesReplicated
@@ -196,12 +198,10 @@ example:
   userId: admin
   rerunId: null
   spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
-  dataSource: file
+  dataSourceType: file
   fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   path: /My Space 1/Dir2/file3.txt
   filePath: /My Space 1/Dir2/file3.txt
-  viewName: null
-  queryViewParams: null
   transferStatus: completed
   replicationStatus: completed
   replicaEvictionStatus: skipped

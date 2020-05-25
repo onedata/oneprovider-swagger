@@ -48,7 +48,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Oneprovider REST API not available.
+      description: File not found.
       schema:
         $ref: '#/definitions/Error'
     '500':

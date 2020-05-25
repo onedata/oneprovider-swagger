@@ -1,6 +1,6 @@
 type: object
 description: Transfer create request.
-discriminator: dataSource
+discriminator: dataSourceType
 x-onedata-oneof: true
 x-onedata-subclasses:
   - file
@@ -21,16 +21,19 @@ properties:
   evictingProviderId:
     type: string
     description: >
-      Id of provider from which data will be removed but only if
-      replicas of data exist on other providers.
+      Id of provider from which data will be removed but only if replicas of
+      data exist on other providers.
   callback:
     type: string
     description: >
-      This parameter allows the user to specify a REST callback URL which will be called
-      when the transfer is complete. Currently only available for `replication`.
-  dataSource:
+      This parameter allows the user to specify a REST callback URL which will
+      be called (http `GET` request) when the transfer is complete.
+  dataSourceType:
     type: string
-    description: Data source.
+    description: Source of data to be transferred.
+    enum:
+      - file
+      - view
 required:
   - type
-  - dataSource
+  - dataSourceType

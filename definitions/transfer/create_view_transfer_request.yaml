@@ -2,12 +2,11 @@ allOf:
   - $ref: '#/definitions/TransferCreateRequest'
   - type: object
     properties:
-      dataSource:
+      dataSourceType:
         type: string
         enum: [view]
         x-discriminator-value: "view"
-        description: |
-          Specifies view as a source of data to be transferred.
+        description: Specifies view as a source of data to be transferred.
       spaceId:
         type: string
         description: Id of space containing view.
@@ -17,12 +16,12 @@ allOf:
       queryViewParams:
         $ref: '#/definitions/QueryViewParams'
 required:
-  - dataSource
+  - dataSourceType
   - spaceId
   - viewName
 example:
   type: eviction
-  evictingProviderId: ASIOdhxckvufysd78f9w394356yisudfsduuzxch
-  dataSource: view
+  evictingProviderId: 6b9bc70630547d925861a27e1f050dfe
+  dataSourceType: view
   spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
   viewName: MyImages

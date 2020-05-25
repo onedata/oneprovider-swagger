@@ -1,5 +1,7 @@
 type: object
-description: View query attributes as provided by [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html)
+description: |
+  View query attributes as provided by
+  [Couchbase](http://docs.couchbase.com/admin/admin/Views/views-querying.html)
 properties:
   descending:
     type: boolean
@@ -45,7 +47,8 @@ properties:
   stale:
     type: string
     description: >
-      Allow records from a stale view to be used. Allowed values are `ok`, `update_after` or `false`.
+      Allow records from a stale view to be used. Allowed values are `ok`,
+      `update_after` or `false`.
     default: update_after
     enum:
       - ok
@@ -54,16 +57,21 @@ properties:
   bbox:
     type: string
     description: >
-      Specify the bounding box for a spatial query (e.g. ?bbox=-180,-90,0,0)
+      Specify the bounding box for a spatial query (e.g. `bbox=-180,-90,0,0`)
   spatial:
     type: boolean
     description: |
-      Enable spatial type of query. When querying the file-popularity view, the `start_range` and
-      `end_range` constraints should be specified as 6-dimensional arrays, with the following fields:
-      `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit, HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
+      Enable spatial type of query. When querying the file-popularity view,
+      the `start_range` and `end_range` constraints should be specified as
+      6-dimensional arrays, with the following fields:
+      `[SizeLowerLimit, LastOpenHoursEpochLowerLimit, TotalOpenLowerLimit,
+      HoursOpenAvgLowerLimit, DayOpenAvgLowerLimit, MonthOpenAvgLowerLimit]`.
   start_range:
     type: string
-    description: Array specifying the range in spatial queries (e.g. `start_range=[1,0,0,0,0,0]`).
+    description: |
+      Array specifying the range in spatial queries (e.g. `start_range=[1,0,0,0,0,0]`).
   end_range:
     type: string
-    description: Array specifying the range in spatial queries (e.g. `end_range=[null,null,null,null,null,null]`).
+    description: |
+      Array specifying the range in spatial queries
+      (e.g. `end_range=[null,null,null,null,null,null]`).

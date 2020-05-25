@@ -27,8 +27,8 @@ post:
     Data to be transferred can come from any of the following:
     - file - depending on what is specified in `fileId` a single file or entire directory
              with all of its subfiles and subdirectories will be transferred.
-             In that case access to it is required.
-    - view - files obtained by querying the view will be moved. In this case
+             Requires permissions to access the file.
+    - view - files obtained by querying the view will be transferred. In this case
              `space_query_views` privilege is additionally required.
              Also view must be defined on all providers involved in the process.
 
@@ -52,8 +52,8 @@ post:
     Data to be transferred can come from any of the following:
     - file - depending on what is specified in `fileId` a single file or entire directory
              with all of its subfiles and subdirectories will be transferred.
-             In that case access to it is required.
-    - view - files obtained by querying the view will be moved. In this case
+             Requires permissions to access the file.
+    - view - files obtained by querying the view will be . In this case
              `space_query_views` privilege is additionally required.
              Also view must be defined on all providers involved in the process.
 
@@ -85,7 +85,7 @@ post:
         properties:
           transferId:
             type: string
-            description: Trasnfer Id.
+            description: Transfer Id.
     '400':
       description: Invalid request.
       schema:
