@@ -30,9 +30,9 @@ get:
     "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos_summary"
 
     {
-      "entries": [{"$QOS_ENTRY_ID": false}],
+      "entries": [{"$QOS_ENTRY_ID": "pending"}],
       "assignedEntries": {"$STORAGE_ID": ["$QOS_ENTRY_ID"]},
-      "fulfilled": false
+      "status": "pending"
     }
 
     ```

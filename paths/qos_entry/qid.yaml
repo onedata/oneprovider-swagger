@@ -24,7 +24,7 @@ get:
       "fileId": "$FILE_ID",
       "qosExpression": "country=FR",
       "replicasNum": 2,
-      "fulfilled": true
+      "status": "fulfilled"
     }
 
     ```
