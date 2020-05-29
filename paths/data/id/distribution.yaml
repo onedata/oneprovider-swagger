@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: distribution
   tags:
-    - Basic File Operations
+    - File Distribution
   summary: Get file distribution
   x-bash-codegen-description: |
     Returns file distribution information about a specific file.

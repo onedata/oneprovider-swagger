@@ -3,7 +3,7 @@ get:
   operationId: get_file_replicas_by_id
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?OBJECTID_BINDING(id)
     aspect: distribution
   tags:
     - Replica
@@ -57,14 +57,14 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: id
     in: path
     description: The Id of the file
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileReplicasById fid=$FILE_ID"
+    source: "oneprovider-rest-cli getFileReplicasById id=$FILE_ID"
 
 post:
   deprecated: true
@@ -72,26 +72,26 @@ post:
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?OBJECTID_BINDING(id)
     aspect: instance
   tags:
     - Replica
   summary: Replicate file or directory by Id
   x-bash-codegen-description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    Replicates a file specified by Id in `id` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on
     the size of the data to move.
 
-    If the `fid` parameter specifies a directory, entire directory is replicated to
+    If the `id` parameter specifies a directory, entire directory is replicated to
     requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
   description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    Replicates a file specified by Id in `id` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `fid` parameter specifies a directory, entire directory is replicated to requested provider.
+    If the `id` parameter specifies a directory, entire directory is replicated to requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
@@ -153,7 +153,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: id
     in: path
     description: Id of the file.
     type: string
@@ -175,36 +175,36 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFileById fid=$FILE_ID provider_id=$PROVIDER_ID"
+    source: "oneprovider-rest-cli replicateFileById id=$FILE_ID provider_id=$PROVIDER_ID"
 
 delete:
   deprecated: true
   operationId: evict_replica_by_id
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?OBJECTID_BINDING(id)
     aspect: instance
   tags:
     - Replica
   summary: Evict existing replica by file Id
   x-bash-codegen-description: |
-    Evicts a replica of a file specified by Id in `fid` parameter.
+    Evicts a replica of a file specified by Id in `id` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the replica has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a directory, entire directory is evicted.
+    If the `id` parameter specifies a directory, entire directory is evicted.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.
 
   description: |
-    Evicts a replica of a file specified by file Id in `fid` parameter.
+    Evicts a replica of a file specified by file Id in `id` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a directory, entire directory is evicted.
+    If the `id` parameter specifies a directory, entire directory is evicted.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.
@@ -255,7 +255,7 @@ delete:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: id
     in: path
     description: Id of the file.
     type: string
@@ -275,4 +275,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplicaById fid=$FILE_ID migration_provider_id=$MIGRATION_PROVIDER_ID"
+    source: "oneprovider-rest-cli evictReplicaById id=$FILE_ID migration_provider_id=$MIGRATION_PROVIDER_ID"

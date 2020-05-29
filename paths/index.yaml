@@ -34,7 +34,7 @@
   $ref: /spaces/sid/views/view_name/query.yaml
 
 
-# tag Resolve File Path
+# tag File Path Resolution
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
@@ -97,7 +97,7 @@
 /replicas/{path}:
   $ref: ./deprecated/20_02/replicas-path.yaml
 
-/replicas-id/{fid}:
+/replicas-id/{id}:
   $ref: ./deprecated/20_02/replicas_id-fid.yaml
 
 /replicas-view/{view_name}:
