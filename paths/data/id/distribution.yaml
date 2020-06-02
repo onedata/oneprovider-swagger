@@ -8,9 +8,16 @@ get:
     - File Distribution
   summary: Get file distribution
   x-bash-codegen-description: |
-    Returns file distribution information about a specific file.
+    Returns information about a specific file distribution among different storage
+    providers. Each provider is associated with a list of byte ranges (specified
+    as a list of pairs [offset, size]), which describe which blocks of a given
+    file are stored at this provider.
+
   description: |
-    Returns file distribution information about a specific file.
+    Returns information about a specific file distribution among different storage
+    providers. Each provider is associated with a list of byte ranges (specified
+    as a list of pairs [offset, size]), which describe which blocks of a given
+    file are stored at this provider.
 
     ***Example cURL requests***
 

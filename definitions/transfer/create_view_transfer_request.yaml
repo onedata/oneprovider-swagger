@@ -6,13 +6,20 @@ allOf:
         type: string
         enum: [view]
         x-discriminator-value: "view"
-        description: Specifies view as a source of data to be transferred.
+        description: |
+          Indicates a transfer of files that are returned as a result of querying
+          chosen view. The view must be defined on all providers involved in
+          the process and querying it must return a valid list of file ids to be transferred.
+
+          For more information about views, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/metadata[advanced-metadata-queries].html).
       spaceId:
         type: string
-        description: Id of space containing view.
+        description: Id of space containing the view.
       viewName:
         type: string
-        description: Name of the view that transfer will be based on.
+        description: |
+          Name of the view that will be queried to obtain the list of
+          files to be transferred.
       queryViewParams:
         $ref: '#/definitions/QueryViewParams'
 required:
