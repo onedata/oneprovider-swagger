@@ -9,8 +9,12 @@ get:
     - Replica
   summary: Get replicas by Id
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
     Returns file distribution information about a specific file.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
     Returns file distribution information about a specific file.
 
     ***Example cURL requests***
@@ -78,6 +82,8 @@ post:
     - Replica
   summary: Replicate file or directory by Id
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Replicates a file specified by Id in `id` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on
     the size of the data to move.
@@ -88,6 +94,8 @@ post:
     This operation requires `space_schedule_replication` privilege.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Replicates a file specified by Id in `id` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
@@ -188,6 +196,8 @@ delete:
     - Replica
   summary: Evict existing replica by file Id
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Evicts a replica of a file specified by Id in `id` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the replica has to be replicated before being
@@ -199,6 +209,8 @@ delete:
     and also `space_schedule_replication` when scheduling migration.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Evicts a replica of a file specified by file Id in `id` parameter.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
