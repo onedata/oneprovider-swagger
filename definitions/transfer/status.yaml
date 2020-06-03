@@ -25,7 +25,7 @@ properties:
       - view
   fileId:
     type: string
-    description: Id of the file or directory being transferred.
+    description: Id of the transferred file or directory.
   path:
     type: string
     description: >
@@ -37,7 +37,8 @@ properties:
     description: Path to the file or directory in the virtual file system.
   viewName:
     type: string
-    description: Name of the view that transfer was based on.
+    description: |
+      Name of the view that was queried to obtain the list of files to transfer.
   queryViewParams:
     $ref: '#/definitions/QueryViewParams'
   transferStatus:
@@ -91,10 +92,12 @@ properties:
       - failed
   replicatingProviderId:
     type: string
-    description: The Id of the target provider to which the replication was requested.
+    description: |
+      Id of provider to which data was copied, ensuring that the provider
+      has a complete replica at the end of the process.
   evictingProviderId:
     type: string
-    description: The Id of the provider whose file replica will be evicted.
+    description: Id of provider from which replica(s) were removed.
   callback:
     type: string
     description: Optional callback URL, which will be invoked on transfer completion.
@@ -116,6 +119,12 @@ properties:
     type: integer
     description: Number of files already evicted.
   failedFiles:
+    type: integer
+    description: |
+      Number of files for which eviction or replication has failed.
+      This field is `deprecated` and it might be removed in future release.
+      Please refer to `filesFailed`.
+  filesFailed:
     type: integer
     description: Number of files for which eviction or replication has failed.
   bytesReplicated:
@@ -184,6 +193,7 @@ required:
   - fileReplicasEvicted
   - filesEvicted
   - failedFiles
+  - filesFailed
   - bytesReplicated
   - scheduleTime
   - startTime
@@ -215,6 +225,7 @@ example:
   fileReplicasEvicted: 0
   filesEvicted: 0
   failedFiles: 0
+  filesFailed: 0
   bytesReplicated: 10485760000
   scheduleTime: 1504688800
   startTime: 15046888765

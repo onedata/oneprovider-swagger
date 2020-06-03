@@ -45,6 +45,7 @@ get:
       "fileReplicasEvicted": 0,
       "filesEvicted": 0,
       "failedFiles": 0,
+      "filesFailed": 0,
       "bytesReplicated": 10485760000,
       "scheduleTime": 1504688800,
       "startTime": 15046888765,
