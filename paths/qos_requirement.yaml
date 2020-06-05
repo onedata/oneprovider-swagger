@@ -1,27 +1,27 @@
 post:
-  operationId: add_qos_entry
+  operationId: add_qos_requirement
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_qos
     aspect: instance
   tags:
     - QoS
-  summary: Add QoS entry
+  summary: Add QoS requirement
   x-bash-codegen-description: |
-    Adds new QoS entry for given file or directory. This triggers
-    data replication (if needed) based on requirements defined in new QoS entry.
+    Adds new QoS requirement for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS requirement.
   description: |
-    Adds new QoS entry for given file or directory. This triggers
-    data replication (if needed) based on requirements defined in new QoS entry.
+    Adds new QoS requirement for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS requirement.
 
     ***Example cURL requests***
 
-    **Add QoS entry for file**
+    **Add QoS requirement for file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
     -d '{ "expression": "country=FR", "replicasNum": 2, "fileId": $FILE_ID }' \
-    "https://$HOST/api/v3/oneprovider/qos_entry"
+    "https://$HOST/api/v3/oneprovider/qos_requirement"
     ```
   consumes:
     - application/json
@@ -30,20 +30,20 @@ post:
   responses:
     '201':
       description: >
-        The request has been accepted and the result is the QoS entry Id
+        The request has been accepted and the result is the QoS requirement Id
         (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
-        Also URI of the QoS entry in form https://$HOST/api/v3/oneprovider/qos_entry/{qid} is
+        Also URI of the QoS requirement in form https://$HOST/api/v3/oneprovider/qos_requirement/{qid} is
         returned in the response `Location` header.
       headers:
         Location:
-          description: URI of the QoS entry.
+          description: URI of the QoS requirement.
           type: string
       schema:
         type: object
         properties:
-          qosEntryId:
+          qosRequirementId:
             type: string
-            description: QoS entry Id.
+            description: QoS requirement Id.
     '400':
       description: Invalid request.
       schema:
@@ -63,10 +63,10 @@ post:
   parameters:
     - name: data
       in: body
-      description: QoS entry properties
+      description: QoS requirement properties
       schema:
         $ref: '#/definitions/QosCreateRequest'
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli addQosEntry fileId=$FILE_ID expression='country=FR' replicasNum=2"
+      source: "oneprovider-rest-cli addQosRequirement fileId=$FILE_ID expression='country=FR' replicasNum=2"

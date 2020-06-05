@@ -10,14 +10,14 @@ get:
   x-bash-codegen-description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
-    QoS entries defined directly for file or directory with QoS entries defined for all
+    QoS requirements defined directly for file or directory with QoS requirements defined for all
     its ancestors.  
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
   description: |
     Returns QoS summary for file or directory.  
     QoS summary contains information about effective QoS, which is calculated by merging
-    QoS entries defined directly for file or directory with QoS entries defined for all
+    QoS requirements defined directly for file or directory with QoS requirements defined for all
     its ancestors.  
 
     To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
@@ -30,8 +30,8 @@ get:
     "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos_summary"
 
     {
-      "entries": [{"$QOS_ENTRY_ID": "pending"}],
-      "assignedEntries": {"$STORAGE_ID": ["$QOS_ENTRY_ID"]},
+      "requirements": [{"$QOS_REQ_ID": "pending"}],
+      "assignedRequirements": {"$STORAGE_ID": ["$QOS_REQ_ID"]},
       "status": "pending"
     }
 

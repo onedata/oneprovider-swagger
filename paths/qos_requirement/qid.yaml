@@ -1,26 +1,26 @@
 get:
-  operationId: get_qos_entry
+  operationId: get_qos_requirement
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
     aspect: instance
   tags:
     - QoS
-  summary: Get QoS entry
+  summary: Get QoS requirement
   x-bash-codegen-description: |
-    Returns detailed information about particular QoS entry.
+    Returns detailed information about particular QoS requirement.
   description: |
-    Returns detailed information about particular QoS entry.
+    Returns detailed information about particular QoS requirement.
 
     ***Example cURL requests***
 
-    **Get detailed information about QoS entry**
+    **Get detailed information about QoS requirement**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos-entry/$QOS_ENTRY_ID"
+    "https://$HOST/api/v3/oneprovider/qos-requirement/$QOS_requirement_ID"
 
     {
-      "qosEntryId": "c84f669f9522c46976fee490d80651f0",
+      "qosRequirementId": "c84f669f9522c46976fee490d80651f0",
       "fileId": "$FILE_ID",
       "qosExpression": "country=FR",
       "replicasNum": 2,
@@ -32,9 +32,9 @@ get:
     - application/json
   responses:
     '200':
-      description: Information about QoS entry.
+      description: Information about QoS requirement.
       schema:
-        $ref: '#/definitions/QosEntry'
+        $ref: '#/definitions/QosRequirement'
     '400':
       description: Invalid request.
       schema:
@@ -44,7 +44,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: QoS entry not found.
+      description: QoS requirement not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -54,41 +54,41 @@ get:
   parameters:
     - name: qid
       in: path
-      description: QoS entry Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQosEntry qid=$QOS_ENTRY_ID"
+      source: "oneprovider-rest-cli getQosRequirement qid=$QOS_requirement_ID"
 
 
 delete:
-  operationId: remove_qos_entry
+  operationId: remove_qos_requirement
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
     aspect: instance
-  summary: Remove QoS entry
+  summary: Remove QoS requirement
   tags:
     - QoS
   x-bash-codegen-description: |
-    Removes QoS entry.
+    Removes QoS requirement.
   description: |
-    Removes QoS entry.
+    Removes QoS requirement.
 
     ***Example cURL requests***
 
-    **Remove QoS entry.**
+    **Remove QoS requirement.**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
-    "https://$HOST/api/v3/oneprovider/qos-entry/$QOS_ENTRY_ID"
+    "https://$HOST/api/v3/oneprovider/qos-requirement/$QOS_requirement_ID"
     ```
   consumes:
     - application/json
   responses:
     '204':
-      description: QoS entry has been deleted.
+      description: QoS requirement has been deleted.
     '400':
       description: Invalid request.
       schema:
@@ -98,7 +98,7 @@ delete:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: QoS entry not found.
+      description: QoS requirement not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -108,9 +108,9 @@ delete:
   parameters:
     - name: qid
       in: path
-      description: QoS entry Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
       type: string
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeQosEntry qid=$QOS_ENTRY_ID"
+      source: "oneprovider-rest-cli removeQosRequirement qid=$QOS_requirement_ID"
