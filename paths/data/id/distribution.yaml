@@ -10,13 +10,13 @@ get:
   x-bash-codegen-description: |
     Returns information about a specific file distribution among different storage
     providers. Each provider is associated with a list of byte ranges (specified
-    as a list of pairs [offset, size]), which describe which blocks of a given
+    as a list of pairs [offset, size]), which describe which blocks of given
     file are stored at this provider.
 
   description: |
     Returns information about a specific file distribution among different storage
     providers. Each provider is associated with a list of byte ranges (specified
-    as a list of pairs [offset, size]), which describe which blocks of a given
+    as a list of pairs [offset, size]), which describe which blocks of given
     file are stored at this provider.
 
     ***Example cURL requests***
@@ -43,9 +43,7 @@ get:
     '200':
       description: The list of file blocks stored at each provider.
       schema:
-        type: array
-        items:
-          $ref: '#/definitions/FileDistribution'
+        $ref: '#/definitions/FileDistribution'
     '400':
       description: Invalid request.
       schema:
