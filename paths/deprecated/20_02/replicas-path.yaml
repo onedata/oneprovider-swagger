@@ -1,32 +1,37 @@
 get:
-  operationId: get_file_replicas_by_id
+  deprecated: true
+  operationId: get_file_replicas
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?PATH_BINDING
     aspect: distribution
   tags:
     - Replica
-  summary: Get replicas by Id
+  summary: Get replicas by path
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
     Returns file distribution information about a specific file.
   description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
     Returns file distribution information about a specific file.
 
     ***Example cURL requests***
 
-    **Get file distribution map by Id**
+    **Get file distribution map by path**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
     [
       {
         "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
-        "providerId": "57ecb305-a097-4243-bd03-a995e78ab206"
+        "providerId": "784dae9d-34a3-4aef-ab4b-2c6c60b74e27"
       },
       {
         "blocks": [ [ 5, 9 ] ],
-        "providerId": "7dedd2c7-dc58-4e62-925e-94663faa70fc"
+        "providerId": "b296ab05-3d62-4755-be46-c57ced411ff1"
       }
     ]
     ```
@@ -56,59 +61,64 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: path
     in: path
-    description: The Id of the file
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileReplicasById fid=$FILE_ID"
+    source: "oneprovider-rest-cli getFileReplicas path='/MySpace/testfiles/file1.txt' key=value1"
+
 
 post:
-  operationId: replicate_file_by_id
+  deprecated: true
+  operationId: replicate_file
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?PATH_BINDING
     aspect: instance
   tags:
     - Replica
-  summary: Replicate file or directory by Id
+  summary: Replicate file or directory by path
   x-bash-codegen-description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider.
-    This operation is asynchronous and it can take a long time depending on
-    the size of the data to move.
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
 
-    If the `fid` parameter specifies a directory, entire directory is replicated to
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on the size of the data to move.
+
+    If the `path` parameter specifies a directory, entire directory is replicated to
     requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
   description: |
-    Replicates a file specified by Id in `fid` parameter to a specified provider.
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data to move.
 
-    If the `fid` parameter specifies a directory, entire directory is replicated to requested provider.
+    If the `path` parameter specifies a directory, entire directory is replicated to requested provider.
 
     This operation requires `space_schedule_replication` privilege.
 
     ***Example cURL requests***
 
-    **Replicate file by Id to any provider**
+    **Replicate file by path to any provider**
     ```bash
     curl -X POST -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
 
 
     { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
     ```
 
-    **Replicate file by Id to specific storage provider with URL callback**
+    **Replicate file by path to specific storage provider with URL callback**
     ```bash
     curl -X POST -H "X-Auth-Token: $TOKEN" \
     -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
-    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID?provider_id=$PROVIDER_ID"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -151,16 +161,16 @@ post:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: path
     in: path
-    description: Id of the file.
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
     in: query
     description: >
       The Id of the provider to which the file will be replicated.
-      By default the file will be replicated to the provided handling this REST call.
+      By default the file will be replicated to the provider handling this REST call.
     required: false
     type: string
   - name: callback
@@ -173,45 +183,54 @@ post:
       $ref: '#/definitions/Callback'
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli replicateFileById fid=$FILE_ID provider_id=$PROVIDER_ID"
+    source: "oneprovider-rest-cli replicateFile path='/MySpace/testfiles/file1.txt' provider_id=$PROVIDER_ID"
 
 delete:
-  operationId: evict_replica_by_id
+  deprecated: true
+  operationId: evict_replica
   x-onedata-gri:
     type: op_replica
-    id: ?OBJECTID_BINDING(fid)
+    id: ?PATH_BINDING
     aspect: instance
   tags:
     - Replica
-  summary: Evict existing replica by file Id
+  summary: Evict existing replica by file path
   x-bash-codegen-description: |
-    Evicts a replica of a file specified by Id in `fid` parameter.
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Removes a replica of a file specified by absolute path in `path` parameter
+    from a specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
-    can be used to specify where the replica has to be replicated before being
+    can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a directory, entire directory is evicted.
+    If the `path` parameter specifies a directory, entire directory is evicted from
+    this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.
 
   description: |
-    Evicts a replica of a file specified by file Id in `fid` parameter.
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Removes a replica of a file specified by absolute path in `path` parameter
+    from a specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
     evicted from this provider.
 
-    If the `fid` parameter specifies a directory, entire directory is evicted.
+    If the `path` parameter specifies a directory, entire directory is evicted from
+    this provider requested provider.
 
     This operation requires `space_schedule_eviction` privilege when scheduling eviction
     and also `space_schedule_replication` when scheduling migration.
 
     ***Example cURL requests***
 
-    **Evict file replica by Id from specific storage provider**
+    **Remove file replica by path from specific storage provider**
     ```bash
     curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
-    "https://$HOST/api/v3/oneprovider/replicas-id/$FILE_ID?provider_id=$PROVIDER_ID"
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
     { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
@@ -252,9 +271,9 @@ delete:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: fid
+  - name: path
     in: path
-    description: Id of the file.
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
     type: string
     required: true
   - name: provider_id
@@ -272,4 +291,4 @@ delete:
     type: string
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli evictReplicaById fid=$FILE_ID migration_provider_id=$MIGRATION_PROVIDER_ID"
+    source: "oneprovider-rest-cli evictReplica path='/MySpace/testfiles/file1.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"
