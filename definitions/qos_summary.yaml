@@ -19,7 +19,7 @@ properties:
       - pending
       - impossible
     description: >
-      Aggregate status of all QoS requirements for given file or directory.  
+      Aggregated status of all QoS requirements for given file or directory.  
 example:
   requirements: {
     "c84f669f9522c46976fee490d80651f0": pending,
