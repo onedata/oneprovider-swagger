@@ -17,7 +17,7 @@ get:
     **Get detailed information about QoS requirement**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos-requirement/$QOS_requirement_ID"
+    "https://$HOST/api/v3/oneprovider/qos-requirements/$QOS_REQ_ID"
 
     {
       "qosRequirementId": "c84f669f9522c46976fee490d80651f0",
@@ -59,7 +59,7 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQosRequirement qid=$QOS_requirement_ID"
+      source: "oneprovider-rest-cli getQosRequirement qid=$QOS_REQ_ID"
 
 
 delete:
@@ -82,7 +82,7 @@ delete:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X DELETE \
     -H "Content-type: application/json" \
-    "https://$HOST/api/v3/oneprovider/qos-requirement/$QOS_requirement_ID"
+    "https://$HOST/api/v3/oneprovider/qos-requirements/$QOS_REQ_ID"
     ```
   consumes:
     - application/json
@@ -113,4 +113,4 @@ delete:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeQosRequirement qid=$QOS_requirement_ID"
+      source: "oneprovider-rest-cli removeQosRequirement qid=$QOS_REQ_ID"

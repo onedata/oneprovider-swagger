@@ -14,6 +14,8 @@ post:
     Adds new QoS requirement for given file or directory. This triggers
     data replication (if needed) based on requirements defined in new QoS requirement.
 
+    For more information about QoS, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/qos.html).
+
     ***Example cURL requests***
 
     **Add QoS requirement for file**
@@ -21,7 +23,7 @@ post:
     curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \
     -d '{ "expression": "country=FR", "replicasNum": 2, "fileId": $FILE_ID }' \
-    "https://$HOST/api/v3/oneprovider/qos_requirement"
+    "https://$HOST/api/v3/oneprovider/qos_requirements"
     ```
   consumes:
     - application/json
@@ -32,7 +34,7 @@ post:
       description: >
         The request has been accepted and the result is the QoS requirement Id
         (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
-        Also URI of the QoS requirement in form https://$HOST/api/v3/oneprovider/qos_requirement/{qid} is
+        Also URI of the QoS requirement in form https://$HOST/api/v3/oneprovider/qos_requirements/{qid} is
         returned in the response `Location` header.
       headers:
         Location:

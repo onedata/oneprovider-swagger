@@ -119,11 +119,11 @@
 
 
 # tag QoS
-/qos_requirement:
-  $ref: ./qos_requirement.yaml
+/qos_requirements:
+  $ref: ./qos_requirements.yaml
 
-/qos_requirement/{qid}:
-  $ref: ./qos_requirement/qid.yaml
+/qos_requirements/{qid}:
+  $ref: ./qos_requirements/qid.yaml
 
 /data/{id}/qos_summary:
   $ref: ./data/id/qos_summary.yaml
