@@ -31,7 +31,6 @@ get:
 
     {
       "requirements": [{"$QOS_REQ_ID": "pending"}],
-      "assignedRequirements": {"$STORAGE_ID": ["$QOS_REQ_ID"]},
       "status": "pending"
     }
 

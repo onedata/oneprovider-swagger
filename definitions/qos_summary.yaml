@@ -6,12 +6,6 @@ properties:
     description: >
       Mapping including all QoS requirements (Ids) that influence given file/directory and corresponding 
       information of fulfillment status for this file/directory (fulfilled/pending/impossible).
-  assignedRequirements:
-    type: object
-    description: >
-      Mapping from storage Id to sublist of QoS requirements. This mapping shows which QoS 
-      requirements require file replica on given storage (mapping is calculated by system 
-      using information stored in QoS requirements)
   status:
     type: string
     enum:
@@ -24,9 +18,5 @@ example:
   requirements: {
     "c84f669f9522c46976fee490d80651f0": pending,
     "22c46976fee490d80651f0c84f669f95": fulfilled
-  }
-  assignedRequirements: {
-    "6969ba86d2172e15f8156ccb32a58b92": ["c84f669f9522c46976fee490d80651f0"],
-    "e15f8156ccb32a58b926969ba86d2172": ["22c46976fee490d80651f0c84f669f95"]
   }
   status: pending
