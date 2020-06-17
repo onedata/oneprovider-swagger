@@ -59,8 +59,8 @@ Share:
 Shares:
   $ref: ./shares.yaml
 
-QosEntry:
-  $ref: ./qos_entry.yaml
+QosRequirement:
+  $ref: ./qos_requirement.yaml
 
 QosCreateRequest:
   $ref: ./qos_create_request.yaml
