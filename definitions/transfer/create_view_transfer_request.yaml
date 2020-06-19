@@ -1,0 +1,34 @@
+allOf:
+  - $ref: '#/definitions/TransferCreateRequest'
+  - type: object
+    properties:
+      dataSourceType:
+        type: string
+        enum: [view]
+        x-discriminator-value: "view"
+        description: |
+          Indicates a transfer of files that are returned as a result of querying
+          chosen view. The view must be defined on all providers involved in
+          the process and querying it must return a valid list of file ids to be transferred.
+
+          For more information about views, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
+      spaceId:
+        type: string
+        description: Id of space containing the view.
+      viewName:
+        type: string
+        description: |
+          Name of the view that will be queried to obtain the list of
+          files to be transferred.
+      queryViewParams:
+        $ref: '#/definitions/QueryViewParams'
+required:
+  - dataSourceType
+  - spaceId
+  - viewName
+example:
+  type: eviction
+  evictingProviderId: 6b9bc70630547d925861a27e1f050dfe
+  dataSourceType: view
+  spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
+  viewName: MyImages

@@ -1,21 +1,22 @@
 description: QoS summary for file or directory.
 type: object
 properties:
-  entries:
+  requirements:
     type: object
     description: >
-      Mapping including all QoS entries (Ids) that influence given file/directory and corresponding 
-      information whether the entry is fulfilled for this file/directory (boolean).
-  assignedEntries:
-    type: object
+      Mapping including all QoS requirements (Ids) that influence given file/directory and corresponding 
+      information of fulfillment status for this file/directory (fulfilled/pending/impossible).
+  status:
+    type: string
+    enum:
+      - fulfilled
+      - pending
+      - impossible
     description: >
-      Mapping from storage Id to sublist of QoS entries. This mapping shows which QoS 
-      entries require file replica on given storage (mapping is calculated by system 
-      using information stored in QoS entries)
-  fulfilled:
-    type: boolean
-    description: Indicates whether all QoS entries for given file or directory are fulfilled. 
+      Aggregated status of all QoS requirements for given file or directory.  
 example:
-  entries: {"c84f669f9522c46976fee490d80651f0": true}
-  assignedEntries: {"6969ba86d2172e15f8156ccb32a58b92": ["c84f669f9522c46976fee490d80651f0"]}
-  fulfilled: true
+  requirements: {
+    "c84f669f9522c46976fee490d80651f0": pending,
+    "22c46976fee490d80651f0c84f669f95": fulfilled
+  }
+  status: pending

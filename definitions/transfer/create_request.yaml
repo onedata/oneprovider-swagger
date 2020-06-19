@@ -1,0 +1,45 @@
+type: object
+description: Transfer create request.
+discriminator: dataSourceType
+x-onedata-oneof: true
+x-onedata-subclasses:
+  - file
+  - view
+properties:
+  type:
+    type: string
+    description: >
+      Requested type of transfer. Depending on selected type specifying also
+      `replicatingProviderId`, `evictingProviderId` or both may be required.
+    enum:
+      - replication
+      - eviction
+      - migration
+  replicatingProviderId:
+    type: string
+    description: >
+      Id of provider to which data will be copied, ensuring that the provider
+      has a complete replica at the end of the process.
+      The data will be copied from one or more providers in the space that
+      hold replicas or some fragments.
+  evictingProviderId:
+    type: string
+    description: >
+      Id of provider from which replica(s) are to be removed.
+      Eviction is safe - will succeed only if there is at least one complete
+      replica (accumulated) on other providers in the space.
+  callback:
+    type: string
+    description: >
+      This parameter allows the user to specify a REST callback URL which will
+      be called (http `POST` request with transfer Id in body) when the transfer
+      is complete.
+  dataSourceType:
+    type: string
+    description: Source of data to be transferred.
+    enum:
+      - file
+      - view
+required:
+  - type
+  - dataSourceType

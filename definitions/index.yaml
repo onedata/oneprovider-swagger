@@ -14,9 +14,6 @@ DirectoryChildren:
 FileDistribution:
   $ref: ./file_distribution.yaml
 
-TransferStatus:
-  $ref: ./transfer_status.yaml
-
 FilePath:
   $ref: ./file_path.yaml
 
@@ -62,11 +59,27 @@ Share:
 Shares:
   $ref: ./shares.yaml
 
-QosEntry:
-  $ref: ./qos_entry.yaml
+QosRequirement:
+  $ref: ./qos_requirement.yaml
 
 QosCreateRequest:
   $ref: ./qos_create_request.yaml
 
 QosSummary:
   $ref: ./qos_summary.yaml
+
+
+# Transfer create request and its subclasses
+TransferCreateRequest:
+  $ref: ./transfer/create_request.yaml
+file:
+  $ref: ./transfer/create_file_transfer_request.yaml
+view:
+  $ref: ./transfer/create_view_transfer_request.yaml
+
+TransferStatus:
+  $ref: ./transfer/status.yaml
+
+
+QueryViewParams:
+  $ref: ./views/query_view_params.yaml

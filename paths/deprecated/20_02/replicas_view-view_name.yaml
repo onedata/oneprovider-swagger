@@ -1,4 +1,5 @@
 post:
+  deprecated: true
   operationId: replicate_files_by_view
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
@@ -9,6 +10,8 @@ post:
   tags:
     - Replica
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Queries the specified view and replicates the resulting list of files to specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
@@ -26,6 +29,8 @@ post:
     This operation requires `space_schedule_replication` and `space_query_views` privileges.
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Queries the specified view and replicates the resulting list of files to specified provider.
     This operation is asynchronous and it can take a long time depending on the size of the data
     to move.
@@ -215,6 +220,7 @@ post:
 
 
 delete:
+  deprecated: true
   operationId: evict_replicas_by_view
   x-onedata-gri:
     type: op_replica
@@ -224,6 +230,8 @@ delete:
   tags:
     - Replica
   x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Queries the specified view and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being
@@ -244,6 +252,8 @@ delete:
       * `space_query_views`, `space_schedule_eviction` and `space_schedule_replication` when scheduling migration
 
   description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
     Queries the specified view and evicts the resulting list of replicas in specified provider.
     This operation is asynchronous. Optional argument `migration_provider_id`
     can be used to specify where the repliace has to be replicated before being

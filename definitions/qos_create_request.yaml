@@ -1,9 +1,9 @@
-description: Object representing body of request that adds QoS entry for file or directory
+description: Object representing body of request that adds QoS requirement for file or directory
 type: object
 properties:
   fileId:
     type: string
-    description: Id of file or directory entry is going to be created for.
+    description: Id of file or directory requirement is going to be created for.
   expression:
     type: string
     description: Expression used to select storages on which file should be replicated.
