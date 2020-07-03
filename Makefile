@@ -82,3 +82,7 @@ bash-packages:
         cp generated/bash/oneprovider-rest-cli.bash-completion "packages/bash/$$release_branch/";\
     done
 	@git checkout master
+
+submodules:
+	git submodule sync --recursive ${submodule}
+	git submodule update --init --recursive ${submodule}
