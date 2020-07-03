@@ -21,7 +21,8 @@ get:
 
     {
       "shareId": "1f4b762b1380946e73aeca574c77f14c",
-      "name": "MyNewShare",
+      "name": "Experiment XYZ",
+      "description": "# Experiment XYZ\nThis collection contains results from Experiment XYZ.",
       "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
       "fileType": "dir",
       "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
@@ -73,13 +74,13 @@ patch:
     type: op_share
     id: ?BINDING(shid)
     aspect: instance
-  summary: Rename share
+  summary: Update share
   tags:
     - Share
   x-bash-codegen-description: |
-    Changes name of the share.
+    Changes name and/or description of the share.
   description: |
-    Changes name of the share.
+    Changes name and/or description of the share.
 
     ***Example cURL requests***
 
@@ -87,7 +88,7 @@ patch:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/json" \
-    -d '{ "name": "NewShareName" }' \
+    -d '{ "name": "NewShareName", "description": "# New description" }' \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
     ```
   consumes:
@@ -117,15 +118,22 @@ patch:
       description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
       type: string
       required: true
-    - name: name
+    - name: data
       in: body
-      description: New name for the share.
+      description: New share details
       schema:
-        type: string
+        type: object
+        properties:
+          name:
+            type: string
+            description: New name for the share.
+          description:
+            type: string
+            description: New description of the share.
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName"
+      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName description==\"# New description\""
 
 
 delete:

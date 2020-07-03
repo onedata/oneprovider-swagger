@@ -48,7 +48,7 @@ doc-markdown: validate
 
 preview: validate
 	$(info Open http://localhost:8088  (or http://$${DOCKER_MACHINE_IP}:8088))
-	@docker run -v `pwd`/swagger.json:/usr/share/nginx/html/swagger.json:ro -p 8088:80 ${SWAGGER_REDOC_IMAGE}
+	@docker run --rm -v `pwd`/swagger.json:/usr/share/nginx/html/swagger.json:ro -p 8088:80 ${SWAGGER_REDOC_IMAGE}
 
 bash-packages: RELEASES = $(shell git branch -a | grep "release/" | sed -n 's/.*release\/\(.*\)/\1/p')
 bash-packages:
