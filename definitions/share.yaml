@@ -9,7 +9,7 @@ properties:
     description: The name of the share.
   description:
     type: string
-    description: Description of the share contents in markdown format.
+    description: Description of the share contents, interpreted as markdown format when displayed in GUI.
   publicUrl:
     type: string
     description: The publicly accessible URL for the share.

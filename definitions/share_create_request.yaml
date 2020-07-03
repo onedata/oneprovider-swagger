@@ -6,7 +6,7 @@ properties:
     description: The name of the share.
   description:
     type: string
-    description: Description of the share contents in markdown format.
+    description: Description of the share contents, interpreted as markdown format when displayed in GUI.
   fileId:
     type: string
     description: Id of file or directory to be shared. The whole space can also be shared.
