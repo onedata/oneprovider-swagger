@@ -1,0 +1,20 @@
+type: object
+properties:
+  children:
+    type: array
+    description: The list of directory files and subdirectories.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the file or subdirectory.
+        name:
+          type: string
+          description: Name of the file or subdirectory.
+example:
+  children:
+    - id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
+      name: File1.txt
+    - id: NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm
+      name: Dir2

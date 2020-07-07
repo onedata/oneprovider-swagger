@@ -1,0 +1,14 @@
+type: object
+description: List of shares.
+properties:
+  shares:
+    type: array
+    description: The list of share Ids.
+    items:
+      type: string
+required:
+  - shares
+example:
+  shares:
+    - 1d24c36707d99197c6cd995810a43aca
+    - 6825604b0eb6a47b8b7a04b6369eb24d

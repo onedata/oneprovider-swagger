@@ -34,8 +34,8 @@ example:
     end: 1465553100
     step: 300
     legend: 
-      - "space s1; metric block_access; user u1; oneprovider ID p1; block_access_read[iops/s]"
-      - "space s1; metric block_access; user u1; oneprovider ID p1; block_access_write[iops/s]"
+      - "space s1; metric block_access; user u1; oneprovider Id p1; block_access_read[iops/s]"
+      - "space s1; metric block_access; user u1; oneprovider Id p1; block_access_write[iops/s]"
   data:
     -
       - null

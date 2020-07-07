@@ -1,12 +1,11 @@
 get:
   operationId: get_all_spaces
-  x-onedata-service: oneprovider
-  x-onedata-module: files
-  x-onedata-resource: file
-  x-onedata-method: get_all_spaces
+  x-onedata-gri:
+    type: op_space
+    aspect: list
   tags:
-    - Data
-  summary: Get all spaces
+    - Space
+  summary: Get all user spaces
   x-bash-codegen-description: |
     Returns the list of all user spaces.
   description: |
@@ -16,7 +15,7 @@ get:
 
     **List all user spaces**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/spaces"
 
     [
@@ -30,13 +29,11 @@ get:
       }
     ]
     ```
-  x-bash-codegen-description:
-    Returns the list of all user spaces.
   produces:
     - application/json
   responses:
     '200':
-      description: The list of all user spaces - containining their names and ID's.
+      description: The list of all user spaces - containining their names and Id's.
       schema:
         type: array
         items:
@@ -47,8 +44,7 @@ get:
                 description: Space name.
               spaceId:
                 type: string
-                description: Space ID.
-
+                description: Space Id.
     '400':
       description: Invalid request.
       schema:

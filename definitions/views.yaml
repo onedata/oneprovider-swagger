@@ -1,0 +1,20 @@
+type: object
+description: The list of views names, nextPageToken is present when there is more to list.
+properties:
+  views:
+    type: array
+    description: List of space views
+    items:
+      type: string
+  nextPageToken:
+    type: string
+    description: >
+      Can be used to list views starting after the last on returned
+      list (present only when there is more views to list)
+required:
+  - views
+example:
+  views:
+    - images
+    - videos
+  nextPageToken: 8471726779817b3a

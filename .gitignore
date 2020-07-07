@@ -7,3 +7,4 @@ dockerimage.report.txt
 dockerimage.sha
 
 .idea
+*.iml

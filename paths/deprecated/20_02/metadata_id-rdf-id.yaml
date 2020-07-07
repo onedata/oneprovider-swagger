@@ -1,0 +1,125 @@
+get:
+  deprecated: true
+  operationId: get_file_rdf_metadata_by_id
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: rdf_metadata
+  summary: Get file rdf metadata by Id (deprecated)
+  tags:
+    - Deprecated File Api
+  x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_rdf_metadata).
+
+    This method returns the rdf metadata for specified file, directory or space by Id.
+
+  description: |
+    This enpoint is deprecated, please use [this one](#operation/get_rdf_metadata).
+
+    This method returns the rdf metadata for specified file, directory or space by Id.
+
+    ***Example cURL requests***
+
+    **Get complete RDF metadata document for file**
+
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X GET \
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
+    ```
+  produces:
+    - application/rdf+xml
+  responses:
+    '200':
+      description: Rdf metadata returned successfully.
+      schema:
+        type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: id
+    in: path
+    description: Id of the file.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileRdfMetadataById id=$FILE_ID"
+
+
+put:
+  deprecated: true
+  operationId: set_file_rdf_metadata_by_id
+  x-onedata-parse_body: '{as_is, <<"metadata">>}'
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: rdf_metadata
+  summary: Set file rdf metadata by Id (deprecated)
+  tags:
+    - Deprecated File Api
+  description: |
+    This enpoint is deprecated, please use [this one](#operation/set_rdf_metadata).
+
+    This method allows to set specific rdf metadata for a file, directory or space specified by Id in the request path.
+
+    This operation will replace the previous rdf metadata if any.
+
+    ***Example cURL requests***
+
+    **Set RDF metadata for space from RDF file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X PUT \
+    -H "Content-type: application/rdf+xml" \
+    -d "@./space1_dublincore.rdf"
+    https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
+    ```
+  consumes:
+    - application/rdf+xml
+  responses:
+    '204':
+      description: Rdf metadata updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: id
+    in: path
+    description: Id of the file.
+    type: string
+    required: true
+  - name: metadata
+    in: body
+    description: The rdf metadata.
+    required: true
+    schema:
+      type: string
+  x-code-samples:
+  - lang: Shell
+    source: "cat metadata.rdf | oneprovider-rest-cli setFileRdfMetadataById id=$FILE_ID -"

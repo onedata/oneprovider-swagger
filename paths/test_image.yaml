@@ -1,0 +1,27 @@
+get:
+  operationId: test_image
+  x-onedata-gri:
+    type: op_provider
+    aspect: test_image
+    scope: public
+  summary: Get test image
+  tags:
+    - Oneprovider
+  x-bash-codegen-description: |
+    This endpoint returns a dummy image in `.png` format. It is used internally
+    by web applications across Onedata to check connectivity with certain services.
+    This endpoint does not require authentication.
+  description: |
+    This endpoint returns a dummy image in `.png` format. It is used internally
+    by web applications across Onedata to check connectivity with certain services.
+    This endpoint does not require authentication.
+
+  produces:
+    - image/png
+  responses:
+    '200':
+      description: Test image.
+    '500':
+      description: Internal server Error.
+      schema:
+        $ref: '#/definitions/Error'

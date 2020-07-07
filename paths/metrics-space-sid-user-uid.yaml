@@ -1,22 +1,26 @@
 get:
   operationId: get_space_user_metrics
-  x-onedata-service: oneprovider
-  x-onedata-module: metrics
-  x-onedata-resource: space
-  x-onedata-method: get_space_user_metrics
+  x-onedata-gri:
+    type: op_metrics
+    id: ?BINDING(sid)
+    aspect: "{user, ?BINDING(uid)}"
   summary: Get space user metrics
   tags:
     - Monitoring
   x-bash-codegen-description: |
     Returns space related metrics of specified type for specific user.
+
+    This operation requires `space_view_statistics` privilege.
   description: |
     Returns space related metrics of specified type for specific user.
+
+    This operation requires `space_view_statistics` privilege.
 
     ***Example cURL requests***
 
     **Get user storage block access metrics with 1 hour resolution**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID/user/$USER_ID?metric=block_access&step=1h"
 
     {
@@ -27,7 +31,7 @@ get:
           "meta": {
               "start": 1465466700,
               "end": 1465553100,
-              "legend": ["space fe14b4cc-bce0-4220-8394-a911d11a0a53; metric storage_used; oneprovider ID 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
+              "legend": ["space fe14b4cc-bce0-4220-8394-a911d11a0a53; metric storage_used; oneprovider Id 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
               "step": 3600
           }
         }
@@ -62,12 +66,12 @@ get:
   parameters:
   - name: sid
     in: path
-    description: ID of a specific space for which the monitoring metrics should be retrieved.
+    description: Id of a specific space for which the monitoring metrics should be retrieved.
     type: string
     required: true
   - name: uid
     in: path
-    description: ID of a specific user within a space for which the monitoring metrics should be limited to.
+    description: Id of a specific user within a space for which the monitoring metrics should be limited to.
     type: string
     required: true
   - name: metric
@@ -79,6 +83,7 @@ get:
       - storage_used
       - data_access
       - block_access
+      - remote_transfer
   - name: step
     in: query
     description: The resolution of the monitoring data to return - default is 5m [5 minutes].

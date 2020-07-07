@@ -9,32 +9,68 @@ definitions:
 tags:
   - name: Oneprovider
     description: Information about the Oneprovider service
-  - name: Data
-    description: Space and file related operations
-  - name: Replication
-    description: Replication, file distribution and transfer control operations
+  - name: Space
+    description: Spaces related operations
+  - name: View
+    description: Views related operations
+  - name: File Path Resolution
+    description: Files and Directories path resolution operations
+  - name: Basic File Operations
+    description: Files and Directories basic operations
+  - name: File Distribution
+    description: Operations concerning file distribution
+  - name: Custom File Metadata
+    description: Files and Directories metadata related operations
+  - name: Deprecated File Api
+    description: Files and Directories related operations (deprecated)
+  - name: QoS
+    description: QoS related operations
+  - name: Share
+    description: Shares related operations
+  - name: Replica
+    description: Replication and file distribution control operations
+  - name: Transfer
+    description: Transfers related operations
   - name: Monitoring
     description: Metrics and change events monitoring related operations
 x-tagGroups:
   - name: Service information
     tags:
       - Oneprovider
-  - name: Data access and management
+  - name: Space management
     tags:
-      - Data
-  - name: Replication and transfer control
+      - Space
+      - View
+  - name: File access & management
     tags:
-      - Replication
-  - name: Monitoring and metrics
+      - File Path Resolution
+      - Basic File Operations
+      - File Distribution
+      - Custom File Metadata
+      - Deprecated File Api
+  - name: Replica & QoS management
+    tags:
+      - Replica
+      - Transfer
+      - QoS
+  - name: Share management
+    tags:
+      - Share
+  - name: Monitoring & metrics
     tags:
       - Monitoring
 securityDefinitions:
-  api_key:
+  # api_key1 is used by Bash generated clients as default
+  # header for sending api key
+  api_key1:
     type: apiKey
     name: X-Auth-Token
     in: header
-  basic:
-    type: basic
+  api_key2:
+    type: apiKey
+    # When using this method, the token must be prefixed with 'Bearer '
+    name: Authorization
+    in: header
 security:
-  - basic: []
-  - api_key: []
+  - api_key1: []
+  - api_key2: []

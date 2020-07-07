@@ -1,17 +1,39 @@
 get:
   operationId: get_configuration
-  x-onedata-service: oneprovider
-  x-onedata-module: configuration
-  x-onedata-resource: configuration
-  x-onedata-method: get_configuration
+  x-onedata-gri:
+    type: op_provider
+    aspect: configuration
+    scope: public
   summary: Get public information
   tags:
     - Oneprovider
   x-bash-codegen-description: |
     Returns public information about the Oneprovider service.
-  description: >
-    Returns public information about the Oneprovider service.
+
     This endpoint does not require authentication.
+  description: |
+    Returns public information about the Oneprovider service.
+
+    This endpoint does not require authentication.
+
+    ***Example cURL requests***
+
+    **Get public information about the Oneprovider service**
+    ```bash
+    curl "https://$HOST/api/v3/oneprovider/configuration"
+
+    {
+      "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
+      "name": "ProviderName",
+      "domain": "zone.domain.org",
+      "onezoneDomain": "example.domain.org",
+      "version": "R14B04",
+      "build": "14-g0d0fd5b",
+      "compatibleOnezoneVersions": ["R13B04, R14B04"],
+      "compatibleOneproviderVersions": ["R14B04"],
+      "compatibleOneclientVersions": ["R14B04"]
+    }
+    ```
   produces:
     - application/json
   responses:
@@ -23,3 +45,6 @@ get:
       description: Internal server error.
       schema:
         $ref: '#/definitions/Error'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getConfiguration"

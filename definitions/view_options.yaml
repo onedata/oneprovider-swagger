@@ -1,0 +1,13 @@
+type: object
+description: |
+  Options specified during creation or update of view conforming to the
+  [automated view update](https://docs.couchbase.com/server/4.1/developer-guide/views-operation.html#automated-index-updates) description.
+properties:
+  update_min_changes:
+    description: Minimum number of document changes to trigger re-viewing.
+    type: integer
+  replica_update_min_changes:
+    description: Minimum number of document changes to trigger re-viewing of a replica index.
+    type: integer
+example:
+  update_min_changes: 100

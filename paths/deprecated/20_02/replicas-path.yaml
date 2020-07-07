@@ -1,0 +1,294 @@
+get:
+  deprecated: true
+  operationId: get_file_replicas
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: distribution
+  tags:
+    - Replica
+  summary: Get replicas by path
+  x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
+    Returns file distribution information about a specific file.
+  description: |
+    This enpoint is deprecated, please use [this one](#operation/get_file_distribution).
+
+    Returns file distribution information about a specific file.
+
+    ***Example cURL requests***
+
+    **Get file distribution map by path**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
+
+    [
+      {
+        "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
+        "providerId": "784dae9d-34a3-4aef-ab4b-2c6c60b74e27"
+      },
+      {
+        "blocks": [ [ 5, 9 ] ],
+        "providerId": "b296ab05-3d62-4755-be46-c57ced411ff1"
+      }
+    ]
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of file blocks stored at each provider.
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/FileDistribution'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileReplicas path='/MySpace/testfiles/file1.txt' key=value1"
+
+
+post:
+  deprecated: true
+  operationId: replicate_file
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: instance
+  tags:
+    - Replica
+  summary: Replicate file or directory by path
+  x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on the size of the data to move.
+
+    If the `path` parameter specifies a directory, entire directory is replicated to
+    requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
+
+  description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Replicates a file specified by absolute path in `path` parameter to a specified provider.
+    This operation is asynchronous and it can take a long time depending on the size of the data to move.
+
+    If the `path` parameter specifies a directory, entire directory is replicated to requested provider.
+
+    This operation requires `space_schedule_replication` privilege.
+
+    ***Example cURL requests***
+
+    **Replicate file by path to any provider**
+    ```bash
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt"
+
+
+    { "transferId": "4f674576-4c63-443b-b3d5-2f74a40724a0" }
+    ```
+
+    **Replicate file by path to specific storage provider with URL callback**
+    ```bash
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
+
+
+    { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The replication request was accepted and the result is the transfer Id, which
+        can be used for monitoring the transfer status.
+        Also URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the new transfer.
+          type: string
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: Transfer Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: provider_id
+    in: query
+    description: >
+      The Id of the provider to which the file will be replicated.
+      By default the file will be replicated to the provider handling this REST call.
+    required: false
+    type: string
+  - name: callback
+    in: body
+    description: >
+      This parameter allows the user to specify a REST callback URL which will be called
+      when the transfer is complete
+    required: false
+    schema:
+      $ref: '#/definitions/Callback'
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli replicateFile path='/MySpace/testfiles/file1.txt' provider_id=$PROVIDER_ID"
+
+delete:
+  deprecated: true
+  operationId: evict_replica
+  x-onedata-gri:
+    type: op_replica
+    id: ?PATH_BINDING
+    aspect: instance
+  tags:
+    - Replica
+  summary: Evict existing replica by file path
+  x-bash-codegen-description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Removes a replica of a file specified by absolute path in `path` parameter
+    from a specified provider.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    evicted from this provider.
+
+    If the `path` parameter specifies a directory, entire directory is evicted from
+    this provider requested provider.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
+  description: |
+    This enpoint is deprecated, please use [this one](#operation/create_transfer).
+
+    Removes a replica of a file specified by absolute path in `path` parameter
+    from a specified provider.
+    This operation is asynchronous. Optional argument `migration_provider_id`
+    can be used to specify where the repliace has to be replicated before being
+    evicted from this provider.
+
+    If the `path` parameter specifies a directory, entire directory is evicted from
+    this provider requested provider.
+
+    This operation requires `space_schedule_eviction` privilege when scheduling eviction
+    and also `space_schedule_replication` when scheduling migration.
+
+    ***Example cURL requests***
+
+    **Remove file replica by path from specific storage provider**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
+
+
+    { "transferId": "b3c85b99-44db-4277-8c66-2ccd50888565" }
+    ```
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The replica removal has been accepted and the result is the transfer Id,
+        which can be used for monitoring the transfer status.
+        Also URI of the new transfer in form https://$HOST/api/v3/oneprovider/transfers/{tid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the new transfer.
+          type: string
+      schema:
+        type: object
+        properties:
+          transferId:
+            type: string
+            description: Transfer Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: path
+    in: path
+    description: File path (e.g. '/MySpace/testfiles/file1.txt')
+    type: string
+    required: true
+  - name: provider_id
+    in: query
+    description: >
+      The Id of the provider from which the replica will be evicted.
+      By default the replica will be evicted in the provider handling this REST call.
+    required: false
+    type: string
+  - name: migration_provider_id
+    in: query
+    description: >
+      The Id of the provider to which the file should be replicated before being evicted.
+    required: false
+    type: string
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli evictReplica path='/MySpace/testfiles/file1.txt' migration_provider_id=$MIGRATION_PROVIDER_ID"

@@ -4,59 +4,138 @@
 #
 
 
+# tag Oneprovider
 /configuration:
   $ref: ./configuration.yaml
 
-# tag Data
+/test_image:
+  $ref: ./test_image.yaml
+
+
+# tag Space
 /spaces:
   $ref: ./spaces.yaml
 
 /spaces/{sid}:
-  $ref: ./spaces-sid.yaml
+  $ref: ./spaces/sid.yaml
 
+
+# tag View
+/spaces/{sid}/views:
+  $ref: ./spaces/sid/views.yaml
+
+/spaces/{sid}/views/{view_name}:
+  $ref: ./spaces/sid/views/view_name.yaml
+
+/spaces/{sid}/views/{view_name}/reduce:
+  $ref: ./spaces/sid/views/view_name/reduce.yaml
+
+/spaces/{sid}/views/{view_name}/query:
+  $ref: /spaces/sid/views/view_name/query.yaml
+
+
+# tag File Path Resolution
+/lookup-file-id/{path}:
+  $ref: ./lookup_file_id-path.yaml
+
+
+# tag Basic File Operations
+/data/{id}/children:
+  $ref: ./data/id/children.yaml
+
+/data/{id}:
+  $ref: ./data/id.yaml
+
+/data/{id}/distribution:
+  $ref: ./data/id/distribution.yaml
+
+
+# tag Custom File Metadata
+/data/{id}/metadata/json:
+  $ref: ./data/id/metadata/json.yaml
+
+/data/{id}/metadata/rdf:
+  $ref: ./data/id/metadata/rdf.yaml
+
+/data/{id}/metadata/xattrs:
+  $ref: ./data/id/metadata/xattrs.yaml
+  
+
+# tag Deprecated File Api
 /files/{path}:
-  $ref: ./files-path.yaml
+  $ref: ./deprecated/20_02/files-path.yaml
 
-/attributes/{path}:
-  $ref: ./attributes-path.yaml
+/files-id/{id}:
+  $ref: ./deprecated/20_02/files_id-id.yaml
 
-/metadata/{path}:
-  $ref: ./metadata-path.yaml
+/metadata/attrs/{path}:
+  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
 
-/metadata-id/{id}:
-  $ref: ./metadata_id-id.yaml
+/metadata/xattrs/{path}:
+  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
 
-/spaces/{sid}/indexes:
-  $ref: ./spaces-sid-indexes.yaml
+/metadata/json/{path}:
+  $ref: ./deprecated/20_02/metadata-json-path.yaml
 
-/spaces/{sid}/indexes/{index_name}:
-  $ref: ./spaces-sid-indexes-index_name.yaml
+/metadata/rdf/{path}:
+  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
 
-/spaces/{sid}/indexes/{index_name}/reduce:
-  $ref: ./spaces-sid-indexes-index_name-reduce.yaml
+/metadata-id/attrs/{id}:
+  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
 
-/spaces/{sid}/indexes/{index_name}/query:
-  $ref: ./spaces-sid-indexes-index_name-query.yaml
+/metadata-id/xattrs/{id}:
+  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
+
+/metadata-id/json/{id}:
+  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
+
+/metadata-id/rdf/{id}:
+  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
 
 
-# tag Replication
+# tag Replica
 /replicas/{path}:
-  $ref: ./replicas-path.yaml
+  $ref: ./deprecated/20_02/replicas-path.yaml
 
-/replicas-id/{fid}:
-  $ref: ./replicas_id-fid.yaml
+/replicas-id/{id}:
+  $ref: ./deprecated/20_02/replicas_id-fid.yaml
 
-/replicas-index/{index_name}:
-  $ref: ./replicas_index-index_name.yaml
+/replicas-view/{view_name}:
+  $ref: ./deprecated/20_02/replicas_view-view_name.yaml
 
+
+# tag Transfer
 /spaces/{sid}/transfers:
-  $ref: ./spaces-sid-transfers.yaml
+  $ref: ./spaces/sid/transfers.yaml
+
+/transfers:
+  $ref: ./transfers.yaml
 
 /transfers/{tid}:
-  $ref: ./transfers-tid.yaml
+  $ref: ./transfers/tid.yaml
 
 /transfers/{tid}/rerun:
-  $ref: ./transfers-tid-rerun.yaml
+  $ref: ./transfers/tid/rerun.yaml
+
+
+# tag QoS
+/qos_requirements:
+  $ref: ./qos_requirements.yaml
+
+/qos_requirements/{qid}:
+  $ref: ./qos_requirements/qid.yaml
+
+/data/{id}/qos_summary:
+  $ref: ./data/id/qos_summary.yaml
+
+
+# tag Share
+/shares:
+  $ref: ./shares.yaml
+
+/shares/{shid}:
+  $ref: ./shares/shid.yaml
+
 
 # tag Monitoring
 /metrics/space/{sid}:
@@ -64,12 +143,6 @@
 
 /metrics/space/{sid}/user/{uid}:
   $ref: ./metrics-space-sid-user-uid.yaml
-
-# /metrics/provider/{pid}:
-#   $ref: ./metrics-provider-pid.yaml
-
-# /metrics/user/{uid}:
-#   $ref: ./metrics-user-uid.yaml
 
 /changes/metadata/{sid}:
   $ref: ./changes-metadata-sid.yaml

@@ -8,29 +8,26 @@ Configuration:
 Error:
   $ref: ./error.yaml
 
+DirectoryChildren:
+  $ref: ./directory_children.yaml
+
 FileDistribution:
-  $ref: ./filedistribution.yaml
-
-FileAttribute:
-  $ref: ./fileattribute.yaml
-
-FileTransferStatus:
-  $ref: ./filetransferstatus.yaml
+  $ref: ./file_distribution.yaml
 
 FilePath:
-  $ref: ./filepath.yaml
+  $ref: ./file_path.yaml
 
 Callback:
   $ref: ./callback.yaml
 
-FileMetadata:
-  $ref: ./filemetadata.yaml
+FileAttributes:
+  $ref: ./file_attributes.yaml
 
 FileMetadataChange:
-  $ref: ./filemetadatachange.yaml
+  $ref: ./file_metadata_change.yaml
 
 MetadataChangesStreamRequest:
-  $ref: ./metadatachangesstreamrequest.yaml
+  $ref: ./metadata_changes_stream_request.yaml
 
 Space:
   $ref: ./space.yaml
@@ -44,8 +41,45 @@ Metrics:
 RRD:
   $ref: ./rrd.yaml
 
-Index:
-  $ref: ./index_type.yaml
+View:
+  $ref: ./view.yaml
 
-IndexOptions:
-  $ref: ./index_options.yaml
+Views:
+  $ref: ./views.yaml
+
+ViewOptions:
+  $ref: ./view_options.yaml
+
+ShareCreateRequest:
+  $ref: ./share_create_request.yaml
+
+Share:
+  $ref: ./share.yaml
+
+Shares:
+  $ref: ./shares.yaml
+
+QosRequirement:
+  $ref: ./qos_requirement.yaml
+
+QosCreateRequest:
+  $ref: ./qos_create_request.yaml
+
+QosSummary:
+  $ref: ./qos_summary.yaml
+
+
+# Transfer create request and its subclasses
+TransferCreateRequest:
+  $ref: ./transfer/create_request.yaml
+file:
+  $ref: ./transfer/create_file_transfer_request.yaml
+view:
+  $ref: ./transfer/create_view_transfer_request.yaml
+
+TransferStatus:
+  $ref: ./transfer/status.yaml
+
+
+QueryViewParams:
+  $ref: ./views/query_view_params.yaml
