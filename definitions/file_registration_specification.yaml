@@ -1,0 +1,64 @@
+type: object
+description: Specification of file to be registered in the Onedata file-system.
+properties:
+  spaceId:
+    type: string
+    description: Id of the space in which the file will be created.
+  storageId:
+    type: string
+    description: Id of the external storage resource on which the file is located, relevant for given storage backend.
+  storageFileId:
+    type: string
+    description: Id of the file on the storage.
+  destinationPath:
+    type: string
+    description: An absolute path in space where file should be created.
+  size:
+    type: integer
+    description: Size of the file in bytes.
+  mode:
+    type: integer
+    description: POSIX file permissions in decimal format
+  atime:
+    type: integer
+    description: Last access timestamp (in seconds).
+  mtime:
+    type: integer
+    description: Last modification timestamp (in seconds).
+  ctime:
+    type: integer
+    description: Last attributes modification timestamp (in seconds).
+  uid:
+    type: string
+    description: Id of the owner of this file on storage.
+  gid:
+    type: string
+    description: Id of the group owner of this file on storage.
+  xattrs:
+    type: object
+    description: Map with extended attributes key-value pairs which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  verifyExistence:
+    type: boolean
+    description: >
+      Flag which determines whether additional operation should be performed to ensure that the file
+      exists on the storage.
+    default: true
+example:
+  spaceId: 761f76677f42ad5289d6472675d5ecf2dfd57be6
+  storageId: 2c1e539dbebf76a697e44782787585ebb0f47af1
+  storageFileId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
+  destinationPath: /experiments/2010/01/05/results.json
+  mode: 511
+  size: 1024
+  atime: 1464958683054
+  mtime: 1464958683051
+  ctime: 1464958681054
+  storage_user_id: 1935313
+  storage_group_id: 1101841
+  xattrs:
+    colour: red
+    country: FR
+    checksum: 189e725f4587b679740f0f7783745056
+  verifyExistence: true
