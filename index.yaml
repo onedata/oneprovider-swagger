@@ -22,7 +22,7 @@ tags:
   - name: Custom File Metadata
     description: Files and Directories metadata related operations
   - name: File registration
-    description: Operations for registering files located on external storage resources
+    description: Operations for registering files located on external storages
   - name: Deprecated File Api
     description: Files and Directories related operations (deprecated)
   - name: QoS

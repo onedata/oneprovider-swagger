@@ -8,15 +8,15 @@ post:
     - File registration
   summary: Register file
   x-bash-codegen-description: |
-    Registers file existing on a remote storage resources.
+    Registers file existing on a remote storage.
 
     This operation requires:
-      * #TODO
+      * space_register_file privilege
   description: |
-    Registers file existing on a remote storage resources.
+    Registers file existing on a remote storage.
 
     This operation requires:
-      * #TODO
+      * space_register_file privilege
     ***Example cURL requests***
 
     **Register file**
@@ -63,11 +63,11 @@ post:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-    - name: fileRegistrationSpecification
+    - name: fileRegistrationRequest
       in: body
       description: Specification of a file to be registered.
       schema:
-        $ref: '#/definitions/FileRegistrationSpecification'
+        $ref: '#/definitions/FileRegistrationRequest'
       required: true
   x-code-samples:
     - lang: Shell

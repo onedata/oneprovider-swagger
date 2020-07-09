@@ -26,8 +26,8 @@ FileAttributes:
 FileMetadataChange:
   $ref: ./file_metadata_change.yaml
 
-FileRegistrationSpecification:
-  $ref: ./file_registration_specification.yaml
+FileRegistrationRequest:
+  $ref: ./file_registration_request.yaml
 
 MetadataChangesStreamRequest:
   $ref: ./metadata_changes_stream_request.yaml
