@@ -8,12 +8,32 @@ post:
     - File registration
   summary: Register file
   x-bash-codegen-description: |
-    Registers file existing on a remote storage.
+    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
+    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
+    space and must be registered manually by the space users.
+
+    The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
+    which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
+    or an automatic detection will be performed (although not all storage backends support the required `stat` operation or
+    equivalent - in such case some metadata must be provided for the operation to succeed).
+
+    The registration of the same file can be repeated, which updates the previous metadata with the new information.
+    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
 
     This operation requires:
       * space_register_file privilege
   description: |
-    Registers file existing on a remote storage.
+    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
+    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
+    space and must be registered manually by the space users.
+
+    The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
+    which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
+    or an automatic detection will be performed (although not all storage backends support the required `stat` operation or
+    equivalent - in such case some metadata must be provided for the operation to succeed).
+
+    The registration of the same file can be repeated, which updates the previous metadata with the new information.
+    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
 
     This operation requires:
       * space_register_file privilege

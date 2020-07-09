@@ -3,7 +3,7 @@ description: Specification of file to be registered in the Onedata file-system.
 properties:
   spaceId:
     type: string
-    description: Id of the space in which the file will be created.
+    description: Id of the space in which the file will be registered.
   storageId:
     type: string
     description: >
