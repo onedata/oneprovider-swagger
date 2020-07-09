@@ -21,6 +21,8 @@ tags:
     description: Operations concerning file distribution
   - name: Custom File Metadata
     description: Files and Directories metadata related operations
+  - name: File registration
+    description: Operations for registering files located on external storages
   - name: Deprecated File Api
     description: Files and Directories related operations (deprecated)
   - name: QoS
@@ -47,6 +49,7 @@ x-tagGroups:
       - Basic File Operations
       - File Distribution
       - Custom File Metadata
+      - File registration
       - Deprecated File Api
   - name: Replica & QoS management
     tags:

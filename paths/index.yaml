@@ -59,7 +59,11 @@
 
 /data/{id}/metadata/xattrs:
   $ref: ./data/id/metadata/xattrs.yaml
-  
+
+# tag File registration
+/data/register:
+  $ref: ./data/register.yaml
+
 
 # tag Deprecated File Api
 /files/{path}:

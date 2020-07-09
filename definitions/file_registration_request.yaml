@@ -1,0 +1,87 @@
+type: object
+description: Specification of file to be registered in the Onedata file-system.
+properties:
+  spaceId:
+    type: string
+    description: Id of the space in which the file will be registered.
+  storageId:
+    type: string
+    description: >
+      Id of the storage on which the file is located.
+      Storage must be created as an `imported` storage with path type equal to `canonical`.
+  storageFileId:
+    type: string
+    description: >
+      Identifier of the file on storage, relevant for given storage backend:
+         * path on POSIX-compatible or canonical object storages, e.g. `/dir/file.txt`
+         * URL on HTTP based storages, e.g. `https://www.example.org/data/21/run123.tar`
+  destinationPath:
+    type: string
+    description: An absolute path in space where file should be created.
+  size:
+    type: integer
+    description: >
+      Size of the file in bytes. If not passed, it will be acquired from storage.
+      If storage does not support the `stat` operation or equivalent used for acquiring files metadata,
+      registration will fail if this value is missing.
+  mode:
+    type: integer
+    description: >
+      User defined POSIX file permissions in decimal format. If not passed, it will be acquired from storage or default
+      `0664` mode will be used.
+  atime:
+    type: integer
+    description: >
+      User defined last access timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  mtime:
+    type: integer
+    description: >
+      User defined last modification timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  ctime:
+    type: integer
+    description: >
+      User defined last attributes modification timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  uid:
+    type: string
+    description: >
+      User defined of the Id of the owner of this file on storage.
+      If not passed, it will be acquired from storage or `0` will be used.
+      This value will be mapped, using LUMA DB, to acquire Onedata user Id of the file owner.
+  gid:
+    type: string
+    description: >
+      User defined Id of the group owner of this file on storage.
+      If not passed, it will be acquired from storage or `0` will be used.
+      This value will be used as display GID in `getattr` operation.
+  xattrs:
+    type: object
+    description: Map with extended attributes key-value pairs which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  verifyExistence:
+    type: boolean
+    description: >
+      Flag which determines whether additional operation should be performed to ensure that the file
+      exists on the storage. If verification is disabled and the file does not exist,
+      it will be visible in Onedata but not accessible.
+    default: true
+example:
+  spaceId: 761f76677f42ad5289d6472675d5ecf2dfd57be6
+  storageId: 2c1e539dbebf76a697e44782787585ebb0f47af1
+  storageFileId: https://www.example.org/data/2010/01/05/run123.tar
+  destinationPath: /data/2010/01/05/run123.tar
+  mode: 511
+  size: 1024
+  atime: 1464958683054
+  mtime: 1464958683051
+  ctime: 1464958681054
+  uid: 1935313
+  gid: 1101841
+  xattrs:
+    colour: red
+    country: FR
+    checksum: 189e725f4587b679740f0f7783745056
+  verifyExistence: true
