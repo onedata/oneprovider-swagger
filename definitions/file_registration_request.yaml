@@ -25,10 +25,10 @@ properties:
       If storage does not support the `stat` operation or equivalent used for acquiring files metadata,
       registration will fail if this value is missing.
   mode:
-    type: integer
+    type: string
     description: >
-      User defined POSIX file permissions in decimal format. If not passed, it will be acquired from storage or default
-      `0664` mode will be used.
+      User defined POSIX file permissions in octal format. If not passed, it will be acquired from storage or default
+      `"664"` mode will be used.
   atime:
     type: integer
     description: >
@@ -73,7 +73,7 @@ example:
   storageId: 2c1e539dbebf76a697e44782787585ebb0f47af1
   storageFileId: https://www.example.org/data/2010/01/05/run123.tar
   destinationPath: /data/2010/01/05/run123.tar
-  mode: 511
+  mode: "664"
   size: 1024
   atime: 1464958683054
   mtime: 1464958683051
