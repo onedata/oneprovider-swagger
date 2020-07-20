@@ -61,12 +61,20 @@ properties:
     description: Map with extended attributes key-value pairs which will be attached to newly created file.
     additionalProperties:
       type: string
-  verifyExistence:
+  autoDetectAttributes:
     type: boolean
     description: >
-      Flag which determines whether additional operation should be performed to ensure that the file
-      exists on the storage. If verification is disabled and the file does not exist,
-      it will be visible in Onedata but not accessible.
+      Flag which determines whether additional `stat` operation (or equivalent) should be performed
+      on the storage to automatically detect file attributes - they will be used if not provided
+      explicitly in the request. The detection also ensures that the file exists - it is performed
+      if the flag is set to `true`, even if all attributes are provided.
+
+      If this flag is set to `false`, default attributes are used if not provided explicitly.
+      The only exception is the `size` attribute, which is mandatory. The registration request will
+      fail if `autoDetectAttributes` is set to `false` and `size` is not provided.
+
+      It is possible to register a file that does not exist on storage if `autoDetectAttributes` is
+      set to `false`. Such file will be visible in Onedata but not accessible.
     default: true
 example:
   spaceId: 761f76677f42ad5289d6472675d5ecf2dfd57be6
@@ -84,4 +92,4 @@ example:
     colour: red
     country: FR
     checksum: 189e725f4587b679740f0f7783745056
-  verifyExistence: true
+  autoDetectAttributes: true
