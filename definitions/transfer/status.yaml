@@ -14,6 +14,9 @@ properties:
   rerunId:
     type: string
     description: If the transfer was rerun, this field contains the Id of the new transfer, otherwise null.
+  effectiveJobTransferId:
+    type: string
+    description: Last transfer Id in chain made of `rerunId`.
   spaceId:
     type: string
     description: Id of space in context of which transfer was performed.
@@ -44,6 +47,21 @@ properties:
   transferStatus:
     type: string
     description: Overall status of transfer.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - replicating
+      - evicting
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  effectiveJobStatus:
+    type: string
+    description: >
+      Overall status of effective transfer job (the last one in chain
+      made of `rerunId`).
     enum:
       - scheduled
       - enqueued
@@ -207,12 +225,14 @@ example:
   type: replication
   userId: admin
   rerunId: null
+  effectiveJobTransferId: c4798eb2dbd2486fae940e6fa0a5071d
   spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
   dataSourceType: file
   fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
   path: /My Space 1/Dir2/file3.txt
   filePath: /My Space 1/Dir2/file3.txt
   transferStatus: completed
+  effectiveJobStatus: completed
   replicationStatus: completed
   replicaEvictionStatus: skipped
   evictionStatus: skipped
