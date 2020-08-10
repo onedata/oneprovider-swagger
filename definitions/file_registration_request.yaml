@@ -61,6 +61,16 @@ properties:
     description: Map with extended attributes key-value pairs which will be attached to newly created file.
     additionalProperties:
       type: string
+  json:
+    type: object
+    description: Map with custom JSON metadata which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  rdf:
+    type: string
+    description: Base64 encoded RDF metadata which will be attached to newly created file.
+    additionalProperties:
+      type: string
   autoDetectAttributes:
     type: boolean
     description: >

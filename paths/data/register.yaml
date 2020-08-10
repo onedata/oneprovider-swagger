@@ -37,6 +37,7 @@ post:
 
     This operation requires:
       * space_register_file privilege
+
     ***Example cURL requests***
 
     **Register file**
