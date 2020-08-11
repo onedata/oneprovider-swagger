@@ -61,6 +61,14 @@ properties:
     description: Map with extended attributes key-value pairs which will be attached to newly created file.
     additionalProperties:
       type: string
+  json:
+    type: object
+    description: Map with custom JSON metadata which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  rdf:
+    type: string
+    description: Base64 encoded RDF metadata which will be attached to newly created file.
   autoDetectAttributes:
     type: boolean
     description: >
@@ -92,4 +100,21 @@ example:
     colour: red
     country: FR
     checksum: 189e725f4587b679740f0f7783745056
+  json:
+    year: 2014
+    month: 10
+    day: 1
+    run: 5038219
+    subrun: 1
+  rdf: >
+    PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5v
+    cmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6
+    Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgICAgICAgICB4bWxuczpleD0iaHR0cDov
+    L2V4YW1wbGUub3JnL3N0dWZmLzEuMC8iPgoKICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0i
+    aHR0cDovL3d3dy53My5vcmcvVFIvcmRmLXN5bnRheC1ncmFtbWFyIgogICAgICAgICAgICAgZGM6
+    dGl0bGU9IlJERjEuMSBYTUwgU3ludGF4Ij4KICAgIDxleDplZGl0b3I+CiAgICAgIDxyZGY6RGVz
+    Y3JpcHRpb24gZXg6ZnVsbE5hbWU9IkRhdmUgQmVja2V0dCI+CiAgICAgICAgPGV4OmhvbWVQYWdl
+    IHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL25ldC9kYWpvYmUvIiAvPgogICAgICA8L3Jk
+    ZjpEZXNjcmlwdGlvbj4KICAgIDwvZXg6ZWRpdG9yPgogIDwvcmRmOkRlc2NyaXB0aW9uPgoKPC9y
+    ZGY6UkRGPgo=
   autoDetectAttributes: true
