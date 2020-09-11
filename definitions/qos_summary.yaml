@@ -1,0 +1,22 @@
+description: QoS summary for file or directory.
+type: object
+properties:
+  requirements:
+    type: object
+    description: >
+      Mapping including all QoS requirements (Ids) that influence given file/directory and corresponding 
+      information of fulfillment status for this file/directory (fulfilled/pending/impossible).
+  status:
+    type: string
+    enum:
+      - fulfilled
+      - pending
+      - impossible
+    description: >
+      Aggregated status of all QoS requirements for given file or directory.  
+example:
+  requirements: {
+    "c84f669f9522c46976fee490d80651f0": pending,
+    "22c46976fee490d80651f0c84f669f95": fulfilled
+  }
+  status: pending

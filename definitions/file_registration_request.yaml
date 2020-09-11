@@ -1,0 +1,120 @@
+type: object
+description: Specification of file to be registered in the Onedata file-system.
+properties:
+  spaceId:
+    type: string
+    description: Id of the space in which the file will be registered.
+  storageId:
+    type: string
+    description: >
+      Id of the storage on which the file is located.
+      Storage must be created as an `imported` storage with path type equal to `canonical`.
+  storageFileId:
+    type: string
+    description: >
+      Identifier of the file on storage, relevant for given storage backend:
+         * path on POSIX-compatible or canonical object storages, e.g. `/dir/file.txt`
+         * URL on HTTP based storages, e.g. `https://www.example.org/data/21/run123.tar`
+  destinationPath:
+    type: string
+    description: An absolute path in space where file should be created.
+  size:
+    type: integer
+    description: >
+      Size of the file in bytes. If not passed, it will be acquired from storage.
+      If storage does not support the `stat` operation or equivalent used for acquiring files metadata,
+      registration will fail if this value is missing.
+  mode:
+    type: string
+    description: >
+      User defined POSIX file permissions in octal format. If not passed, it will be acquired from storage or default
+      `"664"` mode will be used.
+  atime:
+    type: integer
+    description: >
+      User defined last access timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  mtime:
+    type: integer
+    description: >
+      User defined last modification timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  ctime:
+    type: integer
+    description: >
+      User defined last attributes modification timestamp (in seconds).
+      If not passed, it will be acquired from storage or current timestamp will be used.
+  uid:
+    type: string
+    description: >
+      User defined of the Id of the owner of this file on storage.
+      If not passed, it will be acquired from storage or `0` will be used.
+      This value will be mapped, using LUMA DB, to acquire Onedata user Id of the file owner.
+  gid:
+    type: string
+    description: >
+      User defined Id of the group owner of this file on storage.
+      If not passed, it will be acquired from storage or `0` will be used.
+      This value will be used as display GID in `getattr` operation.
+  xattrs:
+    type: object
+    description: Map with extended attributes key-value pairs which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  json:
+    type: object
+    description: Map with custom JSON metadata which will be attached to newly created file.
+    additionalProperties:
+      type: string
+  rdf:
+    type: string
+    description: Base64 encoded RDF metadata which will be attached to newly created file.
+  autoDetectAttributes:
+    type: boolean
+    description: >
+      Flag which determines whether additional `stat` operation (or equivalent) should be performed
+      on the storage to automatically detect file attributes - they will be used if not provided
+      explicitly in the request. The detection also ensures that the file exists - it is performed
+      if the flag is set to `true`, even if all attributes are provided.
+
+      If this flag is set to `false`, default attributes are used if not provided explicitly.
+      The only exception is the `size` attribute, which is mandatory. The registration request will
+      fail if `autoDetectAttributes` is set to `false` and `size` is not provided.
+
+      It is possible to register a file that does not exist on storage if `autoDetectAttributes` is
+      set to `false`. Such file will be visible in Onedata but not accessible.
+    default: true
+example:
+  spaceId: 761f76677f42ad5289d6472675d5ecf2dfd57be6
+  storageId: 2c1e539dbebf76a697e44782787585ebb0f47af1
+  storageFileId: https://www.example.org/data/2010/01/05/run123.tar
+  destinationPath: /data/2010/01/05/run123.tar
+  mode: "664"
+  size: 1024
+  atime: 1464958683054
+  mtime: 1464958683051
+  ctime: 1464958681054
+  uid: 1935313
+  gid: 1101841
+  xattrs:
+    colour: red
+    country: FR
+    checksum: 189e725f4587b679740f0f7783745056
+  json:
+    year: 2014
+    month: 10
+    day: 1
+    run: 5038219
+    subrun: 1
+  rdf: >
+    PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5v
+    cmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6
+    Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgICAgICAgICB4bWxuczpleD0iaHR0cDov
+    L2V4YW1wbGUub3JnL3N0dWZmLzEuMC8iPgoKICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0i
+    aHR0cDovL3d3dy53My5vcmcvVFIvcmRmLXN5bnRheC1ncmFtbWFyIgogICAgICAgICAgICAgZGM6
+    dGl0bGU9IlJERjEuMSBYTUwgU3ludGF4Ij4KICAgIDxleDplZGl0b3I+CiAgICAgIDxyZGY6RGVz
+    Y3JpcHRpb24gZXg6ZnVsbE5hbWU9IkRhdmUgQmVja2V0dCI+CiAgICAgICAgPGV4OmhvbWVQYWdl
+    IHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL25ldC9kYWpvYmUvIiAvPgogICAgICA8L3Jk
+    ZjpEZXNjcmlwdGlvbj4KICAgIDwvZXg6ZWRpdG9yPgogIDwvcmRmOkRlc2NyaXB0aW9uPgoKPC9y
+    ZGY6UkRGPgo=
+  autoDetectAttributes: true

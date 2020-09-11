@@ -3,7 +3,7 @@ description: Basic information about space.
 properties:
   spaceId:
     type: string
-    description: ID of the space.
+    description: Id of the space.
   name:
     type: string
     description: Name of the space.

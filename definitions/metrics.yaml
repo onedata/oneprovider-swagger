@@ -3,7 +3,7 @@ description: Export of monitoring metrics for specific provider.
 properties:
   providerId:
     type: string
-    description: The ID of the provider.
+    description: The Id of the provider.
   rrd:
     description: RRD database export.
     $ref: '#/definitions/RRD'

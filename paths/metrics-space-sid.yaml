@@ -20,7 +20,7 @@ get:
 
     **Get storage space used metrics**
     ```bash
-    curl --tlsv1.2 -X GET -H "X-Auth-Token: $TOKEN" \
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID?metric=storage_used"
 
     {
@@ -31,7 +31,7 @@ get:
           "meta": {
               "start": 1465466700,
               "end": 1465553100,
-              "legend": ["space f4f1799f-4954-4d7a-bc31-630998883296; metric storage_used; oneprovider ID 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
+              "legend": ["space f4f1799f-4954-4d7a-bc31-630998883296; metric storage_used; oneprovider Id 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
               "step": 300
           }
         }
@@ -66,7 +66,7 @@ get:
   parameters:
   - name: sid
     in: path
-    description: ID of a specific space for which the monitoring metrics should be retrieved
+    description: Id of a specific space for which the monitoring metrics should be retrieved
     type: string
     required: true
   - name: metric

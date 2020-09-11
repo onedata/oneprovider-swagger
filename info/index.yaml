@@ -1,4 +1,4 @@
-version: 19.02.4
+version: 20.02.1
 title: Oneprovider
 description: |
   # Overview
@@ -11,7 +11,7 @@ description: |
   All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
   query for 'mode' file attributes would be:
   ```
-  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/attributes/Space1/directory1/file1.txt?attribute=mode
+  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/data/$FILE_ID?attribute=mode
   ```
   Please note that currently the default port for Oneprovider instances is `443`.
 
@@ -44,22 +44,15 @@ description: |
 
   ### Data
 
-  #### File browsing
-  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
-  Paths must be complete up to a folder whose contents are needed and start with the name of the containing space.
-
-  #### File attributes
-  The `/attributes/` operation group provides GET and PUT methods enable querying
-  for file attributes, such as 'mode' file permissions and updating them.
-
-  #### Metadata
-  Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
-  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
+  #### File information
+  The `/data/` path methods provide basic capability for:
+    - browsing files in spaces and directories,
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing file metadata.
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
-  Shares are folders that were made publicly available, so they can be viewed by everyone
+  Shares are directories that were made publicly available, so they can be viewed by everyone
   through public URL.
 
   #### Space information
@@ -75,7 +68,7 @@ description: |
   providers.
 
   #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
+  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
   returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring
@@ -138,22 +131,15 @@ x-bash-codegen-description: |
 
   ### Data
 
-  #### File browsing
-  The `/files/` path methods provide basic capability for browsing files in spaces and folders.
-  Paths must be complete up to a folder whose contents are needed and start with the name of the containing space.
-
-  #### File attributes
-  The `/attributes/` operation group provides GET and PUT methods enable querying
-  for file attributes, such as 'mode' file permissions and updating them.
-
-  #### Metadata
-  Oneprovider exposes an advanced metadata management mechanism allowing to attach
-  arbitrary JSON or RDF documents to any files or folders (under `/metadata` path)
-  as well as create views (`/view`) and query them based on the metadata (`/views/$VIEW_NAME/query`).
+  #### File information
+  The `/data/` path methods provide basic capability for:
+    - browsing files in spaces and directories,
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing file metadata.
 
   #### Share information
   The `/share/` methods enable creating, modyfying and deleting shares.
-  Shares are folders that were made publicly available, so they can be viewed by everyone
+  Shares are directories that were made publicly available, so they can be viewed by everyone
   through public URL.
 
   #### Space information
@@ -169,7 +155,7 @@ x-bash-codegen-description: |
   providers.
 
   #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the ID of transfer
+  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
   returned by `/replicas/{path} [POST]` operation.
 
   ### Monitoring

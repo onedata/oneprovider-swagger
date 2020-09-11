@@ -1,0 +1,95 @@
+post:
+  operationId: register_file
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    aspect: register_file
+  tags:
+    - File registration
+  summary: Register file
+  x-bash-codegen-description: |
+    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
+    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
+    space and must be registered manually by the space users.
+
+    The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
+    which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
+    or an automatic detection will be performed (although not all storage backends support the required `stat` operation or
+    equivalent - in such case some metadata must be provided for the operation to succeed).
+
+    The registration of the same file can be repeated, which updates the previous metadata with the new information.
+    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
+
+    This operation requires:
+      * space_register_file privilege
+  description: |
+    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
+    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
+    space and must be registered manually by the space users.
+
+    The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
+    which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
+    or an automatic detection will be performed (although not all storage backends support the required `stat` operation or
+    equivalent - in such case some metadata must be provided for the operation to succeed).
+
+    The registration of the same file can be repeated, which updates the previous metadata with the new information.
+    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
+
+    This operation requires:
+      * space_register_file privilege
+
+    ***Example cURL requests***
+
+    **Register file**
+    ```bash
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    -H 'Content-type: application/json' -d "@./file_spec.json" \
+    "https://$HOST/api/v3/oneprovider/data/register"
+    ```
+
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The file has been registered in the Onedata file-system and the result is its Id.
+        Also URI of the new file in form https://$HOST/api/v3/oneprovider/data/{Id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the new file.
+          type: string
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: New file Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: At lease one of the required resources (space, storage or file on the storage) does not exist.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: fileRegistrationRequest
+      in: body
+      description: Specification of a file to be registered.
+      schema:
+        $ref: '#/definitions/FileRegistrationRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "cat file_spec.json | oneprovider-rest-cli registerFile"

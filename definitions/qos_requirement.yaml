@@ -1,0 +1,27 @@
+description: Object representing a QoS requirement.
+type: object
+properties:
+  fileId:
+    type: string
+    description: Id of file that requirement was created for.
+  expression:
+    type: string
+    description: Expression used to select storages on which file should be replicated.
+  replicasNum:
+    type: integer
+    description: Number of required file replicas.
+    default: 1
+  status:
+    type: string
+    enum:
+      - fulfilled
+      - pending
+      - impossible
+    description: >
+      Indicates fulfillment status of QoS requirement. 
+example:
+  qosRequirementId: c84f669f9522c46976fee490d80651f0
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
+  expression: country=FR
+  replicasNum: 2
+  status: fulfilled

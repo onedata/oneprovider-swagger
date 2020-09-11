@@ -1,0 +1,166 @@
+get:
+  operationId: get_transfer_status
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: instance
+  tags:
+    - Transfer
+  summary: Get transfer status
+  x-bash-codegen-description: |
+    Returns status of specific transfer.
+
+    This operation requires `space_view_transfers` privilege.
+  description: |
+    Returns status of specific transfer.
+
+    This operation requires `space_view_transfers` privilege.
+
+    ***Example cURL requests***
+
+    **Get status of specific transfer**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+
+    {
+      "type": "replication",
+      "userId": "admin",
+      "rerunId": null,
+      "effectiveJobTransferId": $TRANSFER_ID,
+      "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
+      "dataSourceType": "file",
+      "fileId": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
+      "path": "/space/tmp",
+      "filePath": "/space/tmp",
+      "transferStatus": "completed",
+      "effectiveJobStatus": "completed",
+      "replicationStatus": "completed",
+      "replicaEvictionStatus": "skipped",
+      "evictionStatus": "skipped",
+      "replicatingProviderId": "HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
+      "evictingProviderId": null,
+      "callback": null,
+      "filesToProcess": 1,
+      "filesProcessed": 1,
+      "filesReplicated": 1,
+      "fileReplicasEvicted": 0,
+      "filesEvicted": 0,
+      "failedFiles": 0,
+      "filesFailed": 0,
+      "bytesReplicated": 10485760000,
+      "scheduleTime": 1504688800,
+      "startTime": 15046888765,
+      "finishTime": 1504688814,
+      "lastUpdate": 1504988814,
+      "minHist": {
+        "ASDxicvuisodr78w979879wer": [419430400, 1153433600, 1258291200, 1468006400, 1048576000, 1048576000, 1048576000, 1153433600, 629145600, 1258291200, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "hrHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "dyHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },
+      "mthHist": {
+        "ASDxicvuisodr78w979879wer": [10485760000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Transfer status.
+      schema:
+        $ref: '#/definitions/TransferStatus'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Transfer with provided Id was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: tid
+    in: path
+    description: Transfer Id.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getTransferStatus tid=$TRANSFER_ID"
+
+
+delete:
+  operationId: cancel_transfer
+  x-onedata-gri:
+    type: op_transfer
+    id: ?BINDING(tid)
+    aspect: cancel
+  tags:
+    - Transfer
+  summary: Cancel specific transfer
+  x-bash-codegen-description: |
+    Cancels a scheduled or active transfer. Returns 400 in case the transfer
+    is already completed, canceled or failed.
+
+    This operation requires `space_cancel_replication` privilege in case of canceling replication,
+    `space_cancel_eviction` privilege in case of canceling eviction and both of them when
+    canceling migration.
+
+    However, canceling your own transfers does not require any privileges.
+  description: |
+    Cancels a scheduled or active transfer. Returns 400 in case the transfer is already completed, canceled or failed.
+
+    This operation requires `space_cancel_replication` privilege in case of canceling replication,
+    `space_cancel_eviction` privilege in case of canceling eviction and both of them when
+    canceling migration.
+
+    However, canceling your own transfers does not require any privileges.
+
+    ***Example cURL requests***
+
+    **Cancel specific transfer**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+    ```
+
+  responses:
+    '204':
+      description: The transfer has been canceled.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Transfer with provided Id was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: tid
+    in: path
+    description: Transfer Id.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli cancelTransfer tid=$TRANSFER_ID"

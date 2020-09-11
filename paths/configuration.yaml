@@ -3,6 +3,7 @@ get:
   x-onedata-gri:
     type: op_provider
     aspect: configuration
+    scope: public
   summary: Get public information
   tags:
     - Oneprovider
@@ -44,3 +45,6 @@ get:
       description: Internal server error.
       schema:
         $ref: '#/definitions/Error'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getConfiguration"

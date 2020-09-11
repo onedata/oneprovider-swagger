@@ -1,0 +1,84 @@
+post:
+  operationId: create_share
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    aspect: instance
+  summary: Create share
+  tags:
+    - Share
+  x-bash-codegen-description: |
+    Shares a file or a directory. Shared files can be viewed by everyone through public URL.
+    This operation assigns a share Id that can be used to manage share, see:
+      * [Get basic information about share](#operation/get_share)
+      * [List shares associated with file or directory](#operation/list_file_shares_by_id)
+      * [Change name of the share](#operation/update_share)
+      * [Remove share](#operation/remove_share)
+
+    Any number of shares can be associated with each file or directory.
+
+  description: |
+    Shares a file or a directory. Shared files can be viewed by everyone through public URL.
+    This operation assigns a share Id that can be used to manage share, see:
+      * [Get basic information about share](#operation/get_share)
+      * [List shares associated with file or directory](#operation/list_file_shares_by_id)
+      * [Change name of the share](#operation/update_share)
+      * [Remove share](#operation/remove_share)
+
+    Any number of shares can be associated with each file or directory.
+
+    ***Example cURL requests***
+
+    **Creates share**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "name": "MyShare", "fileId": $FILE_ID }' \
+    "https://$HOST/api/v3/oneprovider/shares"
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the share Id.
+        Also URI of the Share in form https://$HOST/api/v3/oneprovider/shares/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Share.
+          type: string
+      schema:
+        type: object
+        properties:
+          shareId:
+            type: string
+            description: Share Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Share properties.
+      schema:
+        $ref: '#/definitions/ShareCreateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli createShare name==MyShare fileId==$FILE_ID"

@@ -1,0 +1,74 @@
+post:
+  operationId: add_qos_requirement
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_qos
+    aspect: instance
+  tags:
+    - QoS
+  summary: Add QoS requirement
+  x-bash-codegen-description: |
+    Adds new QoS requirement for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS requirement.
+  description: |
+    Adds new QoS requirement for given file or directory. This triggers
+    data replication (if needed) based on requirements defined in new QoS requirement.
+
+    For more information about QoS, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/qos.html).
+
+    ***Example cURL requests***
+
+    **Add QoS requirement for file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST \
+    -H "Content-type: application/json" \
+    -d '{ "expression": "country=FR", "replicasNum": 2, "fileId": $FILE_ID }' \
+    "https://$HOST/api/v3/oneprovider/qos_requirements"
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the QoS requirement Id
+        (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
+        Also URI of the QoS requirement in form https://$HOST/api/v3/oneprovider/qos_requirements/{qid} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the QoS requirement.
+          type: string
+      schema:
+        type: object
+        properties:
+          qosRequirementId:
+            type: string
+            description: QoS requirement Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: QoS requirement properties
+      schema:
+        $ref: '#/definitions/QosCreateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli addQosRequirement fileId=$FILE_ID expression='country=FR' replicasNum=2"

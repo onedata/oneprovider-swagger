@@ -1,0 +1,91 @@
+type: object
+description: Specification of metadata changes to observe and stream.
+properties:
+  triggers:
+    type: array
+    description: List of documents which modifications should trigger sending changes.
+    items:
+      type: string
+      enum:
+        - fileMeta
+        - fileLocation
+        - times
+        - customMetadata
+  fileMeta:
+    type: object
+    description: Specification of fileMeta fields to observe.
+    properties:
+      always:
+        type: boolean
+        default: false
+        description: Indicates whether specified fileMeta fields should be sent on other metadata changes.
+      fields:
+        type: array
+        items:
+          type: string
+          enum:
+            - name
+            - type
+            - mode
+            - owner
+            - provider_id
+            - shares
+            - deleted
+  fileLocation:
+    type: object
+    description: Specification of fileLocation fields to observe.
+    properties:
+      always:
+        type: boolean
+        default: false
+        description: Indicates whether specified fileLocation fields should be sent on other metadata changes.
+      fields:
+        type: array
+        items:
+          type: string
+          enum:
+            - provider_id
+            - storage_id
+            - size
+            - space_id
+            - storage_file_created
+  times:
+    type: object
+    description: Specification of times fields to observe.
+    properties:
+      always:
+        type: boolean
+        default: false
+        description: Indicates whether specified times fields should be sent on other metadata changes.
+      fields:
+        type: array
+        items:
+          type: string
+          enum:
+            - atime
+            - mtime
+            - ctime
+  customMetadata:
+    type: object
+    description: Specification of customMetadata fields to observe.
+    properties:
+      always:
+        type: boolean
+        default: false
+        description: Indicates whether specified customMetadata fields should be sent on other metadata changes.
+      fields:
+        type: array
+        description: >
+          Xattrs names to retrieve. In case of missing fields `null` values are returned.
+          In order to fetch special attributes additional keys can be specified, namely 
+          `onedata_json`, `onedata_rdf` or `onedata_keyvalue` (fetches all fields beside special ones).
+        items:
+          type: string
+      exists:
+        type: array
+        description: >
+          Xattrs names to check for existence. Existence of special attributes can also be checked by
+          specifying `onedata_json`, `onedata_rdf` or `onedata_keyvalue` 
+          (checks if any normal attribute exists).
+        items:
+          type: string

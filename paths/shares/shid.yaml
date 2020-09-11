@@ -1,0 +1,189 @@
+get:
+  operationId: get_share
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
+  summary: Get share info
+  tags:
+    - Share
+  x-bash-codegen-description: |
+    Returns the basic information about share.
+  description: |
+    Returns the basic information about share.
+
+    ***Example cURL requests***
+
+    **Returns the basic information about share**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
+
+    {
+      "shareId": "1f4b762b1380946e73aeca574c77f14c",
+      "name": "Experiment XYZ",
+      "description": "# Experiment XYZ\nThis collection contains results from Experiment XYZ.",
+      "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
+      "fileType": "dir",
+      "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
+      6266666164353939663761373734313235363166342336656331613534313362366634653\
+      2623031613563383561386664373937653223316634623736326231333830393436653733\
+      6165636135373463373766313463",
+      "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
+      "handleId" "doi:10.15911/MyShares.726855"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The share information.
+      schema:
+        $ref: '#/definitions/Share'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File or share not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getShare shid=$SHARE_ID"
+
+
+patch:
+  operationId: update_share
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
+  summary: Update share
+  tags:
+    - Share
+  x-bash-codegen-description: |
+    Changes name and/or description of the share.
+  description: |
+    Changes name and/or description of the share.
+
+    ***Example cURL requests***
+
+    **Changes name of the share**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH \
+    -H "Content-type: application/json" \
+    -d '{ "name": "NewShareName", "description": "# New description" }' \
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: Share's name has been changed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Share not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: New share details
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: New name for the share.
+          description:
+            type: string
+            description: New description of the share.
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName description==\"# New description\""
+
+
+delete:
+  operationId: remove_share
+  x-onedata-gri:
+    type: op_share
+    id: ?BINDING(shid)
+    aspect: instance
+  summary: Remove share
+  tags:
+    - Share
+  x-bash-codegen-description: |
+    Removes a specific share. This operation will not remove data from shared
+    file or directory but it will not be accessible through public url anymore.
+  description: |
+    Removes a specific share. This operation will not remove data from shared
+    file or directory but it will not be accessible through public url anymore.
+
+    ***Example cURL requests***
+
+    **Removes share**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
+    ```
+  responses:
+    '204':
+      description: Share has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Share not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: shid
+      in: path
+      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeShare shid=$SHARE_ID"
