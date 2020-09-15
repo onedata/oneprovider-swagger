@@ -8,33 +8,33 @@ definitions:
   $ref: ./definitions/index.yaml
 tags:
   - name: Oneprovider
-    description: Information about the Oneprovider service
+    description: Information about the Oneprovider service.
   - name: Space
-    description: Spaces related operations
+    description: Spaces related operations.
   - name: View
-    description: Views related operations
+    description: Views related operations.
   - name: File Path Resolution
-    description: Files and Directories path resolution operations
+    description: Files and Directories path resolution operations.
   - name: Basic File Operations
-    description: Files and Directories basic operations
+    description: Files and Directories basic operations.
   - name: File Distribution
-    description: Operations concerning file distribution
+    description: Operations concerning file distribution.
   - name: Custom File Metadata
-    description: Files and Directories metadata related operations
+    description: Files and Directories custom metadata related operations.
   - name: File registration
-    description: Operations for registering files located on external storages
+    description: Operations for registering files located on external storages.
   - name: Deprecated File Api
-    description: Files and Directories related operations (deprecated)
+    description: Files and Directories related operations (deprecated).
   - name: QoS
-    description: QoS related operations
+    description: QoS related operations.
   - name: Share
-    description: Shares related operations
+    description: Shares related operations.
   - name: Replica
-    description: Replication and file distribution control operations
+    description: Replication and file distribution control operations.
   - name: Transfer
-    description: Transfers related operations
+    description: Transfers related operations.
   - name: Monitoring
-    description: Metrics and change events monitoring related operations
+    description: Metrics and change events monitoring related operations.
 x-tagGroups:
   - name: Service information
     tags:

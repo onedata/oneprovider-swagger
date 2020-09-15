@@ -131,3 +131,57 @@ put:
   x-code-samples:
   - lang: Shell
     source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"
+
+
+delete:
+  operationId: remove_rdf_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: rdf_metadata
+  summary: Remove file rdf metadata
+  tags:
+    - Custom File Metadata
+  x-bash-codegen-description: |
+    Removes rdf metadata from specified file.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+  description: |
+    Removes rdf metadata from specified file.
+
+    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Removes file rdf metadata**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    ```
+  responses:
+    '204':
+      description: File rdf metadata has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeRdfMetadata id=$FILE_ID"
