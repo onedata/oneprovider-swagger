@@ -8,14 +8,10 @@ get:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the rdf metadata for specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method returns the rdf metadata for specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -73,18 +69,14 @@ put:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set specific rdf metadata for a file, directory or space.
+    This method allows to set specific rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     This operation will replace the previous rdf metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    This method allows to set specific rdf metadata for a file, directory or space.
+    This method allows to set specific rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     This operation will replace the previous rdf metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -143,13 +135,9 @@ delete:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    Removes rdf metadata from specified file.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Removes rdf metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
   description: |
-    Removes rdf metadata from specified file.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Removes rdf metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

@@ -8,16 +8,12 @@ get:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -100,16 +96,12 @@ put:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -169,13 +161,9 @@ delete:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    Removes specific xattrs from specified file.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
   description: |
-    Removes specific xattrs from specified file.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
