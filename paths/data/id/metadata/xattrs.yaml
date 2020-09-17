@@ -8,16 +8,12 @@ get:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -100,16 +96,12 @@ put:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -156,3 +148,68 @@ put:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"
+
+
+delete:
+  operationId: remove_xattrs
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: xattrs
+  summary: Remove file xattrs
+  tags:
+    - Custom File Metadata
+  x-bash-codegen-description: |
+    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
+  description: |
+    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Removes specific file xattrs**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN"
+    -H 'Content-type: application/json' -d '{ "keys": ["license"] }' \
+    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs
+    ```
+  responses:
+    '204':
+      description: Specific file xattrs has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: The xattrs to remove.
+      required: true
+      schema:
+        type: object
+        properties:
+          keys:
+            type: array
+            description: List of xattrs to remove.
+            items:
+              type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys=='[\"license\"]'"

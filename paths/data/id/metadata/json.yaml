@@ -8,7 +8,7 @@ get:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the json metadata associated with specified file, directory or space.
+    This method returns the json metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
 
     By default the method returns the complete json metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
@@ -17,11 +17,9 @@ get:
       * **keypath** - list of JSON keys which point to requested JSON object,
                     separated by `.`, array elements should be expressed as
                     `[i]` (e.g. `key1.key2.[2].key3`)
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    This method returns the json metadata associated with specified file, directory or space.
+    This method returns the json metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
 
     By default the method returns the complete json metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
@@ -30,8 +28,6 @@ get:
       * **keypath** - list of JSON keys which point to requested JSON object,
                     separated by `.`, array elements should be expressed as
                     `[i]` (e.g. `key1.key2.[2].key3`)
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -39,6 +35,8 @@ get:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET \
     https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json?filter_type=keypath&filter=key1.key2.[2].key3
+
+    {"key4": "value"}
     ```
   produces:
     - application/json
@@ -78,7 +76,9 @@ get:
     required: false
   - name: filter
     in: query
-    description: The filter to apply to the metadata document before returning.
+    description: >
+      The filter to apply to the metadata document before returning.
+      Required if `filter_type` is specified.
     type: string
     required: false
   - name: inherited
@@ -104,18 +104,14 @@ put:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set json metadata for a file, directory or space.
+    This method allows to set json metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     This operation will replace the previous json metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
   description: |
-    This method allows to set json metadata for a file, directory or space.
+    This method allows to set json metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     This operation will replace the previous json metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -162,7 +158,9 @@ put:
     required: false
   - name: filter
     in: query
-    description: The filter allowing to set specific metadata document key. Required if filter_type is specified.
+    description: >
+      The filter allowing to set specific metadata document key.
+      Required if `filter_type` is specified.
     type: string
     required: false
   - name: metadata
@@ -174,3 +172,53 @@ put:
   x-code-samples:
   - lang: Shell
     source: "cat metadata.json | oneprovider-rest-cli setJsonMetadata id=$FILE_ID -"
+
+
+delete:
+  operationId: remove_json_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: json_metadata
+  summary: Remove file json metadata
+  tags:
+    - Custom File Metadata
+  x-bash-codegen-description: |
+    Removes json metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+  description: |
+    Removes json metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Removes file json metadata**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
+    ```
+  responses:
+    '204':
+      description: File json metadata has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeJsonMetadata id=$FILE_ID"

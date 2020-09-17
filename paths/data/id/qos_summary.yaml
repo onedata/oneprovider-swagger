@@ -8,19 +8,16 @@ get:
     - QoS
   summary: Get QoS summary for file or directory
   x-bash-codegen-description: |
-    Returns QoS summary for file or directory.  
+    Returns QoS summary for a file specified by [$FILE_ID](#operation/lookup_file_id).
     QoS summary contains information about effective QoS, which is calculated by merging
     QoS requirements defined directly for file or directory with QoS requirements defined for all
     its ancestors.  
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
   description: |
-    Returns QoS summary for file or directory.  
+    Returns QoS summary for a file specified by [$FILE_ID](#operation/lookup_file_id).
     QoS summary contains information about effective QoS, which is calculated by merging
     QoS requirements defined directly for file or directory with QoS requirements defined for all
     its ancestors.  
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

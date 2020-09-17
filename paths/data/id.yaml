@@ -9,15 +9,11 @@ get:
     - Basic File Operations
   x-bash-codegen-description: |
     This method returns either all or only selected basic attributes associated
-    with specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    with file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
     This method returns either all or only selected basic attributes associated
-    with specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    with file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -97,7 +93,8 @@ put:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method allows to set a value of a regular file attribute.
+    This method allows to set a value of a regular file attribute
+    for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     Currently only POSIX mode can be changed by
     sending:
@@ -106,18 +103,15 @@ put:
     ```
     where the POSIX mode is specified in octal notation.
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
-
   description: |
-    This method allows to set a value of a regular file attribute.
+    This method allows to set a value of a regular file attribute
+    for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     Currently only POSIX mode can be changed by sending:
       ```
       { "mode": "0777" }
       ```
     where the POSIX mode is specified in octal notation.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

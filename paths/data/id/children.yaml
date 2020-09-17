@@ -8,14 +8,12 @@ get:
     - Basic File Operations
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
-    Returns the list of directory files and subdirectories.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Returns the list of directory files and subdirectories for directory
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    Returns the list of directory files and subdirectories.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Returns the list of directory files and subdirectories for directory
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
