@@ -3,12 +3,14 @@ description: Specification of file to be registered in the Onedata file-system.
 properties:
   spaceId:
     type: string
-    description: Id of the space in which the file will be registered.
+    description: >
+      Id of the space in which the file will be registered - the space must be supported by the storage hosting the file
+      (`storageId`). The space support must have `manual import mode`.
   storageId:
     type: string
     description: >
-      Id of the storage on which the file is located.
-      Storage must be created as an `imported` storage with path type equal to `canonical`.
+      Id of the storage hosting the file - the storage must support the target space (`spaceId`).
+      The storage must be configured as an `imported storage` with `canonical` path type.
   storageFileId:
     type: string
     description: >
