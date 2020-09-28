@@ -8,9 +8,10 @@ post:
     - File registration
   summary: Register file
   x-bash-codegen-description: |
-    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
-    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
-    space and must be registered manually by the space users.
+    Registers a file located on an imported storage. This operation is supported only on `imported storages` with
+    `manual import mode`. In such setup, the files existing on the storage are not automatically visible
+    in the space and must be registered manually by the space users -
+    [learn more](https://onedata.org/#/home/documentation/stable/doc/using_onedata/file-registration.html).
 
     The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
     which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
@@ -23,9 +24,10 @@ post:
     This operation requires:
       * space_register_file privilege
   description: |
-    Registers a file located on an imported storage. This operation is supported only on imported storages that have the
-    auto-scan option *disabled* - in such setup, the files existing on the storage are not automatically visible in the
-    space and must be registered manually by the space users.
+    Registers a file located on an imported storage. This operation is supported only on `imported storages` with
+    `manual import mode`. In such setup, the files existing on the storage are not automatically visible
+    in the space and must be registered manually by the space users -
+    [learn more](https://onedata.org/#/home/documentation/stable/doc/using_onedata/file-registration.html).
 
     The operation creates the necessary metadata for the file and registers its physical location on the storage in Onedata,
     which makes the file visible and accessible within the space. The metadata can be provided explicitly by the registering user,
