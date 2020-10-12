@@ -36,7 +36,6 @@ properties:
       is complete.
   dataSourceType:
     type: string
-    description: Source of data to be transferred.
     enum:
       - file
       - view

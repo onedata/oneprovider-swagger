@@ -112,9 +112,9 @@ put:
     This method allows to set a value of a regular file attribute.
 
     Currently only POSIX mode can be changed by sending:
-      ```
-      { "mode": "0777" }
-      ```
+    ```
+    { "mode": "0777" }
+    ```
     where the POSIX mode is specified in octal notation.
 
     ***Example cURL requests***
