@@ -7,11 +7,13 @@ allOf:
         enum: [view]
         x-discriminator-value: "view"
         description: |
-          Indicates a transfer of files that are returned as a result of querying
-          chosen view. The view must be defined on all providers involved in
-          the process and querying it must return a valid list of file ids to be transferred.
-
-          For more information about views, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
+          Indicates the method of determining files to be transferred.
+          
+          `type = "view"` - this transfer covers files that are returned as a result
+          of querying chosen view. The view must be defined on all providers involved in
+          the process and querying it must return a valid list of file ids to be
+          transferred. For more information about views, please see
+          [this](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
       spaceId:
         type: string
         description: Id of space containing the view.
