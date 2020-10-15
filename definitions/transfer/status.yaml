@@ -33,7 +33,7 @@ properties:
       querying chosen view. The view must be defined on all providers involved in
       the process and querying it must return a valid list of file ids to be transferred.
       For more information about views, please see
-      [this](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
+      [here](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
     enum:
       - file
       - view
