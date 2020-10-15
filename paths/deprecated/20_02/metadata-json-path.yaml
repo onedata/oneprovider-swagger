@@ -18,8 +18,8 @@ get:
 
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
-                    separated by `.`, array elements should be expressed as
-                    `[i]` (e.g. `key1.key2.[2].key3`)
+        separated by `.`, array elements should be expressed as `[i]`
+        (e.g. `key1.key2.[2].key3`)
 
   description: |
     This enpoint is deprecated, please use [this one](#operation/get_json_metadata).
@@ -31,8 +31,8 @@ get:
 
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
-                    separated by `.`, array elements should be expressed as
-                    `[i]` (e.g. `key1.key2.[2].key3`)
+        separated by `.`, array elements should be expressed as `[i]`
+        (e.g. `key1.key2.[2].key3`)
 
 
     ***Example cURL requests***

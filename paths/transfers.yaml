@@ -14,16 +14,16 @@ post:
 
     The following types of transfer are supported:
     - `replication` - process of copying data to achieve a complete replica in provider
-                      specified as `replicatingProviderId`. The data will be copied
-                      from one or more providers in the space that hold replicas
-                      or some fragments. This operation requires
-                      `space_schedule_replication` privilege.
+      specified as `replicatingProviderId`. The data will be copied
+      from one or more providers in the space that hold replicas
+      or some fragments. This operation requires
+      `space_schedule_replication` privilege.
     - `eviction` - process of removing replica(s) from provider specified in `evictingProviderId`.
-                   Eviction is safe - will succeed only if there is at least one
-                   complete replica (accumulated) on other providers in the space.
-                   This operation requires `space_schedule_eviction` privilege.
+      Eviction is safe - will succeed only if there is at least one
+      complete replica (accumulated) on other providers in the space.
+      This operation requires `space_schedule_eviction` privilege.
     - `migration` - `replication` followed by `eviction`. This operation requires both
-                    `space_schedule_replication` and `space_schedule_eviction` privileges.
+      `space_schedule_replication` and `space_schedule_eviction` privileges.
 
     Each transfer applies to one or more files/directories, depending on chosen `dataSourceType`:
       - file - a single chosen file or directory
@@ -38,16 +38,16 @@ post:
 
     The following types of transfer are supported:
     - `replication` - process of copying data to achieve a complete replica in provider
-                      specified as `replicatingProviderId`. The data will be copied
-                      from one or more providers in the space that hold replicas
-                      or some fragments. This operation requires
-                      `space_schedule_replication` privilege.
+      specified as `replicatingProviderId`. The data will be copied
+      from one or more providers in the space that hold replicas
+      or some fragments. This operation requires
+      `space_schedule_replication` privilege.
     - `eviction` - process of removing replica(s) from provider specified in `evictingProviderId`.
-                   Eviction is safe - will succeed only if there is at least one
-                   complete replica (accumulated) on other providers in the space.
-                   This operation requires `space_schedule_eviction` privilege.
+      Eviction is safe - will succeed only if there is at least one
+      complete replica (accumulated) on other providers in the space.
+      This operation requires `space_schedule_eviction` privilege.
     - `migration` - `replication` followed by `eviction`. This operation requires both
-                    `space_schedule_replication` and `space_schedule_eviction` privileges.
+      `space_schedule_replication` and `space_schedule_eviction` privileges.
 
     Each transfer applies to one or more files/directories, depending on chosen `dataSourceType`:
       - file - a single chosen file or directory
