@@ -14,7 +14,7 @@ post:
     Adds new QoS requirement for given file or directory. This triggers
     data replication (if needed) based on requirements defined in new QoS requirement.
 
-    For more information about QoS, please see [this](https://onedata.org/#/home/documentation/doc/using_onedata/qos.html).
+    For more information about QoS, please see [here](https://onedata.org/#/home/documentation/doc/using_onedata/qos.html).
 
     ***Example cURL requests***
 

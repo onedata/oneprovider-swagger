@@ -7,7 +7,10 @@ allOf:
         enum: [file]
         x-discriminator-value: "file"
         description: |
-          Indicates a transfer of file/directory contents. Requires permissions
+          Indicates the method of determining files to be transferred.
+          
+          `type = "file"` - this transfer covers a single file or a whole directory
+          (recursively). When scheduling such transfer, the user must have permissions
           to access the file/directory.
       fileId:
         type: string

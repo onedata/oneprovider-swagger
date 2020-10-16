@@ -108,9 +108,9 @@ put:
     for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     Currently only POSIX mode can be changed by sending:
-      ```
-      { "mode": "0777" }
-      ```
+    ```
+    { "mode": "0777" }
+    ```
     where the POSIX mode is specified in octal notation.
 
     ***Example cURL requests***

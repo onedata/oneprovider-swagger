@@ -22,7 +22,18 @@ properties:
     description: Id of space in context of which transfer was performed.
   dataSourceType:
     type: string
-    description: Source of transferred data.
+    description: |
+      Indicates the method of determining files to be transferred.
+            
+      `type = "file"` - this transfer covers a single file or a whole directory
+      (recursively). When scheduling such transfer, the user must have permissions to
+      access the file/directory.
+          
+      `type = "view"` - this transfer covers files that are returned as a result of
+      querying chosen view. The view must be defined on all providers involved in
+      the process and querying it must return a valid list of file ids to be transferred.
+      For more information about views, please see
+      [here](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
     enum:
       - file
       - view
