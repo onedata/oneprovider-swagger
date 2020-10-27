@@ -167,7 +167,7 @@ delete:
 
     ***Example cURL requests***
 
-    **Removes specific file xattrs**
+    **Remove specific file xattrs**
     ```bash
     curl -X DELETE -H "X-Auth-Token: $TOKEN"
     -H 'Content-type: application/json' -d '{ "keys": ["license"] }' \

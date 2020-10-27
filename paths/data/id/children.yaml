@@ -107,7 +107,7 @@ post:
 
     ***Example cURL requests***
 
-    **Creates file**
+    **Create file**
     ```bash
     curl -X POST \
     -H "X-Auth-Token: $TOKEN"

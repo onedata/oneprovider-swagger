@@ -190,7 +190,7 @@ delete:
 
     ***Example cURL requests***
 
-    **Removes file json metadata**
+    **Remove file json metadata**
     ```bash
     curl -X DELETE -H "X-Auth-Token: $TOKEN" https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
     ```

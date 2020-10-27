@@ -14,7 +14,7 @@ get:
 
     ***Example cURL requests***
 
-    **Returns the basic information about share**
+    **Get the basic information about share**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
@@ -84,7 +84,7 @@ patch:
 
     ***Example cURL requests***
 
-    **Changes name of the share**
+    **Change name of the share**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PATCH \
     -H "Content-type: application/json" \
@@ -154,7 +154,7 @@ delete:
 
     ***Example cURL requests***
 
-    **Removes share**
+    **Remove share**
     ```bash
     curl -X DELETE -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"

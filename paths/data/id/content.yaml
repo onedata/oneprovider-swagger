@@ -17,14 +17,14 @@ get:
     Partial file content download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
-    ***Example cURL requests for file with `Some content...` content***
+    ***Example cURL requests for file with `abcdefghijklmno` content***
 
     **Download entire file content**
     ```bash
     curl -X GET -H "X-Auth-Token: $TOKEN" \
     "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
 
-    Some content...
+    abcdefghijklmno
     ```
 
     **Download only part of the file content**
@@ -32,7 +32,7 @@ get:
     curl -X GET -H "X-Auth-Token: $TOKEN" -H "Range: bytes=5-8" \
     "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
 
-    cont
+    fghi
     ```
 
   produces:
@@ -86,23 +86,32 @@ put:
     - Basic File Operations
   x-bash-codegen-description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    If no `offset` query string parameter is given then previous file content is
-    completly overwritten.
+    The `offset` query parameter can be used to start writing from a certain byte
+    in the file, in such case the file is NOT truncated (bytes beyond the overwritten
+    fragment will be preserved).
+    If no `offset` query is given, the file is truncated and the previous file content
+    is completely overwritten.
 
   description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    If no `offset` query string parameter is given then previous file content is
-    completly overwritten.
+    The `offset` query parameter can be used to start writing from a certain byte
+    in the file, in such case the file is NOT truncated (bytes beyond the overwritten
+    fragment will be preserved).
+    If no `offset` query is given, the file is truncated and the previous file content
+    is completely overwritten.
 
     ***Example cURL requests***
 
-    **Updates file content starting from specified offset**
+    **Update file content starting from specified offset:**
     ```bash
+    # originally, the file content is  "abcdefghijklmno"
+
     curl -X PUT \
     -H "X-Auth-Token: $TOKEN"
     -H "Content-type: application/octet-stream" \
-    --data-binary @file.dat \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=100"
+    -d "XYZ" "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4"
+
+    # upon success, the file content is "abcdWXYZijklmno"
     ```
   consumes:
     - application/octet-stream

@@ -57,7 +57,7 @@ post:
 
     ***Example cURL requests***
 
-    **Creates file replication**
+    **Create file replication**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \

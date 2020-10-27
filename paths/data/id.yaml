@@ -164,18 +164,22 @@ delete:
   operationId: remove_file
   x-onedata-gri:
     type: op_file
-    id: ?BINDING(id)
+    id: ?OBJECTID_BINDING(id)
     aspect: instance
   tags:
     - Basic File Operations
   summary: Remove file
   x-bash-codegen-description: |
     Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of directory all children will also be removed.
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
 
   description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of directory all children will also be removed.
+    In case of a directory, all its children are recursively removed - note that
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
 
     ***Example cURL requests***
 

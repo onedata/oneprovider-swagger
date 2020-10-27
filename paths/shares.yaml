@@ -29,7 +29,7 @@ post:
 
     ***Example cURL requests***
 
-    **Creates share**
+    **Create share**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST \
     -H "Content-type: application/json" \

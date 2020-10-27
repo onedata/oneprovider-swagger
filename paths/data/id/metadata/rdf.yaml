@@ -141,7 +141,7 @@ delete:
 
     ***Example cURL requests***
 
-    **Removes file rdf metadata**
+    **Remove file rdf metadata**
     ```bash
     curl -X DELETE -H "X-Auth-Token: $TOKEN" https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
     ```

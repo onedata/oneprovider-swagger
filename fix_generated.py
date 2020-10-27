@@ -153,15 +153,11 @@ routes() ->
     [{Path :: binary(), Handler :: module(), #rest_req{}}].
 sort_routes(AllRoutes) ->
     % Replace ':' (ASCII 58) with `}` (ASCII 125) as this makes routes properly sortable
-    SortableYetInvalidRoutes = lists:map(fun({Path, Handler, RestReq}) ->
-        {binary:replace(Path, <<":">>, <<"}">>, [global]), Handler, RestReq}
+    AllRoutesWithSortingKey = lists:map(fun({Path, Handler, RestReq} = Entry) ->
+        {binary:replace(Path, <<":">>, <<"}">>, [global]), Entry}
     end, AllRoutes),
 
-    SortedInvalidRoutes = lists:sort(SortableYetInvalidRoutes),
-
-    lists:map(fun({Path, Handler, RestReq}) ->
-        {binary:replace(Path, <<"}">>, <<":">>, [global]), Handler, RestReq}
-    end, SortedInvalidRoutes).
+    lists:map(fun({_Key, Entry}) -> Entry end, lists:sort(AllRoutesWithSortingKey)).
 """
 
 with open('generated/cowboy/rest_routes.erl', 'w') as f:
