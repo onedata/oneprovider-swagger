@@ -158,3 +158,58 @@ put:
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"
+
+
+delete:
+  operationId: remove_file
+  x-onedata-gri:
+    type: op_file
+    id: ?BINDING(id)
+    aspect: instance
+  tags:
+    - Basic File Operations
+  summary: Remove file
+  x-bash-codegen-description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of directory all children will also be removed.
+
+  description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of directory all children will also be removed.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
+    ```
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File, directory or space Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"
