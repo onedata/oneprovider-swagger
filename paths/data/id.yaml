@@ -207,7 +207,7 @@ delete:
   parameters:
     - name: id
       in: path
-      description: File, directory or space Id
+      description: File or directory Id
       type: string
       required: true
   x-code-samples:

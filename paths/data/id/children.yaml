@@ -9,11 +9,11 @@ get:
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories for directory
-    specified by [$FILE_ID](#operation/lookup_file_id).
+    specified by [$DIR_ID](#operation/lookup_file_id).
 
   description: |
     Returns the list of directory files and subdirectories for directory
-    specified by [$FILE_ID](#operation/lookup_file_id).
+    specified by [$DIR_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 

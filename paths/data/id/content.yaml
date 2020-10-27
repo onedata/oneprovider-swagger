@@ -1,0 +1,149 @@
+get:
+  operationId: download_file_content
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: content
+  tags:
+    - Basic File Operations
+  summary: Download file content
+  x-bash-codegen-description: |
+    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    Partial file content download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+  description: |
+    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    Partial file content download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    ***Example cURL requests for file with `Some content...` content***
+
+    **Download entire file content**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
+
+    Some content...
+    ```
+
+    **Download only part of the file content**
+    ```bash
+    curl -X GET -H "X-Auth-Token: $TOKEN" -H "Range: bytes=5-8" \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
+
+    cont
+    ```
+
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: Entire file content.
+      schema:
+        type: string
+        format: binary
+    '206':
+      description: Part(s) of file content.
+      schema:
+        type: string
+        format: binary
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
+
+
+put:
+  operationId: update_file_content
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: content
+  summary: Update file content
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    If no `offset` query string parameter is given then previous file content is
+    completly overwritten.
+
+  description: |
+    Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    If no `offset` query string parameter is given then previous file content is
+    completly overwritten.
+
+    ***Example cURL requests***
+
+    **Updates file content starting from specified offset**
+    ```bash
+    curl -X PUT \
+    -H "X-Auth-Token: $TOKEN"
+    -H "Content-type: application/octet-stream" \
+    --data-binary @file.dat \
+    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=100"
+    ```
+  consumes:
+    - application/octet-stream
+  responses:
+    '204':
+      description: File content updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      required: true
+      type: string
+    - name: offset
+      in: query
+      description: Offset at which data sent as request body should be written to file.
+      required: false
+      type: integer
+      default: 0
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "cat new_content.txt | oneprovider-rest-cli updateFileContent id=$PARENT_ID -"
