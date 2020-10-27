@@ -85,3 +85,114 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
+
+
+post:
+  operationId: create_file
+  x-onedata-gri:
+    type: op_file
+    aspect: child
+  summary: Create file
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Creates a file with the $FILE_NAME name in the directory specified by
+    [$PARENT_ID](#operation/lookup_file_id). The data sent in request body (if any)
+    will be saved as file content.
+
+  description: |
+    Creates a file with the $FILE_NAME name in the directory specified by
+    [$PARENT_ID](#operation/lookup_file_id). The data sent in request body (if any)
+    will be saved as file content.
+
+    ***Example cURL requests***
+
+    **Creates file**
+    ```bash
+    curl -X POST \
+    -H "X-Auth-Token: $TOKEN"
+    -H "Content-type: application/octet-stream" \
+    --data-binary @file.dat \
+    "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME"
+
+    {
+      "fileId": $FILE_ID
+    }
+    ```
+  consumes:
+    - application/octet-stream
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the file Id.
+        Also URI of the file in form https://$HOST/api/v3/oneprovider/data/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the file.
+          type: string
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: file Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+    - name: name
+      in: query
+      description: Name of the file.
+      required: true
+      type: string
+    - name: type
+      in: query
+      description: Type of the file.
+      required: false
+      type: string
+      enum:
+        - reg
+        - dir
+      default: reg
+    - name: mode
+      in: query
+      description: POSIX file permissions in decimal format.
+      required: false
+      type: integer
+    - name: offset
+      in: query
+      description: Offset at which data sent as request body should be written to file.
+      required: false
+      type: integer
+      default: 0
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"
