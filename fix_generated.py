@@ -153,7 +153,7 @@ routes() ->
     [{Path :: binary(), Handler :: module(), #rest_req{}}].
 sort_routes(AllRoutes) ->
     % Replace ':' (ASCII 58) with `}` (ASCII 125) as this makes routes properly sortable
-    AllRoutesWithSortingKey = lists:map(fun({Path, Handler, RestReq} = Entry) ->
+    AllRoutesWithSortingKey = lists:map(fun({Path, _Handler, _RestReq} = Entry) ->
         {binary:replace(Path, <<":">>, <<"}">>, [global]), Entry}
     end, AllRoutes),
 

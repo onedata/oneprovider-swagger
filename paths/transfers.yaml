@@ -59,10 +59,13 @@ post:
 
     **Create file replication**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST \
-    -H "Content-type: application/json" \
-    -d '{ "type": "replication", "replicatingProviderId": $PROVIDER_ID, "dataSourceType": "file", "fileId": $FILE_ID }' \
-    "https://$HOST/api/v3/oneprovider/transfers"
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/transfers" \
+    -H "Content-Type: application/json" -d '{
+        "type": "replication",
+        "replicatingProviderId": $PROVIDER_ID,
+        "dataSourceType": "file",
+        "fileId": $FILE_ID
+    }'
     ```
   consumes:
     - application/json

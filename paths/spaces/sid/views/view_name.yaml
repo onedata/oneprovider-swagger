@@ -99,10 +99,10 @@ put:
 
     **Create space view**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PUT \
-    -H "Content-type: application/javascript" \
+    curl -H "X-Auth-Token: $TOKEN" \
+    -H "Content-Type: application/javascript" \
     -d "@./my_improved_view1.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
+    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
     ```
 
   consumes:
@@ -200,9 +200,9 @@ patch:
 
     **Update space view**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PATCH \
-    -H "Content-type: application/javascript" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10
+    curl -H "X-Auth-Token: $TOKEN" \
+    -H "Content-Type: application/javascript" \
+    -X PATCH https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10
     ```
 
   consumes:

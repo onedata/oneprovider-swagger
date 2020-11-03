@@ -125,7 +125,7 @@ put:
     **Set JSON metadata for file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
-    -H "Content-type: application/json" \
+    -H "Content-Type: application/json" \
     -d '{ "key1": { "key2": ["val1", "val2", "val3", "val4"] } }'
     https://$HOST/api/v3/oneprovider/metadata/json/MySpace1/File2.txt
     ```

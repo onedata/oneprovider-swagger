@@ -19,20 +19,20 @@ get:
 
     **Get files in space subdirectory**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
 
     {
-      "children": [
-        {
-          "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
-          "name": "File1.txt"
-        },
-        {
-          "id": "00000000006CB6637368617265477569642333396432363661656463656266666164353939663761373734313235363166342336656331613534313362366634653262303161356338356138666437393765322331663462373632623133383039343665",
-          "name": "Dir2"
-        }
-      ]
+        "children": [
+            {
+                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
+                "name": "File1.txt"
+            },
+            {
+                "id": "00000000006CB6637368617265477569642333396432363661656463656266666164353939663761373734313235363166342336656331613534313362366634653262303161356338356138666437393765322331663462373632623133383039343665",
+                "name": "Dir2"
+            }
+        ]
     }
     ```
   produces:
@@ -91,6 +91,7 @@ post:
   operationId: create_file
   x-onedata-gri:
     type: op_file
+    id: ?OBJECTID_BINDING(id)
     aspect: child
   summary: Create file
   tags:
@@ -109,14 +110,14 @@ post:
 
     **Create file**
     ```bash
-    curl -X POST \
+    curl \
     -H "X-Auth-Token: $TOKEN"
-    -H "Content-type: application/octet-stream" \
-    --data-binary @file.dat \
-    "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME"
+    -H "Content-Type: application/octet-stream" \
+    -d "@file.dat"
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME"
 
     {
-      "fileId": $FILE_ID
+       "fileId": $FILE_ID
     }
     ```
   consumes:

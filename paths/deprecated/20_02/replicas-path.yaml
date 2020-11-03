@@ -117,7 +117,7 @@ post:
     **Replicate file by path to specific storage provider with URL callback**
     ```bash
     curl -X POST -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
+    -H 'Content-Type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 
@@ -229,7 +229,7 @@ delete:
 
     **Remove file replica by path from specific storage provider**
     ```bash
-    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-Type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas/MySpace1/MyFile1.txt?provider_id=$PROVIDER_ID"
 
 

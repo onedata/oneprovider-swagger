@@ -29,8 +29,9 @@ post:
 
     **Listen to space change events**
     ```bash
-    curl -N -X POST -d "@./changes_req.json" -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID"
+    curl -N -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID" \
+    -H "Content-Type: application/json" -d "@./changes_req.json"
     ```
 
   consumes:

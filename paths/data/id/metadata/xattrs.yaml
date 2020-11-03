@@ -23,7 +23,7 @@ get:
     "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
-      "license": "CC-0"
+        "license": "CC-0"
     }
     ```
   produces:
@@ -107,9 +107,9 @@ put:
 
     **Set extended file attribute**
     ```bash
-    curl -X PUT -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "license": "CC-0" }' \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs" \
+    -H 'Content-Type: application/json' -d '{ "license": "CC-0" }'
     ```
   consumes:
     - application/json
@@ -169,9 +169,9 @@ delete:
 
     **Remove specific file xattrs**
     ```bash
-    curl -X DELETE -H "X-Auth-Token: $TOKEN"
-    -H 'Content-type: application/json' -d '{ "keys": ["license"] }' \
-    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs \
+    -H 'Content-Type: application/json' -d '{ "keys": ["license"] }'
     ```
   responses:
     '204':

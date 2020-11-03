@@ -20,18 +20,18 @@ get:
 
     **Get public information about the Oneprovider service**
     ```bash
-    curl "https://$HOST/api/v3/oneprovider/configuration"
+    curl -X GET "https://$HOST/api/v3/oneprovider/configuration"
 
     {
-      "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
-      "name": "ProviderName",
-      "domain": "zone.domain.org",
-      "onezoneDomain": "example.domain.org",
-      "version": "R14B04",
-      "build": "14-g0d0fd5b",
-      "compatibleOnezoneVersions": ["R13B04, R14B04"],
-      "compatibleOneproviderVersions": ["R14B04"],
-      "compatibleOneclientVersions": ["R14B04"]
+        "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
+        "name": "ProviderName",
+        "domain": "zone.domain.org",
+        "onezoneDomain": "example.domain.org",
+        "version": "R14B04",
+        "build": "14-g0d0fd5b",
+        "compatibleOnezoneVersions": ["R13B04, R14B04"],
+        "compatibleOneproviderVersions": ["R14B04"],
+        "compatibleOneclientVersions": ["R14B04"]
     }
     ```
   produces:

@@ -27,10 +27,10 @@ put:
 
     **Update space view**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PUT \
-    -H "Content-type: application/javascript" \
+    curl -H "X-Auth-Token: $TOKEN" \
+    -H "Content-Type: application/javascript" \
     -d "@./my_improved_reduce_fun.js" \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
+    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
     ```
 
   consumes:
