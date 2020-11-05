@@ -31,7 +31,8 @@ get:
                 "providerName": "PublicCloud1"
             }
         ],
-        "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe"
+        "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe",
+        "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
     }
     ```
   produces:

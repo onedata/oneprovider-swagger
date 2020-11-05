@@ -20,10 +20,12 @@ get:
     [
         {
             "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe",
+            "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873",
             "name": "Space1"
         },
         {
             "spaceId": "e14039c53235c44f2f25dce4c90b1f0acha61c",
+            "fileId": "000000184465677569642373706163655F73706163653123737061636531",
             "name": "Space2"
         }
     ]
@@ -44,6 +46,9 @@ get:
               spaceId:
                 type: string
                 description: Space Id.
+              fileId:
+                type: string
+                description: Space directory Id.
     '400':
       description: Invalid request.
       schema:
