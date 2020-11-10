@@ -20,8 +20,8 @@ get:
 
     **Get information about specific view**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
 
     {
         "spatial": false,
@@ -100,9 +100,8 @@ put:
     **Create space view**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -H "Content-Type: application/javascript" \
-    -d "@./my_improved_view1.js" \
-    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2
+    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?spatial=false&providers[]=$PROVIDER_ID_1&providers[]=$PROVIDER_ID_2 \
+    -H "Content-Type: application/javascript" -d "@./my_view1.js"
     ```
 
   consumes:
@@ -201,8 +200,8 @@ patch:
     **Update space view**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -H "Content-Type: application/javascript" \
-    -X PATCH https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10
+    -X PATCH https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME?update_min_changes=10 \
+    -H "Content-Type: application/javascript" -d "@./my_improved_view1.js"
     ```
 
   consumes:
@@ -294,8 +293,8 @@ delete:
 
     **Remove existing view**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME
     ```
 
   responses:

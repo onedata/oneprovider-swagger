@@ -23,8 +23,7 @@ get:
 
     **Get file distribution**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
 
     [
         {

@@ -117,9 +117,8 @@ put:
 
     **Set file POSIX mode**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID" \
     -H 'Content-Type: application/json' -d '{ "mode": "0777" }'
-    -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
     ```
   consumes:
     - application/json
@@ -185,8 +184,7 @@ delete:
 
     **Remove specific file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
     ```
 
   responses:

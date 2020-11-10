@@ -103,8 +103,8 @@ get:
     ```
 
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
 
     [
         {

@@ -16,8 +16,7 @@ get:
 
     **Get the basic information about share**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
 
     {
         "shareId": "1f4b762b1380946e73aeca574c77f14c",
@@ -25,10 +24,7 @@ get:
         "description": "# Experiment XYZ\nThis collection contains results from Experiment XYZ.",
         "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
         "fileType": "dir",
-        "rootFileId": "00000000006CB663736861726547756964233339643236366165646365\
-        6266666164353939663761373734313235363166342336656331613534313362366634653\
-        2623031613563383561386664373937653223316634623736326231333830393436653733\
-        6165636135373463373766313463",
+        "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
         "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
         "handleId" "doi:10.15911/MyShares.726855"
     }
@@ -86,11 +82,11 @@ patch:
 
     **Change name of the share**
     ```bash
-    curl \
-    -H "X-Auth-Token: $TOKEN" \
-    -H "Content-Type: application/json" \
-    -d '{ "name": "NewShareName", "description": "# New description" }' \
-    -X PATCH "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$HOST/api/v3/oneprovider/shares/$SHARE_ID" \
+    -H "Content-Type: application/json" -d '{
+        "name": "NewShareName",
+        "description": "# New description"
+    }'
     ```
   consumes:
     - application/json

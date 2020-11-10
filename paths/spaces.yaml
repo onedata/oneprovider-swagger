@@ -15,17 +15,17 @@ get:
 
     **List all user spaces**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/spaces"
 
     [
         {
             "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe",
-            "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873",
+            "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873...",
             "name": "Space1"
         },
         {
             "spaceId": "e14039c53235c44f2f25dce4c90b1f0acha61c",
-            "fileId": "000000184465677569642373706163655F73706163653123737061636531",
+            "fileId": "000000184465677569642373706163655F73706163653123737061636531...",
             "name": "Space2"
         }
     ]

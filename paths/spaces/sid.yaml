@@ -16,8 +16,7 @@ get:
 
     **Get information about a specific space**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID"
 
     {
         "name": "My Space 1",
@@ -32,7 +31,7 @@ get:
             }
         ],
         "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe",
-        "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
+        "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
     }
     ```
   produces:

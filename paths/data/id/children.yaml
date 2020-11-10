@@ -25,11 +25,11 @@ get:
     {
         "children": [
             {
-                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
+                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
                 "name": "File1.txt"
             },
             {
-                "id": "00000000006CB6637368617265477569642333396432363661656463656266666164353939663761373734313235363166342336656331613534313362366634653262303161356338356138666437393765322331663462373632623133383039343665",
+                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
                 "name": "Dir2"
             }
         ]
@@ -93,31 +93,37 @@ post:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file
+  summary: Create file or directory
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates a file with the $FILE_NAME name in the directory specified by
-    [$PARENT_ID](#operation/lookup_file_id). The data sent in request body (if any)
-    will be saved as file content.
+    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The data sent in request body (if any) will be saved as file content.
 
   description: |
-    Creates a file with the $FILE_NAME name in the directory specified by
-    [$PARENT_ID](#operation/lookup_file_id). The data sent in request body (if any)
-    will be saved as file content.
+    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The data sent in request body (if any) will be saved as file content.
 
     ***Example cURL requests***
 
     **Create file**
     ```bash
-    curl \
-    -H "X-Auth-Token: $TOKEN"
-    -H "Content-Type: application/octet-stream" \
-    -d "@file.dat"
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
+    -H "Content-Type: application/octet-stream" -d "@file.dat"
 
     {
-       "fileId": $FILE_ID
+       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    }
+    ```
+
+    **Create directory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=dir" \
+
+    {
+       "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
     }
     ```
   consumes:

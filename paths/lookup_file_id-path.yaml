@@ -21,7 +21,7 @@ post:
     -X POST "https://$HOST/api/v3/oneprovider/lookup-file-id/MySpace/dir/readme.txt"
 
     {
-      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873"
+      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
     }
     ```
   produces:
@@ -38,7 +38,7 @@ post:
         required:
           - fileId
         example:
-          fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+          fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873...
     '400':
       description: Invalid request.
       schema:

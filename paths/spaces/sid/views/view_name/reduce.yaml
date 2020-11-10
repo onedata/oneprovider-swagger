@@ -28,9 +28,8 @@ put:
     **Update space view**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -H "Content-Type: application/javascript" \
-    -d "@./my_improved_reduce_fun.js" \
-    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
+    -X PUT https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce \
+    -H "Content-Type: application/javascript" -d "@./my_improved_reduce_fun.js"
     ```
 
   consumes:
@@ -99,8 +98,8 @@ delete:
 
     **Remove view reduce function**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/reduce
     ```
 
   responses:

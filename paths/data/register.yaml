@@ -46,9 +46,8 @@ post:
 
     **Register file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-Type: application/json' -d "@./file_spec.json" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/register"
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/data/register" \
+    -H 'Content-Type: application/json' -d "@./file_spec.json"
     ```
 
   consumes:

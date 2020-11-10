@@ -19,8 +19,8 @@ get:
 
     **Get extended file attributes**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
         "license": "CC-0"
