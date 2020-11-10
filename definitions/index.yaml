@@ -70,7 +70,9 @@ QosCreateRequest:
 
 QosSummary:
   $ref: ./qos_summary.yaml
-
+  
+StorageDetails:
+  $ref: ./storage_details.yaml
 
 # Transfer create request and its subclasses
 TransferCreateRequest:

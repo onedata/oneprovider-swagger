@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: string
+    description: Id of storage.
+  name: 
+    type: string
+    description: Name of storage.
+  providerId:
+    type: string
+    description: Id of provider storage belongs to.
+example:
+  {
+    "id": $STORAGE_ID,
+    "name": "storage_name",
+    "providerId": "$PROVIDER_ID"
+  }

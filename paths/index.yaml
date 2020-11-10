@@ -131,6 +131,9 @@
 
 /data/{id}/qos_summary:
   $ref: ./data/id/qos_summary.yaml
+  
+/spaces/{sid}/evaluate_qos_expression:
+  $ref: ./spaces/sid/evaluate_qos_expression.yaml
 
 
 # tag Share
