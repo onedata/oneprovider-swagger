@@ -29,12 +29,10 @@ post:
 
     ***Example cURL requests***
 
-    **Creates share**
+    **Create share**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST \
-    -H "Content-type: application/json" \
-    -d '{ "name": "MyShare", "fileId": $FILE_ID }' \
-    "https://$HOST/api/v3/oneprovider/shares"
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/shares" \
+    -H "Content-Type: application/json" -d '{"name": "MyShare", "fileId": $FILE_ID}'
     ```
   consumes:
     - application/json

@@ -46,6 +46,9 @@
 /data/{id}:
   $ref: ./data/id.yaml
 
+/data/{id}/content:
+  $ref: ./data/id/content.yaml
+
 /data/{id}/distribution:
   $ref: ./data/id/distribution.yaml
 

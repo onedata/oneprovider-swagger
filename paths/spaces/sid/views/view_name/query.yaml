@@ -54,39 +54,39 @@ get:
     With example map function used:
     ```javascript
     function (id, type, meta, ctx) {
-      if(type == 'custom_metadata' && meta['onexattr']) {
-        return [meta['onexattr'], id];
-      }
-      return null;
+        if(type == 'custom_metadata' && meta['onexattr']) {
+            return [meta['onexattr'], id];
+        }
+        return null;
     }
     ```
 
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/VIEW_NAME/query?skip=10&limit=4
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/VIEW_NAME/query?skip=10&limit=4
 
     [
-      {
-        "id": "fd18b793d446099ae84f8bd5c054ad34",
-        "key": 1,
-        "value": "00000000002C45416775696423633062636533343133336336636633393238336134323333396430656461393323737061636531"
-      },
-      {
-        "id": "2785dbd91120e341265f9ee2370ccf08",
-        "key": 2,
-        "value": "00000000002CF7DB6775696423396261373964653764643866336432393436323262313133393738643338383323737061636531"
-      },
-      {
-        "id": "60a9e6da61e12deeb3e6c688fe861c01",
-        "key": 3,
-        "value": "00000000002C47916775696423336330336538623730333439353233383631313966346139343731316631656323737061636531"
-      },
-      {
-        "id": "651d696a8446e92ab55de163f9b8594d",
-        "key": 4,
-        "value": "00000000002CA8906775696423633835366438613139666565336337666165623538303736356465383039356223737061636531"
-      },
-      ...
+        {
+            "id": "fd18b793d446099ae84f8bd5c054ad34",
+            "key": 1,
+            "value": "00000000002C45416775696423633062636533343133336336636633393238336134323333396430656461393323737061636531"
+        },
+        {
+            "id": "2785dbd91120e341265f9ee2370ccf08",
+            "key": 2,
+            "value": "00000000002CF7DB6775696423396261373964653764643866336432393436323262313133393738643338383323737061636531"
+        },
+        {
+            "id": "60a9e6da61e12deeb3e6c688fe861c01",
+            "key": 3,
+            "value": "00000000002C47916775696423336330336538623730333439353233383631313966346139343731316631656323737061636531"
+        },
+        {
+            "id": "651d696a8446e92ab55de163f9b8594d",
+            "key": 4,
+            "value": "00000000002CA8906775696423633835366438613139666565336337666165623538303736356465383039356223737061636531"
+        },
+        ...
     ]
     ```
 
@@ -95,42 +95,43 @@ get:
     With example spatial function used:
     ```javascript
     function (id, type, meta, ctx) {
-      if(type == 'custom_metadata' && meta['onexattr']) {
-        return [meta['onexattr'], id];
-      }
-      return null;
+        if(type == 'custom_metadata' && meta['onexattr']) {
+            return [meta['onexattr'], id];
+        }
+        return null;
     }
     ```
 
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
 
     [
-      {
-        "geometry": {
-          "type": "Point",
-          "coordinates": [0, 0]
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [0, 0]
+            },
+            "id": "36cfb018c312653e65b346c421d7a678",
+            "key": [[0, 0], [0, 0]],
+            "value": "00000000002C5DA36775696423663535633934306564393632656530666133663330633137393362333765356223737061636531"
         },
-        "id": "36cfb018c312653e65b346c421d7a678",
-        "key": [[0, 0], [0, 0]],
-        "value": "00000000002C5DA36775696423663535633934306564393632656530666133663330633137393362333765356223737061636531"
-      },
-      {
-        "geometry": {
-          "type": "Point",
-          "coordinates": [5.1, 10.22]
-        },
-        "id": "972eb78ff8e262c4bebdc11799c20f51",
-        "key": [[5.1, 5.1], [10.22, 10.22]],
-        "value": "00000000002C678A6775696423363030666461383130623030386333616664363637396666653334366137656623737061636531"
-      }
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [5.1, 10.22]
+            },
+            "id": "972eb78ff8e262c4bebdc11799c20f51",
+            "key": [[5.1, 5.1], [10.22, 10.22]],
+            "value": "00000000002C678A6775696423363030666461383130623030386333616664363637396666653334366137656623737061636531"
+        }
     ]
     ```
 
     **Get file popularity for a specific space**
     ```bash
-    curl -sSk -X GET -H "X-Auth-Token: $TOKEN" "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json

@@ -23,18 +23,17 @@ get:
 
     **Get file distribution**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
 
     [
-      {
-        "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
-        "providerId": "57ecb305-a097-4243-bd03-a995e78ab206"
-      },
-      {
-        "blocks": [ [ 5, 9 ] ],
-        "providerId": "7dedd2c7-dc58-4e62-925e-94663faa70fc"
-      }
+        {
+            "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
+            "providerId": "a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74"
+        },
+        {
+            "blocks": [ [ 5, 9 ] ],
+            "providerId": "b107606a22f006b82f6f665a9e6f116cch0500"
+        }
     ]
     ```
   produces:

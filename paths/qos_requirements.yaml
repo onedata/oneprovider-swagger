@@ -20,10 +20,12 @@ post:
 
     **Add QoS requirement for file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST \
-    -H "Content-type: application/json" \
-    -d '{ "expression": "country=FR", "replicasNum": 2, "fileId": $FILE_ID }' \
-    "https://$HOST/api/v3/oneprovider/qos_requirements"
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/qos_requirements" \
+    -H "Content-Type: application/json" -d '{
+        "expression": "country=FR",
+        "replicasNum": 2,
+        "fileId": $FILE_ID
+    }'
     ```
   consumes:
     - application/json

@@ -122,7 +122,7 @@ put:
     **Set file POSIX mode**
     ```bash
     curl -X PUT -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "mode": "0777" }'
+    -H 'Content-Type: application/json' -d '{ "mode": "0777" }'
     "https://$HOST/api/v3/oneprovider/metadata-id/attrs/$FILE_ID"
     ```
   consumes:

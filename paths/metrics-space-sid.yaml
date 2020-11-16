@@ -20,18 +20,18 @@ get:
 
     **Get storage space used metrics**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID?metric=storage_used"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/metrics/space/$SPACE_ID?metric=storage_used"
 
     {
-      "providerId": "4efc4a0c-0a61-4766-8fe9-c3d7fb414da8",
+      "providerId": "a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74",
       "rrd": {
           "about": "RRDtool graph JSON output",
           "data": [[ 5.6435528434 ], [ 2.6435528434 ], [ 4.6435528434 ] ],
           "meta": {
               "start": 1465466700,
               "end": 1465553100,
-              "legend": ["space f4f1799f-4954-4d7a-bc31-630998883296; metric storage_used; oneprovider Id 4efc4a0c-0a61-4766-8fe9-c3d7fb414da8; storage_used[bytes]"],
+              "legend": ["space fb519d81146bcc635b890ff03a5da0fdch34fe; metric storage_used; oneprovider Id a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74; storage_used[bytes]"],
               "step": 300
           }
         }

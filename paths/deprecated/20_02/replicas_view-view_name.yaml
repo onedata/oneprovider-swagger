@@ -56,7 +56,7 @@ post:
     **Replicate 100 files (skipping the first 200) returned by view within specified space to any provider with URL callback**
     ```bash
     curl -X POST -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
+    -H 'Content-Type: application/json' -d '{ "url": "http://example.com/transfer_complete" }' \
     "https://$HOST/api/v3/oneprovider/replicas-view/$VIEW_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 
@@ -272,7 +272,7 @@ delete:
 
     **Evicts 100 replicas (skipping the first 200) returned by view within specified space from specific provider**
     ```bash
-    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    curl -X DELETE -H "X-Auth-Token: $TOKEN" -H 'Content-Type: application/json' \
     "https://$HOST/api/v3/oneprovider/replicas-view/$VIEW_NAME?space_id=$SPACE_ID&provider_id=$PROVIDER_ID&skip=200&limit=100"
 
 

@@ -83,7 +83,7 @@ put:
     **Set RDF metadata for space from RDF file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PUT \
-    -H "Content-type: application/rdf+xml" \
+    -H "Content-Type: application/rdf+xml" \
     -d "@./space1_dublincore.rdf"
     https://$HOST/api/v3/oneprovider/metadata-id/rdf/$FILE_ID
     ```

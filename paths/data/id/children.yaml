@@ -9,30 +9,30 @@ get:
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories for directory
-    specified by [$FILE_ID](#operation/lookup_file_id).
+    specified by [$DIR_ID](#operation/lookup_file_id).
 
   description: |
     Returns the list of directory files and subdirectories for directory
-    specified by [$FILE_ID](#operation/lookup_file_id).
+    specified by [$DIR_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
     **Get files in space subdirectory**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
 
     {
-      "children": [
-        {
-          "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
-          "name": "File1.txt"
-        },
-        {
-          "id": "00000000006CB6637368617265477569642333396432363661656463656266666164353939663761373734313235363166342336656331613534313362366634653262303161356338356138666437393765322331663462373632623133383039343665",
-          "name": "Dir2"
-        }
-      ]
+        "children": [
+            {
+                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
+                "name": "File1.txt"
+            },
+            {
+                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
+                "name": "Dir2"
+            }
+        ]
     }
     ```
   produces:
@@ -85,3 +85,121 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
+
+
+post:
+  operationId: create_file
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: child
+  summary: Create file or directory
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The data sent in request body (if any) will be saved as file content.
+
+  description: |
+    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The data sent in request body (if any) will be saved as file content.
+
+    ***Example cURL requests***
+
+    **Create file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
+    -H "Content-Type: application/octet-stream" -d "@file.dat"
+
+    {
+       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    }
+    ```
+
+    **Create directory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=dir" \
+
+    {
+       "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
+    }
+    ```
+  consumes:
+    - application/octet-stream
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the file Id.
+        Also URI of the file in form https://$HOST/api/v3/oneprovider/data/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the file.
+          type: string
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: file Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+    - name: name
+      in: query
+      description: Name of the file.
+      required: true
+      type: string
+    - name: type
+      in: query
+      description: Type of the file.
+      required: false
+      type: string
+      enum:
+        - reg
+        - dir
+      default: reg
+    - name: mode
+      in: query
+      description: POSIX file permissions in decimal format.
+      required: false
+      type: integer
+    - name: offset
+      in: query
+      description: Offset at which data sent as request body should be written to file.
+      required: false
+      type: integer
+      default: 0
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"
