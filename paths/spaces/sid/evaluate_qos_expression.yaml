@@ -7,32 +7,37 @@ post:
     aspect: evaluate_qos_expression
   tags:
     - QoS
-  summary: Evaluate qos expression
+  summary: Evaluate QoS expression
   x-bash-codegen-description: |
-    Checks whether given QoS expression is valid and if so returns the list 
-    of all storages that match this QoS expression.
+    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
+    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    with the parser report.
 
     This operation requires `space_manage_qos` privilege.
   description: |
-    Checks whether given QoS expression is valid and if so returns the list 
-    of all storages that match this QoS expression. 
+    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
+    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    with the parser report.
 
     This operation requires `space_manage_qos` privilege.
 
     ***Example cURL requests***
-    
+
+    **Evaluate QoS expression**
     ```bash
     curl -X POST -H "X-Auth-Token: $TOKEN" \
+    -H "Content-type: application/json" \
     -d "{"expression": "key = value"}" \
     "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/evaluate_qos_expression" 
 
-    [
-      {
-        "id": $STORAGE_ID,
-        "name": "storage_name",
-        "providerId": "$PROVIDER_ID"
-      }
-    ]
+    {
+      "matchingStorages": {
+        [{
+          "id": "$STORAGE_ID",
+          "name": "storage_name",
+          "providerId": "$PROVIDER_ID"
+        }]
+    }
     ```
   consumes:
     - application/json
@@ -40,11 +45,14 @@ post:
     - application/json
   responses:
     '200':
-      description: The list of storages matching given QoS expression
+      description: The list of storages matching given QoS expression (objects containing basic storage details)
       schema:
-        type: array
-        items:
-          $ref: '#/definitions/StorageDetails'
+        type: object
+        properties:
+          matchingStorages:
+            type: array
+            items:
+              $ref: '#/definitions/StorageDetails'
     '400':
       description: Invalid request.
       schema:
