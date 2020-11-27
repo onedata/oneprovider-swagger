@@ -1,0 +1,88 @@
+post:
+  operationId: evaluate_qos_expression
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: evaluate_qos_expression
+  tags:
+    - QoS
+  summary: Evaluate QoS expression
+  x-bash-codegen-description: |
+    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
+    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    with the parser report.
+
+    This operation requires `space_manage_qos` privilege.
+  description: |
+    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
+    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    with the parser report.
+
+    This operation requires `space_manage_qos` privilege.
+
+    ***Example cURL requests***
+
+    **Evaluate QoS expression**
+    ```bash
+    curl -X POST -H "X-Auth-Token: $TOKEN" \
+    -H "Content-type: application/json" \
+    -d "{"expression": "key = value"}" \
+    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/evaluate_qos_expression" 
+
+    {
+      "matchingStorages": {
+        [{
+          "id": "$STORAGE_ID",
+          "name": "storage_name",
+          "providerId": "$PROVIDER_ID"
+        }]
+    }
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of storages matching given QoS expression (objects containing basic storage details)
+      schema:
+        type: object
+        properties:
+          matchingStorages:
+            type: array
+            items:
+              $ref: '#/definitions/StorageDetails'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: sid
+    in: path
+    description: >
+      Space Id in which to evaluate QoS expression.
+    type: string
+    required: true
+  - name: expression
+    in: body
+    description: QoS expression to be evaluated.
+    schema:
+      type: string
+      example: "key = value"
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli sid=$SPACE_ID evaluateQosExpression expression=\"key=value\""
