@@ -12,9 +12,13 @@ properties:
         name:
           type: string
           description: Name of the file or subdirectory.
+  isLast:
+    type: boolean
+    description: Flag which informs wheter returned batch is the last one.
 example:
   children:
     - id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
       name: File1.txt
     - id: NjIwZTE2NDItNGYyZC00NWYyLWI0ZWItMzdmOGE5NThiNDZm
       name: Dir2
+  isLast: true
