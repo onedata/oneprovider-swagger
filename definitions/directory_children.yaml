@@ -14,7 +14,10 @@ properties:
           description: Name of the file or subdirectory.
   isLast:
     type: boolean
-    description: Flag which informs wheter returned batch is the last one.
+    description: >
+      Flag which informs whether returned batch of children is the last one.
+      Number of returned children can be smaller than requested `limit`.
+      `isLast` flag is the only valid indicator informing that all children has been listed.
 example:
   children:
     - id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
