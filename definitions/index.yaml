@@ -9,28 +9,22 @@ Error:
   $ref: ./error.yaml
 
 DirectoryChildren:
-  $ref: ./directory_children.yaml
+  $ref: ./data/directory_children.yaml
 
 FileDistribution:
-  $ref: ./file_distribution.yaml
-
-FilePath:
-  $ref: ./file_path.yaml
-
-Callback:
-  $ref: ./callback.yaml
+  $ref: ./data/file_distribution.yaml
 
 FileAttributes:
-  $ref: ./file_attributes.yaml
+  $ref: ./data/file_attributes.yaml
 
-FileMetadataChange:
-  $ref: ./file_metadata_change.yaml
+MetadataChangesEvent:
+  $ref: ./monitoring/metadata_changes_event.yaml
 
 FileRegistrationRequest:
-  $ref: ./file_registration_request.yaml
+  $ref: ./data/file_registration_request.yaml
 
 MetadataChangesStreamRequest:
-  $ref: ./metadata_changes_stream_request.yaml
+  $ref: ./monitoring/metadata_changes_stream_request.yaml
 
 Space:
   $ref: ./space.yaml
@@ -39,52 +33,52 @@ Provider:
   $ref: ./provider.yaml
 
 Metrics:
-  $ref: ./metrics.yaml
+  $ref: ./monitoring/metrics.yaml
 
 RRD:
-  $ref: ./rrd.yaml
+  $ref: ./monitoring/rrd.yaml
 
 View:
-  $ref: ./view.yaml
+  $ref: ./view/view.yaml
 
 Views:
-  $ref: ./views.yaml
+  $ref: ./view/views.yaml
 
 ViewOptions:
-  $ref: ./view_options.yaml
+  $ref: ./view/view_options.yaml
 
 ShareCreateRequest:
-  $ref: ./share_create_request.yaml
+  $ref: ./share/share_create_request.yaml
 
 Share:
-  $ref: ./share.yaml
+  $ref: ./share/share.yaml
 
 Shares:
-  $ref: ./shares.yaml
+  $ref: ./share/shares.yaml
 
 QosRequirement:
-  $ref: ./qos_requirement.yaml
+  $ref: ./qos/qos_requirement.yaml
 
 QosCreateRequest:
-  $ref: ./qos_create_request.yaml
+  $ref: ./qos/qos_create_request.yaml
 
 QosSummary:
-  $ref: ./qos_summary.yaml
+  $ref: ./qos/qos_summary.yaml
   
 StorageDetails:
   $ref: ./storage_details.yaml
 
 # Transfer create request and its subclasses
 TransferCreateRequest:
-  $ref: ./transfer/create_request.yaml
+  $ref: ./transfer/transfer_create_request.yaml
 file:
-  $ref: ./transfer/create_file_transfer_request.yaml
+  $ref: ./transfer/transfer_file_create_request.yaml
 view:
-  $ref: ./transfer/create_view_transfer_request.yaml
+  $ref: ./transfer/transfer_view_create_request.yaml
 
 TransferStatus:
-  $ref: ./transfer/status.yaml
+  $ref: ./transfer/transfer_status.yaml
 
 
 QueryViewParams:
-  $ref: ./views/query_view_params.yaml
+  $ref: ./view/view_query_params.yaml

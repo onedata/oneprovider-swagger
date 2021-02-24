@@ -68,49 +68,6 @@
   $ref: ./data/register.yaml
 
 
-# tag Deprecated File Api
-/files/{path}:
-  $ref: ./deprecated/20_02/files-path.yaml
-
-/files-id/{id}:
-  $ref: ./deprecated/20_02/files_id-id.yaml
-
-/metadata/attrs/{path}:
-  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
-
-/metadata/xattrs/{path}:
-  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
-
-/metadata/json/{path}:
-  $ref: ./deprecated/20_02/metadata-json-path.yaml
-
-/metadata/rdf/{path}:
-  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
-
-/metadata-id/attrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
-
-/metadata-id/xattrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
-
-/metadata-id/json/{id}:
-  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
-
-/metadata-id/rdf/{id}:
-  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
-
-
-# tag Replica
-/replicas/{path}:
-  $ref: ./deprecated/20_02/replicas-path.yaml
-
-/replicas-id/{id}:
-  $ref: ./deprecated/20_02/replicas_id-fid.yaml
-
-/replicas-view/{view_name}:
-  $ref: ./deprecated/20_02/replicas_view-view_name.yaml
-
-
 # tag Transfer
 /spaces/{sid}/transfers:
   $ref: ./spaces/sid/transfers.yaml
