@@ -40,12 +40,6 @@ properties:
   fileId:
     type: string
     description: Id of the transferred file or directory.
-  path:
-    type: string
-    description: >
-      Path to the file or directory in the virtual file system.
-      This field is `deprecated` and it might be removed in future release.
-      Please refer to `filePath`.
   filePath:
     type: string
     description: Path to the file or directory in the virtual file system.
@@ -95,18 +89,6 @@ properties:
       - aborting
       - cancelled
       - failed
-  replicaEvictionStatus:
-    type: string
-    description: The status of transfer eviction phase. This field is `deprecated` and it might be removed in future release. Please refer to `evictionStatus`.
-    enum:
-      - scheduled
-      - enqueued
-      - skipped
-      - active
-      - completed
-      - aborting
-      - cancelled
-      - failed
   evictionStatus:
     type: string
     description: The status of transfer eviction phase.
@@ -139,20 +121,9 @@ properties:
   filesReplicated:
     type: integer
     description: Number of files already replicated.
-  fileReplicasEvicted:
-    type: integer
-    description: >
-      Number of files already evicted. This field is `deprecated` and it might be
-      removed in future release. Please refer to `filesEvicted`.
   filesEvicted:
     type: integer
     description: Number of files already evicted.
-  failedFiles:
-    type: integer
-    description: |
-      Number of files for which eviction or replication has failed.
-      This field is `deprecated` and it might be removed in future release.
-      Please refer to `filesFailed`.
   filesFailed:
     type: integer
     description: Number of files for which eviction or replication has failed.
@@ -211,7 +182,6 @@ required:
   - dataSourceType
   - transferStatus
   - replicationStatus
-  - replicaEvictionStatus
   - evictionStatus
   - replicatingProviderId
   - evictingProviderId
@@ -219,9 +189,7 @@ required:
   - filesToProcess
   - filesProcessed
   - filesReplicated
-  - fileReplicasEvicted
   - filesEvicted
-  - failedFiles
   - filesFailed
   - bytesReplicated
   - scheduleTime
@@ -240,12 +208,10 @@ example:
   spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
   dataSourceType: file
   fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
-  path: /My Space 1/Dir2/file3.txt
   filePath: /My Space 1/Dir2/file3.txt
   transferStatus: completed
   effectiveJobStatus: completed
   replicationStatus: completed
-  replicaEvictionStatus: skipped
   evictionStatus: skipped
   replicatingProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
   evictingProviderId: null
@@ -253,9 +219,7 @@ example:
   filesToProcess: 1
   filesProcessed: 1
   filesReplicated: 1
-  fileReplicasEvicted: 0
   filesEvicted: 0
-  failedFiles: 0
   filesFailed: 0
   bytesReplicated: 10485760000
   scheduleTime: 1504688800

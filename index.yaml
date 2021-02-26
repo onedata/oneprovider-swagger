@@ -23,22 +23,15 @@ tags:
     description: Files and Directories custom metadata related operations.
   - name: File registration
     description: Operations for registering files located on external storages.
-  - name: Deprecated File Api
-    description: Files and Directories related operations (deprecated).
   - name: QoS
     description: QoS related operations.
   - name: Share
     description: Shares related operations.
-  - name: Replica
-    description: Replication and file distribution control operations.
   - name: Transfer
     description: Transfers related operations.
   - name: Monitoring
     description: Metrics and change events monitoring related operations.
 x-tagGroups:
-  - name: Service information
-    tags:
-      - Oneprovider
   - name: Space management
     tags:
       - Space
@@ -50,10 +43,8 @@ x-tagGroups:
       - File Distribution
       - Custom File Metadata
       - File registration
-      - Deprecated File Api
   - name: Replica & QoS management
     tags:
-      - Replica
       - Transfer
       - QoS
   - name: Share management
@@ -62,6 +53,9 @@ x-tagGroups:
   - name: Monitoring & metrics
     tags:
       - Monitoring
+  - name: Service information
+    tags:
+      - Oneprovider
 securityDefinitions:
   # api_key1 is used by Bash generated clients as default
   # header for sending api key
