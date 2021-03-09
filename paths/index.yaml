@@ -89,8 +89,8 @@
 /qos_requirements/{qid}:
   $ref: ./qos_requirements/qid.yaml
 
-/data/{id}/qos_summary:
-  $ref: ./data/id/qos_summary.yaml
+/data/{id}/qos/summary:
+  $ref: ./data/id/qos/summary.yaml
   
 /spaces/{sid}/evaluate_qos_expression:
   $ref: ./spaces/sid/evaluate_qos_expression.yaml
@@ -116,6 +116,9 @@
 
 /datasets/{did}:
   $ref: ./datasets/did.yaml
+
+/data/{id}/dataset/summary:
+  $ref: ./data/id/dataset/summary.yaml
 
 
 # tag Monitoring
