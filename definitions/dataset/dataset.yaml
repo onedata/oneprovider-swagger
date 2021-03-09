@@ -1,0 +1,23 @@
+type: object
+description: Basic information about a dataset.
+properties:
+  datasetId:
+    type: string
+    description: Dataset Id.
+  rootFileId:
+    type: string
+    description: Id of file or directory being dataset root.
+  protectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+  attached:
+    $ref: '#/definitions/DatasetAttached'
+required:
+  - datasetId
+  - rootFileId
+  - protectionFlags
+  - attached
+example:
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  rootFileId: 00000000006CB663736861726547756964233339643236366165646365...
+  protectionFlags: ["metadata_protection"]
+  attached: true

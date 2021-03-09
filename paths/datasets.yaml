@@ -1,0 +1,79 @@
+post:
+  operationId: establish_dataset
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_dataset
+    aspect: instance
+  summary: Establish dataset
+  tags:
+    - Dataset
+  x-bash-codegen-description: |
+    Establishes dataset for specified file or directory.
+    For each file/directory only one dataset can be established.
+
+    This operation requires `space_manage_datasets` privilege.
+
+  description: |
+    Establishes dataset for specified file or directory.
+    For each file/directory only one dataset can be established.
+
+    This operation requires `space_manage_datasets` privilege.
+
+    ***Example cURL requests***
+
+    **Establish dataset**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/datasets" \
+    -H "Content-Type: application/json" -d '{
+        "fileId": $FILE_ID,
+        "protectionFlags": ["data_protection"]
+    }'
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the dataset Id.
+        Also URI of the Dataset in form https://$HOST/api/v3/oneprovider/datasets/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Dataset.
+          type: string
+      schema:
+        type: object
+        properties:
+          datasetId:
+            type: string
+            description: Dataset Id.
+        example:
+          datasetId: D67686431633765446F4D76546D6F2D67575
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Dataset properties.
+      schema:
+        $ref: '#/definitions/DatasetEstablishRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli establishDataset fileId==$FILE_ID"

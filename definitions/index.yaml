@@ -56,6 +56,18 @@ Share:
 Shares:
   $ref: ./share/shares.yaml
 
+DatasetProtectionFlags:
+  $ref: ./dataset/dataset_protection_flags.yaml
+
+DatasetAttached:
+  $ref: ./dataset/dataset_attached.yaml
+
+Dataset:
+  $ref: ./dataset/dataset.yaml
+
+DatasetEstablishRequest:
+  $ref: ./dataset/dataset_establish_request.yaml
+
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml
 

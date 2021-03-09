@@ -104,6 +104,14 @@
   $ref: ./shares/shid.yaml
 
 
+# tag Dataset
+/datasets:
+  $ref: ./datasets.yaml
+
+/datasets/{did}:
+  $ref: ./datasets/did.yaml
+
+
 # tag Monitoring
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
