@@ -1,0 +1,104 @@
+get:
+  operationId: list_dataset_children
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: children
+  tags:
+    - Dataset
+  summary: List dataset nested datasets
+  x-bash-codegen-description: |
+    Returns the list of dataset nested datasets.
+
+  description: |
+    Returns the list of dataset nested datasets.
+
+    ***Example cURL requests***
+
+    **Get nested datasets**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
+
+    {
+        "children": [
+            "1f4b762b1380946e73aeca574c77f14c",
+            "64233339643236366165646365626666"
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of dataset nested datasets.
+      schema:
+        type: object
+        properties:
+          children:
+            type: array
+            description: The list of dataset Ids.
+            items:
+              type: string
+          isLast:
+            type: boolean
+            description: >
+              Flag which informs whether returned batch of dataset Ids is the last one.
+              Number of returned Ids can be smaller than requested `limit`.
+              `isLast` flag is the only valid indicator informing that all datasets has been listed.
+        example:
+          children:
+            - "1f4b762b1380946e73aeca574c77f14c"
+            - "64233339643236366165646365626666"
+          isLast: true
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows to specify maximum number of entries that should be returned. If there are more
+        nested datasets, they can be retrieved using `index` and `offset` query parameters.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Index of the partial result, can be used to get subset of the result,
+        when the number of nested datasets exceeds 1000.
+      type: integer
+      required: false
+      default: 0
+    - name: index
+      in: query
+      description: >
+        Index of the partial result, can be used to get subset of the result
+        starting from specific dataset Id.
+      type: string
+      required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listDatasetChildren did=$DATASET_ID limit=100 offset=300"

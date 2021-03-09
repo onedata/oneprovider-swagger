@@ -105,6 +105,12 @@
 
 
 # tag Dataset
+/spaces/{sid}/datasets:
+  $ref: ./spaces/sid/datasets.yaml
+
+/datasets/{did}/children:
+  $ref: ./datasets/did/children.yaml
+
 /datasets:
   $ref: ./datasets.yaml
 

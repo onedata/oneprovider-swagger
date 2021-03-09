@@ -83,6 +83,13 @@ get:
       type: integer
       required: false
       default: 0
+    - name: index
+      in: query
+      description: >
+        Index of the partial result, can be used to get subset of the result
+        starting from specific file name.
+      type: string
+      required: false
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"

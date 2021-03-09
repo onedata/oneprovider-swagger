@@ -1,0 +1,104 @@
+get:
+  operationId: list_space_datasets
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: datasets
+  tags:
+    - Dataset
+  summary: List space datasets
+  x-bash-codegen-description: |
+    Returns the list of space datasets.
+
+  description: |
+    Returns the list of space datasets.
+
+    ***Example cURL requests***
+
+    **Get space datasets**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets"
+
+    {
+        "datasets": [
+            "1f4b762b1380946e73aeca574c77f14c",
+            "64233339643236366165646365626666"
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of space datasets.
+      schema:
+        type: object
+        properties:
+          datasets:
+            type: array
+            description: The list of dataset Ids.
+            items:
+              type: string
+          isLast:
+            type: boolean
+            description: >
+              Flag which informs whether returned batch of dataset Ids is the last one.
+              Number of returned Ids can be smaller than requested `limit`.
+              `isLast` flag is the only valid indicator informing that all datasets has been listed.
+        example:
+          datasets:
+            - "1f4b762b1380946e73aeca574c77f14c"
+            - "64233339643236366165646365626666"
+          isLast: true
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - space not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: sid
+      in: path
+      description: Space Id
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows to specify maximum number of entries that should be returned. If there are more
+        datasets, they can be retrieved using `index` and `offset` query parameters.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Index of the partial result, can be used to get subset of the result,
+        when the number of datasets exceeds 1000.
+      type: integer
+      required: false
+      default: 0
+    - name: index
+      in: query
+      description: >
+        Index of the partial result, can be used to get subset of the result
+        starting from specific dataset Id.
+      type: string
+      required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listSpaceDatasets sid=$SPACE_ID limit=100 offset=300"
