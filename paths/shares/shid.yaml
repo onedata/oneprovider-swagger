@@ -75,8 +75,12 @@ patch:
     - Share
   x-bash-codegen-description: |
     Changes name and/or description of the share.
+
+    This operation requires `space_manage_share` privilege.
   description: |
     Changes name and/or description of the share.
+
+    This operation requires `space_manage_share` privilege.
 
     ***Example cURL requests***
 
@@ -145,9 +149,13 @@ delete:
   x-bash-codegen-description: |
     Removes a specific share. This operation will not remove data from shared
     file or directory but it will not be accessible through public url anymore.
+
+    This operation requires `space_manage_share` privilege.
   description: |
     Removes a specific share. This operation will not remove data from shared
     file or directory but it will not be accessible through public url anymore.
+
+    This operation requires `space_manage_share` privilege.
 
     ***Example cURL requests***
 

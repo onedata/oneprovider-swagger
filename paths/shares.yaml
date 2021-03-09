@@ -17,6 +17,8 @@ post:
 
     Any number of shares can be associated with each file or directory.
 
+    This operation requires `space_manage_share` privilege.
+
   description: |
     Shares a file or a directory. Shared files can be viewed by everyone through public URL.
     This operation assigns a share Id that can be used to manage share, see:
@@ -26,6 +28,8 @@ post:
       * [Remove share](#operation/remove_share)
 
     Any number of shares can be associated with each file or directory.
+
+    This operation requires `space_manage_share` privilege.
 
     ***Example cURL requests***
 
