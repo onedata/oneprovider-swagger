@@ -65,8 +65,17 @@ DatasetAttached:
 Dataset:
   $ref: ./dataset/dataset.yaml
 
+DatasetSummary:
+  $ref: ./dataset/dataset_summary.yaml
+
 DatasetEstablishRequest:
   $ref: ./dataset/dataset_establish_request.yaml
+
+Datasets:
+  $ref: ./dataset/datasets.yaml
+
+DatasetChildren:
+  $ref: ./dataset/dataset_children.yaml
 
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml

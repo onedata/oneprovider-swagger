@@ -1,0 +1,18 @@
+type: object
+properties:
+  datasets:
+    type: array
+    description: The list of datasets Ids.
+    items:
+      type: string
+  isLast:
+    type: boolean
+    description: >
+      Flag which informs whether returned batch of dataset Ids is the last one.
+      Number of returned Ids can be smaller than requested `limit`.
+      `isLast` flag is the only valid indicator informing that all datasets has been listed.
+example:
+  datasets:
+    - "1f4b762b1380946e73aeca574c77f14c"
+    - "64233339643236366165646365626666"
+  isLast: true

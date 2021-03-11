@@ -1,0 +1,19 @@
+type: object
+description: Dataset summary for file or directory.
+properties:
+  directDataset:
+    type: string
+    description: Id of dataset registered for this file.
+  effectiveDatasets:
+    type: array
+    description: Ids of all datasets registered for this file and its ancestor directories.
+    items:
+      type: string
+  effectiveProtectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+example:
+  directDataset: "1f4b762b1380946e73aeca574c77f14c"
+  effectiveDatasets:
+    - "1f4b762b1380946e73aeca574c77f14c"
+    - "64233339643236366165646365626666"
+  effectiveProtectionFlags: ["data_protection", "metadata_protection"]

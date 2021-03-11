@@ -6,7 +6,7 @@ get:
     aspect: dataset_summary
   tags:
     - Dataset
-  summary: Get Dataset summary for file or directory
+  summary: Get dataset summary for file or directory
   x-bash-codegen-description: |
     Returns dataset summary for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -15,34 +15,23 @@ get:
 
     ***Example cURL requests***
 
-    **Get file dataset summary**
+    **Get file's dataset summary**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/dataset/summary"
 
     {
         "directDataset": "1f4b762b1380946e73aeca574c77f14c",
-        "ancestorDatasets": [],
-        "effProtectionFlags": ["data_protection", "metadata_protection"]
+        "effectiveDatasets": ["1f4b762b1380946e73aeca574c77f14c", "64233339643236366165646365626666"],
+        "effectiveProtectionFlags": ["data_protection", "metadata_protection"]
     }
     ```
   produces:
     - application/json
   responses:
     '200':
-      description: Dataset summary for file or directory.
+      description: Dataset summary for file returned successfully.
       schema:
-        type: object
-        properties:
-          directDataset:
-            type: string
-            description: Id of dataset registered for this file.
-          ancestorDatasets:
-            type: array
-            description: Ids of datasets registered for file ancestor directories.
-            items:
-              type: string
-          effProtectionFlags:
-            $ref: '#/definitions/DatasetProtectionFlags'
+        $ref: '#/definitions/DatasetSummary'
     '400':
       description: Invalid request.
       schema:
