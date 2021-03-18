@@ -137,7 +137,7 @@ get:
     - application/json
   responses:
     '200':
-      description: Query results returned successfully.
+      description: Query results.
       schema:
         type: array
         items:

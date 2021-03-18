@@ -9,19 +9,21 @@ get:
   summary: List children datasets of a dataset
   x-bash-codegen-description: |
     Returns the list of children datasets for a dataset.
+    To start listing from top datasets please use [this](#operation/list_space_top_datasets).
 
   description: |
     Returns the list of children datasets for a dataset.
+    To start listing from top datasets please use [this](#operation/list_space_top_datasets).
 
     ***Example cURL requests***
 
-    **Get children datasets**
+    **List children datasets of a dataset**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
 
     {
-        "children": [
+        "datasets": [
             "1f4b762b1380946e73aeca574c77f14c",
             "64233339643236366165646365626666"
         ],
@@ -32,7 +34,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of children datasets for a dataset returned successfully.
+      description: The list of children datasets for a dataset.
       schema:
         $ref: '#/definitions/Datasets'
     '400':
@@ -60,7 +62,7 @@ get:
     - name: limit
       in: query
       description: >
-        Allows to specify maximum number of entries that should be returned. If there are more
+        Allows specifying maximum number of entries that should be returned. If there are more
         children datasets, they can be retrieved using `index` and `offset` query parameters.
       type: integer
       required: false
@@ -71,7 +73,6 @@ get:
       in: query
       description: >
         Offset from beginning of collection or given `index` specifying starting point for listing.
-        Can be used to get subset of the result, when the number of children datasets exceeds 1000.
       type: integer
       required: false
       default: 0

@@ -1,24 +1,50 @@
 get:
-  operationId: list_space_datasets
+  operationId: list_space_top_datasets
   x-onedata-gri:
     type: op_space
     id: ?BINDING(sid)
     aspect: datasets
   tags:
     - Dataset
-  summary: List space datasets
+  summary: List space top datasets
   x-bash-codegen-description: |
-    Returns the list of space datasets.
+    Returns the list of space top datasets. Top datasets are those that have no parent
+    dataset between them and space directory. In special case, when dataset has
+    been established for space directory, there is only one top dataset.
+
+    For each space, there exist 2 datasets trees:
+    * one for datasets in `attached` state - this tree corresponds to compressed
+      files tree for space meaning that dataset A is child of dataset B because
+      B's root directory is ancestor to A's root file and no directory between
+      them is root of some dataset or if is that dataset is in `detached` state.
+      That also means that when moving dataset's root file to other location
+      the dataset location in tree may also change.
+
+    * one for datasets in `detached` state - this tree is effectively frozen and
+      doesn't change when datasets' root files are moved around in files tree.
 
   description: |
-    Returns the list of space datasets.
+    Returns the list of space top datasets. Top datasets are those that have no parent
+    dataset between them and space directory. In special case, when dataset has
+    been established for space directory, there is only one top dataset.
+
+    For each space, there exist 2 datasets trees:
+    * one for datasets in `attached` state - this tree corresponds to compressed
+      files tree for space meaning that dataset A is child of dataset B because
+      B's root directory is ancestor to A's root file and no directory between
+      them is root of some dataset or if is that dataset is in `detached` state.
+      That also means that when moving dataset's root file to other location
+      the dataset location in tree may also change.
+
+    * one for datasets in `detached` state - this tree is effectively frozen and
+      doesn't change when datasets' root files are moved around in files tree.
 
     ***Example cURL requests***
 
-    **Get space datasets**
+    **List space top datasets**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets"
+    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets?state=attached"
 
     {
         "datasets": [
@@ -32,7 +58,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of space datasets.
+      description: The list of space top datasets.
       schema:
         $ref: '#/definitions/Datasets'
     '400':
@@ -57,10 +83,16 @@ get:
       description: Space Id
       type: string
       required: true
+    - name: state
+      in: query
+      description: Specifies dataset tree to list from.
+      type: string
+      required: false
+      default: attached
     - name: limit
       in: query
       description: >
-        Allows to specify maximum number of entries that should be returned. If there are more
+        Allows specifying maximum number of entries that should be returned. If there are more
         datasets, they can be retrieved using `index` and `offset` query parameters.
       type: integer
       required: false
@@ -71,7 +103,6 @@ get:
       in: query
       description: >
         Offset from beginning of collection or given `index` specifying starting point for listing.
-        Can be used to get subset of the result, when the number of datasets exceeds 1000.
       type: integer
       required: false
       default: 0
@@ -84,4 +115,4 @@ get:
       required: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listSpaceDatasets sid=$SPACE_ID limit=100 offset=300"
+    source: "oneprovider-rest-cli listSpaceTopDatasets sid=$SPACE_ID limit=100 offset=300"

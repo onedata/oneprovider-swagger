@@ -38,7 +38,7 @@ get:
     - application/json
   responses:
     '200':
-      description: Configuration returned successfully.
+      description: Oneprovider configuration.
       schema:
         $ref: '#/definitions/Configuration'
     '500':
