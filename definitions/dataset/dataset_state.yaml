@@ -1,0 +1,19 @@
+type: string
+description: |
+  The state of the dataset:
+
+  * `attached` - dataset is coupled with it's root file meaning it will be
+    effectively treated as dataset and have additional features/constraints
+    resulting from this (e.g. protection flags).
+
+  * `detached` - dataset is decoupled with it's root file and serves only archival
+    purposes. That means that dataset root file is no longer treated specially,
+    and changes to it are not tracked by the dataset. In fact the file may have
+    been renamed or removed but information about it, shown by the dataset, will
+    reflect those recorded at the time of detaching. Dataset can be reattached
+    again but only to the same file and only if it still exists (once dataset
+    have been established the root file can no longer be changed).
+enum:
+  - attached
+  - detached
+example: attached

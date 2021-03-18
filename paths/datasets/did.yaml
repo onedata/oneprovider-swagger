@@ -4,13 +4,13 @@ get:
     type: op_dataset
     id: ?BINDING(did)
     aspect: instance
-  summary: Get dataset info
+  summary: Get dataset information.
   tags:
     - Dataset
   x-bash-codegen-description: |
-    Returns the basic information about dataset.
+    Returns the basic information about a dataset.
   description: |
-    Returns the basic information about dataset.
+    Returns the basic information about a dataset.
 
     ***Example cURL requests***
 
@@ -19,10 +19,14 @@ get:
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID"
 
     {
+        "state": "attached",
         "datasetId": "1f4b762b1380946e73aeca574c77f14c",
+        "parentId": null,
         "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
+        "rootFileType": "dir",
+        "rootFilePath": "/MySpace/dir",
         "protectionFlags": ["data_protection"],
-        "attached": true
+        "creationTime": 1576152793
     }
     ```
   produces:
@@ -70,12 +74,12 @@ patch:
   tags:
     - Dataset
   x-bash-codegen-description: |
-    Changes dataset parameters.
+    Changes dataset properties.
 
     This operation requires `space_manage_datasets` privilege.
 
   description: |
-    Changes dataset parameters.
+    Changes dataset properties.
 
     This operation requires `space_manage_datasets` privilege.
 
@@ -93,7 +97,7 @@ patch:
     - application/json
   responses:
     '204':
-      description: Dataset's parameters has been changed.
+      description: Dataset's properties has been changed.
     '400':
       description: Invalid request.
       schema:
@@ -118,16 +122,9 @@ patch:
       required: true
     - name: data
       in: body
-      description: New dataset details
+      description: Dataset properties
       schema:
-        type: object
-        properties:
-          attached:
-            $ref: '#/definitions/DatasetAttached'
-          setProtectionFlags:
-            $ref: '#/definitions/DatasetProtectionFlags'
-          unsetProtectionFlags:
-            $ref: '#/definitions/DatasetProtectionFlags'
+        $ref: '#/definitions/DatasetUpdateRequest'
       required: true
   x-code-samples:
     - lang: Shell
@@ -144,12 +141,14 @@ delete:
   tags:
     - Dataset
   x-bash-codegen-description: |
-    Removes a specific dataset leaving dataset files intact.
+    Removes a specific dataset. This procedure does not modify any files or directories
+    that were a part of the dataset.
 
     This operation requires `space_manage_datasets` privilege.
 
   description: |
-    Removes a specific dataset leaving dataset files intact.
+    Removes a specific dataset. This procedure does not modify any files or directories
+    that were a part of the dataset.
 
     This operation requires `space_manage_datasets` privilege.
 

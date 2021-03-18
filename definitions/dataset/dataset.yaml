@@ -1,23 +1,49 @@
 type: object
 description: Basic information about a dataset.
 properties:
+  state:
+    $ref: '#/definitions/DatasetState'
   datasetId:
     type: string
     description: Dataset Id.
+  parentId:
+    type: string
+    description: Parent dataset Id or `null` in case of top dataset.
   rootFileId:
     type: string
-    description: Id of file or directory being dataset root.
+    description: >
+      Id of file or directory being the dataset root.
+      Once the dataset has been established the root file can no longer be changed.
+      Even after detaching dataset it can be reattached only to the same file
+      and only if it still exists.
+  rootFileType:
+    $ref: '#/definitions/FileType'
+  rootFilePath:
+    type: string
+    description: >
+      Path to the file or directory in the virtual file system.
+      For datasets in `detached` state this field is frozen and shows the value
+      it had at the time of detaching. It is done for archival purposes as file
+      may have been renamed or removed.
   protectionFlags:
     $ref: '#/definitions/DatasetProtectionFlags'
-  attached:
-    $ref: '#/definitions/DatasetAttached'
+  creationTime:
+    $ref: '#/definitions/Timestamp'
 required:
+  - state
   - datasetId
+  - parentId
   - rootFileId
+  - rootFileType
+  - rootFilePath
   - protectionFlags
-  - attached
+  - creationTime
 example:
+  state: attached
   datasetId: 1f4b762b1380946e73aeca574c77f14c
+  parentId: null
   rootFileId: 00000000006CB663736861726547756964233339643236366165646365...
+  rootFileType: dir
+  rootFilePath: /MySpace/dir
   protectionFlags: ["metadata_protection"]
-  attached: true
+  creationTime: 1576152793

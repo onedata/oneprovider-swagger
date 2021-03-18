@@ -1,3 +1,0 @@
-type: boolean
-description: >
-  Flag which determines whether `protectionFlags` has any effects on files in dataset.

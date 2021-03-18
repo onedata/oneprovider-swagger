@@ -34,7 +34,7 @@ get:
     '200':
       description: The list of children datasets for a dataset returned successfully.
       schema:
-        $ref: '#/definitions/DatasetChildren'
+        $ref: '#/definitions/Datasets'
     '400':
       description: Invalid request.
       schema:

@@ -1,0 +1,7 @@
+type: string
+description: Type of the file.
+enum:
+  - reg
+  - dir
+  - lnk
+example: reg

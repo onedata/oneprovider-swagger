@@ -20,8 +20,8 @@ get:
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/dataset/summary"
 
     {
-        "directDataset": "1f4b762b1380946e73aeca574c77f14c",
-        "effectiveDatasets": ["1f4b762b1380946e73aeca574c77f14c", "64233339643236366165646365626666"],
+        "directDataset": null,
+        "effectiveAncestorDatasets": ["1f4b762b1380946e73aeca574c77f14c", "64233339643236366165646365626666"],
         "effectiveProtectionFlags": ["data_protection", "metadata_protection"]
     }
     ```
@@ -29,7 +29,7 @@ get:
     - application/json
   responses:
     '200':
-      description: Dataset summary for file returned successfully.
+      description: Dataset summary for file or directory.
       schema:
         $ref: '#/definitions/DatasetSummary'
     '400':

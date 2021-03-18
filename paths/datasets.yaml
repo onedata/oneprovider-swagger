@@ -8,13 +8,13 @@ post:
   tags:
     - Dataset
   x-bash-codegen-description: |
-    Establishes dataset for specified file or directory.
+    Establishes a dataset with the specified file/directory as the dataset's root.
     For each file/directory only one dataset can be established.
 
     This operation requires `space_manage_datasets` privilege.
 
   description: |
-    Establishes dataset for specified file or directory.
+    Establishes a dataset with the specified file/directory as the dataset's root.
     For each file/directory only one dataset can be established.
 
     This operation requires `space_manage_datasets` privilege.
@@ -25,7 +25,7 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/datasets" \
     -H "Content-Type: application/json" -d '{
-        "fileId": $FILE_ID,
+        "rootFileId": $FILE_ID,
         "protectionFlags": ["data_protection"]
     }'
     ```
@@ -50,7 +50,7 @@ post:
             type: string
             description: Dataset Id.
         example:
-          datasetId: D67686431633765446F4D76546D6F2D67575
+          datasetId: 1f4b762b1380946e73aeca574c77f14c
     '400':
       description: Invalid request.
       schema:
@@ -76,4 +76,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli establishDataset fileId==$FILE_ID"
+      source: "oneprovider-rest-cli establishDataset rootFileId==$FILE_ID"

@@ -5,12 +5,7 @@ properties:
     type: string
     description: File name.
   type:
-    type: string
-    description: Type of the file.
-    enum:
-      - reg
-      - dir
-      - lnk
+    $ref: '#/definitions/FileType'
   mode:
     type: integer
     description: POSIX file permissions in decimal format

@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: file_qos_summary
+    aspect: qos_summary
   tags:
     - QoS
   summary: Get QoS summary for file or directory
