@@ -76,6 +76,7 @@ get:
       - shares
       - provider_id
       - file_id
+      - parent_id
     required: false
   x-code-samples:
   - lang: Shell
