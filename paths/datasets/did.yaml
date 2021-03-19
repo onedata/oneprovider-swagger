@@ -143,12 +143,14 @@ delete:
   x-bash-codegen-description: |
     Removes a specific dataset. This procedure does not modify any files or directories
     that were a part of the dataset.
+    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
 
     This operation requires `space_manage_datasets` privilege.
 
   description: |
     Removes a specific dataset. This procedure does not modify any files or directories
     that were a part of the dataset.
+    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
 
     This operation requires `space_manage_datasets` privilege.
 

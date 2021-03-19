@@ -10,8 +10,11 @@ description: |
   * `detached` - the dataset is decoupled from its root file/directory and serves only archival
     purposes. The dataset does not correspond to any physical content in the file tree and
     changes to the original root file/directory contents are not reflected in the dataset.
+    <!--- TODO VFS-7304
     The only purpose of detached datasets it so keep track of its archives that were created
-    during its `attached` lifecycle. A `detached` dataset can be reattached, but only to the
+    during its `attached` lifecycle.
+    -->
+    A `detached` dataset can be reattached, but only to the
     original file/directory and only if it still exists. Once a dataset has been established,
     its root file/directory can no longer be changed.
 enum:
