@@ -51,8 +51,10 @@ x-tagGroups:
       - QoS
   - name: Share management
     tags:
-      - Dataset
       - Share
+  - name: Dataset management
+    tags:
+      - Dataset
   - name: Monitoring & metrics
     tags:
       - Monitoring
