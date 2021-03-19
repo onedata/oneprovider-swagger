@@ -29,7 +29,7 @@ properties:
     description: Id of the file.
   parent_id:
     type: string
-    description: Id of the parent directory or `null` in case of files tree root.
+    description: Id of the parent directory or `null` in case of file tree root.
   provider_id:
     type: string
     description: Id of the provider on which this file was created.

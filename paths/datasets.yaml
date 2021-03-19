@@ -9,13 +9,13 @@ post:
     - Dataset
   x-bash-codegen-description: |
     Establishes a dataset with the specified file/directory as the dataset's root.
-    For each file/directory only one dataset can be established.
+    For each file/directory, only one dataset can be established.
 
     This operation requires `space_manage_datasets` privilege.
 
   description: |
     Establishes a dataset with the specified file/directory as the dataset's root.
-    For each file/directory only one dataset can be established.
+    For each file/directory, only one dataset can be established.
 
     This operation requires `space_manage_datasets` privilege.
 

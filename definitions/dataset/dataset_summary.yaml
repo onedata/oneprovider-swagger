@@ -3,7 +3,9 @@ description: Dataset summary for file or directory.
 properties:
   directDataset:
     type: string
-    description: Id of dataset registered for this file or `null` if there isn't one.
+    description: |
+      Id of dataset established for this file regardless if attached or detached,
+      or `null` if there isn't one.
   effectiveAncestorDatasets:
     type: array
     description: Ids of all datasets in `attached` state registered for this file ancestor directories.

@@ -8,12 +8,12 @@ get:
     - Dataset
   summary: List children datasets of a dataset
   x-bash-codegen-description: |
-    Returns the list of children datasets for a dataset.
-    To start listing from top datasets please use [this](#operation/list_space_top_datasets).
+    Returns the list of child datasets of a specific dataset. Top datasets in a space
+    can be listed using [this endpoint](#operation/list_space_top_datasets).
 
   description: |
-    Returns the list of children datasets for a dataset.
-    To start listing from top datasets please use [this](#operation/list_space_top_datasets).
+    Returns the list of child datasets of a specific dataset. Top datasets in a space
+    can be listed using [this endpoint](#operation/list_space_top_datasets).
 
     ***Example cURL requests***
 

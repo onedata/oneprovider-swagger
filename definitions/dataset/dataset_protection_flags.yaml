@@ -8,9 +8,13 @@ description: |
   * `metadata_protection` - causes all dataset's files and directories to be
      protected from modifying their metadata (custom metadata, ACL, etc.).
 
-  Attempts to change the data/metadata when protection is enabled and the dataset
-  is in `attached` state will be denied with the EPERM POSIX error (with exception
-  to already opened files).
+  Requests to modify the data/metadata when protection is enabled will be rejected
+  with the EPERM POSIX error.
+
+  The protection flags are ignored when the dataset is in `detached` state.
+
+  Changing the protection flags may not have an immediate effect,
+  especially for files that were already opened before the change.
 
   Note however that some basic readonly file attributes (such as e.g. `atime`
   updated when a file is read) will be modified regardless.
