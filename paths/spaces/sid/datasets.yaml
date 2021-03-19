@@ -9,8 +9,8 @@ get:
   summary: List space top datasets
   x-bash-codegen-description: |
     Returns the list of space's top datasets - ones that do not have any parent
-    (containing) dataset. In special case when dataset has been established for
-    space root directory, there is only one top dataset.
+    dataset. In special case when dataset has been established for space root
+    directory, there is only one top dataset.
 
     Datasets in each space are divided into two separate trees based on their states:
     * `attached` - this tree represents the hierarchy of datasets, which corresponds
@@ -28,8 +28,8 @@ get:
 
   description: |
     Returns the list of space's top datasets - ones that do not have any parent
-    (containing) dataset. In special case when dataset has been established for
-    space root directory, there is only one top dataset.
+    dataset. In special case when dataset has been established for space root
+    directory, there is only one top dataset.
 
     Datasets in each space are divided into two separate trees based on their states:
     * `attached` - this tree represents the hierarchy of datasets, which corresponds
@@ -93,6 +93,9 @@ get:
       in: query
       description: The dataset tree to list from.
       type: string
+      enum:
+        - attached
+        - detached
       required: false
       default: attached
     - name: limit

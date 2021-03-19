@@ -6,18 +6,18 @@ get:
     aspect: children
   tags:
     - Dataset
-  summary: List children datasets of a dataset
+  summary: List child datasets of a dataset
   x-bash-codegen-description: |
-    Returns the list of child datasets of a specific dataset. Top datasets in a space
-    can be listed using [this endpoint](#operation/list_space_top_datasets).
+    Returns the list of child datasets of a specific dataset. List of top datasets
+    in a space can be acquired using [this endpoint](#operation/list_space_top_datasets).
 
   description: |
-    Returns the list of child datasets of a specific dataset. Top datasets in a space
-    can be listed using [this endpoint](#operation/list_space_top_datasets).
+    Returns the list of child datasets of a specific dataset. List of top datasets
+    in a space can be acquired using [this endpoint](#operation/list_space_top_datasets).
 
     ***Example cURL requests***
 
-    **List children datasets of a dataset**
+    **List child datasets**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
@@ -34,7 +34,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of children datasets for a dataset.
+      description: The list of child datasets.
       schema:
         $ref: '#/definitions/Datasets'
     '400':
@@ -63,7 +63,7 @@ get:
       in: query
       description: >
         Allows specifying maximum number of entries that should be returned. If there are more
-        children datasets, they can be retrieved using `index` and `offset` query parameters.
+        child datasets, they can be retrieved using `index` and `offset` query parameters.
       type: integer
       required: false
       maximum: 1000

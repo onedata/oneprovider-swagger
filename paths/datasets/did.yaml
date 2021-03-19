@@ -4,7 +4,7 @@ get:
     type: op_dataset
     id: ?BINDING(did)
     aspect: instance
-  summary: Get dataset information.
+  summary: Get dataset information
   tags:
     - Dataset
   x-bash-codegen-description: |
