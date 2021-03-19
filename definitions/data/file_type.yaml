@@ -1,5 +1,9 @@
 type: string
-description: Type of the file.
+description: |
+  The type of the file:
+  * `reg` - regular file.
+  * `dir` - directory.
+  * `lnk` - symbolic link.
 enum:
   - reg
   - dir
