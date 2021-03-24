@@ -6,22 +6,29 @@ get:
     aspect: content
   tags:
     - Basic File Operations
-  summary: Download file content
+  summary: Download file or directory content
   x-bash-codegen-description: |
-    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    When $FILE_ID is a regular file, its content is simply returned. 
-    If it is a directory, returns a compressed (using GZIP) TAR archive of its content.
-    In case of regular file partial file content download is also supported using
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
+    If $FILE_ID is a directory, returns a compressed (GZIP) TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
   description: |
-    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    When $FILE_ID is a regular file, its content is simply returned. 
-    If it is a directory, returns a compressed (using GZIP) TAR archive of its content.
-    In case of regular file partial file content download is also supported using
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
-    ***Example cURL requests for file with `abcdefghijklmno` content***
+    If $FILE_ID is a directory, returns a compressed (GZIP) TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+
+    ***Example cURL requests***
 
     **Download entire file content**
     ```bash
@@ -33,10 +40,18 @@ get:
 
     **Download only part of the file content**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content" \
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content" \
     -H "Range: bytes=5-8"
 
     fghi
+    ```
+
+    **Download a directory as tar.gz archive**
+    ```bash
+    curl -o directory.tar.gz \
+    -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/content"
     ```
 
   produces:
