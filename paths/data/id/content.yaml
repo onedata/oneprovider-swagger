@@ -9,12 +9,16 @@ get:
   summary: Download file content
   x-bash-codegen-description: |
     Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    Partial file content download is also supported using
+    When $FILE_ID is a regular file, its content is simply returned. 
+    If it is a directory, returns a compressed (using GZIP) TAR archive of its content.
+    In case of regular file partial file content download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
   description: |
     Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    Partial file content download is also supported using
+    When $FILE_ID is a regular file, its content is simply returned. 
+    If it is a directory, returns a compressed (using GZIP) TAR archive of its content.
+    In case of regular file partial file content download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
     ***Example cURL requests for file with `abcdefghijklmno` content***
