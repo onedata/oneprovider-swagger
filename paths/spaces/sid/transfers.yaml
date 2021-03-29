@@ -95,7 +95,9 @@ get:
       Allows to limit the number of returned transfers.
     type: integer
     required: false
-    default: 1000
+    minimum: 1
+    maximum: 1000
+    default: 100
   - name: page_token
     in: query
     description: >

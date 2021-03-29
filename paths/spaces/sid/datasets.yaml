@@ -54,8 +54,14 @@ get:
 
     {
         "datasets": [
-            "1f4b762b1380946e73aeca574c77f14c",
-            "64233339643236366165646365626666"
+            {
+                "id": "1f4b762b1380946e73aeca574c77f14c",
+                "name": "File1.txt"
+            },
+            {
+                "id": "64233339643236366165646365626666",
+                "name": "Dir2"
+            }
         ],
         "isLast": true
     }
@@ -102,26 +108,19 @@ get:
       in: query
       description: >
         Allows specifying maximum number of entries that should be returned. If there are more
-        datasets, they can be retrieved using `index` and `offset` query parameters.
+        datasets, they can be retrieved using `offset` query parameter.
       type: integer
       required: false
-      maximum: 1000
       minimum: 1
-      default: 1000
+      maximum: 1000
+      default: 100
     - name: offset
       in: query
       description: >
-        Offset from beginning of collection or given `index` specifying starting point for listing.
+        Offset from beginning of collection specifying starting point for listing.
       type: integer
       required: false
       default: 0
-    - name: index
-      in: query
-      description: >
-        Index of the partial result, can be used to get subset of the result
-        starting from specific dataset Id.
-      type: string
-      required: false
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listSpaceTopDatasets sid=$SPACE_ID limit=100 offset=300"

@@ -69,7 +69,7 @@ get:
       in: query
       description: >
         Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `index` and `offset` query parameters.
+        they can be retrieved using `offset` query parameter.
       type: integer
       required: false
       maximum: 1000
@@ -78,17 +78,10 @@ get:
     - name: offset
       in: query
       description: >
-        Offset from beginning of collection or given `index` specifying starting point for listing.
+        Offset from beginning of collection specifying starting point for listing.
       type: integer
       required: false
       default: 0
-    - name: index
-      in: query
-      description: >
-        Index of the partial result, can be used to get subset of the result
-        starting from specific file name.
-      type: string
-      required: false
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"

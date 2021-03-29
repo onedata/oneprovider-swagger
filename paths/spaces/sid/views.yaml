@@ -76,6 +76,9 @@ get:
       Allows to limit the number of returned views.
     type: integer
     required: false
+    minimum: 1
+    maximum: 1000
+    default: 100
   - name: page_token
     in: query
     description: >
