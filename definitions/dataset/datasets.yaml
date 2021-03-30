@@ -11,7 +11,7 @@ properties:
           description: Dataset Id.
         name:
           type: string
-          description: Dataset's root file name.
+          description: Dataset's root file/directory name.
   isLast:
     $ref: '#/definitions/IsLast'
 example:
