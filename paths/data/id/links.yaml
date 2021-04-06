@@ -1,0 +1,62 @@
+get:
+  operationId: get_file_links
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: references
+  tags:
+    - Basic File Operations
+  summary: Get file links
+  x-bash-codegen-description: |
+    Returns Ids of all links (including this one) associated with regular file specified
+    by [$FILE_ID](#operation/lookup_file_id).
+
+  description: |
+    Returns Ids of all links (including this one) associated with regular file specified
+    by [$FILE_ID](#operation/lookup_file_id).
+
+    **Get file references**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/links"
+
+    [
+        "094576776E667431723230677767776C6B497031394E445F6E3868677873...",
+        "000000006CB6637368617265477569642333396432363661656463656266..."
+    ]
+    ```
+
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: File links.
+      schema:
+        type: array
+        items:
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the regular link.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileLinks id=$FILE_ID"

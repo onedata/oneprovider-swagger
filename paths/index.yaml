@@ -52,6 +52,9 @@
 /data/{id}/distribution:
   $ref: ./data/id/distribution.yaml
 
+/data/{id}/links:
+  $ref: ./data/id/links.yaml
+
 /data/{id}/symlink_value:
   $ref: ./data/id/symlink_value.yaml
 
