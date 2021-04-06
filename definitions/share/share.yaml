@@ -19,12 +19,8 @@ properties:
   rootFileId:
     type: string
     description: Public Id of shared file or directory, allowing read access to its contents without authentication.
-  fileType:
-    type: string
-    description: Denotes the type of the shared element (file or directory)
-    enum:
-      - file
-      - dir
+  rootFileType:
+    $ref: '#/definitions/FileType'
   handleId:
     type: string
     description: The Id of open data Handle (e.g. DOI or PID) assigned to this share or null.
@@ -34,8 +30,8 @@ required:
   - description
   - publicUrl
   - spaceId
-  - fileType
   - rootFileId
+  - rootFileType
 example:
   shareId: 1f4b762b1380946e73aeca574c77f14c
   name: Experiment XYZ
@@ -46,5 +42,5 @@ example:
       6266666164353939663761373734313235363166342336656331613534313362366634653\
       2623031613563383561386664373937653223316634623736326231333830393436653733\
       6165636135373463373766313463
-  fileType: dir
+  rootFileType: DIR
   handleId: doi:10.15911/MyShares.726855

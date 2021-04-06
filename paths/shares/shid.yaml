@@ -23,7 +23,7 @@ get:
         "name": "Experiment XYZ",
         "description": "# Experiment XYZ\nThis collection contains results from Experiment XYZ.",
         "publicUrl": "https://onedata.org/shares/1f4b762b1380946e73aeca574c77f14c",
-        "fileType": "dir",
+        "rootFileType": "DIR",
         "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
         "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
         "handleId" "doi:10.15911/MyShares.726855"

@@ -46,7 +46,7 @@ properties:
       type: string
 example:
   name: File1.txt
-  type: reg
+  type: REG
   mode: 511
   size: 1024
   atime: 1464958683054

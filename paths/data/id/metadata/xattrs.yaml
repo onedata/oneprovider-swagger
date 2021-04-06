@@ -80,6 +80,11 @@ get:
     type: boolean
     default: false
     required: false
+  - name: resolve_symlink
+    in: query
+    description: Tells whether symlink should be resolved before carrying operation.
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getXattrs id=$FILE_ID"
@@ -145,6 +150,11 @@ put:
       type: object
       additionalProperties:
         type: string
+  - name: resolve_symlink
+    in: query
+    description: Tells whether symlink should be resolved before carrying operation.
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"
@@ -210,6 +220,11 @@ delete:
             description: List of xattrs to remove.
             items:
               type: string
+    - name: resolve_symlink
+      in: query
+      description: Tells whether symlink should be resolved before carrying operation.
+      type: boolean
+      default: true
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys=='[\"license\"]'"

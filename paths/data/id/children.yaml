@@ -97,12 +97,28 @@ post:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates object in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The object can of type:
+    - `REG` - regualr file. In such case the data sent in request body (if any)
+    will be saved as file content.
+    - `DIR` - directory.
+    - `LNK` - hardlink. In that case specifying additional query string parameter
+    `targetFileId` pointing to regular file is required.
+    - `SYMLNK` - hardlink. In that case specifying additional query string parameter
+    `targetFilePath` is required.
 
   description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates object in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The object can of type:
+    - `REG` - regualr file. In such case the data sent in request body (if any)
+    will be saved as file content.
+    - `DIR` - directory.
+    - `LNK` - hardlink. In that case specifying also `targetFileId` pointing to regular file
+    is required.
+    - `SYMLNK` - symlink. In that case specifying also `targetFilePath` is required.
+    When creating symbolic link with absolute path starting from space it is necessary to
+    do so by replacing space name in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/...` (where $SPACE_ID is actual space id)
 
     ***Example cURL requests***
 
@@ -120,10 +136,30 @@ post:
     **Create directory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=dir" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=DIR" \
 
     {
        "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    **Create hardlink**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$LINK_NAME&type=LNK&targetFileId=$TARGET_FILE_ID" \
+
+    {
+       "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
+    }
+    ```
+
+    **Create symlink**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=SYMLNK&targetFilePath=$TARGET_FILE_PATH" \
+
+    {
+       "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
     }
     ```
   consumes:
@@ -179,9 +215,11 @@ post:
       required: false
       type: string
       enum:
-        - reg
-        - dir
-      default: reg
+        - REG
+        - DIR
+        - LNK
+        - SYMLNK
+      default: REG
     - name: mode
       in: query
       description: POSIX file permissions in decimal format.
@@ -193,6 +231,18 @@ post:
       required: false
       type: integer
       default: 0
+    - name: targetFileId
+      in: query
+      description: >
+        If of file for which hardlink should be created (relevant only if type == 'LNK').
+      required: false
+      type: string
+    - name: targetFilePath
+      in: query
+      description: >
+        Path of file for which symbolic link should be created (relevant only if type == 'SYMLNK').
+      required: false
+      type: string
     - name: content
       in: body
       description: File content to be written at specified offset.

@@ -53,6 +53,11 @@ get:
     description: Id of the file.
     type: string
     required: true
+  - name: resolve_symlink
+    in: query
+    description: Tells whether symlink should be resolved before carrying operation.
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getRdfMetadata id=$FILE_ID"
@@ -119,6 +124,11 @@ put:
     required: true
     schema:
       type: string
+  - name: resolve_symlink
+    in: query
+    description: Tells whether symlink should be resolved before carrying operation.
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"
@@ -170,6 +180,11 @@ delete:
       description: Id of the file.
       type: string
       required: true
+    - name: resolve_symlink
+      in: query
+      description: Tells whether symlink should be resolved before carrying operation.
+      type: boolean
+      default: true
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeRdfMetadata id=$FILE_ID"
