@@ -60,7 +60,7 @@ get:
     description: >
       Name of attribute to query for. When accessing file via share mode
       following attributes are unavailable: `owner_id`, `storage_group_id`,
-      `storage_user_id`, `provider_id`, `links_count`
+      `storage_user_id`, `provider_id`, `hardlinks_count`
     type: string
     enum:
       - name
@@ -77,7 +77,7 @@ get:
       - provider_id
       - file_id
       - parent_id
-      - links_count
+      - hardlinks_count
     required: false
   x-code-samples:
   - lang: Shell

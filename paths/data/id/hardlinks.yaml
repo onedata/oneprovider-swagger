@@ -1,24 +1,24 @@
 get:
-  operationId: get_file_links
+  operationId: get_file_hardlinks
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: references
+    aspect: hardlinks
   tags:
     - Basic File Operations
-  summary: Get file links
+  summary: Get file hardlinks
   x-bash-codegen-description: |
-    Returns Ids of all links (including this one) associated with regular file specified
+    Returns Ids of all hardlinks (including this one) associated with regular file specified
     by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    Returns Ids of all links (including this one) associated with regular file specified
+    Returns Ids of all hardlinks (including this one) associated with regular file specified
     by [$FILE_ID](#operation/lookup_file_id).
 
-    **Get file references**
+    **Get file hardlinks**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/links"
+    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/hardlinks"
 
     [
         "094576776E667431723230677767776C6B497031394E445F6E3868677873...",
@@ -30,7 +30,7 @@ get:
     - application/octet-stream
   responses:
     '200':
-      description: File links.
+      description: File hardlinks.
       schema:
         type: array
         items:
@@ -54,9 +54,9 @@ get:
   parameters:
     - name: id
       in: path
-      description: Id of the regular link.
+      description: File Id.
       type: string
       required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli getFileLinks id=$FILE_ID"
+    source: "oneprovider-rest-cli getFileHardlinks id=$FILE_ID"
