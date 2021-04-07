@@ -46,7 +46,7 @@ post:
 
     **Register file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/data/register" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/register" \
     -H 'Content-Type: application/json' -d "@./file_spec.json"
     ```
 
@@ -58,7 +58,7 @@ post:
     '201':
       description: >
         The file has been registered in the Onedata file-system and the result is its Id.
-        Also URI of the new file in form https://$HOST/api/v3/oneprovider/data/{Id} is
+        Also URI of the new file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{Id} is
         returned in the response `Location` header.
       headers:
         Location:

@@ -22,14 +22,14 @@ get:
     **Download entire file content**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content"
 
     abcdefghijklmno
     ```
 
     **Download only part of the file content**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content" \
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content" \
     -H "Range: bytes=5-8"
 
     fghi
@@ -107,7 +107,7 @@ put:
     # originally, the file content is  "abcdefghijklmno"
 
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4" \
     -H "Content-Type: application/octet-stream" -d "WXYZ"
 
     # upon success, the file content is "abcdWXYZijklmno"

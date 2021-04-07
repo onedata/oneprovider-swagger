@@ -28,7 +28,7 @@ post:
     curl -X POST -H "X-Auth-Token: $TOKEN" \
     -H "Content-type: application/json" \
     -d "{"expression": "key = value"}" \
-    "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/evaluate_qos_expression" 
+    "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/evaluate_qos_expression"
 
     {
       "matchingStorages": {

@@ -17,7 +17,7 @@ get:
 
     **Get file's dataset summary**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/dataset/summary"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/dataset/summary"
 
     {
         "directDataset": null,

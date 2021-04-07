@@ -20,7 +20,7 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
 
     {
         "children": [
@@ -125,7 +125,7 @@ post:
     **Create file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
     -H "Content-Type: application/octet-stream" -d "@file.dat"
 
     {
@@ -136,7 +136,7 @@ post:
     **Create directory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=DIR" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=DIR" \
 
     {
        "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
@@ -146,7 +146,7 @@ post:
     **Create hardlink**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$LINK_NAME&type=LNK&targetFileId=$TARGET_FILE_ID" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$LINK_NAME&type=LNK&targetFileId=$TARGET_FILE_ID" \
 
     {
        "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
@@ -156,7 +156,7 @@ post:
     **Create symlink**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=SYMLNK&targetFilePath=$TARGET_FILE_PATH" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=SYMLNK&targetFilePath=$TARGET_FILE_PATH" \
 
     {
        "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
@@ -170,7 +170,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the file Id.
-        Also URI of the file in form https://$HOST/api/v3/oneprovider/data/{id} is
+        Also URI of the file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{id} is
         returned in the response `Location` header.
       headers:
         Location:

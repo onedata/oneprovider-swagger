@@ -20,7 +20,7 @@ get:
     **List child datasets**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
 
     {
         "datasets": [
