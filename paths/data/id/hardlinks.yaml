@@ -6,16 +6,16 @@ get:
     aspect: hardlinks
   tags:
     - Basic File Operations
-  summary: Get file hardlinks
+  summary: Get file hard links
   x-bash-codegen-description: |
-    Returns Ids of all hardlinks (including this one) associated with regular file specified
+    Returns Ids of all hard links (including this one) associated with file specified
     by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    Returns Ids of all hardlinks (including this one) associated with regular file specified
+    Returns Ids of all hard links (including this one) associated with file specified
     by [$FILE_ID](#operation/lookup_file_id).
 
-    **Get file hardlinks**
+    **Get file hard links**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/hardlinks"
@@ -30,7 +30,7 @@ get:
     - application/octet-stream
   responses:
     '200':
-      description: File hardlinks.
+      description: File hard links.
       schema:
         type: array
         items:

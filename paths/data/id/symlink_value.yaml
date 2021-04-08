@@ -6,14 +6,16 @@ get:
     aspect: symlink_value
   tags:
     - Basic File Operations
-  summary: Get symlink value
+  summary: Get symbolic link value
   x-bash-codegen-description: |
-    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id).
+    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id)
+    (the path to where the link is pointing).
 
   description: |
-    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id).
+    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id)
+    (the path to where the link is pointing).
 
-    **Get symlink value**
+    **Get symbolic link value**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/symlink_value"
@@ -25,7 +27,7 @@ get:
     - application/octet-stream
   responses:
     '200':
-      description: Symlink value.
+      description: Symbolic link value.
       schema:
         type: string
         format: binary

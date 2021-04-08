@@ -82,7 +82,9 @@ get:
     required: false
   - name: resolve_symlink
     in: query
-    description: Tells whether symlink should be resolved before carrying operation.
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
     type: boolean
     default: true
   x-code-samples:
@@ -152,7 +154,9 @@ put:
         type: string
   - name: resolve_symlink
     in: query
-    description: Tells whether symlink should be resolved before carrying operation.
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
     type: boolean
     default: true
   x-code-samples:
@@ -222,7 +226,9 @@ delete:
               type: string
     - name: resolve_symlink
       in: query
-      description: Tells whether symlink should be resolved before carrying operation.
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
       type: boolean
       default: true
   x-code-samples:
