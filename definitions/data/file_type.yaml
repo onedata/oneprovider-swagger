@@ -3,7 +3,7 @@ description: |
   The type of the file:
   * `REG` - regular file.
   * `DIR` - directory.
-  * `LNK` - hardlink.
+  * `LNK` - hard link.
   * `SYMLNK` - symbolic link.
 enum:
   - REG

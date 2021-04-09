@@ -47,7 +47,7 @@ properties:
   hardlinks_count:
     type: integer
     description: >
-      The number of hardlinks (including this one) associated with this file.
+      The number of hard links (including this one) associated with this file.
 example:
   name: File1.txt
   type: REG
