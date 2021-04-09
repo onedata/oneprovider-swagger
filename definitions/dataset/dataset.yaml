@@ -43,7 +43,7 @@ example:
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   parentId: null
   rootFileId: 00000000006CB663736861726547756964233339643236366165646365...
-  rootFileType: dir
+  rootFileType: DIR
   rootFilePath: /MySpace/dir
   protectionFlags: ["metadata_protection"]
   creationTime: 1576152793

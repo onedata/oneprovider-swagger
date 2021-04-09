@@ -34,7 +34,7 @@ get:
     **Get specific JSON value from metadata document**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json?filter_type=keypath&filter=key1.key2.[2].key3
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json?filter_type=keypath&filter=key1.key2.[2].key3
 
     {"key4": "value"}
     ```
@@ -88,6 +88,13 @@ get:
       parent directories as well as entire space into a single JSON document.
     type: boolean
     required: false
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getJsonMetadata id=$FILE_ID inherited=false"
@@ -118,7 +125,7 @@ put:
     **Set JSON metadata for file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json \
+    -X PUT https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json \
     -H "Content-Type: application/json" -d '{
         "key1": {
             "key2": ["val1", "val2", "val3", "val4"]
@@ -172,6 +179,13 @@ put:
     required: true
     schema:
       type: string
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "cat metadata.json | oneprovider-rest-cli setJsonMetadata id=$FILE_ID -"
@@ -196,7 +210,7 @@ delete:
     **Remove file json metadata**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
     ```
   responses:
     '204':
@@ -223,6 +237,13 @@ delete:
       description: Id of the file.
       type: string
       required: true
+    - name: resolve_symlink
+      in: query
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
+      type: boolean
+      default: true
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeJsonMetadata id=$FILE_ID"

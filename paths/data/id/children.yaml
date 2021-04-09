@@ -20,7 +20,7 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
 
     {
         "children": [
@@ -93,23 +93,41 @@ post:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file or directory
+  summary: Create file
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
   description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
     ***Example cURL requests***
 
     **Create file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME"
     -H "Content-Type: application/octet-stream" -d "@file.dat"
 
     {
@@ -120,10 +138,30 @@ post:
     **Create directory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=dir" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=DIR"
 
     {
        "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    **Create hard link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+
+    {
+       "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
+    }
+    ```
+
+    **Create symbolic link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+
+    {
+       "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
     }
     ```
   consumes:
@@ -134,7 +172,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the file Id.
-        Also URI of the file in form https://$HOST/api/v3/oneprovider/data/{id} is
+        Also URI of the file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{id} is
         returned in the response `Location` header.
       headers:
         Location:
@@ -179,9 +217,11 @@ post:
       required: false
       type: string
       enum:
-        - reg
-        - dir
-      default: reg
+        - REG
+        - DIR
+        - LNK
+        - SYMLNK
+      default: REG
     - name: mode
       in: query
       description: POSIX file permissions in decimal format.
@@ -193,6 +233,18 @@ post:
       required: false
       type: integer
       default: 0
+    - name: target_file_id
+      in: query
+      description: >
+        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+      required: false
+      type: string
+    - name: target_file_path
+      in: query
+      description: >
+        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+      required: false
+      type: string
     - name: content
       in: body
       description: File content to be written at specified offset.

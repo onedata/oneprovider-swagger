@@ -23,7 +23,7 @@ get:
 
     **Get file QoS summary**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos/summary"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/qos/summary"
 
     {
         "requirements": [{"$QOS_REQ_ID": "pending"}],

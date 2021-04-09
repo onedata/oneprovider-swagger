@@ -35,7 +35,7 @@ post:
 
     **Create share**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/shares" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/shares" \
     -H "Content-Type: application/json" -d '{"name": "MyShare", "rootFileId": $FILE_ID}'
     ```
   consumes:
@@ -46,7 +46,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the share Id.
-        Also URI of the Share in form https://$HOST/api/v3/oneprovider/shares/{id} is
+        Also URI of the Share in form https://$PROVIDER_HOST/api/v3/oneprovider/shares/{id} is
         returned in the response `Location` header.
       headers:
         Location:

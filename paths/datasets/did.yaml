@@ -16,14 +16,14 @@ get:
 
     **Get the basic information about dataset**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
 
     {
         "state": "attached",
         "datasetId": "1f4b762b1380946e73aeca574c77f14c",
         "parentId": null,
         "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
-        "rootFileType": "dir",
+        "rootFileType": "DIR",
         "rootFilePath": "/MySpace/dir",
         "protectionFlags": ["data_protection"],
         "creationTime": 1576152793
@@ -87,7 +87,7 @@ patch:
 
     **Change dataset protection flags**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID" \
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID" \
     -H "Content-Type: application/json" -d '{
         "setProtectionFlags": ["metadata_protection"],
         "unsetProtectionFlags": ["data_protection"]
@@ -159,7 +159,7 @@ delete:
     **Remove dataset**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
     ```
   responses:
     '204':

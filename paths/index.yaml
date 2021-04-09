@@ -52,6 +52,12 @@
 /data/{id}/distribution:
   $ref: ./data/id/distribution.yaml
 
+/data/{id}/hardlinks:
+  $ref: ./data/id/hardlinks.yaml
+
+/data/{id}/symlink_value:
+  $ref: ./data/id/symlink_value.yaml
+
 
 # tag Custom File Metadata
 /data/{id}/metadata/json:

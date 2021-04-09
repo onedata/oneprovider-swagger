@@ -35,11 +35,7 @@ properties:
             type: string
             description: File name.
           type:
-            type: string
-            description: File type.
-            enum:
-              - REG
-              - DIR
+            $ref: '#/definitions/FileType'
           mode:
             type: integer
             description: POSIX file permissions.

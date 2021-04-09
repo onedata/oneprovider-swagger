@@ -1,0 +1,58 @@
+get:
+  operationId: get_symlink_value
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: symlink_value
+  tags:
+    - Basic File Operations
+  summary: Get symbolic link value
+  x-bash-codegen-description: |
+    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id)
+    (the path to where the link is pointing).
+
+  description: |
+    Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id)
+    (the path to where the link is pointing).
+
+    **Get symbolic link value**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/symlink_value"
+
+    ../../Dir1/File1
+    ```
+
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: Symbolic link value.
+      schema:
+        type: string
+        format: binary
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the symbolic link.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getSymlinkValue id=$FILE_ID"

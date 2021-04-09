@@ -44,9 +44,13 @@ properties:
     description: The list of Ids of shares created for this file.
     items:
       type: string
+  hardlinks_count:
+    type: integer
+    description: >
+      The number of hard links (including this one) associated with this file.
 example:
   name: File1.txt
-  type: reg
+  type: REG
   mode: 511
   size: 1024
   atime: 1464958683054
@@ -61,3 +65,4 @@ example:
   shares:
     - 1d24c36707d99197c6cd995810a43aca
     - 6825604b0eb6a47b8b7a04b6369eb24d
+  hardlinks_count: 1
