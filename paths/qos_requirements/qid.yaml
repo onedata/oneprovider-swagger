@@ -85,7 +85,7 @@ delete:
     ```
   responses:
     '204':
-      description: QoS requirement has been deleted.
+      description: QoS requirement has been removed.
     '400':
       description: Invalid request.
       schema:

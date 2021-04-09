@@ -1,0 +1,26 @@
+type: array
+description: |
+  Dataset protection flags:
+
+  * `data_protection` - causes all dataset's files and directories to be
+     protected from modifying their content.
+
+  * `metadata_protection` - causes all dataset's files and directories to be
+     protected from modifying their metadata (custom metadata, ACL, etc.).
+
+  Requests to modify the data/metadata when protection is enabled will be rejected
+  with the EPERM POSIX error.
+
+  The protection flags are ignored when the dataset is in `detached` state.
+
+  Changing the protection flags may not have an immediate effect,
+  especially for files that were already opened before the change.
+
+  Note however that some basic readonly file attributes (such as e.g. `atime`
+  updated when a file is read) will be modified regardless.
+items:
+  type: string
+  enum:
+    - data_protection
+    - metadata_protection
+example: ["data_protection"]

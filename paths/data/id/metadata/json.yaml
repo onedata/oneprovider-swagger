@@ -42,7 +42,7 @@ get:
     - application/json
   responses:
     '200':
-      description: JSON metadata returned successfully.
+      description: JSON metadata.
       schema:
         type: string
     '400':

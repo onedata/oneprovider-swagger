@@ -1,0 +1,59 @@
+get:
+  operationId: get_file_dataset_summary
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: dataset_summary
+  tags:
+    - Dataset
+  summary: Get dataset summary for file or directory
+  x-bash-codegen-description: |
+    Returns dataset summary for a file specified by [$FILE_ID](#operation/lookup_file_id).
+
+  description: |
+    Returns dataset summary for a file specified by [$FILE_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Get file's dataset summary**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/dataset/summary"
+
+    {
+        "directDataset": null,
+        "effectiveAncestorDatasets": ["1f4b762b1380946e73aeca574c77f14c", "64233339643236366165646365626666"],
+        "effectiveProtectionFlags": ["data_protection", "metadata_protection"]
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Dataset summary for file or directory.
+      schema:
+        $ref: '#/definitions/DatasetSummary'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file or directory.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileDatasetSummary id=$FILE_ID"

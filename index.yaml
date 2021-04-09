@@ -23,10 +23,12 @@ tags:
     description: Files and Directories custom metadata related operations.
   - name: File registration
     description: Operations for registering files located on external storages.
-  - name: QoS
-    description: QoS related operations.
   - name: Share
     description: Shares related operations.
+  - name: Dataset
+    description: Datasets related operations.
+  - name: QoS
+    description: QoS related operations.
   - name: Transfer
     description: Transfers related operations.
   - name: Monitoring
@@ -50,6 +52,9 @@ x-tagGroups:
   - name: Share management
     tags:
       - Share
+  - name: Dataset management
+    tags:
+      - Dataset
   - name: Monitoring & metrics
     tags:
       - Monitoring

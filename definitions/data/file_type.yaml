@@ -1,0 +1,11 @@
+type: string
+description: |
+  The type of the file:
+  * `reg` - regular file.
+  * `dir` - directory.
+  * `lnk` - symbolic link.
+enum:
+  - reg
+  - dir
+  - lnk
+example: reg

@@ -1,0 +1,23 @@
+type: object
+properties:
+  datasets:
+    type: array
+    description: The list of dataset Ids.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dataset Id.
+        name:
+          type: string
+          description: Dataset's root file/directory name.
+  isLast:
+    $ref: '#/definitions/IsLast'
+example:
+  datasets:
+    - id: 1f4b762b1380946e73aeca574c77f14c
+      name: File1.txt
+    - id: 64233339643236366165646365626666
+      name: Dir2
+  isLast: true

@@ -1,0 +1,87 @@
+get:
+  operationId: list_dataset_children
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: children
+  tags:
+    - Dataset
+  summary: List child datasets of a dataset
+  x-bash-codegen-description: |
+    Returns the list of child datasets of a specific dataset. The list of top datasets
+    in a space can be acquired using [this endpoint](#operation/list_space_top_datasets).
+
+  description: |
+    Returns the list of child datasets of a specific dataset. The list of top datasets
+    in a space can be acquired using [this endpoint](#operation/list_space_top_datasets).
+
+    ***Example cURL requests***
+
+    **List child datasets**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID/children"
+
+    {
+        "datasets": [
+            {
+                "id": "1f4b762b1380946e73aeca574c77f14c",
+                "name": "File1.txt"
+            },
+            {
+                "id": "64233339643236366165646365626666",
+                "name": "Dir2"
+            }
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of child datasets.
+      schema:
+        $ref: '#/definitions/Datasets'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of entries that should be returned. If there are more
+        child datasets, they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Offset from beginning of collection specifying starting point for listing.
+      type: integer
+      required: false
+      default: 0
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listDatasetChildren did=$DATASET_ID limit=100 offset=300"

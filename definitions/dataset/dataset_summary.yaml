@@ -1,0 +1,23 @@
+type: object
+description: Dataset summary for file or directory.
+properties:
+  directDataset:
+    type: string
+    description: |
+      Id of dataset established for this file regardless if attached or detached,
+      or `null` if there isn't one.
+  effectiveAncestorDatasets:
+    type: array
+    description: Ids of all datasets in `attached` state registered for this file ancestor directories.
+    items:
+      type: string
+  effectiveProtectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+example:
+  directDataset: null
+  effectiveAncestorDatasets:
+    - "1f4b762b1380946e73aeca574c77f14c"
+    - "64233339643236366165646365626666"
+  effectiveProtectionFlags:
+    - "data_protection"
+    - "metadata_protection"

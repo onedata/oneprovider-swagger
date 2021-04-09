@@ -27,7 +27,7 @@ get:
     - application/rdf+xml
   responses:
     '200':
-      description: Rdf metadata returned successfully.
+      description: Rdf metadata.
       schema:
         type: string
         example: <RDF><homepage>https://www.onedata.org</homepage></RDF>

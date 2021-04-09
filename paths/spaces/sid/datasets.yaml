@@ -1,0 +1,126 @@
+get:
+  operationId: list_space_top_datasets
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: datasets
+  tags:
+    - Dataset
+  summary: List space top datasets
+  x-bash-codegen-description: |
+    Returns the list of space's top datasets - ones that do not have any parent
+    dataset. In special case when dataset has been established for space root
+    directory, there is only one top dataset.
+
+    Datasets in each space are divided into two separate trees based on their states:
+    * `attached` - this tree represents the hierarchy of datasets, which corresponds
+      to the hierarchy of files in the space. It can be perceived as a "compressed"
+      file tree, containing only the nodes corresponding to files/directories marked
+      as a dataset. For example, dataset A is child of dataset B because
+      B's root directory is ancestor to A's root file and no directory between
+      them is a root of any attached dataset. Consequently, moving dataset's root file
+      to other location may change the dataset location in the tree.
+
+    * `detached` - this tree represents the hierarchy of datasets for the moment
+      of detachment and does not change when root files are moved. Individual
+      datasets from this tree can be reattached, causing the tree to be
+      restructured in specific cases.
+
+  description: |
+    Returns the list of space's top datasets - ones that do not have any parent
+    dataset. In special case when dataset has been established for space root
+    directory, there is only one top dataset.
+
+    Datasets in each space are divided into two separate trees based on their states:
+    * `attached` - this tree represents the hierarchy of datasets, which corresponds
+      to the hierarchy of files in the space. It can be perceived as a "compressed"
+      file tree, containing only the nodes corresponding to files/directories marked
+      as a dataset. For example, dataset A is child of dataset B because
+      B's root directory is ancestor to A's root file and no directory between
+      them is a root of any attached dataset. Consequently, moving dataset's root file
+      to other location may change the dataset location in the tree.
+
+    * `detached` - this tree represents the hierarchy of datasets for the moment
+      of detachment and does not change when root files are moved. Individual
+      datasets from this tree can be reattached, causing the tree to be
+      restructured in specific cases.
+
+    ***Example cURL requests***
+
+    **List space top datasets**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets?state=attached"
+
+    {
+        "datasets": [
+            {
+                "id": "1f4b762b1380946e73aeca574c77f14c",
+                "name": "File1.txt"
+            },
+            {
+                "id": "64233339643236366165646365626666",
+                "name": "Dir2"
+            }
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of space top datasets.
+      schema:
+        $ref: '#/definitions/Datasets'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - space not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: sid
+      in: path
+      description: Space Id
+      type: string
+      required: true
+    - name: state
+      in: query
+      description: The dataset tree to list from.
+      type: string
+      enum:
+        - attached
+        - detached
+      required: false
+      default: attached
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of entries that should be returned. If there are more
+        datasets, they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      minimum: 1
+      maximum: 1000
+      default: 100
+    - name: offset
+      in: query
+      description: >
+        Offset from beginning of collection specifying starting point for listing.
+      type: integer
+      required: false
+      default: 0
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listSpaceTopDatasets sid=$SPACE_ID limit=100 offset=300"

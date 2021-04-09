@@ -8,11 +8,20 @@ Configuration:
 Error:
   $ref: ./error.yaml
 
+Timestamp:
+  $ref: ./timestamp.yaml
+
+IsLast:
+  $ref: ./is_last.yaml
+
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
 
 FileDistribution:
   $ref: ./data/file_distribution.yaml
+
+FileType:
+  $ref: ./data/file_type.yaml
 
 FileAttributes:
   $ref: ./data/file_attributes.yaml
@@ -55,6 +64,27 @@ Share:
 
 Shares:
   $ref: ./share/shares.yaml
+
+DatasetProtectionFlags:
+  $ref: ./dataset/dataset_protection_flags.yaml
+
+DatasetState:
+  $ref: ./dataset/dataset_state.yaml
+
+Dataset:
+  $ref: ./dataset/dataset.yaml
+
+DatasetSummary:
+  $ref: ./dataset/dataset_summary.yaml
+
+DatasetEstablishRequest:
+  $ref: ./dataset/dataset_establish_request.yaml
+
+DatasetUpdateRequest:
+  $ref: ./dataset/dataset_update_request.yaml
+
+Datasets:
+  $ref: ./dataset/datasets.yaml
 
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml

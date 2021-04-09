@@ -1,0 +1,7 @@
+type: boolean
+description: >
+  Due to delays in synchronization between Oneproviders, the number of returned
+  entries can be smaller than the requested limit, even though there are still
+  some ensuing ones.
+  The `isLast` flag is the only valid indicator that all entries has been listed.
+example: true

@@ -3,7 +3,7 @@ get:
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: file_qos_summary
+    aspect: qos_summary
   tags:
     - QoS
   summary: Get QoS summary for file or directory
@@ -23,7 +23,7 @@ get:
 
     **Get file QoS summary**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos_summary"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/qos/summary"
 
     {
         "requirements": [{"$QOS_REQ_ID": "pending"}],

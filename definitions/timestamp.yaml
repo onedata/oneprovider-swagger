@@ -1,0 +1,2 @@
+type: integer
+description: Timestamp in seconds (UNIX epoch), e.g. `1563819329`.

@@ -17,6 +17,8 @@ post:
 
     Any number of shares can be associated with each file or directory.
 
+    This operation requires `space_manage_share` privilege.
+
   description: |
     Shares a file or a directory. Shared files can be viewed by everyone through public URL.
     This operation assigns a share Id that can be used to manage share, see:
@@ -27,12 +29,14 @@ post:
 
     Any number of shares can be associated with each file or directory.
 
+    This operation requires `space_manage_share` privilege.
+
     ***Example cURL requests***
 
     **Create share**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/shares" \
-    -H "Content-Type: application/json" -d '{"name": "MyShare", "fileId": $FILE_ID}'
+    -H "Content-Type: application/json" -d '{"name": "MyShare", "rootFileId": $FILE_ID}'
     ```
   consumes:
     - application/json

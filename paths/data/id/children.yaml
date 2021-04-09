@@ -68,8 +68,8 @@ get:
     - name: limit
       in: query
       description: >
-        Allows to specify maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `index` and `offset` query parameters.
+        Allows specifying maximum number of files that should be returned. If there are more files,
+        they can be retrieved using `offset` query parameter.
       type: integer
       required: false
       maximum: 1000
@@ -78,8 +78,7 @@ get:
     - name: offset
       in: query
       description: >
-        Index of the partial result, can be used to get subset of the result,
-        when the number of files and directories under given path exceeds 1000.
+        Offset from beginning of collection specifying starting point for listing.
       type: integer
       required: false
       default: 0
