@@ -20,7 +20,7 @@ get:
 
     **Get status of specific transfer**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
 
     {
         "type": "replication",
@@ -127,7 +127,7 @@ delete:
 
     **Cancel specific transfer**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
     ```
 
   responses:

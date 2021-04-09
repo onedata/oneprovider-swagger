@@ -50,7 +50,7 @@ get:
     **List space top datasets**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets?state=attached"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/datasets?state=attached"
 
     {
         "datasets": [

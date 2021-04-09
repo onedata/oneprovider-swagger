@@ -23,7 +23,7 @@ post:
 
     **Establish dataset**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/datasets" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/datasets" \
     -H "Content-Type: application/json" -d '{
         "rootFileId": $FILE_ID,
         "protectionFlags": ["data_protection"]
@@ -37,7 +37,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the dataset Id.
-        Also URI of the Dataset in form https://$HOST/api/v3/oneprovider/datasets/{id} is
+        Also URI of the Dataset in form https://$PROVIDER_HOST/api/v3/oneprovider/datasets/{id} is
         returned in the response `Location` header.
       headers:
         Location:

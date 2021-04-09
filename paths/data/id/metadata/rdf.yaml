@@ -19,7 +19,7 @@ get:
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
 
     <RDF><homepage>https://www.onedata.org</homepage></RDF>
     ```
@@ -90,7 +90,7 @@ put:
     **Set RDF metadata for space from RDF file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf \
+    -X PUT https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf \
     -H "Content-Type: application/rdf+xml" -d "@./space1_dublincore.rdf"
     ```
   consumes:
@@ -157,7 +157,7 @@ delete:
     **Remove file rdf metadata**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
     ```
   responses:
     '204':

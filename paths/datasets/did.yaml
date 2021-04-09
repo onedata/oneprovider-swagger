@@ -16,7 +16,7 @@ get:
 
     **Get the basic information about dataset**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
 
     {
         "state": "attached",
@@ -87,7 +87,7 @@ patch:
 
     **Change dataset protection flags**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID" \
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID" \
     -H "Content-Type: application/json" -d '{
         "setProtectionFlags": ["metadata_protection"],
         "unsetProtectionFlags": ["data_protection"]
@@ -159,7 +159,7 @@ delete:
     **Remove dataset**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE "https://$HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
     ```
   responses:
     '204':
