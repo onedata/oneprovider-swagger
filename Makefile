@@ -85,6 +85,5 @@ submodules:
 	git submodule sync --recursive ${submodule}
 	git submodule update --init --recursive ${submodule}
 
-
 codetag-tracker:
 	./bamboos/scripts/codetag-tracker.sh --branch=${BRANCH}
