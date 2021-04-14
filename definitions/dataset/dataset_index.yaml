@@ -1,0 +1,5 @@
+type: string
+description: >
+  Index that uniquely identifies given dataset.
+  It can be used to determine starting point for next listing request.
+example: 74202576080626a121af8d9193512c0f

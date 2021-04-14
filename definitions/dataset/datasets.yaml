@@ -12,8 +12,12 @@ properties:
         name:
           type: string
           description: Dataset's root file/directory name.
+        index:
+          $ref: '#/definitions/DatasetIndex'
   isLast:
     $ref: '#/definitions/IsLast'
+  nextPageToken:
+    $ref: '#/definitions/ListToken'
 example:
   datasets:
     - id: 1f4b762b1380946e73aeca574c77f14c
@@ -21,3 +25,4 @@ example:
     - id: 64233339643236366165646365626666
       name: Dir2
   isLast: true
+  index: 74202576080626a121af8d9193512c0f

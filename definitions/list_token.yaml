@@ -1,0 +1,5 @@
+type: string
+description: >
+  String returned in the response that can be passed in the consecutive request to
+  fetch next page of entries.
+example: 74202576080626a121af8d9193512c0f

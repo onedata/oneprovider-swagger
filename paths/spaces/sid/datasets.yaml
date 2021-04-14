@@ -56,14 +56,17 @@ get:
         "datasets": [
             {
                 "id": "1f4b762b1380946e73aeca574c77f14c",
-                "name": "File1.txt"
+                "name": "File1.txt",
+                "index": "c743e49a3ae14830ed38dec9d3a83f16638015f1"
             },
             {
                 "id": "64233339643236366165646365626666",
-                "name": "Dir2"
+                "name": "Dir2",
+                "index": "10ca5de26a0a667894bc557355292bf843da50d3"
             }
         ],
-        "isLast": true
+        "isLast": true,
+        "nextPageToken": "10ca5de26a0a667894bc557355292bf843da50d3"
     }
     ```
   produces:
@@ -117,10 +120,28 @@ get:
     - name: offset
       in: query
       description: >
-        Offset from beginning of collection specifying starting point for listing.
+        Offset determining beginning of the list of datasets returned in the response.
+        It it calculated from the starting point, determined by `index` or `token` parameters.
       type: integer
       required: false
       default: 0
+    - name: index
+      in: query
+      description: >
+        String determining starting point for listing. Starting point will be set
+        at dataset with index which is lexicographically greater or equal to the passed index (it is inclusive).
+      type: string
+      required: false
+      default: ""
+    - name: token
+      in: query
+      description: >
+        String specifying starting point for listing. It shall be used for paging using `nextBatchToken`
+        from the previous page response. It works similarly to index with the only difference that it is
+        exclusive. If both `token` and `index` are passed, `token` has higher priority.
+      type: string
+      required: false
+      default: ""
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listSpaceTopDatasets sid=$SPACE_ID limit=100 offset=300"

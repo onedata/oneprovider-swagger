@@ -14,6 +14,9 @@ Timestamp:
 IsLast:
   $ref: ./is_last.yaml
 
+ListToken:
+  $ref: ./list_token.yaml
+
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
 
@@ -70,6 +73,9 @@ DatasetProtectionFlags:
 
 DatasetState:
   $ref: ./dataset/dataset_state.yaml
+
+DatasetIndex:
+  $ref: ./dataset/dataset_index.yaml
 
 Dataset:
   $ref: ./dataset/dataset.yaml

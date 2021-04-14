@@ -29,6 +29,8 @@ properties:
     $ref: '#/definitions/DatasetProtectionFlags'
   creationTime:
     $ref: '#/definitions/Timestamp'
+  index:
+    $ref: '#/definitions/DatasetIndex'
 required:
   - state
   - datasetId
@@ -38,6 +40,7 @@ required:
   - rootFilePath
   - protectionFlags
   - creationTime
+  - index
 example:
   state: attached
   datasetId: 1f4b762b1380946e73aeca574c77f14c
@@ -47,3 +50,4 @@ example:
   rootFilePath: /MySpace/dir
   protectionFlags: ["metadata_protection"]
   creationTime: 1576152793
+  index: 10ca5de26a0a667894bc557355292bf843da50d3
