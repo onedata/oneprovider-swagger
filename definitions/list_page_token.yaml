@@ -1,0 +1,5 @@
+type: string
+description: >
+  A token in the listing response that can be passed in the consecutive request to
+  start listing from the next page of entries.
+example: RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2

@@ -57,16 +57,16 @@ get:
             {
                 "id": "1f4b762b1380946e73aeca574c77f14c",
                 "name": "File1.txt",
-                "index": "c743e49a3ae14830ed38dec9d3a83f16638015f1"
+                "index": "File1.txt1f4b762b1380946e73aeca574c77f14c"
             },
             {
                 "id": "64233339643236366165646365626666",
                 "name": "Dir2",
-                "index": "10ca5de26a0a667894bc557355292bf843da50d3"
+                "index": "Dir264233339643236366165646365626666"
             }
         ],
         "isLast": true,
-        "nextPageToken": "10ca5de26a0a667894bc557355292bf843da50d3"
+        "nextPageToken": "RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2"
     }
     ```
   produces:
@@ -121,24 +121,26 @@ get:
       in: query
       description: >
         Offset determining beginning of the list of datasets returned in the response.
-        It it calculated from the starting point, determined by `index` or `token` parameters.
+        Expressed in number of entries, further adjusts the starting point of listing indicated by `index` or `token` parameters.
+        The value can be negative, in such case entries preceding the starting point will be returned.
       type: integer
       required: false
       default: 0
     - name: index
       in: query
       description: >
-        String determining starting point for listing. Starting point will be set
-        at dataset with index which is lexicographically greater or equal to the passed index (it is inclusive).
+        Determines the starting point for listing. The listing will (inclusively) start from the first
+        dataset whose index is lexicographically greater or equal to the specified index.
+        The value must be urlencoded.
       type: string
       required: false
       default: ""
     - name: token
       in: query
       description: >
-        String specifying starting point for listing. It shall be used for paging using `nextBatchToken`
-        from the previous page response. It works similarly to index with the only difference that it is
-        exclusive. If both `token` and `index` are passed, `token` has higher priority.
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+        If both `token` and `index` are passed, the `token` prevails.
       type: string
       required: false
       default: ""

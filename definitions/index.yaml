@@ -14,8 +14,8 @@ Timestamp:
 IsLast:
   $ref: ./is_last.yaml
 
-ListToken:
-  $ref: ./list_token.yaml
+ListPageToken:
+  $ref: ./list_page_token.yaml
 
 DirectoryChildren:
   $ref: ./data/directory_children.yaml

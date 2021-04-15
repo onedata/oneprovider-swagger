@@ -1,5 +1,6 @@
 type: string
 description: >
-  Index that uniquely identifies given dataset.
-  It can be used to determine starting point for next listing request.
-example: 74202576080626a121af8d9193512c0f
+  Index that uniquely identifies the position of given dataset within a list of datasets on a certain level.
+  It can be used to indicate the starting point for a listing request.
+  The indices of subsequent datasets within a list grow strictly monotonically.
+example: Dir264233339643236366165646365626666
