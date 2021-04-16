@@ -74,9 +74,6 @@ DatasetProtectionFlags:
 DatasetState:
   $ref: ./dataset/dataset_state.yaml
 
-DatasetIndex:
-  $ref: ./dataset/dataset_index.yaml
-
 Dataset:
   $ref: ./dataset/dataset.yaml
 

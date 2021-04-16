@@ -26,16 +26,13 @@ get:
         "datasets": [
             {
                 "id": "1f4b762b1380946e73aeca574c77f14c",
-                "name": "File1.txt",
-                "index": "File1.txt1f4b762b1380946e73aeca574c77f14c"
+                "name": "File1.txt"
             },
             {
                 "id": "64233339643236366165646365626666",
-                "name": "Dir2",
-                "index": "Dir264233339643236366165646365626666"
+                "name": "Dir2"
             }
         ],
-        "isLast": true,
         "nextPageToken": "RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2"
     }
     ```
@@ -91,11 +88,11 @@ get:
       in: query
       description: >
         Determines the starting point for listing. The listing will (inclusively) start from the first
-        dataset whose index is lexicographically greater or equal to the specified index.
+        dataset whose name is lexicographically greater or equal to the specified index.
         The value must be urlencoded.
       type: string
       required: false
-      default: ""
+      default: null
     - name: token
       in: query
       description: >
@@ -104,7 +101,7 @@ get:
         If both `token` and `index` are passed, the `token` prevails.
       type: string
       required: false
-      default: ""
+      default: null
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listDatasetChildren did=$DATASET_ID limit=100 offset=300"

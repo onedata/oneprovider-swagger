@@ -1,5 +1,5 @@
 type: object
-description: The list of views names, nextPageToken is present when there is more to list.
+description: The list of views names.
 properties:
   views:
     type: array
@@ -7,12 +7,10 @@ properties:
     items:
       type: string
   nextPageToken:
-    type: string
-    description: >
-      Can be used to list views starting after the last on returned
-      list (present only when there is more views to list)
+    $ref: '#/definitions/ListPageToken'
 required:
   - views
+  - nextPageToken
 example:
   views:
     - images

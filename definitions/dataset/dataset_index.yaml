@@ -1,6 +1,0 @@
-type: string
-description: >
-  Index that uniquely identifies the position of given dataset within a list of datasets on a certain level.
-  It can be used to indicate the starting point for a listing request.
-  The indices of subsequent datasets within a list grow strictly monotonically.
-example: Dir264233339643236366165646365626666
