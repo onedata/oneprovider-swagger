@@ -89,7 +89,7 @@ get:
       description: >
         Determines the starting point for listing. The listing will (inclusively) start from the first
         dataset whose name is lexicographically greater or equal to the specified index.
-        The value must be urlencoded.
+        Since the index may include characters that are not URL-safe, it should always be urlencoded.
       type: string
       required: false
       default: null
