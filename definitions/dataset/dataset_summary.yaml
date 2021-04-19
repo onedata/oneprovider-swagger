@@ -12,7 +12,7 @@ properties:
     items:
       type: string
   effectiveProtectionFlags:
-    $ref: '#/definitions/DatasetProtectionFlags'
+    $ref: '#/definitions/EffectiveFileProtectionFlags'
 example:
   directDataset: null
   effectiveAncestorDatasets:

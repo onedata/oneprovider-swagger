@@ -71,6 +71,9 @@ Shares:
 DatasetProtectionFlags:
   $ref: ./dataset/dataset_protection_flags.yaml
 
+EffectiveFileProtectionFlags:
+  $ref: ./dataset/effective_file_protection_flags.yaml
+
 DatasetState:
   $ref: ./dataset/dataset_state.yaml
 
