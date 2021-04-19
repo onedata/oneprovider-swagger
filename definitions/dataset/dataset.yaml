@@ -27,6 +27,8 @@ properties:
       may have been renamed or removed.
   protectionFlags:
     $ref: '#/definitions/DatasetProtectionFlags'
+  effectiveProtectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
   creationTime:
     $ref: '#/definitions/Timestamp'
 required:
@@ -37,6 +39,7 @@ required:
   - rootFileType
   - rootFilePath
   - protectionFlags
+  - effectiveProtectionFlags
   - creationTime
 example:
   state: attached
@@ -46,4 +49,5 @@ example:
   rootFileType: DIR
   rootFilePath: /MySpace/dir
   protectionFlags: ["metadata_protection"]
+  effectiveProtectionFlags: ["data_protection", "metadata_protection"]
   creationTime: 1576152793
