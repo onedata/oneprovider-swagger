@@ -12,12 +12,15 @@ properties:
         name:
           type: string
           description: Dataset's root file/directory name.
-  isLast:
-    $ref: '#/definitions/IsLast'
+  nextPageToken:
+    $ref: '#/definitions/ListPageToken'
+required:
+  - datasets
+  - nextPageToken
 example:
   datasets:
     - id: 1f4b762b1380946e73aeca574c77f14c
       name: File1.txt
     - id: 64233339643236366165646365626666
       name: Dir2
-  isLast: true
+  nextPageToken: RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2

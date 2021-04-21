@@ -33,7 +33,7 @@ get:
                 "name": "Dir2"
             }
         ],
-        "isLast": true
+        "nextPageToken": "RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2"
     }
     ```
   produces:
@@ -78,10 +78,30 @@ get:
     - name: offset
       in: query
       description: >
-        Offset from beginning of collection specifying starting point for listing.
+        Offset determining beginning of the list of datasets returned in the response.
+        Expressed in number of entries, further adjusts the starting point of listing indicated by `index` or `token` parameters.
+        The value can be negative, in such case entries preceding the starting point will be returned.
       type: integer
       required: false
       default: 0
+    - name: index
+      in: query
+      description: >
+        Determines the starting point for listing. The listing will (inclusively) start from the first
+        dataset whose name is lexicographically greater or equal to the specified index.
+        Since the index may include characters that are not URL-safe, it should always be urlencoded.
+      type: string
+      required: false
+      default: null
+    - name: token
+      in: query
+      description: >
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+        If both `token` and `index` are passed, the `token` prevails.
+      type: string
+      required: false
+      default: null
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listDatasetChildren did=$DATASET_ID limit=100 offset=300"

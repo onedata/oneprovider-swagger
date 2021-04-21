@@ -10,7 +10,7 @@ get:
   x-bash-codegen-description: |
     Returns the list of all view names in a space.
     The list is broken down into pages, each with length less or equal to the
-    limit parameter. If the nextPageToken is present in the response, there are
+    limit parameter. If the nextPageToken in the response has non-null value, there are
     more names to list - provide the token in the page_token parameter in
     the following request.
 
@@ -18,7 +18,7 @@ get:
   description: |
     Returns the list of all view names in a space.
     The list is broken down into pages, each with length less or equal to the
-    limit parameter. If the nextPageToken is present in the response, there are
+    limit parameter. If the nextPageToken in the response has non-null value, there are
     more names to list - provide the token in the page_token parameter in
     the following request.
 
@@ -44,7 +44,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of view names, nextPageToken is present when there is more to list.
+      description: The list of view names.
       schema:
         $ref: '#/definitions/Views'
     '400':
