@@ -1,0 +1,29 @@
+type: object
+description: Archive dataset request.
+properties:
+  datasetId:
+    type: string
+    description: Id of the dataset that will be archived.
+  type:
+    $ref: '#/definitions/ArchiveType'
+  character:
+    $ref: '#/definitions/ArchiveCharacter'
+  dataStructure:
+    $ref: '#/definitions/ArchiveDataStructure'
+  metadataStructure:
+    $ref: '#/definitions/ArchiveMetadataStructure'
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+required:
+  - datasetId
+  - type
+  - character
+  - dataStructure
+  - metadataStructure
+example:
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  type: full
+  character: aip
+  dataStructure: bagit
+  metaDataStructure: json
+  description: "Archived dataset with experiment data from 2021."

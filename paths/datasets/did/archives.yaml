@@ -1,0 +1,94 @@
+get:
+  operationId: list_dataset_archives
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: archives
+  tags:
+    - Archive
+#    - Dataset todo can we have many tags?
+  summary: List archives of the dataset
+  x-bash-codegen-description: |
+    Returns the list of archives created from a specific dataset.
+
+  description: |
+    Returns the list of archives created from a specific dataset.
+
+    ***Example cURL requests***
+
+    **List dataset archives**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID/archives"
+
+    {
+        "archives": [
+            {
+                "id": "d0f08b098804da5504609b2c54b507b3"
+            },
+            {
+                "id": "5a1e63f7cf5282a206144f77822c3f10"
+            }
+        ],
+        "nextPageToken": "UkdseU1qWTBNak16TXpNNU5qUXpNak0yTXpZMk1UWTFOalEyTXpZMU5qSTJOalky"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of archives.
+      schema:
+        $ref: '#/definitions/Archives'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of entries that should be returned. If there are more archives,
+        they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Offset determining beginning of the list of archives returned in the response.
+        Expressed in number of entries, further adjusts the starting point of listing indicated by `token` parameter.
+        The value can be negative, in such case entries preceding the starting point will be returned.
+      type: integer
+      required: false
+      default: 0
+    - name: token
+      in: query
+      description: >
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+      type: string
+      required: false
+      default: null
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listDatasetArchives did=$DATASET_ID limit=100 offset=300"

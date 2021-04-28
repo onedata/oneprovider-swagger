@@ -31,6 +31,10 @@ properties:
     $ref: '#/definitions/DatasetProtectionFlags'
   creationTime:
     $ref: '#/definitions/Timestamp'
+  archivesCount:
+    type: integer
+    description: >
+      Number of archives created from the dataset.
 required:
   - state
   - datasetId

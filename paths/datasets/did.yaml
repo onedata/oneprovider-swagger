@@ -128,7 +128,7 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateDataset did=$DATASET_ID attached==true"
+      source: "oneprovider-rest-cli updateDataset did=$DATASET_ID attached=true"
 
 
 delete:

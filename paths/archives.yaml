@@ -1,0 +1,83 @@
+post:
+  operationId: archive_dataset
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_archive
+    aspect: instance
+  summary: Archive dataset
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Archives a dataset.
+    Archivisation procedure can be configured by passing appropriate parameters.
+
+    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+
+  description: |
+    Archives a dataset.
+    Archivisation procedure can be configured by passing appropriate parameters.
+
+    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+
+    ***Example cURL requests***
+
+    **Archive dataset**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives" \
+    -H "Content-Type: application/json" -d '{
+        "datasetId": $DATASET_ID,
+        "type": "full",
+        "character": "aip",
+        "dataStructure": "bagit",
+        "metadataStructure": "json",
+        "description": "Archived dataset with experiment data from 2021."
+    }'
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the archive Id.
+        Also URI of the Archive in form https://$PROVIDER_HOST/api/v3/oneprovider/archives/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Archive.
+          type: string
+      schema:
+        type: object
+        properties:
+          archiveId:
+            type: string
+            description: Archive Id.
+        example:
+          archiveId: ae6f78c89a97c9e78e891105f703bcb8
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Dataset properties.
+      schema:
+        $ref: '#/definitions/ArchiveDatasetRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "cat archive_params.json | oneprovider-rest-cli archiveDataset datasetId=$DATASET_ID -"

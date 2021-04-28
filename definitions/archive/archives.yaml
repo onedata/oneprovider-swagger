@@ -1,0 +1,21 @@
+type: object
+properties:
+  archives:
+    type: array
+    description: The list of archive Ids.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Archive Id.
+  nextPageToken:
+    $ref: '#/definitions/ListPageToken'
+required:
+  - archives
+  - nextPageToken
+example:
+  archives:
+    - id: d0f08b098804da5504609b2c54b507b3
+    - id: 5a1e63f7cf5282a206144f77822c3f10
+  nextPageToken: UkdseU1qWTBNak16TXpNNU5qUXpNak0yTXpZMk1UWTFOalEyTXpZMU5qSTJOalky

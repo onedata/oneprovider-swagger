@@ -1,0 +1,14 @@
+type: string
+description: |
+  The structure in which the metadata is stored in the archive:
+
+  * `builtIn` - TODO
+
+  * `json` - TODO
+
+  * `xml` - TODO
+enum:
+  - builtIn
+  - json
+  - xml
+example: json

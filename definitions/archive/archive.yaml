@@ -1,0 +1,48 @@
+type: object
+description: Basic information about an archive.
+properties:
+  state:
+    $ref: '#/definitions/ArchiveState'
+  archiveId:
+    type: string
+    description: Archive Id.
+  datasetId:
+    type: string
+    description: Id of the dataset from which the archive has been created.
+  rootDirectoryId:
+    type: string
+    description: Id of the hidden directory in the space where archive is stored.
+  creationTime:
+    $ref: '#/definitions/Timestamp'
+  type:
+    $ref: '#/definitions/ArchiveType'
+  character:
+    $ref: '#/definitions/ArchiveCharacter'
+  dataStructure:
+    $ref: '#/definitions/ArchiveDataStructure'
+  metadataStructure:
+    $ref: '#/definitions/ArchiveMetadataStructure'
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+required:
+  - state
+  - archiveId
+  - datasetId
+  - rootDirectoryId
+  - creationTime
+  - type
+  - character
+  - dataStructure
+  - metadataStructure
+  - description
+example:
+  state: archived
+  archiveId: ae6f78c89a97c9e78e891105f703bcb8
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
+  creationTime: 1576152793
+  type: full
+  character: aip
+  dataStructure: bagit
+  metaDataStructure: json
+  description: "Archived dataset with experiment data from 2021."

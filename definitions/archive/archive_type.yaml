@@ -1,0 +1,11 @@
+type: string
+description: |
+  The type of the archive:
+
+  * `full` - TODO
+
+  * `incremental` - TODO
+enum:
+  - full
+  - incremental
+example: full

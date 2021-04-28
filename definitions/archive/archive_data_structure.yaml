@@ -1,0 +1,11 @@
+type: string
+description: |
+  The structure in which the data is stored in the archive:
+
+  * `simpleCopy` - TODO
+
+  * `bagit` - TODO
+enum:
+  - simpleCopy
+  - bagit
+example: simpleCopy

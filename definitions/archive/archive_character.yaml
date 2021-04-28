@@ -1,0 +1,14 @@
+type: string
+description: |
+  The character of the archive:
+
+  * `dip` - TODO
+
+  * `aip` - TODO
+
+  * `hybrid` - TODO
+enum:
+  - dip
+  - aip
+  - hybrid
+example: dip

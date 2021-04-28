@@ -1,0 +1,3 @@
+type: string
+description: Additional information about the archive.
+example: "Archived dataset with experiment data from 2021."

@@ -1,0 +1,193 @@
+get:
+  operationId: get_archive
+  x-onedata-gri:
+    type: op_archive
+    id: ?BINDING(aid)
+    aspect: instance
+  summary: Get archive information
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Returns the basic information about an archive.
+  description: |
+    Returns the basic information about an archive.
+
+    ***Example cURL requests***
+
+    **Get the basic information about archive**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID"
+
+    {
+        "state": "archived",
+        "archiveId": "ae6f78c89a97c9e78e891105f703bcb8"
+        "datasetId": "1f4b762b1380946e73aeca574c77f14c"
+        "rootDirectoryId": "00000000006CB663736861726547756964233339643236366165646365"
+        "creationTime": 1576152793
+        "type": "full"
+        "character": "aip"
+        "dataStructure": "bagit"
+        "metaDataStructure": "json"
+        "description": "Archived dataset with experiment data from 2021."
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The archive information.
+      schema:
+        $ref: '#/definitions/Archive'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Archive not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: aid
+      in: path
+      description: Archive Id (e.g. 'ae6f78c89a97c9e78e891105f703bcb8')
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getArchive aid=$ARCHIVE_ID"
+
+
+patch:
+  operationId: update_archive
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_archive
+    id: ?BINDING(aid)
+    aspect: instance
+  summary: Update archive
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Changes archive properties.
+
+    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+
+  description: |
+    Changes archive properties.
+
+    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+
+    ***Example cURL requests***
+
+    **Change archive description**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID" \
+    -H "Content-Type: application/json" -d '{
+        "description": "New archive description"
+    }'
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: Archive's properties has been changed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Archive not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: aid
+      in: path
+      description: Archive Id (e.g. 'ae6f78c89a97c9e78e891105f703bcb8')
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Archive properties
+      schema:
+        $ref: '#/definitions/ArchiveUpdateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "cat archive.json | oneprovider-rest-cli updateArchive aid=$ARCHIVE_ID -"
+
+
+# TODO czy na pewno delete? moze raczej cos co zmieni stan
+#delete:
+#  operationId: remove_archive
+#  x-onedata-gri:
+#    type: op_archive
+#    id: ?BINDING(aid)
+#    aspect: instance
+#  summary: Remove archive
+#  tags:
+#    - Archive
+#  x-bash-codegen-description: |
+#    Removes a specific archive. This procedure does not modify any files or directories
+#    that were a part of the dataset.
+#    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
+#
+#    This operation requires `space_manage_datasets` privilege.
+#
+#  description: |
+#    Removes a specific dataset. This procedure does not modify any files or directories
+#    that were a part of the dataset.
+#    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
+#
+#    This operation requires `space_manage_datasets` privilege.
+#
+#    ***Example cURL requests***
+#
+#    **Remove dataset**
+#    ```bash
+#    curl -H "X-Auth-Token: $TOKEN" \
+#    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+#    ```
+#  responses:
+#    '204':
+#      description: Dataset has been removed.
+#    '400':
+#      description: Invalid request.
+#      schema:
+#        $ref: '#/definitions/Error'
+#    '403':
+#      description: Forbidden request.
+#      schema:
+#        $ref: '#/definitions/Error'
+#    '404':
+#      description: Dataset not found.
+#      schema:
+#        $ref: '#/definitions/Error'
+#    '500':
+#      description: Internal server error.
+#      schema:
+#        $ref: '#/definitions/Error'
+#  parameters:
+#    - name: did
+#      in: path
+#      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+#      type: string
+#      required: true
+#  x-code-samples:
+#    - lang: Shell
+#      source: "oneprovider-rest-cli removeDataset did=$DATASET_ID"

@@ -1,0 +1,21 @@
+type: string
+description: |
+  The state of the archive:
+
+  * `empty` - the archive metadata has been created in the database but the process of archiving
+  data on the storage has not started yet.
+
+  * `initializing` - the process of archiving data on the storage is in progress.
+
+  * `archived` - data has been successfully archived on the storage.
+
+  * `failed` - an error occured during process of archiving data on the storage.
+
+  * `retiring` - archived data is being remove from the storage.
+enum:
+  - empty
+  - initializing
+  - archived
+  - failed
+  - retiring
+example: archived

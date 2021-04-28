@@ -68,6 +68,36 @@ Share:
 Shares:
   $ref: ./share/shares.yaml
 
+Archive:
+  $ref: ./archive/archive.yaml
+
+ArchiveCharacter:
+  $ref: ./archive/archive_character.yaml
+
+ArchiveDatasetRequest:
+  $ref: ./archive/archive_dataset_request.yaml
+
+ArchiveDataStructure:
+  $ref: ./archive/archive_data_structure.yaml
+
+ArchiveDescription:
+  $ref: ./archive/archive_description.yaml
+
+ArchiveMetadataStructure:
+  $ref: ./archive/archive_metadata_structure.yaml
+
+ArchiveState:
+  $ref: ./archive/archive_state.yaml
+
+ArchiveType:
+  $ref: ./archive/archive_type.yaml
+
+ArchiveUpdateRequest:
+  $ref: ./archive/archive_update_request.yaml
+
+Archives:
+  $ref: ./archive/archives.yaml
+
 DatasetProtectionFlags:
   $ref: ./dataset/dataset_protection_flags.yaml
 
