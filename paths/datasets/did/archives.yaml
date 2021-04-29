@@ -6,7 +6,6 @@ get:
     aspect: archives
   tags:
     - Archive
-#    - Dataset todo can we have many tags?
   summary: List archives of the dataset
   x-bash-codegen-description: |
     Returns the list of archives created from a specific dataset.

@@ -1,5 +1,8 @@
 type: object
-description: Basic information about an archive.
+description: >
+  Basic information about an archive.
+  Archive is a snapshot of a dataset at the certain moment.
+  It contains both data and metadata from the dataset.
 properties:
   state:
     $ref: '#/definitions/ArchiveState'

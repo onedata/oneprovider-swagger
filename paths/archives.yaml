@@ -64,7 +64,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: Dataset not found.
       schema:
         $ref: '#/definitions/Error'
     '500':

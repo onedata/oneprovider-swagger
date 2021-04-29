@@ -2,7 +2,8 @@ type: string
 description: |
   The structure in which the metadata is stored in the archive:
 
-  * `builtIn` - TODO
+  * `builtIn` - Metadata are stored only in the database of Oneprovider,
+  they are not stored alongside directories and files on the storage.
 
   * `json` - TODO
 

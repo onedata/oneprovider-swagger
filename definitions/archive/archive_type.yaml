@@ -2,9 +2,11 @@ type: string
 description: |
   The type of the archive:
 
-  * `full` - TODO
+  * `full` - All files belonging to the archived dataset are stored in the archive.
 
-  * `incremental` - TODO
+  * `incremental` -
+      Only files which has changed since previous version of an archive are stored in the archive.
+      Unchanged files are hardlinks to files in the previous version.
 enum:
   - full
   - incremental
