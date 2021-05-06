@@ -1,0 +1,6 @@
+type: string
+description: |
+  URL on which POST request will be performed to notify that process of persisting an archive has finished.
+  The callback request will include JSON `{"archiveId": "$ARCHIVE_ID", "datasetId" : "$DATASET_ID"}` as a body
+  to determine which archive has been persisted.
+example: https://example.org/persisted_archives

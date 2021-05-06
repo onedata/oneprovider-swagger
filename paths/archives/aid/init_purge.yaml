@@ -15,7 +15,8 @@ post:
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
     archive has been purged.
 
-    This operation requires `space_manage_datasets` and 'space_remove_archives' privileges.
+    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
+    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
 
   description: |
     Initializes process of purging an archive.
@@ -24,7 +25,7 @@ post:
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
     archive has been purged.
 
-    This operation requires `space_manage_datasets` and 'space_remove_archives' privileges.
+    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
 
     ***Example cURL requests***
 
@@ -38,7 +39,7 @@ post:
   consumes:
     - application/json
   responses:
-    '202':
+    '204': # todo should it be 202?
       description: >
         The request has been accepted and the process of purging an archive has started.
     '400':
@@ -67,16 +68,7 @@ post:
       in: body
       description: Parameters for initializing purging of an archive
       schema:
-        type: object
-        properties:
-          callback:
-            type: string
-            description: >
-              URL on which POST request will be performed to notify that process of purging an archive has finished.
-              The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
-              archive has been purged.
-        example:
-          callback: https://example.org/purged_archives
+        $ref: '#/definitions/ArchiveInitPurgeRequest'
       required: false
   x-code-samples:
     - lang: Shell

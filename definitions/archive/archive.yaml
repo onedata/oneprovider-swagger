@@ -19,12 +19,14 @@ properties:
     $ref: '#/definitions/Timestamp'
   type:
     $ref: '#/definitions/ArchiveType'
-  character:
-    $ref: '#/definitions/ArchiveCharacter'
+  dip:
+    $ref: '#/definitions/ArchiveDip'
   dataStructure:
     $ref: '#/definitions/ArchiveDataStructure'
   metadataStructure:
     $ref: '#/definitions/ArchiveMetadataStructure'
+  callback:
+    $ref: '#/definitions/ArchivePersistedCallback'
   description:
     $ref: '#/definitions/ArchiveDescription'
 required:
@@ -34,9 +36,10 @@ required:
   - rootDirectoryId
   - creationTime
   - type
-  - character
+  - dip
   - dataStructure
   - metadataStructure
+  - callback
   - description
 example:
   state: archived
@@ -45,7 +48,8 @@ example:
   rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
   type: full
-  character: aip
+  dip: false
   dataStructure: bagit
   metaDataStructure: json
+  callback: "https://example.org/persisted_archives"
   description: "Archived dataset with experiment data from 2021."

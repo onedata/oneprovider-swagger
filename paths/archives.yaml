@@ -11,13 +11,13 @@ post:
     Archives a dataset.
     Archivisation procedure can be configured by passing appropriate parameters.
 
-    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+    This operation requires `space_manage_datasets` and `space_create_archives` privileges.
 
   description: |
     Archives a dataset.
     Archivisation procedure can be configured by passing appropriate parameters.
 
-    This operation requires `space_manage_datasets` and 'space_create_archives' privileges.
+    This operation requires `space_manage_datasets` and `space_create_archives` privileges.
 
     ***Example cURL requests***
 
@@ -27,9 +27,10 @@ post:
     -H "Content-Type: application/json" -d '{
         "datasetId": $DATASET_ID,
         "type": "full",
-        "character": "aip",
+        "dip": false,
         "dataStructure": "bagit",
         "metadataStructure": "json",
+        "callback": "https://example.org/persisted_archives",
         "description": "Archived dataset with experiment data from 2021."
     }'
     ```

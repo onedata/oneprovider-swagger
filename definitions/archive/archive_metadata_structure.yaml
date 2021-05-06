@@ -5,9 +5,11 @@ description: |
   * `builtIn` - Metadata are stored only in the database of Oneprovider,
   they are not stored alongside directories and files on the storage.
 
-  * `json` - TODO
+  * `json` - Metadata are stored in JSON format on the storage.
+  <!--- TODO VFS-7616 refine archive params and their description-->
 
-  * `xml` - TODO
+  * `xml` - Metadata are stored in XML format on the storage.
+  <!--- TODO VFS-7616 refine archive params and their description-->
 enum:
   - builtIn
   - json

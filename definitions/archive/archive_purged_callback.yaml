@@ -1,0 +1,6 @@
+type: string
+description: |
+  URL on which POST request will be performed to notify that process of purging an archive has finished.
+  The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
+  archive has been purged.
+example: https://example.org/purged_archives

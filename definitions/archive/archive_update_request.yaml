@@ -1,13 +1,7 @@
 type: object
 description: Modify archive attributes request.
 properties:
-  archiveId:
-    type: string
-    description: Id of the archive that will be modified.
   description:
     $ref: '#/definitions/ArchiveDescription'
-required:
-  - archiveId
 example:
-  archiveId: 1f4b762b1380946e73aeca574c77f14c
   description: "Archived dataset with experiment data from 2019."

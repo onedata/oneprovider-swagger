@@ -69,7 +69,7 @@ get:
       in: query
       description: >
         Allows specifying maximum number of entries that should be returned. If there are more
-        child datasets, they can be retrieved using `offset` query parameter.
+        child datasets, they can be retrieved using `offset` or `token` query parameters.
       type: integer
       required: false
       maximum: 1000
