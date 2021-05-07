@@ -112,4 +112,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createTransfer type=replication replicatingProviderId=$PROVIDER_ID dataSourceType=file fileId=$FILE_ID"
+      source: "oneprovider-rest-cli createTransfer type==replication replicatingProviderId==$PROVIDER_ID dataSourceType==file fileId==$FILE_ID"

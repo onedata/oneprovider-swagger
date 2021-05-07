@@ -11,7 +11,8 @@ description: |
 
   * `failed` - an error occured during process of archiving data on the storage,
 
-  * `purging` - archived data is being purged from the storage.
+  * `purging` - archived data is being purged from the storage. When archive is purged, all its metadata will be deleted,
+  therefore it will be impossible to fetch it.
 enum:
   - empty
   - initializing

@@ -95,4 +95,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "cat file_spec.json | oneprovider-rest-cli registerFile"
+      source: "cat file_spec.json | oneprovider-rest-cli registerFile -"

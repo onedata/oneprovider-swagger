@@ -134,7 +134,7 @@ patch:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name=NewShareName description=\"# New description\""
+      source: "oneprovider-rest-cli updateShare shid=$SHARE_ID name==NewShareName description==\"# New description\""
 
 
 delete:

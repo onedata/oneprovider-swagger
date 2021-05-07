@@ -161,7 +161,7 @@ put:
     default: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli setXattr id=$FILE_ID license=CC-0"
+    source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"
 
 
 delete:
@@ -233,4 +233,4 @@ delete:
       default: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys='[\"license\"]'"
+      source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys=='[\"license\"]'"

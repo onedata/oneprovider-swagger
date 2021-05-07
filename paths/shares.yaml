@@ -83,4 +83,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createShare name=MyShare fileId=$FILE_ID"
+      source: "oneprovider-rest-cli createShare name==MyShare fileId==$FILE_ID"

@@ -16,7 +16,6 @@ post:
     archive has been purged.
 
     This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
-    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
 
   description: |
     Initializes process of purging an archive.
@@ -72,4 +71,4 @@ post:
       required: false
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID callback='https://example.org/purged_archives'"
+      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID callback=='https://example.org/purged_archives'"

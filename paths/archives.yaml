@@ -81,4 +81,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "cat archive_params.json | oneprovider-rest-cli archiveDataset datasetId=$DATASET_ID -"
+      source: "cat archive_params.json | oneprovider-rest-cli archiveDataset -"
