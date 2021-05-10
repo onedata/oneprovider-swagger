@@ -1,0 +1,9 @@
+type: boolean
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  This flag determines whether archive is incremental - only files
+  which has changed since previous archive created from this dataset
+  are stored in the archive. Unchanged files are hardlinks to files in the previous archive.
+  Otherwise, all files belonging to the archived dataset are stored in the archive.
+default: false
+example: true

@@ -1,0 +1,34 @@
+type: object
+description: Archive dataset request.
+properties:
+  datasetId:
+    type: string
+    description: Id of the dataset that will be archived.
+  incremental:
+    $ref: '#/definitions/ArchiveIncremental'
+  includeDip:
+    $ref: '#/definitions/ArchiveDip'
+  layout:
+    $ref: '#/definitions/ArchiveLayout'
+# TODO VFS-7616 use and rename metadataStructure
+#  metadataStructure:
+#    $ref: '#/definitions/ArchiveMetadataStructure'
+  callback:
+    $ref: '#/definitions/ArchivePreservedCallback'
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+required:
+  - datasetId
+  - incremental
+  - layout
+#   TODO VFS-7616 use and rename metadataStructure
+#  - metadataStructure
+example:
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  incremental: false
+  includeDip: false
+  layout: bagit
+# TODO VFS-7616 use and rename metadataStructure
+#  metaDataStructure: json
+  callback: https://example.org/preserved_archives
+  description: "Archived dataset with experiment data from 2021."

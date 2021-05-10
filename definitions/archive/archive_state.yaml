@@ -2,21 +2,19 @@ type: string
 description: |
   The state of the archive:
 
-  * `empty` - the archive metadata has been created in the database but the process of archiving
-  data on the storage has not started yet,
+  * `pending` - the archive creation has been scheduled, but the process of archiving data on the storage has not started yet,
 
-  * `initializing` - the process of archiving data on the storage is in progress,
+  * `building` - the process of archiving data on the storage is in progress,
 
-  * `persisted` - data has been successfully archived on the storage,
+  * `preserved` - all data has been successfully archived on the storage,
 
-  * `failed` - an error occured during process of archiving data on the storage,
+  * `failed` - an error occured during the process of archiving data on the storage,
 
-  * `purging` - archived data is being purged from the storage. When archive is purged, all its metadata will be deleted,
-  therefore it will be impossible to fetch it.
+  * `purging` - the archive is being deleted. In the process, the archived data is purged from the storage, then all the information concerning the archive is deleted.
 enum:
-  - empty
-  - initializing
-  - archived
+  - pending
+  - building
+  - preserved
   - failed
   - purging
-example: archived
+example: preserved

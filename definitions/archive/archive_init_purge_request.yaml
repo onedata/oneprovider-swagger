@@ -1,5 +1,5 @@
 type: object
-description: Initialize purging of an archive request.
+description: Archive purge initialization request.
 properties:
   callback:
     $ref: '#/definitions/ArchivePurgedCallback'

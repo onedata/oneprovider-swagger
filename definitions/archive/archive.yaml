@@ -4,29 +4,30 @@ description: >
   Archive is a snapshot of a dataset at the certain moment.
   It contains both data and metadata from the dataset.
 properties:
-  state:
-    $ref: '#/definitions/ArchiveState'
   archiveId:
     type: string
     description: Archive Id.
+  state:
+    $ref: '#/definitions/ArchiveState'
   datasetId:
     type: string
     description: Id of the dataset from which the archive has been created.
   rootDirectoryId:
     type: string
-    description: Id of the hidden directory in the space where archive is stored.
+    description: Id of the hidden directory in the space where the archive is stored.
   creationTime:
     $ref: '#/definitions/Timestamp'
-  type:
-    $ref: '#/definitions/ArchiveType'
-  dip:
+  incremental:
+    $ref: '#/definitions/ArchiveIncremental'
+  includeDip:
     $ref: '#/definitions/ArchiveDip'
-  dataStructure:
-    $ref: '#/definitions/ArchiveDataStructure'
-  metadataStructure:
-    $ref: '#/definitions/ArchiveMetadataStructure'
+  layout:
+    $ref: '#/definitions/ArchiveLayout'
+# TODO VFS-7616 use and rename metadataStructure
+#  metadataStructure:
+#    $ref: '#/definitions/ArchiveMetadataStructure'
   callback:
-    $ref: '#/definitions/ArchivePersistedCallback'
+    $ref: '#/definitions/ArchivePreservedCallback'
   description:
     $ref: '#/definitions/ArchiveDescription'
 required:
@@ -35,21 +36,23 @@ required:
   - datasetId
   - rootDirectoryId
   - creationTime
-  - type
-  - dip
-  - dataStructure
-  - metadataStructure
+  - incremental
+  - includeDip
+  - layout
+# TODO VFS-7616 use and rename metadataStructure
+#  - metadataStructure
   - callback
   - description
 example:
-  state: archived
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
+  state: preserved
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
-  type: full
-  dip: false
-  dataStructure: bagit
-  metaDataStructure: json
-  callback: "https://example.org/persisted_archives"
+  incremental: false
+  includeDip: false
+  layout: bagit
+# TODO VFS-7616 use and rename metadataStructure
+#  metaDataStructure: json
+  callback: "https://example.org/preserved_archives"
   description: "Archived dataset with experiment data from 2021."

@@ -4,33 +4,32 @@ post:
   x-onedata-gri:
     type: op_archive
     aspect: instance
-  summary: Archive dataset
+  summary: Create archive from a dataset
   tags:
     - Archive
   x-bash-codegen-description: |
-    Archives a dataset.
-    Archivisation procedure can be configured by passing appropriate parameters.
+    Creates an archive of a dataset - a snapshot of its data and metadata.
 
     This operation requires `space_manage_datasets` and `space_create_archives` privileges.
 
   description: |
-    Archives a dataset.
-    Archivisation procedure can be configured by passing appropriate parameters.
+    Creates an archive of a dataset - a snapshot of its data and metadata.
 
     This operation requires `space_manage_datasets` and `space_create_archives` privileges.
 
     ***Example cURL requests***
 
     **Archive dataset**
+    <!--- TODO VFS-7616 add metadata structure to the example-->
+
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives" \
     -H "Content-Type: application/json" -d '{
-        "datasetId": $DATASET_ID,
-        "type": "full",
+        "datasetId": "$DATASET_ID",
+        "incremental": false,
         "dip": false,
-        "dataStructure": "bagit",
-        "metadataStructure": "json",
-        "callback": "https://example.org/persisted_archives",
+        "layout": "bagit",
+        "callback": "https://example.org/preserved_archives",
         "description": "Archived dataset with experiment data from 2021."
     }'
     ```
@@ -77,7 +76,7 @@ post:
       in: body
       description: Dataset properties.
       schema:
-        $ref: '#/definitions/ArchiveDatasetRequest'
+        $ref: '#/definitions/ArchiveCreateRequest'
       required: true
   x-code-samples:
     - lang: Shell

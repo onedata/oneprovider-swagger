@@ -31,7 +31,7 @@ properties:
     $ref: '#/definitions/DatasetProtectionFlags'
   creationTime:
     $ref: '#/definitions/Timestamp'
-  archivesCount:
+  archiveCount:
     type: integer
     description: >
       Number of archives created from the dataset.
@@ -55,3 +55,4 @@ example:
   protectionFlags: ["metadata_protection"]
   effectiveProtectionFlags: ["data_protection", "metadata_protection"]
   creationTime: 1576152793
+  archiveCount: 5

@@ -1,5 +1,5 @@
 post:
-  operationId: purge_dataset
+  operationId: purge_archive
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_archive
@@ -10,6 +10,7 @@ post:
     - Archive
   x-bash-codegen-description: |
     Initializes process of purging an archive.
+    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
     The process may be time consuming therefore it is possible to pass callback URL
     on which the POST request will be performed to notify that the process has finished.
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
@@ -19,6 +20,7 @@ post:
 
   description: |
     Initializes process of purging an archive.
+    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
     The process may be time consuming therefore it is possible to pass callback URL
     on which the POST request will be performed to notify that the process has finished.
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
@@ -38,7 +40,7 @@ post:
   consumes:
     - application/json
   responses:
-    '204': # todo should it be 202?
+    '204':
       description: >
         The request has been accepted and the process of purging an archive has started.
     '400':
@@ -60,7 +62,7 @@ post:
   parameters:
     - name: aid
       in: path
-      description: Id of a specific archive which shall be purged.
+      description: Id of a specific archive to be purged.
       type: string
       required: true
     - name: data

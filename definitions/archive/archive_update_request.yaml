@@ -1,5 +1,5 @@
 type: object
-description: Modify archive attributes request.
+description: Archive update request.
 properties:
   description:
     $ref: '#/definitions/ArchiveDescription'

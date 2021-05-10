@@ -55,7 +55,7 @@ get:
   parameters:
     - name: did
       in: path
-      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Dataset Id
       type: string
       required: true
   x-code-samples:
@@ -117,7 +117,7 @@ patch:
   parameters:
     - name: did
       in: path
-      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Dataset Id
       type: string
       required: true
     - name: data
@@ -183,7 +183,7 @@ delete:
   parameters:
     - name: did
       in: path
-      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Dataset Id
       type: string
       required: true
   x-code-samples:

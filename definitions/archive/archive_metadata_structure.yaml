@@ -1,17 +1,18 @@
 type: string
 description: |
+  <!--- TODO VFS-7616 find better name for this class, mabye ArchiveMetadataStorageType?-->
   The structure in which the metadata is stored in the archive:
 
-  * `builtIn` - Metadata are stored only in the database of Oneprovider,
-  they are not stored alongside directories and files on the storage.
+  * `external` - Metadata is stored only in the database of Oneprovider,
+  rather than alongside directories and files on the storage.
 
-  * `json` - Metadata are stored in JSON format on the storage.
-  <!--- TODO VFS-7616 refine archive params and their description-->
+  * `json` - Metadata is stored in JSON format on the storage.
+  <!--- TODO VFS-7616 it's not exactly structure nor storageType, find better name-->
 
-  * `xml` - Metadata are stored in XML format on the storage.
-  <!--- TODO VFS-7616 refine archive params and their description-->
+  * `xml` - Metadata is stored in XML format on the storage.
+  <!--- TODO VFS-7616 it's not exactly structure nor storageType, find better name-->
 enum:
-  - builtIn
+  - external
   - json
   - xml
 example: json

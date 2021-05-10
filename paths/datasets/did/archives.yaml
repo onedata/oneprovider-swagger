@@ -6,7 +6,7 @@ get:
     aspect: archives
   tags:
     - Archive
-  summary: List archives of the dataset
+  summary: List archives of a dataset
   x-bash-codegen-description: |
     Returns the list of archives created from a specific dataset.
 
@@ -21,14 +21,7 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID/archives"
 
     {
-        "archives": [
-            {
-                "id": "d0f08b098804da5504609b2c54b507b3"
-            },
-            {
-                "id": "5a1e63f7cf5282a206144f77822c3f10"
-            }
-        ],
+        "archives": ["d0f08b098804da5504609b2c54b507b3", "5a1e63f7cf5282a206144f77822c3f10"],
         "nextPageToken": "UkdseU1qWTBNak16TXpNNU5qUXpNak0yTXpZMk1UWTFOalEyTXpZMU5qSTJOalky"
     }
     ```
@@ -58,7 +51,7 @@ get:
   parameters:
     - name: did
       in: path
-      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Dataset Id
       type: string
       required: true
     - name: limit
