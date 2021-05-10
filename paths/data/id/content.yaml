@@ -17,11 +17,10 @@ get:
     If $FILE_ID is a directory, returns a TAR archive with its contents.
     Any nested files or subdirectories to which the client does not have access
     (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
-    Request for directory download results in redirection URL (in Location hedear) with ID of 
-    temporary download session. Download will start after a request to this URL is made. 
-    With the use of this URL and range header failed downloads (e.g. after network failure) 
-    can be resumed. In such case size (in bytes) of so far downloaded file should be provided 
-    as range begin, and range end should be ommited.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
   description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -32,11 +31,11 @@ get:
     If $FILE_ID is a directory, returns a TAR archive with its contents.
     Any nested files or subdirectories to which the client does not have access
     (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
-    Request for directory download results in redirection URL (in Location hedear) with ID of 
-    temporary download session. Download will start after a request to this URL is made. 
-    With the use of this URL and range header failed downloads (e.g. after network failure) 
-    can be resumed. In such case size (in bytes) of so far downloaded file should be provided 
-    as range begin, and range end should be ommited.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
 
     ***Example cURL requests***
 
@@ -93,6 +92,12 @@ get:
       schema:
         type: string
         format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
     '400':
       description: Invalid request.
       schema:
