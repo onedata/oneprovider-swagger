@@ -14,9 +14,14 @@ get:
     download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
-    If $FILE_ID is a directory, returns a compressed (GZIP) TAR archive with its contents.
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
     Any nested files or subdirectories to which the client does not have access
     (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in redirection URL (in Location hedear) with ID of 
+    temporary download session. Download will start after a request to this URL is made. 
+    With the use of this URL and range header failed downloads (e.g. after network failure) 
+    can be resumed. In such case size (in bytes) of so far downloaded file should be provided 
+    as range begin, and range end should be ommited.
   description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -24,9 +29,14 @@ get:
     download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
-    If $FILE_ID is a directory, returns a compressed (GZIP) TAR archive with its contents.
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
     Any nested files or subdirectories to which the client does not have access
     (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in redirection URL (in Location hedear) with ID of 
+    temporary download session. Download will start after a request to this URL is made. 
+    With the use of this URL and range header failed downloads (e.g. after network failure) 
+    can be resumed. In such case size (in bytes) of so far downloaded file should be provided 
+    as range begin, and range end should be ommited.
 
     ***Example cURL requests***
 
@@ -47,11 +57,27 @@ get:
     fghi
     ```
 
-    **Download a directory as tar.gz archive**
+    **Download a directory as tar archive**
     ```bash
-    curl -o directory.tar.gz \
-    -H "X-Auth-Token: $TOKEN" \
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content" | grep location
+    
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+    
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
     ```
 
   produces:
