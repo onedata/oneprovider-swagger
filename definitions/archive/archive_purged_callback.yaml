@@ -5,6 +5,7 @@ description: |
   ```
   {
       "archiveId": "$ARCHIVE_ID",
+      "datasetId": "$DATASET_ID",
       "error": "Error description"
   }
   ```

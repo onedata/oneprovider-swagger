@@ -28,7 +28,7 @@ post:
         "datasetId": "$DATASET_ID",
         "config": {
           "incremental": false,
-          "dip": false,
+          "includeDip": false,
           "layout": "bagit",
         },
         "preservedCallback": "https://example.org/preserved_archives"
