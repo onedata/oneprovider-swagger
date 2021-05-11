@@ -11,19 +11,15 @@ properties:
 # TODO VFS-7616 use and rename metadataStructure
 #  metadataStructure:
 #    $ref: '#/definitions/ArchiveMetadataStructure'
-  callback:
-    $ref: '#/definitions/ArchivePreservedCallback'
 required:
   - incremental
   - includeDip
   - layout
 # TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure
-  - callback
 example:
   incremental: false
   includeDip: false
   layout: bagit
 # TODO VFS-7616 use and rename metadataStructure
-#  metaDataStructure: json
-  callback: "https://example.org/preserved_archives"
+#  metadataStructure: json

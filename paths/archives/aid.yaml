@@ -34,8 +34,9 @@ get:
           "incremental": false,
           "dip": false,
           "layout": "bagit",
-          "callback": "https://example.org/preserved_archives"
         },
+        "preservedCallback": "https://example.org/preserved_archives",
+        "purgedCallback": null,
         "description": "Archived dataset with experiment data from 2021."
     }
     ```
@@ -95,11 +96,13 @@ patch:
 
     ***Example cURL requests***
 
-    **Change archive description**
+    **Change archive description and callbacks**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID" \
     -H "Content-Type: application/json" -d '{
-        "description": "New archive description"
+        "description": "New archive description",
+        "preservedCallback": "https://archives.org/preserved_archives",
+        "purgedCallback": "https://archives.org/purged_archives"
     }'
     ```
   consumes:

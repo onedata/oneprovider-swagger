@@ -30,8 +30,8 @@ post:
           "incremental": false,
           "dip": false,
           "layout": "bagit",
-          "callback": "https://example.org/preserved_archives"
         },
+        "preservedCallback": "https://example.org/preserved_archives"
         "description": "Archived dataset with experiment data from 2021."
     }'
     ```

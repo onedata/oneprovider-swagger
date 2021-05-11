@@ -34,7 +34,7 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/init_purge" \
     -H "Content-Type: application/json" -d '{
-        "callback": "https://example.org/purged_archives"
+        "purgedCallback": "https://example.org/purged_archives"
     }'
     ```
   consumes:
@@ -73,4 +73,4 @@ post:
       required: false
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID callback=='https://example.org/purged_archives'"
+      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID purgedCallback=='https://example.org/purged_archives'"

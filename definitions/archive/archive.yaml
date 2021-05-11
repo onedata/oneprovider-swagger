@@ -21,6 +21,10 @@ properties:
     $ref: '#/definitions/ArchiveConfig'
   description:
     $ref: '#/definitions/ArchiveDescription'
+  preservedCallback:
+    $ref: '#/definitions/ArchivePreservedCallback'
+  purgedCallback:
+      $ref: '#/definitions/ArchivePurgedCallback'
 required:
   - state
   - archiveId
@@ -41,5 +45,6 @@ example:
     layout: bagit
     # TODO VFS-7616 use and rename metadataStructure
     #  metaDataStructure: json
-    callback: "https://example.org/preserved_archives"
+  preservedCallback: "https://example.org/preserved_archives"
+  purgedCallback: "https://example.org/purged_archives"
   description: "Archived dataset with experiment data from 2021."
