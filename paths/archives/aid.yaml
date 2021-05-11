@@ -30,10 +30,12 @@ get:
         "datasetId": "1f4b762b1380946e73aeca574c77f14c",
         "rootDirectoryId": "00000000006CB663736861726547756964233339643236366165646365",
         "creationTime": 1576152793,
-        "incremental": false,
-        "dip": false,
-        "layout": "bagit",
-        "callback": "https://example.org/preserved_archives",
+        "config": {
+          "incremental": false,
+          "dip": false,
+          "layout": "bagit",
+          "callback": "https://example.org/preserved_archives"
+        },
         "description": "Archived dataset with experiment data from 2021."
     }
     ```

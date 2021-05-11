@@ -1,5 +1,5 @@
 post:
-  operationId: archive_dataset
+  operationId: create_archive
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_archive
@@ -19,17 +19,19 @@ post:
 
     ***Example cURL requests***
 
-    **Archive dataset**
+    **Create archive from a dataset**
     <!--- TODO VFS-7616 add metadata structure to the example-->
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives" \
     -H "Content-Type: application/json" -d '{
         "datasetId": "$DATASET_ID",
-        "incremental": false,
-        "dip": false,
-        "layout": "bagit",
-        "callback": "https://example.org/preserved_archives",
+        "config": {
+          "incremental": false,
+          "dip": false,
+          "layout": "bagit",
+          "callback": "https://example.org/preserved_archives"
+        },
         "description": "Archived dataset with experiment data from 2021."
     }'
     ```
@@ -80,4 +82,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "cat archive_params.json | oneprovider-rest-cli archiveDataset -"
+      source: "cat archive_params.json | oneprovider-rest-cli createArchive -"

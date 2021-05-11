@@ -17,17 +17,8 @@ properties:
     description: Id of the hidden directory in the space where the archive is stored.
   creationTime:
     $ref: '#/definitions/Timestamp'
-  incremental:
-    $ref: '#/definitions/ArchiveIncremental'
-  includeDip:
-    $ref: '#/definitions/ArchiveIncludeDip'
-  layout:
-    $ref: '#/definitions/ArchiveLayout'
-# TODO VFS-7616 use and rename metadataStructure
-#  metadataStructure:
-#    $ref: '#/definitions/ArchiveMetadataStructure'
-  callback:
-    $ref: '#/definitions/ArchivePreservedCallback'
+  config:
+    $ref: '#/definitions/ArchiveConfig'
   description:
     $ref: '#/definitions/ArchiveDescription'
 required:
@@ -36,12 +27,7 @@ required:
   - datasetId
   - rootDirectoryId
   - creationTime
-  - incremental
-  - includeDip
-  - layout
-# TODO VFS-7616 use and rename metadataStructure
-#  - metadataStructure
-  - callback
+  - config
   - description
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
@@ -49,10 +35,11 @@ example:
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
-  incremental: false
-  includeDip: false
-  layout: bagit
-# TODO VFS-7616 use and rename metadataStructure
-#  metaDataStructure: json
-  callback: "https://example.org/preserved_archives"
+  config:
+    incremental: false
+    includeDip: false
+    layout: bagit
+    # TODO VFS-7616 use and rename metadataStructure
+    #  metaDataStructure: json
+    callback: "https://example.org/preserved_archives"
   description: "Archived dataset with experiment data from 2021."
