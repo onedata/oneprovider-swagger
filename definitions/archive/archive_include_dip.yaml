@@ -3,7 +3,6 @@ description: |
   <!--- TODO VFS-7616 refine archive params and their description-->
   This flag determines whether dissemination information package (DIP) is created alongside with
   archival information package (AIP), on the storage.
-  For more information on DIP and AIP please consult [Open Archival Information System]
-  (https://en.wikipedia.org/wiki/Open_Archival_Information_System).
+  For more information on DIP and AIP please consult [Open Archival Information System](https://en.wikipedia.org/wiki/Open_Archival_Information_System).
 default: false
 example: true

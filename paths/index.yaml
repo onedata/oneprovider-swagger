@@ -128,6 +128,9 @@
 
 # tag Archive
 
+/datasets/{did}/archives:
+  $ref: ./datasets/did/archives.yaml
+
 /archives:
   $ref: ./archives.yaml
 
@@ -136,9 +139,6 @@
 
 /archives/{aid}/init_purge:
   $ref: ./archives/aid/init_purge.yaml
-
-/datasets/{did}/archives:
-  $ref: ./datasets/did/archives.yaml
 
 # tag Monitoring
 /metrics/space/{sid}:

@@ -77,8 +77,8 @@ ArchiveCreateRequest:
 ArchiveDescription:
   $ref: ./archive/archive_description.yaml
 
-ArchiveDip:
-  $ref: ./archive/archive_dip.yaml
+ArchiveIncludeDip:
+  $ref: ./archive/archive_include_dip.yaml
 
 ArchiveIncremental:
   $ref: ./archive/archive_incremental.yaml

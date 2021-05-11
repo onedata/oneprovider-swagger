@@ -54,7 +54,7 @@ get:
   parameters:
     - name: qid
       in: path
-      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id
       type: string
       required: true
   x-code-samples:
@@ -105,7 +105,7 @@ delete:
   parameters:
     - name: qid
       in: path
-      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id
       type: string
       required: true
   x-code-samples:

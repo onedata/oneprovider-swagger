@@ -1,5 +1,5 @@
 type: object
-description: Archive dataset request.
+description: Archive create request.
 properties:
   datasetId:
     type: string
@@ -7,7 +7,7 @@ properties:
   incremental:
     $ref: '#/definitions/ArchiveIncremental'
   includeDip:
-    $ref: '#/definitions/ArchiveDip'
+    $ref: '#/definitions/ArchiveIncludeDip'
   layout:
     $ref: '#/definitions/ArchiveLayout'
 # TODO VFS-7616 use and rename metadataStructure
@@ -19,7 +19,6 @@ properties:
     $ref: '#/definitions/ArchiveDescription'
 required:
   - datasetId
-  - incremental
   - layout
 #   TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure

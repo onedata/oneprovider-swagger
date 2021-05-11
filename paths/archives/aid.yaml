@@ -9,8 +9,12 @@ get:
     - Archive
   x-bash-codegen-description: |
     Returns the basic information about an archive.
+
+    This operation requires `space_view_archives` privilege.
   description: |
     Returns the basic information about an archive.
+
+    This operation requires `space_view_archives` privilege.
 
     ***Example cURL requests***
 
@@ -120,7 +124,7 @@ patch:
   parameters:
     - name: aid
       in: path
-      description: Archive Id (e.g. 'ae6f78c89a97c9e78e891105f703bcb8')
+      description: Archive Id
       type: string
       required: true
     - name: data

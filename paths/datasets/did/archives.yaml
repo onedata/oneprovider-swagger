@@ -10,8 +10,11 @@ get:
   x-bash-codegen-description: |
     Returns the list of archives created from a specific dataset.
 
+    This operation requires `space_view_archives` privilege.
   description: |
     Returns the list of archives created from a specific dataset.
+
+    This operation requires `space_view_archives` privilege.
 
     ***Example cURL requests***
 

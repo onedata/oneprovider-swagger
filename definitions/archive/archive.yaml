@@ -20,7 +20,7 @@ properties:
   incremental:
     $ref: '#/definitions/ArchiveIncremental'
   includeDip:
-    $ref: '#/definitions/ArchiveDip'
+    $ref: '#/definitions/ArchiveIncludeDip'
   layout:
     $ref: '#/definitions/ArchiveLayout'
 # TODO VFS-7616 use and rename metadataStructure
