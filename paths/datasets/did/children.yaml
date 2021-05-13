@@ -62,14 +62,14 @@ get:
   parameters:
     - name: did
       in: path
-      description: Dataset Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Dataset Id
       type: string
       required: true
     - name: limit
       in: query
       description: >
         Allows specifying maximum number of entries that should be returned. If there are more
-        child datasets, they can be retrieved using `offset` query parameter.
+        child datasets, they can be retrieved using `offset` or `token` query parameters.
       type: integer
       required: false
       maximum: 1000

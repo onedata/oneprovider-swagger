@@ -76,4 +76,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli establishDataset rootFileId==$FILE_ID"
+      source: "cat dataset.json | oneprovider-rest-cli establishDataset -"

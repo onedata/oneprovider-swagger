@@ -1,0 +1,12 @@
+type: string
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  The layout of files and directories in an archive.
+
+  * `plain` - Structure of the data in the archive is an exact copy of the dataset.
+
+  * `bagit` - Data in the archive are stored in the [bagit format](https://tools.ietf.org/html/rfc8493).
+enum:
+  - plain
+  - bagit
+example: plain

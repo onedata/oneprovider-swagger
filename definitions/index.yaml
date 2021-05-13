@@ -68,6 +68,49 @@ Share:
 Shares:
   $ref: ./share/shares.yaml
 
+Archive:
+  $ref: ./archive/archive.yaml
+
+ArchiveConfig:
+  $ref: ./archive/archive_config.yaml
+
+ArchiveCreateRequest:
+  $ref: ./archive/archive_create_request.yaml
+
+ArchiveDescription:
+  $ref: ./archive/archive_description.yaml
+
+ArchiveIncludeDip:
+  $ref: ./archive/archive_include_dip.yaml
+
+ArchiveIncremental:
+  $ref: ./archive/archive_incremental.yaml
+
+ArchiveInitPurgeRequest:
+  $ref: ./archive/archive_init_purge_request.yaml
+
+ArchiveLayout:
+  $ref: ./archive/archive_layout.yaml
+
+# TODO VFS-7616 use and rename metadataStructure
+#ArchiveMetadataStructure:
+#  $ref: ./archive/archive_metadata_structure.yaml
+
+ArchivePreservedCallback:
+  $ref: ./archive/archive_preserved_callback.yaml
+
+ArchivePurgedCallback:
+  $ref: ./archive/archive_purged_callback.yaml
+
+ArchiveState:
+  $ref: ./archive/archive_state.yaml
+
+ArchiveUpdateRequest:
+  $ref: ./archive/archive_update_request.yaml
+
+Archives:
+  $ref: ./archive/archives.yaml
+
 DatasetProtectionFlags:
   $ref: ./dataset/dataset_protection_flags.yaml
 

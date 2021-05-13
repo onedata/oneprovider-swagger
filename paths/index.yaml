@@ -126,6 +126,19 @@
 /data/{id}/dataset/summary:
   $ref: ./data/id/dataset/summary.yaml
 
+# tag Archive
+
+/datasets/{did}/archives:
+  $ref: ./datasets/did/archives.yaml
+
+/archives:
+  $ref: ./archives.yaml
+
+/archives/{aid}:
+  $ref: ./archives/aid.yaml
+
+/archives/{aid}/init_purge:
+  $ref: ./archives/aid/init_purge.yaml
 
 # tag Monitoring
 /metrics/space/{sid}:

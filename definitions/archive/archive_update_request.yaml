@@ -1,0 +1,13 @@
+type: object
+description: Archive update request.
+properties:
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+  preservedCallback:
+    $ref: '#/definitions/ArchivePreservedCallback'
+  purgedCallback:
+    $ref: '#/definitions/ArchivePurgedCallback'
+example:
+  description: "Archived dataset with experiment data from 2019."
+  preservedCallback: https://archives.org/preserved_archives
+  purgedCallback: https://archives.org/purged_archives

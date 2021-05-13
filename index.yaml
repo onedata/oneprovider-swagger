@@ -27,6 +27,8 @@ tags:
     description: Shares related operations.
   - name: Dataset
     description: Datasets related operations.
+  - name: Archive
+    description: Archives related operations.
   - name: QoS
     description: QoS related operations.
   - name: Transfer
@@ -52,9 +54,10 @@ x-tagGroups:
   - name: Share management
     tags:
       - Share
-  - name: Dataset management
+  - name: Dataset & archive management
     tags:
       - Dataset
+      - Archive
   - name: Monitoring & metrics
     tags:
       - Monitoring

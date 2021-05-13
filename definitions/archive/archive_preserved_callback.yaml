@@ -1,0 +1,14 @@
+type: string
+description: |
+  URL on which POST request will be performed to notify that process of persisting an archive has finished.
+  The callback request will include body in the following JSON format:
+  ```
+  {
+      "archiveId": "$ARCHIVE_ID",
+      "datasetId" : "$DATASET_ID",
+      "error": "Error description"
+  }
+  ```
+
+  `"error"` field will have `null` value if archivisation has been finished successfully.
+example: https://example.org/preserved_archives

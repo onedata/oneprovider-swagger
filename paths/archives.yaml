@@ -1,0 +1,86 @@
+post:
+  operationId: create_archive
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_archive
+    aspect: instance
+  summary: Create archive from a dataset
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Creates an archive of a dataset - a snapshot of its data and metadata.
+
+    This operation requires `space_manage_datasets` and `space_create_archives` privileges.
+
+  description: |
+    Creates an archive of a dataset - a snapshot of its data and metadata.
+
+    This operation requires `space_manage_datasets` and `space_create_archives` privileges.
+
+    ***Example cURL requests***
+
+    **Create archive from a dataset**
+    <!--- TODO VFS-7616 add metadata structure to the example-->
+
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives" \
+    -H "Content-Type: application/json" -d '{
+        "datasetId": "$DATASET_ID",
+        "config": {
+          "incremental": false,
+          "includeDip": false,
+          "layout": "bagit",
+        },
+        "preservedCallback": "https://example.org/preserved_archives",
+        "purgedCallback": "https://example.org/purged_archives",
+        "description": "Archived dataset with experiment data from 2021."
+    }'
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the archive Id.
+        Also URI of the Archive in form https://$PROVIDER_HOST/api/v3/oneprovider/archives/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the Archive.
+          type: string
+      schema:
+        type: object
+        properties:
+          archiveId:
+            type: string
+            description: Archive Id.
+        example:
+          archiveId: ae6f78c89a97c9e78e891105f703bcb8
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: data
+      in: body
+      description: Dataset properties.
+      schema:
+        $ref: '#/definitions/ArchiveCreateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "cat archive_params.json | oneprovider-rest-cli createArchive -"

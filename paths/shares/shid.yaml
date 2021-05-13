@@ -55,7 +55,7 @@ get:
   parameters:
     - name: shid
       in: path
-      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id
       type: string
       required: true
   x-code-samples:
@@ -116,7 +116,7 @@ patch:
   parameters:
     - name: shid
       in: path
-      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id
       type: string
       required: true
     - name: data
@@ -186,7 +186,7 @@ delete:
   parameters:
     - name: shid
       in: path
-      description: Share Id (e.g. '1f4b762b1380946e73aeca574c77f14c')
+      description: Share Id
       type: string
       required: true
   x-code-samples:

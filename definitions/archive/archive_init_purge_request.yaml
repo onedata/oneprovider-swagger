@@ -1,0 +1,7 @@
+type: object
+description: Archive purge initialization request.
+properties:
+  purgedCallback:
+    $ref: '#/definitions/ArchivePurgedCallback'
+example:
+  purgedCallback: https://example.org/purged_archives
