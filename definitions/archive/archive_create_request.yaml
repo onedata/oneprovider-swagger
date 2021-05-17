@@ -14,13 +14,12 @@ properties:
     $ref: '#/definitions/ArchivePurgedCallback'
 required:
   - datasetId
-  - config
 example:
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   config:
     incremental: false
     includeDip: false
-    layout: bagit
+    layout: plain
     # TODO VFS-7616 use and rename metadataStructure
     #  metaDataStructure: json
   preservedCallback: https://example.org/preserved_archives

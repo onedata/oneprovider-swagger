@@ -11,4 +11,6 @@ description: |
   ```
 
   `"error"` field will have `null` value if archivisation has been finished successfully.
+
+  Requested server should response with `200` HTTP code.
 example: https://example.org/preserved_archives

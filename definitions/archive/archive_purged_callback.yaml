@@ -11,4 +11,6 @@ description: |
   ```
 
   `"error"` field will have `null` value if purging of an archive has been finished successfully.
+
+  Requested server should response with `200` HTTP code.
 example: https://example.org/purged_archives

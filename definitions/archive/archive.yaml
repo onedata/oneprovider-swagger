@@ -31,7 +31,6 @@ required:
   - datasetId
   - rootDirectoryId
   - creationTime
-  - config
   - description
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
@@ -42,7 +41,7 @@ example:
   config:
     incremental: false
     includeDip: false
-    layout: bagit
+    layout: plain
     # TODO VFS-7616 use and rename metadataStructure
     #  metaDataStructure: json
   preservedCallback: "https://example.org/preserved_archives"
