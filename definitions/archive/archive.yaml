@@ -25,6 +25,18 @@ properties:
     $ref: '#/definitions/ArchivePreservedCallback'
   purgedCallback:
       $ref: '#/definitions/ArchivePurgedCallback'
+  filesToArchive:
+    type: integer
+    description: Counter of files that have been scheduled to be archived.
+  filesArchived:
+    type: integer
+    description: Counter of successfully archived files.
+  filesFailed:
+    type: integer
+    description: Counter of files for which archiving process has failed.
+  totalSize:
+    type: integer
+    description: Total size of already archived files in bytes.
 required:
   - state
   - archiveId
@@ -32,6 +44,10 @@ required:
   - rootDirectoryId
   - creationTime
   - description
+  - filesToArchive
+  - filesArchived
+  - filesFailed
+  - totalSize
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
@@ -47,3 +63,7 @@ example:
   preservedCallback: "https://example.org/preserved_archives"
   purgedCallback: "https://example.org/purged_archives"
   description: "Archived dataset with experiment data from 2021."
+  filesToArchive: 8951
+  filesArchived: 7940
+  filesFailed: 3
+  totalSize: 879245378924537
