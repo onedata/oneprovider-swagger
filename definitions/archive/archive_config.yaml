@@ -11,15 +11,11 @@ properties:
 # TODO VFS-7616 use and rename metadataStructure
 #  metadataStructure:
 #    $ref: '#/definitions/ArchiveMetadataStructure'
-required:
-  - incremental
-  - includeDip
-  - layout
 # TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure
 example:
   incremental: false
   includeDip: false
-  layout: bagit
+  layout: plain
 # TODO VFS-7616 use and rename metadataStructure
 #  metadataStructure: json

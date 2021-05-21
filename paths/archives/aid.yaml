@@ -37,7 +37,11 @@ get:
         },
         "preservedCallback": "https://example.org/preserved_archives",
         "purgedCallback": null,
-        "description": "Archived dataset with experiment data from 2021."
+        "description": "Archived dataset with experiment data from 2021.",
+        "filesToArchive": 8951,
+        "filesArchived": 7940,
+        "filesFailed": 3,
+        "byteSize": 879245378924537
     }
     ```
   produces:

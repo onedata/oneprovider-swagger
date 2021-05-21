@@ -5,5 +5,7 @@ description: |
   changed since the previous archivization of the dataset.
   Unchanged files are preserved as hard links to the corresponding files in the previous archive.
   If set to `false`, all files belonging to the dataset are stored directly in the archive.
+
+  WARNING: Currently only `false` value of this option is supported.
 default: false
 example: true
