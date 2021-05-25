@@ -34,7 +34,7 @@ properties:
   filesFailed:
     type: integer
     description: Counter of files for which archiving process has failed.
-  byteSize:
+  bytesArchived:
     type: integer
     description: Total size of already archived files in bytes.
 required:
@@ -47,7 +47,7 @@ required:
   - filesToArchive
   - filesArchived
   - filesFailed
-  - byteSize
+  - bytesArchived
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
@@ -66,4 +66,4 @@ example:
   filesToArchive: 8951
   filesArchived: 7940
   filesFailed: 3
-  byteSize: 879245378924537
+  bytesArchived: 879245378924537
