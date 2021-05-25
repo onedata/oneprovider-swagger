@@ -41,7 +41,7 @@ get:
         "filesToArchive": 8951,
         "filesArchived": 7940,
         "filesFailed": 3,
-        "byteSize": 879245378924537
+        "bytesArchived": 879245378924537
     }
     ```
   produces:
