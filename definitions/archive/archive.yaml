@@ -12,7 +12,7 @@ properties:
   datasetId:
     type: string
     description: Id of the dataset from which the archive has been created.
-  rootDirectoryId:
+  parentDirectoryId:
     type: string
     description: Id of the hidden directory in the space where the archive is stored.
   creationTime:
@@ -25,34 +25,21 @@ properties:
     $ref: '#/definitions/ArchivePreservedCallback'
   purgedCallback:
       $ref: '#/definitions/ArchivePurgedCallback'
-  filesToArchive:
-    type: integer
-    description: Counter of files that have been scheduled to be archived.
-  filesArchived:
-    type: integer
-    description: Counter of successfully archived files.
-  filesFailed:
-    type: integer
-    description: Counter of files for which archiving process has failed.
-  bytesArchived:
-    type: integer
-    description: Total size of already archived files in bytes.
+  stats:
+      $ref: '#/definitions/ArchiveStats'
 required:
   - state
   - archiveId
   - datasetId
-  - rootDirectoryId
+  - parentDirectoryId
   - creationTime
   - description
-  - filesToArchive
-  - filesArchived
-  - filesFailed
-  - bytesArchived
+  - stats
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
   datasetId: 1f4b762b1380946e73aeca574c77f14c
-  rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
+  parentDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
   config:
     incremental: false
@@ -63,7 +50,7 @@ example:
   preservedCallback: "https://example.org/preserved_archives"
   purgedCallback: "https://example.org/purged_archives"
   description: "Archived dataset with experiment data from 2021."
-  filesToArchive: 8951
-  filesArchived: 7940
-  filesFailed: 3
-  bytesArchived: 879245378924537
+  stats:
+    filesArchived: 7940
+    filesFailed: 3
+    bytesArchived: 879245378924537
