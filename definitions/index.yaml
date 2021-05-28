@@ -105,6 +105,9 @@ ArchivePurgedCallback:
 ArchiveState:
   $ref: ./archive/archive_state.yaml
 
+ArchiveStats:
+  $ref: ./archive/archive_stats.yaml
+
 ArchiveUpdateRequest:
   $ref: ./archive/archive_update_request.yaml
 
