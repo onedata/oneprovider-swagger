@@ -1,0 +1,13 @@
+type: string
+description: |
+  The type of the file:
+  * `REG` - regular file.
+  * `DIR` - directory.
+  * `LNK` - hard link.
+  * `SYMLNK` - symbolic link.
+enum:
+  - REG
+  - DIR
+  - LNK
+  - SYMLNK
+example: REG

@@ -1,0 +1,17 @@
+type: string
+description: |
+  URL on which POST request will be performed to notify that process of purging an archive has finished.
+  The callback request will include body in the following JSON format:
+  ```
+  {
+      "archiveId": "$ARCHIVE_ID",
+      "datasetId": "$DATASET_ID",
+      "error": "Error description"
+  }
+  ```
+
+  `"error"` field will have `null` value if purging of an archive has been finished successfully.
+
+  Requested server should response with one of `2xx` HTTP codes. If the request fails or returns any
+  other HTTP code, it will be retried.
+example: https://example.org/purged_archives

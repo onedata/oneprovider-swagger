@@ -30,7 +30,7 @@ post:
     **Listen to space change events**
     ```bash
     curl -N -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/changes/metadata/$SPACE_ID" \
     -H "Content-Type: application/json" -d "@./changes_req.json"
     ```
 
@@ -42,7 +42,7 @@ post:
     '200':
       description: Subscription to events has been successful.
       schema:
-        $ref: '#/definitions/FileMetadataChange'
+        $ref: '#/definitions/MetadataChangesEvent'
     '400':
       description: Invalid request.
       schema:

@@ -1,0 +1,191 @@
+get:
+  operationId: get_dataset
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: instance
+  summary: Get dataset information
+  tags:
+    - Dataset
+  x-bash-codegen-description: |
+    Returns the basic information about a dataset.
+  description: |
+    Returns the basic information about a dataset.
+
+    ***Example cURL requests***
+
+    **Get the basic information about dataset**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+
+    {
+        "state": "attached",
+        "datasetId": "1f4b762b1380946e73aeca574c77f14c",
+        "parentId": null,
+        "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
+        "rootFileType": "DIR",
+        "rootFilePath": "/MySpace/dir",
+        "protectionFlags": ["data_protection"],
+        "creationTime": 1576152793
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The dataset information.
+      schema:
+        $ref: '#/definitions/Dataset'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getDataset did=$DATASET_ID"
+
+
+patch:
+  operationId: update_dataset
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: instance
+  summary: Update dataset
+  tags:
+    - Dataset
+  x-bash-codegen-description: |
+    Changes dataset properties.
+
+    This operation requires `space_manage_datasets` privilege.
+
+  description: |
+    Changes dataset properties.
+
+    This operation requires `space_manage_datasets` privilege.
+
+    ***Example cURL requests***
+
+    **Change dataset protection flags**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X PATCH "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID" \
+    -H "Content-Type: application/json" -d '{
+        "setProtectionFlags": ["metadata_protection"],
+        "unsetProtectionFlags": ["data_protection"]
+    }'
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: Dataset's properties has been changed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Dataset properties
+      schema:
+        $ref: '#/definitions/DatasetUpdateRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli updateDataset did=$DATASET_ID attached==true"
+
+
+delete:
+  operationId: remove_dataset
+  x-onedata-gri:
+    type: op_dataset
+    id: ?BINDING(did)
+    aspect: instance
+  summary: Remove dataset
+  tags:
+    - Dataset
+  x-bash-codegen-description: |
+    Removes a specific dataset. This procedure does not modify any files or directories
+    that were a part of the dataset.
+    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
+
+    This operation requires `space_manage_datasets` privilege.
+
+  description: |
+    Removes a specific dataset. This procedure does not modify any files or directories
+    that were a part of the dataset.
+    <!--- TODO VFS-7304 Add information that datasets can be deleted only if they have no archives -->
+
+    This operation requires `space_manage_datasets` privilege.
+
+    ***Example cURL requests***
+
+    **Remove dataset**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/datasets/$DATASET_ID"
+    ```
+  responses:
+    '204':
+      description: Dataset has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Dataset not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: did
+      in: path
+      description: Dataset Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeDataset did=$DATASET_ID"

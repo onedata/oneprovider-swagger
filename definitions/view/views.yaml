@@ -1,0 +1,18 @@
+type: object
+description: The list of views names.
+properties:
+  views:
+    type: array
+    description: List of space views
+    items:
+      type: string
+  nextPageToken:
+    $ref: '#/definitions/ListPageToken'
+required:
+  - views
+  - nextPageToken
+example:
+  views:
+    - images
+    - videos
+  nextPageToken: 8471726779817b3a

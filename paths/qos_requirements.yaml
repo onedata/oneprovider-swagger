@@ -20,7 +20,7 @@ post:
 
     **Add QoS requirement for file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/qos_requirements" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements" \
     -H "Content-Type: application/json" -d '{
         "expression": "country=FR",
         "replicasNum": 2,
@@ -34,9 +34,8 @@ post:
   responses:
     '201':
       description: >
-        The request has been accepted and the result is the QoS requirement Id
-        (e.g. 'fc05cfc92eda7a054b835bc1ee4a1372').
-        Also URI of the QoS requirement in form https://$HOST/api/v3/oneprovider/qos_requirements/{qid} is
+        The request has been accepted and the result is the QoS requirement Id.
+        Also URI of the QoS requirement in form https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements/{qid} is
         returned in the response `Location` header.
       headers:
         Location:

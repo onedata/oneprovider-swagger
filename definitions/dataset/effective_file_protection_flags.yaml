@@ -1,0 +1,27 @@
+type: array
+description: |
+  Effective file protection flags:
+
+  * `data_protection` - causes file/directory to be
+     protected from modifying its content.
+
+  * `metadata_protection` - causes file/directory to be
+     protected from modifying its metadata (custom metadata, ACL, etc.).
+
+  Requests to modify the data/metadata when protection is enabled will be rejected
+  with the EPERM POSIX error.
+
+  Protection flags are calculated as a union of protection flags of all
+  attached datasets to which the file belongs to.
+
+  Changing the protection flags may not have an immediate effect,
+  especially for files that were already opened before the change.
+
+  Note however that some basic readonly file attributes (such as e.g. `atime`
+  updated when a file is read) will be modified regardless.
+items:
+  type: string
+  enum:
+    - data_protection
+    - metadata_protection
+example: ["data_protection"]

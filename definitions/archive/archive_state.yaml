@@ -1,0 +1,20 @@
+type: string
+description: |
+  The state of the archive:
+
+  * `pending` - the archive creation has been scheduled, but the process of archiving data on the storage has not started yet,
+
+  * `building` - the process of archiving data on the storage is in progress,
+
+  * `preserved` - all data has been successfully archived on the storage,
+
+  * `failed` - an error occured during the process of archiving data on the storage,
+
+  * `purging` - the archive is being deleted. In the process, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+enum:
+  - pending
+  - building
+  - preserved
+  - failed
+  - purging
+example: preserved

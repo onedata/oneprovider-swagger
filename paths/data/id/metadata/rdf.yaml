@@ -19,7 +19,7 @@ get:
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
 
     <RDF><homepage>https://www.onedata.org</homepage></RDF>
     ```
@@ -27,7 +27,7 @@ get:
     - application/rdf+xml
   responses:
     '200':
-      description: Rdf metadata returned successfully.
+      description: Rdf metadata.
       schema:
         type: string
         example: <RDF><homepage>https://www.onedata.org</homepage></RDF>
@@ -53,6 +53,13 @@ get:
     description: Id of the file.
     type: string
     required: true
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getRdfMetadata id=$FILE_ID"
@@ -83,7 +90,7 @@ put:
     **Set RDF metadata for space from RDF file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf \
+    -X PUT https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf \
     -H "Content-Type: application/rdf+xml" -d "@./space1_dublincore.rdf"
     ```
   consumes:
@@ -119,6 +126,13 @@ put:
     required: true
     schema:
       type: string
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"
@@ -143,7 +157,7 @@ delete:
     **Remove file rdf metadata**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
     ```
   responses:
     '204':
@@ -170,6 +184,13 @@ delete:
       description: Id of the file.
       type: string
       required: true
+    - name: resolve_symlink
+      in: query
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
+      type: boolean
+      default: true
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeRdfMetadata id=$FILE_ID"

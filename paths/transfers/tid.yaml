@@ -20,7 +20,7 @@ get:
 
     **Get status of specific transfer**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
 
     {
         "type": "replication",
@@ -30,12 +30,10 @@ get:
         "spaceId": "6ec1a5413b6f4e2b01a5c85a8fd797e2",
         "dataSourceType": "file",
         "fileId": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873",
-        "path": "/space/tmp",
         "filePath": "/space/tmp",
         "transferStatus": "completed",
         "effectiveJobStatus": "completed",
         "replicationStatus": "completed",
-        "replicaEvictionStatus": "skipped",
         "evictionStatus": "skipped",
         "replicatingProviderId": "HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q",
         "evictingProviderId": null,
@@ -43,9 +41,7 @@ get:
         "filesToProcess": 1,
         "filesProcessed": 1,
         "filesReplicated": 1,
-        "fileReplicasEvicted": 0,
         "filesEvicted": 0,
-        "failedFiles": 0,
         "filesFailed": 0,
         "bytesReplicated": 10485760000,
         "scheduleTime": 1504688800,
@@ -131,7 +127,7 @@ delete:
 
     **Cancel specific transfer**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/transfers/$TRANSFER_ID"
     ```
 
   responses:

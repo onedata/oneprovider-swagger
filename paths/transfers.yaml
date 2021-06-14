@@ -59,7 +59,7 @@ post:
 
     **Create file replication**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$HOST/api/v3/oneprovider/transfers" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/transfers" \
     -H "Content-Type: application/json" -d '{
         "type": "replication",
         "replicatingProviderId": $PROVIDER_ID,
@@ -75,7 +75,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the transfer Id.
-        Also URI of the transfer in form https://$HOST/api/v3/oneprovider/transfers/{id} is
+        Also URI of the transfer in form https://$PROVIDER_HOST/api/v3/oneprovider/transfers/{id} is
         returned in the response `Location` header.
       headers:
         Location:

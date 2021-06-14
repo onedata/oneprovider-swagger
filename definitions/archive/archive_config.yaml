@@ -1,0 +1,21 @@
+type: object
+description: >
+  Parameters used to configure the process of creating an archive.
+properties:
+  incremental:
+    $ref: '#/definitions/ArchiveIncremental'
+  includeDip:
+    $ref: '#/definitions/ArchiveIncludeDip'
+  layout:
+    $ref: '#/definitions/ArchiveLayout'
+# TODO VFS-7616 use and rename metadataStructure
+#  metadataStructure:
+#    $ref: '#/definitions/ArchiveMetadataStructure'
+# TODO VFS-7616 use and rename metadataStructure
+#  - metadataStructure
+example:
+  incremental: false
+  includeDip: false
+  layout: plain
+# TODO VFS-7616 use and rename metadataStructure
+#  metadataStructure: json
