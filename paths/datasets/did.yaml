@@ -26,7 +26,9 @@ get:
         "rootFileType": "DIR",
         "rootFilePath": "/MySpace/dir",
         "protectionFlags": ["data_protection"],
-        "creationTime": 1576152793
+        "effectiveProtectionFlags": ["data_protection", "metadata_protection"],
+        "creationTime": 1576152793,
+        "archiveCount": 5
     }
     ```
   produces:

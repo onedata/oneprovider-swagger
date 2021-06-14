@@ -24,7 +24,7 @@ post:
     -H "Content-Type: application/json" -d '{
         "expression": "country=FR",
         "replicasNum": 2,
-        "fileId": $FILE_ID
+        "fileId": "'$FILE_ID'"
     }'
     ```
   consumes:

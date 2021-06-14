@@ -25,7 +25,7 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/datasets" \
     -H "Content-Type: application/json" -d '{
-        "rootFileId": $FILE_ID,
+        "rootFileId": "'$FILE_ID'",
         "protectionFlags": ["data_protection"]
     }'
     ```
