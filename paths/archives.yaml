@@ -25,7 +25,7 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives" \
     -H "Content-Type: application/json" -d '{
-        "datasetId": "$DATASET_ID",
+        "datasetId": "'$DATASET_ID'",
         "config": {
           "incremental": false,
           "includeDip": false,

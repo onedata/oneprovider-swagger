@@ -62,9 +62,9 @@ post:
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/transfers" \
     -H "Content-Type: application/json" -d '{
         "type": "replication",
-        "replicatingProviderId": $PROVIDER_ID,
+        "replicatingProviderId": "'$PROVIDER_ID'",
         "dataSourceType": "file",
-        "fileId": $FILE_ID
+        "fileId": "'$FILE_ID'"
     }'
     ```
   consumes:

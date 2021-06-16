@@ -36,7 +36,7 @@ post:
     **Create share**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/shares" \
-    -H "Content-Type: application/json" -d '{"name": "MyShare", "rootFileId": $FILE_ID}'
+    -H "Content-Type: application/json" -d '{"name": "MyShare", "rootFileId": "'$FILE_ID'"}'
     ```
   consumes:
     - application/json
