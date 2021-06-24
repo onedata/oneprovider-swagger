@@ -31,7 +31,8 @@ get:
         "rootDirectoryId": "00000000006CB663736861726547756964233339643236366165646365",
         "creationTime": 1576152793,
         "config": {
-          "incremental": false,
+          "incremental": true,
+          "baseArchiveId": "ae6f78c89a97c9e78e891105f703bcb8",
           "includeDip": false,
           "layout": "bagit",
         },

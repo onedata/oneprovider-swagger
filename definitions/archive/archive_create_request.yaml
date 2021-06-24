@@ -17,7 +17,8 @@ required:
 example:
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   config:
-    incremental: false
+    incremental: true
+    baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
     includeDip: false
     layout: plain
     # TODO VFS-7616 use and rename metadataStructure

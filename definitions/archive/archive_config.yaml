@@ -4,6 +4,8 @@ description: >
 properties:
   incremental:
     $ref: '#/definitions/ArchiveIncremental'
+  baseArchiveId:
+    $ref: '#/definitions/ArchiveBase'
   includeDip:
     $ref: '#/definitions/ArchiveIncludeDip'
   layout:
@@ -14,7 +16,8 @@ properties:
 # TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure
 example:
-  incremental: false
+  incremental: true
+  baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
   includeDip: false
   layout: plain
 # TODO VFS-7616 use and rename metadataStructure

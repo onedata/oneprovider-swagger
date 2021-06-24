@@ -71,6 +71,9 @@ Shares:
 Archive:
   $ref: ./archive/archive.yaml
 
+ArchiveBase:
+  $ref: ./archive/archive_base.yaml
+
 ArchiveConfig:
   $ref: ./archive/archive_config.yaml
 
