@@ -25,9 +25,11 @@ properties:
   preservedCallback:
     $ref: '#/definitions/ArchivePreservedCallback'
   purgedCallback:
-      $ref: '#/definitions/ArchivePurgedCallback'
+    $ref: '#/definitions/ArchivePurgedCallback'
   stats:
-      $ref: '#/definitions/ArchiveStats'
+    $ref: '#/definitions/ArchiveStats' 
+  baseArchive:
+    $ref: '#/definitions/ArchiveBase'
 required:
   - state
   - archiveId
@@ -36,6 +38,7 @@ required:
   - creationTime
   - description
   - stats
+  - baseArchive
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
@@ -44,7 +47,6 @@ example:
   creationTime: 1576152793
   config:
     incremental: true
-    baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
     includeDip: false
     layout: plain
     # TODO VFS-7616 use and rename metadataStructure
@@ -56,3 +58,4 @@ example:
     filesArchived: 7940
     filesFailed: 3
     bytesArchived: 879245378924537
+  baseArchive: ae6f78c89a97c9e78e891105f703bcb8

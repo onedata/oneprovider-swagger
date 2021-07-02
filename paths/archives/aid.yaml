@@ -32,7 +32,6 @@ get:
         "creationTime": 1576152793,
         "config": {
           "incremental": true,
-          "baseArchiveId": "ae6f78c89a97c9e78e891105f703bcb8",
           "includeDip": false,
           "layout": "bagit",
         },
@@ -43,7 +42,8 @@ get:
             "filesArchived": 7940,
             "filesFailed": 3,
             "bytesArchived": 879245378924537
-        }
+        },
+        "baseArchiveId": "ae6f78c89a97c9e78e891105f703bcb8",
     }
     ```
   produces:
