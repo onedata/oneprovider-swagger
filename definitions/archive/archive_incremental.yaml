@@ -1,8 +1,20 @@
-type: boolean
+type: object
 description: |
-  This flag determines whether archive is incremental - storing only files that have
-  changed in comparison to the base archive (consult description of the `baseArchiveId` parameter).
+  This field determines whether archive is incremental - storing only files that have
+  changed in comparison to the base archive (provided under the "basedOn" key).
   Unchanged files are preserved as hard links to the corresponding files in the base archive.
-  If set to `false`, all files belonging to the dataset are stored directly in the archive.
-default: false
-example: true
+  If does not enabled, all files belonging to the dataset are stored directly in the archive.
+properties:
+  enable: 
+    type: boolean
+  basedOn:
+    $ref: '#/definitions/ArchiveBase'
+default: {
+  enable: false
+}
+example: {
+  enable: true,
+  basedOn: ae6f78c89a97c9e78e891105f703bcb8
+}
+required:
+  - enable
