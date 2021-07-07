@@ -46,7 +46,8 @@ example:
   rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
   config:
-    incremental: true
+    incremental: 
+      enable: true
     includeDip: false
     layout: plain
     # TODO VFS-7616 use and rename metadataStructure
