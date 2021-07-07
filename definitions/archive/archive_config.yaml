@@ -15,7 +15,7 @@ properties:
 #  - metadataStructure
 example:
   incremental: {
-    enable: true
+    enabled: true
   }
   includeDip: false
   layout: plain

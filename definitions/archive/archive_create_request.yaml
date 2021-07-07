@@ -18,7 +18,7 @@ example:
   datasetId: 1f4b762b1380946e73aeca574c77f14c
   config:
     incremental: 
-      enable: true
+      enabled: true
       basedOn: ae6f78c89a97c9e78e891105f703bcb8
     includeDip: false
     layout: plain

@@ -47,7 +47,7 @@ example:
   creationTime: 1576152793
   config:
     incremental: 
-      enable: true
+      enabled: true
     includeDip: false
     layout: plain
     # TODO VFS-7616 use and rename metadataStructure

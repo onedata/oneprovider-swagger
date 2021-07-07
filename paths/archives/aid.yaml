@@ -31,7 +31,7 @@ get:
         "rootDirectoryId": "00000000006CB663736861726547756964233339643236366165646365",
         "creationTime": 1576152793,
         "config": {
-          "incremental": {"enable": true},
+          "incremental": {"enabled": true},
           "includeDip": false,
           "layout": "bagit",
         },

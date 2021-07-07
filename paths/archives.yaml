@@ -27,7 +27,7 @@ post:
     -H "Content-Type: application/json" -d '{
         "datasetId": "'$DATASET_ID'",
         "config": {
-          "incremental": {"enable": true},
+          "incremental": {"enabled": true},
           "includeDip": false,
           "layout": "bagit",
         },
