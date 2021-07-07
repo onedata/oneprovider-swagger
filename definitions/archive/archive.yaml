@@ -33,11 +33,11 @@ properties:
   relatedAipId:
     type: string
     description: >
-      Id of the related archival information package (AIP) archive.
+      Id of the related archival information package (AIP) archive. Can be null when there is no such archive.
   relatedDipId:
     type: string
     description: >
-      Id of the related dissemination information package (DIP) archive.
+      Id of the related dissemination information package (DIP) archive. Can be null when there is no such archive.
 required:
   - state
   - archiveId
