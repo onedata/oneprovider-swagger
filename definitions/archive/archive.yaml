@@ -12,11 +12,10 @@ properties:
   datasetId:
     type: string
     description: Id of the dataset from which the archive has been created.
-  rootFileId:
+  rootDirectoryId:
     type: string
     description: >
-      Id of the archive's root file or directory.
-      It is an archived version of the corresponding dataset's root.
+      Id of the hidden directory in the space where the archive is stored.
   creationTime:
     $ref: '#/definitions/Timestamp'
   config:
@@ -33,7 +32,7 @@ required:
   - state
   - archiveId
   - datasetId
-  - rootFileId
+  - rootDirectoryId
   - creationTime
   - description
   - stats
@@ -41,7 +40,7 @@ example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
   datasetId: 1f4b762b1380946e73aeca574c77f14c
-  rootFileId: 00000000006CB663736861726547756964233339643236366165646365
+  rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
   config:
     incremental: false

@@ -5,6 +5,7 @@ description: |
   archival information package (AIP), on the storage.
   For more information on DIP and AIP please consult [Open Archival Information System](https://en.wikipedia.org/wiki/Open_Archival_Information_System).
 
+  <!--- TODO VFS-7653 remove below warning after implementing DIP handling-->
   WARNING: Currently only `false` value of this option is supported.
 default: false
 example: true
