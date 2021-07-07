@@ -44,6 +44,8 @@ get:
             "bytesArchived": 879245378924537
         },
         "baseArchiveId": "ae6f78c89a97c9e78e891105f703bcb8",
+        "relatedAipId": "e891105f703bcb8ae6f78c89a97c9e78",
+        "relatedDipId": "78e891105f703bcb8ae6f78c89a97c9e"
     }
     ```
   produces:

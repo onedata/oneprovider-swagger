@@ -30,6 +30,14 @@ properties:
     $ref: '#/definitions/ArchiveStats' 
   baseArchiveId:
     $ref: '#/definitions/ArchiveBase'
+  relatedAipId:
+    type: string
+    description: >
+      Id of the related archival information package (AIP) archive.
+  relatedDipId:
+    type: string
+    description: >
+      Id of the related dissemination information package (DIP) archive.
 required:
   - state
   - archiveId
@@ -39,6 +47,8 @@ required:
   - description
   - stats
   - baseArchiveId
+  - relatedAipId
+  - relatedDipId
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
@@ -60,3 +70,5 @@ example:
     filesFailed: 3
     bytesArchived: 879245378924537
   baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
+  relatedAipId: e891105f703bcb8ae6f78c89a97c9e78
+  relatedDipId: 78e891105f703bcb8ae6f78c89a97c9e
