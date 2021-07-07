@@ -14,7 +14,9 @@ properties:
 # TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure
 example:
-  incremental: false
+  incremental: {
+    enabled: true
+  }
   includeDip: false
   layout: plain
 # TODO VFS-7616 use and rename metadataStructure
