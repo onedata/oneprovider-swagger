@@ -27,8 +27,11 @@ properties:
       - enqueued
       - pending
       - active
+      - aborting
       - finished
+      - cancelled
       - failed
+      - skipped
   scheduleTime:
     type: integer
     description: Schedule time in seconds (POSIX epoch timestamp).
@@ -66,8 +69,11 @@ properties:
             - enqueued
             - pending
             - active
+            - aborting
             - finished
+            - cancelled
             - failed
+            - skipped
         schemaId:
           type: string
           description: Id of the lane schema used for this execution.
@@ -87,8 +93,11 @@ properties:
                   - enqueued
                   - pending
                   - active
+                  - aborting
                   - finished
+                  - cancelled
                   - failed
+                  - skipped
               schemaId:
                 type: string
                 description: Id of the parallel box schema used for this execution.
