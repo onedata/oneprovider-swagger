@@ -1,0 +1,24 @@
+type: object
+description: Workflow execution create request.
+properties:
+  spaceId:
+    type: string
+    description: >
+      Id of the space in context of which the workflow will be executed.
+  atmWorkflowSchemaId:
+    type: string
+    description: >
+      Id of the workflow schema describing the tasks and stores for the workflow.
+  storeInitialValues:
+    type: object
+    description: Map with store schema Ids (keys) and corresponding initial values
+      for the stores.
+    additionalProperties: {}
+  callback:
+    type: string
+    description: >
+      Custom REST callback URL which will be called when the workflow execution
+      ends - a http `POST` request with workflow execution Id and status in body.
+required:
+  - spaceId
+  - atmWorkflowSchemaId

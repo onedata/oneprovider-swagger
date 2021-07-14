@@ -1,0 +1,11 @@
+type: string
+description: Overall status of the workflow execution.
+enum:
+  - scheduled
+  - preparing
+  - enqueued
+  - active
+  - aborting
+  - finished
+  - cancelled
+  - failed

@@ -167,3 +167,16 @@ TransferStatus:
 
 QueryViewParams:
   $ref: ./view/view_query_params.yaml
+
+
+AtmWorkflowExecutionScheduleRequest:
+  $ref: ./automation/execution/workflow_execution_schedule_request.yaml
+
+AtmWorkflowExecutionDetails:
+  $ref: ./automation/execution/workflow_execution_details.yaml
+
+AtmWorkflowExecutionStatus:
+  $ref: ./automation/execution/workflow_execution_status.yaml
+
+AtmWorkflowExecutionBlockStatus:
+  $ref: ./automation/execution/workflow_execution_block_status.yaml
