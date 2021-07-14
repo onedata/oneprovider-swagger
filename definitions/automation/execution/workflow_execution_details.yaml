@@ -1,5 +1,5 @@
 type: object
-description: File transfer status.
+description: Workflow execution details.
 properties:
   atmWorkflowExecutionId:
     type: string
@@ -11,27 +11,18 @@ properties:
       and stores for this workflow.
   name:
     type: string
-    description: Name of the workflow schema usd for this execution.
+    description: Name of the workflow schema used for this execution.
   atmInventoryId:
     type: string
     description: Id of automation inventory from which the workflow schema originates.
   spaceId:
     type: string
-    description: Id of space in context of which transfer was performed.
-  status:
+    description: Id of the space in context of which the workflow was executed.
+  userId:
     type: string
-    description: Overall status of the workflow execution.
-    enum:
-      - scheduled
-      - preparing
-      - enqueued
-      - pending
-      - active
-      - aborting
-      - finished
-      - cancelled
-      - failed
-      - skipped
+    description: Id of the scheduling user.
+  status:
+    $ref: '#/definitions/AtmWorkflowExecutionStatus'
   scheduleTime:
     type: integer
     description: Schedule time in seconds (POSIX epoch timestamp).
@@ -43,8 +34,7 @@ properties:
     description: Finish time in seconds (POSIX epoch timestamp).
   lambdaSnapshotRegistry:
     type: object
-    description: Map with lambda schema Ids (keys) and corresponding
-      schema snapshot Ids.
+    description: Map with lambda Ids (keys) and corresponding snapshot Ids.
     additionalProperties:
       type: string
   storeRegistry:
@@ -61,43 +51,21 @@ properties:
       description: Basic information about workflow execution's lane.
       properties:
         status:
-          type: string
+          $ref: '#/definitions/AtmWorkflowExecutionBlockStatus'
           description: Execution status of the lane.
-          enum:
-            - scheduled
-            - preparing
-            - enqueued
-            - pending
-            - active
-            - aborting
-            - finished
-            - cancelled
-            - failed
-            - skipped
         schemaId:
           type: string
           description: Id of the lane schema used for this execution.
         parallelBoxes:
           type: array
-          description: Details of parallel boxes in this workflow execution.
+          description: Details of parallel boxes in this lane execution.
           items:
             type: object
             description: Basic information about workflow execution's parallel box.
             properties:
               status:
-                type: string
+                $ref: '#/definitions/AtmWorkflowExecutionBlockStatus'
                 description: Execution status of the parallel box.
-                enum:
-                  - scheduled
-                  - preparing
-                  - enqueued
-                  - pending
-                  - active
-                  - aborting
-                  - finished
-                  - cancelled
-                  - failed
-                  - skipped
               schemaId:
                 type: string
                 description: Id of the parallel box schema used for this execution.
@@ -113,6 +81,7 @@ required:
   - name
   - atmInventoryId
   - spaceId
+  - userId
   - status
   - scheduleTime
   - startTime
@@ -126,6 +95,7 @@ example:
   name: test execution
   atmInventoryId: 2d180796daafcf15d586d29dd13dae48chd5fc
   spaceId: c17147cc3188408c26f522881282cb83ch9853
+  userId: 08c26cc228812c3188417147f582cb83ch9853
   status: enqueued
   scheduleTime: 1626107063
   startTime: 0

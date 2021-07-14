@@ -4,7 +4,7 @@ properties:
   spaceId:
     type: string
     description: >
-      Id of the space in which the workflow will be executed.
+      Id of the space in context of which the workflow will be executed.
   atmWorkflowSchemaId:
     type: string
     description: >
@@ -17,8 +17,8 @@ properties:
   callback:
     type: string
     description: >
-      Custom REST callback URL which will be called (http `POST` request with
-      workflow execution Id in body) when the workflow execution is complete.
+      Custom REST callback URL which will be called when the workflow execution
+      ends - a http `POST` request with workflow execution Id and status in body.
 required:
   - spaceId
   - atmWorkflowSchemaId

@@ -10,11 +10,15 @@ get:
   x-bash-codegen-description: |
     Returns the details of a specific workflow execution.
 
-    This operation requires `space_view_atm_workflow_executions` privilege.
+    This operation requires `space_view_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
   description: |
     Returns the details of a specific workflow execution.
 
-    This operation requires `space_view_atm_workflow_executions` privilege.
+    This operation requires `space_view_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
 
     ***Example cURL requests***
 
@@ -29,32 +33,33 @@ get:
         "name": "test execution",
         "atmInventoryId": "2d180796daafcf15d586d29dd13dae48chd5fc",
         "spaceId": "c17147cc3188408c26f522881282cb83ch9853",
+        "userId": "08c26cc228812c3188417147f582cb83ch9853",
         "status": "enqueued",
         "scheduleTime": 1626107063,
         "startTime": 0,
         "finishTime": 0,
         "lambdaSnapshotRegistry": {
-          "e412848d415329d81b7edd15c80b7740chf93f": "3946496fb29e3cf3faa96dbbd58d42d9ch9e3c"
+            "e412848d415329d81b7edd15c80b7740chf93f": "3946496fb29e3cf3faa96dbbd58d42d9ch9e3c"
         },
         "storeRegistry": {
-          "216a5de15ba9f8f3138168682c3da954212abf": "805392e2b84fb7e6ff5b31b4b7e70845ch1995"
+            "216a5de15ba9f8f3138168682c3da954212abf": "805392e2b84fb7e6ff5b31b4b7e70845ch1995"
         },
         "lanes": [
-          {
-            "status": "pending",
-            "schemaId": "3a1a829f714a41b043c4ce67402d8c136f125f",
-            "parallelBoxes": [
-              {
-                "taskRegistry": {
-                  "d92b861a5edfb08b920e0e80f4670a87f48176": "1697f7c1f46e0e22bb426bead5a3cb47chda3d"
-                },
+            {
                 "status": "pending",
-                "schemaId": "0068146d662adc878f699bf82af08b9ddbd9ab"
-              }
-            ]
-          }
+                "schemaId": "3a1a829f714a41b043c4ce67402d8c136f125f",
+                "parallelBoxes": [
+                    {
+                        "taskRegistry": {
+                            "d92b861a5edfb08b920e0e80f4670a87f48176": "1697f7c1f46e0e22bb426bead5a3cb47chda3d"
+                        },
+                        "status": "pending",
+                        "schemaId": "0068146d662adc878f699bf82af08b9ddbd9ab"
+                    }
+                ]
+            }
         ]
-      }
+    }
     ```
   produces:
     - application/json

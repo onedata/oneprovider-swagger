@@ -1,23 +1,27 @@
 post:
-  operationId: create_workflow_execution
+  operationId: schedule_workflow_execution
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_atm_workflow_execution
     aspect: instance
-  summary: Create workflow execution
+  summary: Schedule workflow execution
   tags:
     - Workflow execution
   x-bash-codegen-description: |
     Schedules a workflow execution based on specified workflow schema.
     The execution is asynchronous.
 
-    This operation requires `space_schedule_atm_workflow_executions` privilege.
+    This operation requires `space_schedule_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
 
   description: |
     Schedules a workflow execution based on specified workflow schema.
     The execution is asynchronous.
 
-    This operation requires `space_schedule_atm_workflow_executions` privilege.
+    This operation requires `space_schedule_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
 
     ***Example cURL requests***
 
@@ -28,15 +32,15 @@ post:
         "spaceId": "'$SPACE_ID'",
         "atmWorkflowSchemaId": "'$ATM_WORKFLOW_SCHEMA_ID'",
         "storeInitialValues": {
-          "de6d2e524459dd235f80aa8652a68879b5dbe9": [
-            {
-              "file_id": "0000000000523261677569642330376134636136616638613431366334386338343366356338643562323662"
-            }
-          ],
+            "de6d2e524459dd235f80aa8652a68879b5dbe9": [
+                {
+                    "file_id": "0000000000523261677569642330376134636136616638613431366334386338343366356338643562323662"
+                }
+            ],
             "83cf895501eb11f9bc71e4b2b41a252e8561b5": {
-              "file_id": "000000000052A6E0677569642334653938663463616538386232366437366539636462393634633031653733"
+                "file_id": "000000000052A6E0677569642334653938663463616538386232366437366539636462393634633031653733"
             }
-          }
+        }
         "callback": "https://my-server.example.com/execution-callback"
     }'
     ```
@@ -70,7 +74,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: Workflow execution with provided Id was not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -82,8 +86,8 @@ post:
       in: body
       description: Workflow execution properties.
       schema:
-        $ref: '#/definitions/AtmWorkflowExecutionCreateRequest'
+        $ref: '#/definitions/AtmWorkflowExecutionScheduleRequest'
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createWorkflowExecution spaceId==$SPACE_ID atmWorkflowSchemaId==$ATM_WORKFLOW_SCHEMA_ID callback==https://my-server.example.com/execution-callback"
+      source: "oneprovider-rest-cli scheduleWorkflowExecution spaceId==$SPACE_ID atmWorkflowSchemaId==$ATM_WORKFLOW_SCHEMA_ID callback==https://my-server.example.com/execution-callback"
