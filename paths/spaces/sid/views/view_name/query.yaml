@@ -63,7 +63,7 @@ get:
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/VIEW_NAME/query?skip=10&limit=4
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/VIEW_NAME/query?skip=10&limit=4
 
     [
         {
@@ -104,7 +104,7 @@ get:
 
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/$VIEW_NAME/query?spatial=true&stale=false
 
     [
         {
@@ -131,13 +131,13 @@ get:
     **Get file popularity for a specific space**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json
   responses:
     '200':
-      description: Query results returned successfully.
+      description: Query results.
       schema:
         type: array
         items:

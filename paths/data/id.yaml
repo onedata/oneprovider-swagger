@@ -20,7 +20,7 @@ get:
     **Get file size**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size"
 
     {
         "size": 100
@@ -60,7 +60,7 @@ get:
     description: >
       Name of attribute to query for. When accessing file via share mode
       following attributes are unavailable: `owner_id`, `storage_group_id`,
-      `storage_user_id`, `provider_id`
+      `storage_user_id`, `provider_id`, `hardlinks_count`
     type: string
     enum:
       - name
@@ -76,6 +76,8 @@ get:
       - shares
       - provider_id
       - file_id
+      - parent_id
+      - hardlinks_count
     required: false
   x-code-samples:
   - lang: Shell
@@ -117,7 +119,7 @@ put:
 
     **Set file POSIX mode**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID" \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" \
     -H 'Content-Type: application/json' -d '{ "mode": "0777" }'
     ```
   consumes:
@@ -184,7 +186,7 @@ delete:
 
     **Remove specific file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
     ```
 
   responses:

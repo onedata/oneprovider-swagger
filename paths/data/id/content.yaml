@@ -6,33 +6,83 @@ get:
     aspect: content
   tags:
     - Basic File Operations
-  summary: Download file content
+  summary: Download file or directory content
   x-bash-codegen-description: |
-    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    Partial file content download is also supported using
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
   description: |
-    Returns the content of file specified by [$FILE_ID](#operation/lookup_file_id).
-    Partial file content download is also supported using
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
 
-    ***Example cURL requests for file with `abcdefghijklmno` content***
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+
+    ***Example cURL requests***
 
     **Download entire file content**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content"
 
     abcdefghijklmno
     ```
 
     **Download only part of the file content**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content" \
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content" \
     -H "Range: bytes=5-8"
 
     fghi
+    ```
+
+    **Download a directory as tar archive**
+    ```bash
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content" | grep location
+    
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+    
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content?follow_symlinks=false"
     ```
 
   produces:
@@ -48,6 +98,12 @@ get:
       schema:
         type: string
         format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
     '400':
       description: Invalid request.
       schema:
@@ -70,6 +126,12 @@ get:
       description: Id of the file.
       type: string
       required: true
+    - name: follow_symlinks
+      in: query
+      description: Flag controlling whether symbolic links in requested download should be resolved.
+      required: false
+      type: boolean
+      default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
@@ -107,7 +169,7 @@ put:
     # originally, the file content is  "abcdefghijklmno"
 
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4" \
     -H "Content-Type: application/octet-stream" -d "WXYZ"
 
     # upon success, the file content is "abcdWXYZijklmno"

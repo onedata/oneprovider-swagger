@@ -20,7 +20,7 @@ get:
     **Get extended file attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
         "license": "CC-0"
@@ -80,6 +80,13 @@ get:
     type: boolean
     default: false
     required: false
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getXattrs id=$FILE_ID"
@@ -108,7 +115,7 @@ put:
     **Set extended file attribute**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs" \
     -H 'Content-Type: application/json' -d '{ "license": "CC-0" }'
     ```
   consumes:
@@ -145,6 +152,13 @@ put:
       type: object
       additionalProperties:
         type: string
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"
@@ -170,7 +184,7 @@ delete:
     **Remove specific file xattrs**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X DELETE https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs \
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs \
     -H 'Content-Type: application/json' -d '{ "keys": ["license"] }'
     ```
   responses:
@@ -210,6 +224,13 @@ delete:
             description: List of xattrs to remove.
             items:
               type: string
+    - name: resolve_symlink
+      in: query
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
+      type: boolean
+      default: true
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys=='[\"license\"]'"

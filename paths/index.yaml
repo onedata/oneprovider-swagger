@@ -52,6 +52,12 @@
 /data/{id}/distribution:
   $ref: ./data/id/distribution.yaml
 
+/data/{id}/hardlinks:
+  $ref: ./data/id/hardlinks.yaml
+
+/data/{id}/symlink_value:
+  $ref: ./data/id/symlink_value.yaml
+
 
 # tag Custom File Metadata
 /data/{id}/metadata/json:
@@ -66,49 +72,6 @@
 # tag File registration
 /data/register:
   $ref: ./data/register.yaml
-
-
-# tag Deprecated File Api
-/files/{path}:
-  $ref: ./deprecated/20_02/files-path.yaml
-
-/files-id/{id}:
-  $ref: ./deprecated/20_02/files_id-id.yaml
-
-/metadata/attrs/{path}:
-  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
-
-/metadata/xattrs/{path}:
-  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
-
-/metadata/json/{path}:
-  $ref: ./deprecated/20_02/metadata-json-path.yaml
-
-/metadata/rdf/{path}:
-  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
-
-/metadata-id/attrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
-
-/metadata-id/xattrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
-
-/metadata-id/json/{id}:
-  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
-
-/metadata-id/rdf/{id}:
-  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
-
-
-# tag Replica
-/replicas/{path}:
-  $ref: ./deprecated/20_02/replicas-path.yaml
-
-/replicas-id/{id}:
-  $ref: ./deprecated/20_02/replicas_id-fid.yaml
-
-/replicas-view/{view_name}:
-  $ref: ./deprecated/20_02/replicas_view-view_name.yaml
 
 
 # tag Transfer
@@ -132,8 +95,8 @@
 /qos_requirements/{qid}:
   $ref: ./qos_requirements/qid.yaml
 
-/data/{id}/qos_summary:
-  $ref: ./data/id/qos_summary.yaml
+/data/{id}/qos/summary:
+  $ref: ./data/id/qos/summary.yaml
   
 /spaces/{sid}/evaluate_qos_expression:
   $ref: ./spaces/sid/evaluate_qos_expression.yaml
@@ -145,6 +108,45 @@
 
 /shares/{shid}:
   $ref: ./shares/shid.yaml
+
+
+# tag Dataset
+/spaces/{sid}/datasets:
+  $ref: ./spaces/sid/datasets.yaml
+
+/datasets/{did}/children:
+  $ref: ./datasets/did/children.yaml
+
+/datasets:
+  $ref: ./datasets.yaml
+
+/datasets/{did}:
+  $ref: ./datasets/did.yaml
+
+/data/{id}/dataset/summary:
+  $ref: ./data/id/dataset/summary.yaml
+
+
+# tag Archive
+/datasets/{did}/archives:
+  $ref: ./datasets/did/archives.yaml
+
+/archives:
+  $ref: ./archives.yaml
+
+/archives/{aid}:
+  $ref: ./archives/aid.yaml
+
+/archives/{aid}/init_purge:
+  $ref: ./archives/aid/init_purge.yaml
+
+
+# tag Workflow execution
+/automation/execution/workflows:
+  $ref: ./automation/execution/workflows.yaml
+
+/automation/execution/workflows/{wid}:
+  $ref: ./automation/execution/workflows/wid.yaml
 
 
 # tag Monitoring

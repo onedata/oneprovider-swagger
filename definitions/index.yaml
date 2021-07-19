@@ -8,29 +8,35 @@ Configuration:
 Error:
   $ref: ./error.yaml
 
+Timestamp:
+  $ref: ./timestamp.yaml
+
+IsLast:
+  $ref: ./is_last.yaml
+
+ListPageToken:
+  $ref: ./list_page_token.yaml
+
 DirectoryChildren:
-  $ref: ./directory_children.yaml
+  $ref: ./data/directory_children.yaml
 
 FileDistribution:
-  $ref: ./file_distribution.yaml
+  $ref: ./data/file_distribution.yaml
 
-FilePath:
-  $ref: ./file_path.yaml
-
-Callback:
-  $ref: ./callback.yaml
+FileType:
+  $ref: ./data/file_type.yaml
 
 FileAttributes:
-  $ref: ./file_attributes.yaml
+  $ref: ./data/file_attributes.yaml
 
-FileMetadataChange:
-  $ref: ./file_metadata_change.yaml
+MetadataChangesEvent:
+  $ref: ./monitoring/metadata_changes_event.yaml
 
 FileRegistrationRequest:
-  $ref: ./file_registration_request.yaml
+  $ref: ./data/file_registration_request.yaml
 
 MetadataChangesStreamRequest:
-  $ref: ./metadata_changes_stream_request.yaml
+  $ref: ./monitoring/metadata_changes_stream_request.yaml
 
 Space:
   $ref: ./space.yaml
@@ -39,52 +45,138 @@ Provider:
   $ref: ./provider.yaml
 
 Metrics:
-  $ref: ./metrics.yaml
+  $ref: ./monitoring/metrics.yaml
 
 RRD:
-  $ref: ./rrd.yaml
+  $ref: ./monitoring/rrd.yaml
 
 View:
-  $ref: ./view.yaml
+  $ref: ./view/view.yaml
 
 Views:
-  $ref: ./views.yaml
+  $ref: ./view/views.yaml
 
 ViewOptions:
-  $ref: ./view_options.yaml
+  $ref: ./view/view_options.yaml
 
 ShareCreateRequest:
-  $ref: ./share_create_request.yaml
+  $ref: ./share/share_create_request.yaml
 
 Share:
-  $ref: ./share.yaml
+  $ref: ./share/share.yaml
 
 Shares:
-  $ref: ./shares.yaml
+  $ref: ./share/shares.yaml
+
+Archive:
+  $ref: ./archive/archive.yaml
+
+ArchiveBase:
+  $ref: ./archive/archive_base.yaml
+
+ArchiveConfig:
+  $ref: ./archive/archive_config.yaml
+
+ArchiveCreateRequest:
+  $ref: ./archive/archive_create_request.yaml
+
+ArchiveDescription:
+  $ref: ./archive/archive_description.yaml
+
+ArchiveIncludeDip:
+  $ref: ./archive/archive_include_dip.yaml
+
+ArchiveIncremental:
+  $ref: ./archive/archive_incremental.yaml
+
+ArchiveInitPurgeRequest:
+  $ref: ./archive/archive_init_purge_request.yaml
+
+ArchiveLayout:
+  $ref: ./archive/archive_layout.yaml
+
+# TODO VFS-7616 use and rename metadataStructure
+#ArchiveMetadataStructure:
+#  $ref: ./archive/archive_metadata_structure.yaml
+
+ArchivePreservedCallback:
+  $ref: ./archive/archive_preserved_callback.yaml
+
+ArchivePurgedCallback:
+  $ref: ./archive/archive_purged_callback.yaml
+
+ArchiveState:
+  $ref: ./archive/archive_state.yaml
+
+ArchiveStats:
+  $ref: ./archive/archive_stats.yaml
+
+ArchiveUpdateRequest:
+  $ref: ./archive/archive_update_request.yaml
+
+Archives:
+  $ref: ./archive/archives.yaml
+
+DatasetProtectionFlags:
+  $ref: ./dataset/dataset_protection_flags.yaml
+
+EffectiveFileProtectionFlags:
+  $ref: ./dataset/effective_file_protection_flags.yaml
+
+DatasetState:
+  $ref: ./dataset/dataset_state.yaml
+
+Dataset:
+  $ref: ./dataset/dataset.yaml
+
+DatasetSummary:
+  $ref: ./dataset/dataset_summary.yaml
+
+DatasetEstablishRequest:
+  $ref: ./dataset/dataset_establish_request.yaml
+
+DatasetUpdateRequest:
+  $ref: ./dataset/dataset_update_request.yaml
+
+Datasets:
+  $ref: ./dataset/datasets.yaml
 
 QosRequirement:
-  $ref: ./qos_requirement.yaml
+  $ref: ./qos/qos_requirement.yaml
 
 QosCreateRequest:
-  $ref: ./qos_create_request.yaml
+  $ref: ./qos/qos_create_request.yaml
 
 QosSummary:
-  $ref: ./qos_summary.yaml
+  $ref: ./qos/qos_summary.yaml
   
 StorageDetails:
   $ref: ./storage_details.yaml
 
 # Transfer create request and its subclasses
 TransferCreateRequest:
-  $ref: ./transfer/create_request.yaml
+  $ref: ./transfer/transfer_create_request.yaml
 file:
-  $ref: ./transfer/create_file_transfer_request.yaml
+  $ref: ./transfer/transfer_file_create_request.yaml
 view:
-  $ref: ./transfer/create_view_transfer_request.yaml
+  $ref: ./transfer/transfer_view_create_request.yaml
 
 TransferStatus:
-  $ref: ./transfer/status.yaml
+  $ref: ./transfer/transfer_status.yaml
 
 
 QueryViewParams:
-  $ref: ./views/query_view_params.yaml
+  $ref: ./view/view_query_params.yaml
+
+
+AtmWorkflowExecutionScheduleRequest:
+  $ref: ./automation/execution/workflow_execution_schedule_request.yaml
+
+AtmWorkflowExecutionDetails:
+  $ref: ./automation/execution/workflow_execution_details.yaml
+
+AtmWorkflowExecutionStatus:
+  $ref: ./automation/execution/workflow_execution_status.yaml
+
+AtmWorkflowExecutionBlockStatus:
+  $ref: ./automation/execution/workflow_execution_block_status.yaml

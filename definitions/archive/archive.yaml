@@ -1,0 +1,74 @@
+type: object
+description: >
+  Basic information about an archive.
+  Archive is a snapshot of a dataset at the certain moment.
+  It contains both data and metadata from the dataset.
+properties:
+  archiveId:
+    type: string
+    description: Archive Id.
+  state:
+    $ref: '#/definitions/ArchiveState'
+  datasetId:
+    type: string
+    description: Id of the dataset from which the archive has been created.
+  rootDirectoryId:
+    type: string
+    description: >
+      Id of the hidden directory in the space where the archive is stored.
+  creationTime:
+    $ref: '#/definitions/Timestamp'
+  config:
+    $ref: '#/definitions/ArchiveConfig'
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+  preservedCallback:
+    $ref: '#/definitions/ArchivePreservedCallback'
+  purgedCallback:
+    $ref: '#/definitions/ArchivePurgedCallback'
+  stats:
+    $ref: '#/definitions/ArchiveStats' 
+  baseArchiveId:
+    $ref: '#/definitions/ArchiveBase'
+  relatedAipId:
+    type: string
+    description: >
+      Id of the related archival information package (AIP) archive. Can be null when there is no such archive.
+  relatedDipId:
+    type: string
+    description: >
+      Id of the related dissemination information package (DIP) archive. Can be null when there is no such archive.
+required:
+  - state
+  - archiveId
+  - datasetId
+  - rootDirectoryId
+  - creationTime
+  - description
+  - stats
+  - baseArchiveId
+  - relatedAipId
+  - relatedDipId
+example:
+  archiveId: ae6f78c89a97c9e78e891105f703bcb8
+  state: preserved
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
+  creationTime: 1576152793
+  config:
+    incremental: 
+      enabled: true
+    includeDip: false
+    layout: plain
+    # TODO VFS-7616 use and rename metadataStructure
+    #  metaDataStructure: json
+  preservedCallback: "https://example.org/preserved_archives"
+  purgedCallback: "https://example.org/purged_archives"
+  description: "Archived dataset with experiment data from 2021."
+  stats:
+    filesArchived: 7940
+    filesFailed: 3
+    bytesArchived: 879245378924537
+  baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
+  relatedAipId: e891105f703bcb8ae6f78c89a97c9e78
+  relatedDipId: 78e891105f703bcb8ae6f78c89a97c9e

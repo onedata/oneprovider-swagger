@@ -1,0 +1,26 @@
+type: object
+properties:
+  datasets:
+    type: array
+    description: The list of dataset Ids.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dataset Id.
+        name:
+          type: string
+          description: Dataset's root file/directory name.
+  nextPageToken:
+    $ref: '#/definitions/ListPageToken'
+required:
+  - datasets
+  - nextPageToken
+example:
+  datasets:
+    - id: 1f4b762b1380946e73aeca574c77f14c
+      name: File1.txt
+    - id: 64233339643236366165646365626666
+      name: Dir2
+  nextPageToken: RGlyMjY0MjMzMzM5NjQzMjM2MzY2MTY1NjQ2MzY1NjI2NjY2

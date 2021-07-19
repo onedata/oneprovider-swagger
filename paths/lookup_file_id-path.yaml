@@ -18,7 +18,7 @@ post:
     **Lookup file id**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/lookup-file-id/MySpace/dir/readme.txt"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/lookup-file-id/MySpace/dir/readme.txt"
 
     {
       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
