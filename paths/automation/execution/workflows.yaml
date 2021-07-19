@@ -40,7 +40,7 @@ post:
             "83cf895501eb11f9bc71e4b2b41a252e8561b5": {
                 "file_id": "000000000052A6E0677569642334653938663463616538386232366437366539636462393634633031653733"
             }
-        }
+        },
         "callback": "https://my-server.example.com/execution-callback"
     }'
     ```
