@@ -151,7 +151,7 @@ QosSummary:
   $ref: ./qos/qos_summary.yaml
   
 QosRequirementAuditLog:
-  $ref: ./qos/qos_audit_log.yaml
+  $ref: ./qos/qos_requirement_audit_log.yaml
   
 StorageDetails:
   $ref: ./storage_details.yaml

@@ -1,5 +1,5 @@
 get:
-  operationId: get_qos_audit_log
+  operationId: get_qos_requirement_audit_log
   x-onedata-gri:
     type: op_qos
     id: ?BINDING(qid)
@@ -9,17 +9,19 @@ get:
   summary: Get QoS audit log
   x-bash-codegen-description: |
     Returns audit log of performed locally (on selected Oneprovider) files operations
-    that were result of given QoS entry.
+    that were result of given QoS requirement. The audit log stores logs concerning all 
+    files affected by a specific QoS requirement.
   description: |
     Returns audit log of performed locally (on selected Oneprovider) files operations
-    that were result of given QoS entry.
+    that were result of given QoS requirement. The audit log stores logs concerning all 
+    files affected by a specific QoS requirement.
 
     ***Example cURL requests***
 
     **Get QoS audit log**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements/$QOS_REQ_ID/audit_log"
+    curl -H "X-Auth-Token: $TOKEN" -X GET \ 
+    "https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements/$QOS_REQ_ID/audit_log?timestamp=1626334701662&offset=1"
 
     {
         "isLast": false,
@@ -35,7 +37,7 @@ get:
     - application/json
   responses:
     '200':
-      description: QoS requirement aduit log.
+      description: QoS requirement audit log.
       schema:
         $ref: '#/definitions/QosRequirementAuditLog'
     '400':
@@ -62,24 +64,29 @@ get:
       required: true
     - name: timestamp
       in: query
-      description: Lowest timestamp of audit log entry that should be returned.
+      description: >
+        Starting timestamp for listing - the listing will start with an entry
+        that has an equal or greater timestamp.
       type: integer
       required: false
       minimum: 0
-      default: 0
     - name: offset
       in: query
-      description: Offset of returned entries in relation to timestamp.
+      description: >
+        Offset from the beginning of the collection specifying starting point for listing
+        relative to timestamp.
       type: integer
       required: false
       default: 0
     - name: limit
       in: query
-      description: Maximum number of audit log entries that will be returned as a result.
+      description: >
+        Maximum number of entries that should be returned. If there are more entries,
+        they can be retrieved using `offset` or `timestamp` query parameters.
       type: integer
       required: false
       default: 1000
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getQosAuditLog qid=$QOS_REQ_ID timestamp=1626334701662 offset=1"
+      source: "oneprovider-rest-cli getQosRequirementAuditLog qid=$QOS_REQ_ID timestamp=1626334701662 offset=1"
 

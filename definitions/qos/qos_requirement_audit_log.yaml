@@ -12,7 +12,7 @@ properties:
       properties:
         timestamp: 
           type: integer
-          description: Timestamp of event described by entry.
+          description: UNIX epoch timestamp in seconds of event described by entry.
         fileId:
           type: string
           description: Id of file for which event occured.
