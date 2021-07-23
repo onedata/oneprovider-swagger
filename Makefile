@@ -5,15 +5,12 @@ SWAGGER_AGGREGATOR_IMAGE    ?= docker.onedata.org/swagger-aggregator:1.5.0
 SWAGGER_CLI_IMAGE           ?= docker.onedata.org/swagger-cli:1.5.0
 SWAGGER_BOOTPRINT_IMAGE     ?= docker.onedata.org/swagger-bootprint:1.5.0
 SWAGGER_MARKDOWN_IMAGE      ?= docker.onedata.org/swagger-gitbook:1.4.1
-
 SWAGGER_COWBOY_SERVER_IMAGE ?= docker.onedata.org/swagger-codegen:2.3.1-cowboy
-
+SWAGGER_BASH_CLIENT_IMAGE   ?= docker.onedata.org/swagger-codegen:VFS-6328
 # Updated/newer docker images for swagger codegen v2 and v3
 SWAGGER_PYTHON_CLIENT_IMAGE ?= swaggerapi/swagger-codegen-cli:2.4.20
 SWAGGER_OPENAPI_CLIENT_IMAGE ?= swaggerapi/swagger-codegen-cli-v3:3.0.26
 
-#SWAGGER_PYTHON_CLIENT_IMAGE ?= docker.onedata.org/swagger-codegen-official:ID-507bde287c
-SWAGGER_BASH_CLIENT_IMAGE   ?= docker.onedata.org/swagger-codegen:VFS-6328
 
 .PHONY : all swagger.json
 all : cowboy-server python-client bash-client doc-static doc-markdown
@@ -40,7 +37,7 @@ cowboy-server: validate
 python-client: validate
 	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/local -t ${SWAGGER_PYTHON_CLIENT_IMAGE} generate -i /local/swagger.json -l python -o /local/generated/python -c /local/python-config.json
 
-#Generate OpenAPI v3 stubbs 
+# Generate OpenAPI v3 stubs 
 python-client3:
 	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/local -t ${SWAGGER_OPENAPI_CLIENT_IMAGE} generate -i /local/openapi.json -l python -o /local/generated/python3 -c /local/python-config.json
 
