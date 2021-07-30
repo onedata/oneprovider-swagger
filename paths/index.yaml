@@ -95,6 +95,9 @@
 /qos_requirements/{qid}:
   $ref: ./qos_requirements/qid.yaml
 
+/qos_requirements/{qid}/audit_log:
+  $ref: ./qos_requirements/qid/audit_log.yaml
+
 /data/{id}/qos/summary:
   $ref: ./data/id/qos/summary.yaml
   
