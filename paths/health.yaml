@@ -1,0 +1,24 @@
+get:
+  operationId: health
+  x-onedata-gri:
+    type: op_provider
+    aspect: health
+    scope: public
+  summary: Perform health check
+  tags:
+    - Oneprovider
+  x-bash-codegen-description: |
+    Returns status code indicating oneprovider service health status.
+    This endpoint does not require authentication.
+  description: |
+    Returns status code indicating oneprovider service health status.
+    This endpoint does not require authentication.
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Service is healthy.
+    '500':
+      description: Internal server Error.
+      schema:
+        $ref: '#/definitions/Error'
