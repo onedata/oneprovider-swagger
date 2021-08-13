@@ -1,0 +1,327 @@
+get:
+  operationId: get_file_using_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_on_path
+  tags:
+    - Basic File Operations
+  summary: Get content of file under given path.
+  x-bash-codegen-description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+  description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Get files in space subdirectory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
+
+    {
+        "children": [
+            {
+                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
+                "name": "File1.txt"
+            },
+            {
+                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
+                "name": "Dir2"
+            }
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/DirectoryChildren'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory.
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of files that should be returned. If there are more files,
+        they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Offset from beginning of collection specifying starting point for listing.
+      type: integer
+      required: false
+      default: 0
+
+
+put:
+  operationId: create_file_on_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_on_path
+  summary: Create file
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
+  description: |
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
+    ***Example cURL requests***
+
+    **Create file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME"
+    -H "Content-Type: application/octet-stream" -d "@file.dat"
+
+    {
+       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    }
+    ```
+
+    **Create directory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=DIR"
+
+    {
+       "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    **Create hard link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+
+    {
+       "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
+    }
+    ```
+
+    **Create symbolic link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+
+    {
+       "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
+    }
+    ```
+  consumes:
+    - application/octet-stream
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the file Id.
+        Also URI of the file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the file.
+          type: string
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: file Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+    - name: path
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+    - name: name
+      in: query
+      description: Name of the file.
+      required: true
+      type: string
+    - name: type
+      in: query
+      description: Type of the file.
+      required: false
+      type: string
+      enum:
+        - REG
+        - DIR
+        - LNK
+        - SYMLNK
+      default: REG
+    - name: mode
+      in: query
+      description: POSIX file permissions in decimal format.
+      required: false
+      type: integer
+    - name: offset
+      in: query
+      description: Offset at which data sent as request body should be written to file.
+      required: false
+      type: integer
+      default: 0
+    - name: target_file_id
+      in: query
+      description: >
+        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+      required: false
+      type: string
+    - name: target_file_path
+      in: query
+      description: >
+        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+      required: false
+      type: string
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+
+
+
+
+delete:
+  operationId: remove_file_on_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_on_path
+  tags:
+    - Basic File Operations
+  summary: Remove file
+  x-bash-codegen-description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+  description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
+    ```
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File or directory Id
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Id of the parent directory.
+      required: true
+      type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"
+
