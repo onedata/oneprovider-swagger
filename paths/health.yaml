@@ -4,7 +4,7 @@ get:
     type: op_provider
     aspect: health
     scope: public
-  summary: Perform health check
+  summary: Check cluster health
   tags:
     - Oneprovider
   x-bash-codegen-description: |
@@ -19,6 +19,6 @@ get:
     '200':
       description: Service is healthy.
     '500':
-      description: Internal server Error.
+      description: Service is unhealthy.
       schema:
         $ref: '#/definitions/Error'
