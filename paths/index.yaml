@@ -151,8 +151,10 @@
 /metrics/space/{sid}:
   $ref: ./metrics-space-sid.yaml
 
-/metrics/space/{sid}/user/{uid}:
-  $ref: ./metrics-space-sid-user-uid.yaml
+# @TODO VFS-8297 currently disabled
+#/metrics/space/{sid}/user/{uid}:
+#  $ref: ./metrics-space-sid-user-uid.yaml
 
-/changes/metadata/{sid}:
-  $ref: ./changes-metadata-sid.yaml
+# @TODO VFS-8297 currently disabled
+#/changes/metadata/{sid}:
+#  $ref: ./changes-metadata-sid.yaml
