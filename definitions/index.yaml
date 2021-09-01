@@ -150,6 +150,9 @@ QosCreateRequest:
 QosSummary:
   $ref: ./qos/qos_summary.yaml
   
+QosRequirementAuditLog:
+  $ref: ./qos/qos_requirement_audit_log.yaml
+  
 StorageDetails:
   $ref: ./storage_details.yaml
 

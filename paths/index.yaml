@@ -11,6 +11,9 @@
 /test_image:
   $ref: ./test_image.yaml
 
+/health:
+  $ref: ./health.yaml
+
 
 # tag Space
 /spaces:
@@ -98,6 +101,9 @@
 /qos_requirements/{qid}:
   $ref: ./qos_requirements/qid.yaml
 
+/qos_requirements/{qid}/audit_log:
+  $ref: ./qos_requirements/qid/audit_log.yaml
+
 /data/{id}/qos/summary:
   $ref: ./data/id/qos/summary.yaml
   
@@ -153,11 +159,13 @@
 
 
 # tag Monitoring
-/metrics/space/{sid}:
-  $ref: ./metrics-space-sid.yaml
+# @TODO VFS-8297 currently disabled
+#/metrics/space/{sid}:
+#  $ref: ./metrics-space-sid.yaml
 
-/metrics/space/{sid}/user/{uid}:
-  $ref: ./metrics-space-sid-user-uid.yaml
+# @TODO VFS-8297 currently disabled
+#/metrics/space/{sid}/user/{uid}:
+#  $ref: ./metrics-space-sid-user-uid.yaml
 
 /changes/metadata/{sid}:
   $ref: ./changes-metadata-sid.yaml
