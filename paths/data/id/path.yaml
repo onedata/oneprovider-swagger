@@ -8,41 +8,90 @@ get:
     - Basic File Operations
   summary: Get content of file under given path.
   x-bash-codegen-description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
+    Returns content of file under given path.
 
   description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
+    Returns the content of a file or directory specified by path given in the url.
+
+    If requested file is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If requested file is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
 
     ***Example cURL requests***
 
-    **Get files in space subdirectory**
+    **Download entire file content**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/dir1/dir2/file"
 
-    {
-        "children": [
-            {
-                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
-                "name": "File1.txt"
-            },
-            {
-                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
-                "name": "Dir2"
-            }
-        ],
-        "isLast": true
-    }
+    abcdefghijklmno
+    ```
+
+    **Download only part of the file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/dir1/dir2/file" \
+    -H "Range: bytes=5-8"
+
+    fghi
+    ```
+
+    **Download a directory as tar archive**
+    ```bash
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_IDpath/dir1" | grep location
+
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1?follow_symlinks=false"
     ```
   produces:
-    - application/json
+    - application/octet-stream
   responses:
     '200':
-      description: The list of directory files and subdirectories.
+      description: Entire file content.
       schema:
-        $ref: '#/definitions/DirectoryChildren'
+        type: string
+        format: binary
+    '206':
+      description: Part(s) of file content.
+      schema:
+        type: string
+        format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
     '400':
       description: Invalid request.
       schema:
@@ -52,7 +101,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: Invalid path - file or directory not found.
+      description: File not found.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -70,23 +119,19 @@ get:
       description: Id of the parent directory.
       required: true
       type: string
-    - name: limit
-      in: query
-      description: >
-        Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
-      type: integer
-      required: false
-      maximum: 1000
-      minimum: 1
-      default: 1000
     - name: offset
       in: query
-      description: >
-        Offset from beginning of collection specifying starting point for listing.
-      type: integer
+      description: Offset at which data sent as request body should be written to file.
       required: false
+      type: integer
       default: 0
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
 
 
 put:
@@ -95,11 +140,11 @@ put:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: file_on_path
-  summary: Create file
+  summary: Create file under path
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    Creates file in the directory specified by path hiven in the url.
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
     is saved as file content.
@@ -129,7 +174,7 @@ put:
     **Create file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/$NAME"
     -H "Content-Type: application/octet-stream" -d "@file.dat"
 
     {
@@ -140,7 +185,7 @@ put:
     **Create directory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=DIR"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$DIR_NAME&type=DIR"
 
     {
        "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
@@ -150,7 +195,7 @@ put:
     **Create hard link**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
 
     {
        "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
@@ -160,7 +205,7 @@ put:
     **Create symbolic link**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
 
     {
        "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
@@ -261,8 +306,6 @@ put:
         format: binary
 
 
-
-
 delete:
   operationId: remove_file_on_path
   x-onedata-gri:
@@ -271,15 +314,15 @@ delete:
     aspect: file_on_path
   tags:
     - Basic File Operations
-  summary: Remove file
+  summary: Remove file under path
   x-bash-codegen-description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes file specified by path.
     In case of a directory, all its children are recursively removed - note that
     the operation will fail part-way if the client does not have permissions to
     remove some of the nested files/directories.
 
   description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes file specified by path.
     In case of a directory, all its children are recursively removed - note that
     the operation will fail part-way if the client does not have permissions to
     remove some of the nested files/directories.
@@ -288,7 +331,7 @@ delete:
 
     **Remove specific file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/path/dir1/file.txt"
     ```
 
   responses:
@@ -318,7 +361,7 @@ delete:
       required: true
     - name: path
       in: path
-      description: Id of the parent directory.
+      description: Relative path of file to delete.
       required: true
       type: string
   x-code-samples:
