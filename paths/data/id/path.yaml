@@ -31,7 +31,7 @@ get:
     **Download entire file content**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/dir1/dir2/file"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/dir1/dir2/file" \
 
     abcdefghijklmno
     ```
@@ -148,7 +148,6 @@ put:
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
     is saved as file content.
-    - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
     - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
@@ -157,11 +156,10 @@ put:
     `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
   description: |
-    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    Creates file in the directory specified by path hiven in the url.
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
     is saved as file content.
-    - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
     - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
@@ -179,16 +177,6 @@ put:
 
     {
        "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
-    }
-    ```
-
-    **Create directory**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$DIR_NAME&type=DIR"
-
-    {
-       "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
     }
     ```
 
@@ -270,7 +258,6 @@ put:
       type: string
       enum:
         - REG
-        - DIR
         - LNK
         - SYMLNK
       default: REG
