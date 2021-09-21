@@ -1,0 +1,49 @@
+description: Audit log of QoS requirement.
+type: object
+properties:
+  isLast:
+    type: boolean
+    description: >
+      Flag indicating whether last entry in audit log was listed.
+  auditLog:
+    type: array
+    items:
+      type: object
+      properties:
+        timestamp: 
+          type: integer
+          description: UNIX epoch timestamp in seconds of event described by entry.
+        fileId:
+          type: string
+          description: Id of file for which event occured.
+        status: 
+          type: string
+          enum:
+            - synchronized
+            - cancelled
+            - error
+        error:
+          type: string
+          description: Description of error if status is `error`.
+      required:
+        - timestamp
+        - fileId
+        - status
+required:
+  - isLast
+  - auditLog
+example:
+  isLast: false
+  auditLog: [
+    {
+      "timestamp": 1626334701662,
+      "fileId": "$FILE_ID",
+      "status": "synchronized"
+    },
+    {
+      "timestamp": 1626334701672,
+      "fileId": "$FILE_ID",
+      "status": "error",
+      "error": "Operation failed with POSIX error: enoent."
+    }
+  ]

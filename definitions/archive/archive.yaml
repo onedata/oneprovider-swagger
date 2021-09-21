@@ -25,9 +25,19 @@ properties:
   preservedCallback:
     $ref: '#/definitions/ArchivePreservedCallback'
   purgedCallback:
-      $ref: '#/definitions/ArchivePurgedCallback'
+    $ref: '#/definitions/ArchivePurgedCallback'
   stats:
-      $ref: '#/definitions/ArchiveStats'
+    $ref: '#/definitions/ArchiveStats' 
+  baseArchiveId:
+    $ref: '#/definitions/ArchiveBase'
+  relatedAipId:
+    type: string
+    description: >
+      Id of the related archival information package (AIP) archive. Can be null when there is no such archive.
+  relatedDipId:
+    type: string
+    description: >
+      Id of the related dissemination information package (DIP) archive. Can be null when there is no such archive.
 required:
   - state
   - archiveId
@@ -36,6 +46,9 @@ required:
   - creationTime
   - description
   - stats
+  - baseArchiveId
+  - relatedAipId
+  - relatedDipId
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
@@ -43,7 +56,8 @@ example:
   rootDirectoryId: 00000000006CB663736861726547756964233339643236366165646365
   creationTime: 1576152793
   config:
-    incremental: false
+    incremental: 
+      enabled: true
     includeDip: false
     layout: plain
     # TODO VFS-7616 use and rename metadataStructure
@@ -55,3 +69,6 @@ example:
     filesArchived: 7940
     filesFailed: 3
     bytesArchived: 879245378924537
+  baseArchiveId: ae6f78c89a97c9e78e891105f703bcb8
+  relatedAipId: e891105f703bcb8ae6f78c89a97c9e78
+  relatedDipId: 78e891105f703bcb8ae6f78c89a97c9e

@@ -68,7 +68,7 @@ get:
     curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
     ```
 
-    **Download a directory as tar archive in single request**
+    **Download a directory as tar archive in a single request**
     ```bash
     curl -L -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content"
@@ -77,6 +77,12 @@ get:
     **Resume download of a directory (previous download failed after 12345678 bytes)**
     ```bash
     curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content?follow_symlinks=false"
     ```
 
   produces:
@@ -120,6 +126,12 @@ get:
       description: Id of the file.
       type: string
       required: true
+    - name: follow_symlinks
+      in: query
+      description: Flag controlling whether symbolic links in requested download should be resolved.
+      required: false
+      type: boolean
+      default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
