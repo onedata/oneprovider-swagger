@@ -37,17 +37,17 @@
   $ref: /spaces/sid/views/view_name/query.yaml
 
 
-# tag File Path Resolution
+# tag File Path Operations
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
+
+/data/{id}/path/{path}:
+  $ref: ./data/id/path.yaml
 
 
 # tag Basic File Operations
 /data/{id}/children:
   $ref: ./data/id/children.yaml
-
-/data/{id}/path/{path}:
-  $ref: ./data/id/path.yaml
 
 /data/{id}:
   $ref: ./data/id.yaml

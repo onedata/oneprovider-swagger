@@ -169,7 +169,7 @@ delete:
     aspect: instance
   tags:
     - Basic File Operations
-  summary: Remove file
+  summary: Remove file by ID
   x-bash-codegen-description: |
     Removes file specified by [$FILE_ID](#operation/lookup_file_id).
     In case of a directory, all its children are recursively removed - note that
@@ -188,6 +188,7 @@ delete:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
     ```
+    See also [Remove file at path](#operation/remove_file_at_path).
 
   responses:
     '204':

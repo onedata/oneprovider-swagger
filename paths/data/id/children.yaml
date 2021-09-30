@@ -93,7 +93,7 @@ post:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file
+  summary: Create file in directory
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
@@ -121,6 +121,7 @@ post:
     When creating symbolic link with absolute path starting from specific space
     it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
     `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
 
     ***Example cURL requests***
 
@@ -164,6 +165,9 @@ post:
        "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
     }
     ```
+
+    See also [Create file at path](#operation/create_file_at_path).
+
   consumes:
     - application/octet-stream
   produces:

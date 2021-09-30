@@ -13,7 +13,7 @@ tags:
     description: Spaces related operations.
   - name: View
     description: Views related operations.
-  - name: File Path Resolution
+  - name: File Path Operations
     description: Files and Directories path resolution operations.
   - name: Basic File Operations
     description: Files and Directories basic operations.
@@ -44,7 +44,7 @@ x-tagGroups:
       - View
   - name: File access & management
     tags:
-      - File Path Resolution
+      - File Path Operations
       - Basic File Operations
       - File Distribution
       - Custom File Metadata
