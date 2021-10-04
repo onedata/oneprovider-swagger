@@ -1,0 +1,58 @@
+get:
+  operationId: is_hardlink_to_file
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: "{hardlinks, ?OBJECTID_BINDING(hid)}"
+  tags:
+    - Basic File Operations
+  summary: Check whether is a hard link to a file
+  x-bash-codegen-description: |
+    Checks whether given files specified by [$FILE_ID](#operation/lookup_file_id) are 
+    hardlinks to the same file.
+
+  description: |
+    Checks whether given files specified by [$FILE_ID](#operation/lookup_file_id) are 
+    hardlinks to the same file.
+
+    **Check whether is a hard link to a file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID1/hardlinks/$FILE_ID2"
+    ```
+
+  produces:
+    - application/json
+  responses:
+    '204':
+      description: Given files are hard links to the same file.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File Id.
+      type: string
+      required: true
+    - name: hid
+      in: path
+      description: File Id.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli isHardlinkToFile id=$FILE_ID1 hid=$FILE_ID2"
