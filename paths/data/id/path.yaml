@@ -1,12 +1,12 @@
 get:
-  operationId: download_content_by_path
+  operationId: download_file_content_by_path
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: file_at_path
   tags:
     - Path-based File Operations
-  summary: Download file content at path
+  summary: Download file content by path
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by path given in the URL.
 
@@ -158,7 +158,7 @@ put:
     - Path-based File Operations
   x-bash-codegen-description: |
     Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
-    If the parent path does not exist and `parent` flag is set to true, the operation will attempt to create
+    If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
     intermediate parent directories.
 
     The first element of the path provided in the URL must be an ID of the base directory, relative to which
@@ -178,7 +178,7 @@ put:
 
   description: |
     Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
-    If the parent path does not exist and `parent` flag is set to true, the operation will attempt to create
+    If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
     intermediate parent directories.
 
     The first element of the path provided in the URL must be an ID of the base directory, relative to which
@@ -308,12 +308,12 @@ put:
       description: POSIX file permissions in decimal format.
       required: false
       type: integer
-    - name: parents
+    - name: create_parents
       in: query
       description: Allows to create unexistient directories specified in path parameter.
       required: false
       type: boolean
-      default: true
+      default: false
     - name: offset
       in: query
       description: Offset at which data sent as request body should be written to file.

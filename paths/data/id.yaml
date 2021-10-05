@@ -169,7 +169,7 @@ delete:
     aspect: instance
   tags:
     - ID-based File Operations
-  summary: Remove file by ID
+  summary: Remove file
   x-bash-codegen-description: |
     Removes file specified by [$FILE_ID](#operation/lookup_file_id).
     In case of a directory, all its children are recursively removed - note that

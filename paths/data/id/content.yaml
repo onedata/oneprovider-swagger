@@ -6,7 +6,7 @@ get:
     aspect: content
   tags:
     - ID-based File Operations
-  summary: Download file content by ID
+  summary: Download file content
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -86,7 +86,7 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content?follow_symlinks=false"
     ```
 
-    See also [Download file content at path](#operation/download_content_by_path).
+    See also [Download file content at path](#operation/download_file_content_by_path).
 
   produces:
     - application/octet-stream

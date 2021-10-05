@@ -102,30 +102,24 @@ description: |
   ## Data
 
   The Onedata system organizes all user data into logical containers called spaces.
-  Please refer to this chapter for details about this concept and how the logical files
-  are mapped to their physical content on storage backends.
+  <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
+  <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
+
 
   ### File path and ID
-  Files and directories in Onedata can be globally identified using unique file IDs or logical paths.
+  Files and directories in Onedata can be globally identified using unique File IDs or logical paths.
   Whenever possible, it is recommended to use File IDs, due to better performance and no need for escaping or encoding.
 
   ### File path
-  All logical paths in Onedata use the slash / delimiter and must start with a space name:
+  All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
   ```bash
   /CMS 1/file.txt
   /MyExperiment/directory/subdirectory/image.jpg
   ```
-  The path-based navigation is used mainly in the Web GUI and Oneclient interfaces.
 
-  Web GUI - the path is represented in the file browser's breadcrumbs.
+  **REST API**
 
-  Oneclient - please remember that some characters in paths should be properly escaped.
-  ```bash
-  cat /CMS\ 1/file.txt
-  ```
-
-  REST or CDMI API - referencing by path should be avoided,
-  otherwise make sure to urlencode the path if its the part of an URL:
+  When referencing files by path in the REST API, make sure to urlencode the path in the URL:
   ```bash
   {...}/CMS%201/file.txt
   ```
@@ -134,11 +128,12 @@ description: |
 
   File ID is a unique, global identifier associated with a file or directory and can be used universally
   in the REST and CDMI APIs. There are several ways to find out the File ID of given file or directory:
+  <!---  @TODO VFS-7218 remove redundant information and provide a link to the new docs -->
 
-  Web GUI - click on Information in the file/directory context menu and look for File ID
+  **Web GUI** - click on Information in the file/directory context menu and look for File ID.
 
-  REST API - use the File ID resolution endpoint. Below example returns the File ID of
-  /CMS 1/file.txt, where CMS 1 is the space name
+  **REST API** - use the File ID resolution endpoint. Below example returns the File ID of
+  `/CMS 1/file.txt`, where `CMS 1` is the space name:
 
   ```bash
   curl -H "X-Auth-Token: ${ACCESS_TOKEN}" \
@@ -150,19 +145,23 @@ description: |
 
   ### SPACE ID
 
-  Space ID is a unique, global identifier associated with a space and can be used universally in the REST and CDMI APIs.
+  Space ID is a unique, global identifier associated with a space and can be used universally in the REST APIs.
 
-  To find out the SPACE ID click on Overview in the Data/INFO context menu and look for ID.
+  **Web GUI** - click on Information in the file/directory context menu and look for Space ID.
 
-  Can be used alternatively with space root directory FILE ID.
+  **REST API** - use the [Get all user spaces](#operation/get_all_spaces) endpoint.
 
-  **Remove specific file by parent as SPACE ID **
+  The Space ID can be used interchangeably with the space root directory's File ID in the path-based enpoints.
+
+  **Remove specific file relative to the space root**
   ```bash
   curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_ID/path/dir1/file.txt"
+  # is equivalent to
+  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_ROOT_FILE_ID/path/dir1/file.txt"
   ```
-  **Remove specific file by parent as FILE ID **
+  **Remove specific file relative to any parent directory**
   ```bash
-  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/path/dir1/file.txt"
+  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_FILE_ID/path/dir1/file.txt"
   ```
 
 x-bash-codegen-description: |
@@ -251,6 +250,72 @@ x-bash-codegen-description: |
   ```
 
   More detailed examples are available in the documentation of each operation.
+
+
+  ## Data
+
+  The Onedata system organizes all user data into logical containers called spaces.
+  <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
+  <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
+
+
+  ### File path and ID
+  Files and directories in Onedata can be globally identified using unique File IDs or logical paths.
+  Whenever possible, it is recommended to use File IDs, due to better performance and no need for escaping or encoding.
+
+  ### File path
+  All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
+  ```bash
+  /CMS 1/file.txt
+  /MyExperiment/directory/subdirectory/image.jpg
+  ```
+
+  **REST API**
+
+  When referencing files by path in the REST API, make sure to urlencode the path in the URL:
+  ```bash
+  {...}/CMS%201/file.txt
+  ```
+
+  ### File ID
+
+  File ID is a unique, global identifier associated with a file or directory and can be used universally
+  in the REST and CDMI APIs. There are several ways to find out the File ID of given file or directory:
+  <!---  @TODO VFS-7218 remove redundant information and provide a link to the new docs -->
+
+  **Web GUI** - click on Information in the file/directory context menu and look for File ID.
+
+  **REST API** - use the File ID resolution endpoint. Below example returns the File ID of
+  `/CMS 1/file.txt`, where `CMS 1` is the space name:
+
+  ```bash
+  curl -H "X-Auth-Token: ${ACCESS_TOKEN}" \
+  -X POST "https://${ONEPROVIDER_DOMAIN}/api/v3/oneprovider/lookup-file-id/CMS%201/file.txt"
+  {
+      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+  }
+  ```
+
+  ### SPACE ID
+
+  Space ID is a unique, global identifier associated with a space and can be used universally in the REST APIs.
+
+  **Web GUI** - click on Information in the file/directory context menu and look for Space ID.
+
+  **REST API** - use the [Get all user spaces](#operation/get_all_spaces) endpoint.
+
+  The Space ID can be used interchangeably with the space root directory's File ID in the path-based enpoints.
+
+  **Remove specific file relative to the space root**
+  ```bash
+  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_ID/path/dir1/file.txt"
+  # is equivalent to
+  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_ROOT_FILE_ID/path/dir1/file.txt"
+  ```
+  **Remove specific file relative to any parent directory**
+  ```bash
+  curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_FILE_ID/path/dir1/file.txt"
+  ```
 
 contact:
   name: Onedata support
