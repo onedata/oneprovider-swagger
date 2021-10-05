@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: children
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories for directory
@@ -95,7 +95,7 @@ post:
     aspect: child
   summary: Create file in directory
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   x-bash-codegen-description: |
     Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
     The file can be of type:

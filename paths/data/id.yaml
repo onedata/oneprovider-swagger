@@ -6,7 +6,7 @@ get:
     aspect: attrs
   summary: Get file attributes
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   x-bash-codegen-description: |
     This method returns either all or only selected basic attributes associated
     with file specified by [$FILE_ID](#operation/lookup_file_id).
@@ -93,7 +93,7 @@ put:
     aspect: attrs
   summary: Set file attribute
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   x-bash-codegen-description: |
     This method allows to set a value of a regular file attribute
     for a file specified by [$FILE_ID](#operation/lookup_file_id).
@@ -168,7 +168,7 @@ delete:
     id: ?OBJECTID_BINDING(id)
     aspect: instance
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   summary: Remove file by ID
   x-bash-codegen-description: |
     Removes file specified by [$FILE_ID](#operation/lookup_file_id).

@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: content
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   summary: Download file content by ID
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
@@ -148,7 +148,7 @@ put:
     aspect: content
   summary: Update file content
   tags:
-    - Basic File Operations
+    - ID-based File Operations
   x-bash-codegen-description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
     The `offset` query parameter can be used to start writing from a certain byte

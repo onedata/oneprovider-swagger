@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: file_at_path
   tags:
-    - File Path Operations
+    - Path-based File Operations
   summary: Download file content at path
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by path given in the URL.
@@ -155,7 +155,7 @@ put:
     aspect: file_at_path
   summary: Create file at path
   tags:
-    - File Path Operations
+    - Path-based File Operations
   x-bash-codegen-description: |
     Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
     If the parent path does not exist and `parent` flag is set to true, the operation will attempt to create
@@ -348,7 +348,7 @@ delete:
     id: ?OBJECTID_BINDING(id)
     aspect: file_at_path
   tags:
-    - File Path Operations
+    - Path-based File Operations
   summary: Remove file at path
   x-bash-codegen-description: |
     Removes file specified by path given in the URL.

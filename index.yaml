@@ -13,9 +13,9 @@ tags:
     description: Spaces related operations.
   - name: View
     description: Views related operations.
-  - name: File Path Operations
+  - name: Path-based File Operations
     description: Files and Directories path resolution operations.
-  - name: Basic File Operations
+  - name: ID-based File Operations
     description: Files and Directories basic operations.
   - name: File Distribution
     description: Operations concerning file distribution.
@@ -44,8 +44,8 @@ x-tagGroups:
       - View
   - name: File access & management
     tags:
-      - File Path Operations
-      - Basic File Operations
+      - Path-based File Operations
+      - ID-based File Operations
       - File Distribution
       - Custom File Metadata
       - File registration
