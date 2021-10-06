@@ -1,31 +1,36 @@
 get:
-  operationId: is_hardlink_to_file
+  operationId: test_for_hardlink_between_files
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: "{hardlinks, ?OBJECTID_BINDING(hid)}"
   tags:
     - Basic File Operations
-  summary: Check whether is a hard link to a file
+  summary: Test for hard link between files
   x-bash-codegen-description: |
-    Checks whether given files specified by [$FILE_ID](#operation/lookup_file_id) are 
-    hardlinks to the same file.
+    Checks whether one file is a hard link to the other one. Both files are specified by
+    [$FILE_ID](#operation/lookup_file_id). The relation is symmetric; the order of the
+    files in the URL does not matter.
 
   description: |
-    Checks whether given files specified by [$FILE_ID](#operation/lookup_file_id) are 
-    hardlinks to the same file.
+    Checks whether one file is a hard link to the other one. Both files are specified by
+    [$FILE_ID](#operation/lookup_file_id). The relation is symmetric; the order of the
+    files in the URL does not matter.
 
-    **Check whether is a hard link to a file**
+    **Test for hard link between files**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID1/hardlinks/$FILE_ID2"
+    
+    # return code = 0 (HTTP code = 204) -> true
+    # return code != 0 (HTTP code = 404) -> false
     ```
 
   produces:
     - application/json
   responses:
     '204':
-      description: Given files are hard links to the same file.
+      description: A hard link does exist between the files..
     '400':
       description: Invalid request.
       schema:
@@ -35,7 +40,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: No hard link exists between the files.
       schema:
         $ref: '#/definitions/Error'
     '500':
@@ -45,14 +50,14 @@ get:
   parameters:
     - name: id
       in: path
-      description: File Id.
+      description: First File Id.
       type: string
       required: true
     - name: hid
       in: path
-      description: File Id.
+      description: Second File Id.
       type: string
       required: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli isHardlinkToFile id=$FILE_ID1 hid=$FILE_ID2"
+    source: "oneprovider-rest-cli testForHardlinkBetweenFiles id=$FILE_ID1 hid=$FILE_ID2"
