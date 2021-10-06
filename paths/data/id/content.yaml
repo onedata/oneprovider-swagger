@@ -1,12 +1,12 @@
 get:
-  operationId: download_file_content
+  operationId: download_file_content_by_id
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: content
   tags:
-    - ID-based File Operations
-  summary: Download file content
+    - Basic File Operations
+  summary: Download file content by ID
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -137,7 +137,7 @@ get:
       default: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
+    source: "oneprovider-rest-cli downloadFileContentById id=$FILE_ID"
 
 
 put:
@@ -148,7 +148,7 @@ put:
     aspect: content
   summary: Update file content
   tags:
-    - ID-based File Operations
+    - Basic File Operations
   x-bash-codegen-description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
     The `offset` query parameter can be used to start writing from a certain byte

@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: children
   tags:
-    - ID-based File Operations
+    - Basic File Operations
   summary: List directory files and subdirectories
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories for directory
@@ -88,14 +88,14 @@ get:
 
 
 post:
-  operationId: create_file
+  operationId: create_file_by_id
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file in directory
+  summary: Create file in directory by ID
   tags:
-    - ID-based File Operations
+    - Basic File Operations
   x-bash-codegen-description: |
     Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
     The file can be of type:
@@ -258,4 +258,4 @@ post:
         format: binary
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"
+      source: "oneprovider-rest-cli createFileByID id=$PARENT_ID name=$FILE_NAME"

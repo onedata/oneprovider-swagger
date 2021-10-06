@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: symlink_value
   tags:
-    - ID-based File Operations
+    - Basic File Operations
   summary: Get symbolic link value
   x-bash-codegen-description: |
     Returns the value of symbolic link specified by [$FILE_ID](#operation/lookup_file_id)

@@ -1,152 +1,3 @@
-get:
-  operationId: download_file_content_by_path
-  x-onedata-gri:
-    type: op_file
-    id: ?OBJECTID_BINDING(id)
-    aspect: file_at_path
-  tags:
-    - Path-based File Operations
-  summary: Download file content by path
-  x-bash-codegen-description: |
-    Returns the content of a file or directory specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
-
-    If requested file is a regular file, returns its binary content. Partial content
-    download is also supported using
-    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
-
-    If requested file is a directory, returns a TAR archive with its contents.
-    Any nested files or subdirectories to which the client does not have access
-    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
-    Request for directory download results in a redirection URL (in Location header) that
-    contains the ID of a temporary download session. The URL can be used to download the
-    tarball, with support for resuming interrupted downloads using the Range header
-    (where the range start is the number of already downloaded bytes and the range end is omitted).
-
-  description: |
-    Returns the content of a file or directory specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
-
-    If requested file is a regular file, returns its binary content. Partial content
-    download is also supported using
-    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
-
-    If requested file is a directory, returns a TAR archive with its contents.
-    Any nested files or subdirectories to which the client does not have access
-    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
-    Request for directory download results in a redirection URL (in Location header) that
-    contains the ID of a temporary download session. The URL can be used to download the
-    tarball, with support for resuming interrupted downloads using the Range header
-    (where the range start is the number of already downloaded bytes and the range end is omitted).
-
-
-    ***Example cURL requests***
-
-    **Download entire file content**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
-
-    abcdefghijklmno
-    ```
-
-    **Download only part of the file content**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
-    -H "Range: bytes=5-8"
-
-    fghi
-    ```
-
-    **Download a directory as tar archive**
-    ```bash
-    curl -sD - -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1" | grep location
-
-    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
-    ```
-
-    ```
-    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
-    ```
-
-    **Download a directory as tar archive in a single request**
-    ```bash
-    curl -L -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1"
-    ```
-
-    **Resume download of a directory (previous download failed after 12345678 bytes)**
-    ```bash
-    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
-    ```
-
-    **Download a directory as tar archive in a single request without resolving symlinks**
-    ```bash
-    curl -L -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1?follow_symlinks=false"
-    ```
-
-    See also [Download file content by ID](#operation/download_file_content).
-  produces:
-    - application/octet-stream
-  responses:
-    '200':
-      description: Entire file content.
-      schema:
-        type: string
-        format: binary
-    '206':
-      description: Part(s) of file content.
-      schema:
-        type: string
-        format: binary
-    '302':
-      description: Redirection URL for directory download.
-      headers:
-        Location:
-          description: URL with the ID of a temporary download session.
-          type: string
-    '400':
-      description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
-      schema:
-        $ref: '#/definitions/Error'
-    '404':
-      description: File not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '500':
-      description: Internal server error.
-      schema:
-        $ref: '#/definitions/Error'
-  parameters:
-    - name: id
-      in: path
-      description: |
-        ID of the base directory, relative to which the path remainder will be resolved. It can be a **space ID**
-        (in which case the space root directory is taken), or a **file ID** of any existing
-        directory (including the space root directory). See [Data](#section/Overview/Data) section
-        for more detailed description.
-      type: string
-      required: true
-    - name: path
-      in: path
-      description: Path relative to the base directory (specified in the id parameter).
-      required: true
-      type: string
-
-
 put:
   operationId: create_file_at_path
   x-onedata-gri:
@@ -155,7 +6,7 @@ put:
     aspect: file_at_path
   summary: Create file at path
   tags:
-    - Path-based File Operations
+    - Basic File Operations
   x-bash-codegen-description: |
     Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
     If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
@@ -239,7 +90,7 @@ put:
     }
     ```
 
-    See also [Create file in directory](#operation/create_file).
+    See also [Create file in directory](#operation/create_file_by_id).
 
   consumes:
     - application/octet-stream
@@ -339,6 +190,161 @@ put:
       schema:
         type: string
         format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "cat file.txt | oneprovider-rest-cli createFileAtPath id=$SPACE_OR_PARENT_ID path=$PATH -"
+
+
+get:
+  operationId: download_file_content_by_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_at_path
+  tags:
+    - Basic File Operations
+  summary: Download file content by path
+  x-bash-codegen-description: |
+    Returns the content of a file or directory specified by path given in the URL.
+
+    The first element of the path provided in the URL must be an ID of the base directory, relative to which
+    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
+    or an ID of any existing directory (including the space root directory).
+
+    If requested file is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If requested file is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+  description: |
+    Returns the content of a file or directory specified by path given in the URL.
+
+    The first element of the path provided in the URL must be an ID of the base directory, relative to which
+    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
+    or an ID of any existing directory (including the space root directory).
+
+    If requested file is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If requested file is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+
+    ***Example cURL requests***
+
+    **Download entire file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
+
+    abcdefghijklmno
+    ```
+
+    **Download only part of the file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
+    -H "Range: bytes=5-8"
+
+    fghi
+    ```
+
+    **Download a directory as tar archive**
+    ```bash
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1" | grep location
+
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1?follow_symlinks=false"
+    ```
+
+    See also [Download file content by ID](#operation/download_file_content_by_id_).
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: Entire file content.
+      schema:
+        type: string
+        format: binary
+    '206':
+      description: Part(s) of file content.
+      schema:
+        type: string
+        format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **space ID**
+        (in which case the space root directory is taken), or a **file ID** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data) section
+        for more detailed description.
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Path relative to the base directory (specified in the id parameter).
+      required: true
+      type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli downloadFileContentByPath id=$SPACE_OR_PARENT_ID path=$PATH"
 
 
 delete:
@@ -348,7 +354,7 @@ delete:
     id: ?OBJECTID_BINDING(id)
     aspect: file_at_path
   tags:
-    - Path-based File Operations
+    - Basic File Operations
   summary: Remove file at path
   x-bash-codegen-description: |
     Removes file specified by path given in the URL.
@@ -379,7 +385,7 @@ delete:
     curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/file.txt"
     ```
 
-    See also [Remove file by ID](#operation/remove_file).
+    See also [Remove file by ID](#operation/remove_file_by_id).
 
   responses:
     '204':
@@ -418,4 +424,3 @@ delete:
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli removeFileAtPath id=$SPACE_OR_PARENT_ID path=$PATH"
-

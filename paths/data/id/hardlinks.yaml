@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: hardlinks
   tags:
-    - ID-based File Operations
+    - Basic File Operations
   summary: Get file hard links
   x-bash-codegen-description: |
     Returns Ids of all hard links (including this one) associated with file specified
