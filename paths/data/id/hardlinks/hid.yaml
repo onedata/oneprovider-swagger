@@ -30,7 +30,7 @@ get:
     - application/json
   responses:
     '204':
-      description: A hard link does exist between the files..
+      description: A hard link does exist between the files.
     '400':
       description: Invalid request.
       schema:
