@@ -25,6 +25,12 @@ properties:
       For datasets in `detached` state this field is frozen and shows the value
       it had at the time of detaching. It is done for archival purposes as file
       may have been renamed or removed.
+  rootFileDeleted:
+    type: boolean
+    description: >
+      Flag informing whether dataset's root file has been deleted. 
+      Only relevant to detached datasets. If root file has been deleted 
+      it is no longer possible to reattach such dataset.
   protectionFlags:
     $ref: '#/definitions/DatasetProtectionFlags'
   effectiveProtectionFlags:
