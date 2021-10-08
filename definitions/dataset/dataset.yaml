@@ -38,13 +38,15 @@ properties:
 required:
   - state
   - datasetId
-  - parentId
   - rootFileId
   - rootFileType
   - rootFilePath
   - protectionFlags
   - effectiveProtectionFlags
   - creationTime
+  # NOTE: parentId cannot be set as required as it can have null value,
+  # which causes the generated API client to fail response validation
+  # (this workaround is needed due to Swagger 2.0 limitations)
 example:
   state: attached
   datasetId: 1f4b762b1380946e73aeca574c77f14c
