@@ -25,6 +25,7 @@ get:
         "rootFileId": "00000000006CB663736861726547756964233339643236366165646365...",
         "rootFileType": "DIR",
         "rootFilePath": "/MySpace/dir",
+        "rootFileDeleted": false,
         "protectionFlags": ["data_protection"],
         "effectiveProtectionFlags": ["data_protection", "metadata_protection"],
         "creationTime": 1576152793,
