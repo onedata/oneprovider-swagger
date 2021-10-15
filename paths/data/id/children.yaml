@@ -88,12 +88,12 @@ get:
 
 
 post:
-  operationId: create_file_by_id
+  operationId: create_file
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file in directory by ID
+  summary: Create file in directory
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
@@ -258,4 +258,4 @@ post:
         format: binary
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli createFileByID id=$PARENT_ID name=$FILE_NAME"
+      source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"

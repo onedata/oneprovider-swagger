@@ -8,13 +8,10 @@ put:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
+    Creates a file at path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
     If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
     intermediate parent directories.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
 
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
@@ -28,13 +25,10 @@ put:
     `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
   description: |
-    Creates a file at path specified in the URL, relative to the base directory given in the `id` parameter.
+    Creates a file at path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
     If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
     intermediate parent directories.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
 
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
@@ -90,7 +84,7 @@ put:
     }
     ```
 
-    See also [Create file in directory](#operation/create_file_by_id).
+    See also [Create file in directory](#operation/create_file).
 
   consumes:
     - application/octet-stream
@@ -205,11 +199,8 @@ get:
     - Basic File Operations
   summary: Download file content by path
   x-bash-codegen-description: |
-    Returns the content of a file or directory specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
+    Returns the content of a file or directory by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
 
     If requested file is a regular file, returns its binary content. Partial content
     download is also supported using
@@ -224,11 +215,8 @@ get:
     (where the range start is the number of already downloaded bytes and the range end is omitted).
 
   description: |
-    Returns the content of a file or directory specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
+    Returns the content of a file or directory by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
 
     If requested file is a regular file, returns its binary content. Partial content
     download is also supported using
@@ -291,7 +279,7 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1?follow_symlinks=false"
     ```
 
-    See also [Download file content by ID](#operation/download_file_content_by_id_).
+    See also [Download file content by ID](#operation/download_file_content).
   produces:
     - application/octet-stream
   responses:
@@ -357,22 +345,16 @@ delete:
     - Basic File Operations
   summary: Remove file at path
   x-bash-codegen-description: |
-    Removes file specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
+    Removes file by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
 
     In case of a directory, all its children are recursively removed - note that
     the operation will fail part-way if the client does not have permissions to
     remove some of the nested files/directories.
 
   description: |
-    Removes file specified by path given in the URL.
-
-    The first element of the path provided in the URL must be an ID of the base directory, relative to which
-    the path remainder will be resolved. It can be a space ID (in which case the space root directory is taken),
-    or an ID of any existing directory (including the space root directory).
+    Removes file by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
 
     In case of a directory, all its children are recursively removed - note that
     the operation will fail part-way if the client does not have permissions to
@@ -385,7 +367,7 @@ delete:
     curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/file.txt"
     ```
 
-    See also [Remove file by ID](#operation/remove_file_by_id).
+    See also [Remove file by ID](#operation/remove_file).
 
   responses:
     '204':

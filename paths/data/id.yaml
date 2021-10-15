@@ -162,14 +162,14 @@ put:
 
 
 delete:
-  operationId: remove_file_by_id
+  operationId: remove_file
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: instance
   tags:
     - Basic File Operations
-  summary: Remove file by ID
+  summary: Remove file
   x-bash-codegen-description: |
     Removes file specified by [$FILE_ID](#operation/lookup_file_id).
     In case of a directory, all its children are recursively removed - note that
@@ -217,4 +217,4 @@ delete:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli removeFileById id=$FILE_ID"
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"

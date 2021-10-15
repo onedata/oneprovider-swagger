@@ -55,14 +55,16 @@
 /data/{id}/path/{path}:
   $ref: ./data/id/path.yaml
 
-/data/{id}/distribution:
-  $ref: ./data/id/distribution.yaml
-
 /data/{id}/hardlinks:
   $ref: ./data/id/hardlinks.yaml
 
 /data/{id}/symlink_value:
   $ref: ./data/id/symlink_value.yaml
+
+
+# File Distribution
+/data/{id}/distribution:
+  $ref: ./data/id/distribution.yaml
 
 
 # tag Custom File Metadata

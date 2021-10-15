@@ -13,7 +13,7 @@ tags:
     description: Spaces related operations.
   - name: View
     description: Views related operations.
-  - name: Basic File Operations
+  - name: File Path Resolution
     description: Files and Directories path resolution operations.
   - name: Basic File Operations
     description: Files and Directories basic operations.

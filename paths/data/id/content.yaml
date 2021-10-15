@@ -1,12 +1,12 @@
 get:
-  operationId: download_file_content_by_id
+  operationId: download_file_content
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: content
   tags:
     - Basic File Operations
-  summary: Download file content by ID
+  summary: Download file content
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -137,7 +137,7 @@ get:
       default: true
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli downloadFileContentById id=$FILE_ID"
+    source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
 
 
 put:
