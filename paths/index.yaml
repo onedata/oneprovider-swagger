@@ -46,14 +46,14 @@
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
-/data/{id}:
-  $ref: ./data/id.yaml
-
 /data/{id}/content:
   $ref: ./data/id/content.yaml
 
 /data/{id}/path/{path}:
   $ref: ./data/id/path.yaml
+
+/data/{id}:
+  $ref: ./data/id.yaml
 
 /data/{id}/hardlinks:
   $ref: ./data/id/hardlinks.yaml

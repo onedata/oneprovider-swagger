@@ -98,7 +98,7 @@ description: |
 
   ### File path
   All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
-  ```
+  ```lang-none
   /CMS 1/file.txt
   /MyExperiment/directory/subdirectory/image.jpg
   ```
@@ -265,7 +265,7 @@ x-bash-codegen-description: |
 
   ### File path
   All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
-  ```
+  ```plaintext
   /CMS 1/file.txt
   /MyExperiment/directory/subdirectory/image.jpg
   ```

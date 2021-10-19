@@ -1,92 +1,3 @@
-get:
-  operationId: list_children
-  x-onedata-gri:
-    type: op_file
-    id: ?OBJECTID_BINDING(id)
-    aspect: children
-  tags:
-    - Basic File Operations
-  summary: List directory files and subdirectories
-  x-bash-codegen-description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
-
-  description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
-
-    ***Example cURL requests***
-
-    **Get files in space subdirectory**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
-
-    {
-        "children": [
-            {
-                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
-                "name": "File1.txt"
-            },
-            {
-                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
-                "name": "Dir2"
-            }
-        ],
-        "isLast": true
-    }
-    ```
-  produces:
-    - application/json
-  responses:
-    '200':
-      description: The list of directory files and subdirectories.
-      schema:
-        $ref: '#/definitions/DirectoryChildren'
-    '400':
-      description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
-      schema:
-        $ref: '#/definitions/Error'
-    '404':
-      description: Invalid path - file or directory not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '500':
-      description: Internal server error.
-      schema:
-        $ref: '#/definitions/Error'
-  parameters:
-    - name: id
-      in: path
-      description: Id of the directory.
-      type: string
-      required: true
-    - name: limit
-      in: query
-      description: >
-        Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
-      type: integer
-      required: false
-      maximum: 1000
-      minimum: 1
-      default: 1000
-    - name: offset
-      in: query
-      description: >
-        Offset from beginning of collection specifying starting point for listing.
-      type: integer
-      required: false
-      default: 0
-  x-code-samples:
-  - lang: Shell
-    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
-
-
 post:
   operationId: create_file
   x-onedata-gri:
@@ -259,3 +170,92 @@ post:
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"
+
+
+get:
+  operationId: list_children
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: children
+  tags:
+    - Basic File Operations
+  summary: List directory files and subdirectories
+  x-bash-codegen-description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+  description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Get files in space subdirectory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
+
+    {
+        "children": [
+            {
+                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
+                "name": "File1.txt"
+            },
+            {
+                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
+                "name": "Dir2"
+            }
+        ],
+        "isLast": true
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/DirectoryChildren'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory.
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of files that should be returned. If there are more files,
+        they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Offset from beginning of collection specifying starting point for listing.
+      type: integer
+      required: false
+      default: 0
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
