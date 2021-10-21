@@ -38,7 +38,6 @@
 
 
 # File Path Resolution
-# File Path Resolution
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
