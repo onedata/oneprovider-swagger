@@ -15,84 +15,30 @@ description: |
   ```
   Please note that currently the default port for Oneprovider instances is `443`.
 
-  In addition to REST API, Oneprovider also provides support for [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol,
-  and some of data management operations are currently only possible via CDMI.
+  In addition to REST API, Oneprovider also provides support for
+  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol.
 
 
   ## Authentication
-  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
+  To use the APIs, the REST client must authenticate with the Oneprovider service and present
+  a proof of authorization to perform a specific operation. This is done using access tokens,
+  which can be generated using the Onedata GUI or Onezone's REST API.
 
-  Currently this is supported through authentication token which can be generate using the Onedata user interface.
-  The token must be added to the request header like this:
+  The token is passed in the request header like this:
   ```
-  X-Auth-Token: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
+  X-Auth-Token: MIIFrzCCA5egAwIBAgIBEzANBgkqhkiG9w0BAQUFADBcMQswCQYDVQQGEwJQTDET...
   ```
-  In case this Onedata deployment supports authentication delegation other IdP's,
-  the `X-Auth-Token` field can contain token from such IdP with appropriate prefix,
-  as configured by Onezone administrators, e.g.:
-  ```
-    X-Auth-Token: github:GST5aasdA7asdAASFG7asdasaAS
-  ```
-  In addition please take into account, that depending on your account authorization rights, not all operations
-  may be possible.
 
-  ## API structure
-  The Oneprovider API reflects the fact that most operations deal directly with virtual file paths relative to
-  user spaces, which are provided as part of the paths in the REST calls.
+  The authorization to perform a specific operation depends on the authenticated user's privileges
+  in the corresponding space, file level permissions (posix, ACL) and caveats (restrictions)
+  inscribed in the provided access token.
 
-  The API provides the following functionality:
 
-  ### Data
-
-  #### File information
-  The `/data/` path methods provide basic capability for:
-    - browsing files in spaces and directories,
-    - querying for file attributes, such as 'mode' file permissions and updating them,
-    - managing file metadata.
-
-  #### Share information
-  The `/share/` methods enable creating, modyfying and deleting shares.
-  Shares are directories that were made publicly available, so they can be viewed by everyone
-  through public URL.
-
-  #### Space information
-  The `/space/` methods provide means for getting basic information about
-  spaces directly from the Oneprovider service but also allows to define views and
-  list transfers for specified space.
-
-  More information can be found [here](#section/Overview/Data).
-
-  ### Replication
-
-  #### Replica management
-  The `/replicas/` methods allow retrieving information about file replica distribution
-  among Onedata providers as well as requesting specific file replication to selected
-  providers.
-
-  #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
-  returned by `/replicas/{path} [POST]` operation.
-
-  ### Monitoring
-
-  #### Changes subscription
-  The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
-  file related events such as reads, writes or deletes which are returned as complete file metadata
-  records with sequence numbers representing their current version.
-
-  #### Monitoring metrics
-  The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
-  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/)
-  database files, with resolution determined by the `step` query parameter.
-
-  ## Data
-
+  ## Data management basics
   The Onedata system organizes all user data into logical containers called spaces.
   <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
   <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
 
-
-  ### File path and Id
   Files and directories in Onedata can be globally identified using unique File Ids or logical paths.
   Whenever possible, it is recommended to use File Ids, due to better performance and no need for escaping or encoding.
 
@@ -102,8 +48,6 @@ description: |
   /CMS 1/file.txt
   /MyExperiment/directory/subdirectory/image.jpg
   ```
-
-  **REST API**
 
   When referencing files by path in the REST API, make sure to urlencode the path in the URL:
   ```bash
@@ -129,9 +73,10 @@ description: |
   }
   ```
 
-  ### SPACE Id
+  ### Space Id
 
   Space Id is a unique, global identifier associated with a space and can be used universally in the REST APIs.
+  In order to find out the Space Id:
 
   **Web GUI** - click on Information in the file/directory context menu and look for Space Id.
 
@@ -150,24 +95,54 @@ description: |
   curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_FILE_ID/path/dir1/file.txt"
   ```
 
-  ## Examples
 
-  **Create replica of file at specific storage provider**
-  ```bash
-  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
-  ```
+  ## API structure
 
-  **Get space storage qouta metric**
-  ```bash
-  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-  "https://$PROVIDER/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
-  ```
+  The API is divided into the following sections:
 
-  More detailed examples are available in the documentation of each operation.
+  ### Space management
+  These methods provide means for getting basic information about spaces directly
+  from the Oneprovider service, but also allows to define database views.
+
+  ### File access and management
+  The API provides capabilities for:
+    - browsing files in spaces and directories,
+    - creating and deleting files as well as updating their content
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing custom file metadata (xattrs, JSON, RDF),
+    - manual registration of files for imported storages.
+
+  More information can be found [here](#section/Overview/Data-management-basics).
+
+  ### Replica and QoS management
+  These methods allow viewing file replica distribution, requesting file replication
+  (transfers) between Oneproviders, viewing ongoing and historical transfers data,
+  as well as managing QoS requirements that trigger automatic replication according to the QoS rules.
+
+  ### Share management
+  Offers methods for creating, modyfying and deleting shares.
+  Shares are files or directories that were made publicly available,
+  so that they can be viewed by everyone through a public URL.
+
+  ### Dataset & archive management
+  API for managing datasets - designated files or directories that are used to facilitate
+  building collections of data meaningful for the users with additional features, such as
+  write protection and archivisation mechanisms.
+
+  ### Automation
+  Basic API for scheduling and viewing workflow executions.
+
+  ### Monitoring
+  The API provides means for subscribing (through HTTP long-polling technique) for
+  file related events such as reads, writes or deletes which are returned as complete file metadata
+  records with sequence numbers representing their current version.
+
+  ### Service information
+  Publicly available, basic configuration of the Oneprovider service.
+
+  Detailed examples of API usage are available in the documentation of each operation.
 
 x-bash-codegen-description: |
-
   # Overview
 
   This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://onedata.org).
@@ -182,95 +157,39 @@ x-bash-codegen-description: |
   ```
   Please note that currently the default port for Oneprovider instances is `443`.
 
-  In addition to REST API, Oneprovider also provides support for [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol,
-  and some of data management operations are currently only possible via CDMI.
+  In addition to REST API, Oneprovider also provides support for
+  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol.
 
 
   ## Authentication
-  In order to be able to use this API the REST client must be able to authenticate with the Oneprovider service.
+  To use the APIs, the REST client must authenticate with the Oneprovider service and present
+  a proof of authorization to perform a specific operation. This is done using access tokens,
+  which can be generated using the Onedata GUI or Onezone's REST API.
 
-  Currently this is supported through authentication token which can be generate using the Onedata user interface.
-  The token must be added to the request header like this:
+  The token is passed in the request header like this:
   ```
-  X-Auth-Token: LAKSJHDLKJAHSDKLJHASKLCBBASKLCBLHABSCBALKSBCK...
+  X-Auth-Token: MIIFrzCCA5egAwIBAgIBEzANBgkqhkiG9w0BAQUFADBcMQswCQYDVQQGEwJQTDET...
   ```
-  In case this Onedata deployment supports authentication delegation other IdP's,
-  the `X-Auth-Token` field can contain token from such IdP with appropriate prefix,
-  as configured by Onezone administrators, e.g.:
-  ```
-    X-Auth-Token: github:GST5aasdA7asdAASFG7asdasaAS
-  ```
-  In addition please take into account, that depending on your account authorization rights, not all operations
-  may be possible.
 
-  ## API structure
-  The Oneprovider API reflects the fact that most operations deal directly with virtual file paths relative to
-  user spaces, which are provided as part of the paths in the REST calls.
+  The authorization to perform a specific operation depends on the authenticated user's privileges
+  in the corresponding space, file level permissions (posix, ACL) and caveats (restrictions)
+  inscribed in the provided access token.
 
-  The API provides the following functionality:
 
-  ### Data
-
-  #### File information
-  The `/data/` path methods provide basic capability for:
-    - browsing files in spaces and directories,
-    - querying for file attributes, such as 'mode' file permissions and updating them,
-    - managing file metadata.
-
-  #### Share information
-  The `/share/` methods enable creating, modyfying and deleting shares.
-  Shares are directories that were made publicly available, so they can be viewed by everyone
-  through public URL.
-
-  #### Space information
-  The `/space/` methods provide means for getting basic information about
-  spaces directly from the Oneprovider service but also allows to define views and
-  list transfers for specified space.
-
-  More information can be found [here](#section/Overview/Data).
-
-  ### Replication
-
-  #### Replica management
-  The `/replicas/` methods allow retrieving information about file replica distribution
-  among Onedata providers as well as requesting specific file replication to selected
-  providers.
-
-  #### Transfer management
-  The `/transfer/` operations provide basic transfer management functionality based on the Id of transfer
-  returned by `/replicas/{path} [POST]` operation.
-
-  ### Monitoring
-
-  #### Changes subscription
-  The `/changes/` method group provides means for subscribing (through HTTP long-polling technique) for
-  file related events such as reads, writes or deletes which are returned as complete file metadata
-  records with sequence numbers representing their current version.
-
-  #### Monitoring metrics
-  The `/metrics/` operations enable retrieval of internal Oneprovider monitoring data.
-  All monitoring data is returned in the form of [RRD](http://oss.oetiker.ch/rrdtool/)
-  database files, with resolution determined by the `step` query parameter.
-
-  ## Data
-
+  ## Data management basics
   The Onedata system organizes all user data into logical containers called spaces.
   <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
   <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
 
-
-  ### File path and Id
   Files and directories in Onedata can be globally identified using unique File Ids or logical paths.
   Whenever possible, it is recommended to use File Ids, due to better performance and no need for escaping or encoding.
 
   ### File path
   All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
-  ```plaintext
+  ```lang-none
   /CMS 1/file.txt
   /MyExperiment/directory/subdirectory/image.jpg
   ```
-
-  **REST API**
 
   When referencing files by path in the REST API, make sure to urlencode the path in the URL:
   ```bash
@@ -296,9 +215,10 @@ x-bash-codegen-description: |
   }
   ```
 
-  ### SPACE Id
+  ### Space Id
 
   Space Id is a unique, global identifier associated with a space and can be used universally in the REST APIs.
+  In order to find out the Space Id:
 
   **Web GUI** - click on Information in the file/directory context menu and look for Space Id.
 
@@ -317,21 +237,52 @@ x-bash-codegen-description: |
   curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_FILE_ID/path/dir1/file.txt"
   ```
 
-  ## Examples
 
-  **Create replica of file at specific storage provider**
-  ```bash
-  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X POST \
-  "https://$PROVIDER/api/v3/oneprovider/replicas/MySpace1/MyFile2.txt?provider_id=$PROVIDER_ID"
-  ```
+  ## API structure
 
-  **Get space storage qouta metric**
-  ```bash
-  curl -v --tlsv1.2 -H "X-Auth-Token: $TOKEN" -X GET \
-  "https://$PROVIDER/api/v3/oneprovider/metrics/space/MySpace1?metric=storage_qouta"
-  ```
+  The API is divided into the following sections:
 
-  More detailed examples are available in the documentation of each operation.
+  ### Space management
+  These methods provide means for getting basic information about spaces directly
+  from the Oneprovider service, but also allows to define database views.
+
+  ### File access and management
+  The API provides capabilities for:
+    - browsing files in spaces and directories,
+    - creating and deleting files as well as updating their content
+    - querying for file attributes, such as 'mode' file permissions and updating them,
+    - managing custom file metadata (xattrs, JSON, RDF),
+    - manual registration of files for imported storages.
+
+  More information can be found [here](#section/Overview/Data-management-basics).
+
+  ### Replica and QoS management
+  These methods allow viewing file replica distribution, requesting file replication
+  (transfers) between Oneproviders, viewing ongoing and historical transfers data,
+  as well as managing QoS requirements that trigger automatic replication according to the QoS rules.
+
+  ### Share management
+  Offers methods for creating, modyfying and deleting shares.
+  Shares are files or directories that were made publicly available,
+  so that they can be viewed by everyone through a public URL.
+
+  ### Dataset & archive management
+  API for managing datasets - designated files or directories that are used to facilitate
+  building collections of data meaningful for the users with additional features, such as
+  write protection and archivisation mechanisms.
+
+  ### Automation
+  Basic API for scheduling and viewing workflow executions.
+
+  ### Monitoring
+  The API provides means for subscribing (through HTTP long-polling technique) for
+  file related events such as reads, writes or deletes which are returned as complete file metadata
+  records with sequence numbers representing their current version.
+
+  ### Service information
+  Publicly available, basic configuration of the Oneprovider service.
+
+  Detailed examples of API usage are available in the documentation of each operation.
 
 
 contact:
