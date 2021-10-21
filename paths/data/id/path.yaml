@@ -10,8 +10,8 @@ put:
   x-bash-codegen-description: |
     Creates a file at path specified in the URL, relative to the base directory
     given in the `id` parameter (see the parameter description for details).
-    If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
-    intermediate parent directories.
+    If the parent path does not exist and `create_parents` flag is set to true,
+    the operation will attempt to create intermediate parent directories.
 
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
@@ -27,8 +27,8 @@ put:
   description: |
     Creates a file at path specified in the URL, relative to the base directory
     given in the `id` parameter (see the parameter description for details).
-    If the parent path does not exist and `create_parents` flag is set to true, the operation will attempt to create
-    intermediate parent directories.
+    If the parent path does not exist and `create_parents` flag is set to true,
+    the operation will attempt to create intermediate parent directories.
 
     The file can be of type:
     - `REG` (regular file) - in such case, the data sent in request body (if any)
@@ -126,10 +126,10 @@ put:
     - name: id
       in: path
       description: |
-        ID of the base directory, relative to which the path remainder will be resolved. It can be a **space ID**
-        (in which case the space root directory is taken), or a **file ID** of any existing
-        directory (including the space root directory). See [Data](#section/Overview/Data) section
-        for more detailed description.
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
       required: true
       type: string
     - name: path
@@ -319,10 +319,10 @@ get:
     - name: id
       in: path
       description: |
-        ID of the base directory, relative to which the path remainder will be resolved. It can be a **space ID**
-        (in which case the space root directory is taken), or a **file ID** of any existing
-        directory (including the space root directory). See [Data](#section/Overview/Data) section
-        for more detailed description.
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
       type: string
       required: true
     - name: path
@@ -392,10 +392,10 @@ delete:
     - name: id
       in: path
       description: |
-        ID of the base directory, relative to which the path remainder will be resolved. It can be a **space ID**
-        (in which case the space root directory is taken), or a **file ID** of any existing
-        directory (including the space root directory). See [Data](#section/Overview/Data) section
-        for more detailed description.
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
       type: string
       required: true
     - name: path

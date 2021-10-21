@@ -38,6 +38,7 @@
 
 
 # File Path Resolution
+# File Path Resolution
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
@@ -49,9 +50,6 @@
 /data/{id}/content:
   $ref: ./data/id/content.yaml
 
-/data/{id}/path/{path}:
-  $ref: ./data/id/path.yaml
-
 /data/{id}:
   $ref: ./data/id.yaml
 
@@ -61,10 +59,8 @@
 /data/{id}/symlink_value:
   $ref: ./data/id/symlink_value.yaml
 
-
-# File Distribution
-/data/{id}/distribution:
-  $ref: ./data/id/distribution.yaml
+/data/{id}/path/{path}:
+  $ref: ./data/id/path.yaml
 
 
 # tag Custom File Metadata
@@ -80,6 +76,11 @@
 # tag File registration
 /data/register:
   $ref: ./data/register.yaml
+
+
+# tag File Distribution
+/data/{id}/distribution:
+  $ref: ./data/id/distribution.yaml
 
 
 # tag Transfer
