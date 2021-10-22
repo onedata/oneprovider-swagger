@@ -25,6 +25,12 @@ properties:
       For datasets in `detached` state this field is frozen and shows the value
       it had at the time of detaching. It is done for archival purposes as file
       may have been renamed or removed.
+  rootFileDeleted:
+    type: boolean
+    description: >
+      Flag informing whether dataset's root file has been deleted. 
+      Only relevant for detached datasets. If the root file has been deleted,
+      it is no longer possible to reattach the dataset.
   protectionFlags:
     $ref: '#/definitions/DatasetProtectionFlags'
   effectiveProtectionFlags:
@@ -38,13 +44,15 @@ properties:
 required:
   - state
   - datasetId
-  - parentId
   - rootFileId
   - rootFileType
   - rootFilePath
   - protectionFlags
   - effectiveProtectionFlags
   - creationTime
+  # NOTE: parentId cannot be set as required as it can have null value,
+  # which causes the generated API client to fail response validation
+  # (this workaround is needed due to Swagger 2.0 limitations)
 example:
   state: attached
   datasetId: 1f4b762b1380946e73aeca574c77f14c

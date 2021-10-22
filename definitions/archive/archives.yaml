@@ -10,7 +10,9 @@ properties:
     $ref: '#/definitions/ListPageToken'
 required:
   - archives
-  - nextPageToken
+  # NOTE: nextPageToken cannot be set as required as it can have null value,
+  # which causes the generated API client to fail response validation
+  # (this workaround is needed due to Swagger 2.0 limitations)
 example:
   archives: ["d0f08b098804da5504609b2c54b507b3", "5a1e63f7cf5282a206144f77822c3f10"]
   nextPageToken: UkdseU1qWTBNak16TXpNNU5qUXpNak0yTXpZMk1UWTFOalEyTXpZMU5qSTJOalky

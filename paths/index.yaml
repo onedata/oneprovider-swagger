@@ -55,6 +55,9 @@
 /data/{id}/hardlinks:
   $ref: ./data/id/hardlinks.yaml
 
+/data/{id}/hardlinks/{hid}:
+  $ref: ./data/id/hardlinks/hid.yaml
+
 /data/{id}/symlink_value:
   $ref: ./data/id/symlink_value.yaml
 
