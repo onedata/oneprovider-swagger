@@ -1,3 +1,62 @@
+delete:
+  operationId: remove_file
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
+  tags:
+    - Basic File Operations
+  summary: Remove file
+  x-bash-codegen-description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+  description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
+    ```
+    See also [Remove file at path](#operation/remove_file_at_path).
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File or directory Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"
+
+
 get:
   operationId: get_attrs
   x-onedata-gri:
@@ -159,61 +218,3 @@ put:
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"
-
-
-delete:
-  operationId: remove_file
-  x-onedata-gri:
-    type: op_file
-    id: ?OBJECTID_BINDING(id)
-    aspect: instance
-  tags:
-    - Basic File Operations
-  summary: Remove file
-  x-bash-codegen-description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of a directory, all its children are recursively removed - note that
-    the operation will fail part-way if the client does not have permissions to
-    remove some of the nested files/directories.
-
-  description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of a directory, all its children are recursively removed - note that
-    the operation will fail part-way if the client does not have permissions to
-    remove some of the nested files/directories.
-
-    ***Example cURL requests***
-
-    **Remove specific file**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
-    ```
-
-  responses:
-    '204':
-      description: The file has been removed.
-    '400':
-      description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
-      schema:
-        $ref: '#/definitions/Error'
-    '404':
-      description: File not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '500':
-      description: Internal server error.
-      schema:
-        $ref: '#/definitions/Error'
-  parameters:
-    - name: id
-      in: path
-      description: File or directory Id
-      type: string
-      required: true
-  x-code-samples:
-    - lang: Shell
-      source: "oneprovider-rest-cli removeFile id=$FILE_ID"

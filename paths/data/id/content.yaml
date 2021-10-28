@@ -6,7 +6,7 @@ get:
     aspect: content
   tags:
     - Basic File Operations
-  summary: Download file or directory content
+  summary: Download file content
   x-bash-codegen-description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -21,6 +21,7 @@ get:
     contains the ID of a temporary download session. The URL can be used to download the
     tarball, with support for resuming interrupted downloads using the Range header
     (where the range start is the number of already downloaded bytes and the range end is omitted).
+
   description: |
     Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
 
@@ -84,6 +85,8 @@ get:
     curl -L -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content?follow_symlinks=false"
     ```
+
+    See also [Download file content by path](#operation/download_file_content_by_path).
 
   produces:
     - application/octet-stream

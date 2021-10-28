@@ -1,0 +1,408 @@
+put:
+  operationId: create_file_at_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_at_path
+  summary: Create file at path
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Creates a file at path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+    If the parent path does not exist and `create_parents` flag is set to true,
+    the operation will attempt to create intermediate parent directories.
+
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
+  description: |
+    Creates a file at path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+    If the parent path does not exist and `create_parents` flag is set to true,
+    the operation will attempt to create intermediate parent directories.
+
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
+    ***Example cURL requests***
+
+    **Create file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/$NAME"
+    -H "Content-Type: application/octet-stream" -d "@file.dat"
+
+    {
+       "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    }
+    ```
+
+    **Create directory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME?type=DIR"
+
+    {
+       "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    **Create hard link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+
+    {
+       "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
+    }
+    ```
+
+    **Create symbolic link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+
+    {
+       "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    See also [Create file in directory](#operation/create_file).
+
+  consumes:
+    - application/octet-stream
+  produces:
+    - application/json
+  responses:
+    '201':
+      description: >
+        The request has been accepted and the result is the file Id.
+        Also URI of the file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{id} is
+        returned in the response `Location` header.
+      headers:
+        Location:
+          description: URI of the file.
+          type: string
+      schema:
+        type: object
+        properties:
+          fileId:
+            type: string
+            description: file Id.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
+      required: true
+      type: string
+    - name: path
+      in: path
+      description: Path relative to the base directory (specified in the id parameter).
+      required: true
+      type: string
+    - name: type
+      in: query
+      description: Type of the file.
+      required: false
+      type: string
+      enum:
+        - REG
+        - DIR
+        - LNK
+        - SYMLNK
+      default: REG
+    - name: mode
+      in: query
+      description: POSIX file permissions in decimal format.
+      required: false
+      type: integer
+    - name: create_parents
+      in: query
+      description: Allows to create unexistient directories specified in path parameter.
+      required: false
+      type: boolean
+      default: false
+    - name: offset
+      in: query
+      description: Offset at which data sent as request body should be written to file.
+      required: false
+      type: integer
+      default: 0
+    - name: target_file_id
+      in: query
+      description: >
+        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+      required: false
+      type: string
+    - name: target_file_path
+      in: query
+      description: >
+        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+      required: false
+      type: string
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "cat file.txt | oneprovider-rest-cli createFileAtPath id=$SPACE_OR_PARENT_ID path=$PATH -"
+
+
+get:
+  operationId: download_file_content_by_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_at_path
+  tags:
+    - Basic File Operations
+  summary: Download file content by path
+  x-bash-codegen-description: |
+    Returns the content of a file or directory by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+
+    If requested file is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If requested file is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+  description: |
+    Returns the content of a file or directory by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+
+    If requested file is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If requested file is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+
+    ***Example cURL requests***
+
+    **Download entire file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
+
+    abcdefghijklmno
+    ```
+
+    **Download only part of the file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file" \
+    -H "Range: bytes=5-8"
+
+    fghi
+    ```
+
+    **Download a directory as tar archive**
+    ```bash
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1" | grep location
+
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1?follow_symlinks=false"
+    ```
+
+    See also [Download file content by ID](#operation/download_file_content).
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: Entire file content.
+      schema:
+        type: string
+        format: binary
+    '206':
+      description: Part(s) of file content.
+      schema:
+        type: string
+        format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Path relative to the base directory (specified in the id parameter).
+      required: true
+      type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli downloadFileContentByPath id=$SPACE_OR_PARENT_ID path=$PATH"
+
+
+delete:
+  operationId: remove_file_at_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_at_path
+  tags:
+    - Basic File Operations
+  summary: Remove file at path
+  x-bash-codegen-description: |
+    Removes file by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+  description: |
+    Removes file by path specified in the URL, relative to the base directory
+    given in the `id` parameter (see the parameter description for details).
+
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/file.txt"
+    ```
+
+    See also [Remove file by ID](#operation/remove_file).
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Path relative to the base directory (specified in the id parameter).
+      required: true
+      type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFileAtPath id=$SPACE_OR_PARENT_ID path=$PATH"

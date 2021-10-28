@@ -46,11 +46,11 @@ x-tagGroups:
     tags:
       - File Path Resolution
       - Basic File Operations
-      - File Distribution
       - Custom File Metadata
       - File registration
   - name: Replica & QoS management
     tags:
+      - File Distribution
       - Transfer
       - QoS
   - name: Share management
