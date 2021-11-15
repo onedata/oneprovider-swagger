@@ -46,9 +46,9 @@ required:
   - creationTime
   - description
   - stats
-  - baseArchiveId
-  - relatedAipId
-  - relatedDipId
+  # NOTE: baseArchiveId, relatedAipId, relatedDipId cannot be set as required
+  # as it can have null value, which causes the generated API client to fail
+  # response validation (this workaround is needed due to Swagger 2.0 limitations)
 example:
   archiveId: ae6f78c89a97c9e78e891105f703bcb8
   state: preserved
