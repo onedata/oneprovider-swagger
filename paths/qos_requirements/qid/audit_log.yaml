@@ -25,10 +25,13 @@ get:
 
     {
         "isLast": false,
-        "auditLog": [{
+        "logEntries": [{
+            "index": 0,
             "timestamp": 1626334701662,
-            "fileId": $FILE_ID,
-            "status": "synchronized"
+            "content": {
+                "fileId": $FILE_ID,
+                "status": "synchronized"
+            }
         }]
     }
 
