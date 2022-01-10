@@ -5,45 +5,62 @@ properties:
     type: boolean
     description: >
       Flag indicating whether last entry in audit log was listed.
-  auditLog:
+  logEntries:
     type: array
     items:
       type: object
       properties:
-        timestamp: 
+        index:
+          type: integer
+          description: |
+            Index of this log entry, used to identify the position of this log
+            in a series of logs.
+        timestamp:
           type: integer
           description: UNIX epoch timestamp in seconds of event described by entry.
-        fileId:
-          type: string
-          description: Id of file for which event occured.
-        status: 
-          type: string
-          enum:
-            - synchronized
-            - cancelled
-            - error
-        error:
-          type: string
-          description: Description of error if status is `error`.
+        content:
+          type: object
+          properties:
+            fileId:
+              type: string
+              description: Id of file for which event occured.
+            status:
+              type: string
+              enum:
+                - synchronized
+                - cancelled
+                - error
+            error:
+              type: string
+              description: Description of error if status is `error`.
+          required:
+            - fileId
+            - status
       required:
+        - index
         - timestamp
-        - fileId
-        - status
+        - content
 required:
   - isLast
-  - auditLog
+  - logEntries
 example:
   isLast: false
-  auditLog: [
+  logEntries: [
     {
+      "index": 0,
       "timestamp": 1626334701662,
-      "fileId": "$FILE_ID",
-      "status": "synchronized"
+      "content": {
+        "fileId": "$FILE_ID",
+        "status": "synchronized"
+      }
     },
     {
+      "index": 1,
       "timestamp": 1626334701672,
-      "fileId": "$FILE_ID",
-      "status": "error",
-      "error": "Operation failed with POSIX error: enoent."
+      "content": {
+        "fileId": "$FILE_ID",
+        "status": "error",
+        "error": "Operation failed with POSIX error: enoent."
+      }
     }
   ]
