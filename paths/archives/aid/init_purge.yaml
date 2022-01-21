@@ -67,7 +67,7 @@ post:
       required: true
     - name: data
       in: body
-      description: Parameters for initializing purging of an archive
+      description: Parameters for initializing purging of an archive.
       schema:
         $ref: '#/definitions/ArchiveInitPurgeRequest'
       required: false

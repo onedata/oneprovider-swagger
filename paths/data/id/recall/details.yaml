@@ -1,0 +1,63 @@
+get:
+  operationId: get_archive_recall_details
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: archive_recall_details
+  tags:
+    - Archive
+  summary: Get details of an archive recall
+  x-bash-codegen-description: |
+    Returns details of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
+    is a root of.
+
+  description: |
+    Returns details of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
+    is a root of.
+
+    **Get archive recall details**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/details"
+
+    {
+      "sourceArchive": "$ARCHIVE_ID",
+      "sourceDataset": "$DATASET_ID",
+      "startTimestamp": 1643103923417,
+      "finishTimestamp": 1643103933417,
+      "targetFiles" : 1,
+      "targetBytes": 65536
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Archive recall details.
+      schema:
+        $ref: '#/definitions/ArchiveRecallDetails'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File Id.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getArchiveRecallDetails id=$FILE_ID"

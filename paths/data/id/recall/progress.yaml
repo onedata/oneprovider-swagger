@@ -1,0 +1,69 @@
+get:
+  operationId: get_archive_recall_progress
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: archive_recall_progress
+  tags:
+    - Archive
+  summary: Get progress of an archive recall
+  x-bash-codegen-description: |
+    Returns progress of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
+    is a root of.
+    This resource is only available on provider performing recall.
+
+  description: |
+    Returns progress of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
+    is a root of.
+    This resource is only available on provider performing recall.
+
+    **Get archive recall progress**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/progress"
+
+    {
+      "currentFiles": 8,
+      "currentBytes": 16384,
+      "failedFiles": 1,
+      "lastError": {
+        "fileId": "$FILE_ID",
+        "reason": {
+          "description": "The resource could not be found.",
+          "id": "notFound"
+        }
+      }
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Archive recall progress.
+      schema:
+        $ref: '#/definitions/ArchiveRecallProgress'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File Id.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getArchiveRecallProgress id=$FILE_ID"

@@ -1,0 +1,69 @@
+post:
+  operationId: recall_archive
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_archive
+    id: ?BINDING(aid)
+    aspect: recall
+  summary: Recall archive
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Initializes process of recalling an archive.
+    Creates a copy of given archive content in specified directory.
+
+    This operation requires `space_recall_archives` privilege.
+
+  description: |
+    Initializes process of recalling an archive.
+    Creates a copy of given archive content in specified directory.
+
+    This operation requires `space_recall_archives` privilege.
+
+    ***Example cURL requests***
+
+    **Recall archive**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/init_recall" \
+    -H "Content-Type: application/json" -d '{
+        "targetParentId": "$FILE_ID",
+        "targetRootName": "example_name"
+    }'
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: >
+        The request has been accepted and the process of recalling an archive has started.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Archive not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: aid
+      in: path
+      description: Id of a specific archive to be recalled.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Parameters for initializing recall of an archive.
+      schema:
+        $ref: '#/definitions/ArchiveInitRecallRequest'
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli recallArchive archiveId=$ARCHIVE_ID targetFileId==$FILE_ID"

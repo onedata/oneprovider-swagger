@@ -1,0 +1,44 @@
+type: object
+description: Archive recall details.
+properties:
+  currentFiles:
+    description: Number of files copied so far.
+    type: integer
+  currentBytes:
+    description: Number of bytes copied so far.
+    type: integer
+  failedFiles:
+    description: Number of failed files.
+    type: integer
+  lastError:
+    description: Description of a last encountered error.
+    type: object
+    properties:
+      fileId: 
+        description: Id of a file for which error occured.
+        type: string
+      reason:
+        type: object
+        properties:
+          description: 
+            description: Detailed description of and error.
+            type: string
+          id: 
+            description: Id of an error.
+            type: string
+required:
+  - currentBytes
+  - currentFiles
+  - failedFiles
+  - lastError
+example:
+  currentFiles: 8
+  currentBytes: 16384
+  failedFiles: 1
+  lastError: {
+    fileId: "$FILE_ID",
+    reason: {
+      description: "The resource could not be found.",
+      id: "notFound"
+    }
+  }

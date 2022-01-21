@@ -92,6 +92,9 @@ ArchiveIncremental:
 ArchiveInitPurgeRequest:
   $ref: ./archive/archive_init_purge_request.yaml
 
+ArchiveInitRecallRequest:
+  $ref: ./archive/archive_init_recall_request.yaml
+
 ArchiveLayout:
   $ref: ./archive/archive_layout.yaml
 
@@ -116,6 +119,12 @@ ArchiveUpdateRequest:
 
 Archives:
   $ref: ./archive/archives.yaml
+
+ArchiveRecallDetails:
+  $ref: ./archive/archive_recall_details.yaml
+
+ArchiveRecallProgress:
+  $ref: ./archive/archive_recall_progress.yaml
 
 DatasetProtectionFlags:
   $ref: ./dataset/dataset_protection_flags.yaml
