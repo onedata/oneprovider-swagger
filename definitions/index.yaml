@@ -102,6 +102,12 @@ ArchiveLayout:
 #ArchiveMetadataStructure:
 #  $ref: ./archive/archive_metadata_structure.yaml
 
+ArchiveCreateNestedArchives:
+  $ref: ./archive/archive_create_nested_archives.yaml
+
+ArchiveFollowSymlinks:
+  $ref: ./archive/archive_follow_symlinks.yaml
+
 ArchivePreservedCallback:
   $ref: ./archive/archive_preserved_callback.yaml
 

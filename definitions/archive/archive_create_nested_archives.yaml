@@ -1,0 +1,7 @@
+type: boolean
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  This flag determines whether separate archive should be created for nested datasets.
+  Nested archives will be symlinked from parent archives. 
+default: false
+example: true

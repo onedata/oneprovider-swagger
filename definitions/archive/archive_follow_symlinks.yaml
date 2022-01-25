@@ -1,0 +1,12 @@
+type: boolean
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  This flag determines whether symbolic links in a dataset should be resolved.
+  If set to true all symbolic links targeting outside of dataset will be resolved, 
+  targeting files in dataset will target appropriate files in created archive 
+  and invalid symbolic links will be ignored.
+  If set to false all symbolic links targeting files in dataset will target appropriate 
+  files in created archive and all other symbolic links will be left intact (they may target 
+  files in file system that can be modified).
+default: true
+example: false
