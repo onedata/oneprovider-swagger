@@ -151,11 +151,11 @@
 /archives/{aid}:
   $ref: ./archives/aid.yaml
 
-/archives/{aid}/init_purge:
-  $ref: ./archives/aid/init_purge.yaml
+/archives/{aid}/purge:
+  $ref: ./archives/aid/purge.yaml
 
-/archives/{aid}/init_recall:
-  $ref: ./archives/aid/init_recall.yaml
+/archives/{aid}/recall:
+  $ref: ./archives/aid/recall.yaml
 
 /data/{id}/recall/details:
   $ref: ./data/id/recall/details.yaml

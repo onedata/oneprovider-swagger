@@ -8,14 +8,14 @@ get:
     - Archive
   summary: Get progress of an archive recall
   x-bash-codegen-description: |
-    Returns progress of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
-    is a root of.
-    This resource is only available on provider performing recall.
+    If this file is a root of a past or ongoing archive recall, returns its progress. Otherwise, 
+    returns `404 NOT FOUND` error.
+    This resource is only available on the Oneprovider performing the recall.
 
   description: |
-    Returns progress of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
-    is a root of.
-    This resource is only available on provider performing recall.
+    If this file is a root of a past or ongoing archive recall, returns its progress. Otherwise, 
+    returns `404 NOT FOUND` error.
+    This resource is only available on the Oneprovider performing the recall.
 
     **Get archive recall progress**
     ```bash
@@ -23,16 +23,16 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/progress"
 
     {
-      "currentFiles": 8,
-      "currentBytes": 16384,
-      "failedFiles": 1,
-      "lastError": {
-        "fileId": "$FILE_ID",
-        "reason": {
-          "description": "The resource could not be found.",
-          "id": "notFound"
+        "filesCopied": 8,
+        "bytesCopied": 16384,
+        "filesFailed": 1,
+        "lastError": {
+            "fileId": "$FILE_ID",
+            "reason": {
+              "description": "The resource could not be found.",
+              "id": "notFound"
+            }
         }
-      }
     }
     ```
   produces:
@@ -51,7 +51,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: This file is not a root of any archive recall.
       schema:
         $ref: '#/definitions/Error'
     '500':

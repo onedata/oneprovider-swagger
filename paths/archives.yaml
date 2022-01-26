@@ -27,11 +27,11 @@ post:
     -H "Content-Type: application/json" -d '{
         "datasetId": "'$DATASET_ID'",
         "config": {
-          "incremental": {"enabled": true},
-          "includeDip": false,
-          "layout": "bagit",
-          "createNestedArchives": true,
-          "followSymlinks": true
+            "incremental": {"enabled": true},
+            "includeDip": false,
+            "layout": "bagit",
+            "createNestedArchives": true,
+            "followSymlinks": true
         },
         "preservedCallback": "https://example.org/preserved_archives",
         "purgedCallback": "https://example.org/purged_archives",

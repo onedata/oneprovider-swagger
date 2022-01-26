@@ -8,12 +8,12 @@ get:
     - Archive
   summary: Get details of an archive recall
   x-bash-codegen-description: |
-    Returns details of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
-    is a root of.
+    If this file is a root of a past or ongoing archive recall, returns its details. Otherwise, 
+    returns `404 NOT FOUND` error.
 
   description: |
-    Returns details of an archive recall that given file [$FILE_ID](#operation/lookup_file_id) 
-    is a root of.
+    If this file is a root of a past or ongoing archive recall, returns its details. Otherwise, 
+    returns `404 NOT FOUND` error.
 
     **Get archive recall details**
     ```bash
@@ -21,12 +21,12 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/details"
 
     {
-      "sourceArchive": "$ARCHIVE_ID",
-      "sourceDataset": "$DATASET_ID",
-      "startTimestamp": 1643103923417,
-      "finishTimestamp": 1643103933417,
-      "targetFiles" : 1,
-      "targetBytes": 65536
+        "archiveId": "$ARCHIVE_ID",
+        "datasetId": "$DATASET_ID",
+        "startTime": 1643103923417,
+        "finishTime": 1643103933417,
+        "totalFiles" : 1,
+        "totalBytes": 65536
     }
     ```
   produces:
@@ -45,7 +45,7 @@ get:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: File not found.
+      description: This file is not a root of any archive recall.
       schema:
         $ref: '#/definitions/Error'
     '500':

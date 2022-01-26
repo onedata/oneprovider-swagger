@@ -89,11 +89,11 @@ ArchiveIncludeDip:
 ArchiveIncremental:
   $ref: ./archive/archive_incremental.yaml
 
-ArchiveInitPurgeRequest:
-  $ref: ./archive/archive_init_purge_request.yaml
+ArchivePurgeRequest:
+  $ref: ./archive/archive_purge_request.yaml
 
-ArchiveInitRecallRequest:
-  $ref: ./archive/archive_init_recall_request.yaml
+ArchiveRecallRequest:
+  $ref: ./archive/archive_recall_request.yaml
 
 ArchiveLayout:
   $ref: ./archive/archive_layout.yaml

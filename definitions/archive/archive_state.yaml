@@ -10,7 +10,7 @@ description: |
 
   * `preserved` - all data has been successfully archived on the storage,
 
-  * `verification_failed` - data in the archive was modified externally during archiving process and archive is considered invalid,
+  * `verification_failed` - the data in the archive was modified externally during the archiving process and the archive is considered inconsistent,
 
   * `failed` - an error occured during the process of archiving data on the storage,
 

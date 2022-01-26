@@ -1,40 +1,40 @@
 type: object
-description: Archive recall details.
+description: Archive recall progress.
 properties:
-  currentFiles:
+  filesCopied:
     description: Number of files copied so far.
     type: integer
-  currentBytes:
+  bytesCopied:
     description: Number of bytes copied so far.
     type: integer
-  failedFiles:
+  filesFailed:
     description: Number of failed files.
     type: integer
   lastError:
-    description: Description of a last encountered error.
+    description: Information about the last encountered error, or `null`.
     type: object
     properties:
       fileId: 
-        description: Id of a file for which error occured.
+        description: Id of the file for which error occured.
         type: string
       reason:
         type: object
         properties:
           description: 
-            description: Detailed description of and error.
+            description: Detailed description of an error.
             type: string
           id: 
-            description: Id of an error.
+            description: Id of an therror.
             type: string
 required:
-  - currentBytes
-  - currentFiles
-  - failedFiles
+  - filesCopied
+  - bytesCopied
+  - filesFailed
   - lastError
 example:
-  currentFiles: 8
-  currentBytes: 16384
-  failedFiles: 1
+  filesCopied: 8
+  bytesCopied: 16384
+  filesFailed: 1
   lastError: {
     fileId: "$FILE_ID",
     reason: {

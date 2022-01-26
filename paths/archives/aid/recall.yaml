@@ -24,7 +24,7 @@ post:
 
     **Recall archive**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/init_recall" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/recall" \
     -H "Content-Type: application/json" -d '{
         "targetParentId": "$FILE_ID",
         "targetRootName": "example_name"
@@ -62,7 +62,7 @@ post:
       in: body
       description: Parameters for initializing recall of an archive.
       schema:
-        $ref: '#/definitions/ArchiveInitRecallRequest'
+        $ref: '#/definitions/ArchiveRecallRequest'
       required: true
   x-code-samples:
     - lang: Shell
