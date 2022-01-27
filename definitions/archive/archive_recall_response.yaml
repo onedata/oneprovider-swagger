@@ -1,0 +1,10 @@
+type: object
+description: Archive recall initialization response.
+properties:
+  rootId:
+    description: Id of the root file of the recalled archive.
+    type: string
+required: 
+  - rootId
+example:
+  rootId: "$FILE_ID"

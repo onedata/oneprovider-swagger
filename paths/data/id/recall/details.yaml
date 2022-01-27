@@ -25,8 +25,8 @@ get:
         "datasetId": "$DATASET_ID",
         "startTime": 1643103923417,
         "finishTime": 1643103933417,
-        "totalFiles" : 1,
-        "totalBytes": 65536
+        "totalFileCount" : 1,
+        "totalByteSize": 65536
     }
     ```
   produces:

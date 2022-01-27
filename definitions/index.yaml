@@ -95,6 +95,9 @@ ArchivePurgeRequest:
 ArchiveRecallRequest:
   $ref: ./archive/archive_recall_request.yaml
 
+ArchiveRecallResponse:
+  $ref: ./archive/archive_recall_response.yaml
+
 ArchiveLayout:
   $ref: ./archive/archive_layout.yaml
 

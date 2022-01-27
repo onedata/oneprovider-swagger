@@ -10,13 +10,13 @@ post:
     - Archive
   x-bash-codegen-description: |
     Initializes process of recalling an archive.
-    Creates a copy of given archive content in specified directory.
+    The recall creates a copy of the archive content in specified destination.
 
     This operation requires `space_recall_archives` privilege.
 
   description: |
     Initializes process of recalling an archive.
-    Creates a copy of given archive content in specified directory.
+    The recall creates a copy of the archive content in specified destination.
 
     This operation requires `space_recall_archives` privilege.
 
@@ -26,16 +26,21 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/recall" \
     -H "Content-Type: application/json" -d '{
-        "targetParentId": "$FILE_ID",
+        "targetParentId": "$PARENT_FILE_ID",
         "targetRootName": "example_name"
     }'
+    
+    {
+        "rootId": "$ROOT_FILE_ID"
+    }
     ```
   consumes:
     - application/json
   responses:
-    '204':
-      description: >
-        The request has been accepted and the process of recalling an archive has started.
+    '200':
+      description: Archive recall initialization request response.
+      schema:
+        $ref: '#/definitions/ArchiveRecallResponse'
     '400':
       description: Invalid request.
       schema:

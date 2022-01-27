@@ -13,10 +13,10 @@ properties:
   finishTime:
     description: Timestamp in milliseconds (UNIX epoch) when the recall finished (null if not finished yet).
     type: integer
-  totalFiles:
+  totalFileCount:
     description: Number of files in source archive (number of files that is to be copied by recall).
     type: integer
-  totalBytes:
+  totalByteSize:
     description: Number of bytes in source archive (number of bytes that is to be copied by recall).
     type: integer
 required:
@@ -24,12 +24,12 @@ required:
   - datasetid
   - startTime
   - finishTime
-  - totalFiles
-  - totalBytes
+  - totalFileCount
+  - totalByteSize
 example:
   archiveId: $ARCHIVE_ID
   datasetId: $DATASET_ID
   startTime: 1643103923417
   finishTimes: 1643103933417
-  totalFiles: 1
-  totalBytes: 65536
+  totalFileCount: 1
+  totalByteSize: 65536
