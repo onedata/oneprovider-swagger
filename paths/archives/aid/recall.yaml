@@ -31,7 +31,7 @@ post:
     }'
     
     {
-        "rootId": "$ROOT_FILE_ID"
+        "rootFileId": "$ROOT_FILE_ID"
     }
     ```
   consumes:
