@@ -8,16 +8,22 @@ properties:
     $ref: '#/definitions/ArchiveIncludeDip'
   layout:
     $ref: '#/definitions/ArchiveLayout'
+  createNestedArchives:
+    $ref: '#/definitions/ArchiveCreateNestedArchives'
 # TODO VFS-7616 use and rename metadataStructure
 #  metadataStructure:
 #    $ref: '#/definitions/ArchiveMetadataStructure'
 # TODO VFS-7616 use and rename metadataStructure
 #  - metadataStructure
+  followSymlinks:
+    $ref: '#/definitions/ArchiveFollowSymlinks'
 example:
   incremental: {
     enabled: true
   }
   includeDip: false
   layout: plain
+  createNestedArchives: false,
+  followSymlinks: true
 # TODO VFS-7616 use and rename metadataStructure
 #  metadataStructure: json

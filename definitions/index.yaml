@@ -89,8 +89,14 @@ ArchiveIncludeDip:
 ArchiveIncremental:
   $ref: ./archive/archive_incremental.yaml
 
-ArchiveInitPurgeRequest:
-  $ref: ./archive/archive_init_purge_request.yaml
+ArchivePurgeRequest:
+  $ref: ./archive/archive_purge_request.yaml
+
+ArchiveRecallRequest:
+  $ref: ./archive/archive_recall_request.yaml
+
+ArchiveRecallResponse:
+  $ref: ./archive/archive_recall_response.yaml
 
 ArchiveLayout:
   $ref: ./archive/archive_layout.yaml
@@ -98,6 +104,12 @@ ArchiveLayout:
 # TODO VFS-7616 use and rename metadataStructure
 #ArchiveMetadataStructure:
 #  $ref: ./archive/archive_metadata_structure.yaml
+
+ArchiveCreateNestedArchives:
+  $ref: ./archive/archive_create_nested_archives.yaml
+
+ArchiveFollowSymlinks:
+  $ref: ./archive/archive_follow_symlinks.yaml
 
 ArchivePreservedCallback:
   $ref: ./archive/archive_preserved_callback.yaml
@@ -116,6 +128,12 @@ ArchiveUpdateRequest:
 
 Archives:
   $ref: ./archive/archives.yaml
+
+ArchiveRecallDetails:
+  $ref: ./archive/archive_recall_details.yaml
+
+ArchiveRecallProgress:
+  $ref: ./archive/archive_recall_progress.yaml
 
 DatasetProtectionFlags:
   $ref: ./dataset/dataset_protection_flags.yaml

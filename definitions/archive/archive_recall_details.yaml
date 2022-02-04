@@ -1,0 +1,35 @@
+type: object
+description: Archive recall details.
+properties:
+  archiveId:
+    description: Id of the archive that is being recalled.
+    type: string
+  datasetId:
+    description: Id of the dataset from which the archive was created.
+    type: string
+  startTime:
+    description: Timestamp in milliseconds (UNIX epoch) when the recall started (null if not started yet).
+    type: integer
+  finishTime:
+    description: Timestamp in milliseconds (UNIX epoch) when the recall finished (null if not finished yet).
+    type: integer
+  totalFileCount:
+    description: Number of files in source archive (number of files that is to be copied by recall).
+    type: integer
+  totalByteSize:
+    description: Number of bytes in source archive (number of bytes that is to be copied by recall).
+    type: integer
+required:
+  - archiveId
+  - datasetid
+  - startTime
+  - finishTime
+  - totalFileCount
+  - totalByteSize
+example:
+  archiveId: $ARCHIVE_ID
+  datasetId: $DATASET_ID
+  startTime: 1643103923417
+  finishTimes: 1643103933417
+  totalFileCount: 1
+  totalByteSize: 65536
