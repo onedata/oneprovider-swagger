@@ -194,21 +194,21 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children?attribute=size&attribute=name&limit=2"
 
     {
         "children": [
-            {
-                "id": "$CHILD_FILE_ID1",
-                "name": "File1.txt"
+            { 
+                "name": File1.txt
+                "size": 1024
             },
-            {
-                "id": "$CHILD_FILE_ID2",
-                "name": "Dir2"
+            { 
+                "name": File2.txt
+                "size": 16384
             }
         ],
-        "isLast": true,
-        "nextPageToken": "$TOKEN"
+        "isLast": false,
+        "nextPageToken": "g2gDZAAKbGlua190b2tlbmgCZAAMY2FjaGVkX3Rva2VuWgADY..."
     }
     ```
   produces:
@@ -244,7 +244,7 @@ get:
       in: query
       description: >
         Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
+        they can be retrieved using `token` query parameter.
       type: integer
       required: false
       maximum: 1000
@@ -256,6 +256,30 @@ get:
         Token allowing to continue listing from the point where previous one ended.
       type: string
       required: false
+      default: null
+    - name: attribute
+      in: query
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+      type: string
+      enum:
+        - name
+        - owner_id
+        - type
+        - mode
+        - size
+        - atime
+        - mtime
+        - ctime
+        - storage_group_id
+        - storage_user_id
+        - shares
+        - provider_id
+        - file_id
+        - parent_id
+        - hardlinks_count
     - name: index
       in: query
       description: >
