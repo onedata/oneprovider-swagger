@@ -198,16 +198,28 @@ get:
 
     {
         "children": [
-            {
-                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
-                "name": "File1.txt"
-            },
-            {
-                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
-                "name": "Dir2"
-            }
+            "name": File1.txt
+            "type": REG
+            "mode": 511
+            "size": 1024
+            "atime": 1464958683054
+            "mtime": 1464958683051
+            "ctime": 1464958681054
+            "owner_id": "MTZjYzc1ZWEtN2ZjNC00Y2QxLTljYzgtMTJmYTMxNTk1YzUw"
+            "file_id": "00000CF4706775696423745F772D67686431633765446F4D76546D6..."
+            "parent_id": "000006CB66373686172654775696423333964323636616564636562..."
+            "provider_id": "YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk"
+            "storage_user_id": 1935313
+            "storage_group_id": 1101841
+            "shares": [
+              "1d24c36707d99197c6cd995810a43aca"
+              "6825604b0eb6a47b8b7a04b6369eb24d"
+            ],
+            "hardlinks_count": 1
+            "isLast": true
         ],
-        "isLast": true
+        "isLast": true,
+        "nextPageToken": "g2gDZAAKbGlua190b2tlbmgCZAAMY2FjaGVkX3Rva2VuWgADY..."
     }
     ```
   produces:
@@ -243,19 +255,20 @@ get:
       in: query
       description: >
         Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
+        they can be retrieved using `token` query parameter.
       type: integer
       required: false
       maximum: 1000
       minimum: 1
       default: 1000
-    - name: offset
+    - name: token
       in: query
+      type: string
       description: >
-        Offset from beginning of collection specifying starting point for listing.
-      type: integer
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
       required: false
-      default: 0
+      default: null
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100"
