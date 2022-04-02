@@ -1,116 +1,45 @@
-get:
-  operationId: list_children
-  x-onedata-gri:
-    type: op_file
-    id: ?OBJECTID_BINDING(id)
-    aspect: children
-  tags:
-    - Basic File Operations
-  summary: List directory files and subdirectories
-  x-bash-codegen-description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
-
-  description: |
-    Returns the list of directory files and subdirectories for directory
-    specified by [$DIR_ID](#operation/lookup_file_id).
-
-    ***Example cURL requests***
-
-    **Get files in space subdirectory**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$DIR_ID/children"
-
-    {
-        "children": [
-            {
-                "id": "00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D6...",
-                "name": "File1.txt"
-            },
-            {
-                "id": "00000000006CB6637368617265477569642333396432363661656463656266666...",
-                "name": "Dir2"
-            }
-        ],
-        "isLast": true
-    }
-    ```
-  produces:
-    - application/json
-  responses:
-    '200':
-      description: The list of directory files and subdirectories.
-      schema:
-        $ref: '#/definitions/DirectoryChildren'
-    '400':
-      description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
-      schema:
-        $ref: '#/definitions/Error'
-    '404':
-      description: Invalid path - file or directory not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '500':
-      description: Internal server error.
-      schema:
-        $ref: '#/definitions/Error'
-  parameters:
-    - name: id
-      in: path
-      description: Id of the directory.
-      type: string
-      required: true
-    - name: limit
-      in: query
-      description: >
-        Allows to specify maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `index` and `offset` query parameters.
-      type: integer
-      required: false
-      maximum: 1000
-      minimum: 1
-      default: 1000
-    - name: offset
-      in: query
-      description: >
-        Index of the partial result, can be used to get subset of the result,
-        when the number of files and directories under given path exceeds 1000.
-      type: integer
-      required: false
-      default: 0
-  x-code-samples:
-  - lang: Shell
-    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 offset=300"
-
-
 post:
   operationId: create_file
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: child
-  summary: Create file or directory
+  summary: Create file in directory
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
   description: |
-    Creates a file or directory in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The data sent in request body (if any) will be saved as file content.
+    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    The file can be of type:
+    - `REG` (regular file) - in such case, the data sent in request body (if any)
+    is saved as file content.
+    - `DIR` (directory).
+    - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
+    is specified.
+    - `SYMLNK` (symbolic link) - requires that `target_file_path` is specified.
+    When creating symbolic link with absolute path starting from specific space
+    it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
+    `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
+
 
     ***Example cURL requests***
 
     **Create file**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$FILE_NAME" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME"
     -H "Content-Type: application/octet-stream" -d "@file.dat"
 
     {
@@ -121,12 +50,35 @@ post:
     **Create directory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$DIR_NAME&type=dir" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=DIR"
 
     {
        "fileId": "000000006CB6637368617265477569642333396432363661656463656266..."
     }
     ```
+
+    **Create hard link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+
+    {
+       "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
+    }
+    ```
+
+    **Create symbolic link**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$PARENT_ID/children?name=$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+
+    {
+       "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
+    }
+    ```
+
+    See also [Create file at path](#operation/create_file_at_path).
+
   consumes:
     - application/octet-stream
   produces:
@@ -135,7 +87,7 @@ post:
     '201':
       description: >
         The request has been accepted and the result is the file Id.
-        Also URI of the file in form https://$HOST/api/v3/oneprovider/data/{id} is
+        Also URI of the file in form https://$PROVIDER_HOST/api/v3/oneprovider/data/{id} is
         returned in the response `Location` header.
       headers:
         Location:
@@ -180,9 +132,11 @@ post:
       required: false
       type: string
       enum:
-        - reg
-        - dir
-      default: reg
+        - REG
+        - DIR
+        - LNK
+        - SYMLNK
+      default: REG
     - name: mode
       in: query
       description: POSIX file permissions in decimal format.
@@ -194,6 +148,18 @@ post:
       required: false
       type: integer
       default: 0
+    - name: target_file_id
+      in: query
+      description: >
+        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+      required: false
+      type: string
+    - name: target_file_path
+      in: query
+      description: >
+        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+      required: false
+      type: string
     - name: content
       in: body
       description: File content to be written at specified offset.
@@ -204,3 +170,118 @@ post:
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli createFile id=$PARENT_ID name=$FILE_NAME"
+
+
+get:
+  operationId: list_children
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: children
+  tags:
+    - Basic File Operations
+  summary: List directory files and subdirectories
+  x-bash-codegen-description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+  description: |
+    Returns the list of directory files and subdirectories for directory
+    specified by [$DIR_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Get files in space subdirectory**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children?attribute=size&attribute=name&limit=2"
+
+    {
+        "children": [
+            { 
+                "name": File1.txt
+                "size": 1024
+            },
+            { 
+                "name": File2.txt
+                "size": 16384
+            }
+        ],
+        "isLast": false,
+        "nextPageToken": "g2gDZAAKbGlua190b2tlbmgCZAAMY2FjaGVkX3Rva2VuWgADY..."
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/DirectoryChildren'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory.
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of files that should be returned. If there are more files,
+        they can be retrieved using `token` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: token
+      in: query
+      type: string
+      description: >
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+      required: false
+      default: null
+    - name: attribute
+      in: query
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+      type: string
+      enum:
+        - name
+        - owner_id
+        - type
+        - mode
+        - size
+        - atime
+        - mtime
+        - ctime
+        - storage_group_id
+        - storage_user_id
+        - shares
+        - provider_id
+        - file_id
+        - parent_id
+        - hardlinks_count
+      required: false
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100"

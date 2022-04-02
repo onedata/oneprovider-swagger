@@ -1,3 +1,62 @@
+delete:
+  operationId: remove_file
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
+  tags:
+    - Basic File Operations
+  summary: Remove file
+  x-bash-codegen-description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+  description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
+    ```
+    See also [Remove file at path](#operation/remove_file_at_path).
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File or directory Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"
+
+
 get:
   operationId: get_attrs
   x-onedata-gri:
@@ -20,9 +79,10 @@ get:
     **Get file size**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size&attribute=name"
 
     {
+        "name": "File1.txt"
         "size": 100
     }
     ```
@@ -58,9 +118,9 @@ get:
   - name: attribute
     in: query
     description: >
-      Name of attribute to query for. When accessing file via share mode
-      following attributes are unavailable: `owner_id`, `storage_group_id`,
-      `storage_user_id`, `provider_id`
+      Name of attribute to query for. Can be provided multiple times. 
+      When accessing file via share mode following attributes are unavailable: 
+      `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
     type: string
     enum:
       - name
@@ -76,6 +136,8 @@ get:
       - shares
       - provider_id
       - file_id
+      - parent_id
+      - hardlinks_count
     required: false
   x-code-samples:
   - lang: Shell
@@ -117,7 +179,7 @@ put:
 
     **Set file POSIX mode**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$HOST/api/v3/oneprovider/data/$FILE_ID" \
+    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" \
     -H 'Content-Type: application/json' -d '{ "mode": "0777" }'
     ```
   consumes:
@@ -157,61 +219,3 @@ put:
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"
-
-
-delete:
-  operationId: remove_file
-  x-onedata-gri:
-    type: op_file
-    id: ?OBJECTID_BINDING(id)
-    aspect: instance
-  tags:
-    - Basic File Operations
-  summary: Remove file
-  x-bash-codegen-description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of a directory, all its children are recursively removed - note that
-    the operation will fail part-way if the client does not have permissions to
-    remove some of the nested files/directories.
-
-  description: |
-    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
-    In case of a directory, all its children are recursively removed - note that
-    the operation will fail part-way if the client does not have permissions to
-    remove some of the nested files/directories.
-
-    ***Example cURL requests***
-
-    **Remove specific file**
-    ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
-    ```
-
-  responses:
-    '204':
-      description: The file has been removed.
-    '400':
-      description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
-      schema:
-        $ref: '#/definitions/Error'
-    '404':
-      description: File not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '500':
-      description: Internal server error.
-      schema:
-        $ref: '#/definitions/Error'
-  parameters:
-    - name: id
-      in: path
-      description: File or directory Id
-      type: string
-      required: true
-  x-code-samples:
-    - lang: Shell
-      source: "oneprovider-rest-cli removeFile id=$FILE_ID"

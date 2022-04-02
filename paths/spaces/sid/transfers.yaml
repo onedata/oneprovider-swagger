@@ -10,7 +10,7 @@ get:
   x-bash-codegen-description: |
     Returns the list of all transfer IDs in a space with given state.
     The list is broken down into pages, each with length less or equal to the
-    limit parameter. If the nextPageToken is present in the response, there are
+    limit parameter. If the nextPageToken in the response has non-null value, there are
     more transfers to list - provide the token in the page_token parameter in
     the following request.
 
@@ -18,7 +18,7 @@ get:
   description: |
     Returns the list of all transfer IDs in a space with given state.
     The list is broken down into pages, each with length less or equal to the
-    limit parameter. If the nextPageToken is present in the response, there are
+    limit parameter. If the nextPageToken in the response has non-null value, there are
     more transfers to list - provide the token in the page_token parameter in
     the following request.
 
@@ -29,7 +29,7 @@ get:
     **List at most 3 ongoing transfers starting from page id 757136151113c2f**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$HOST/api/v3/oneprovider/spaces/$SPACE_ID/transfers?state=ongoing&limit=3&page_token=757136151113c2f"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/transfers?state=ongoing&limit=3&page_token=757136151113c2f"
 
     {
         "transfers": [
@@ -44,7 +44,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of transfer IDs, nextPageToken is present when there is more to list.
+      description: The list of transfer IDs.
       schema:
         type: object
         properties:
@@ -54,8 +54,7 @@ get:
             items:
               type: string
           nextPageToken:
-            type: string
-            description: Token which can be used to list next batch of transfer Ids.
+            $ref: '#/definitions/ListPageToken'
     '400':
       description: Invalid request.
       schema:
@@ -95,7 +94,9 @@ get:
       Allows to limit the number of returned transfers.
     type: integer
     required: false
-    default: 1000
+    minimum: 1
+    maximum: 1000
+    default: 100
   - name: page_token
     in: query
     description: >

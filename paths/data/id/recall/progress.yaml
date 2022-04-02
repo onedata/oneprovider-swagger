@@ -1,0 +1,69 @@
+get:
+  operationId: get_archive_recall_progress
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: archive_recall_progress
+  tags:
+    - Archive
+  summary: Get progress of an archive recall
+  x-bash-codegen-description: |
+    If this file is a root of a past or ongoing archive recall, returns its progress. Otherwise, 
+    returns `404 NOT FOUND` error.
+    This resource is only available on the Oneprovider performing the recall.
+
+  description: |
+    If this file is a root of a past or ongoing archive recall, returns its progress. Otherwise, 
+    returns `404 NOT FOUND` error.
+    This resource is only available on the Oneprovider performing the recall.
+
+    **Get archive recall progress**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/progress"
+
+    {
+        "filesCopied": 8,
+        "bytesCopied": 16384,
+        "filesFailed": 1,
+        "lastError": {
+            "fileId": "$FILE_ID",
+            "reason": {
+              "description": "The resource could not be found.",
+              "id": "notFound"
+            }
+        }
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Archive recall progress.
+      schema:
+        $ref: '#/definitions/ArchiveRecallProgress'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: This file is not a root of any archive recall.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File Id.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getArchiveRecallProgress id=$FILE_ID"

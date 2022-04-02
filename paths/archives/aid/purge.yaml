@@ -1,0 +1,76 @@
+post:
+  operationId: purge_archive
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_archive
+    id: ?BINDING(aid)
+    aspect: purge
+  summary: Purge archive
+  tags:
+    - Archive
+  x-bash-codegen-description: |
+    Initializes process of purging an archive.
+    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+    The process may be time consuming therefore it is possible to pass callback URL
+    on which the POST request will be performed to notify that the process has finished.
+    The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
+    archive has been purged.
+
+    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
+
+  description: |
+    Initializes process of purging an archive.
+    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+    The process may be time consuming therefore it is possible to pass callback URL
+    on which the POST request will be performed to notify that the process has finished.
+    The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
+    archive has been purged.
+
+    This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
+
+    ***Example cURL requests***
+
+    **Purge archive**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/purge" \
+    -H "Content-Type: application/json" -d '{
+        "purgedCallback": "https://example.org/purged_archives"
+    }'
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: >
+        The request has been accepted and the process of purging an archive has started.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Archive not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: aid
+      in: path
+      description: Id of a specific archive to be purged.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Parameters for initializing purging of an archive.
+      schema:
+        $ref: '#/definitions/ArchivePurgeRequest'
+      required: false
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID purgedCallback=='https://example.org/purged_archives'"

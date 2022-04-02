@@ -1,0 +1,29 @@
+type: object
+description: Archive create request.
+properties:
+  datasetId:
+    type: string
+    description: Id of the dataset that will be archived.
+  config:
+    $ref: '#/definitions/ArchiveConfig'
+  description:
+    $ref: '#/definitions/ArchiveDescription'
+  preservedCallback:
+    $ref: '#/definitions/ArchivePreservedCallback'
+  purgedCallback:
+    $ref: '#/definitions/ArchivePurgedCallback'
+required:
+  - datasetId
+example:
+  datasetId: 1f4b762b1380946e73aeca574c77f14c
+  config:
+    incremental: 
+      enabled: true
+      basedOn: ae6f78c89a97c9e78e891105f703bcb8
+    includeDip: false
+    layout: plain
+    # TODO VFS-7616 use and rename metadataStructure
+    #  metaDataStructure: json
+  preservedCallback: https://example.org/preserved_archives
+  purgedCallback: https://example.org/purged_archives
+  description: "Archived dataset with experiment data from 2021."

@@ -1,0 +1,16 @@
+type: object
+description: Archive recall initialization request.
+properties:
+  parentDirectoryId:
+    description: Id of a parent directory where the target directory will be created.
+    type: string
+  targetFileName:
+    description: |
+      Name of the file/directory that will be created as the root of the recalled archive.
+      If not specified, defaults to the dataset's name.
+    type: string
+required: 
+  - targetParentId
+example:
+  targetParentId: "$FILE_ID"
+  targetRootName: "example_name"

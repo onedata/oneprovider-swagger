@@ -11,6 +11,9 @@
 /test_image:
   $ref: ./test_image.yaml
 
+/health:
+  $ref: ./health.yaml
+
 
 # tag Space
 /spaces:
@@ -34,23 +37,32 @@
   $ref: /spaces/sid/views/view_name/query.yaml
 
 
-# tag File Path Resolution
+# File Path Resolution
 /lookup-file-id/{path}:
   $ref: ./lookup_file_id-path.yaml
 
 
-# tag Basic File Operations
+# Basic File Operations
 /data/{id}/children:
   $ref: ./data/id/children.yaml
-
-/data/{id}:
-  $ref: ./data/id.yaml
 
 /data/{id}/content:
   $ref: ./data/id/content.yaml
 
-/data/{id}/distribution:
-  $ref: ./data/id/distribution.yaml
+/data/{id}:
+  $ref: ./data/id.yaml
+
+/data/{id}/hardlinks:
+  $ref: ./data/id/hardlinks.yaml
+
+/data/{id}/hardlinks/{hid}:
+  $ref: ./data/id/hardlinks/hid.yaml
+
+/data/{id}/symlink_value:
+  $ref: ./data/id/symlink_value.yaml
+
+/data/{id}/path/{path}:
+  $ref: ./data/id/path.yaml
 
 
 # tag Custom File Metadata
@@ -68,47 +80,9 @@
   $ref: ./data/register.yaml
 
 
-# tag Deprecated File Api
-/files/{path}:
-  $ref: ./deprecated/20_02/files-path.yaml
-
-/files-id/{id}:
-  $ref: ./deprecated/20_02/files_id-id.yaml
-
-/metadata/attrs/{path}:
-  $ref: ./deprecated/20_02/metadata-attrs-path.yaml
-
-/metadata/xattrs/{path}:
-  $ref: ./deprecated/20_02/metadata-xattrs-path.yaml
-
-/metadata/json/{path}:
-  $ref: ./deprecated/20_02/metadata-json-path.yaml
-
-/metadata/rdf/{path}:
-  $ref: ./deprecated/20_02/metadata-rdf-path.yaml
-
-/metadata-id/attrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-attrs-id.yaml
-
-/metadata-id/xattrs/{id}:
-  $ref: ./deprecated/20_02/metadata_id-xattrs-id.yaml
-
-/metadata-id/json/{id}:
-  $ref: ./deprecated/20_02/metadata_id-json-id.yaml
-
-/metadata-id/rdf/{id}:
-  $ref: ./deprecated/20_02/metadata_id-rdf-id.yaml
-
-
-# tag Replica
-/replicas/{path}:
-  $ref: ./deprecated/20_02/replicas-path.yaml
-
-/replicas-id/{id}:
-  $ref: ./deprecated/20_02/replicas_id-fid.yaml
-
-/replicas-view/{view_name}:
-  $ref: ./deprecated/20_02/replicas_view-view_name.yaml
+# tag File Distribution
+/data/{id}/distribution:
+  $ref: ./data/id/distribution.yaml
 
 
 # tag Transfer
@@ -132,8 +106,11 @@
 /qos_requirements/{qid}:
   $ref: ./qos_requirements/qid.yaml
 
-/data/{id}/qos_summary:
-  $ref: ./data/id/qos_summary.yaml
+/qos_requirements/{qid}/audit_log:
+  $ref: ./qos_requirements/qid/audit_log.yaml
+
+/data/{id}/qos/summary:
+  $ref: ./data/id/qos/summary.yaml
   
 /spaces/{sid}/evaluate_qos_expression:
   $ref: ./spaces/sid/evaluate_qos_expression.yaml
@@ -145,6 +122,54 @@
 
 /shares/{shid}:
   $ref: ./shares/shid.yaml
+
+
+# tag Dataset
+/spaces/{sid}/datasets:
+  $ref: ./spaces/sid/datasets.yaml
+
+/datasets/{did}/children:
+  $ref: ./datasets/did/children.yaml
+
+/datasets:
+  $ref: ./datasets.yaml
+
+/datasets/{did}:
+  $ref: ./datasets/did.yaml
+
+/data/{id}/dataset/summary:
+  $ref: ./data/id/dataset/summary.yaml
+
+
+# tag Archive
+/datasets/{did}/archives:
+  $ref: ./datasets/did/archives.yaml
+
+/archives:
+  $ref: ./archives.yaml
+
+/archives/{aid}:
+  $ref: ./archives/aid.yaml
+
+/archives/{aid}/purge:
+  $ref: ./archives/aid/purge.yaml
+
+/archives/{aid}/recall:
+  $ref: ./archives/aid/recall.yaml
+
+/data/{id}/recall/details:
+  $ref: ./data/id/recall/details.yaml
+
+/data/{id}/recall/progress:
+  $ref: ./data/id/recall/progress.yaml
+
+
+# tag Workflow execution
+/automation/execution/workflows:
+  $ref: ./automation/execution/workflows.yaml
+
+/automation/execution/workflows/{wid}:
+  $ref: ./automation/execution/workflows/wid.yaml
 
 
 # tag Monitoring

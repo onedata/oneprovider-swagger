@@ -1,0 +1,14 @@
+type: boolean
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  This flag determines the strategy of archiving nested datasets (i. e. datasets inside the dataset that is being archived).
+
+  If set to `true`, a separate archive will be created for each nested dataset, and a symbolic link to the nested archive will
+  be created in the parent archive in the place of the nested dataset's root file/directory. The procedure is recursive and
+  may effectively create a tree of linked archives.
+
+  If set to `false`, the resulting archive will be monolithic, i. e. all files and directories from nested datasets will be copied
+  directly to the archive, in their respective locations. Effectively, the internal hierarchy of datasets has no impact on the
+  resulting archive content.
+default: false
+example: true

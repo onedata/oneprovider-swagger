@@ -20,7 +20,7 @@ get:
 
     **Get public information about the Oneprovider service**
     ```bash
-    curl -X GET "https://$HOST/api/v3/oneprovider/configuration"
+    curl -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/configuration"
 
     {
         "providerId": "c4798eb2dbd2486fae940e6fa0a5071d",
@@ -38,7 +38,7 @@ get:
     - application/json
   responses:
     '200':
-      description: Configuration returned successfully.
+      description: Oneprovider configuration.
       schema:
         $ref: '#/definitions/Configuration'
     '500':

@@ -1,0 +1,115 @@
+type: object
+description: Workflow execution details.
+properties:
+  atmWorkflowExecutionId:
+    type: string
+    description: Id of this workflow execution.
+  atmWorkflowSchemaSnapshotId:
+    type: string
+    description: |
+      Id of the snapshot of the workflow schema describing the tasks
+      and stores for this workflow.
+  name:
+    type: string
+    description: Name of the workflow schema used for this execution.
+  atmInventoryId:
+    type: string
+    description: Id of automation inventory from which the workflow schema originates.
+  spaceId:
+    type: string
+    description: Id of the space in context of which the workflow was executed.
+  userId:
+    type: string
+    description: Id of the scheduling user.
+  status:
+    $ref: '#/definitions/AtmWorkflowExecutionStatus'
+  scheduleTime:
+    type: integer
+    description: Schedule time in seconds (POSIX epoch timestamp).
+  startTime:
+    type: integer
+    description: Start time in seconds (POSIX epoch timestamp).
+  finishTime:
+    type: integer
+    description: Finish time in seconds (POSIX epoch timestamp).
+  lambdaSnapshotRegistry:
+    type: object
+    description: Map with lambda Ids (keys) and corresponding snapshot Ids.
+    additionalProperties:
+      type: string
+  storeRegistry:
+    type: object
+    description: Map with store schema Ids (keys) and corresponding
+      store instance Ids.
+    additionalProperties:
+      type: string
+  lanes:
+    type: array
+    description: Details of lanes in this workflow execution.
+    items:
+      type: object
+      description: Basic information about workflow execution's lane.
+      properties:
+        status:
+          $ref: '#/definitions/AtmWorkflowExecutionBlockStatus'
+          description: Execution status of the lane.
+        schemaId:
+          type: string
+          description: Id of the lane schema used for this execution.
+        parallelBoxes:
+          type: array
+          description: Details of parallel boxes in this lane execution.
+          items:
+            type: object
+            description: Basic information about workflow execution's parallel box.
+            properties:
+              status:
+                $ref: '#/definitions/AtmWorkflowExecutionBlockStatus'
+                description: Execution status of the parallel box.
+              schemaId:
+                type: string
+                description: Id of the parallel box schema used for this execution.
+              taskRegistry:
+                type: object
+                description: Map with task schema Ids (keys) and corresponding
+                  task execution Ids.
+                additionalProperties:
+                  type: string
+required:
+  - atmWorkflowExecutionId
+  - atmWorkflowSchemaSnapshotId
+  - name
+  - atmInventoryId
+  - spaceId
+  - userId
+  - status
+  - scheduleTime
+  - startTime
+  - finishTime
+  - lambdaSnapshotRegistry
+  - storeRegistry
+  - lanes
+example:
+  atmWorkflowExecutionId: 11a53ed06d175c89bc3ed5be61f8217cch1890
+  atmWorkflowSchemaSnapshotId: 821711ad53ed06be61f175c89bc3ed5cch1890
+  name: test execution
+  atmInventoryId: 2d180796daafcf15d586d29dd13dae48chd5fc
+  spaceId: c17147cc3188408c26f522881282cb83ch9853
+  userId: 08c26cc228812c3188417147f582cb83ch9853
+  status: enqueued
+  scheduleTime: 1626107063
+  startTime: 0
+  finishTime: 0
+  lambdaSnapshotRegistry:
+    e412848d415329d81b7edd15c80b7740chf93f: 3946496fb29e3cf3faa96dbbd58d42d9ch9e3c
+  storeRegistry:
+    216a5de15ba9f8f3138168682c3da954212abf: 805392e2b84fb7e6ff5b31b4b7e70845ch1995
+  lanes:
+    - status: pending
+      schemaId: 3a1a829f714a41b043c4ce67402d8c136f125f
+      parallelBoxes:
+        - status: pending
+          schemaId: 0068146d662adc878f699bf82af08b9ddbd9ab
+          taskRegistry:
+            d92b861a5edfb08b920e0e80f4670a87f48176: 1697f7c1f46e0e22bb426bead5a3cb47chda3d
+
