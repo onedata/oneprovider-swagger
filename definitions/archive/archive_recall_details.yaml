@@ -19,6 +19,22 @@ properties:
   totalByteSize:
     description: Number of bytes in source archive (number of bytes that is to be copied by recall).
     type: integer
+  lastError:
+    description: Information about the last encountered error, or `null`.
+    type: object
+    properties:
+      fileId:
+        description: Id of the file for which error occured.
+        type: string
+      reason:
+        type: object
+        properties:
+          description:
+            description: Detailed description of an error.
+            type: string
+          id:
+            description: Id of an therror.
+            type: string
 required:
   - archiveId
   - datasetid
@@ -26,6 +42,7 @@ required:
   - finishTime
   - totalFileCount
   - totalByteSize
+  - lastError
 example:
   archiveId: $ARCHIVE_ID
   datasetId: $DATASET_ID
@@ -33,3 +50,10 @@ example:
   finishTimes: 1643103933417
   totalFileCount: 1
   totalByteSize: 65536
+  lastError: {
+    fileId: "$FILE_ID",
+    reason: {
+      description: "The resource could not be found.",
+      id: "notFound"
+    }
+  }

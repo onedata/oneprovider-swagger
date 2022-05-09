@@ -25,14 +25,7 @@ get:
     {
         "filesCopied": 8,
         "bytesCopied": 16384,
-        "filesFailed": 1,
-        "lastError": {
-            "fileId": "$FILE_ID",
-            "reason": {
-              "description": "The resource could not be found.",
-              "id": "notFound"
-            }
-        }
+        "filesFailed": 1
     }
     ```
   produces:

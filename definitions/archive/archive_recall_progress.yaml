@@ -10,35 +10,11 @@ properties:
   filesFailed:
     description: Number of failed files.
     type: integer
-  lastError:
-    description: Information about the last encountered error, or `null`.
-    type: object
-    properties:
-      fileId: 
-        description: Id of the file for which error occured.
-        type: string
-      reason:
-        type: object
-        properties:
-          description: 
-            description: Detailed description of an error.
-            type: string
-          id: 
-            description: Id of an therror.
-            type: string
 required:
   - filesCopied
   - bytesCopied
   - filesFailed
-  - lastError
 example:
   filesCopied: 8
   bytesCopied: 16384
   filesFailed: 1
-  lastError: {
-    fileId: "$FILE_ID",
-    reason: {
-      description: "The resource could not be found.",
-      id: "notFound"
-    }
-  }

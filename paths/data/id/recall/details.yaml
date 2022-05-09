@@ -26,7 +26,14 @@ get:
         "startTime": 1643103923417,
         "finishTime": 1643103933417,
         "totalFileCount" : 1,
-        "totalByteSize": 65536
+        "totalByteSize": 65536,
+        "lastError": {
+            "fileId": "$FILE_ID",
+            "reason": {
+              "description": "The resource could not be found.",
+              "id": "notFound"
+            }
+        }
     }
     ```
   produces:

@@ -157,6 +157,9 @@
 /archives/{aid}/recall:
   $ref: ./archives/aid/recall.yaml
 
+/data/{id}/recall/cancel:
+  $ref: ./data/id/recall/cancel.yaml
+
 /data/{id}/recall/details:
   $ref: ./data/id/recall/details.yaml
 

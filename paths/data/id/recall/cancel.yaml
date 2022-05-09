@@ -1,0 +1,50 @@
+post:
+  operationId: cancel_archive_recall
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: cancel_archive_recall
+  tags:
+    - Archive
+  summary: Cancel an archive recall
+  x-bash-codegen-description: |
+    Cancels an ongoing archive recall this file is a root of.
+
+  description: |
+    Cancels an ongoing archive recall this file is a root of.
+
+    **Cancel archive recall**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/recall/cancel"
+    ```
+  produces:
+    - application/json
+  responses:
+    '204':
+      description: Ongoing archive recall has been cancelled.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: This file is not a root of any archive recall.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File Id.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli cancelArchiveRecall id=$FILE_ID"
