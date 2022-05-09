@@ -28,13 +28,20 @@ properties:
               type: string
               enum:
                 - synchronized
-                - cancelled
-                - error
-            error:
+                - synchronization started
+                - synchronization failed
+                - synchronization skipped
+            severity: 
               type: string
-              description: Description of error if status is `error`.
+              enum:
+                - info
+                - error
+            reason:
+              type: string
+              description: Reason of reaching abnormal status(synchronization failed, synchronization skipped).
           required:
             - fileId
+            - severity
             - status
       required:
         - index
@@ -51,6 +58,7 @@ example:
       "timestamp": 1626334701662,
       "content": {
         "fileId": "$FILE_ID",
+        "severity": "info",
         "status": "synchronized"
       }
     },
@@ -59,8 +67,9 @@ example:
       "timestamp": 1626334701672,
       "content": {
         "fileId": "$FILE_ID",
-        "status": "error",
-        "error": "Operation failed with POSIX error: enoent."
+        "severity": "error",
+        "status": "synchronization failed",
+        "reason": "Operation failed with POSIX error: enoent."
       }
     }
   ]
