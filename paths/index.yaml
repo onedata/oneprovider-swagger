@@ -46,6 +46,9 @@
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
+/data/{id}/files:
+  $ref: ./data/id/files.yaml
+
 /data/{id}/content:
   $ref: ./data/id/content.yaml
 

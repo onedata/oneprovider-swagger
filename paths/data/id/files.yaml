@@ -1,0 +1,130 @@
+get:
+  operationId: list_files_recursively
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: files
+  tags:
+    - Basic File Operations
+  summary: List files recursively
+  x-bash-codegen-description: |
+    Lists recursively non-directory files (i.e regular files, symbolic links and hardlinks) 
+    in given directory. Files are listed lexicographically, ordered by path.
+
+  description: |
+    Lists recursively non-directory files (i.e regular files, symbolic links and hardlinks) 
+    in given directory. Files are listed lexicographically, ordered by path.
+
+    ***Example cURL requests***
+
+    **List files recursively**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/files?start_after=ParentDirName/Dir1"
+
+    {
+        "files": [
+            {
+                "file_id": "$CHILD_FILE_ID2",
+                "name": "Dir2",
+                "path": "ParentDirName/Dir2"
+            },
+            {
+                "file_id": "$CHILD_FILE_ID1",
+                "name": "File1.txt",
+                "path": "ParentDirName/File1.txt"
+            },
+        ],
+        "inaccessiblePaths": [
+          "ParentDirName/Dir3"
+        ],
+        "isLast": false,
+        "nextPageToken": "$TOKEN"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/RecursiveFiles'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory.
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of files that should be returned. If there are more files,
+        they can be retrieved using `offset` query parameter.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: token
+      in: query
+      description: >
+        Token allowing to continue listing from the point where previous one ended.
+      type: string
+      required: false
+    - name: start_after
+      in: query
+      description: >
+        Determines starting point of listing i.e. listing will start from 
+        the first file path lexicographically larger and listing will continue 
+        until all subtree is listed/limit is reached.
+      type: string
+      required: false
+    - name: prefix
+      in: query
+      description: >
+        Only files with paths that begin with this value will be returned.
+      type: string
+      required: false
+    - name: attribute
+      in: query
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+      type: string
+      enum:
+        - name
+        - owner_id
+        - type
+        - mode
+        - size
+        - atime
+        - mtime
+        - ctime
+        - storage_group_id
+        - storage_user_id
+        - shares
+        - provider_id
+        - file_id
+        - parent_id
+        - hardlinks_count
+        - path
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listFilesRecursively id=$FILE_ID limit=100 start_after=dir1/dir2/filename.txt"
