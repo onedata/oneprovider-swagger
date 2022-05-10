@@ -253,7 +253,8 @@ get:
     - name: token
       in: query
       description: >
-        Token allowing to continue listing from the point where previous one ended.
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
       type: string
       required: false
       default: null
