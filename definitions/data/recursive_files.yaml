@@ -8,6 +8,8 @@ properties:
   inaccessiblePaths:
     type: array
     description: Paths to directiories that were not listed due to lack of access privileges.
+    items:
+      type: string
   isLast:
     $ref: '#/definitions/IsLast'
   nextPageToken:
