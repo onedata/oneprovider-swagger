@@ -14,4 +14,4 @@ description: |
 
   Requested server should response with one of `2xx` HTTP codes. If the request fails or returns any
   other HTTP code, it will be retried.
-example: https://example.org/purged_archives
+example: https://example.org/deleted_archives

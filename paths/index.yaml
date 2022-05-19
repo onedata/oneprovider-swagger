@@ -154,8 +154,8 @@
 /archives/{aid}:
   $ref: ./archives/aid.yaml
 
-/archives/{aid}/purge:
-  $ref: ./archives/aid/purge.yaml
+/archives/{aid}/delete:
+  $ref: ./archives/aid/delete.yaml
 
 /archives/{aid}/recall:
   $ref: ./archives/aid/recall.yaml

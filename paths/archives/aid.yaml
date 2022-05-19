@@ -36,7 +36,7 @@ get:
           "layout": "bagit",
         },
         "preservedCallback": "https://example.org/preserved_archives",
-        "purgedCallback": null,
+        "deletedCallback": null,
         "description": "Archived dataset with experiment data from 2021.",
         "stats": {
             "filesArchived": 7940,
@@ -110,7 +110,7 @@ patch:
     -H "Content-Type: application/json" -d '{
         "description": "New archive description",
         "preservedCallback": "https://archives.org/preserved_archives",
-        "purgedCallback": "https://archives.org/purged_archives"
+        "deletedCallback": "https://archives.org/deleted_archives"
     }'
     ```
   consumes:

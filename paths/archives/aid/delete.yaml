@@ -1,40 +1,40 @@
 post:
-  operationId: purge_archive
+  operationId: delete_archive
   x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_archive
     id: ?BINDING(aid)
-    aspect: purge
-  summary: Purge archive
+    aspect: delete
+  summary: Delete archive
   tags:
     - Archive
   x-bash-codegen-description: |
     Initializes process of purging an archive.
-    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+    First, the archived data is deleted from the storage, then all the information concerning the archive is deleted.
     The process may be time consuming therefore it is possible to pass callback URL
     on which the POST request will be performed to notify that the process has finished.
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
-    archive has been purged.
+    archive has been deleted.
 
     This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
 
   description: |
     Initializes process of purging an archive.
-    First, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+    First, the archived data is deleted from the storage, then all the information concerning the archive is deleted.
     The process may be time consuming therefore it is possible to pass callback URL
     on which the POST request will be performed to notify that the process has finished.
     The callback request will include JSON `{"archiveId": $ARCHIVE_ID}` as a body to determine which
-    archive has been purged.
+    archive has been deleted.
 
     This operation requires `space_manage_datasets` and `space_remove_archives` privileges.
 
     ***Example cURL requests***
 
-    **Purge archive**
+    **Delete archive**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/purge" \
+    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/delete" \
     -H "Content-Type: application/json" -d '{
-        "purgedCallback": "https://example.org/purged_archives"
+        "deletedCallback": "https://example.org/deleted_archives"
     }'
     ```
   consumes:
@@ -62,15 +62,15 @@ post:
   parameters:
     - name: aid
       in: path
-      description: Id of a specific archive to be purged.
+      description: Id of a specific archive to be deleted.
       type: string
       required: true
     - name: data
       in: body
       description: Parameters for initializing purging of an archive.
       schema:
-        $ref: '#/definitions/ArchivePurgeRequest'
+        $ref: '#/definitions/ArchiveDeleteRequest'
       required: false
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli purgeArchive archiveId=$ARCHIVE_ID purgedCallback=='https://example.org/purged_archives'"
+      source: "oneprovider-rest-cli deleteArchive archiveId=$ARCHIVE_ID deletedCallback=='https://example.org/deleted_archives'"
