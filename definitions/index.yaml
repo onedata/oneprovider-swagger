@@ -20,8 +20,8 @@ ListPageToken:
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
 
-RecursiveFiles:
-  $ref: ./data/recursive_files.yaml
+RecursiveFileList:
+  $ref: ./data/recursive_file_list.yaml
 
 FileDistribution:
   $ref: ./data/file_distribution.yaml

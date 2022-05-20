@@ -8,12 +8,18 @@ get:
     - Basic File Operations
   summary: List files recursively
   x-bash-codegen-description: |
-    Lists recursively non-directory files (i.e regular files, symbolic links and hardlinks) 
-    in given directory. Files are listed lexicographically, ordered by path.
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks) 
+    in directory specified by `$DIR_ID`.  
+    Files are listed in lexicographical order by their paths, which are relative to the root directory.  
+    When there is no access to `$DIR_ID` its relative path (`"."`) will be included in `inaccessiblePaths` 
+    and the `files` listing result will be empty.
 
   description: |
-    Lists recursively non-directory files (i.e regular files, symbolic links and hardlinks) 
-    in given directory. Files are listed lexicographically, ordered by path.
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks) 
+    in directory specified by `$DIR_ID`.  
+    Files are listed in lexicographical order by their paths, which are relative to the root directory.  
+    When there is no access to `$DIR_ID` its relative path (`"."`) will be included in `inaccessiblePaths` 
+    and the `files` listing result will be empty.
 
     ***Example cURL requests***
 
@@ -25,21 +31,19 @@ get:
     {
         "files": [
             {
-                "file_id": "$CHILD_FILE_ID2",
-                "name": "Dir2",
+                "file_id": "FILE_ID1",
                 "path": "ParentDirName/Dir2"
             },
             {
-                "file_id": "$CHILD_FILE_ID1",
-                "name": "File1.txt",
+                "file_id": "FILE_ID2",
                 "path": "ParentDirName/File1.txt"
             },
         ],
         "inaccessiblePaths": [
-          "ParentDirName/Dir3"
+            "ParentDirName/Dir3"
         ],
         "isLast": false,
-        "nextPageToken": "$TOKEN"
+        "nextPageToken": "$PAGING_TOKEN"
     }
     ```
   produces:
@@ -48,7 +52,7 @@ get:
     '200':
       description: The list of directory files and subdirectories.
       schema:
-        $ref: '#/definitions/RecursiveFiles'
+        $ref: '#/definitions/RecursiveFileList'
     '400':
       description: Invalid request.
       schema:
@@ -74,8 +78,8 @@ get:
     - name: limit
       in: query
       description: >
-        Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `offset` query parameter.
+        Specifies the maximum number of entries that can be returned in one result batch.
+        If there are more files, they can be retrieved using options that specify a custom starting point.
       type: integer
       required: false
       maximum: 1000
@@ -84,29 +88,31 @@ get:
     - name: token
       in: query
       description: >
-        Token allowing to continue listing from the point where previous one ended.
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+        Cannot be provided alongside `start_after` parameter.
       type: string
       required: false
     - name: start_after
       in: query
       description: >
-        Determines starting point of listing i.e. listing will start from 
-        the first file path lexicographically larger and listing will continue 
-        until all subtree is listed/limit is reached.
+        Determines the starting point for listing - it will be started from
+        the first file path lexicographically larger than the provided path.
       type: string
       required: false
     - name: prefix
       in: query
       description: >
-        Only files with paths that begin with this value will be returned.
+        Only files with paths that begin with this value will be listed.
       type: string
       required: false
     - name: attribute
       in: query
       description: >
-        Name of attribute to query for. Can be provided multiple times. 
-        When accessing file via share mode following attributes are unavailable: 
-        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+        Name of attribute to be returned for each entry. Can be provided multiple times.
+        When accessing a file via share mode, the following attributes are unavailable:
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        When not provided `file_id` and `path` will be listed.
       type: string
       enum:
         - name

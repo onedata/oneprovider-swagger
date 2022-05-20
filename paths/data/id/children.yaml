@@ -255,15 +255,17 @@ get:
       description: >
         Determines the starting point for listing. The listing will start from the next page (batch) of entries
         which follows the page previously obtained along with the corresponding `nextPageToken`.
+        Cannot be provided alongside `index` or `tune_for_large_continuous_listing` parameters.
       type: string
       required: false
       default: null
     - name: attribute
       in: query
       description: >
-        Name of attribute to query for. Can be provided multiple times. 
-        When accessing file via share mode following attributes are unavailable: 
-        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+        Name of attribute to be returned for each entry. Can be provided multiple times.
+        When accessing a file via share mode, the following attributes are unavailable:
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        When not provided `file_id` and `name` will be listed.
       type: string
       enum:
         - name
@@ -284,19 +286,22 @@ get:
     - name: index
       in: query
       description: >
-        Allows to specify listing starting point - listing will start from given file name.
+        Determines the starting point for listing - it will be started from given file name (inclusively).
+        Cannot be provided alongside `token` parameter.
       type: string
       required: false
     - name: tune_for_large_continuous_listing
       in: query
       description: >
-        CAUTION!! When the tuning is enabled, there is no guarantee that changes on file tree performed 
-        after the start of first listing will be included. Therefore it shouldn't be used when 
-        listing result is expected to be up to date with state of file tree at the moment of listing.   
-        It also should not be used when time between subsequent listings is substantial (over 10 seconds).  
-        Be aware that enabling this option may slow down Oneprovider.   
-        Enabling this options increases performance when listing multiple batches (using token) of 
-        large directory children.
+        **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
+        after the start of listing will be included. Therefore it shouldn't be used when the
+        listing result is expected to be up to date with the state of the file tree at the moment of listing.
+        It should be avoided if the interval between subsequent listings is longer than 10 seconds,
+        otherwise the listing performance will be much worse.
+        Overusing this option may cause a significant load on the Oneprovider.
+        Enabling this option increases performance of listing large directories (with thousands of files) 
+        when using subsequent calls with paging tokens.
+        Cannot be provided alongside `token` parameter.
       type: boolean
       required: false
       default: false

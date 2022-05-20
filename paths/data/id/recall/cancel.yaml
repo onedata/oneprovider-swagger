@@ -8,10 +8,12 @@ post:
     - Archive
   summary: Cancel an archive recall
   x-bash-codegen-description: |
-    Cancels an ongoing archive recall this file is a root of.
+    Cancels an ongoing archive recall, identified by the root [FILE_ID] to which the archive 
+    is being recalled.
 
   description: |
-    Cancels an ongoing archive recall this file is a root of.
+    Cancels an ongoing archive recall, identified by the root [FILE_ID] to which the archive 
+    is being recalled.
 
     **Cancel archive recall**
     ```bash

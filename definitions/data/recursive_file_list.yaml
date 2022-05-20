@@ -2,7 +2,7 @@ type: object
 properties:
   files:
     type: array
-    description: The list of directory files.
+    description: The list of files.
     items:
       $ref: '#/definitions/FileAttributes'
   inaccessiblePaths:
@@ -15,7 +15,7 @@ properties:
   nextPageToken:
     $ref: '#/definitions/ListPageToken'
 example:
-  children:
+  files:
     - name: File1.txt
       type: REG
       mode: 511
