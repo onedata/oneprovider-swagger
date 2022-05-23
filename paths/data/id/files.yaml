@@ -8,18 +8,18 @@ get:
     - Basic File Operations
   summary: List files recursively
   x-bash-codegen-description: |
-    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks) 
-    in directory specified by `$DIR_ID`.  
-    Files are listed in lexicographical order by their paths, which are relative to the root directory.  
-    When there is no access to `$DIR_ID` its relative path (`"."`) will be included in `inaccessiblePaths` 
-    and the `files` listing result will be empty.
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
 
   description: |
-    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks) 
-    in directory specified by `$DIR_ID`.  
-    Files are listed in lexicographical order by their paths, which are relative to the root directory.  
-    When there is no access to `$DIR_ID` its relative path (`"."`) will be included in `inaccessiblePaths` 
-    and the `files` listing result will be empty.
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
 
     ***Example cURL requests***
 
@@ -112,7 +112,7 @@ get:
         Name of attribute to be returned for each entry. Can be provided multiple times.
         When accessing a file via share mode, the following attributes are unavailable:
         `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
-        When not provided `file_id` and `path` will be listed.
+        If not provided, default attributes of `file_id` and `path` will be returned.
       type: string
       enum:
         - name
