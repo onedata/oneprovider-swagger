@@ -90,7 +90,7 @@ get:
       description: >
         Determines the starting point for listing. The listing will start from the next page (batch) of entries
         which follows the page previously obtained along with the corresponding `nextPageToken`.
-        Cannot be provided alongside `start_after` parameter.
+        Cannot be provided alongside the `start_after` parameter.
       type: string
       required: false
     - name: start_after
