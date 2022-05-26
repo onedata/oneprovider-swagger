@@ -30,6 +30,7 @@ get:
             "timestamp": 1626334701662,
             "content": {
                 "fileId": $FILE_ID,
+                "severity": "info"
                 "status": "synchronized"
             }
         }]

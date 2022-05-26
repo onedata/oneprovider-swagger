@@ -20,6 +20,9 @@ ListPageToken:
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
 
+RecursiveFileList:
+  $ref: ./data/recursive_file_list.yaml
+
 FileDistribution:
   $ref: ./data/file_distribution.yaml
 
@@ -89,8 +92,8 @@ ArchiveIncludeDip:
 ArchiveIncremental:
   $ref: ./archive/archive_incremental.yaml
 
-ArchivePurgeRequest:
-  $ref: ./archive/archive_purge_request.yaml
+ArchiveDeleteRequest:
+  $ref: ./archive/archive_delete_request.yaml
 
 ArchiveRecallRequest:
   $ref: ./archive/archive_recall_request.yaml
@@ -114,8 +117,8 @@ ArchiveFollowSymlinks:
 ArchivePreservedCallback:
   $ref: ./archive/archive_preserved_callback.yaml
 
-ArchivePurgedCallback:
-  $ref: ./archive/archive_purged_callback.yaml
+ArchiveDeletedCallback:
+  $ref: ./archive/archive_deleted_callback.yaml
 
 ArchiveState:
   $ref: ./archive/archive_state.yaml

@@ -252,18 +252,20 @@ get:
       default: 1000
     - name: token
       in: query
-      type: string
       description: >
         Determines the starting point for listing. The listing will start from the next page (batch) of entries
         which follows the page previously obtained along with the corresponding `nextPageToken`.
+        Cannot be provided alongside the `index` or `tune_for_large_continuous_listing` parameters.
+      type: string
       required: false
       default: null
     - name: attribute
       in: query
       description: >
-        Name of attribute to query for. Can be provided multiple times. 
-        When accessing file via share mode following attributes are unavailable: 
-        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
+        Name of attribute to be returned for each entry. Can be provided multiple times.
+        When accessing a file via share mode, the following attributes are unavailable:
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        If not provided, default attributes of `file_id` and `name` will be returned.
       type: string
       enum:
         - name
@@ -281,7 +283,28 @@ get:
         - file_id
         - parent_id
         - hardlinks_count
+    - name: index
+      in: query
+      description: >
+        Determines the starting point for listing - it will be started from given file name (inclusively).
+        Cannot be provided alongside the `token` parameter.
+      type: string
       required: false
+    - name: tune_for_large_continuous_listing
+      in: query
+      description: >
+        This option increases performance of listing large directories (with thousands of files)
+        when using subsequent calls with paging tokens.<br/>
+        **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
+        after the start of listing will be included. Therefore it shouldn't be used when the
+        listing result is expected to be up to date with the state of the file tree at the moment of listing.
+        It should be avoided if the interval between subsequent listings is longer than 10 seconds,
+        otherwise the listing performance will be much worse.<br/>
+        Overusing this option may cause a significant load on the Oneprovider.<br/>
+        Cannot be provided alongside the `token` parameter.
+      type: boolean
+      required: false
+      default: false
   x-code-samples:
   - lang: Shell
-    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100"
+    source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 index=filename.txt"

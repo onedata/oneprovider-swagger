@@ -14,7 +14,7 @@ description: |
 
   * `failed` - an error occured during the process of archiving data on the storage,
 
-  * `purging` - the archive is being deleted. In the process, the archived data is purged from the storage, then all the information concerning the archive is deleted.
+  * `purging` - the archive is being deleted. In the process, the archived data is deleted from the storage, then all the information concerning the archive is deleted.
 enum:
   - pending
   - building

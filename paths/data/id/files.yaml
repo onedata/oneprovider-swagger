@@ -1,0 +1,136 @@
+get:
+  operationId: list_files_recursively
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: files
+  tags:
+    - Basic File Operations
+  summary: List files recursively
+  x-bash-codegen-description: |
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
+
+  description: |
+    Recursively lists non-directory files (i.e regular files, symbolic links and hardlinks)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
+
+    ***Example cURL requests***
+
+    **List files recursively**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/files?start_after=ParentDirName/Dir1"
+
+    {
+        "files": [
+            {
+                "file_id": "FILE_ID1",
+                "path": "ParentDirName/Dir2"
+            },
+            {
+                "file_id": "FILE_ID2",
+                "path": "ParentDirName/File1.txt"
+            },
+        ],
+        "inaccessiblePaths": [
+            "ParentDirName/Dir3"
+        ],
+        "isLast": false,
+        "nextPageToken": "$PAGING_TOKEN"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/RecursiveFileList'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory.
+      type: string
+      required: true
+    - name: limit
+      in: query
+      description: >
+        Specifies the maximum number of entries that can be returned in one result batch.
+        If there are more files, they can be retrieved using options that specify a custom starting point.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: token
+      in: query
+      description: >
+        Determines the starting point for listing. The listing will start from the next page (batch) of entries
+        which follows the page previously obtained along with the corresponding `nextPageToken`.
+        Cannot be provided alongside the `start_after` parameter.
+      type: string
+      required: false
+    - name: start_after
+      in: query
+      description: >
+        Determines the starting point for listing - it will be started from
+        the first file path lexicographically larger than the provided path.
+      type: string
+      required: false
+    - name: prefix
+      in: query
+      description: >
+        Only files with paths that begin with this value will be listed.
+      type: string
+      required: false
+    - name: attribute
+      in: query
+      description: >
+        Name of attribute to be returned for each entry. Can be provided multiple times.
+        When accessing a file via share mode, the following attributes are unavailable:
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        If not provided, default attributes of `file_id` and `path` will be returned.
+      type: string
+      enum:
+        - name
+        - owner_id
+        - type
+        - mode
+        - size
+        - atime
+        - mtime
+        - ctime
+        - storage_group_id
+        - storage_user_id
+        - shares
+        - provider_id
+        - file_id
+        - parent_id
+        - hardlinks_count
+        - path
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listFilesRecursively id=$FILE_ID limit=100 start_after=dir1/dir2/filename.txt"
