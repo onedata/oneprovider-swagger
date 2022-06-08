@@ -26,8 +26,8 @@ post:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/archives/$ARCHIVE_ID/recall" \
     -H "Content-Type: application/json" -d '{
-        "targetParentId": "$PARENT_FILE_ID",
-        "targetRootName": "example_name"
+        "parentDirectoryId": "$PARENT_DIRECTORY_ID",
+        "targetFileName": "example_name"
     }'
     
     {

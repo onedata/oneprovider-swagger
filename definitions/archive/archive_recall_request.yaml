@@ -12,5 +12,5 @@ properties:
 required: 
   - targetParentId
 example:
-  targetParentId: "$FILE_ID"
-  targetRootName: "example_name"
+  parentDirectoryId: "DIRECTORY_ID"
+  targetFileName: "example_name"
