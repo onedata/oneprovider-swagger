@@ -1,5 +1,5 @@
 #
-# This file groups the type definitions for Onezone REST API
+# This file groups the type definitions for Oneprovider REST API
 #
 
 Configuration:
@@ -7,6 +7,9 @@ Configuration:
 
 Error:
   $ref: ./error.yaml
+
+ErrorJson:
+  $ref: ./error_json.yaml
 
 Timestamp:
   $ref: ./timestamp.yaml

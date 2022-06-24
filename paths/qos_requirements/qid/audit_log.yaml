@@ -31,7 +31,8 @@ get:
             "content": {
                 "fileId": $FILE_ID,
                 "severity": "info"
-                "status": "synchronized"
+                "status": "completed",
+                "description": "Local replica reconciled."
             }
         }]
     }
