@@ -35,7 +35,9 @@ required:
   - finishTime
   - totalFileCount
   - totalByteSize
-  - lastError
+  # NOTE: lastError cannot be set as required as it can have null value,
+  # which causes the generated API client to fail response validation
+  # (this workaround is needed due to Swagger 2.0 limitations)
 example:
   archiveId: $ARCHIVE_ID
   datasetId: $DATASET_ID
