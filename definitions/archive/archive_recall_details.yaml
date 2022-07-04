@@ -27,22 +27,15 @@ properties:
         description: Id of the file for which error occured.
         type: string
       reason:
-        type: object
-        properties:
-          description:
-            description: Detailed description of an error.
-            type: string
-          id:
-            description: Id of an therror.
-            type: string
+        $ref: '#/definitions/ErrorJson'
 required:
   - archiveId
   - datasetid
-  - startTime
-  - finishTime
   - totalFileCount
   - totalByteSize
-  - lastError
+  # NOTE: lastError, startTime, finishTime cannot be set as required as it
+  # can have null value, which causes the generated API client to fail response
+  # validation (this workaround is needed due to Swagger 2.0 limitations)
 example:
   archiveId: $ARCHIVE_ID
   datasetId: $DATASET_ID

@@ -27,22 +27,25 @@ properties:
             status:
               type: string
               enum:
-                - synchronized
-                - synchronization started
-                - synchronization failed
-                - synchronization skipped
+                - scheduled
+                - completed
+                - failed
+                - skipped
             severity: 
               type: string
               enum:
                 - info
                 - error
-            reason:
+            description:
               type: string
-              description: Reason of reaching abnormal status(synchronization failed, synchronization skipped).
+              description: Detailed description of the recorded event.
+            reason:
+              $ref: '#/definitions/ErrorJson'
           required:
             - fileId
             - severity
             - status
+            - description
       required:
         - index
         - timestamp
@@ -59,7 +62,8 @@ example:
       "content": {
         "fileId": "$FILE_ID",
         "severity": "info",
-        "status": "synchronized"
+        "status": "completed",
+        "description": "Local replica reconciled."
       }
     },
     {
@@ -68,8 +72,15 @@ example:
       "content": {
         "fileId": "$FILE_ID",
         "severity": "error",
-        "status": "synchronization failed",
-        "reason": "Operation failed with POSIX error: enoent."
+        "status": "failed",
+        "description": "Failed to reconcile local replica: Operation failed with POSIX error: enoent.",
+        "reason": {
+          "description": "Operation failed with POSIX error: enoent.",
+          "details": {
+            "errno": "enoent"
+          },
+          "id": "posix"
+        }
       }
     }
   ]
