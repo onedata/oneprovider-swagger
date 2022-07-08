@@ -1,39 +1,71 @@
-type: array
+type: object
 description: >
   Describes distribution of a single file among different storage providers.
-  For each provider, this data type provides a list of byte ranges
-  (specified as a list of pairs [offset, size]), which describe
-  which blocks of a given file are stored at which provider.
-items:
-  type: object
-  properties:
-    providerId:
+properties:
+  type:
+    $ref: '#/definitions/FileType'
+  storages:
+    type: array
+    description: The list of storages at that provider (only for SYMLNK type).
+    items:
       type: string
-      description: Id of the provider
-    blocks:
-      type: array
-      description: The list of blocks in byte ranges stored at that provider.
-      items:
-        type: array
-        description: File block specified as a pair [offset, size].
-        items:
+      description: Id of a storage.
+  size:
+    type: integer
+    description: Size of a symlink on a storage(always 0) (only for SYMLNK type)
+  distributionPerProvider: 
+    type: object
+    description: Map with file distribution per Oneprovider (only DIR i REG type).
+    additionalProperties: 
+      type: object
+      description: Single provider specific distribution.
+      properties:
+        success:
+          type: boolean
+          description: Indicates whether fetching file distribution from this provider was successful. 
+        logicalSize: 
           type: integer
-        maxItems: 2
-        minItems: 2
+          description: Logical size of file/dir as seen by this provider.
+        distributionPerStorage:
+          type: object
+          description: > 
+            Map with file distribution per storage (only when success = true).
+            For DIR file type this is single integer value representing physical size on storage.
+            For REG file type this data type provides a list of byte ranges (specified as a list of pairs [offset, size]), 
+            which describe which blocks of a given file are stored at which storage.
+          additionalProperties: 
+            type: object
+            description: Single storage specific file distribution. 
+            properties:
+              blocks:
+                type: array
+                description: File block specified as a pair [offset, size].
+                items:
+                  type: integer
+                  maxItems: 2
+                  minItems: 2
+              totalBlockSize:
+                type: integer
+                description: Physical size of this REG file on this storage.
+        perStorage:
+          description: Error description per each storage when success = false
+          additionalProperties:
+            $ref: '#/definitions/ErrorJson'
 example:
-  - providerId: "b4687585-57d5-4edb-a192-0f3b1cab636b"
-    blocks:
-      -
-        - 0
-        - 4
-      -
-        - 10
-        - 20
-  - providerId: "a0274289-6f8a-482f-86f8-4a518760749c"
-    blocks:
-      -
-        - 1024
-        - 2048
-      -
-        - 4096
-        - 1048576
+  type: REG
+  storages: [$STORAGE_ID]
+  size: 0
+  distributionPerProvider: 
+    $PROVIDER_ID:
+      success: true
+      logicalSize: 8
+      distributionPerStorage:
+        $STORAGE_ID:
+          blocks: [0, 7]
+          totalBlockSize: 8
+      perStorage:
+        $STORAGE_ID:
+          description: "Operation failed with POSIX error: enoent."
+          details: 
+            errno: "enoent"
+  

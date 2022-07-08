@@ -9,15 +9,11 @@ get:
   summary: Get file distribution
   x-bash-codegen-description: |
     Returns information about a specific file distribution among different storage
-    providers. Each provider is associated with a list of byte ranges (specified
-    as a list of pairs [offset, size]), which describe which blocks of given
-    file are stored at this provider.
+    providers. 
 
   description: |
     Returns information about a specific file distribution among different storage
-    providers. Each provider is associated with a list of byte ranges (specified
-    as a list of pairs [offset, size]), which describe which blocks of given
-    file are stored at this provider.
+    providers. 
 
     ***Example cURL requests***
 
@@ -25,22 +21,27 @@ get:
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
 
-    [
-        {
-            "blocks": [ [ 0, 4 ], [ 10, 20 ] ],
-            "providerId": "a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74"
-        },
-        {
-            "blocks": [ [ 5, 9 ] ],
-            "providerId": "b107606a22f006b82f6f665a9e6f116cch0500"
+    {
+      type: REG,
+      distributionPerProvider: {
+        $PROVIDER_ID: {
+          success: true,
+          logicalSize: 8,
+          distributionPerStorage: {
+            $STORAGE_ID: {
+              blocks: [0, 7],
+              totalBlockSize: 8
+            }
+          }
         }
-    ]
+      }
+    }
     ```
   produces:
     - application/json
   responses:
     '200':
-      description: The list of file blocks stored at each provider.
+      description: The file distribution of file.
       schema:
         $ref: '#/definitions/FileDistribution'
     '400':
