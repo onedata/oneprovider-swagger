@@ -4,18 +4,8 @@ description: >
 properties:
   type:
     $ref: '#/definitions/FileType'
-  storages:
-    type: array
-    description: The list of storages at that provider (only for SYMLNK type).
-    items:
-      type: string
-      description: Id of a storage.
-  size:
-    type: integer
-    description: Size of a symlink on a storage(always 0) (only for SYMLNK type)
   distributionPerProvider: 
     type: object
-    description: Map with file distribution per Oneprovider (only DIR i REG type).
     additionalProperties: 
       type: object
       description: Single provider specific distribution.
@@ -30,42 +20,43 @@ properties:
           type: object
           description: > 
             Map with file distribution per storage (only when success = true).
-            For DIR file type this is single integer value representing physical size on storage.
-            For REG file type this data type provides a list of byte ranges (specified as a list of pairs [offset, size]), 
-            which describe which blocks of a given file are stored at which storage.
           additionalProperties: 
             type: object
             description: Single storage specific file distribution. 
             properties:
               blocks:
                 type: array
-                description: File block specified as a pair [offset, size].
+                description: > 
+                  A list of blocks in byte ranges stored at that storage (only for REG file type).
                 items:
-                  type: integer
+                  type: array
+                  description: File block specified as a pair [offset, size].
+                  items:
+                    type: integer
                   maxItems: 2
                   minItems: 2
-              totalBlockSize:
+              physicalSize:
                 type: integer
-                description: Physical size of this REG file on this storage.
-        perStorage:
+                description: Physical size of this file on this storage.
+        errorPerStorage:
           description: Error description per each storage when success = false
           additionalProperties:
             $ref: '#/definitions/ErrorJson'
 example:
-  type: REG
-  storages: [$STORAGE_ID]
-  size: 0
-  distributionPerProvider: 
-    $PROVIDER_ID:
-      success: true
-      logicalSize: 8
-      distributionPerStorage:
-        $STORAGE_ID:
-          blocks: [0, 7]
-          totalBlockSize: 8
-      perStorage:
-        $STORAGE_ID:
-          description: "Operation failed with POSIX error: enoent."
-          details: 
-            errno: "enoent"
+  "type": "REG"
+  "distributionPerProvider": 
+    "$PROVIDER_ID1":
+      "success": true
+      "logicalSize": 8
+      "distributionPerStorage":
+        "$STORAGE_ID":
+          "blocks": [[0, 4], [6, 2]]
+          "physicalSize": 6
+    "$PROVIDER_ID2":
+      "success": false
+      "perStorage":
+        "$STORAGE_ID":
+          "description": "Operation failed with POSIX error: enoent."
+          "details": 
+            "errno": "enoent"
   

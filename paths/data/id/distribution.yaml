@@ -22,15 +22,26 @@ get:
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
 
     {
-      type: REG,
-      distributionPerProvider: {
-        $PROVIDER_ID: {
-          success: true,
-          logicalSize: 8,
-          distributionPerStorage: {
-            $STORAGE_ID: {
-              blocks: [0, 7],
-              totalBlockSize: 8
+      "type": "REG"
+      "distributionPerProvider": {
+        "$PROVIDER_ID1": {
+          "success": true
+          "logicalSize": 8
+          "distributionPerStorage": {
+            "$STORAGE_ID": {
+              "blocks": [[0, 4], [6, 2]]
+              "physicalSize": 6
+            }
+          }
+        }
+        "$PROVIDER_ID2": {
+          "success": false
+          "perStorage": {
+            "$STORAGE_ID": {
+              "description": "Operation failed with POSIX error: enoent."
+              "details": {
+                "errno": "enoent"
+              }
             }
           }
         }
