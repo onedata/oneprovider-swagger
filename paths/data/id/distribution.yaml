@@ -8,12 +8,11 @@ get:
     - File Distribution
   summary: Get file distribution
   x-bash-codegen-description: |
-    Returns information about a specific file distribution among different storage
-    providers. 
+    Returns information about distribution of a specific file among different storage providers.
+
 
   description: |
-    Returns information about a specific file distribution among different storage
-    providers. 
+    Returns information about distribution of a specific file among different storage providers.
 
     ***Example cURL requests***
 
@@ -36,11 +35,13 @@ get:
         }
         "$PROVIDER_ID2": {
           "success": false
-          "perStorage": {
+          "distributionPerStorage": {
             "$STORAGE_ID": {
-              "description": "Operation failed with POSIX error: enoent."
-              "details": {
-                "errno": "enoent"
+              "error": {
+                "description": "Operation failed with POSIX error: enoent."
+                "details": {
+                  "errno": "enoent"
+                }
               }
             }
           }
@@ -52,7 +53,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The file distribution of file.
+      description: The distribution of the file.
       schema:
         $ref: '#/definitions/FileDistribution'
     '400':

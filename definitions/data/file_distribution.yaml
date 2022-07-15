@@ -8,26 +8,26 @@ properties:
     type: object
     additionalProperties: 
       type: object
-      description: Single provider specific distribution.
+      description: File distribution for a specific provider.
       properties:
         success:
           type: boolean
-          description: Indicates whether fetching file distribution from this provider was successful. 
+          description: Indicates whether fetching file distribution for this provider was successful. 
         logicalSize: 
           type: integer
-          description: Logical size of file/dir as seen by this provider.
+          description: Logical size of file/dir as seen by this provider (only if `success` = true).
         distributionPerStorage:
           type: object
           description: > 
-            Map with file distribution per storage (only when success = true).
+            Map with file distribution per storage.
           additionalProperties: 
             type: object
-            description: Single storage specific file distribution. 
+            description: File distribution for a specific storage.
             properties:
               blocks:
                 type: array
                 description: > 
-                  A list of blocks in byte ranges stored at that storage (only for REG file type).
+                  A list of blocks in byte ranges stored on this storage (only for REG file type and `success` = true).
                 items:
                   type: array
                   description: File block specified as a pair [offset, size].
@@ -37,26 +37,26 @@ properties:
                   minItems: 2
               physicalSize:
                 type: integer
-                description: Physical size of this file on this storage.
-        errorPerStorage:
-          description: Error description per each storage when success = false
-          additionalProperties:
-            $ref: '#/definitions/ErrorJson'
+                description: Physical size of the file on this storage (only when `success` = true).
+              error: 
+                description: Error description for this storage (only when `success` = false).
+                $ref: '#/definitions/ErrorJson'
 example:
-  "type": "REG"
-  "distributionPerProvider": 
-    "$PROVIDER_ID1":
-      "success": true
-      "logicalSize": 8
-      "distributionPerStorage":
-        "$STORAGE_ID":
-          "blocks": [[0, 4], [6, 2]]
-          "physicalSize": 6
-    "$PROVIDER_ID2":
-      "success": false
-      "perStorage":
-        "$STORAGE_ID":
-          "description": "Operation failed with POSIX error: enoent."
-          "details": 
-            "errno": "enoent"
+  type: "REG"
+  distributionPerProvider: 
+    $PROVIDER_ID1:
+      success: true
+      logicalSize: 8
+      distributionPerStorage:
+        $STORAGE_ID:
+          blocks: [[0, 4], [6, 2]]
+          physicalSize: 6
+    $PROVIDER_ID2:
+      success: false
+      distributionPerStorage:
+        $STORAGE_ID:
+          error:
+            description: "Operation failed with POSIX error: enoent."
+            details: 
+              errno: "enoent"
   
