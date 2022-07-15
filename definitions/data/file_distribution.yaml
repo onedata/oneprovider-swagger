@@ -39,8 +39,18 @@ properties:
                 type: integer
                 description: Physical size of the file on this storage (only when `success` = true).
               error: 
-                description: Error description for this storage (only when `success` = false).
-                $ref: '#/definitions/ErrorJson'
+                type: object
+                description: Error that occured for this storage (only when `success` = false).
+                properties:
+                  description:
+                    description: Detailed description of the error.
+                    type: string
+                  id:
+                    description: Id of the error.
+                    type: string
+                  details:
+                    description: Key value map with details describing the error.
+                    type: object
 example:
   type: "REG"
   distributionPerProvider: 
