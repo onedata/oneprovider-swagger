@@ -1,0 +1,9 @@
+type: object
+description: Map of regular file location per storage.
+additionalProperties: 
+  type: string
+  description: File location on this storage.
+example:
+  $STORAGE_ID1: "/path/to/file"
+  $STORAGE_ID2: null
+

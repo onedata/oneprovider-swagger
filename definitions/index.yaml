@@ -29,6 +29,9 @@ RecursiveFileList:
 FileDistribution:
   $ref: ./data/file_distribution.yaml
 
+StorageFileLocations:
+  $ref: ./data/storage_file_locations.yaml
+
 FileType:
   $ref: ./data/file_type.yaml
 
