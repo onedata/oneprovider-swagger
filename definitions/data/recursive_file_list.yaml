@@ -33,6 +33,7 @@ example:
         - 1d24c36707d99197c6cd995810a43aca
         - 6825604b0eb6a47b8b7a04b6369eb24d
       hardlinks_count: 1
+      index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA
       path: dir1/dir2/dir3/File1.txt
   inaccessiblePaths: 
     - dir1/dir3

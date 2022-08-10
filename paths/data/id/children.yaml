@@ -283,6 +283,7 @@ get:
         - file_id
         - parent_id
         - hardlinks_count
+        - index
     - name: index
       in: query
       description: >
