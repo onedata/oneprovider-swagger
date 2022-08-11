@@ -23,8 +23,18 @@ get:
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/storage_locations"
 
     {
-      "$STORAGE_ID1": "/path/to/file",
-      "$STORAGE_ID2": null
+      "locationsPerProvider": {
+        "$PROVIDER_ID1": {
+          "locationsPerStorage": {
+            "$STORAGE_ID1": "path/to/file"
+          }
+        },
+        "$PROVIDER_ID2": {
+          "locationsPerStorage": {
+            "$STORAGE_ID2": null
+          }
+        }
+      }
     }
     ```
   produces:
