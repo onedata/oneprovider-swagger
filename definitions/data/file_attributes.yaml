@@ -48,6 +48,10 @@ properties:
     type: integer
     description: >
       The number of hard links (including this one) associated with this file.
+  index:
+    type: string
+    description: >
+      File index that can be provided as starting point when listing files.
 example:
   name: File1.txt
   type: REG
@@ -66,3 +70,4 @@ example:
     - 1d24c36707d99197c6cd995810a43aca
     - 6825604b0eb6a47b8b7a04b6369eb24d
   hardlinks_count: 1
+  index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA

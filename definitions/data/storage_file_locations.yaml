@@ -1,0 +1,26 @@
+type: object
+description: >
+  Describes storage locations of a single file among different storage providers.
+properties:
+  locationsPerProvider:
+    type: object
+    additionalProperties:
+      type: object
+      description: File storage locations for a specific provider.
+      properties:
+        locationsPerStorage:
+          type: object
+          description: >
+            Map with file storage location per storage.
+          additionalProperties:
+            type: string
+            description: File storage location for a specific storage.
+example:
+  locationsPerProvider:
+    $PROVIDER_ID1:
+      locationsPerStorage:
+        $STORAGE_ID: "path/to/file"
+    $PROVIDER_ID2:
+      locationsPerStorage:
+        $STORAGE_ID: null
+  

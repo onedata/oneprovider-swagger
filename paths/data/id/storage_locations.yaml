@@ -1,0 +1,71 @@
+get:
+  operationId: get_file_storage_locations
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: storage_locations
+  tags:
+    - File Distribution
+  summary: Get file storage locations
+  x-bash-codegen-description: |
+    Returns information about regular file location on each storage. `null` value for a storage 
+    means that there is no file replica on this storage.
+
+
+  description: |
+    Returns information about regular file location on each storage. `null` value for a storage 
+    means that there is no file replica on this storage.
+
+    ***Example cURL requests***
+
+    **Get file storage locations**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/storage_locations"
+
+    {
+      "locationsPerProvider": {
+        "$PROVIDER_ID1": {
+          "locationsPerStorage": {
+            "$STORAGE_ID1": "path/to/file"
+          }
+        },
+        "$PROVIDER_ID2": {
+          "locationsPerStorage": {
+            "$STORAGE_ID2": null
+          }
+        }
+      }
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Storage file locations.
+      schema:
+        $ref: '#/definitions/StorageFileLocations'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: The Id of the file
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileStorageLocations id=$FILE_ID"
