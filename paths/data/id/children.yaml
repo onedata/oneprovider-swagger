@@ -8,10 +8,13 @@ post:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The file can be of type:
-    - `REG` (regular file) - in such case, the data sent in request body (if any)
-    is saved as file content.
+    Creates a file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    
+    If the file already exists, the operation fails with an error.
+    
+    The file type can be of:
+    - `REG` (regular file) - in this case, **the data sent in request body (if any)
+    is saved as file content**.
     - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
@@ -21,10 +24,13 @@ post:
     `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
 
   description: |
-    Creates file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
-    The file can be of type:
-    - `REG` (regular file) - in such case, the data sent in request body (if any)
-    is saved as file content.
+    Creates a file in the directory specified by [$PARENT_ID](#operation/lookup_file_id).
+    
+    If the file already exists, the operation fails with an error.
+    
+    The file type can be of:
+    - `REG` (regular file) - in this case, **the data sent in request body (if any)
+    is saved as file content**.
     - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
@@ -32,7 +38,6 @@ post:
     When creating symbolic link with absolute path starting from specific space
     it is necessary to do so by replacing `/$SPACE_NAME/` in path by special prefix in the form
     `<__onedata_space_id:$SPACE_ID>/` (where $SPACE_ID is actual space id)
-
 
     ***Example cURL requests***
 
@@ -144,25 +149,26 @@ post:
       type: integer
     - name: offset
       in: query
-      description: Offset at which data sent as request body should be written to file.
+      description: > 
+        Offset at which the data sent as request body will be written to the file (relevant only if `type == "REG"`).
       required: false
       type: integer
       default: 0
     - name: target_file_id
       in: query
       description: >
-        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+        The Id of the file to which the hard link should point (relevant only if `type == "LNK"`).
       required: false
       type: string
     - name: target_file_path
       in: query
       description: >
-        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+        Path to which the symbolic link should point (relevant only if `type == "SYMLNK"`).
       required: false
       type: string
     - name: content
       in: body
-      description: File content to be written at specified offset.
+      description: File content to be written at specified offset (relevant only if `type == "REG"`).
       required: false
       schema:
         type: string
