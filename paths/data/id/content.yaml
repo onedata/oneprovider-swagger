@@ -140,6 +140,8 @@ get:
     source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
 
 
+# @TODO VFS-8986 add option to create the file if it does not exist
+# @TODO VFS-8986 add a variant to update a file by path (similar to create)
 put:
   operationId: update_file_content
   x-onedata-gri:
@@ -151,19 +153,23 @@ put:
     - Basic File Operations
   x-bash-codegen-description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    
+    The file must exist beforehand, otherwise the operation fails with an error.
+    
     The `offset` query parameter can be used to start writing from a certain byte
     in the file, in such case the file is NOT truncated (bytes beyond the overwritten
-    fragment will be preserved).
-    If no `offset` query is given, the file is truncated and the previous file content
-    is completely overwritten.
+    fragment will be preserved). If no `offset` query is given, the file is truncated 
+    and the previous file content is completely overwritten.
 
   description: |
     Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    
+    The file must exist beforehand, otherwise the operation fails with an error.
+    
     The `offset` query parameter can be used to start writing from a certain byte
     in the file, in such case the file is NOT truncated (bytes beyond the overwritten
-    fragment will be preserved).
-    If no `offset` query is given, the file is truncated and the previous file content
-    is completely overwritten.
+    fragment will be preserved). If no `offset` query is given, the file is truncated 
+    and the previous file content is completely overwritten.
 
     ***Example cURL requests***
 
@@ -206,7 +212,9 @@ put:
       type: string
     - name: offset
       in: query
-      description: Offset at which data sent as request body should be written to file.
+      description: | 
+        Offset at which the data sent as request body will be written to the file.
+        If not specified, the file will be completely overwritten.
       required: false
       type: integer
       default: 0
