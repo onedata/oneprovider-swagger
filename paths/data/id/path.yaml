@@ -12,10 +12,12 @@ put:
     given in the `id` parameter (see the parameter description for details).
     If the parent path does not exist and `create_parents` flag is set to true,
     the operation will attempt to create intermediate parent directories.
+    
+    If the file already exists, the operation fails with an error.
 
-    The file can be of type:
-    - `REG` (regular file) - in such case, the data sent in request body (if any)
-    is saved as file content.
+    The file type can be of:
+    - `REG` (regular file) - in this case, the **data sent in request body (if any)
+    is saved as file content**.
     - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
@@ -29,10 +31,12 @@ put:
     given in the `id` parameter (see the parameter description for details).
     If the parent path does not exist and `create_parents` flag is set to true,
     the operation will attempt to create intermediate parent directories.
+    
+    If the file already exists, the operation fails with an error.
 
-    The file can be of type:
-    - `REG` (regular file) - in such case, the data sent in request body (if any)
-    is saved as file content.
+    The file type can be of:
+    - `REG` (regular file) - in this case, the **data sent in request body (if any)
+    is saved as file content**.
     - `DIR` (directory).
     - `LNK` (hard link) - requires that `target_file_id` pointing to a regular file
     is specified.
@@ -161,25 +165,26 @@ put:
       default: false
     - name: offset
       in: query
-      description: Offset at which data sent as request body should be written to file.
+      description: >
+        Offset at which the data sent as request body will be written to the file (relevant only if `type == "REG"`).
       required: false
       type: integer
       default: 0
     - name: target_file_id
       in: query
       description: >
-        The Id of the file to which the hard link should point (relevant only if type == 'LNK').
+        The Id of the file to which the hard link should point (relevant only if `type == "LNK"`).
       required: false
       type: string
     - name: target_file_path
       in: query
       description: >
-        Path to which the symbolic link should point (relevant only if type == 'SYMLNK').
+        Path to which the symbolic link should point (relevant only if `type == "SYMLNK"`).
       required: false
       type: string
     - name: content
       in: body
-      description: File content to be written at specified offset.
+      description: File content to be written at specified offset (relevant only if `type == "REG"`).
       required: false
       schema:
         type: string
