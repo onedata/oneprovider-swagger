@@ -17,8 +17,8 @@ tags:
     description: Files and Directories path resolution operations.
   - name: Basic File Operations
     description: Files and Directories basic operations.
-  - name: File Distribution
-    description: Operations concerning file distribution.
+  - name: Data Distribution
+    description: Operations concerning data distribution.
   - name: Custom File Metadata
     description: Files and Directories custom metadata related operations.
   - name: Miscellaneous
@@ -50,7 +50,7 @@ x-tagGroups:
       - Miscellaneous
   - name: Replica & QoS management
     tags:
-      - File Distribution
+      - Data Distribution
       - Transfer
       - QoS
   - name: Share management

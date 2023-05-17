@@ -26,8 +26,8 @@ DirectoryChildren:
 RecursiveFileList:
   $ref: ./data/recursive_file_list.yaml
 
-FileDistribution:
-  $ref: ./data/file_distribution.yaml
+DataDistribution:
+  $ref: ./data/data_distribution.yaml
 
 StorageFileLocations:
   $ref: ./data/storage_file_locations.yaml

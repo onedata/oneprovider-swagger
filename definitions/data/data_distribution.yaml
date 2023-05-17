@@ -8,14 +8,22 @@ properties:
     type: object
     additionalProperties: 
       type: object
-      description: File distribution for a specific provider.
+      description: Data distribution for a specific provider.
       properties:
         success:
           type: boolean
           description: Indicates whether fetching file distribution for this provider was successful. 
-        logicalSize: 
+        virtualSize:
           type: integer
-          description: Logical size of file/dir as seen by this provider (only if `success` = true).
+          description: Virtual size of file/dir as seen by this provider (only if `success` = true).
+        locationsPerStorage:
+          type: object
+          description: >
+            Map with file locations per storage (only for REG).
+          additionalProperties:
+            type: string
+            description: Information about regular file location on each storage. `null` value for a storage 
+              means that there is no file replica on this storage.
         distributionPerStorage:
           type: object
           description: > 
@@ -57,6 +65,8 @@ example:
     $PROVIDER_ID1:
       success: true
       logicalSize: 8
+      locationsPerStorage:
+        $STORAGE_ID: "/file/location/on/storage"
       distributionPerStorage:
         $STORAGE_ID:
           blocks: [[0, 4], [6, 2]]
