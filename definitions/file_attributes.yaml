@@ -12,8 +12,8 @@ properties:
       - dir
       - lnk
   mode:
-    type: integer
-    description: POSIX file permissions in decimal format
+    type: string
+    description: POSIX file permissions as string expressing octal notation.
   size:
     type: integer
     description: Size of the file in bytes.
@@ -49,7 +49,7 @@ properties:
 example:
   name: File1.txt
   type: reg
-  mode: 511
+  mode: "777"
   size: 1024
   atime: 1464958683054
   mtime: 1464958683051
