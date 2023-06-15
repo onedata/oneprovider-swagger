@@ -1,0 +1,67 @@
+type: object
+description:
+  This module encompasses fundamental concepts related to time series, 
+  specifically the aggregation of data points (measurements) within constant-width time windows.
+properties:
+  nameGeneratorType:
+    type: string
+    enum:
+      - exact
+      - add_prefix
+    description: >
+      Specifies how time series names are generated - 'exact' for unique names, 'add_prefix' for shared name prefix.
+  nameGenerator:
+    type: string
+    description: Generator name.
+  unit:
+    type: string
+    enum:
+      - none
+      - milliseconds
+      - seconds
+      - bits
+      - bytes
+      - hertz
+      - counts_per_sec
+      - operations_per_sec
+      - requests_per_sec
+      - bytes_per_sec
+      - bits_per_sec
+      - reads_per_sec
+      - writes_per_sec
+      - io_operations_per_sec
+      - percent
+      - percent_normalized
+      - boolean
+      - custom
+    description: >
+      Specifies the unit of measurement for the time series. The possible values are:
+      - 'none'
+      - 'milliseconds'
+      - 'seconds'
+      - 'bits'
+      - 'bytes'
+      - 'hertz'
+      - 'counts_per_sec'
+      - 'operations_per_sec'
+      - 'requests_per_sec'
+      - 'bits_per_sec'
+      - 'bytes_per_sec'
+      - 'reads_per_sec'
+      - 'writes_per_sec'
+      - 'io_operations_per_sec'
+      - 'percent'
+      - 'percent_normalized'
+      - 'boolean'
+      - 'custom' (followed by a custom unit name)
+  metrics:
+      $ref: '#/definitions/TimeSeriesMetrics'
+example:
+  nameGeneratorType: exact
+  nameGenerator: "generator_name"
+  unit: milliseconds
+  metrics:
+    metric1:
+      resolution: 30
+      retention: 10
+      aggregator: max

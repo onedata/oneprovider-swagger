@@ -1,0 +1,28 @@
+type: object
+properties:
+  time_series_schemas:
+    type: array
+    description: Specifies what time series can appear in the collection and how to display them using a dashboard.
+    items:
+      $ref: '#/definitions/TimeSeries'
+example:
+    - nameGeneratorType: exact
+      nameGenerator: "generator_name1"
+      unit: milliseconds
+      metrics:
+        metric1:
+          resolution: 60
+          retention: 10
+          aggregator: sum
+        metric2:
+          resolution: 30
+          retention: 5
+          aggregator: avg
+    - nameGeneratorType: add_prefix
+      nameGenerator: "generator_name2"
+      unit: seconds
+      metrics:
+        metric3:
+          resolution: 10
+          retention: 5
+          aggregator: max

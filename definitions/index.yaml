@@ -38,6 +38,15 @@ FileType:
 FileAttributes:
   $ref: ./data/file_attributes.yaml
 
+TimeSeriesCollection:
+  $ref: ./data/time_series_collection_schema.yaml
+
+TimeSeries:
+  $ref: ./data/time_series_schema.yaml
+
+TimeSeriesMetrics:
+  $ref: ./data/time_series_metrics.yaml
+
 MetadataChangesEvent:
   $ref: ./monitoring/metadata_changes_event.yaml
 
