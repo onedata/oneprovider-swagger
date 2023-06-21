@@ -1,25 +1,28 @@
 type: object
 description: >
-  A set of metrics along with their configurations. Each metric is identified by its unique name, 
-  Metric composition is an integral part of the time series configuration.
-properties:
-  resolution:
-    type: integer
-    description: "The width of a single time window in seconds. A value of 0 indicates infinity."
-    retention:
+  A metric represents a specific measurement or statistic within the time series data. It is uniquely identified 
+  by its name.
+metric_name:
+  type: string
+  description: Name of the metric.
+properties:resolution:
       type: integer
-      description: "The number of windows to store for the metric. Older windows are pruned."
-    aggregator:
-      type: string
-      enum:
-        - sum
-        - max
-        - min
-        - last
-        - first
-        - avg
-      description: "The aggregator function applied when inserting a new measurement into a time window."
+      description: Specifies the width of a time window in seconds. A value of 0 indicates infinity.
+      retention:
+        type: integer
+        description: Specifies the number of stored windows for the metric, with older windows being pruned.
+      aggregator:
+        type: string
+        enum:
+          - sum
+          - max
+          - min
+          - last
+          - first
+          - avg
+        description: Specifies the aggregator function used for consolidating measurements within a time window.
 example:
-  resolution: 60
-  retention: 5
-  aggregator: "avg"
+  file_size_avg:
+    resolution: 60
+    retention: 5
+    aggregator: "avg"

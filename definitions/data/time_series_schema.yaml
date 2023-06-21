@@ -1,7 +1,7 @@
 type: object
-description:
-  This module encompasses fundamental concepts related to time series, 
-  specifically the aggregation of data points (measurements) within constant-width time windows.
+description: >
+  Managing and analyzing time series data. Enables the aggregation and processing of data points 
+  (measurements) within fixed time intervals.
 properties:
   nameGeneratorType:
     type: string
@@ -9,7 +9,9 @@ properties:
       - exact
       - add_prefix
     description: >
-      Specifies how time series names are generated - 'exact' for unique names, 'add_prefix' for shared name prefix.
+      Determines how time series names are generated:
+      * 'exact' for unique names, 
+      * 'add_prefix' for shared name prefix.
   nameGenerator:
     type: string
     description: Generator name.
@@ -35,7 +37,7 @@ properties:
       - boolean
       - custom
     description: >
-      Specifies the unit of measurement for the time series. The possible values are:
+      The unit of measurement for the time series. Allowed values are:
       - 'none'
       - 'milliseconds'
       - 'seconds'
@@ -58,10 +60,14 @@ properties:
       $ref: '#/definitions/TimeSeriesMetrics'
 example:
   nameGeneratorType: exact
-  nameGenerator: "generator_name"
-  unit: milliseconds
+  nameGenerator: "file_size"
+  unit: bytes
   metrics:
-    metric1:
-      resolution: 30
+    file_size_sum:
+      resolution: 60
       retention: 10
-      aggregator: max
+      aggregator: sum
+    file_size_avg:
+      resolution: 30
+      retention: 5
+      aggregator: avg

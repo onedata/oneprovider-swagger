@@ -2,27 +2,27 @@ type: object
 properties:
   time_series_schemas:
     type: array
-    description: Specifies what time series can appear in the collection and how to display them using a dashboard.
+    description: Describes the time series that can appear in the collection and their properties.
     items:
       $ref: '#/definitions/TimeSeries'
 example:
     - nameGeneratorType: exact
-      nameGenerator: "generator_name1"
-      unit: milliseconds
+      nameGenerator: "file_size_aggregate"
+      unit: bytes
       metrics:
-        metric1:
+        file_size_sum:
           resolution: 60
           retention: 10
           aggregator: sum
-        metric2:
+        file_size_avg:
           resolution: 30
           retention: 5
           aggregator: avg
     - nameGeneratorType: add_prefix
-      nameGenerator: "generator_name2"
-      unit: seconds
+      nameGenerator: "file_size_max"
+      unit: bytes
       metrics:
-        metric3:
+        file_size_max:
           resolution: 10
           retention: 5
           aggregator: max
