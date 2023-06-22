@@ -39,9 +39,9 @@ properties:
     description: >
       Specifies the unit of measurement for the time series data within the collection.
   metrics:
-    type: array
+    type: object
     description: Describes the time series metrics and their respective properties.
-    items:
+    additionalProperties:
       $ref: '#/definitions/TimeSeriesMetric'
 example:
   nameGeneratorType: exact

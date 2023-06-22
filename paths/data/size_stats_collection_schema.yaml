@@ -5,7 +5,7 @@ get:
     aspect: dir_size_stats_collection_schema
   summary: Get size statistics collection schema.
   tags:
-    - Size Statistics
+    - Basic File Operations
   x-bash-codegen-description: |
     This method returns a collection of time series schemas, 
     which define the structure and configuration of time series data.
@@ -21,35 +21,35 @@ get:
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/dir_size_stats_collection_schema"
     
     {
-      "time_series_schemas" = [
+      "timeSeriesSchemas": [
         {
-          "name_generator_type" = "exact",
-          "name_generator" = "file_size_aggregate",
-          "unit" = "bytes",
-          "metrics" = [
-            "file_size_sum" = {
-              "resolution" = 60
-              "retention" = 10
-              "aggregator" = sum
+          "nameGeneratorType": "exact",
+          "nameGenerator": "file_size_aggregate",
+          "unit": "bytes",
+          "metrics": {
+            "file_size_sum": {
+              "resolution": 60
+              "retention": 10
+              "aggregator": "sum"
             },
-            "file_size_avg" = {
-              "resolution" = 30
-              "retention" = 5
-              "aggregator" = avg
+            "file_size_avg": {
+              "resolution": 30
+              "retention": 5
+              "aggregator": "avg"
             }
-          ]
+          }
         },
         {
-          "name_generator_type" = "exact",
-          "name_generator" = "file_size_max",
-          "unit" = "bytes",
-          "metrics" = [
-            "file_size_max" = {
-              "resolution" = 10
-              "retention" = 5
-              "aggregator" = max
+          "nameGeneratorType": "exact",
+          "nameGenerator": "file_size_max",
+          "unit": "bytes",
+          "metrics": {
+            "file_size_max": {
+              "resolution": 10
+              "retention": 5
+              "aggregator": "max"
             }
-          ]
+          }
         },
       ]
     }

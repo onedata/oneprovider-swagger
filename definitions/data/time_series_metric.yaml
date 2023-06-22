@@ -2,26 +2,23 @@ type: object
 description: >
   Describes a specific measurement or statistic within the time series data. 
   Each metric is uniquely identified by its name.
-metric_name:
-  type: string
-  description: Name of the metric.
 properties:
   resolution:
-      type: integer
-      description: Specifies the width of a time window in seconds. A value of 0 indicates infinity.
-      retention:
-        type: integer
-        description: Specifies the number of stored windows for the metric, with older windows being pruned.
-      aggregator:
-        type: string
-        enum:
-          - sum
-          - max
-          - min
-          - last
-          - first
-          - avg
-        description: Specifies the aggregator function used for consolidating measurements within a time window.
+    type: integer
+    description: Specifies the width of a time window in seconds. A value of 0 indicates infinity.
+  retention:
+    type: integer
+    description: Specifies the number of stored windows for the metric, with older windows being pruned.
+  aggregator:
+    type: string
+    enum:
+      - sum
+      - max
+      - min
+      - last
+      - first
+      - avg
+    description: Specifies the aggregator function used for consolidating measurements within a time window.
 example:
   file_size_avg:
     resolution: 60
