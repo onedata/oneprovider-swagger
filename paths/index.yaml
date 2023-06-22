@@ -43,6 +43,9 @@
 
 
 # Basic File Operations
+/data/size_stats_collection_schema:
+  $ref: ./data/size_stats_collection_schema.yaml
+
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
@@ -66,9 +69,6 @@
 
 /data/{id}/path/{path}:
   $ref: ./data/id/path.yaml
-
-/data/size_stats_collection_schema:
-  $ref: ./data/size_stats_collection_schema.yaml
 
 # tag Custom File Metadata
 /data/{id}/metadata/json:

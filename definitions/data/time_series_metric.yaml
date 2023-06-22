@@ -20,7 +20,7 @@ properties:
       - avg
     description: Specifies the aggregator function used for consolidating measurements within a time window.
 example:
-  file_size_avg:
-    resolution: 60
-    retention: 5
-    aggregator: "avg"
+  month:
+    retention: 360,
+    resolution: 2592000,
+    aggregator: last

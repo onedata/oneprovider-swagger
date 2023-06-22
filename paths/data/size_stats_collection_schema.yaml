@@ -3,6 +3,7 @@ get:
   x-onedata-gri:
     type: op_file
     aspect: dir_size_stats_collection_schema
+    scope: public
   summary: Get size statistics collection schema.
   tags:
     - Basic File Operations
@@ -17,40 +18,64 @@ get:
     
     **Get size statistics collection schema**
     ```bash
-      curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/dir_size_stats_collection_schema"
+      curl -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/size_stats_collection_schema"
     
     {
       "timeSeriesSchemas": [
         {
           "nameGeneratorType": "exact",
-          "nameGenerator": "file_size_aggregate",
+          "nameGenerator": "total_size",
           "unit": "bytes",
           "metrics": {
-            "file_size_sum": {
-              "resolution": 60
-              "retention": 10
-              "aggregator": "sum"
+           "month":{
+               "retention":360,
+               "resolution":2592000,
+               "aggregator":"last"
             },
-            "file_size_avg": {
-              "resolution": 30
-              "retention": 5
-              "aggregator": "avg"
+            "minute":{
+               "retention":720,
+               "resolution":60,
+               "aggregator":"last"
+            },
+            "hour":{
+               "retention":1440,
+               "resolution":3600,
+               "aggregator":"last"
+            },
+            "day":{
+               "retention":550,
+               "resolution":86400,
+               "aggregator":"last"
             }
           }
         },
         {
-          "nameGeneratorType": "exact",
-          "nameGenerator": "file_size_max",
-          "unit": "bytes",
-          "metrics": {
-            "file_size_max": {
-              "resolution": 10
-              "retention": 5
-              "aggregator": "max"
+         "nameGeneratorType":"exact",
+         "nameGenerator":"dir_count",
+         "unit":"none",
+         "metrics":{
+            "month":{
+               "retention":360,
+               "resolution":2592000,
+               "aggregator":"last"
+            },
+            "minute":{
+               "retention":720,
+               "resolution":60,
+               "aggregator":"last"
+            },
+            "hour":{
+               "retention":1440,
+               "resolution":3600,
+               "aggregator":"last"
+            },
+            "day":{
+               "retention":550,
+               "resolution":86400,
+               "aggregator":"last"
             }
-          }
-        },
+         }
+      },
       ]
     }
     ```
@@ -63,10 +88,6 @@ get:
         $ref: '#/definitions/TimeSeriesCollection'
     '400':
       description: Invalid request.
-      schema:
-        $ref: '#/definitions/Error'
-    '403':
-      description: Forbidden request.
       schema:
         $ref: '#/definitions/Error'
     '500':

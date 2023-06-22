@@ -7,22 +7,42 @@ properties:
       $ref: '#/definitions/TimeSeries'
 example:
     - nameGeneratorType: exact
-      nameGenerator: "file_size_aggregate"
+      nameGenerator: "total_size"
       unit: bytes
       metrics:
-        file_size_sum:
-          resolution: 60
-          retention: 10
-          aggregator: sum
-        file_size_avg:
-          resolution: 30
-          retention: 5
-          aggregator: avg
+        month:
+          retention: 360,
+          resolution: 2592000,
+          aggregator: last
+        minute:
+          retention: 720,
+          resolution: 60,
+          aggregator: last
+        hour:
+          retention: 1440,
+          resolution: 3600,
+          aggregator: last
+        day:
+          retention: 550,
+          resolution: 86400,
+          aggregator: last
     - nameGeneratorType: add_prefix
-      nameGenerator: "file_size_max"
-      unit: bytes
+      nameGenerator: "dir_count"
+      unit: none
       metrics:
-        file_size_max:
-          resolution: 10
-          retention: 5
-          aggregator: max
+        month:
+          retention: 360,
+          resolution: 2592000,
+          aggregator: last
+        minute:
+          retention: 720,
+          resolution: 60,
+          aggregator: last
+        hour:
+          retention: 1440,
+          resolution: 3600,
+          aggregator: last
+        day:
+          retention: 550,
+          resolution: 86400,
+          aggregator: last
