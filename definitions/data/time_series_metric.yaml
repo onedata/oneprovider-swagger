@@ -1,11 +1,12 @@
 type: object
 description: >
-  A metric represents a specific measurement or statistic within the time series data. It is uniquely identified 
-  by its name.
+  Describes a specific measurement or statistic within the time series data. 
+  Each metric is uniquely identified by its name.
 metric_name:
   type: string
   description: Name of the metric.
-properties:resolution:
+properties:
+  resolution:
       type: integer
       description: Specifies the width of a time window in seconds. A value of 0 indicates infinity.
       retention:

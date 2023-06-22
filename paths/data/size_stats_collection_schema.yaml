@@ -1,0 +1,78 @@
+get:
+  operationId: get_size_stats_collection_schema
+  x-onedata-gri:
+    type: op_file
+    aspect: dir_size_stats_collection_schema
+  summary: Get size statistics collection schema.
+  tags:
+    - Size Statistics
+  x-bash-codegen-description: |
+    This method returns a collection of time series schemas, 
+    which define the structure and configuration of time series data.
+  description: |
+    This method returns a collection of time series schemas, 
+    which define the structure and configuration of time series data.
+    
+    ***Example cURL requests***
+    
+    **Get size statistics collection schema**
+    ```bash
+      curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/dir_size_stats_collection_schema"
+    
+    {
+      "time_series_schemas" = [
+        {
+          "name_generator_type" = "exact",
+          "name_generator" = "file_size_aggregate",
+          "unit" = "bytes",
+          "metrics" = [
+            "file_size_sum" = {
+              "resolution" = 60
+              "retention" = 10
+              "aggregator" = sum
+            },
+            "file_size_avg" = {
+              "resolution" = 30
+              "retention" = 5
+              "aggregator" = avg
+            }
+          ]
+        },
+        {
+          "name_generator_type" = "exact",
+          "name_generator" = "file_size_max",
+          "unit" = "bytes",
+          "metrics" = [
+            "file_size_max" = {
+              "resolution" = 10
+              "retention" = 5
+              "aggregator" = max
+            }
+          ]
+        },
+      ]
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Returns the requested size statistics collection schema.
+      schema:
+        $ref: '#/definitions/TimeSeriesCollection'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getSizeStatsCollectionSchema"

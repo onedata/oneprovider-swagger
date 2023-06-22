@@ -67,6 +67,9 @@
 /data/{id}/path/{path}:
   $ref: ./data/id/path.yaml
 
+# tag Size Statistics
+/data/size_stats_collection_schema:
+  $ref: ./data/size_stats_collection_schema.yaml
 
 # tag Custom File Metadata
 /data/{id}/metadata/json:

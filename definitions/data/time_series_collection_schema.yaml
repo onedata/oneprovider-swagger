@@ -2,7 +2,7 @@ type: object
 properties:
   time_series_schemas:
     type: array
-    description: Describes the time series that can appear in the collection and their properties.
+    description: Describes the time series present in the collection and their respective properties.
     items:
       $ref: '#/definitions/TimeSeries'
 example:

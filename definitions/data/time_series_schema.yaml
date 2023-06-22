@@ -1,7 +1,7 @@
 type: object
 description: >
-  Managing and analyzing time series data. Enables the aggregation and processing of data points 
-  (measurements) within fixed time intervals.
+  Enables management and analysis of time series data. It facilitates the aggregation and 
+  processing of data points (measurements) within fixed time intervals.
 properties:
   nameGeneratorType:
     type: string
@@ -37,27 +37,12 @@ properties:
       - boolean
       - custom
     description: >
-      The unit of measurement for the time series. Allowed values are:
-      - 'none'
-      - 'milliseconds'
-      - 'seconds'
-      - 'bits'
-      - 'bytes'
-      - 'hertz'
-      - 'counts_per_sec'
-      - 'operations_per_sec'
-      - 'requests_per_sec'
-      - 'bits_per_sec'
-      - 'bytes_per_sec'
-      - 'reads_per_sec'
-      - 'writes_per_sec'
-      - 'io_operations_per_sec'
-      - 'percent'
-      - 'percent_normalized'
-      - 'boolean'
-      - 'custom' (followed by a custom unit name)
+      Specifies the unit of measurement for the time series data within the collection.
   metrics:
-      $ref: '#/definitions/TimeSeriesMetrics'
+    type: array
+    description: Describes the time series metrics and their respective properties.
+    items:
+      $ref: '#/definitions/TimeSeriesMetric'
 example:
   nameGeneratorType: exact
   nameGenerator: "file_size"
