@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '#/definitions/SizeStatsProperties'
+  - type: object
+    properties:
+      mode:
+        type: string
+        enum: [layout]
+        x-discriminator-value: "layout"
+        description: |
+          Indicates the method of determining the statistic mode to be sent. 
+          The "layout" mode provides a layout structure with statistics grouped by different time intervals.
+required:
+  - mode
+example:
+  mode: layout

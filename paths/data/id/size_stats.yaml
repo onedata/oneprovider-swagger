@@ -1,0 +1,182 @@
+get:
+  operationId: get_size_stats
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: "{dir_size_stats_collection, ?PROVIDER_BINDING}"
+  summary: Get size statistics.
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    This endpoint retrieves historical size statistics for a directory. 
+    Provides only information from the hosted provider. 
+    This method is designed for directories. If it is called with a file, it will return an error: 
+    "Operation failed with POSIX error: enotdir.".
+
+    It supports two modes: 'layout' and 'slice'. 
+    In 'layout' mode, it returns the time series layout information. 
+    In 'slice' mode, it returns a time series slice.
+
+  description: |
+    This endpoint retrieves historical size statistics for a directory. 
+    Provides only information from the hosted provider. 
+    This method is designed for directories. If it is called with a file, it will return an error: 
+    "Operation failed with POSIX error: enotdir.".
+
+    It supports two modes: 'layout' and 'slice'. 
+    In 'layout' mode, it returns the time series layout information. 
+    In 'slice' mode, it returns a time series slice.
+    
+    ***Example cURL requests***
+    
+    **Get directory size statistics**
+    ```bash
+      curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
+        -H "Content-Type: application/json" -d '{
+            "mode":"slice",
+            "extendedInfo":true,
+            "layout":{
+              "dir_count":[
+                "minute"
+              ],
+              "reg_file_and_link_count":[
+                "minute"
+              ],
+              "total_size":[
+                "minute"
+              ],
+              "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55":[
+                "minute"
+              ]
+            },
+            "startTimestamp":1687513285,
+            "windowLimit":31
+            }'
+      {
+        "slice": {
+          "total_size": {
+            "minute": [
+              {
+                "value": 883365,
+                "timestamp": 1687513260,
+                "lastMeasurementTimestamp": 1687513287,
+                "firstMeasurementTimestamp": 1687513287
+              }
+            ]
+          },
+          "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55": {
+            "minute": [
+              {
+                "value": 883365,
+                "timestamp": 1687513260,
+                "lastMeasurementTimestamp": 1687513287,
+                "firstMeasurementTimestamp": 1687513287
+              }
+            ]
+          },
+          "reg_file_and_link_count": {
+            "minute": [
+              {
+                "value": 10,
+                "timestamp": 1687513260,
+                "lastMeasurementTimestamp": 1687513287,
+                "firstMeasurementTimestamp": 1687513287
+              }
+            ]
+          },
+          "dir_count": {
+            "minute": [
+              {
+                "value": 0,
+                "timestamp": 1687513260,
+                "lastMeasurementTimestamp": 1687513287,
+                "firstMeasurementTimestamp": 1687513287
+              }
+            ]
+          }
+        }
+      }
+    
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
+        -H "Content-Type: application/json" -d '{
+        "mode": "layout"  
+      }'
+      {
+        "layout": {
+          "total_size": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ],
+          "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ],
+          "reg_file_and_link_count": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ],
+          "file_errors_count": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ],
+          "dir_errors_count": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ],
+          "dir_count": [
+            "day",
+            "hour",
+            "minute",
+            "month"
+          ]
+        }
+      }
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: Historical directory size statistics.
+      schema:
+        $ref: '#/definitions/DirSizeStats'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: | 
+        Directory Id
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Directory size statistics properties.
+      required: true
+      schema:
+        $ref: '#/definitions/SizeStatsProperties'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getSizeStats id=$DIR_ID"

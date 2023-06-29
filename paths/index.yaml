@@ -43,8 +43,8 @@
 
 
 # Basic File Operations
-/data/size_stats_collection_schema:
-  $ref: ./data/size_stats_collection_schema.yaml
+/data/{id}/size_stats:
+  $ref: ./data/id/size_stats.yaml
 
 /data/{id}/children:
   $ref: ./data/id/children.yaml

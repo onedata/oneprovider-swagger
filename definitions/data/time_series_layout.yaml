@@ -1,0 +1,13 @@
+type: object
+additionalProperties:
+    type: array
+    description: Provides a layout structure with statistics grouped by different time intervals.
+    items:
+      type: string
+      description: Contains array of metric names for a time series
+example:
+  total_size:
+    - day
+    - hour
+    - minute
+    - month

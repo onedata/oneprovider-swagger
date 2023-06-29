@@ -1,0 +1,46 @@
+allOf:
+  - $ref: '#/definitions/SizeStatsProperties'
+  - type: object
+    properties:
+      mode:
+        type: string
+        enum: [slice]
+        x-discriminator-value: "slice"
+        description: |
+          Indicates the method of determining the statistic mode to be sent. 
+          The "slice" mode provides specific statistics for individual slices of data.
+      layout:
+          type: array
+          description: Specifies a layout structure with statistics grouped by different time intervals.
+          items:
+            type: string
+            description: Contains array of metric names for a time series
+      startTimestamp:
+        type: string
+        description: Specifies the starting timestamp for retrieving the statistics
+      windowLimit:
+        type: string
+        description: Sets the duration of the time window for collecting statistics.
+      extendedInfo:
+        type: string
+        description: Determines whether additional extended information should be included in the response.
+required:
+  - mode
+  - layout
+  - startTimestamp
+  - windowLimit
+  - extendedInfo
+example:
+  mode: slice
+  layout:
+    dir_count:
+      - minute
+    reg_file_and_link_count:
+      - minute
+    total_size:
+      - minute
+    storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
+      - minute
+  extendedInfo: true
+  startTimestamp: 1687513285,
+  windowLimit: 31

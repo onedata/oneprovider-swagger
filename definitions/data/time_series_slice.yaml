@@ -1,0 +1,15 @@
+type: object
+additionalProperties:
+    type: object
+    description: Describe specific statistics for individual slices of data.
+    additionalProperties:
+      type: array
+      items:
+        $ref: '#/definitions/WindowInfo'
+example:
+  total_size:
+    minute:
+      - value: 883365,
+        timestamp: 1687513260,
+        lastMeasurementTimestamp: 1687513287,
+        firstMeasurementTimestamp: 1687513287

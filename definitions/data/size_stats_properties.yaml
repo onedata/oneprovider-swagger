@@ -1,0 +1,15 @@
+type: object
+description: Specifies the type of size statistics to be returned.
+discriminator: mode
+x-onedata-oneof: true
+x-onedata-subclasses:
+  - slice
+  - layout
+properties:
+  mode:
+    type: string
+    enum:
+      - slice
+      - layout
+required:
+  - mode
