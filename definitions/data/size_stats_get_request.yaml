@@ -11,5 +11,4 @@ properties:
     enum:
       - slice
       - layout
-required:
-  - mode
+    default: layout

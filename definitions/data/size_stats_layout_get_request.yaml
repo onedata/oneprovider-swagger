@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '#/definitions/SizeStatsProperties'
+  - $ref: '#/definitions/SizeStatsGetRequest'
   - type: object
     properties:
       mode:

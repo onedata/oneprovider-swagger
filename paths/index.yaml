@@ -43,9 +43,6 @@
 
 
 # Basic File Operations
-/data/{id}/size_stats:
-  $ref: ./data/id/size_stats.yaml
-
 /data/{id}/children:
   $ref: ./data/id/children.yaml
 
@@ -57,6 +54,9 @@
 
 /data/{id}:
   $ref: ./data/id.yaml
+
+/data/{id}/size_stats:
+  $ref: ./data/id/size_stats.yaml
 
 /data/{id}/hardlinks:
   $ref: ./data/id/hardlinks.yaml
@@ -70,6 +70,7 @@
 /data/{id}/path/{path}:
   $ref: ./data/id/path.yaml
 
+
 # tag Custom File Metadata
 /data/{id}/metadata/json:
   $ref: ./data/id/metadata/json.yaml
@@ -79,6 +80,7 @@
 
 /data/{id}/metadata/xattrs:
   $ref: ./data/id/metadata/xattrs.yaml
+
 
 # tag File registration
 /data/register:

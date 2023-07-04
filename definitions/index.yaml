@@ -38,24 +38,24 @@ FileType:
 FileAttributes:
   $ref: ./data/file_attributes.yaml
 
-DirSizeStats:
-  $ref: ./data/dir_size_stats.yaml
+SizeStats:
+  $ref: ./data/size_stats.yaml
 
 TimeSeriesLayout:
-  $ref: ./data/time_series_layout.yaml
+  $ref: ./time_series/time_series_layout.yaml
 
 TimeSeriesSlice:
-  $ref: ./data/time_series_slice.yaml
+  $ref: ./time_series/time_series_slice.yaml
 
 WindowInfo:
-  $ref: ./data/window_info.yaml
+  $ref: ./time_series/window_info.yaml
 
-SizeStatsProperties:
-  $ref: ./data/size_stats_properties.yaml
+SizeStatsGetRequest:
+  $ref: ./data/size_stats_get_request.yaml
 slice:
-  $ref: ./data/size_stats_slice_properties.yaml
+  $ref: ./data/size_stats_slice_get_request.yaml
 layout:
-  $ref: ./data/size_stats_layout_properties.yaml
+  $ref: ./data/size_stats_layout_get_request.yaml
 
 MetadataChangesEvent:
   $ref: ./monitoring/metadata_changes_event.yaml

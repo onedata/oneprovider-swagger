@@ -1,0 +1,22 @@
+type: object
+properties:
+  timestamp:
+    type: integer
+    format: timestamp
+    description: ID of the window (timestamp representing the beginning of the window)
+  value:
+    type: number
+    description: Value generated from aggregated measurements
+  firstMeasurementTimestamp:
+    type: integer
+    format: timestamp
+    description: First timestamp among measurements
+  lastMeasurementTimestamp:
+    type: integer
+    format: timestamp
+    description: Last timestamp among measurements
+example:
+  timestamp: 1687513260,
+  value: 883365,
+  firstMeasurementTimestamp: 1687513287,
+  lastMeasurementTimestamp: 1687513287

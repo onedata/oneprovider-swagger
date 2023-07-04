@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '#/definitions/SizeStatsProperties'
+  - $ref: '#/definitions/SizeStatsGetRequest'
   - type: object
     properties:
       mode:
@@ -10,11 +10,7 @@ allOf:
           Indicates the method of determining the statistic mode to be sent. 
           The "slice" mode provides specific statistics for individual slices of data.
       layout:
-          type: array
-          description: Specifies a layout structure with statistics grouped by different time intervals.
-          items:
-            type: string
-            description: Contains array of metric names for a time series
+        $ref: '#/definitions/TimeSeriesLayout'
       startTimestamp:
         type: string
         description: Specifies the starting timestamp for retrieving the statistics
@@ -23,7 +19,7 @@ allOf:
         description: Sets the duration of the time window for collecting statistics.
       extendedInfo:
         type: string
-        description: Determines whether additional extended information should be included in the response.
+        description: Determines whether to include additional extended information about the first and last timestamps of measurements in the response.
 required:
   - mode
   - layout
@@ -41,6 +37,6 @@ example:
       - minute
     storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
       - minute
-  extendedInfo: true
   startTimestamp: 1687513285,
-  windowLimit: 31
+  windowLimit: 31,
+  extendedInfo: true

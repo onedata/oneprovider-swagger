@@ -9,7 +9,7 @@ additionalProperties:
 example:
   total_size:
     minute:
-      - value: 883365,
-        timestamp: 1687513260,
-        lastMeasurementTimestamp: 1687513287,
-        firstMeasurementTimestamp: 1687513287
+      - timestamp: 1687513260,
+        value: 883365,
+        firstMeasurementTimestamp: 1687513287,
+        lastMeasurementTimestamp: 1687513287

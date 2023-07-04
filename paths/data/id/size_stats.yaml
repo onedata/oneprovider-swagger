@@ -13,6 +13,9 @@ get:
     Provides only information from the hosted provider. 
     This method is designed for directories. If it is called with a file, it will return an error: 
     "Operation failed with POSIX error: enotdir.".
+    
+    To retrieve historical size statistics for a directory using this endpoint, it is necessary to have statistics
+    enabled in your provider. Without enabling statistics, the endpoint will not return the desired information.
 
     It supports two modes: 'layout' and 'slice'. 
     In 'layout' mode, it returns the time series layout information. 
@@ -23,6 +26,9 @@ get:
     Provides only information from the hosted provider. 
     This method is designed for directories. If it is called with a file, it will return an error: 
     "Operation failed with POSIX error: enotdir.".
+    
+    To retrieve historical size statistics for a directory using this endpoint, it is necessary to have statistics
+    enabled in your provider. Without enabling statistics, the endpoint will not return the desired information.
 
     It supports two modes: 'layout' and 'slice'. 
     In 'layout' mode, it returns the time series layout information. 
@@ -34,25 +40,26 @@ get:
     ```bash
       curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
         -H "Content-Type: application/json" -d '{
-            "mode":"slice",
-            "extendedInfo":true,
-            "layout":{
-              "dir_count":[
-                "minute"
-              ],
-              "reg_file_and_link_count":[
-                "minute"
-              ],
-              "total_size":[
-                "minute"
-              ],
-              "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55":[
-                "minute"
-              ]
-            },
-            "startTimestamp":1687513285,
-            "windowLimit":31
-            }'
+        "mode":"slice",
+        "extendedInfo":true,
+        "layout":{
+          "dir_count":[
+            "minute"
+          ],
+          "reg_file_and_link_count":[
+            "minute"
+          ],
+          "total_size":[
+            "minute"
+          ],
+          "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55":[
+            "minute"
+          ]
+        },
+        "startTimestamp":1687513285,
+        "windowLimit":31
+      }'
+    
       {
         "slice": {
           "total_size": {
@@ -97,11 +104,14 @@ get:
           }
         }
       }
+    ```
     
-    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
+    ```
+      curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
         -H "Content-Type: application/json" -d '{
         "mode": "layout"  
       }'
+    
       {
         "layout": {
           "total_size": [
@@ -151,7 +161,7 @@ get:
     '200':
       description: Historical directory size statistics.
       schema:
-        $ref: '#/definitions/DirSizeStats'
+        $ref: '#/definitions/SizeStats'
     '400':
       description: Invalid request.
       schema:
@@ -176,7 +186,7 @@ get:
       description: Directory size statistics properties.
       required: true
       schema:
-        $ref: '#/definitions/SizeStatsProperties'
+        $ref: '#/definitions/SizeStatsGetRequest'
   x-code-samples:
     - lang: Shell
       source: "oneprovider-rest-cli getSizeStats id=$DIR_ID"
