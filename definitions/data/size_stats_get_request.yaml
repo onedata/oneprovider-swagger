@@ -12,3 +12,5 @@ properties:
       - slice
       - layout
     default: layout
+required:
+  - mode

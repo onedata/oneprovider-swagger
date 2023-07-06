@@ -41,6 +41,13 @@ FileAttributes:
 SizeStats:
   $ref: ./data/size_stats.yaml
 
+SizeStatsGetRequest:
+  $ref: ./data/size_stats_get_request.yaml
+slice:
+  $ref: ./data/size_stats_slice_get_request.yaml
+layout:
+  $ref: ./data/size_stats_layout_get_request.yaml
+
 TimeSeriesLayout:
   $ref: ./time_series/time_series_layout.yaml
 
@@ -49,13 +56,6 @@ TimeSeriesSlice:
 
 WindowInfo:
   $ref: ./time_series/window_info.yaml
-
-SizeStatsGetRequest:
-  $ref: ./data/size_stats_get_request.yaml
-slice:
-  $ref: ./data/size_stats_slice_get_request.yaml
-layout:
-  $ref: ./data/size_stats_layout_get_request.yaml
 
 MetadataChangesEvent:
   $ref: ./monitoring/metadata_changes_event.yaml
