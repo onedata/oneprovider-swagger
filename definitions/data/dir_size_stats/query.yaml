@@ -1,16 +1,16 @@
 type: object
-description: Specifies the type of size statistics to be returned.
+description: Specifies the mode of the query.
 discriminator: mode
 x-onedata-oneof: true
 x-onedata-subclasses:
-  - slice
   - layout
+  - slice
 properties:
   mode:
     type: string
     enum:
-      - slice
       - layout
+      - slice
     default: layout
 required:
   - mode
