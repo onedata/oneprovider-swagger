@@ -43,7 +43,7 @@ get:
     **Get the layout of directory size statistics**    
     ```
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/dir_size_stats" \
     -H "Content-Type: application/json" -d '{
         "mode": "layout"  
     }'
@@ -68,7 +68,7 @@ get:
     **Get a slice of directory size statistics**    
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/size_stats" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/dir_size_stats" \
     -H "Content-Type: application/json" -d '{
         "mode": "slice",
         "extendedInfo": true,
@@ -109,7 +109,7 @@ get:
                 ]
             }
         }
-    }
+    }'
     ```
   consumes:
     - application/json

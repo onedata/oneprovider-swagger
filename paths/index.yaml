@@ -55,7 +55,7 @@
 /data/{id}:
   $ref: ./data/id.yaml
 
-/data/{id}/size_stats:
+/data/{id}/dir_size_stats:
   $ref: ./data/id/dir_size_stats.yaml
 
 /data/{id}/hardlinks:
