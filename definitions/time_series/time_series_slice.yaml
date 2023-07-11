@@ -1,11 +1,12 @@
 type: object
+description: Listing of time series windows per time series and per metric within a time series.
 additionalProperties:
-    type: object
-    description: Describe specific statistics for individual slices of data.
-    additionalProperties:
-      type: array
-      items:
-        $ref: '#/definitions/WindowInfo'
+  type: object
+  description: Listing of time series windows per metric within this time series.
+  additionalProperties:
+    type: array
+    items:
+      $ref: '#/definitions/TSWindowInfo'
 example:
   total_size:
     minute:

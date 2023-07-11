@@ -1,8 +1,7 @@
 type: object
 description: | 
-  Represents size statistics for the directory. Returns statistics based on the chosen mode of operation.
-  If mode is layout than provides a layout structure.
-  If mode is slice than describes statistics for slices of data.
+  Response to a directory size statistics query. Depending on the query mode, returns the
+  `layout` or `slice` object.
 properties:
     layout:
       $ref: '#/definitions/TimeSeriesLayout'
@@ -40,3 +39,16 @@ example:
       - hour
       - minute
       - month
+  slice:
+    total_size:
+      minute:
+        - value: 883365,
+          timestamp: 1687513260,
+          lastMeasurementTimestamp: 1687513287,
+          firstMeasurementTimestamp: 1687513287
+    storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
+      minute:
+        - value: 56280,
+          timestamp: 1687513260,
+          lastMeasurementTimestamp: 1687513287,
+          firstMeasurementTimestamp: 1687513287

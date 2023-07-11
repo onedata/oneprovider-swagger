@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '#/definitions/SizeStatsGetRequest'
+  - $ref: '#/definitions/DirSizeStatsQuery'
   - type: object
     properties:
       mode:
@@ -7,19 +7,19 @@ allOf:
         enum: [slice]
         x-discriminator-value: "slice"
         description: |
-          Indicates the method of determining the statistic mode to be sent. 
-          The "slice" mode provides specific statistics for individual slices of data.
+          Indicates the mode of the query. The `slice` mode returns a collection of slices 
+          of requested time series and metrics that were specified in the `layout` field.
       layout:
         $ref: '#/definitions/TimeSeriesLayout'
       startTimestamp:
         type: string
-        description: Specifies the starting timestamp for retrieving the statistics
+        description: Newest timestamp from which descending listing of time windows will begin.
       windowLimit:
         type: string
-        description: Sets the duration of the time window for collecting statistics.
+        description: Maximum number of time windows to be listed.
       extendedInfo:
         type: string
-        description: Determines whether to include additional extended information about the first and last timestamps of measurements in the response.
+        description: If true, information about the first and last timestamp of measurements per window will be included.
 required:
   - mode
   - layout
@@ -37,6 +37,6 @@ example:
       - minute
     storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
       - minute
-  startTimestamp: 1687513285,
-  windowLimit: 31,
+  startTimestamp: 1687513285
+  windowLimit: 31
   extendedInfo: true

@@ -38,15 +38,15 @@ FileType:
 FileAttributes:
   $ref: ./data/file_attributes.yaml
 
-SizeStats:
-  $ref: ./data/size_stats.yaml
+DirSizeStatsResponse:
+  $ref: ./data/dir_size_stats/response.yaml
 
-SizeStatsGetRequest:
-  $ref: ./data/size_stats_get_request.yaml
-slice:
-  $ref: ./data/size_stats_slice_get_request.yaml
+DirSizeStatsQuery:
+  $ref: ./data/dir_size_stats/query.yaml
 layout:
-  $ref: ./data/size_stats_layout_get_request.yaml
+  $ref: ./data/dir_size_stats/layout_query.yaml
+slice:
+  $ref: ./data/dir_size_stats/slice_query.yaml
 
 TimeSeriesLayout:
   $ref: ./time_series/time_series_layout.yaml
@@ -54,7 +54,7 @@ TimeSeriesLayout:
 TimeSeriesSlice:
   $ref: ./time_series/time_series_slice.yaml
 
-WindowInfo:
+TSWindowInfo:
   $ref: ./time_series/window_info.yaml
 
 MetadataChangesEvent:

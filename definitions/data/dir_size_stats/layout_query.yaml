@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '#/definitions/DirSizeStatsQuery'
+  - type: object
+    properties:
+      mode:
+        type: string
+        enum: [layout]
+        x-discriminator-value: "layout"
+        description: |
+          Indicates the mode of the query. The `layout` mode returns information about the structure of stats 
+          collection, i.e. the names of the available time series and metrics within them.
+required:
+  - mode
+example:
+  mode: layout
