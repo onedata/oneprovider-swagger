@@ -85,6 +85,7 @@ get:
             ]
         },
         "startTimestamp": 1687513285,
+        "stopTimestamp": 1687499802,
         "windowLimit": 31
     }'
     

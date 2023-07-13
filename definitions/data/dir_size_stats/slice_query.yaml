@@ -14,6 +14,9 @@ allOf:
       startTimestamp:
         type: string
         description: Newest timestamp from which descending listing of time windows will begin.
+      stopTimestamp:
+        type: string
+        description: Oldest timestamp with which descending listing of time windows will end.
       windowLimit:
         type: string
         description: Maximum number of time windows to be listed.
@@ -24,6 +27,7 @@ required:
   - mode
   - layout
   - startTimestamp
+  - stopTimestamp
   - windowLimit
   - extendedInfo
 example:
@@ -38,5 +42,6 @@ example:
     storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
       - minute
   startTimestamp: 1687513285
+  stopTimestamp: 1687499802
   windowLimit: 31
   extendedInfo: true
