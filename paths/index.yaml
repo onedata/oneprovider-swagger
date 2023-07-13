@@ -55,9 +55,6 @@
 /data/{id}:
   $ref: ./data/id.yaml
 
-/data/{id}/dir_size_stats:
-  $ref: ./data/id/dir_size_stats.yaml
-
 /data/{id}/hardlinks:
   $ref: ./data/id/hardlinks.yaml
 
@@ -82,10 +79,12 @@
   $ref: ./data/id/metadata/xattrs.yaml
 
 
-# tag File registration
+# tag Miscellaneous
 /data/register:
   $ref: ./data/register.yaml
 
+/data/{id}/dir_size_stats:
+  $ref: ./data/id/dir_size_stats.yaml
 
 # tag File Distribution
 /data/{id}/distribution:

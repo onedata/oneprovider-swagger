@@ -7,7 +7,7 @@ get:
     aspect: "{dir_size_stats_collection, ?QUERIED_PROVIDER_BINDING}"
   summary: Get directory size statistics.
   tags:
-    - Basic File Operations
+    - Miscellaneous
   x-bash-codegen-description: |
     Retrieves historical size statistics over time for a directory.
     The response includes only the information pertaining to the queried provider;
@@ -18,6 +18,8 @@ get:
     Size statistics over time are available only for directories.
     
     **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
+    If size statistics are disabled for the specific provider, an error message will be returned indicating
+    that directory statistics collection is disabled for the given space.
     
     Two request modes are supported: 
       * `layout` - returns information about the structure of stats collection, i.e. the names of the available time series and metrics within them
@@ -33,6 +35,8 @@ get:
     Size statistics over time are available only for directories.
     
     **This endpoint requires the size statistics to be enabled for given space on the queried provider.**
+    If size statistics are disabled for the specific provider, an error message will be returned indicating
+    that directory statistics collection is disabled for the given space.
     
     Two request modes are supported: 
       * `layout` - returns information about the structure of stats collection, i.e. the names of the available time series and metrics within them
