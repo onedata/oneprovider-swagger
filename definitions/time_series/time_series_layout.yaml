@@ -1,6 +1,6 @@
 type: object
 description: |
-  A map of arrays representing the structure of the time series collection - the names of time series
+  A map of arrays representing the structure of a time series collection - the names of time series
   and metrics within them.
 additionalProperties:
     type: array

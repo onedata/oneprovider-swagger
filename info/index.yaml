@@ -252,7 +252,7 @@ x-bash-codegen-description: |
     - creating and deleting files as well as updating their content
     - querying for file attributes, such as 'mode' file permissions and updating them,
     - managing custom file metadata (xattrs, JSON, RDF),
-    - miscellaneous operations related to file management and analysis.
+    - miscellaneous operations related to file management.
 
   More information can be found [here](#section/Overview/Data-management-basics).
 

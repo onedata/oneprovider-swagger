@@ -22,7 +22,7 @@ tags:
   - name: Custom File Metadata
     description: Files and Directories custom metadata related operations.
   - name: Miscellaneous
-    description: Miscellaneous operations related to file management and analysis.
+    description: Miscellaneous operations related to file management.
   - name: Share
     description: Shares related operations.
   - name: Dataset

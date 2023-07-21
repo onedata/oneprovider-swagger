@@ -5,7 +5,7 @@ get:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: "{dir_size_stats_collection, ?QUERIED_PROVIDER_BINDING}"
-  summary: Get directory size statistics.
+  summary: Get directory size statistics
   tags:
     - Miscellaneous
   x-bash-codegen-description: |
@@ -15,15 +15,28 @@ get:
     space must be queried. There may be discrepancies in statistics such as logical
     size of data, which stem from synchronization delays between providers.
     
-    Size statistics over time are available only for directories.
+    Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children) 
+    and the statistics from all its subdirectories. 
     
     **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
-    If size statistics are disabled for the specific provider, an error message will be returned indicating
-    that directory statistics collection is disabled for the given space.
+    Otherwise, an adequate error will be returned.
     
     Two request modes are supported: 
       * `layout` - returns information about the structure of stats collection, i.e. the names of the available time series and metrics within them
       * `slice` - returns a slice of statistics as a collection of slices of requested time series and metrics
+    
+    The following time series are available for each directory:
+      * `total_size`: the total logical size of file data contained in the directory, i.e. the sum of logical byte sizes of all regular files.
+      * `storage_use_$STORAGE_ID`: storage size used to store the physical data of the contained files for given `$STORAGE_ID`. Only the storage backends owned by the queried providers are returned.
+      * `reg_file_and_link_count`: the count of regular files, hardlinks, and symbolic links contained in the directory.
+      * `dir_count`: the count of directories contained in the directory.
+      * `file_errors_count`: the count of error occurrences when the statistics mechanisms were not able to gather size information about a certain file.
+      * `dir_errors_count`: like above, for directories.
+    
+    If the values of `file_errors_count` or `dir_errors_count` are not zero, the statistics may not be accurate.
+    
+    The following metrics are available for each time series: `day`, `hour`, `minute`, `month`.
 
   description: |
     Retrieves historical size statistics over time for a directory.
@@ -32,20 +45,33 @@ get:
     space must be queried. There may be discrepancies in statistics such as logical
     size of data, which stem from synchronization delays between providers.
     
-    Size statistics over time are available only for directories.
+    Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children) 
+    and the statistics from all its subdirectories. 
     
-    **This endpoint requires the size statistics to be enabled for given space on the queried provider.**
-    If size statistics are disabled for the specific provider, an error message will be returned indicating
-    that directory statistics collection is disabled for the given space.
+    **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
+    Otherwise, an adequate error will be returned.
     
     Two request modes are supported: 
       * `layout` - returns information about the structure of stats collection, i.e. the names of the available time series and metrics within them
       * `slice` - returns a slice of statistics as a collection of slices of requested time series and metrics
     
+    The following time series are available for each directory:
+      * `total_size` - the total logical size of file data contained in the directory, i.e. the sum of logical byte sizes of all regular files.
+      * `storage_use_$STORAGE_ID` - storage size used to store the physical data of the contained files for given `$STORAGE_ID`. Only the storage backends owned by the queried providers are returned.
+      * `reg_file_and_link_count` - the count of regular files, hardlinks, and symbolic links contained in the directory.
+      * `dir_count` - the count of directories contained in the directory.
+      * `file_errors_count` - the count of error occurrences when the statistics mechanisms were not able to gather size information about a certain file.
+      * `dir_errors_count` - like above, for directories.
+    
+    If the values of `file_errors_count` or `dir_errors_count` are not zero, the statistics may not be accurate.
+    
+    The following metrics are available for each time series: `day`, `hour`, `minute`, `month`.
+    
     ***Example cURL requests***
     
     **Get the layout of directory size statistics**    
-    ```
+    ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/dir_size_stats" \
     -H "Content-Type: application/json" -d '{
@@ -122,7 +148,8 @@ get:
     - application/json
   responses:
     '200':
-      description: Response to the directory size statistics query.
+      description: | 
+        Query response. Depending on the query mode, contains the `layout` or `slice` object.
       schema:
         $ref: '#/definitions/DirSizeStatsResponse'
     '400':

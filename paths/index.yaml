@@ -80,11 +80,11 @@
 
 
 # tag Miscellaneous
-/data/register:
-  $ref: ./data/register.yaml
-
 /data/{id}/dir_size_stats:
   $ref: ./data/id/dir_size_stats.yaml
+
+/data/register:
+  $ref: ./data/register.yaml
 
 
 # tag File Distribution

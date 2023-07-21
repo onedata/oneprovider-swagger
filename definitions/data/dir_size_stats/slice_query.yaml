@@ -8,15 +8,21 @@ allOf:
         x-discriminator-value: "slice"
         description: |
           Indicates the mode of the query. The `slice` mode returns a collection of slices 
-          of requested time series and metrics that were specified in the `layout` field.
+          of requested time series and metrics that were specified in the `layout` field
+          (which may express a subset of the queried collection).
       layout:
         $ref: '#/definitions/TimeSeriesLayout'
       startTimestamp:
         type: string
-        description: Newest timestamp from which descending listing of time windows will begin.
+        description: | 
+          Newest timestamp from which descending listing of time windows will begin. The first window to be listed
+          is the one that includes the given timestamp in its timespan. If no such window exists, the next existing
+          one is taken.
       stopTimestamp:
         type: string
-        description: Oldest timestamp with which descending listing of time windows will end.
+        description: Oldest timestamp with which descending listing of time windows will end. The last window to be listed
+          is the one that includes the given timestamp in its timespan. If no such window exists, the previous existing
+          one is taken.
       windowLimit:
         type: string
         description: Maximum number of time windows to be listed.
