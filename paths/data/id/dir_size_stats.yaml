@@ -16,8 +16,8 @@ get:
     size of data, which stem from synchronization delays between providers.
     
     Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
-    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children) 
-    and the statistics from all its subdirectories. 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children), 
+    including relevant data from the trash and archives, and the statistics from all its subdirectories. 
     
     **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
     Otherwise, an adequate error will be returned.
@@ -53,8 +53,8 @@ get:
     size of data, which stem from synchronization delays between providers.
     
     Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
-    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children) 
-    and the statistics from all its subdirectories. 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children), 
+    including relevant data from the trash and archives, and the statistics from all its subdirectories. 
     
     **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
     Otherwise, an adequate error will be returned.
@@ -193,4 +193,4 @@ get:
         $ref: '#/definitions/DirSizeStatsQuery'
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getSizeStats id=$DIR_ID"
+      source: "oneprovider-rest-cli getDirectorySizeStats id=$DIR_ID"

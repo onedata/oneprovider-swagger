@@ -36,10 +36,6 @@ allOf:
 required:
   - mode
   - layout
-  - startTimestamp
-  - stopTimestamp
-  - windowLimit
-  - extendedInfo
 example:
   mode: slice
   layout:
