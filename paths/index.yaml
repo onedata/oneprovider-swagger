@@ -78,7 +78,11 @@
 /data/{id}/metadata/xattrs:
   $ref: ./data/id/metadata/xattrs.yaml
 
-# tag File registration
+
+# tag Miscellaneous
+/data/{id}/dir_size_stats:
+  $ref: ./data/id/dir_size_stats.yaml
+
 /data/register:
   $ref: ./data/register.yaml
 

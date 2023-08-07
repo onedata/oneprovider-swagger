@@ -1,0 +1,198 @@
+get:
+  operationId: get_directory_size_stats
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: "{dir_size_stats_collection, ?QUERIED_PROVIDER_BINDING}"
+  summary: Get directory size statistics
+  tags:
+    - Miscellaneous
+  x-bash-codegen-description: |
+    Retrieves historical size statistics over time for a directory.
+    The response includes only the information pertaining to the queried provider;
+    in order to collect globally-complete statistics, all providers supporting the
+    space must be queried. There may be discrepancies in statistics such as logical
+    size of data, which stem from synchronization delays between providers.
+    
+    Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children),
+    and the statistics from all its subdirectories. Additionally, size statistics for the space directory
+    encompass relevant information from archives.
+    
+    **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
+    Otherwise, an adequate error will be returned.
+    
+    Two request modes are supported: 
+      * `layout` - returns information about the structure of stats collection, 
+    i.e. the names of the available time series and metrics within them
+      * `slice` - returns a slice of statistics as a collection of slices of 
+    requested time series and metrics
+    
+    The following time series are available for each directory:
+      * `total_size` - the total logical size of file data contained in the directory, 
+    i.e. the sum of logical byte sizes of all regular files.
+      * `storage_use_$STORAGE_ID` - storage size used to store the physical data
+    of the contained files for given `$STORAGE_ID`. Only the storage backends
+    owned by the queried providers are returned.
+      * `reg_file_and_link_count` - the count of regular files, hardlinks, 
+    and symbolic links contained in the directory.
+      * `dir_count` - the count of directories contained in the directory.
+      * `file_errors_count` - the count of error occurrences when the statistics 
+    mechanisms were not able to gather size information about a certain file.
+      * `dir_errors_count` - like above, for directories.
+    
+    If the values of `file_errors_count` or `dir_errors_count` are not zero, the statistics may not be accurate.
+    
+    The following metrics are available for each time series: `day`, `hour`, `minute`, `month`.
+
+  description: |
+    Retrieves historical size statistics over time for a directory.
+    The response includes only the information pertaining to the queried provider;
+    in order to collect globally-complete statistics, all providers supporting the
+    space must be queried. There may be discrepancies in statistics such as logical
+    size of data, which stem from synchronization delays between providers.
+    
+    Size statistics over time are available only for directories. They are collected hierarchically i.e. for a 
+    certain directory, its statistics are a sum of statistics for the directory (regarding its direct children),
+    and the statistics from all its subdirectories. Additionally, size statistics for the space directory
+    encompass relevant information from archives.
+    
+    **This endpoint requires the size statistics to be enabled for the containing space on the queried provider.**
+    Otherwise, an adequate error will be returned.
+    
+    Two request modes are supported: 
+      * `layout` - returns information about the structure of stats collection, 
+    i.e. the names of the available time series and metrics within them
+      * `slice` - returns a slice of statistics as a collection of slices of 
+    requested time series and metrics
+    
+    The following time series are available for each directory:
+      * `total_size` - the total logical size of file data contained in the directory, 
+    i.e. the sum of logical byte sizes of all regular files.
+      * `storage_use_$STORAGE_ID` - storage size used to store the physical data
+    of the contained files for given `$STORAGE_ID`. Only the storage backends
+    owned by the queried providers are returned.
+      * `reg_file_and_link_count` - the count of regular files, hardlinks, 
+    and symbolic links contained in the directory.
+      * `dir_count` - the count of directories contained in the directory.
+      * `file_errors_count` - the count of error occurrences when the statistics 
+    mechanisms were not able to gather size information about a certain file.
+      * `dir_errors_count` - like above, for directories.
+    
+    If the values of `file_errors_count` or `dir_errors_count` are not zero, the statistics may not be accurate.
+    
+    The following metrics are available for each time series: `day`, `hour`, `minute`, `month`.
+    
+    ***Example cURL requests***
+    
+    **Get the layout of directory size statistics**    
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/dir_size_stats" \
+    -H "Content-Type: application/json" -d '{
+        "mode": "layout"  
+    }'
+    
+    {
+        "layout": {
+            "total_size": [
+                "day",
+                "hour",
+                "minute",
+                "month"
+            ],
+            "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55": [...],
+            "reg_file_and_link_count": [...],
+            "file_errors_count": [...],
+            "dir_errors_count": [...],
+            "dir_count": [...]
+        }
+    }
+    ```
+    
+    **Get a slice of directory size statistics**    
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/dir_size_stats" \
+    -H "Content-Type: application/json" -d '{
+        "mode": "slice",
+        "extendedInfo": true,
+        "layout": {
+            "total_size": [
+                "minute"
+            ],
+            "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55": [
+                "minute"
+            ]
+        },
+        "startTimestamp": 1687513285,
+        "stopTimestamp": 1687499802,
+        "windowLimit": 31
+    }'
+    
+    {
+        "slice": {
+            "total_size": {
+                "minute": [
+                    {
+                        "value": 883365,
+                        "timestamp": 1687513260,
+                        "lastMeasurementTimestamp": 1687513287,
+                        "firstMeasurementTimestamp": 1687513287
+                    },
+                    ...
+                ]
+            },
+            "storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55": {
+                "minute": [
+                    {
+                        "value": 56280,
+                        "timestamp": 1687513260,
+                        "lastMeasurementTimestamp": 1687513287,
+                        "firstMeasurementTimestamp": 1687513287
+                    },
+                    ...
+                ]
+            }
+        }
+    }'
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: | 
+        Query response. Depending on the query mode, contains the `layout` or `slice` object.
+      schema:
+        $ref: '#/definitions/DirSizeStatsResponse'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: | 
+        Directory Id
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Query body.
+      required: true
+      schema:
+        $ref: '#/definitions/DirSizeStatsQuery'
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getDirectorySizeStats id=$DIR_ID"

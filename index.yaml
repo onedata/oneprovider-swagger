@@ -21,8 +21,8 @@ tags:
     description: Operations concerning file distribution.
   - name: Custom File Metadata
     description: Files and Directories custom metadata related operations.
-  - name: File registration
-    description: Operations for registering files located on external storages.
+  - name: Miscellaneous
+    description: Miscellaneous operations related to file management.
   - name: Share
     description: Shares related operations.
   - name: Dataset
@@ -47,7 +47,7 @@ x-tagGroups:
       - File Path Resolution
       - Basic File Operations
       - Custom File Metadata
-      - File registration
+      - Miscellaneous
   - name: Replica & QoS management
     tags:
       - File Distribution

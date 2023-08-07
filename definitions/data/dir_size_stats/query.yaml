@@ -1,0 +1,16 @@
+type: object
+description: Specifies the mode of the query.
+discriminator: mode
+x-onedata-oneof: true
+x-onedata-subclasses:
+  - layout
+  - slice
+properties:
+  mode:
+    type: string
+    enum:
+      - layout
+      - slice
+    default: layout
+required:
+  - mode

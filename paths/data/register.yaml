@@ -5,7 +5,7 @@ post:
     type: op_file
     aspect: register_file
   tags:
-    - File registration
+    - Miscellaneous
   summary: Register file
   x-bash-codegen-description: |
     Registers a file located on an `imported storage`.

@@ -1,0 +1,54 @@
+type: object
+description: | 
+  Response to a directory size statistics query. Depending on the query mode, contains the
+  `layout` or `slice` object.
+properties:
+    layout:
+      $ref: '#/definitions/TimeSeriesLayout'
+    slice:
+      $ref: '#/definitions/TimeSeriesSlice'
+example:
+  layout: 
+    total_size: 
+      - day
+      - hour
+      - minute
+      - month
+    storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
+      - day
+      - hour
+      - minute
+      - month
+    reg_file_and_link_count:
+      - day
+      - hour
+      - minute
+      - month
+    file_errors_count:
+      - day
+      - hour
+      - minute
+      - month
+    dir_errors_count:
+      - day
+      - hour
+      - minute
+      - month
+    dir_count:
+      - day
+      - hour
+      - minute
+      - month
+  slice:
+    total_size:
+      minute:
+        - value: 883365
+          timestamp: 1687513260
+          lastMeasurementTimestamp: 1687513287
+          firstMeasurementTimestamp: 1687513287
+    storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
+      minute:
+        - value: 56280
+          timestamp: 1687513260
+          lastMeasurementTimestamp: 1687513287
+          firstMeasurementTimestamp: 1687513287

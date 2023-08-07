@@ -38,6 +38,25 @@ FileType:
 FileAttributes:
   $ref: ./data/file_attributes.yaml
 
+DirSizeStatsResponse:
+  $ref: ./data/dir_size_stats/response.yaml
+
+DirSizeStatsQuery:
+  $ref: ./data/dir_size_stats/query.yaml
+layout:
+  $ref: ./data/dir_size_stats/layout_query.yaml
+slice:
+  $ref: ./data/dir_size_stats/slice_query.yaml
+
+TimeSeriesLayout:
+  $ref: ./time_series/time_series_layout.yaml
+
+TimeSeriesSlice:
+  $ref: ./time_series/time_series_slice.yaml
+
+TSWindowInfo:
+  $ref: ./time_series/window_info.yaml
+
 MetadataChangesEvent:
   $ref: ./monitoring/metadata_changes_event.yaml
 
