@@ -178,6 +178,9 @@
 
 
 # tag Workflow execution
+/spaces/{sid}/automation/execution/workflows:
+  $ref: ./spaces/sid/automation/execution/workflows.yaml
+
 /automation/execution/workflows:
   $ref: ./automation/execution/workflows.yaml
 
