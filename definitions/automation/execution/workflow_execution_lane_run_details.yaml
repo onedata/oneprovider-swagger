@@ -1,0 +1,89 @@
+type: object
+description: Workflow execution lane run details.
+properties:
+  runNumber:
+    type: integer
+    description: >
+      Number of workflow execution run in which this lane run is included. 
+      When prepared in advance, this value is `null`, as the specific number 
+      is not yet known (a previous lane run may fail and be retried, thereby 
+      incrementing the workflow execution run number).
+  originRunNumber:
+    type: integer
+    description: >
+      Number of workflow execution lane run on which this lane run is based 
+      in case of repeat (either rerun or retry) or `null` otherwise.
+  runType:
+    type: string
+    description: Type of lane run.
+    enum:
+      - regular
+      - rerun
+      - retry
+  status:
+    type: string
+    description: Overall status of the lane run.
+    enum:
+      - resuming
+      - scheduled
+      - preparing
+      - enqueued
+      - active
+      - stopping
+      - interrupted
+      - paused
+      - finished
+      - crashed
+      - cancelled
+      - failed
+  iteratedStoreId:
+    type: string
+    description: Id of this lane run iterated store.
+  exceptionStoreId:
+    type: string
+    description: Id of this lane run exception store.
+  parallelBoxes:
+    type: array
+    description: Details of parallel boxes in this lane run.
+    items:
+      type: object
+      description: Basic information about parallel box.
+      properties:
+        schemaId:
+          type: string
+          description: Id of the parallel box schema used for this execution.
+        taskRegistry:
+          type: object
+          description: >
+            Map with task schema Ids (keys) and corresponding task execution Ids.
+          additionalProperties:
+            type: string
+  isRetriable:
+    type: boolean
+    description: Indicates whether this lane execution run can be retried or not.
+  isRerunable:
+    type: boolean
+    description: Indicates whether this lane execution run can be rerun or not.
+required:
+  - runNumber
+  - originRunNumber
+  - runType
+  - status
+  - iteratedStoreId
+  - exceptionStoreId
+  - parallelBoxes
+  - isRetriable
+  - isRerunable
+example:
+  runNumber: 3
+  originRunNumber: 1
+  runType: retry
+  status: pending
+  iteratedStoreId: 1b502545a3f9faa7f1e339f4aea793117be91d
+  exceptionStoreId: 98c669ec69c0394a38391c0ab0117f67ch260d
+  parallelBoxes:
+    schemaId: 0068146d662adc878f699bf82af08b9ddbd9ab
+    taskRegistry:
+      d92b861a5edfb08b920e0e80f4670a87f48176: 1697f7c1f46e0e22bb426bead5a3cb47chda3d
+  isRetriable: false
+  isRerunable: false

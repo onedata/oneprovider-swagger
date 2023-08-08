@@ -224,8 +224,5 @@ AtmWorkflowExecutionScheduleRequest:
 AtmWorkflowExecutionDetails:
   $ref: ./automation/execution/workflow_execution_details.yaml
 
-AtmWorkflowExecutionStatus:
-  $ref: ./automation/execution/workflow_execution_status.yaml
-
-AtmWorkflowExecutionBlockStatus:
-  $ref: ./automation/execution/workflow_execution_block_status.yaml
+AtmWorkflowExecutionLaneRunDetails:
+  $ref: ./automation/execution/workflow_execution_lane_run_details.yaml
