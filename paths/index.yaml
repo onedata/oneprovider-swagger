@@ -193,6 +193,9 @@
 /automation/execution/workflows/{wid}/resume:
   $ref: ./automation/execution/workflows/wid/resume.yaml
 
+/automation/execution/workflows/{wid}/force_continue:
+  $ref: ./automation/execution/workflows/wid/force_continue.yaml
+
 
 # tag Monitoring
 # @TODO VFS-8297 currently disabled
