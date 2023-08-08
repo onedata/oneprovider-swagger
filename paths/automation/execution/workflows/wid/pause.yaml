@@ -1,21 +1,21 @@
 post:
-  operationId: cancel_workflow_execution
+  operationId: pause_workflow_execution
   x-onedata-gri:
     type: op_atm_workflow_execution
     id: ?BINDING(wid)
-    aspect: cancel
-  summary: Cancel workflow execution
+    aspect: pause
+  summary: Pause workflow execution
   tags:
     - Workflow execution
   x-bash-codegen-description: |
-    Cancels scheduled, ongoing or suspended workflow execution.
+    Pauses scheduled or ongoing workflow execution.
 
     This operation requires `space_schedule_atm_workflow_executions` when
     invoked by scheduling user, or `space_manage_atm_workflow_executions` 
     otherwise.
 
   description: |
-    Cancels scheduled, ongoing or suspended workflow execution.
+    Pauses scheduled or ongoing workflow execution.
 
     This operation requires `space_schedule_atm_workflow_executions` when
     invoked by scheduling user, or `space_manage_atm_workflow_executions` 
@@ -23,14 +23,14 @@ post:
 
     ***Example cURL requests***
 
-    **Cancel workflow execution**
+    **Pause workflow execution**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/automation/execution/workflows/$ATM_WORKFLOW_EXECUTION_ID/cancel"
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/automation/execution/workflows/$ATM_WORKFLOW_EXECUTION_ID/pause"
     ```
   responses:
     '204':
-      description: The workflow execution cancel has been initiated.
+      description: The workflow execution pause has been initiated.
     '400':
       description: Invalid request.
       schema:
@@ -55,4 +55,4 @@ post:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli cancelWorkflowExecution wid=$ATM_WORKFLOW_SCHEMA_ID"
+      source: "oneprovider-rest-cli pauseWorkflowExecution wid=$ATM_WORKFLOW_SCHEMA_ID"

@@ -187,6 +187,9 @@
 /automation/execution/workflows/{wid}/cancel:
   $ref: ./automation/execution/workflows/wid/cancel.yaml
 
+/automation/execution/workflows/{wid}/pause:
+  $ref: ./automation/execution/workflows/wid/pause.yaml
+
 
 # tag Monitoring
 # @TODO VFS-8297 currently disabled
