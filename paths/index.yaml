@@ -202,6 +202,9 @@
 /automation/execution/workflows/{wid}/rerun:
   $ref: ./automation/execution/workflows/wid/rerun.yaml
 
+/automation/execution/workflows/{wid}/retry:
+  $ref: ./automation/execution/workflows/wid/retry.yaml
+
 
 # tag Monitoring
 # @TODO VFS-8297 currently disabled
