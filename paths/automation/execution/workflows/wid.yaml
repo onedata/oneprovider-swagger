@@ -106,3 +106,64 @@ get:
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getWorkflowExecutionDetails wid=$ATM_WORKFLOW_EXECUTION_ID"
+
+
+delete:
+  operationId: delete_workflow_execution
+  x-onedata-gri:
+    type: op_atm_workflow_execution
+    id: ?BINDING(wid)
+    aspect: instance
+  tags:
+    - Workflow execution
+  summary: Delete workflow execution
+  x-bash-codegen-description: |
+    Deletes stopped workflow execution.
+
+    This operation requires `space_view_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
+  description: |
+    Deletes stopped workflow execution.
+
+    This operation requires `space_view_atm_workflow_executions` privilege and
+    the requesting user must belong to the automation inventory containing the
+    corresponding workflow schema definition.
+
+    ***Example cURL requests***
+
+    **Delete workflow execution details**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/automation/execution/workflows/$ATM_WORKFLOW_EXECUTION_ID"
+    ```
+  produces:
+    - application/json
+  responses:
+    '204':
+      description: The workflow execution deletion has been initiated.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Workflow execution with provided Id was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+  - name: wid
+    in: path
+    description: Workflow execution Id.
+    type: string
+    required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli deleteWorkflowExecution wid=$ATM_WORKFLOW_EXECUTION_ID"
