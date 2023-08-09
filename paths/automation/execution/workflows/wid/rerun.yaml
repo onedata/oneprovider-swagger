@@ -1,0 +1,84 @@
+post:
+  operationId: rerun_workflow_execution
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_atm_workflow_execution
+    id: ?BINDING(wid)
+    aspect: rerun
+  summary: Rerun workflow execution
+  tags:
+    - Workflow execution
+  x-bash-codegen-description: |
+    Reruns stopped workflow execution starting from specified lane run.
+
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
+
+  description: |
+    Reruns stopped workflow execution starting from specified lane run.
+
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
+
+    ***Example cURL requests***
+
+    **Rerun workflow execution**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/automation/execution/workflows/$ATM_WORKFLOW_EXECUTION_ID/rerun"
+    -H "Content-Type: application/json" -d '{
+        "laneIndex": 2,
+        "laneRunNumber": 3
+    }'
+    ```
+  consumes:
+    - application/json
+  responses:
+    '204':
+      description: The workflow execution rerun has been initiated.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Workflow execution with provided Id was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: wid
+      in: path
+      description: Workflow execution Id.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: Lane run reference.
+      schema:
+        type: object
+        properties:
+          laneIndex:
+            type: integer
+            description: Lane index
+          laneRunNumber: 
+            type: integer
+            description: Lane run `runNumber`
+        required:
+          - laneIndex
+          - laneRunNumber
+        example:
+          laneIndex: 2
+          laneRunNumber: 3
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli rerunWorkflowExecution wid=$ATM_WORKFLOW_SCHEMA_ID laneIndex==2 laneRunNumber==3"

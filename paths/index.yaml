@@ -199,6 +199,9 @@
 /automation/execution/workflows/{wid}/force_continue:
   $ref: ./automation/execution/workflows/wid/force_continue.yaml
 
+/automation/execution/workflows/{wid}/rerun:
+  $ref: ./automation/execution/workflows/wid/rerun.yaml
+
 
 # tag Monitoring
 # @TODO VFS-8297 currently disabled
