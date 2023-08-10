@@ -8,13 +8,13 @@ get:
     - Workflow execution
   summary: List workflow executions
   x-bash-codegen-description: |
-    Returns the list of workflow execution IDs with given phase within a space.
+    Returns the list of workflow execution Ids with given phase within a space.
     The list will include only workflow executions based on schemas from 
     inventories to which user has access.
 
     This operation requires `space_view_atm_workflow_executions` privilege.
   description: |
-    Returns the list of workflow execution IDs with given phase within a space.
+    Returns the list of workflow execution Ids with given phase within a space.
     The list will include only workflow executions based on schemas from 
     inventories to which user has access.
 
@@ -25,7 +25,7 @@ get:
     **List at most 3 ongoing workflow executions starting from page id 757136151113c2f**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/transfers?phase=ongoing&limit=3&token=757136151113c2f"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/automation/execution/workflows?phase=ongoing&limit=3&token=757136151113c2f"
 
     {
         "atmWorkflowExecutions": [
@@ -41,7 +41,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of workflow execution IDs.
+      description: The list of workflow execution Ids.
       schema:
         type: object
         properties:

@@ -120,15 +120,15 @@ delete:
   x-bash-codegen-description: |
     Deletes stopped workflow execution.
 
-    This operation requires `space_view_atm_workflow_executions` privilege and
-    the requesting user must belong to the automation inventory containing the
-    corresponding workflow schema definition.
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
   description: |
     Deletes stopped workflow execution.
 
-    This operation requires `space_view_atm_workflow_executions` privilege and
-    the requesting user must belong to the automation inventory containing the
-    corresponding workflow schema definition.
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
 
     ***Example cURL requests***
 

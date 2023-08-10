@@ -6,8 +6,7 @@ properties:
     description: >
       Number of workflow execution run in which this lane run is included. 
       When prepared in advance, this value is `null`, as the specific number 
-      is not yet known (a previous lane run may fail and be retried, thereby 
-      incrementing the workflow execution run number).
+      is not yet known.
   originRunNumber:
     type: integer
     description: >
