@@ -7,13 +7,33 @@ properties:
       Id of the space in context of which the workflow will be executed.
   atmWorkflowSchemaId:
     type: string
+    description: Id of the workflow schema.
+  atmWorkflowSchemaRevisionNumber:
+    type: string
     description: >
-      Id of the workflow schema describing the tasks and stores for the workflow.
-  storeInitialValues:
+      Number of workflow schema revision describing the tasks and stores for 
+      the workflow.
+  storeInitialContentOverlay:
     type: object
-    description: Map with store schema Ids (keys) and corresponding initial values
-      for the stores.
+    description: >
+      Map with store schema Ids (keys) and corresponding initial content 
+      of the stores.
     additionalProperties: {}
+  logLevel:
+    type: string
+    description: |
+      Level controling the amount of information recorded in audit logs as only
+      logs with severity equal or higher to this level will be stored. 
+    enum:
+      - debug
+      - info
+      - notice
+      - warning
+      - error
+      - critical
+      - alert
+      - emergency
+    default: info
   callback:
     type: string
     description: >
@@ -22,3 +42,4 @@ properties:
 required:
   - spaceId
   - atmWorkflowSchemaId
+  - atmWorkflowSchemaRevisionNumber

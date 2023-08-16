@@ -178,11 +178,32 @@
 
 
 # tag Workflow execution
+/spaces/{sid}/automation/execution/workflows:
+  $ref: ./spaces/sid/automation/execution/workflows.yaml
+
 /automation/execution/workflows:
   $ref: ./automation/execution/workflows.yaml
 
 /automation/execution/workflows/{wid}:
   $ref: ./automation/execution/workflows/wid.yaml
+
+/automation/execution/workflows/{wid}/cancel:
+  $ref: ./automation/execution/workflows/wid/cancel.yaml
+
+/automation/execution/workflows/{wid}/pause:
+  $ref: ./automation/execution/workflows/wid/pause.yaml
+
+/automation/execution/workflows/{wid}/resume:
+  $ref: ./automation/execution/workflows/wid/resume.yaml
+
+/automation/execution/workflows/{wid}/force_continue:
+  $ref: ./automation/execution/workflows/wid/force_continue.yaml
+
+/automation/execution/workflows/{wid}/rerun:
+  $ref: ./automation/execution/workflows/wid/rerun.yaml
+
+/automation/execution/workflows/{wid}/retry:
+  $ref: ./automation/execution/workflows/wid/retry.yaml
 
 
 # tag Monitoring

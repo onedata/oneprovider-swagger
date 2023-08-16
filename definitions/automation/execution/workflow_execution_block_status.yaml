@@ -1,8 +1,0 @@
-type: string
-description: Execution status of a single lane, parallel box or task.
-enum:
-  - pending
-  - active
-  - finished
-  - failed
-  - skipped

@@ -34,7 +34,7 @@ tags:
   - name: Transfer
     description: Transfers related operations.
   - name: Workflow execution
-    description: Scheduling and browsing workflow executions.
+    description: Workflow executions related operations.
   - name: Monitoring
     description: Metrics and change events monitoring related operations.
 x-tagGroups:
