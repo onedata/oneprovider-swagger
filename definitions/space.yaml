@@ -9,7 +9,16 @@ properties:
     description: Id of the space.
   fileId:
     type: string
+    description: (deprecated) Id of space directory.
+  dirId:
+    type: string
     description: Id of space directory.
+  trashDirId:
+    type: string
+    description: Id of space trash directory (directory that temporarily contains deleted space files).
+  archivesDirId:
+    type: string
+    description: Id of space archives root directory (directory that contains all archives created in given space).
   providers:
     type: array
     description: The list of providers who support this space.
@@ -19,6 +28,9 @@ example:
   name: My Space 1
   spaceId: cda5d1bd-ca13-40ef-95e6-51fc1cc3b322
   fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+  dirId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+  trashDirId: 6C6B497031394E445F6E3868677873094576776E66743172323067776777
+  archivesDirId: 723230677767776C6B497031394E445F6E3868677873094576776E667431
   providers:
   - providerId: c40a3a39-0bbc-41cd-878f-5591f8c55014
     providerName: MyPrivateCloud
