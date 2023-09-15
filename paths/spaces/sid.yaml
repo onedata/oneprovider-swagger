@@ -6,11 +6,11 @@ get:
     aspect: instance
   tags:
     - Space
-  summary: Get basic space information
+  summary: Get space details
   x-bash-codegen-description: |
-    Returns the basic information about space with given Id.
+    Returns the details about a specific space.
   description: |
-    Returns the basic information about space with given Id.
+    Returns the details about a specific space.
 
     ***Example cURL requests***
 
