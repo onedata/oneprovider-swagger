@@ -1,15 +1,15 @@
 type: object
 description: Basic information about space.
 properties:
-  name:
-    type: string
-    description: Name of the space.
   spaceId:
     type: string
     description: Id of the space.
+  name:
+    type: string
+    description: Name of the space.
   fileId:
     type: string
-    description: (deprecated) Id of space directory.
+    description: (deprecated) Id of the space directory.
   dirId:
     type: string
     description: Id of the space directory.
@@ -22,7 +22,7 @@ properties:
     description: Id of the space archives root directory, which contains all archives created in the space.
   providers:
     type: array
-    description: The list of providers who support this space.
+    description: The list of providers which support this space.
     items:
       $ref: '#/definitions/Provider'
 example:

@@ -7,9 +7,9 @@ get:
     - Space
   summary: Get all user spaces
   x-bash-codegen-description: |
-    Returns the list of all user spaces.
+    Returns the list of all user spaces and their details.
   description: |
-    Returns the list of all user spaces.
+    Returns the list of all user spaces and their details.
 
     ***Example cURL requests***
 
@@ -56,7 +56,7 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of all user spaces - containining their names and Id's.
+      description: The list of all user spaces and their details.
       schema:
         type: array
         items:
