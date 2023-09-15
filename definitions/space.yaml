@@ -12,13 +12,14 @@ properties:
     description: (deprecated) Id of space directory.
   dirId:
     type: string
-    description: Id of space directory.
+    description: Id of the space directory.
   trashDirId:
     type: string
-    description: Id of space trash directory (directory that temporarily contains deleted space files).
+    description:
+      Id of the space trash directory, to which deleted files are temporarily moved for deletion in the background.
   archivesDirId:
     type: string
-    description: Id of space archives root directory (directory that contains all archives created in given space).
+    description: Id of the space archives root directory, which contains all archives created in the space.
   providers:
     type: array
     description: The list of providers who support this space.
