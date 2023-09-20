@@ -1,24 +1,37 @@
 type: object
 description: Basic information about space.
 properties:
-  name:
-    type: string
-    description: Name of the space.
   spaceId:
     type: string
     description: Id of the space.
+  name:
+    type: string
+    description: Name of the space.
   fileId:
     type: string
-    description: Id of space directory.
+    description: (deprecated) Id of the space directory.
+  dirId:
+    type: string
+    description: Id of the space directory.
+  trashDirId:
+    type: string
+    description:
+      Id of the space trash directory, to which deleted files are temporarily moved for deletion in the background.
+  archivesDirId:
+    type: string
+    description: Id of the space archives root directory, which contains all archives created in the space.
   providers:
     type: array
-    description: The list of providers who support this space.
+    description: The list of providers which support this space.
     items:
       $ref: '#/definitions/Provider'
 example:
   name: My Space 1
   spaceId: cda5d1bd-ca13-40ef-95e6-51fc1cc3b322
   fileId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+  dirId: 094576776E667431723230677767776C6B497031394E445F6E3868677873
+  trashDirId: 6C6B497031394E445F6E3868677873094576776E66743172323067776777
+  archivesDirId: 723230677767776C6B497031394E445F6E3868677873094576776E667431
   providers:
   - providerId: c40a3a39-0bbc-41cd-878f-5591f8c55014
     providerName: MyPrivateCloud
