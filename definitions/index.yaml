@@ -2,6 +2,12 @@
 # This file groups the type definitions for Oneprovider REST API
 #
 
+Ace:
+  $ref: ./acl/ace.yaml
+
+Acl:
+  $ref: ./acl/acl.yaml
+
 Configuration:
   $ref: ./configuration.yaml
 
@@ -187,11 +193,20 @@ DatasetUpdateRequest:
 Datasets:
   $ref: ./dataset/datasets.yaml
 
+ProtectionFlags:
+  $ref: ./data/protection_flags.yaml
+
+FileMembership:
+  $ref: ./data/file_membership.yaml
+
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml
 
 QosCreateRequest:
   $ref: ./qos/qos_create_request.yaml
+
+QosStatus:
+  $ref: ./qos/qos_status.yaml
 
 QosSummary:
   $ref: ./qos/qos_summary.yaml

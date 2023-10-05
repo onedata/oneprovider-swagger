@@ -1,0 +1,4 @@
+description: Access Control List.
+type: array
+items:
+  $ref: '#/definitions/Ace'

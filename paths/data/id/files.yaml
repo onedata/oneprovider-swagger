@@ -31,11 +31,11 @@ get:
     {
         "files": [
             {
-                "file_id": "FILE_ID1",
+                "fileId": "FILE_ID1",
                 "path": "ParentDirName/Dir2"
             },
             {
-                "file_id": "FILE_ID2",
+                "fileId": "FILE_ID2",
                 "path": "ParentDirName/File1.txt"
             },
         ],
@@ -106,16 +106,60 @@ get:
         Only files with paths that begin with this value will be listed.
       type: string
       required: false
+    - name: attributes
+      in: query
+      required: false
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode only following attributes are available: 
+        `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
+        `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
+        If not provided, default deprecated attributes of `file_id` and `path` will be returned.
+      type: string
+      enum:
+        - fileId
+        - index
+        - type
+        - activePermissionsType
+        - posixPermissions
+        - acl
+        - name
+        - conflictingName
+        - path
+        - parentFileId
+        - displayGid
+        - displayUid
+        - atime
+        - mtime
+        - ctime
+        - size
+        - isFullyReplicatedLocally
+        - localReplicationRate
+        - originProviderId
+        - directShareIds
+        - ownerUserId
+        - hardlinkCount
+        - symlinkValue
+        - hasCustomMetadata
+        - effProtectionFlags
+        - effDatasetProtectionFlags
+        - effDatasetMembership
+        - effQosMembership
+        - qosStatus
+        - recallRootFileId
+        - xattr.*
     - name: attribute
       in: query
+      required: false
       description: >
-        Name of attribute to be returned for each entry. Can be provided multiple times.
-        When accessing a file via share mode, the following attributes are unavailable:
+        (Deprecated) Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
         `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
         If not provided, default attributes of `file_id` and `path` will be returned.
       type: string
       enum:
         - name
+        - path
         - owner_id
         - type
         - mode
@@ -130,7 +174,8 @@ get:
         - file_id
         - parent_id
         - hardlinks_count
-        - path
+        - index
+        - xattr.*
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listFilesRecursively id=$FILE_ID limit=100 start_after=dir1/dir2/filename.txt"

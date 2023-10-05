@@ -1,0 +1,15 @@
+description: Access Control Entry
+type: object
+properties:
+  aceType:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  identifier:
+    type: string
+  aceFlags:
+    type: integer
+  acemask:
+    type: integer
+# fixme descriptions + example

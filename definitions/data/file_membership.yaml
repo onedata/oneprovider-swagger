@@ -1,0 +1,7 @@
+description: File membership.
+type: string
+enum:
+  - none
+  - direct
+  - ancestor
+  - direct_and_ancestor

@@ -57,33 +57,37 @@ delete:
       source: "oneprovider-rest-cli removeFile id=$FILE_ID"
 
 
+# TODO VFS-11377 remove deprecated values after next major release
 get:
   operationId: get_attrs
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: attrs
+    aspect: instance
   summary: Get file attributes
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method returns either all or only selected basic attributes associated
+    This method returns either all or only selected attributes associated
     with file specified by [$FILE_ID](#operation/lookup_file_id).
+    Additionally `xattr.*` (where * is an extended attribute key) can be provided as an selected attribute.
 
   description: |
-    This method returns either all or only selected basic attributes associated
+    This method returns either all or only selected attributes associated
     with file specified by [$FILE_ID](#operation/lookup_file_id).
+    Additionally `xattr.*` (where * is an extended attribute key) can be provided as an selected attribute.
 
     ***Example cURL requests***
 
     **Get file size**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size&attribute=name"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attributes=size&attributes=name&attributes=xattr.key"
 
     {
-        "name": "File1.txt"
-        "size": 100
+        "name": "File1.txt",
+        "size": 100,
+        "xattr.key": "extended_attribute_value"
     }
     ```
   produces:
@@ -110,35 +114,78 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: id
-    in: path
-    description: File, directory or space Id
-    type: string
-    required: true
-  - name: attribute
-    in: query
-    description: >
-      Name of attribute to query for. Can be provided multiple times. 
-      When accessing file via share mode following attributes are unavailable: 
-      `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
-    type: string
-    enum:
-      - name
-      - owner_id
-      - type
-      - mode
-      - size
-      - atime
-      - mtime
-      - ctime
-      - storage_group_id
-      - storage_user_id
-      - shares
-      - provider_id
-      - file_id
-      - parent_id
-      - hardlinks_count
-    required: false
+    - name: id
+      in: path
+      description: File, directory or space Id
+      type: string
+      required: true
+    - name: attributes
+      in: query
+      required: false
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode only following attributes are available: 
+        `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
+        `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
+      type: string
+      enum:
+        - fileId
+        - index
+        - type
+        - activePermissionsType
+        - posixPermissions
+        - acl
+        - name
+        - conflictingName
+        - path
+        - parentFileId
+        - displayGid
+        - displayUid
+        - atime
+        - mtime
+        - ctime
+        - size
+        - isFullyReplicatedLocally
+        - localReplicationRate
+        - originProviderId
+        - directShareIds
+        - ownerUserId
+        - hardlinkCount
+        - symlinkValue
+        - hasCustomMetadata
+        - effProtectionFlags
+        - effDatasetProtectionFlags
+        - effDatasetMembership
+        - effQosMembership
+        - qosStatus
+        - recallRootFileId
+        - xattr.*
+    - name: attribute
+      in: query
+      required: false
+      description: >
+        (Deprecated) Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
+        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+      type: string
+      enum:
+        - name
+        - owner_id
+        - type
+        - mode
+        - size
+        - atime
+        - mtime
+        - ctime
+        - storage_group_id
+        - storage_user_id
+        - shares
+        - provider_id
+        - file_id
+        - parent_id
+        - hardlinks_count
+        - index
+        - xattr.*
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getAttrs id=$FILE_ID"

@@ -1,0 +1,7 @@
+description: File protection flags.
+type: array
+items:
+  type: string
+  enum:
+    - data_protection
+    - metadata_protection

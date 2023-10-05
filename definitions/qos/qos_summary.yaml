@@ -7,13 +7,10 @@ properties:
       Mapping including all QoS requirements (Ids) that influence given file/directory and corresponding 
       information of fulfillment status for this file/directory (fulfilled/pending/impossible).
   status:
-    type: string
-    enum:
-      - fulfilled
-      - pending
-      - impossible
-    description: >
-      Aggregated status of all QoS requirements for given file or directory.  
+    allOf:
+      - description: >
+          Aggregated status of all QoS requirements for given file or directory.
+      - $ref: '#/definitions/QosStatus'
 example:
   requirements: {
     "c84f669f9522c46976fee490d80651f0": pending,

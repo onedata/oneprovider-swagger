@@ -171,7 +171,7 @@ delete:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: xattrs
-  summary: Remove file xattrs
+  summary: Remove file extended attributes
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |

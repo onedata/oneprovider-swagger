@@ -200,17 +200,19 @@ get:
     **Get files in space subdirectory**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children?attribute=size&attribute=name&limit=2"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children?attributes=size&attributes=name&attributes=xattr.key&limit=2"
 
     {
         "children": [
             { 
-                "name": File1.txt
-                "size": 1024
+                "name": File1.txt,
+                "size": 1024,
+                "xattr.key": "extended_attribute_value"
             },
             { 
-                "name": File2.txt
-                "size": 16384
+                "name": File2.txt,
+                "size": 16384,
+                "xattr.key": null
             }
         ],
         "isLast": false,
@@ -265,11 +267,54 @@ get:
       type: string
       required: false
       default: null
+    - name: attributes
+      in: query
+      required: false
+      description: >
+        Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode only following attributes are available: 
+        `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
+        `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
+        If not provided, default deprecated attributes of `file_id` and `name` will be returned.
+      type: string
+      enum:
+        - fileId
+        - index
+        - type
+        - activePermissionsType
+        - posixPermissions
+        - acl
+        - name
+        - conflictingName
+        - path
+        - parentFileId
+        - displayGid
+        - displayUid
+        - atime
+        - mtime
+        - ctime
+        - size
+        - isFullyReplicatedLocally
+        - localReplicationRate
+        - originProviderId
+        - directShareIds
+        - ownerUserId
+        - hardlinkCount
+        - symlinkValue
+        - hasCustomMetadata
+        - effProtectionFlags
+        - effDatasetProtectionFlags
+        - effDatasetMembership
+        - effQosMembership
+        - qosStatus
+        - recallRootFileId
+        - xattr.*
     - name: attribute
       in: query
+      required: false
       description: >
-        Name of attribute to be returned for each entry. Can be provided multiple times.
-        When accessing a file via share mode, the following attributes are unavailable:
+        (Deprecated) Name of attribute to query for. Can be provided multiple times. 
+        When accessing file via share mode following attributes are unavailable: 
         `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
         If not provided, default attributes of `file_id` and `name` will be returned.
       type: string
@@ -290,6 +335,8 @@ get:
         - parent_id
         - hardlinks_count
         - index
+        - xattr.*
+    # @TODO VFS-11412 make index only accept index from file attr
     - name: index
       in: query
       description: >
@@ -297,6 +344,16 @@ get:
         Cannot be provided alongside the `token` parameter.
       type: string
       required: false
+    - name: offset
+      in: query
+      description: >
+        Offset from provided index (first file when not provided), that the listing will be started from.
+        Cannot be provided alongside the `token` parameter.
+      type: integer
+      required: false
+      maximum: 500
+      minimum: -500
+      default: 0
     - name: tune_for_large_continuous_listing
       in: query
       description: >

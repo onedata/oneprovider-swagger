@@ -1,0 +1,6 @@
+description: Status of QoS requirement.
+type: string
+enum:
+  - fulfilled
+  - pending
+  - impossible
