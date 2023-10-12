@@ -175,13 +175,13 @@ delete:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes specific extended attributes from the file specified by [$FILE_ID](#operation/lookup_file_id).
   description: |
-    Removes specific xattrs from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes specific extended attributes from the file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
-    **Remove specific file xattrs**
+    **Remove specific file extended attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs \
@@ -189,7 +189,7 @@ delete:
     ```
   responses:
     '204':
-      description: Specific file xattrs has been removed.
+      description: Specific file extended attributes has been removed.
     '400':
       description: Invalid request.
       schema:
@@ -214,14 +214,14 @@ delete:
       required: true
     - name: data
       in: body
-      description: The xattrs to remove.
+      description: The extended attributes to remove.
       required: true
       schema:
         type: object
         properties:
           keys:
             type: array
-            description: List of xattrs to remove.
+            description: List of extended attributes to remove.
             items:
               type: string
     - name: resolve_symlink

@@ -109,7 +109,7 @@ description: |
     - browsing files in spaces and directories,
     - creating and deleting files as well as updating their content
     - querying for file attributes, such as 'mode' file permissions and updating them,
-    - managing custom file metadata (xattrs, JSON, RDF),
+    - managing custom file metadata (extended attributes, JSON, RDF),
     - manual registration of files for imported storages.
 
   More information can be found [here](#section/Overview/Data-management-basics).
@@ -251,7 +251,7 @@ x-bash-codegen-description: |
     - browsing files in spaces and directories,
     - creating and deleting files as well as updating their content
     - querying for file attributes, such as 'mode' file permissions and updating them,
-    - managing custom file metadata (xattrs, JSON, RDF),
+    - managing custom file metadata (extended attributes, JSON, RDF),
     - miscellaneous operations related to file management.
 
   More information can be found [here](#section/Overview/Data-management-basics).

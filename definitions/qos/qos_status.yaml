@@ -1,4 +1,4 @@
-description: Status of QoS requirement.
+description: Status of QoS requirement fulfillment for given file/directory. FIXME shortly describe the statuses - maybe take from GUI?
 type: string
 enum:
   - fulfilled

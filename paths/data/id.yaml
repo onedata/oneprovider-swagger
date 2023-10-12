@@ -68,18 +68,18 @@ get:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method returns either all or only selected attributes associated
-    with file specified by [$FILE_ID](#operation/lookup_file_id).
-    Additionally `xattr.*` (where * is an extended attribute key) can be provided as an selected attribute.
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
 
   description: |
-    This method returns either all or only selected attributes associated
-    with file specified by [$FILE_ID](#operation/lookup_file_id).
-    Additionally `xattr.*` (where * is an extended attribute key) can be provided as an selected attribute.
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
 
     ***Example cURL requests***
 
-    **Get file size**
+    **Get selected file attributes**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attributes=size&attributes=name&attributes=xattr.key"
