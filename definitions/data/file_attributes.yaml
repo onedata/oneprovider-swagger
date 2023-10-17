@@ -18,7 +18,8 @@ properties:
     description: Type of permissions that are taken into account when determining access rights to this file/directory.
   mode:
     type: string
-    description: POSIX file permissions as string expressing octal notation. For a shared file/directory
+    description: > 
+      POSIX file permissions as string expressing octal notation. For a shared file/directory
       accessed in public mode, only the last byte (`other`) is shown, as it applies to the anonymous users accessing it.
   acl:
     $ref: '#/definitions/Acl'
@@ -37,14 +38,19 @@ properties:
     description: Logical path to the file/directory.
   parentFileId:
     type: string
-    description: (deprecated parent_id) Id of the parent directory or `null` in case of file tree root 
-      (space root, archives root, trash, root of a shared file/directory).
+    description: > 
+      Id of the parent directory or `null` in case of file tree root 
+      (space root, archives root, trash, root of a shared file/directory). Successor of the **deprecated `parent_id`**.
   displayGid:
     type: string
-    description: (deprecated storage_group_id) GID of this file/directory displayed in the Oneclient mounted filesystem.
+    description: > 
+      GID of this file/directory displayed in the Oneclient mounted filesystem. 
+      Successor of the **deprecated `storage_group_id`**.
   displayUid:
     type: string
-    description: (deprecated storage_user_id) UID of this file/directory displayed in the Oneclient mounted filesystem.
+    description: > 
+      UID of this file/directory displayed in the Oneclient mounted filesystem. 
+      Successor of the **deprecated `storage_user_id`**.
   atime:
     type: integer
     description: Last access timestamp in seconds (UNIX epoch).
@@ -78,15 +84,15 @@ properties:
   directShareIds:
     type: array
     description: > 
-      (deprecated shares) The list of Ids of shares created for this file/directory. For every share, only
+      The list of Ids of shares created for this file/directory. For every share, only
       the root file/directory will contain the share Id on the list and not the nested files/directories.
       For a shared file/directory accessed in public mode, shows only the Id of the share in the context 
-      of which the file is being accessed.
+      of which the file is being accessed. Successor of the **deprecated `shares`**.
     items:
       type: string
   ownerUserId:
     type: string
-    description: (deprecated owner_id) User Id of the owner of this file/directory.
+    description: User Id of the owner of this file/directory. Successor of the **deprecated `owner_id`**.
   hardlinkCount:
     type: integer
     description: The number of hardlinks (including this one) associated with this file/directory.
@@ -101,9 +107,9 @@ properties:
   effProtectionFlags:
     allOf:
       - description: >
-          File protection flags that effectively concern this file/directory (a sum of protection flags from the
-          file/directory itself, its ancestor directories and hardlinks). **NOTE**: the file may be deleted 
-          even when the `data_protection` flag is enabled, as long as it inherited the flag through one of its 
+          File protection flags that effectively concern this file/directory (a sum of protection flags from dataset 
+          established on the file/directory itself, its ancestor directories and hardlinks). **NOTE**: the file may be 
+          deleted even when the `data_protection` flag is enabled, as long as it inherited the flag through one of its 
           hardlinks (see `effDatasetProtectionFlags`).
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetProtectionFlags:

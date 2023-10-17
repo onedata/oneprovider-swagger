@@ -284,7 +284,7 @@ get:
       in: query
       description: >
         Expressed in number of entries, further adjusts the starting point of listing indicated by the `index` 
-        parameter (or the list beginning if there `index` is not specified).
+        parameter (or the list beginning if the `index` is not specified).
         The value can be negative, in such case entries preceding the starting point will be returned.
         Cannot be provided alongside the `token` parameter.
       type: integer
@@ -293,7 +293,7 @@ get:
       minimum: -500
       default: 0
 
-    - name: tune_for_large_continuous_listing
+    - name: tuneForLargeContinuousListing
       in: query
       description: >
         This option increases performance of listing large directories (with thousands of files)
@@ -305,6 +305,23 @@ get:
         otherwise the listing performance will be much worse.<br/>
         Overusing this option may cause a significant load on the Oneprovider.<br/>
         Cannot be provided alongside the `token` parameter.
+      type: boolean
+      required: false
+      default: false
+
+    - name: tune_for_large_continuous_listing
+      in: query
+      description: >
+        (deprecated) This option increases performance of listing large directories (with thousands of files)
+        when using subsequent calls with paging tokens.<br/>
+        **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
+        after the start of listing will be included. Therefore it shouldn't be used when the
+        listing result is expected to be up to date with the state of the file tree at the moment of listing.
+        It should be avoided if the interval between subsequent listings is longer than 10 seconds,
+        otherwise the listing performance will be much worse.<br/>
+        Overusing this option may cause a significant load on the Oneprovider.<br/>
+        Cannot be provided alongside the `token` parameter.
+        Ignored when provided alongside `tuneForLargeContinuousListing` parameter.
       type: boolean
       required: false
       default: false
