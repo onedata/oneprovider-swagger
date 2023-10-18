@@ -334,7 +334,8 @@ get:
         For a shared file/directory accessed in public mode, only the following attributes are available: 
         `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
         `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
-        If not provided, default attributes (`file_id` and `name`) will be returned.
+        If not provided, deprecated parameter `attribute` is taken into account. When both are not provided 
+        default deprecated attributes of `file_id` and `name` will be returned.
       type: string
       enum:
         - fileId
@@ -375,6 +376,7 @@ get:
         (Deprecated) Name of attribute to query for. Can be provided multiple times. 
         When accessing file via share mode following attributes are unavailable: 
         `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        Ignored when provided alongside `attributes` parameter.
         If not provided, default attributes of `file_id` and `name` will be returned.
       type: string
       enum:
