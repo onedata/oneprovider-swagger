@@ -15,11 +15,14 @@ properties:
           description: Indicates whether fetching file distribution for this provider was successful. 
         virtualSize:
           type: integer
-          description: Virtual size of file/dir as seen by this provider (only if `success` = true).
+          description: > 
+            Virtual size of file/dir as seen by this provider (only if `success` = true).
+            See also [directory size statistics](#operation/get_directory_size_stats) for more information
+            about different data size metrics.
         locationsPerStorage:
           type: object
           description: >
-            Map with file locations per storage (only for REG).
+            Map with file locations per storage (only for `type = REG`).
           additionalProperties:
             type: string
             description: Information about regular file location on each storage. `null` value for a storage 

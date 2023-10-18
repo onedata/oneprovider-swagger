@@ -137,15 +137,15 @@ properties:
         description: Indicates whether this metadata was deleted or not.
       changed: 
         type: boolean
-        description: Indicates whether changes occured to this metadata or not.
+        description: Indicates whether changes occurred to this metadata or not.
       fields:
         type: object
         description: >
-          Retrieved xattr values. In case of missing fields `null` values are returned.
+          Retrieved extended attribute values. In case of missing fields `null` values are returned.
       exists:
         type: object
         description: >
-          Map indicating whether given xattrs exists or not.
+          Map indicating whether given extended attributes exists or not.
 required:
   - fileId
   - filePath

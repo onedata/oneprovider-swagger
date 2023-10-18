@@ -20,7 +20,8 @@ post:
     equivalent - in such case some metadata must be provided for the operation to succeed).
 
     The registration of the same file can be repeated, which updates the previous metadata with the new information.
-    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
+    In most cases, the metadata is overwritten with new values, with exception of extended attributes - previous values 
+    are merged with new ones.
 
     This operation requires:
       * space_register_file privilege
@@ -37,7 +38,8 @@ post:
     equivalent - in such case some metadata must be provided for the operation to succeed).
 
     The registration of the same file can be repeated, which updates the previous metadata with the new information.
-    In most cases, the metadata is overwritten with new values, with exception of xattrs - previous values are merged with new ones.
+    In most cases, the metadata is overwritten with new values, with exception of extended attributes - previous values 
+    are merged with new ones.
 
     This operation requires:
       * space_register_file privilege

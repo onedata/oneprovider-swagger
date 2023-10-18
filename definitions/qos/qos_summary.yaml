@@ -9,7 +9,7 @@ properties:
   status:
     allOf:
       - description: >
-          Aggregated status of all QoS requirements for given file or directory.
+          Aggregate status of all effective QoS requirements that concern this file/directory.
       - $ref: '#/definitions/QosStatus'
 example:
   requirements: {

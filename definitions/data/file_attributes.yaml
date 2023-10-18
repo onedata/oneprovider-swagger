@@ -4,10 +4,10 @@ description: File or directory attributes.
 properties:
   fileId:
     type: string
-    description: (deprecated file_id) Id of the file/directory.
+    description: Id of the file/directory. Successor of the **deprecated `file_id`**.
   index:
     type: string
-    description: File index that can be provided as starting point when listing files.
+    description: Index pointing to this file/directory that can be provided as starting point when listing files.
   type:
     $ref: '#/definitions/FileType'
   activePermissionsType:
@@ -15,106 +15,137 @@ properties:
     enum:
       - posix
       - acl
-    description: Type of permissions that is taken into account when determining access rights to this file/directory.
+    description: Type of permissions that are taken into account when determining access rights to this file/directory.
   mode:
     type: string
-    description: POSIX file permissions as string expressing octal notation. In public view (through share) only 
-      last byte, representing `other`, is shown.
+    description: > 
+      POSIX file permissions as string expressing octal notation. For a shared file/directory
+      accessed in public mode, only the last byte (`other`) is shown, as it applies to the anonymous users accessing it.
   acl:
     $ref: '#/definitions/Acl'
   name:
     type: string
-    description: File/Directory name. In case of two files with the same name being created simultaneously on two 
-      providers this name is disambiguated by extending it with `originProviderId`.
+    description: > 
+      Name of the file/directory. In case of name conflicts (when two files with identical name are 
+      created simultaneously in two providers), this name is disambiguated by extending it with `originProviderId`.
   conflictingName:
     type: string
-    description: Name file/directory was created with in case of file name conflict as described in `name`. 
+    description: >
+      Original name of the file/directory in case of file name conflict, as described in `name`. 
       `null` if there is no file name conflict.
   path:
     type: string
-    description: Path to the file/directory.
+    description: Logical path to the file/directory.
   parentFileId:
     type: string
-    description: (deprecated parent_id) Id of the parent directory or `null` in case of file tree root 
-      (space root, archives root, trash, directly shared file/directory).
+    description: > 
+      Id of the parent directory or `null` in case of file tree root 
+      (space root, archives root, trash, root of a shared file/directory). Successor of the **deprecated `parent_id`**.
   displayGid:
     type: string
-    description: (deprecated storage_group_id) GID of this file/directory in Oneclient mounted filesystem.
+    description: > 
+      GID of this file/directory displayed in the Oneclient mounted filesystem. 
+      Successor of the **deprecated `storage_group_id`**.
   displayUid:
     type: string
-    description: (deprecated storage_user_id) UID of this file/directory in Oneclient mounted filesystem.
+    description: > 
+      UID of this file/directory displayed in the Oneclient mounted filesystem. 
+      Successor of the **deprecated `storage_user_id`**.
   atime:
     type: integer
-    description: Last access timestamp (in seconds).
+    description: Last access timestamp in seconds (UNIX epoch).
   mtime:
     type: integer
-    description: Last modification timestamp (in seconds).
+    description: Last modification timestamp in seconds (UNIX epoch).
   ctime:
     type: integer
-    description: Last attributes modification timestamp (in seconds).
+    description: Last attributes modification timestamp in seconds (UNIX epoch).
   size:
     type: integer
-    description: Size of the file/directory in bytes. For directories can be `null` when directory statistics 
-      are not enabled or not yet calculated.
+    description: >
+      Logical size of the file/directory in bytes. For directories, it can be `null` 
+      when directory statistics are not enabled or not yet calculated. See 
+      [directory size statistics](#operation/get_directory_size_stats) 
+      for more information and details about different data size metrics.
   isFullyReplicatedLocally:
     type: boolean
-    description: Only for regular files (`null` otherwise). Informs whether whole file replica is present on 
-      queried provider.
+    description: >      
+      Indicates whether a complete file replica is present on the queried provider.
+      Applicable only for regular files (`null` otherwise).
   localReplicationRate:
     type: number
-    description: Ratio of file/directory content that is present on queried provider.
+    description: >
+      Ratio (`0.0 .. 1.0`) of the local replica size present on the queried provider to the total virtual data size. # FIXME virtual or logical?
+      See also [directory size statistics](#operation/get_directory_size_stats) for more information
+      about different data size metrics.
   originProviderId:
     type: string
-    description: Id of the provider on which this file/directory was created.
+    description: Id of the provider in which this file/directory was created.
   directShareIds:
     type: array
-    description: (deprecated shares) The list of Ids of shares created for this file/directory. 
-      When accessing through public view only ShareId of the share that is being accessed is shown.
+    description: > 
+      The list of Ids of shares created for this file/directory. For every share, only
+      the root file/directory will contain the share Id on the list and not the nested files/directories.
+      For a shared file/directory accessed in public mode, shows only the Id of the share in the context 
+      of which the file is being accessed. Successor of the **deprecated `shares`**.
     items:
       type: string
   ownerUserId:
     type: string
-    description: (deprecated owner_id) Id of the owner of this file/directory.
+    description: User Id of the owner of this file/directory. Successor of the **deprecated `owner_id`**.
   hardlinkCount:
     type: integer
     description: The number of hardlinks (including this one) associated with this file/directory.
   symlinkValue:
     type: string
-    description: The path that is the value of a symbolic link, if this file is one. `null` for all other file types. 
-      Whole path is shown even in public view through share.
+    description: >
+      The path to which the symbolic link points. Applicable only for symlinks (`null` otherwise).
+      **NOTE**: The path is shown even for a shared file/directory accessed in public mode.
   hasCustomMetadata:
     type: boolean
-    description: Informs whether this file/directory has any custom metadata.
+    description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached.
   effProtectionFlags:
     allOf:
-      - description: File protection flags. File may be deleted even with `data_protection` flag enabled, 
-          when it inherited this flag through one of its hardlinks. (see `effDatasetProtectionFlags`)
+      - description: >
+          File protection flags that effectively concern this file/directory (a sum of protection flags from dataset 
+          established on the file/directory itself, its ancestor directories and hardlinks). **NOTE**: the file may be 
+          deleted even when the `data_protection` flag is enabled, as long as it inherited the flag through one of its 
+          hardlinks (see `effDatasetProtectionFlags`).
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetProtectionFlags:
     allOf:
-      - description: File protection flags from direct datasets (protection flags of hardlinks are not taken into 
-          account). File/Directory can be deleted if and only if `data_protection` flag is not enabled.
+      - description: >
+          File protection flags inherited from datasets that include this file/directory (protection flags of 
+          hardlinks are not taken into account). **NOTE**: the file/directory can be deleted if and only if 
+          the `data_protection` flag is disabled.
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetMembership:
     allOf:
-      - description: Informs whether file/directory is a dataset or is in a subtree of a dataset.
+      - description: >
+          Indicates whether this file/directory effectively belongs to a dataset, 
+          i.e. is a dataset or is in a subtree of a dataset.
       - $ref: '#/definitions/FileMembership'
   effQosMembership:
     allOf:
-      - description: Informs whether file/directory has any direct QoS requirement or is under and influence of any 
-          QoS requirements from any of its ancestors.
+      - description: >
+          Indicates whether this file/directory has any effective QoS requirement, 
+          i.e. a direct QoS requirement or any QoS requirement inherited from its ancestors.
       - $ref: '#/definitions/FileMembership'
   qosStatus:
     allOf:
-      - description: Status of all QoS requirements that influence this file/directory.
+      - description: Aggregate status of all effective QoS requirements that concern this file/directory.
       - $ref: '#/definitions/QosStatus'
   recallRootId:
     type: string
-    description: Id of the recall that this file/directory belongs to (is in the subtree of). 
-      `null` when file does not belong to any recall.
+    description: > 
+      Id of the archive recall that this file/directory belongs to (is in the subtree of). 
+      Archive recall is a process that creates a copy of a dataset archive (snapshot) in the space filesystem, 
+      i.e. creates a regular directory, but the files and directories inside are assigned this attribute.      
+      `null` when the file does not belong to any archive recall.
   xattr.*:
     type: string
-    description: Value of each requested extended attribute key (* is replaced with a key). Repeated for each key.
+    description: >
+      Value of requested extended attribute key (`*` is replaced with the key). Repeated for each requested key.
       `null` when given extended attribute was not found.
 example:
   fileId: 00000CF4706775696423745F772D67686431633765446F4D76546D6...
@@ -123,7 +154,7 @@ example:
   activePermissionsType: posix
   mode: "511"
   acl: []
-  name: File1.txt@YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
+  name: File1.txt@a47b8b7a04b197c6cd99581047b8b7ad
   conflictingName: File1.txt
   path: /space/Dir1/File1.txt # TODO VFS-11428 update after issue is resolved
   parentFileId: 000006CB66373686172654775696423333964323636616564636562...
@@ -135,11 +166,11 @@ example:
   size: 1024
   isFullyReplicatedLocally: false
   localReplicationRate: 0.8
-  originProviderId: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
+  originProviderId: a47b8b7a04b197c6cd99581047b8b7ad
   directShareIds:
     - 1d24c36707d99197c6cd995810a43aca
     - 6825604b0eb6a47b8b7a04b6369eb24d
-  ownerUserId: MTZjYzc1ZWEtN2ZjNC00Y2QxLTljYzgtMTJmYTMxNTk1YzUw
+  ownerUserId: b6b6a47b8b7a04b63a45604b07b8b7a2
   hardlinkCount: 1
   symlinkValue: null
   hasCustomMetadata: true

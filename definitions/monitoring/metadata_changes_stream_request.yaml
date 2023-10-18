@@ -76,7 +76,7 @@ properties:
       fields:
         type: array
         description: >
-          Xattrs names to retrieve. In case of missing fields `null` values are returned.
+          Extended attribute names to retrieve. In case of missing fields `null` values are returned.
           In order to fetch special attributes additional keys can be specified, namely 
           `onedata_json`, `onedata_rdf` or `onedata_keyvalue` (fetches all fields beside special ones).
         items:
@@ -84,7 +84,7 @@ properties:
       exists:
         type: array
         description: >
-          Xattrs names to check for existence. Existence of special attributes can also be checked by
+          Extended attribute names to check for existence. Existence of special attributes can also be checked by
           specifying `onedata_json`, `onedata_rdf` or `onedata_keyvalue` 
           (checks if any normal attribute exists).
         items:
