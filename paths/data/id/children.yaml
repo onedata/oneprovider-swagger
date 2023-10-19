@@ -193,17 +193,17 @@ get:
     
     **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
       The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-    the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
-    * `file_id` -> `fileId`
-    * `mode` -> `posixPermissions`
-    * `parent_id` -> `parentFileId`
-    * `storage_group_id` -> `displayGid`
-    * `storage_user_id` -> `displayUid`
-    * `is_fully_replicated` -> `isFullyReplicatedLocally`
-    * `provider_id` -> `originProviderId`
-    * `shares` -> `directShareIds`
-    * `owner_id` -> `ownerUserId`
-    * `hardlinks_count` -> `hardlinkCount`
+      the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
+      * `file_id` -> `fileId`
+      * `mode` -> `posixPermissions`
+      * `parent_id` -> `parentFileId`
+      * `storage_group_id` -> `displayGid`
+      * `storage_user_id` -> `displayUid`
+      * `is_fully_replicated` -> `isFullyReplicatedLocally`
+      * `provider_id` -> `originProviderId`
+      * `shares` -> `directShareIds`
+      * `owner_id` -> `ownerUserId`
+      * `hardlinks_count` -> `hardlinkCount`
 
   description: |
     Returns the list of directory files and subdirectories for directory
@@ -211,17 +211,17 @@ get:
     
     **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
       The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-    the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
-    * `file_id` -> `fileId`
-    * `mode` -> `posixPermissions`
-    * `parent_id` -> `parentFileId`
-    * `storage_group_id` -> `displayGid`
-    * `storage_user_id` -> `displayUid`
-    * `is_fully_replicated` -> `isFullyReplicatedLocally`
-    * `provider_id` -> `originProviderId`
-    * `shares` -> `directShareIds`
-    * `owner_id` -> `ownerUserId`
-    * `hardlinks_count` -> `hardlinkCount`
+      the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
+      * `file_id` -> `fileId`
+      * `mode` -> `posixPermissions`
+      * `parent_id` -> `parentFileId`
+      * `storage_group_id` -> `displayGid`
+      * `storage_user_id` -> `displayUid`
+      * `is_fully_replicated` -> `isFullyReplicatedLocally`
+      * `provider_id` -> `originProviderId`
+      * `shares` -> `directShareIds`
+      * `owner_id` -> `ownerUserId`
+      * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
