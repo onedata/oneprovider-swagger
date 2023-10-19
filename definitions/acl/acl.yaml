@@ -1,4 +1,5 @@
-description: Access Control List.
+# TODO VFS-11468 - better description and examples
+description: An ACL (Access Control List) is an ordered list of ACEs (Access Control Entries).
 type: array
 items:
   $ref: '#/definitions/Ace'

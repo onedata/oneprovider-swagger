@@ -16,11 +16,12 @@ properties:
       - posix
       - acl
     description: Type of permissions that are taken into account when determining access rights to this file/directory.
-  mode:
+  posixPermissions:
     type: string
     description: > 
       POSIX file permissions as string expressing octal notation. For a shared file/directory
       accessed in public mode, only the last byte (`other`) is shown, as it applies to the anonymous users accessing it.
+      Successor of the **deprecated `mode`**.
   acl:
     $ref: '#/definitions/Acl'
   name:
@@ -119,23 +120,21 @@ properties:
           hardlinks are not taken into account). **NOTE**: the file/directory can be deleted if and only if 
           the `data_protection` flag is disabled.
       - $ref: '#/definitions/ProtectionFlags'
-  effDatasetMembership:
+  effDatasetInheritancePath:
     allOf:
       - description: >
           Indicates whether this file/directory effectively belongs to a dataset, 
           i.e. is a dataset or is in a subtree of a dataset.
-      - $ref: '#/definitions/FileMembership'
-  effQosMembership:
+      - $ref: '#/definitions/FileInheritancePath'
+  effQosInheritancePath:
     allOf:
       - description: >
           Indicates whether this file/directory has any effective QoS requirement, 
           i.e. a direct QoS requirement or any QoS requirement inherited from its ancestors.
-      - $ref: '#/definitions/FileMembership'
-  qosStatus:
-    allOf:
-      - description: Aggregate status of all effective QoS requirements that concern this file/directory.
-      - $ref: '#/definitions/QosStatus'
-  recallRootId:
+      - $ref: '#/definitions/FileInheritancePath'
+  aggregateQosStatus:
+    $ref: '#/definitions/AggregateQosStatus'
+  archiveRecallRootFileId:
     type: string
     description: > 
       Id of the archive recall that this file/directory belongs to (is in the subtree of). 
@@ -152,7 +151,7 @@ example:
   index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA
   type: REG
   activePermissionsType: posix
-  mode: "511"
+  posixPermissions: "511"
   acl: []
   name: File1.txt@a47b8b7a04b197c6cd99581047b8b7ad
   conflictingName: File1.txt
@@ -179,9 +178,9 @@ example:
     - metadata_protection
   effDatasetProtectionFlags:
     - data_protection
-  effDatasetMembership: direct_and_ancestor
-  effQosMembership: ancestor
-  qosStatus: fulfilled
-  recallRootId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
+  effDatasetInheritancePath: direct_and_ancestor
+  effQosInheritancePath: ancestor
+  aggregateQosStatus: fulfilled
+  archiveRecallRootFileId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
   xattr.key1: value1
   xattr.key2: null

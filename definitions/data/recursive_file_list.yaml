@@ -20,7 +20,7 @@ example:
       index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA
       type: REG
       activePermissionsType: posix
-      mode: "511"
+      posixPermissions: "511"
       acl: []
       name: File1.txt@YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
       conflictingName: File1.txt
@@ -47,10 +47,10 @@ example:
         - metadata_protection
       effDatasetProtectionFlags:
         - data_protection
-      effDatasetMembership: direct_and_ancestor
-      effQosMembership: ancestor
-      qosStatus: fulfilled
-      recallRootId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
+      effDatasetInheritancePath: direct_and_ancestor
+      effQosInheritancePath: ancestor
+      aggregateQosStatus: fulfilled
+      archiveRecallRootFileId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
       xattr.key1: value1
       xattr.key2: null
   inaccessiblePaths:

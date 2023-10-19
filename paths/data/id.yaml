@@ -71,11 +71,39 @@ get:
     This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
     The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
     using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
+      The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
+    the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
   description: |
     This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
     The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
     using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
+      The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
+    the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
@@ -127,6 +155,8 @@ get:
         When accessing file via share mode only following attributes are available: 
         `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
         `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
+        If not provided, deprecated parameter `attribute` is taken into account. When both are not provided 
+        combined deprecated and current values are returned.
       type: string
       enum:
         - fileId
@@ -155,10 +185,10 @@ get:
         - hasCustomMetadata
         - effProtectionFlags
         - effDatasetProtectionFlags
-        - effDatasetMembership
-        - effQosMembership
-        - qosStatus
-        - recallRootFileId
+        - effDatasetInheritancePath
+        - effQosInheritancePath
+        - aggregateQosStatus
+        - archiveRecallRootFileId
         - xattr.*
     - name: attribute
       in: query
@@ -167,6 +197,8 @@ get:
         (Deprecated) Name of attribute to query for. Can be provided multiple times. 
         When accessing file via share mode following attributes are unavailable: 
         `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
+        Ignored when provided alongside `attributes` parameter.
+        When both are not provided, combined deprecated and current values are returned.
       type: string
       enum:
         - name

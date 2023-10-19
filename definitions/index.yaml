@@ -196,8 +196,8 @@ Datasets:
 ProtectionFlags:
   $ref: ./data/protection_flags.yaml
 
-FileMembership:
-  $ref: ./data/file_membership.yaml
+FileInheritancePath:
+  $ref: ./data/file_inheritance_path.yaml
 
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml
@@ -207,6 +207,9 @@ QosCreateRequest:
 
 QosStatus:
   $ref: ./qos/qos_status.yaml
+
+AggregateQosStatus:
+  $ref: ./qos/aggregate_qos_status.yaml
 
 QosSummary:
   $ref: ./qos/qos_summary.yaml

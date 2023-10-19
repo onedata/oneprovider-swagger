@@ -1,4 +1,4 @@
-description: File membership.
+description: File InheritancePath.
 type: string
 enum:
   - none

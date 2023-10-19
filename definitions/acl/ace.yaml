@@ -1,3 +1,4 @@
+# TODO VFS-11468 - better descriptions and examples
 description: Access Control Entry
 type: object
 properties:
@@ -12,4 +13,3 @@ properties:
     type: integer
   acemask:
     type: integer
-# fixme descriptions + example

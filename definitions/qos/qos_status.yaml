@@ -1,4 +1,8 @@
-description: Status of QoS requirement fulfillment for given file/directory. FIXME shortly describe the statuses - maybe take from GUI?
+description: >
+  Status of QoS requirement fulfillment for given file/directory. Possible statuses:
+    * `fulfilled` - desired number of replicas have been created on matching storages and their contents are up-to-date.
+    * `pending` - data replication is still ongoing.
+    * `impossible` - there are not enough storage backends matching the expression to meet the required number of replicas.
 type: string
 enum:
   - fulfilled
