@@ -123,13 +123,21 @@ properties:
     allOf:
       - description: >
           Indicates whether this file/directory effectively belongs to a dataset, 
-          i.e. is a dataset or is in a subtree of a dataset.
+          i.e. is a dataset or is in a subtree of a dataset:
+            * `none` - the file does not belong to any dataset,
+            * `direct` - the file only belongs to the dataset established on the file itself,
+            * `ancestor` - the file belongs to one or more ancestor datasets (is in their file trees),
+            * `direct_and_ancestor` - the file belongs to the dataset established on itself and to one or more ancestor datasets.
       - $ref: '#/definitions/FileInheritancePath'
   effQosInheritancePath:
     allOf:
       - description: >
           Indicates whether this file/directory has any effective QoS requirement, 
           i.e. a direct QoS requirement or any QoS requirement inherited from its ancestors.
+            * `none` - the file does not have any QoS requirements,
+            * `direct` - the file has only QoS requirements set on the file itself,
+            * `ancestor` - the file has only QoS requirements inherited from its ancestor directories,
+            * `direct_and_ancestor` - the file has QoS requirements set on itself and inherited from its ancestor directories.
       - $ref: '#/definitions/FileInheritancePath'
   aggregateQosStatus:
     $ref: '#/definitions/AggregateQosStatus'
