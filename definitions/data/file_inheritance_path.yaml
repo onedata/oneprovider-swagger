@@ -1,4 +1,4 @@
-description: File InheritancePath.
+description: Indicates the inheritance path in a file tree.
 type: string
 enum:
   - none

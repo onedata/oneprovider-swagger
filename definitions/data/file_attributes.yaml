@@ -107,18 +107,17 @@ properties:
     description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached.
   effProtectionFlags:
     allOf:
-      - description: >
+      - description: |
           File protection flags that effectively concern this file/directory (a sum of protection flags from dataset 
-          established on the file/directory itself, its ancestor directories and hardlinks). **NOTE**: the file may be 
-          deleted even when the `data_protection` flag is enabled, as long as it inherited the flag through one of its 
-          hardlinks (see `effDatasetProtectionFlags`).
+          established on the file/directory itself, its ancestor directories and hardlinks). 
+          To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetProtectionFlags:
     allOf:
-      - description: >
+      - description: |
           File protection flags inherited from datasets that include this file/directory (protection flags of 
-          hardlinks are not taken into account). **NOTE**: the file/directory can be deleted if and only if 
-          the `data_protection` flag is disabled.
+          hardlinks are not taken into account).
+          To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetInheritancePath:
     allOf:

@@ -34,7 +34,10 @@ properties:
   protectionFlags:
     $ref: '#/definitions/DatasetProtectionFlags'
   effectiveProtectionFlags:
-    $ref: '#/definitions/DatasetProtectionFlags'
+    allOf:
+      - description: >
+          Aggregate protection flags from this dataset and inherited from ancestor datasets. See `protectionFlags`.
+      - $ref: '#/definitions/DatasetProtectionFlags'
   creationTime:
     $ref: '#/definitions/Timestamp'
   archiveCount:
