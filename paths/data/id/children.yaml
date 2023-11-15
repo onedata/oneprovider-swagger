@@ -192,36 +192,36 @@ get:
     specified by [$DIR_ID](#operation/lookup_file_id).
     
     **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
-      The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-      the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
-      * `file_id` -> `fileId`
-      * `mode` -> `posixPermissions`
-      * `parent_id` -> `parentFileId`
-      * `storage_group_id` -> `displayGid`
-      * `storage_user_id` -> `displayUid`
-      * `is_fully_replicated` -> `isFullyReplicatedLocally`
-      * `provider_id` -> `originProviderId`
-      * `shares` -> `directShareIds`
-      * `owner_id` -> `ownerUserId`
-      * `hardlinks_count` -> `hardlinkCount`
+    The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
+    the APIs and returned if the client makes a request specifying their old names. The following changes were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
   description: |
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
     
     **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
-      The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-      the APIs and returned if the client makes a request specifying their old names. Following changes were introduced:
-      * `file_id` -> `fileId`
-      * `mode` -> `posixPermissions`
-      * `parent_id` -> `parentFileId`
-      * `storage_group_id` -> `displayGid`
-      * `storage_user_id` -> `displayUid`
-      * `is_fully_replicated` -> `isFullyReplicatedLocally`
-      * `provider_id` -> `originProviderId`
-      * `shares` -> `directShareIds`
-      * `owner_id` -> `ownerUserId`
-      * `hardlinks_count` -> `hardlinkCount`
+    The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
+    the APIs and returned if the client makes a request specifying their old names. The following changes were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
@@ -280,8 +280,9 @@ get:
     - name: limit
       in: query
       description: >
-        Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using the `token` query parameter.
+        Specifies the maximum number of entries that can be returned in one result batch.
+        If there are more files, they can be retrieved using options that specify a custom starting point
+        (`token`, `index`).
       type: integer
       required: false
       maximum: 1000
@@ -293,8 +294,7 @@ get:
       description: >
         Determines the starting point for listing. The listing will start from the next page (batch) of entries
         which follows the page previously obtained along with the corresponding `nextPageToken`.
-        Cannot be provided alongside the `index`, `tuneForLargeContinuousListing` or `tune_for_large_continuous_listing` 
-        parameters.
+        Cannot be provided alongside the `index` or `tuneForLargeContinuousListing` parameters.
       type: string
       required: false
       default: null
@@ -341,16 +341,8 @@ get:
     - name: tune_for_large_continuous_listing
       in: query
       description: >
-        (deprecated) This option increases performance of listing large directories (with thousands of files)
-        when using subsequent calls with paging tokens.<br/>
-        **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
-        after the start of listing will be included. Therefore it shouldn't be used when the
-        listing result is expected to be up to date with the state of the file tree at the moment of listing.
-        It should be avoided if the interval between subsequent listings is longer than 10 seconds,
-        otherwise the listing performance will be much worse.<br/>
-        Overusing this option may cause a significant load on the Oneprovider.<br/>
-        Cannot be provided alongside the `token` parameter.
-        Ignored when provided alongside `tuneForLargeContinuousListing` parameter.
+        (**DEPRECATED**) This parameter is still supported but scheduled for deletion in future releases.
+        Use `tuneForLargeContinuousListing` instead.
       type: boolean
       required: false
       default: false
@@ -359,12 +351,11 @@ get:
       in: query
       required: false
       description: >
-        Name of the attribute to be included in the results for each listed file. Can be provided multiple times. 
+        Name of the attribute to be included in the results for each listed file. Can be provided multiple times. FIXME adjust to comma separated
         For a shared file/directory accessed in public mode, only the following attributes are available: 
         `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
         `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
-        If not provided, deprecated parameter `attribute` is taken into account. When both are not provided 
-        combined deprecated and current default attributes of `file_id`, `fileId` and `name` will be returned.
+        If not provided, the default attributes of `fileId` and `name` will be returned.
       type: string
       enum:
         - fileId
@@ -398,16 +389,15 @@ get:
         - aggregateQosStatus
         - archiveRecallRootFileId
         - xattr.*
+
     - name: attribute
       in: query
       required: false
       description: >
-        (Deprecated) Name of attribute to query for. Can be provided multiple times. 
-        When accessing file via share mode following attributes are unavailable: 
-        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
-        Ignored when provided alongside `attributes` parameter.
-        If both are not provided, combined deprecated and current default attributes of `file_id`, `fileId` and `name` 
-        will be returned.
+        (**DEPRECATED**) Name of the attribute to be included in the results for each listed file. 
+        Can be provided multiple times. 
+        This parameter is still supported but scheduled for deletion in future releases.
+        Use `attributes` instead.
       type: string
       enum:
         - name

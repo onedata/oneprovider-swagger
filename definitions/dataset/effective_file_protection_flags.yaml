@@ -7,12 +7,15 @@ description: |
 
   * `metadata_protection` - causes file/directory to be
      protected from modifying its metadata (custom metadata, ACL, etc.).
+  
+  **NOTE**: the file/directory can be deleted if `data_protection` flag is disabled,
+  or when the flag is enabled but is inherited through one of its hardlinks.
 
   Requests to modify the data/metadata when protection is enabled will be rejected
   with the EPERM POSIX error.
 
   Protection flags are calculated as a union of protection flags of all
-  attached datasets to which the file belongs to.
+  attached datasets to which the file belongs to, collectively for each hardlink of the file.
 
   Changing the protection flags may not have an immediate effect,
   especially for files that were already opened before the change.
