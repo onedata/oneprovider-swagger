@@ -5,15 +5,21 @@ get:
     aspect: list
   tags:
     - Space
-  summary: Get all user spaces
+  summary: List all user spaces
   x-bash-codegen-description: |
-    Returns the list of all user spaces and their details.
+    Returns the list of user spaces and their details.
+    
+    If the token presented as authorization contains any caveats limiting data access
+    to specific spaces, only the available ones show up in the result.
   description: |
-    Returns the list of all user spaces and their details.
+    Returns the list of user spaces and their details.
+    
+    If the token presented as authorization contains any caveats limiting data access
+    to specific spaces, only the available ones show up in the result.
 
     ***Example cURL requests***
 
-    **List all user spaces**
+    **List user spaces**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces"
 
