@@ -3,20 +3,17 @@ title: Oneprovider
 description: |
   # Overview
 
-  This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://onedata.org).
+  This is the RESTful API definition of Oneprovider component of Onedata data management system 
+  [onedata.org](http://onedata.org).
 
   > This API is defined using [Swagger](http://swagger.io/), the JSON specification can be used to automatically generate
   > client libraries - [swagger.json](../../../swagger/oneprovider/swagger.json).
 
-  All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
-  query for 'mode' file attributes would be:
-  ```
-  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/data/$FILE_ID?attribute=mode
-  ```
-  Please note that currently the default port for Oneprovider instances is `443`.
-
   In addition to REST API, Oneprovider also provides support for
-  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol.
+  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol. Keep in mind that CDMI is
+  less performant, mainly because it uses Base64 encoded strings for binary file content
+  transmission, resulting in approximately 33% larger I/O traffic compared to
+  REST, which works with plain binaries.
 
 
   ## Authentication
@@ -37,40 +34,54 @@ description: |
   ## Data management basics
   The Onedata system organizes all user data into logical containers called spaces.
   <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
+  <!--- TODO VFS-7218 remove redundant information and provide a link to the new docs -->
   <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
 
-  Files and directories in Onedata can be globally identified using unique File Ids or logical paths.
-  Whenever possible, it is recommended to use File Ids, due to better performance and no need for escaping or encoding.
-
-  ### File path
-  All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
-  ```lang-none
-  /CMS 1/file.txt
-  /MyExperiment/directory/subdirectory/image.jpg
-  ```
-
-  When referencing files by path in the REST API, make sure to urlencode the path in the URL:
-  ```bash
-  {...}/CMS%201/file.txt
-  ```
-
-  ### File Id
-
-  File Id is a unique, global identifier associated with a file or directory and can be used universally
-  in the REST and CDMI APIs. There are several ways to find out the File Id of given file or directory:
-  <!---  @TODO VFS-7218 remove redundant information and provide a link to the new docs -->
+  Any file in Onedata (**regular**, **directory**, **symbolic link**, or **hard
+  link**) can be globally identified using its unique **File Id** or **logical
+  path**.
+  
+  All **logical paths** in Onedata use the slash (`/`) delimiter and must start with a
+  leading slash and a space name:
+  
+  <pre>
+  /CMS 1/directory/images&videos/garden.png
+  </pre>
+  
+  **File Id** is a unique, global identifier associated with a file, structured as
+  a string of alphanumeric characters:
+  
+  <pre>
+  094576776E667431723230677767776C6B497031394E445F6E3868677873...
+  </pre>
+  
+  The path-based navigation is used mainly in the Web GUI and Oneclient
+  interfaces. In the REST and CDMI APIs, it is **recommended to use File
+  IDs**, due to better performance and no need for escaping or encoding.
+    
+  ### Find out the File Id
 
   **Web GUI** - click on Information in the file/directory context menu and look for File Id.
 
-  **REST API** - use the File Id resolution endpoint. Below example returns the File Id of
-  `/CMS 1/file.txt`, where `CMS 1` is the space name:
+  **REST API** - use the File Id [resolution endpoint](#operation/lookup_file_id). 
+  Below example returns the File Id of <br />
+  `/CMS 1/directory/images&videos/garden.png`, where `CMS 1` is the space name:
 
   ```bash
-  curl -H "X-Auth-Token: ${ACCESS_TOKEN}" \
-  -X POST "https://${ONEPROVIDER_DOMAIN}/api/v3/oneprovider/lookup-file-id/CMS%201/file.txt"
+  curl -H "X-Auth-Token: ${ACCESS_TOKEN}" -X POST \
+  "https://${PROVIDER_DOMAIN}/api/v3/oneprovider/lookup-file-id/CMS%201/directory/images%26videos/garden.png"
+  ```
+  
+  ```json
   {
-      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
   }
+  ```
+  
+  > **NOTE:** Paths used in URLs must be url-encoded, e.g.:
+  
+  ```
+  {...}/CMS%201/directory/images%26videos/garden.png
   ```
 
   ### Space Id
@@ -145,20 +156,17 @@ description: |
 x-bash-codegen-description: |
   # Overview
 
-  This is the RESTful API definition of Oneprovider component of Onedata data management system [onedata.org](http://onedata.org).
+  This is the RESTful API definition of Oneprovider component of Onedata data management system 
+  [onedata.org](http://onedata.org).
 
   > This API is defined using [Swagger](http://swagger.io/), the JSON specification can be used to automatically generate
   > client libraries - [swagger.json](../../../swagger/oneprovider/swagger.json).
 
-  All paths below are relative to a common Oneprovider basepath which is `/api/v3/oneprovider`, thus a complete example
-  query for 'mode' file attributes would be:
-  ```
-  https://ONEPROVIDER_HOSTNAME/api/v3/oneprovider/data/$FILE_ID?attribute=mode
-  ```
-  Please note that currently the default port for Oneprovider instances is `443`.
-
   In addition to REST API, Oneprovider also provides support for
-  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol.
+  [CDMI](http://onedata.org/#/home/documentation/doc/advanced/cdmi.html) protocol. Keep in mind that CDMI is
+  less performant, mainly because it uses Base64 encoded strings for binary file content
+  transmission, resulting in approximately 33% larger I/O traffic compared to
+  REST, which works with plain binaries.
 
 
   ## Authentication
@@ -179,40 +187,54 @@ x-bash-codegen-description: |
   ## Data management basics
   The Onedata system organizes all user data into logical containers called spaces.
   <!--- TODO VFS-7218 uncomment when the new docs are deployed -->
+  <!--- TODO VFS-7218 remove redundant information and provide a link to the new docs -->
   <!--- For more information, please refer to the [documentation](https://onedata.org/#/home/documentation). -->
 
-  Files and directories in Onedata can be globally identified using unique File Ids or logical paths.
-  Whenever possible, it is recommended to use File Ids, due to better performance and no need for escaping or encoding.
-
-  ### File path
-  All logical paths in Onedata use the slash (`/`) delimiter and must start with a space name:
-  ```lang-none
-  /CMS 1/file.txt
-  /MyExperiment/directory/subdirectory/image.jpg
-  ```
-
-  When referencing files by path in the REST API, make sure to urlencode the path in the URL:
-  ```bash
-  {...}/CMS%201/file.txt
-  ```
-
-  ### File Id
-
-  File Id is a unique, global identifier associated with a file or directory and can be used universally
-  in the REST and CDMI APIs. There are several ways to find out the File Id of given file or directory:
-  <!---  @TODO VFS-7218 remove redundant information and provide a link to the new docs -->
+  Any file in Onedata (**regular**, **directory**, **symbolic link**, or **hard
+  link**) can be globally identified using its unique **File Id** or **logical
+  path**.
+  
+  All **logical paths** in Onedata use the slash (`/`) delimiter and must start with a
+  leading slash and a space name:
+  
+  <pre>
+  /CMS 1/directory/images&videos/garden.png
+  </pre>
+  
+  **File Id** is a unique, global identifier associated with a file, structured as
+  a string of alphanumeric characters:
+  
+  <pre>
+  094576776E667431723230677767776C6B497031394E445F6E3868677873...
+  </pre>
+  
+  The path-based navigation is used mainly in the Web GUI and Oneclient
+  interfaces. In the REST and CDMI APIs, it is **recommended to use File
+  IDs**, due to better performance and no need for escaping or encoding.
+  
+  ### Find out the File Id
 
   **Web GUI** - click on Information in the file/directory context menu and look for File Id.
 
-  **REST API** - use the File Id resolution endpoint. Below example returns the File Id of
-  `/CMS 1/file.txt`, where `CMS 1` is the space name:
+  **REST API** - use the File Id [resolution endpoint](#operation/lookup_file_id). 
+  Below example returns the File Id of <br />
+  `/CMS 1/directory/images&videos/garden.png`, where `CMS 1` is the space name:
 
   ```bash
-  curl -H "X-Auth-Token: ${ACCESS_TOKEN}" \
-  -X POST "https://${ONEPROVIDER_DOMAIN}/api/v3/oneprovider/lookup-file-id/CMS%201/file.txt"
+  curl -H "X-Auth-Token: ${ACCESS_TOKEN}" -X POST \
+  "https://${PROVIDER_DOMAIN}/api/v3/oneprovider/lookup-file-id/CMS%201/directory/images%26videos/garden.png"
+  ```
+  
+  ```json
   {
-      "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
+    "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873..."
   }
+  ```
+  
+  > **NOTE:** Paths used in URLs must be url-encoded, e.g.:
+  
+  ```
+  {...}/CMS%201/directory/images%26videos/garden.png
   ```
 
   ### Space Id
