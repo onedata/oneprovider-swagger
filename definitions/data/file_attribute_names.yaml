@@ -1,0 +1,41 @@
+type: array
+description: >
+  List of names of the attributes to be included in the result.
+  For a shared file/directory accessed in public mode, only the following attributes are available: 
+  `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
+  `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
+  If not provided, by default all attributes are returned.
+items:
+  type: string
+  enum:
+    - fileId
+    - index
+    - type
+    - activePermissionsType
+    - posixPermissions
+    - acl
+    - name
+    - conflictingName
+    - path
+    - parentFileId
+    - displayGid
+    - displayUid
+    - atime
+    - mtime
+    - ctime
+    - size
+    - isFullyReplicatedLocally
+    - localReplicationRate
+    - originProviderId
+    - directShareIds
+    - ownerUserId
+    - hardlinkCount
+    - symlinkValue
+    - hasCustomMetadata
+    - effProtectionFlags
+    - effDatasetProtectionFlags
+    - effDatasetInheritancePath
+    - effQosInheritancePath
+    - aggregateQosStatus
+    - archiveRecallRootFileId
+    - xattr.*

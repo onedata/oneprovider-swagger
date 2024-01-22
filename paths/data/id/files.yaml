@@ -1,5 +1,6 @@
 get:
   operationId: list_files_recursively
+  x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -53,18 +54,19 @@ get:
 
     **List files recursively**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/files?start_after=ParentDirName/Dir1"
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/files" -d '{
+      "start_after": "ParentDirName/Dir1",
+      "attributes": ["fileId", "path"]
+    }'
 
     {
         "files": [
             {
-                "file_id": "FILE_ID1",
                 "fileId": "FILE_ID1",
                 "path": "ParentDirName/Dir2"
             },
             {
-                "file_id": "FILE_ID2",
                 "fileId": "FILE_ID2",
                 "path": "ParentDirName/File1.txt"
             },
@@ -106,84 +108,11 @@ get:
       type: string
       required: true
 
-    - name: limit
-      in: query
-      description: >
-        Specifies the maximum number of entries that can be returned in one result batch.
-        If there are more files, they can be retrieved using options that specify a custom starting point
-        (`token`, `startAfter`).
-      type: integer
+    - name: data
+      in: body
       required: false
-      maximum: 1000
-      minimum: 1
-      default: 1000
-
-    - name: token
-      in: query
-      description: >
-        Determines the starting point for listing. The listing will start from the next page (batch) of entries
-        which follows the page previously obtained along with the corresponding `nextPageToken`.
-        Cannot be provided alongside the `start_after` parameter.
-      type: string
-      required: false
-
-    - name: start_after
-      in: query
-      description: >
-        Determines the starting point for listing - it will be started from
-        the first file path lexicographically larger than the provided path.
-      type: string
-      required: false
-
-    - name: prefix
-      in: query
-      description: >
-        Only files with paths that begin with this value will be listed.
-      type: string
-      required: false
-
-    - name: attributes
-      in: query
-      required: false
-      description: >
-        Name of the attribute to be included in the results for each listed file. Can be provided multiple times. FIXME adjust to comma separated 
-        For a shared file/directory accessed in public mode, only the following attributes are available: 
-        `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
-        `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
-        If not provided, the default attributes of `fileId` and `path` will be returned.
-      type: string
-      enum:
-        - fileId
-        - index
-        - type
-        - activePermissionsType
-        - posixPermissions
-        - acl
-        - name
-        - conflictingName
-        - path
-        - parentFileId
-        - displayGid
-        - displayUid
-        - atime
-        - mtime
-        - ctime
-        - size
-        - isFullyReplicatedLocally
-        - localReplicationRate
-        - originProviderId
-        - directShareIds
-        - ownerUserId
-        - hardlinkCount
-        - symlinkValue
-        - hasCustomMetadata
-        - effProtectionFlags
-        - effDatasetProtectionFlags
-        - effDatasetInheritancePath
-        - effQosInheritancePath
-        - aggregateQosStatus
-        - archiveRecallRootFileId
-        - xattr.*
+      schema:
+        $ref: '#/definitions/GetRecursiveFileListRequest'
 
     - name: attribute
       in: query

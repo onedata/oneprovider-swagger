@@ -26,8 +26,14 @@ IsLast:
 ListPageToken:
   $ref: ./list_page_token.yaml
 
+GetDirectoryChildrenRequest:
+  $ref: ./data/get_directory_children_request.yaml
+
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
+
+GetRecursiveFileListRequest:
+  $ref: ./data/get_recursive_file_list_request.yaml
 
 RecursiveFileList:
   $ref: ./data/recursive_file_list.yaml
@@ -40,6 +46,9 @@ StorageFileLocations:
 
 FileType:
   $ref: ./data/file_type.yaml
+
+FileAttributeNames:
+  $ref: ./data/file_attribute_names.yaml
 
 FileAttributes:
   $ref: ./data/file_attributes.yaml

@@ -1,0 +1,33 @@
+type: object
+description: Get children request.
+properties:
+  limit:
+    description: >
+      Specifies the maximum number of entries that can be returned in one result batch.
+      If there are more files, they can be retrieved using options that specify a custom starting point
+      (`token`, `startAfter`).
+    type: integer
+    maximum: 1000
+    minimum: 1
+    default: 1000
+
+  token:
+    description: >
+      Determines the starting point for listing. The listing will start from the next page (batch) of entries
+      which follows the page previously obtained along with the corresponding `nextPageToken`.
+      Cannot be provided alongside the `start_after` parameter.
+    type: string
+
+  start_after:
+    description: >
+      Determines the starting point for listing - it will be started from
+      the first file path lexicographically larger than the provided path.
+    type: string
+
+  prefix:
+    description: >
+      Only files with paths that begin with this value will be listed.
+    type: string
+
+  attributes:
+    $ref: '#/definitions/FileAttributeNames'

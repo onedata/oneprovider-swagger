@@ -1,0 +1,61 @@
+type: object
+description: Get children request.
+properties:
+  limit:
+    description: >
+      Specifies the maximum number of entries that can be returned in one result batch.
+      If there are more files, they can be retrieved using options that specify a custom starting point
+      (`token`, `index`).
+    type: integer
+    maximum: 1000
+    minimum: 1
+    default: 1000
+
+  token:
+    description: >
+      Determines the starting point for listing. The listing will start from the next page (batch) of entries
+      which follows the page previously obtained along with the corresponding `nextPageToken`.
+      Cannot be provided alongside the `index` or `tuneForLargeContinuousListing` parameters.
+    type: string
+    default: null
+
+  # @TODO VFS-11412 make index only accept index from file attr
+  index:
+    description: >
+      Determines the starting point for listing. The listing will (inclusively) start from the first
+      file whose name is lexicographically greater or equal to the specified index.
+      Cannot be provided alongside the `token` parameter.
+    type: string
+
+  offset:
+    description: >
+      Expressed in number of entries, further adjusts the starting point of listing indicated by the `index` 
+      parameter (or the list beginning if the `index` is not specified).
+      The value can be negative, in such case entries preceding the starting point will be returned.
+      Cannot be provided alongside the `token` parameter.
+    type: integer
+    maximum: 500
+    minimum: -500
+    default: 0
+
+  tuneForLargeContinuousListing:
+    description: >
+      This option increases performance of listing large directories (with thousands of files)
+      when using subsequent calls with paging tokens.<br/>
+      **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
+      after the start of listing will be included. Therefore it shouldn't be used when the
+      listing result is expected to be up to date with the state of the file tree at the moment of listing.
+      It should be avoided if the interval between subsequent listings is longer than 10 seconds,
+      otherwise the listing performance will be much worse.<br/>
+      Overusing this option may cause a significant load on the Oneprovider.<br/>
+      Cannot be provided alongside the `token` parameter.
+    type: boolean
+
+  tune_for_large_continuous_listing:
+    description: >
+      (**DEPRECATED**) This parameter is still supported but scheduled for deletion in future releases.
+      Use `tuneForLargeContinuousListing` instead.
+    type: boolean
+
+  attributes:
+    $ref: '#/definitions/FileAttributeNames'

@@ -60,6 +60,7 @@ delete:
 # TODO VFS-11377 remove deprecated values after next major release
 get:
   operationId: get_attrs
+  x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -109,8 +110,10 @@ get:
 
     **Get selected file attributes**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attributes=size&attributes=name&attributes=xattr.key"
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" -d '{
+      "attributes": ["name", "size", "xattr.key"]
+    }'
 
     {
         "name": "File1.txt",
@@ -148,48 +151,15 @@ get:
       type: string
       required: true
 
-    - name: attributes
-      in: query
+    - name: data
+      in: body
       required: false
-      description: >
-        Name of the attribute to be included in the result. Can be provided multiple times. FIXME adjust to comma separated 
-        For a shared file/directory accessed in public mode, only the following attributes are available: 
-        `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
-        `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, `xattr.*`.
-        If not provided, by default all attributes are returned.
-      type: string
-      enum:
-        - fileId
-        - index
-        - type
-        - activePermissionsType
-        - posixPermissions
-        - acl
-        - name
-        - conflictingName
-        - path
-        - parentFileId
-        - displayGid
-        - displayUid
-        - atime
-        - mtime
-        - ctime
-        - size
-        - isFullyReplicatedLocally
-        - localReplicationRate
-        - originProviderId
-        - directShareIds
-        - ownerUserId
-        - hardlinkCount
-        - symlinkValue
-        - hasCustomMetadata
-        - effProtectionFlags
-        - effDatasetProtectionFlags
-        - effDatasetInheritancePath
-        - effQosInheritancePath
-        - aggregateQosStatus
-        - archiveRecallRootFileId
-        - xattr.*
+      schema:
+        type: object
+        description: Get file attributes request.
+        properties:
+          attributes:
+            $ref: '#/definitions/FileAttributeNames'
 
     - name: attribute
       in: query

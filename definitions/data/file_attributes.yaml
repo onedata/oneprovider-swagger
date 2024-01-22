@@ -76,7 +76,7 @@ properties:
   localReplicationRate:
     type: number
     description: >
-      Ratio (`0.0 .. 1.0`) of the local replica size present on the queried provider to the total virtual data size. # FIXME virtual or logical?
+      Ratio (`0.0 .. 1.0`) of the local replica size present on the queried provider to the total logical data size.
       See also [directory size statistics](#operation/get_directory_size_stats) for more information
       about different data size metrics.
   originProviderId:
