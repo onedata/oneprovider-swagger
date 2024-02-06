@@ -289,7 +289,7 @@ get:
       schema:
         $ref: '#/definitions/GetDirectoryChildrenRequest'
 
-    - name: legacy options
+    - name: legacy_options
       in: query
       required: false
       description: >

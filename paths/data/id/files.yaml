@@ -116,7 +116,7 @@ get:
       schema:
         $ref: '#/definitions/GetRecursiveFileListRequest'
 
-    - name: legacy options
+    - name: legacy_options
       in: query
       required: false
       description: >
