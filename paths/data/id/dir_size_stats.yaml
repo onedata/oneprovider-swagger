@@ -35,7 +35,7 @@ get:
       * `storage_use_$STORAGE_ID` - storage size used to store the physical data
     of the contained files for given `$STORAGE_ID`. Only the storage backends
     owned by the queried providers are returned.
-      * `reg_file_and_link_count` - the count of regular files, hardlinks, 
+      * `reg_file_and_link_count` - the count of regular files, hard links, 
     and symbolic links contained in the directory.
       * `dir_count` - the count of directories contained in the directory.
       * `file_errors_count` - the count of error occurrences when the statistics 
@@ -73,7 +73,7 @@ get:
       * `storage_use_$STORAGE_ID` - storage size used to store the physical data
     of the contained files for given `$STORAGE_ID`. Only the storage backends
     owned by the queried providers are returned.
-      * `reg_file_and_link_count` - the count of regular files, hardlinks, 
+      * `reg_file_and_link_count` - the count of regular files, hard links, 
     and symbolic links contained in the directory.
       * `dir_count` - the count of directories contained in the directory.
       * `file_errors_count` - the count of error occurrences when the statistics 

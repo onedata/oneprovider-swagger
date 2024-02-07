@@ -7,7 +7,7 @@ properties:
     description: Id of the file/directory. Successor of the **deprecated `file_id`**.
   index:
     type: string
-    description: Index pointing to this file/directory that can be provided as starting point when listing files.
+    description: Index pointing to this file/directory that can be provided as a starting point when listing files.
   type:
     $ref: '#/definitions/FileType'
   activePermissionsType:
@@ -27,12 +27,12 @@ properties:
   name:
     type: string
     description: > 
-      Name of the file/directory. In case of name conflicts (when two files with identical name are 
+      Name of the file/directory. In case of name conflicts (when two files with identical names are 
       created simultaneously in two providers), this name is disambiguated by extending it with `originProviderId`.
   conflictingName:
     type: string
     description: >
-      Original name of the file/directory in case of file name conflict, as described in `name`. 
+      The original name of the file/directory in case of file name conflict, as described in `name`. 
       `null` if there is no file name conflict.
   path:
     type: string
@@ -45,12 +45,12 @@ properties:
   displayGid:
     type: string
     description: > 
-      GID of this file/directory displayed in the Oneclient mounted filesystem. 
+      GID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_group_id`**.
   displayUid:
     type: string
     description: > 
-      UID of this file/directory displayed in the Oneclient mounted filesystem. 
+      UID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_user_id`**.
   atime:
     type: integer
@@ -64,7 +64,7 @@ properties:
   size:
     type: integer
     description: >
-      Logical size of the file/directory in bytes. For directories, it can be `null` 
+      The logical size of the file/directory in bytes. For directories, it can be `null` 
       when directory statistics are not enabled or not yet calculated. See 
       [directory size statistics](#operation/get_directory_size_stats) 
       for more information and details about different data size metrics.
@@ -86,7 +86,7 @@ properties:
     type: array
     description: > 
       The list of Ids of shares created for this file/directory. For every share, only
-      the root file/directory will contain the share Id on the list and not the nested files/directories.
+      the root file/directory will contain the share Id on the list and nested files/directories won't.
       For a shared file/directory accessed in public mode, shows only the Id of the share in the context 
       of which the file is being accessed. Successor of the **deprecated `shares`**.
     items:
@@ -96,7 +96,7 @@ properties:
     description: User Id of the owner of this file/directory. Successor of the **deprecated `owner_id`**.
   hardlinkCount:
     type: integer
-    description: The number of hardlinks (including this one) associated with this file/directory.
+    description: The number of hard links (including this one) associated with this file/directory.
   symlinkValue:
     type: string
     description: >
@@ -108,15 +108,15 @@ properties:
   effProtectionFlags:
     allOf:
       - description: |
-          File protection flags that effectively concern this file/directory (a sum of protection flags from dataset 
-          established on the file/directory itself, its ancestor directories and hardlinks). 
+          File protection flags that effectively concern this file/directory (a sum of protection flags from the dataset 
+          established on the file/directory itself, its ancestor directories, and hard links). 
           To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetProtectionFlags:
     allOf:
       - description: |
           File protection flags inherited from datasets that include this file/directory (protection flags of 
-          hardlinks are not taken into account).
+          hard links are not taken into account).
           To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
       - $ref: '#/definitions/ProtectionFlags'
   effDatasetInheritancePath:

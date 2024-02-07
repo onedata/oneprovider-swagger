@@ -192,9 +192,10 @@ get:
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
     
-    **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
-    The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-    the APIs and returned if the client makes a request specifying their old names. The following changes were introduced:
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
     * `file_id` -> `fileId`
     * `mode` -> `posixPermissions`
     * `parent_id` -> `parentFileId`
@@ -210,9 +211,10 @@ get:
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
     
-    **NOTE**: as of version 21.02.4, some of the attributes have been renamed and the list of available ones have been extended.
-    The old attribute names are **DEPRECATED** and scheduled for deletion in future releases. For now, they are still accepted in
-    the APIs and returned if the client makes a request specifying their old names. The following changes were introduced:
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
     * `file_id` -> `fileId`
     * `mode` -> `posixPermissions`
     * `parent_id` -> `parentFileId`
@@ -287,33 +289,16 @@ get:
       schema:
         $ref: '#/definitions/GetDirectoryChildrenRequest'
 
-    - name: attribute
+    - name: legacy_options
       in: query
       required: false
       description: >
-        (**DEPRECATED**) Name of the attribute to be included in the results for each listed file. 
-        Can be provided multiple times. 
-        This parameter is still supported but scheduled for deletion in future releases.
-        Use `attributes` instead.
+        The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+        deletion in the future major release. You may refer to the 
+        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.3/oneprovider?anchor=operation/list_files_recursively),
+        but it's recommended to use the new API with options as JSON body.
       type: string
-      enum:
-        - name
-        - owner_id
-        - type
-        - mode
-        - size
-        - atime
-        - mtime
-        - ctime
-        - storage_group_id
-        - storage_user_id
-        - shares
-        - provider_id
-        - file_id
-        - parent_id
-        - hardlinks_count
-        - index
-        - xattr.*
+
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 index=filename.txt"
