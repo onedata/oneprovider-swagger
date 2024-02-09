@@ -1,8 +1,8 @@
 type: string
 description: |
   The type of the file:
-  * `REG` - regular file.
-  * `DIR` - directory.
+  * `REG` - regular file,
+  * `DIR` - directory,
   * `SYMLNK` - symbolic link.
 enum:
   - REG

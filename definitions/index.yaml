@@ -2,6 +2,12 @@
 # This file groups the type definitions for Oneprovider REST API
 #
 
+Ace:
+  $ref: ./acl/ace.yaml
+
+Acl:
+  $ref: ./acl/acl.yaml
+
 Configuration:
   $ref: ./configuration.yaml
 
@@ -20,20 +26,29 @@ IsLast:
 ListPageToken:
   $ref: ./list_page_token.yaml
 
+GetDirectoryChildrenRequest:
+  $ref: ./data/get_directory_children_request.yaml
+
 DirectoryChildren:
   $ref: ./data/directory_children.yaml
+
+GetRecursiveFileListRequest:
+  $ref: ./data/get_recursive_file_list_request.yaml
 
 RecursiveFileList:
   $ref: ./data/recursive_file_list.yaml
 
-FileDistribution:
-  $ref: ./data/file_distribution.yaml
+DataDistribution:
+  $ref: ./data/data_distribution.yaml
 
 StorageFileLocations:
   $ref: ./data/storage_file_locations.yaml
 
 FileType:
   $ref: ./data/file_type.yaml
+
+FileAttributeNames:
+  $ref: ./data/file_attribute_names.yaml
 
 FileAttributes:
   $ref: ./data/file_attributes.yaml
@@ -187,11 +202,23 @@ DatasetUpdateRequest:
 Datasets:
   $ref: ./dataset/datasets.yaml
 
+ProtectionFlags:
+  $ref: ./data/protection_flags.yaml
+
+FileInheritancePath:
+  $ref: ./data/file_inheritance_path.yaml
+
 QosRequirement:
   $ref: ./qos/qos_requirement.yaml
 
 QosCreateRequest:
   $ref: ./qos/qos_create_request.yaml
+
+QosStatus:
+  $ref: ./qos/qos_status.yaml
+
+AggregateQosStatus:
+  $ref: ./qos/aggregate_qos_status.yaml
 
 QosSummary:
   $ref: ./qos/qos_summary.yaml

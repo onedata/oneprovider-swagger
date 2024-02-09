@@ -1,0 +1,12 @@
+description: > 
+  Indicates the inheritance path in a file tree of a value that can be inherited:
+  * none - no value is inherited,
+  * direct - the value is set for the file itself,
+  * ancestor - the value is a sum of values is inherited from one (or more) of the ancestors,
+  * direct_and_ancestor - the value is a sum of the file's own value and values inherited from one (or more) of the ancestors.
+type: string
+enum:
+  - none
+  - direct
+  - ancestor
+  - direct_and_ancestor

@@ -5,7 +5,7 @@ get:
     id: ?OBJECTID_BINDING(id)
     aspect: storage_locations
   tags:
-    - File Distribution
+    - Data Distribution
   summary: Get file storage locations
   x-bash-codegen-description: |
     Returns information about regular file location on each storage. `null` value for a storage 

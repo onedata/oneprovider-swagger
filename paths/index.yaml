@@ -87,7 +87,7 @@
   $ref: ./data/register.yaml
 
 
-# tag File Distribution
+# tag Data Distribution
 /data/{id}/distribution:
   $ref: ./data/id/distribution.yaml
   

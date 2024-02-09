@@ -1,73 +1,193 @@
+# TODO VFS-11377 remove deprecated values after next major release
 type: object
-description: File or directory basic attributes.
+description: File or directory attributes.
 properties:
-  name:
+  fileId:
     type: string
-    description: File name.
-  type:
-    $ref: '#/definitions/FileType'
-  mode:
-    type: string
-    description: POSIX file permissions as string expressing octal notation.
-  size:
-    type: integer
-    description: Size of the file in bytes.
-  atime:
-    type: integer
-    description: Last access timestamp (in seconds).
-  mtime:
-    type: integer
-    description: Last modification timestamp (in seconds).
-  ctime:
-    type: integer
-    description: Last attributes modification timestamp (in seconds).
-  owner_id:
-    type: string
-    description: Id of the owner of this file.
-  file_id:
-    type: string
-    description: Id of the file.
-  parent_id:
-    type: string
-    description: Id of the parent directory or `null` in case of file tree root.
-  provider_id:
-    type: string
-    description: Id of the provider on which this file was created.
-  storage_user_id:
-    type: string
-    description: Id of the owner of this file on storage.
-  storage_group_id:
-    type: string
-    description: Id of the group owner of this file on storage.
-  shares:
-    type: array
-    description: The list of Ids of shares created for this file.
-    items:
-      type: string
-  hardlinks_count:
-    type: integer
-    description: >
-      The number of hard links (including this one) associated with this file.
+    description: Id of the file/directory. Successor of the **deprecated `file_id`**.
   index:
     type: string
+    description: Index pointing to this file/directory that can be provided as a starting point when listing files.
+  type:
+    $ref: '#/definitions/FileType'
+  activePermissionsType:
+    type: string
+    enum:
+      - posix
+      - acl
+    description: Type of permissions that are taken into account when determining access rights to this file/directory.
+  posixPermissions:
+    type: string
+    description: > 
+      POSIX file permissions as string expressing octal notation. For a shared file/directory
+      accessed in public mode, only the last byte (`other`) is shown, as it applies to the anonymous users accessing it.
+      Successor of the **deprecated `mode`**.
+  acl:
+    $ref: '#/definitions/Acl'
+  name:
+    type: string
+    description: > 
+      Name of the file/directory. In case of name conflicts (when two files with identical names are 
+      created simultaneously in two providers), this name is disambiguated by extending it with `originProviderId`.
+  conflictingName:
+    type: string
     description: >
-      File index that can be provided as starting point when listing files.
+      The original name of the file/directory in case of file name conflict, as described in `name`. 
+      `null` if there is no file name conflict.
+  path:
+    type: string
+    description: Logical path to the file/directory.
+  parentFileId:
+    type: string
+    description: > 
+      Id of the parent directory or `null` in case of file tree root 
+      (space root, archives root, trash, root of a shared file/directory). Successor of the **deprecated `parent_id`**.
+  displayGid:
+    type: string
+    description: > 
+      GID of this file/directory displayed in the Oneclient's mounted filesystem. 
+      Successor of the **deprecated `storage_group_id`**.
+  displayUid:
+    type: string
+    description: > 
+      UID of this file/directory displayed in the Oneclient's mounted filesystem. 
+      Successor of the **deprecated `storage_user_id`**.
+  atime:
+    type: integer
+    description: Last access timestamp in seconds (UNIX epoch).
+  mtime:
+    type: integer
+    description: Last modification timestamp in seconds (UNIX epoch).
+  ctime:
+    type: integer
+    description: Last attributes modification timestamp in seconds (UNIX epoch).
+  size:
+    type: integer
+    description: >
+      The logical size of the file/directory in bytes. For directories, it can be `null` 
+      when directory statistics are not enabled or not yet calculated. See 
+      [directory size statistics](#operation/get_directory_size_stats) 
+      for more information and details about different data size metrics.
+  isFullyReplicatedLocally:
+    type: boolean
+    description: >      
+      Indicates whether a complete file replica is present on the queried provider.
+      Applicable only for regular files (`null` otherwise).
+  localReplicationRate:
+    type: number
+    description: >
+      Ratio (`0.0 .. 1.0`) of the local replica size present on the queried provider to the total logical data size.
+      See also [directory size statistics](#operation/get_directory_size_stats) for more information
+      about different data size metrics.
+  originProviderId:
+    type: string
+    description: Id of the provider in which this file/directory was created.
+  directShareIds:
+    type: array
+    description: > 
+      The list of Ids of shares created for this file/directory. For every share, only
+      the root file/directory will contain the share Id on the list and nested files/directories won't.
+      For a shared file/directory accessed in public mode, shows only the Id of the share in the context 
+      of which the file is being accessed. Successor of the **deprecated `shares`**.
+    items:
+      type: string
+  ownerUserId:
+    type: string
+    description: User Id of the owner of this file/directory. Successor of the **deprecated `owner_id`**.
+  hardlinkCount:
+    type: integer
+    description: The number of hard links (including this one) associated with this file/directory.
+  symlinkValue:
+    type: string
+    description: >
+      The path to which the symbolic link points. Applicable only for symlinks (`null` otherwise).
+      **NOTE**: The path is shown even for a shared file/directory accessed in public mode.
+  hasCustomMetadata:
+    type: boolean
+    description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached.
+  effProtectionFlags:
+    allOf:
+      - description: |
+          File protection flags that effectively concern this file/directory (a sum of protection flags from the dataset 
+          established on the file/directory itself, its ancestor directories, and hard links). 
+          To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
+      - $ref: '#/definitions/ProtectionFlags'
+  effDatasetProtectionFlags:
+    allOf:
+      - description: |
+          File protection flags inherited from datasets that include this file/directory (protection flags of 
+          hard links are not taken into account).
+          To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
+      - $ref: '#/definitions/ProtectionFlags'
+  effDatasetInheritancePath:
+    allOf:
+      - description: >
+          Indicates whether this file/directory effectively belongs to a dataset, 
+          i.e. is a dataset or is in a subtree of a dataset:
+            * `none` - the file does not belong to any dataset,
+            * `direct` - the file only belongs to the dataset established on the file itself,
+            * `ancestor` - the file belongs to one or more ancestor datasets (is in their file trees),
+            * `direct_and_ancestor` - the file belongs to the dataset established on itself and to one or more ancestor datasets.
+      - $ref: '#/definitions/FileInheritancePath'
+  effQosInheritancePath:
+    allOf:
+      - description: >
+          Indicates whether this file/directory has any effective QoS requirement, 
+          i.e. a direct QoS requirement or any QoS requirement inherited from its ancestors.
+            * `none` - the file does not have any QoS requirements,
+            * `direct` - the file has only QoS requirements set on the file itself,
+            * `ancestor` - the file has only QoS requirements inherited from its ancestor directories,
+            * `direct_and_ancestor` - the file has QoS requirements set on itself and inherited from its ancestor directories.
+      - $ref: '#/definitions/FileInheritancePath'
+  aggregateQosStatus:
+    $ref: '#/definitions/AggregateQosStatus'
+  archiveRecallRootFileId:
+    type: string
+    description: > 
+      Id of the archive recall that this file/directory belongs to (is in the subtree of). 
+      Archive recall is a process that creates a copy of a dataset archive (snapshot) in the space filesystem, 
+      i.e. creates a regular directory, but the files and directories inside are assigned this attribute.      
+      `null` when the file does not belong to any archive recall.
+  xattr.*:
+    type: string
+    description: >
+      Value of requested extended attribute key (`*` is replaced with the key). Repeated for each requested key.
+      `null` when given extended attribute was not found.
 example:
-  name: File1.txt
+  fileId: 00000CF4706775696423745F772D67686431633765446F4D76546D6...
+  index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA
   type: REG
-  mode: "511"
-  size: 1024
+  activePermissionsType: posix
+  posixPermissions: "511"
+  acl: []
+  name: File1.txt@a47b8b7a04b197c6cd99581047b8b7ad
+  conflictingName: File1.txt
+  path: /space/Dir1/File1.txt # TODO VFS-11428 update after issue is resolved
+  parentFileId: 000006CB66373686172654775696423333964323636616564636562...
+  displayGid: 1101841
+  displayUid: 1935313
   atime: 1464958683054
   mtime: 1464958683051
   ctime: 1464958681054
-  owner_id: MTZjYzc1ZWEtN2ZjNC00Y2QxLTljYzgtMTJmYTMxNTk1YzUw
-  file_id: 00000CF4706775696423745F772D67686431633765446F4D76546D6...
-  parent_id: 000006CB66373686172654775696423333964323636616564636562...
-  provider_id: YzQ3OThlYjItZGJkMi00ODZmLWFlOTQtMGU2ZmEwYTUwNzFk
-  storage_user_id: 1935313
-  storage_group_id: 1101841
-  shares:
+  size: 1024
+  isFullyReplicatedLocally: false
+  localReplicationRate: 0.8
+  originProviderId: a47b8b7a04b197c6cd99581047b8b7ad
+  directShareIds:
     - 1d24c36707d99197c6cd995810a43aca
     - 6825604b0eb6a47b8b7a04b6369eb24d
-  hardlinks_count: 1
-  index: g2gDZAAKbGlzdF9pbmRleG0AAAAEbmFtZW0AAAAHdHJlZV9pZA
+  ownerUserId: b6b6a47b8b7a04b63a45604b07b8b7a2
+  hardlinkCount: 1
+  symlinkValue: null
+  hasCustomMetadata: true
+  effProtectionFlags:
+    - data_protection
+    - metadata_protection
+  effDatasetProtectionFlags:
+    - data_protection
+  effDatasetInheritancePath: direct_and_ancestor
+  effQosInheritancePath: ancestor
+  aggregateQosStatus: fulfilled
+  archiveRecallRootFileId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
+  xattr.key1: value1
+  xattr.key2: null

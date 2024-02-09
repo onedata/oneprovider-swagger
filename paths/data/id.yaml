@@ -57,33 +57,72 @@ delete:
       source: "oneprovider-rest-cli removeFile id=$FILE_ID"
 
 
+# TODO VFS-11377 remove deprecated values after next major release
 get:
   operationId: get_attrs
+  x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: attrs
+    aspect: instance
   summary: Get file attributes
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method returns either all or only selected basic attributes associated
-    with file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    By default, all attributes are returned, except for extended attributes.
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
   description: |
-    This method returns either all or only selected basic attributes associated
-    with file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    By default, all attributes are returned, except for extended attributes.
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
-    **Get file size**
+    **Get selected file attributes**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size&attribute=name"
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" -d '{
+      "attributes": ["name", "size", "xattr.key"]
+    }'
 
     {
-        "name": "File1.txt"
-        "size": 100
+        "name": "File1.txt",
+        "size": 100,
+        "xattr.key": "extended_attribute_value"
     }
     ```
   produces:
@@ -110,35 +149,32 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: id
-    in: path
-    description: File, directory or space Id
-    type: string
-    required: true
-  - name: attribute
-    in: query
-    description: >
-      Name of attribute to query for. Can be provided multiple times. 
-      When accessing file via share mode following attributes are unavailable: 
-      `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`
-    type: string
-    enum:
-      - name
-      - owner_id
-      - type
-      - mode
-      - size
-      - atime
-      - mtime
-      - ctime
-      - storage_group_id
-      - storage_user_id
-      - shares
-      - provider_id
-      - file_id
-      - parent_id
-      - hardlinks_count
-    required: false
+    - name: id
+      in: path
+      description: File, directory or space Id.
+      type: string
+      required: true
+
+    - name: data
+      in: body
+      required: false
+      schema:
+        type: object
+        description: Get file attributes request.
+        properties:
+          attributes:
+            $ref: '#/definitions/FileAttributeNames'
+
+    - name: legacy_options
+      in: query
+      required: false
+      description: >
+        The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+        deletion in the future major release. You may refer to the 
+        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.3/oneprovider?anchor=operation/list_files_recursively),
+        but it's recommended to use the new API with options as JSON body.
+      type: string
+
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getAttrs id=$FILE_ID"

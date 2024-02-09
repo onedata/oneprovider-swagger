@@ -180,6 +180,7 @@ post:
 
 get:
   operationId: list_children
+  x-onedata-parse_body: as_json_params
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
@@ -190,27 +191,62 @@ get:
   x-bash-codegen-description: |
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
   description: |
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
     **Get files in space subdirectory**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children?attribute=size&attribute=name&limit=2"
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/children" -d '{
+      "attributes": ["name", "size", "xattr.key"],
+      "limit": 2
+    }'
 
     {
         "children": [
             { 
-                "name": File1.txt
-                "size": 1024
+                "name": File1.txt,
+                "size": 1024,
+                "xattr.key": "extended_attribute_value"
             },
             { 
-                "name": File2.txt
-                "size": 16384
+                "name": File2.txt,
+                "size": 16384,
+                "xattr.key": null
             }
         ],
         "isLast": false,
@@ -243,75 +279,26 @@ get:
   parameters:
     - name: id
       in: path
-      description: Id of the directory.
+      description: Id of the directory to be listed.
       type: string
       required: true
-    - name: limit
-      in: query
-      description: >
-        Allows specifying maximum number of files that should be returned. If there are more files,
-        they can be retrieved using `token` query parameter.
-      type: integer
+
+    - name: data
+      in: body
       required: false
-      maximum: 1000
-      minimum: 1
-      default: 1000
-    - name: token
+      schema:
+        $ref: '#/definitions/GetDirectoryChildrenRequest'
+
+    - name: legacy_options
       in: query
+      required: false
       description: >
-        Determines the starting point for listing. The listing will start from the next page (batch) of entries
-        which follows the page previously obtained along with the corresponding `nextPageToken`.
-        Cannot be provided alongside the `index` or `tune_for_large_continuous_listing` parameters.
+        The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+        deletion in the future major release. You may refer to the 
+        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.3/oneprovider?anchor=operation/list_files_recursively),
+        but it's recommended to use the new API with options as JSON body.
       type: string
-      required: false
-      default: null
-    - name: attribute
-      in: query
-      description: >
-        Name of attribute to be returned for each entry. Can be provided multiple times.
-        When accessing a file via share mode, the following attributes are unavailable:
-        `owner_id`, `storage_group_id`, `storage_user_id`, `provider_id`, `hardlinks_count`.
-        If not provided, default attributes of `file_id` and `name` will be returned.
-      type: string
-      enum:
-        - name
-        - owner_id
-        - type
-        - mode
-        - size
-        - atime
-        - mtime
-        - ctime
-        - storage_group_id
-        - storage_user_id
-        - shares
-        - provider_id
-        - file_id
-        - parent_id
-        - hardlinks_count
-        - index
-    - name: index
-      in: query
-      description: >
-        Determines the starting point for listing - it will be started from given file name (inclusively).
-        Cannot be provided alongside the `token` parameter.
-      type: string
-      required: false
-    - name: tune_for_large_continuous_listing
-      in: query
-      description: >
-        This option increases performance of listing large directories (with thousands of files)
-        when using subsequent calls with paging tokens.<br/>
-        **CAUTION!!** When enabled, there is no guarantee that changes in the file tree performed
-        after the start of listing will be included. Therefore it shouldn't be used when the
-        listing result is expected to be up to date with the state of the file tree at the moment of listing.
-        It should be avoided if the interval between subsequent listings is longer than 10 seconds,
-        otherwise the listing performance will be much worse.<br/>
-        Overusing this option may cause a significant load on the Oneprovider.<br/>
-        Cannot be provided alongside the `token` parameter.
-      type: boolean
-      required: false
-      default: false
+
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli listChildren id=$FILE_ID limit=100 index=filename.txt"

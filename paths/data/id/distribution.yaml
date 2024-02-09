@@ -1,12 +1,12 @@
 get:
-  operationId: get_file_distribution
+  operationId: get_data_distribution
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: distribution
   tags:
-    - File Distribution
-  summary: Get file distribution
+    - Data Distribution
+  summary: Get data distribution
   x-bash-codegen-description: |
     Returns information about distribution of a specific file among different storage providers.
 
@@ -25,7 +25,10 @@ get:
       "distributionPerProvider": {
         "$PROVIDER_ID1": {
           "success": true
-          "logicalSize": 8
+          "virtualSize": 8
+          "locationsPerStorage": {
+            "$STORAGE_ID": "/file/location/on/storage"
+          },
           "distributionPerStorage": {
             "$STORAGE_ID": {
               "blocks": [[0, 4], [6, 2]]
@@ -55,7 +58,7 @@ get:
     '200':
       description: The distribution of the file.
       schema:
-        $ref: '#/definitions/FileDistribution'
+        $ref: '#/definitions/DataDistribution'
     '400':
       description: Invalid request.
       schema:
@@ -80,4 +83,4 @@ get:
       required: true
   x-code-samples:
     - lang: Shell
-      source: "oneprovider-rest-cli getFileDistribution id=$FILE_ID"
+      source: "oneprovider-rest-cli getDataDistribution id=$FILE_ID"
