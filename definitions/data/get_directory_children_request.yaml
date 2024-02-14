@@ -51,11 +51,5 @@ properties:
       Cannot be provided alongside the `token` parameter.
     type: boolean
 
-  tune_for_large_continuous_listing:
-    description: >
-      (**DEPRECATED**) This parameter is still supported but scheduled for deletion in future releases.
-      Use `tuneForLargeContinuousListing` instead.
-    type: boolean
-
   attributes:
     $ref: '#/definitions/FileAttributeNames'
