@@ -43,12 +43,12 @@ properties:
       Id of the parent directory or `null` in case of file tree root 
       (space root, archives root, trash, root of a shared file/directory). Successor of the **deprecated `parent_id`**.
   displayGid:
-    type: string
+    type: integer
     description: > 
       GID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_group_id`**.
   displayUid:
-    type: string
+    type: integer
     description: > 
       UID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_user_id`**.
