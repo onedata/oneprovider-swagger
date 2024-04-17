@@ -192,6 +192,10 @@ get:
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
     
+    **NOTE**: the listing may contain files that are not fully synchronized or have been deleted in parallel.
+    For that reason, it's recommended to safeguard consecutive calls referring to the directory children
+    against `ENOENT` errors.
+    
     **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
     Moreover, some of the attributes have been renamed and the list of available ones has been extended.
     The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
@@ -210,6 +214,10 @@ get:
   description: |
     Returns the list of directory files and subdirectories for directory
     specified by [$DIR_ID](#operation/lookup_file_id).
+    
+    **NOTE**: the listing may contain files that are not fully synchronized or have been deleted in parallel.
+    For that reason, it's recommended to safeguard consecutive calls referring to the directory children
+    against `ENOENT` errors.
     
     **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
     Moreover, some of the attributes have been renamed and the list of available ones has been extended.
