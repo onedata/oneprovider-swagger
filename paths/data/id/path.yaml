@@ -71,7 +71,7 @@ put:
     **Create hard link**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=LNK&target_file_id=$TARGET_FILE_ID"
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME?type=LNK&target_file_id=$TARGET_FILE_ID"
 
     {
        "fileId": "000000184465677569642373706163655F73706163653123737061636531..."
@@ -81,7 +81,7 @@ put:
     **Create symbolic link**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME&type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/$NAME?type=SYMLNK&target_file_path=$TARGET_FILE_PATH"
 
     {
        "fileId": "00989AB98890037368617265477569642333396432363661656463656266..."
