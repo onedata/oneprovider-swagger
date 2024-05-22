@@ -125,6 +125,8 @@ get:
         "xattr.key": "extended_attribute_value"
     }
     ```
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:

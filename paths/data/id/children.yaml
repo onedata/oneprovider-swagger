@@ -261,6 +261,8 @@ get:
         "nextPageToken": "g2gDZAAKbGlua190b2tlbmgCZAAMY2FjaGVkX3Rva2VuWgADY..."
     }
     ```
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:

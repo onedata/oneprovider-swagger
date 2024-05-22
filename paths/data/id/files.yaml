@@ -88,6 +88,8 @@ get:
         "nextPageToken": "$PAGING_TOKEN"
     }
     ```
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
