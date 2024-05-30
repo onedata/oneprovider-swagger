@@ -52,6 +52,9 @@ properties:
     description: > 
       UID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_user_id`**.
+  creationTime:
+    type: integer
+    description: File creation timestamp in seconds (UNIX epoch).
   atime:
     type: integer
     description: Last access timestamp in seconds (UNIX epoch).
