@@ -173,7 +173,7 @@ get:
       description: >
         The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
         deletion in the future major release. You may refer to the 
-        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.3/oneprovider?anchor=operation/list_files_recursively),
+        [docs for 21.02.5](https://onedata.org/#/home/api/21.02.3/oneprovider?anchor=operation/list_files_recursively),
         but it's recommended to use the new API with options as JSON body.
       type: string
 
