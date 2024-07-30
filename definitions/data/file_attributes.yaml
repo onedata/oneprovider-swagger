@@ -52,15 +52,24 @@ properties:
     description: > 
       UID of this file/directory displayed in the Oneclient's mounted filesystem. 
       Successor of the **deprecated `storage_user_id`**.
+  creationTime:
+    type: integer
+    description: >
+      Item's creation timestamp (UNIX epoch, in seconds). NOTE: in case of items imported from storage or created in 
+      Oneproviders in version 21.02.5 or lower it is assumed as minimum of atime, mtime and ctime.
   atime:
     type: integer
-    description: Last access timestamp in seconds (UNIX epoch).
+    description: Last time an item was accessed. (UNIX epoch, in seconds).
   mtime:
     type: integer
-    description: Last modification timestamp in seconds (UNIX epoch).
+    description: > 
+      Last time the item's content was modified. For regular files, indicates the time of the last write or truncate 
+      operation on the file. For directories, updated when a child item is added, renamed or deleted. (UNIX epoch, in seconds).
   ctime:
     type: integer
-    description: Last attributes modification timestamp in seconds (UNIX epoch).
+    description: >
+      Last time the item's metadata was changed, e.g. permissions. It' s also always updated when the 
+      modification time changes. (UNIX epoch, in seconds).
   size:
     type: integer
     description: >
