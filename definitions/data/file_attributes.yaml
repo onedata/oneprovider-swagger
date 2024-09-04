@@ -56,7 +56,7 @@ properties:
     type: integer
     description: >
       Item's creation timestamp (UNIX epoch, in seconds). NOTE: in case of items imported from storage or created in 
-      Oneproviders in version 21.02.5 or lower it is assumed as minimum of atime, mtime and ctime.
+      Oneproviders in version 21.02.6 or lower it is assumed as minimum of atime, mtime and ctime.
   atime:
     type: integer
     description: Last time an item was accessed. (UNIX epoch, in seconds).
