@@ -56,7 +56,7 @@ properties:
     type: integer
     description: >
       Item's creation timestamp (UNIX epoch, in seconds). NOTE: in case of items imported from storage or created in 
-      Oneproviders in version 21.02.8 or lower it is assumed as minimum of atime, mtime and ctime.
+      Oneproviders in version 21.02.5 or lower it is assumed as minimum of atime, mtime and ctime.
   atime:
     type: integer
     description: Last time an item was accessed. (UNIX epoch, in seconds).
@@ -157,6 +157,10 @@ properties:
       Archive recall is a process that creates a copy of a dataset archive (snapshot) in the space filesystem, 
       i.e. creates a regular directory, but the files and directories inside are assigned this attribute.      
       `null` when the file does not belong to any archive recall.
+  jsonMetadata:
+    type: object
+    description: >
+      JSON metadata associated with the file.
   xattr.*:
     type: string
     description: >
@@ -198,5 +202,6 @@ example:
   effQosInheritancePath: ancestor
   aggregateQosStatus: fulfilled
   archiveRecallRootFileId: 000006431633765446F4D76546D6F47067D67686431633765446F4D76546D6....
+  jsonMetadata: {"key": "value"}
   xattr.key1: value1
   xattr.key2: null
