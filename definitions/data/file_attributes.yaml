@@ -160,7 +160,7 @@ properties:
   jsonMetadata:
     type: object
     description: >
-      JSON metadata associated with the file.
+      JSON metadata associated with the file. `null` when file does not have JSON metadata.
   xattr.*:
     type: string
     description: >
