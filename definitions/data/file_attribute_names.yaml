@@ -4,7 +4,7 @@ description: >
   For a shared file/directory accessed in public mode, only the following attributes are available: 
   `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
   `creationTime`, `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, 
-  `jsonMetadata`, `xattr.*`.
+  `hasJsonMetadata`, `jsonMetadata`, `xattr.*`.
   If not provided, by default all attributes are returned.
 items:
   type: string
@@ -34,6 +34,7 @@ items:
     - hardlinkCount
     - symlinkValue
     - hasCustomMetadata
+    - hasJsonMetadata
     - effProtectionFlags
     - effDatasetProtectionFlags
     - effDatasetInheritancePath

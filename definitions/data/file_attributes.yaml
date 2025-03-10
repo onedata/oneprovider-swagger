@@ -114,6 +114,9 @@ properties:
   hasCustomMetadata:
     type: boolean
     description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached.
+  hasJsonMetadata:
+    type: boolean
+    description: Indicates whether this file/directory has any JSON [custom metadata](#tag/Custom-File-Metadata) attached.
   effProtectionFlags:
     allOf:
       - description: |
@@ -193,6 +196,7 @@ example:
   hardlinkCount: 1
   symlinkValue: null
   hasCustomMetadata: true
+  hasJsonMetadata: true
   effProtectionFlags:
     - data_protection
     - metadata_protection
