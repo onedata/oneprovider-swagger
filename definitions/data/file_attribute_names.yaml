@@ -33,13 +33,13 @@ items:
     - ownerUserId
     - hardlinkCount
     - symlinkValue
-    - hasCustomMetadata
-    - hasJsonMetadata
     - effProtectionFlags
     - effDatasetProtectionFlags
     - effDatasetInheritancePath
     - effQosInheritancePath
     - aggregateQosStatus
     - archiveRecallRootFileId
+    - hasCustomMetadata
+    - hasJsonMetadata
     - jsonMetadata
     - xattr.*

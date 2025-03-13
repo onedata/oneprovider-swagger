@@ -111,12 +111,6 @@ properties:
     description: >
       The path to which the symbolic link points. Applicable only for symlinks (`null` otherwise).
       **NOTE**: The path is shown even for a shared file/directory accessed in public mode.
-  hasCustomMetadata:
-    type: boolean
-    description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached.
-  hasJsonMetadata:
-    type: boolean
-    description: Indicates whether this file/directory has any JSON [custom metadata](#tag/Custom-File-Metadata) attached.
   effProtectionFlags:
     allOf:
       - description: |
@@ -160,10 +154,18 @@ properties:
       Archive recall is a process that creates a copy of a dataset archive (snapshot) in the space filesystem, 
       i.e. creates a regular directory, but the files and directories inside are assigned this attribute.      
       `null` when the file does not belong to any archive recall.
+  hasCustomMetadata:
+    type: boolean
+    description: Indicates whether this file/directory has any [custom metadata](#tag/Custom-File-Metadata) attached (xattr, JSON or RDF).
+  hasJsonMetadata:
+    type: boolean
+    description: Indicates whether this file/directory has any JSON [custom metadata](#tag/Custom-File-Metadata) attached.
   jsonMetadata:
     type: object
     description: >
-      JSON metadata associated with the file. `null` when file does not have JSON metadata.
+      JSON metadata associated with the file. Special cases:
+        * `jsonMetadata==null` and `hasJsonMetadata==true` - the JSON metadata is set and equal to `null` (which is a valid JSON itself).
+        * `jsonMetadata==null` and `hasJsonMetadata==false` - there is no JSON metadata at all.
   xattr.*:
     type: string
     description: >
