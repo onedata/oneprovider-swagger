@@ -131,7 +131,7 @@ get:
     **Get file popularity for a specific space**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
-    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?spatial=true&start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/views/file-popularity/query?start_range=\[1,0,0,0,0,0\]&end_range=\[null,null,null,null,null,null\]"
     ```
   produces:
     - application/json
