@@ -1,6 +1,6 @@
 post:
   operationId: get_space_changes
-  x-onedata-custom-handler: changes_stream_handler
+  x-onedata-custom-handler: space_monitoring_stream_handler
   x-onedata-gri:
     type: op_metrics
     id: ?BINDING(sid)
