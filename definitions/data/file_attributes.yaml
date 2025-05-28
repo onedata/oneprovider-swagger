@@ -46,6 +46,8 @@ properties:
     type: boolean
     description: >
       Indicates whether the file/directory was imported from a storage.
+      NOTE: This field was added in version 22.02.0. For files created/imported in earlier versions, this information 
+      was not collected and as such, after upgrading to version 22, this field will have special string value `unknown`.
   displayGid:
     type: integer
     description: > 
