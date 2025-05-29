@@ -25,7 +25,7 @@ get:
       "distributionPerProvider": {
         "$PROVIDER_ID1": {
           "success": true
-          "virtualSize": 8
+          "logicalSize": 8
           "locationsPerStorage": {
             "$STORAGE_ID": "/file/location/on/storage"
           },
