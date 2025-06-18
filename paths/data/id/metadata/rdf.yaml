@@ -4,14 +4,14 @@ get:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Get file rdf metadata
+  summary: Get file RDF metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method returns the rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
@@ -72,18 +72,18 @@ put:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Set file rdf metadata
+  summary: Set file RDF metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set specific rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method allows to set specific RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous rdf metadata if any.
+    This operation will replace the previous RDF metadata if any.
 
   description: |
-    This method allows to set specific rdf metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method allows to set specific RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous rdf metadata if any.
+    This operation will replace the previous RDF metadata if any.
 
     ***Example cURL requests***
 
@@ -122,7 +122,7 @@ put:
     required: true
   - name: metadata
     in: body
-    description: The rdf metadata.
+    description: The RDF metadata.
     required: true
     schema:
       type: string
@@ -144,24 +144,24 @@ delete:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Remove file rdf metadata
+  summary: Remove file RDF metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    Removes rdf metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes RDF metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
   description: |
-    Removes rdf metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes RDF metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
-    **Remove file rdf metadata**
+    **Remove file RDF metadata**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
     ```
   responses:
     '204':
-      description: File rdf metadata has been removed.
+      description: File RDF metadata has been removed.
     '400':
       description: Invalid request.
       schema:

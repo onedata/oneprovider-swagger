@@ -76,7 +76,7 @@ get:
     in: query
     description: >
       When set to true, this operation returns all attributes including those
-      normally not shown (e.g. json/rdf metadata, acl and cdmi attributes).
+      normally not shown (e.g. JSON/RDF metadata, ACL and CDMI attributes).
     type: boolean
     default: false
     required: false

@@ -4,13 +4,13 @@ get:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: json_metadata
-  summary: Get file json metadata
+  summary: Get file JSON metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the json metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns the JSON metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    By default the method returns the complete json metadata. But it is possible to request
+    By default the method returns the complete JSON metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     Supported filter types are:
@@ -19,9 +19,9 @@ get:
         (e.g. `key1.key2.[2].key3`)
 
   description: |
-    This method returns the json metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method returns the JSON metadata associated with file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    By default the method returns the complete json metadata. But it is possible to request
+    By default the method returns the complete JSON metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     Supported filter types are:
@@ -107,18 +107,18 @@ put:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: json_metadata
-  summary: Set file json metadata
+  summary: Set file JSON metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set json metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method allows to set JSON metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous json metadata if any.
+    This operation will replace the previous JSON metadata if any.
 
   description: |
-    This method allows to set json metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
+    This method allows to set JSON metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous json metadata if any.
+    This operation will replace the previous JSON metadata if any.
 
     ***Example cURL requests***
 
@@ -175,7 +175,7 @@ put:
     required: false
   - name: metadata
     in: body
-    description: The json metadata.
+    description: The JSON metadata.
     required: true
     schema:
       type: string
@@ -197,24 +197,24 @@ delete:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: json_metadata
-  summary: Remove file json metadata
+  summary: Remove file JSON metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    Removes json metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes JSON metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
   description: |
-    Removes json metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+    Removes JSON metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
-    **Remove file json metadata**
+    **Remove file JSON metadata**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" \
     -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/json
     ```
   responses:
     '204':
-      description: File json metadata has been removed.
+      description: File JSON metadata has been removed.
     '400':
       description: Invalid request.
       schema:
