@@ -1,4 +1,5 @@
 type: object
+description: Object describing an error.
 properties:
   id:
     type: string
@@ -12,6 +13,9 @@ properties:
     type: object
     description: Details about the error instance. The object schema is
       specific to each error type.
+  ctx:
+    $ref: '#/definitions/ErrorJsonCtx'
 required:
   - id
   - description
+  - ctx
