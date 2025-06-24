@@ -7,7 +7,7 @@ properties:
     description: Timestamp in milliseconds.
   serviceReleaseVersion:
     type: string
-    description: Version of the service release.
+    description: Release version of a product, for example "21.02.8".
   serviceId:
     type: string
     description: Identifier of a service instance — either Oneprovider Id or "onezone".
@@ -19,7 +19,12 @@ properties:
     description: Build version of the service.
   service:
     type: string
-    description: "Short name of service, one of: ozw, opw, ozp, opp."
+    description: Short name of service.
+    enum: 
+      - ozw
+      - opw
+      - ozp
+      - opp
   onedataErrorsRevision:
     type: string
     description: Revision of onedata-errors repo, where the error is defined.
