@@ -1,0 +1,46 @@
+type: object
+description: Technical information about error.
+properties:
+  timestamp:
+    type: integer
+    format: int64
+    description: Timestamp in milliseconds.
+  serviceReleaseVersion:
+    type: string
+    description: Release version of a product, for example "21.02.8".
+  serviceId:
+    type: string
+    description: Identifier of a service instance — either Oneprovider Id or "onezone".
+  serviceDomain:
+    type: string
+    description: Domain of the service.
+  serviceBuildVersion:
+    type: string
+    description: Build version of the service.
+  service:
+    type: string
+    description: Short name of service.
+    enum: 
+      - ozw
+      - opw
+      - ozp
+      - opp
+  onedataErrorsRevision:
+    type: string
+    description: Revision of onedata-errors repo, where the error is defined.
+  module:
+    type: string
+    description: Module where the error occurred.
+  line:
+    type: integer
+    description: Line number in the module where the error occurred.
+required:
+  - timestamp
+  - serviceReleaseVersion
+  - serviceId
+  - serviceDomain
+  - serviceBuildVersion
+  - service
+  - onedataErrorsRevision
+  - module
+  - line

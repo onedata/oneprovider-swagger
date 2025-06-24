@@ -17,6 +17,9 @@ Error:
 ErrorJson:
   $ref: ./error_json.yaml
 
+ErrorJsonCtx:
+  $ref: ./error_json_ctx.yaml
+
 Timestamp:
   $ref: ./timestamp.yaml
 
