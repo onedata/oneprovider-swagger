@@ -2,11 +2,8 @@ type: object
 description: Generic error model for REST requests.
 properties:
   error:
-    description: Identifier representing internal error code.
-    type: string
-  error_description:
-    description: Detailed error message.
-    type: string
+    $ref: '#/definitions/ErrorJson'
 example:
-  error: invalid_token
-  error_description: Provided token could not be validated.
+  error:
+    id: example
+    description: This is an example error.
