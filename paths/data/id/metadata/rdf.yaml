@@ -11,13 +11,13 @@ get:
     This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     If there is no RDF metadata associated with the file, this method returns HTTP 400
-    code with `enoent` POSIX error.
+    code with `enodata` POSIX error.
 
   description: |
     This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     If there is no RDF metadata associated with the file, this method returns HTTP 400
-    code with `enoent` POSIX error.
+    code with `enodata` POSIX error.
 
     ***Example cURL requests***
 

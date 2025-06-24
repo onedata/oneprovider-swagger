@@ -14,7 +14,7 @@ get:
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     If there is no JSON metadata associated with the file, this method returns HTTP 400
-    code with `enoent` POSIX error.
+    code with `enodata` POSIX error.
 
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
@@ -28,7 +28,7 @@ get:
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
     If there is no JSON metadata associated with the file, this method returns HTTP 400
-    code with `enoent` POSIX error.
+    code with `enodata` POSIX error.
 
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
