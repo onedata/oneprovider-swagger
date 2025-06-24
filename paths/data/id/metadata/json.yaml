@@ -13,6 +13,9 @@ get:
     By default the method returns the complete JSON metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
 
+    If there is no JSON metadata associated with the file, this method returns HTTP 400
+    code with `enoent` POSIX error.
+
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
         separated by `.`, array elements should be expressed as `[i]`
@@ -23,6 +26,9 @@ get:
 
     By default the method returns the complete JSON metadata. But it is possible to request
     only a part of the document by specifying `filter_type` and `filter` attributes in the query.
+
+    If there is no JSON metadata associated with the file, this method returns HTTP 400
+    code with `enoent` POSIX error.
 
     Supported filter types are:
       * **keypath** - list of JSON keys which point to requested JSON object,
@@ -46,9 +52,16 @@ get:
       schema:
         type: string
     '400':
-      description: Invalid request.
+      description: No JSON metadata associated with the file or invalid request.
       schema:
-        $ref: '#/definitions/Error'
+        allOf:
+          - $ref: '#/definitions/Error'
+          - example:
+              error:
+                id: posix
+                details:
+                  errno: enodata
+                description: 'Operation failed with POSIX error: enodata.'
     '403':
       description: Forbidden request.
       schema:
