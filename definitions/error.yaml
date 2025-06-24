@@ -1,8 +1,10 @@
 type: object
-description: Generic error model for REST requests.
+description: The generic error model for REST requests.
 properties:
   error:
     $ref: '#/definitions/ErrorJson'
+required:
+  - error
 example:
   error:
     id: example
