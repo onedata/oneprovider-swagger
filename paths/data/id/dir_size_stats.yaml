@@ -30,17 +30,20 @@ get:
     requested time series and metrics
     
     The following time series are available for each directory:
-      * `total_size` - the total logical size of file data contained in the directory, 
+      * `logical_size` - the total logical size of file data contained in the directory, 
     i.e. the sum of logical byte sizes of all regular files.
-      * `storage_use_$STORAGE_ID` - storage size used to store the physical data
+      * `virtual_size` - how many bytes it would take to store data of the directory if there was only one replica of 
+    each file (note that irrelevant to how many hard links a file has there is only one representation on a storage 
+    backend).
+      * `physical_size_$STORAGE_ID` - storage size used to store the physical data
     of the contained files for given `$STORAGE_ID`. Only the storage backends
     owned by the queried providers are returned.
       * `reg_file_and_link_count` - the count of regular files, hard links, 
     and symbolic links contained in the directory.
       * `dir_count` - the count of directories contained in the directory.
-      * `file_errors_count` - the count of error occurrences when the statistics 
+      * `file_error_count` - the count of error occurrences when the statistics 
     mechanisms were not able to gather size information about a certain file.
-      * `dir_errors_count` - like above, for directories.
+      * `dir_error_count` - like above, for directories.
     
     If the values of `file_errors_count` or `dir_errors_count` are not zero, the statistics may not be accurate.
     
