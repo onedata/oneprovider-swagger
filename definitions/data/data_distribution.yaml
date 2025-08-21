@@ -35,15 +35,16 @@ properties:
             Map with file locations per storage (only for `type = REG` or `type = DIR` and if `success` = true).
           additionalProperties:
             type: object
-            description: Information about regular file location on each storage. `null` value for a storage 
-              means that there is no file replica on this storage.
+            description: Information about file location on each storage. 
             properties:
               success:
                 type: boolean
                 description: Indicates whether fetching file location for this storage was successful. 
               location: 
                 type: string
-                description: File location on this storage (only if `success` = true).
+                description: > 
+                  File location on this storage (only if `success` = true). 
+                  `null` value for a storage means that there is no file replica on this storage.
               error:
                 $ref: '#/definitions/Error'
                 description: Error that occurred for this storage (only if `success` = false).
@@ -80,7 +81,7 @@ example:
   distributionPerProvider: 
     $PROVIDER_ID1:
       success: true
-      logicalSize: 8
+      virtualSize: 8
       locationsPerStorage:
         $STORAGE_ID: 
           success: true
@@ -116,7 +117,7 @@ example:
           physicalSize: 6
     $PROVIDER_ID4:
       success: true
-      logicalSize: 8
+      virtualSize: 8
       locationsPerStorage:
         $STORAGE_ID:
           success: true
@@ -128,7 +129,7 @@ example:
           physicalSize: 0
     $PROVIDER_ID5:
       success: true
-      logicalSize: null
+      virtualSize: null
       locationsPerStorage:
         $STORAGE_ID:
           success: true

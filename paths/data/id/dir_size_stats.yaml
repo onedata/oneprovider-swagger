@@ -33,7 +33,7 @@ get:
       * `logical_size` - the total logical size of file data contained in the directory, 
     i.e. the sum of logical byte sizes of all regular files.
       * `virtual_size` - how many bytes it would take to store data of the directory if there was only one replica of 
-    each file (note that irrelevant to how many hard links a file has there is only one representation on a storage 
+    each file (note, that no matter how many hard links a file has, there is only one representation on a storage 
     backend).
       * `physical_size_$STORAGE_ID` - storage size used to store the physical data
     of the contained files for given `$STORAGE_ID`. Only the storage backends
