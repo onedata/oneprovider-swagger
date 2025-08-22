@@ -117,6 +117,7 @@ example:
           physicalSize: 6
     $PROVIDER_ID4:
       success: true
+      logicalSize: 8
       virtualSize: 8
       locationsPerStorage:
         $STORAGE_ID:
@@ -129,6 +130,7 @@ example:
           physicalSize: 0
     $PROVIDER_ID5:
       success: true
+      logicalSize: null
       virtualSize: null
       locationsPerStorage:
         $STORAGE_ID:

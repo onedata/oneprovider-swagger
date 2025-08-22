@@ -29,7 +29,7 @@ get:
       "distributionPerProvider": {
         "$PROVIDER_ID1": {
           "success": true,
-          "logicalSize": 8,
+          "virtualSize": 8,
           "locationsPerStorage": {
             "$STORAGE_ID": {
               "success": true,
@@ -54,6 +54,7 @@ get:
         "$PROVIDER_ID3": {
           "success": true,
           "logicalSize": 8,
+          "virtualSize": 8,
           "locationsPerStorage": {
             "$STORAGE_ID": {
               "success": false,
@@ -78,6 +79,7 @@ get:
         "$PROVIDER_ID4": {
           "success": true,
           "logicalSize": 8,
+          "virtualSize": 8,
           "locationsPerStorage": {
             "$STORAGE_ID": {
               "success": true,
@@ -95,6 +97,7 @@ get:
         "$PROVIDER_ID5": {
           "success": true,
           "logicalSize": null,
+          "virtualSize": null,
           "locationsPerStorage": {
             "$STORAGE_ID": {
               "success": true,
