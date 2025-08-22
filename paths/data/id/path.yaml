@@ -155,9 +155,14 @@ put:
         - LNK
         - SYMLNK
       default: REG
-    - name: mode
+    - name: posixPermissions
       in: query
       description: POSIX file permissions in decimal format.
+      required: false
+      type: integer
+    - name: mode
+      in: query
+      description: (deprecated) POSIX file permissions in decimal format.
       required: false
       type: integer
     - name: create_parents
