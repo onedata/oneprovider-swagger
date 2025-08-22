@@ -53,7 +53,6 @@ get:
         },
         "$PROVIDER_ID3": {
           "success": true,
-          "logicalSize": 8,
           "virtualSize": 8,
           "locationsPerStorage": {
             "$STORAGE_ID": {
@@ -78,7 +77,6 @@ get:
         },
         "$PROVIDER_ID4": {
           "success": true,
-          "logicalSize": 8,
           "virtualSize": 8,
           "locationsPerStorage": {
             "$STORAGE_ID": {
@@ -91,25 +89,6 @@ get:
               "success": true,
               "blocks": [],
               "physicalSize": 0
-            }
-          }
-        },
-        "$PROVIDER_ID5": {
-          "success": true,
-          "logicalSize": null,
-          "virtualSize": null,
-          "locationsPerStorage": {
-            "$STORAGE_ID": {
-              "success": true,
-              "location": "/file/location/on/storage"
-          },
-          "distributionPerStorage": {
-            "$STORAGE_ID": {
-              "success": false,
-              "error": {
-                "id": "dirStatsDisabledForSpace",
-                "description": "Directory statistics collection is disabled for this space."
-              }
             }
           }
         }

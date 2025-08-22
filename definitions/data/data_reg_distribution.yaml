@@ -1,0 +1,120 @@
+allOf:
+  - $ref: '#/definitions/DataDistribution'
+  - type: object
+    properties:
+      distributionPerProvider:
+        type: object
+        additionalProperties:
+          type: object
+          description: Data distribution for a specific provider.
+          properties:
+            success:
+              type: boolean
+              description: Indicates whether fetching file distribution for this provider was successful.
+            error:
+              $ref: '#/definitions/Error'
+              description: Error that occurred for this provider (only if `success` = false).
+            virtualSize: 
+              type: integer
+              description: > 
+                Virtual size of file/dir as seen by this provider (only if `success` = true).
+                See also [directory size statistics](#operation/get_directory_size_stats) for more information
+                about different data size metrics. 
+            locationsPerStorage:
+              type: object
+              description: >
+                Map with file locations per storage (only if `success` = true).
+              additionalProperties:
+                type: object
+                description: Information about file location on each storage. 
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates whether fetching file location for this storage was successful. 
+                  location: 
+                    type: string
+                    description: > 
+                      File location on this storage (only if `success` = true). 
+                      `null` value for a storage means that there is no file replica on this storage.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this storage (only if `success` = false).
+            distributionPerStorage:
+              type: object
+              description: > 
+                Map with file distribution per storage.
+              additionalProperties: 
+                type: object
+                description: File distribution for a specific storage.
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates whether fetching file distribution for this storage was successful. 
+                  blocks:
+                    type: array
+                    description: > 
+                      A list of blocks in byte ranges stored on this storage (only if `success` = true).
+                    items:
+                      type: array
+                      description: File block specified as a pair [offset, size].
+                      items:
+                        type: integer
+                      maxItems: 2
+                      minItems: 2
+                  physicalSize:
+                    type: integer
+                    description: Physical size of the file on this storage (only when `success` = true).
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this provider (only if `success` = false).
+example:
+  type: "REG"
+  distributionPerProvider: 
+    $PROVIDER_ID1:
+      success: true
+      virtualSize: 8
+      locationsPerStorage:
+        $STORAGE_ID: 
+          success: true
+          location: "/file/location/on/storage"
+      distributionPerStorage:
+        $STORAGE_ID:
+          success: true
+          blocks: [[0, 4], [6, 2]]
+          physicalSize: 6
+    $PROVIDER_ID2:
+      success: true
+      virtualSize: 8
+      locationsPerStorage:
+        $STORAGE_ID:
+          success: true
+          location: null
+      distributionPerStorage:
+        $STORAGE_ID:
+          success: true
+          blocks: []
+          physicalSize: 0
+    $PROVIDER_ID3:
+      success: true
+      logicalSize: 8
+      virtualSize: 8
+      locationsPerStorage:
+        $STORAGE_ID:
+          success: false
+          error:
+            id: "requiresPosixCompatibleStorage"
+            description: "Cannot apply for the storage backend \"b2ce3858c7267a9c016296e51dc9c41cch3618\". This operation requires a POSIX-compatible storage backend (any of: posix, glusterfs, nfs, nulldevice)."
+            details:
+              storageId: "$STORAGE_ID"
+              posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]
+      distributionPerStorage:
+        $STORAGE_ID:
+          success: true
+          blocks: [[0, 4], [6, 2]]
+          physicalSize: 6
+    $PROVIDER_ID4:
+      success: false
+      error:
+        description: "Operation failed with POSIX error: enoent."
+        details: 
+          errno: "enoent"
