@@ -48,8 +48,6 @@ REG:
   $ref: ./data/data_reg_distribution.yaml
 DIR:
   $ref: ./data/data_dir_distribution.yaml
-SYMLNK:
-  $ref: ./data/data_symlink_distribution.yaml
 
 StorageFileLocations:
   $ref: ./data/storage_file_locations.yaml

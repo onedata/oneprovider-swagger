@@ -6,7 +6,6 @@ x-onedata-oneof: true
 x-onedata-subclasses:
   - REG
   - DIR
-  - SYMLNK
 properties:
   type:
     $ref: '#/definitions/FileType'

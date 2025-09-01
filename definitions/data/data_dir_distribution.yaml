@@ -10,42 +10,47 @@ allOf:
           properties:
             success:
               type: boolean
-              description: Indicates whether fetching file distribution for this provider was successful.
-            virtualSize:
-              type: integer
               description: >
-                Virtual size of file/dir as seen by this provider (only if `success` = true).
-                See also [directory size statistics](#operation/get_directory_size_stats) for more information
-                about different data size metrics. `null` if file is a directory and directory statistics collecting is 
-                disabled in a space.
+                Indicates whether fetching file distribution for this provider was successful.
+                If false, the `error` field carries the reason and the rest of the fields are absent. 
+                If true, the error field is absent.
+            error:
+              $ref: '#/definitions/Error'
+              description: Error that occurred for this provider.
             logicalSize:
               type: integer
               description: >
-                Logical size of dir as seen by this provider (only if `success` = true).
-                See also [directory size statistics](#operation/get_directory_size_stats) for more information
-                about different data size metrics. `null` if directory statistics collecting is disabled in a space.
-            error:
-              $ref: '#/definitions/Error'
-              description: Error that occurred for this provider (only if `success` = false).
+                Total size of file data contained in the directory, i.e. the sum of logical sizes of all regular files 
+                in its subtree. If a file has multiple hardlinks in the subtree, each hardlink is counted separately.
+                `null` if directory statistics collecting is disabled in a space.
+            virtualSize:
+              type: integer
+              description: >
+                Deduplicated logical size, where hardlinks of the same file in the subtree are counted only once. 
+                Represents the storage space required for a complete replica of the directory.
+                `null` if directory statistics collecting is disabled in a space.
             locationsPerStorage:
               type: object
               description: >
-                Map with file locations per storage (only if `success` = true).
+                Map with file locations per storage.
               additionalProperties:
                 type: object
                 description: Information about file location on each storage.
                 properties:
                   success:
                     type: boolean
-                    description: Indicates whether fetching file location for this storage was successful.
+                    description: >
+                      Indicates whether fetching file location for this storage was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent.
+                      If true, the error field is absent.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this storage.
                   location:
                     type: string
                     description: >
-                      File location on this storage (only if `success` = true). 
+                      File location on this storage.
                       `null` value for a storage means that the directory was noy yet created on this storage.
-                  error:
-                    $ref: '#/definitions/Error'
-                    description: Error that occurred for this storage (only if `success` = false).
             distributionPerStorage:
               type: object
               description: >
@@ -56,13 +61,18 @@ allOf:
                 properties:
                   success:
                     type: boolean
-                    description: Indicates whether fetching file distribution for this storage was successful.
-                  physicalSize:
-                    type: integer
-                    description: Physical size of the file on this storage (only when `success` = true).
+                    description: >
+                      Indicates whether fetching file distribution for this storage was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent. 
+                      If true, the error field is absent.
                   error:
                     $ref: '#/definitions/Error'
-                    description: Error that occurred for this storage (only if `success` = false).
+                    description: Error that occurred for this provider.
+                  physicalSize:
+                    type: integer
+                    description: > 
+                      Actual amount of storage consumed on a given storage backend by all regular files in the 
+                      directory’s subtree. May be smaller than the virtual size if some file replicas are incomplete.
 example:
   type: "DIR"
   distributionPerProvider:
