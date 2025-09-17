@@ -26,7 +26,7 @@ allOf:
             virtualSize:
               type: integer
               description: >
-                Deduplicated logical size, where hardlinks of the same file in the subtree are counted only once. 
+                Consolidated logical size, where hardlinks of the same file in the subtree are counted only once. 
                 Represents the storage space required for a complete replica of the directory.
                 `null` if directory statistics collecting is disabled in a space.
             locationsPerStorage:

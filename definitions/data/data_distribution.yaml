@@ -8,4 +8,10 @@ x-onedata-subclasses:
   - DIR
 properties:
   type:
-    $ref: '#/definitions/FileType'
+    description: |
+      The type of the file:
+      * `REG` - regular file,
+      * `DIR` - directory,
+    enum:
+      - REG
+      - DIR

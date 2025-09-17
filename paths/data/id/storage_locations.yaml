@@ -11,14 +11,16 @@ get:
     Returns information about file location on each storage. `null` value for a storage 
     means that there is no file replica on this storage. 
     Supported for directories and regular files. 
-    This endpoint returns subset of data available under [data distribution](#operation/get_data_distribution).
+    This endpoint returns a subset of information offered by the 
+    [Get data distribution](#operation/get_data_distribution) endpoint.
 
 
   description: |
     Returns information about file location on each storage. `null` value for a storage 
     means that there is no file replica on this storage. 
     Supported for directories and regular files. 
-    This endpoint returns subset of data available under [data distribution](#operation/get_data_distribution).
+    This endpoint returns a subset of information offered by the 
+    [Get data distribution](#operation/get_data_distribution) endpoint.
 
     ***Example cURL requests***
 

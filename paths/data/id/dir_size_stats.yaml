@@ -32,7 +32,7 @@ get:
     The following time series are available for each directory:
       * `logical_size` - total size of file data contained in the directory, i.e. the sum of logical sizes of all 
     regular files in its subtree. If a file has multiple hardlinks in the subtree, each hardlink is counted separately.
-      * `virtual_size` - deduplicated logical size, where hardlinks of the same file in the subtree are counted only 
+      * `virtual_size` - consolidated logical size, where hardlinks of the same file in the subtree are counted only 
     once. Represents the storage space required for a complete replica of the directory.
       * `physical_size_$STORAGE_ID` - actual amount of storage consumed on a given storage backend by all regular files 
     in the directory’s subtree. May be smaller than the virtual size if some file replicas are incomplete. 
@@ -72,7 +72,7 @@ get:
     The following time series are available for each directory:
       * `logical_size` - total size of file data contained in the directory, i.e. the sum of logical sizes of all 
     regular files in its subtree. If a file has multiple hardlinks in the subtree, each hardlink is counted separately.
-      * `virtual_size` - deduplicated logical size, where hardlinks of the same file in the subtree are counted only 
+      * `virtual_size` - consolidated logical size, where hardlinks of the same file in the subtree are counted only 
     once. Represents the storage space required for a complete replica of the directory.
       * `physical_size_$STORAGE_ID` - actual amount of storage consumed on a given storage backend by all regular files 
     in the directory’s subtree. May be smaller than the virtual size if some file replicas are incomplete. 

@@ -9,13 +9,15 @@ get:
   summary: Get data distribution
   x-bash-codegen-description: |
     Returns information about distribution of a specific file among different storage providers.
-    Returned `locationsPerStorage` are the same as returned by [get storage locations](#operation/get_file_storage_locations) 
+    Symbolic links are not supported, since data distribution is not applicable for them.
+    The `locationsPerStorage` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
     endpoint.
 
 
   description: |
     Returns information about distribution of a specific file among different storage providers.
-    Returned `locationsPerStorage` are the same as returned by [get storage locations](#operation/get_file_storage_locations) 
+    Symbolic links are not supported, since data distribution is not applicable for them.
+    The `locationsPerStorage` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
     endpoint.
 
     ***Example cURL requests***
