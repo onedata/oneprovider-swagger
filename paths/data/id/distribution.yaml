@@ -10,14 +10,14 @@ get:
   x-bash-codegen-description: |
     Returns information about distribution of a specific file among different storage providers.
     Symbolic links are not supported, since data distribution is not applicable for them.
-    The `locationsPerStorage` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
+    The `locationsPerStorageBackend` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
     endpoint.
 
 
   description: |
     Returns information about distribution of a specific file among different storage providers.
     Symbolic links are not supported, since data distribution is not applicable for them.
-    The `locationsPerStorage` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
+    The `locationsPerStorageBackend` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
     endpoint.
 
     ***Example cURL requests***
@@ -32,7 +32,7 @@ get:
         "$PROVIDER_ID1": {
           "success": true,
           "logicalSize": 8,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID": {
               "success": true,
               "location": "/file/location/on/storage"
@@ -56,7 +56,7 @@ get:
         "$PROVIDER_ID3": {
           "success": true,
           "logicalSize": 8,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID": {
               "success": false,
               "error": {
@@ -80,7 +80,7 @@ get:
         "$PROVIDER_ID4": {
           "success": true,
           "logicalSize": 8,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID": {
               "success": true,
               "location": null
@@ -114,10 +114,6 @@ get:
         $ref: '#/definitions/Error'
     '404':
       description: File not found.
-      schema:
-        $ref: '#/definitions/Error'
-    '422':
-      description: Not supported for symlinks.
       schema:
         $ref: '#/definitions/Error'
     '500':

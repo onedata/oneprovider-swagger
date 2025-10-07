@@ -22,7 +22,7 @@ allOf:
               description: >
                 Total number of bytes in the file content, from the point of view of the Onedata logical namespace. 
                 Independent of the file’s distribution or replication.
-            locationsPerStorage:
+            locationsPerStorageBackend:
               type: object
               description: >
                 Map with file locations per storage.
@@ -83,7 +83,7 @@ example:
     $PROVIDER_ID1:
       success: true
       logicalSize: 8
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID: 
           success: true
           location: "/file/location/on/storage"
@@ -95,7 +95,7 @@ example:
     $PROVIDER_ID2:
       success: true
       logicalSize: 8
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID:
           success: true
           location: null
@@ -107,7 +107,7 @@ example:
     $PROVIDER_ID3:
       success: true
       logicalSize: 8
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID:
           success: false
           error:

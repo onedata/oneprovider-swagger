@@ -81,7 +81,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: At lease one of the required resources (space, storage or file on the storage) does not exist.
+      description: At least one of the required resources (space, storage backend or file on the storage) does not exist.
       schema:
         $ref: '#/definitions/Error'
     '500':

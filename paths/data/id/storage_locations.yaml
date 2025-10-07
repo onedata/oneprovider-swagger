@@ -8,16 +8,16 @@ get:
     - Data Distribution
   summary: Get file storage locations
   x-bash-codegen-description: |
-    Returns information about file location on each storage. `null` value for a storage 
-    means that there is no file replica on this storage. 
+    Returns information about file location on each storage backend. `null` value for a storage backend
+    means that there is no file replica on this storage backend. 
     Supported for directories and regular files. 
     This endpoint returns a subset of information offered by the 
     [Get data distribution](#operation/get_data_distribution) endpoint.
 
 
   description: |
-    Returns information about file location on each storage. `null` value for a storage 
-    means that there is no file replica on this storage. 
+    Returns information about file location on each storage backend. `null` value for a storage backend
+    means that there is no file replica on this storage backend. 
     Supported for directories and regular files. 
     This endpoint returns a subset of information offered by the 
     [Get data distribution](#operation/get_data_distribution) endpoint.
@@ -32,7 +32,7 @@ get:
       "locationsPerProvider": {
         "$PROVIDER_ID1": {
           "success": true,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID1": {
               "success": "true",
               "location": "path/to/file"
@@ -41,7 +41,7 @@ get:
         },
         "$PROVIDER_ID2": {
           "success": true,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID2": {
               "success": "true",
               "location": null
@@ -50,7 +50,7 @@ get:
         },
         "$PROVIDER_ID3": {
           "success": true,
-          "locationsPerStorage": {
+          "locationsPerStorageBackend": {
             "$STORAGE_ID2": {
               "success": false,
               "error": {

@@ -4,7 +4,7 @@ properties:
   spaceId:
     type: string
     description: >
-      Id of the space in which the file will be registered - the space must be supported by the storage hosting the file
+      Id of the space in which the file will be registered - the space must be supported by the storage backend hosting the file
       (`storageId`). The space support must have `manual import mode`.
   storageId:
     type: string

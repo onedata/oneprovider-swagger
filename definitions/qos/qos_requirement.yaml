@@ -6,7 +6,7 @@ properties:
     description: Id of file that requirement was created for.
   expression:
     type: string
-    description: Expression used to select storages on which file should be replicated.
+    description: Expression used to select storage backends on which file should be replicated.
   replicasNum:
     type: integer
     description: Number of required file replicas.

@@ -14,7 +14,7 @@ properties:
         error:
           $ref: '#/definitions/Error'
           description: Error that occurred for this provider (only if `success` = false).
-        locationsPerStorage:
+        locationsPerStorageBackend:
           type: object
           description: >
             Map with file storage location per storage (only when `success` = true).
@@ -38,13 +38,13 @@ example:
   locationsPerProvider:
     $PROVIDER_ID1:
       success: true
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID: 
           success: true
           location: "path/to/file"
     $PROVIDER_ID2:
       success: true
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID:
           success: true
           location: null
@@ -56,7 +56,7 @@ example:
           errno: "enoent"
     $PROVIDER_ID4:
       success: true
-      locationsPerStorage:
+      locationsPerStorageBackend:
         $STORAGE_ID:
           success: false
           error:
