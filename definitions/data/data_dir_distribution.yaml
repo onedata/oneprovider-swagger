@@ -32,37 +32,38 @@ allOf:
             locationsPerStorageBackend:
               type: object
               description: >
-                Map with directory locations per storage.
+                Map with directory locations per storage backend.
               additionalProperties:
                 type: object
-                description: Information about directory location on each storage.
+                description: Information about directory location on each storage backend.
                 properties:
                   success:
                     type: boolean
                     description: >
-                      Indicates whether fetching directory location for this storage was successful. 
+                      Indicates whether fetching directory location for this storage backend was successful. 
                       If false, the `error` field carries the reason and the rest of the fields are absent.
                       If true, the error field is absent.
                   error:
                     $ref: '#/definitions/Error'
-                    description: Error that occurred for this storage.
+                    description: Error that occurred for this storage backend.
                   location:
                     type: string
                     description: >
-                      Directory location on this storage.
-                      `null` value for a storage means that the directory was noy yet created on this storage.
-            distributionPerStorage:
+                      Directory location on this storage backend.
+                      `null` value for a storage backend means that the directory was not yet created on this
+                      storage backend.
+            distributionPerStorageBackend:
               type: object
               description: >
-                Map with directory distribution per storage.
+                Map with directory distribution per storage backend.
               additionalProperties:
                 type: object
-                description: Directory distribution for a specific storage.
+                description: Directory distribution for a specific storage backend.
                 properties:
                   success:
                     type: boolean
                     description: >
-                      Indicates whether fetching directory distribution for this storage was successful. 
+                      Indicates whether fetching directory distribution for this storage backend was successful. 
                       If false, the `error` field carries the reason and the rest of the fields are absent. 
                       If true, the error field is absent.
                   error:
@@ -89,7 +90,7 @@ example:
             details:
               storageId: "$STORAGE_ID"
               posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: true
           physicalSize: 6
@@ -101,7 +102,7 @@ example:
         $STORAGE_ID:
           success: true
           location: null
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: true
           physicalSize: 0
@@ -113,7 +114,7 @@ example:
         $STORAGE_ID:
           success: true
           location: "/file/location/on/storage"
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: false
           error:

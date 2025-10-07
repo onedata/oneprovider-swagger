@@ -25,37 +25,37 @@ allOf:
             locationsPerStorageBackend:
               type: object
               description: >
-                Map with file locations per storage.
+                Map with file locations per storage backend.
               additionalProperties:
                 type: object
-                description: Information about file location on each storage. 
+                description: Information about file location on each storage backend. 
                 properties:
                   success:
                     type: boolean
                     description: >
-                      Indicates whether fetching file location for this storage was successful. 
+                      Indicates whether fetching file location for this storage backend was successful. 
                       If false, the `error` field carries the reason and the rest of the fields are absent.
                       If true, the error field is absent.
                   error:
                     $ref: '#/definitions/Error'
-                    description: Error that occurred for this storage.
+                    description: Error that occurred for this storage backend.
                   location: 
                     type: string
                     description: > 
-                      File location on this storage.
-                      `null` value for a storage means that there is no file replica on this storage.
-            distributionPerStorage:
+                      File location on this storage backend.
+                      `null` value for a storage backend means that there is no file replica on this storage backend.
+            distributionPerStorageBackend:
               type: object
               description: > 
-                Map with file distribution per storage.
+                Map with file distribution per storage backend.
               additionalProperties: 
                 type: object
-                description: File distribution for a specific storage.
+                description: File distribution for a specific storage backend.
                 properties:
                   success:
                     type: boolean
                     description: >
-                      Indicates whether fetching file distribution for this storage was successful. 
+                      Indicates whether fetching file distribution for this storage backend was successful. 
                       If false, the `error` field carries the reason and the rest of the fields are absent. 
                       If true, the error field is absent.
                   error:
@@ -64,7 +64,7 @@ allOf:
                   blocks:
                     type: array
                     description: > 
-                      A list of blocks in byte ranges stored on this storage.
+                      A list of blocks in byte ranges stored on this storage backend.
                     items:
                       type: array
                       description: File block specified as a pair [offset, size].
@@ -87,7 +87,7 @@ example:
         $STORAGE_ID: 
           success: true
           location: "/file/location/on/storage"
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: true
           blocks: [[0, 4], [6, 2]]
@@ -99,7 +99,7 @@ example:
         $STORAGE_ID:
           success: true
           location: null
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: true
           blocks: []
@@ -116,7 +116,7 @@ example:
             details:
               storageId: "$STORAGE_ID"
               posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]
-      distributionPerStorage:
+      distributionPerStorageBackend:
         $STORAGE_ID:
           success: true
           blocks: [[0, 4], [6, 2]]

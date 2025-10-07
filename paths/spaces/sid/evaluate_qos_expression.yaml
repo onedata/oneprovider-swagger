@@ -9,14 +9,14 @@ post:
     - QoS
   summary: Evaluate QoS expression
   x-bash-codegen-description: |
-    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
-    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    Parses given QoS expression and evaluates it against the parameters of storage backends supporting the space.
+    Returns the list of storage backends that match the expression. In case of invalid expression, returns an error
     with the parser report.
 
     This operation requires `space_manage_qos` privilege.
   description: |
-    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
-    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    Parses given QoS expression and evaluates it against the parameters of storage backends supporting the space.
+    Returns the list of storage backends that match the expression. In case of invalid expression, returns an error
     with the parser report.
 
     This operation requires `space_manage_qos` privilege.
@@ -45,7 +45,7 @@ post:
     - application/json
   responses:
     '200':
-      description: The list of storages matching given QoS expression (objects containing basic storage details)
+      description: The list of storage backends matching given QoS expression (objects containing basic storage details)
       schema:
         type: object
         properties:
