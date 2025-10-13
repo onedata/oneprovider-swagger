@@ -9,14 +9,14 @@ post:
     - QoS
   summary: Evaluate QoS expression
   x-bash-codegen-description: |
-    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
-    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    Parses given QoS expression and evaluates it against the parameters of storage backends supporting the space.
+    Returns the list of storage backends that match the expression. In case of invalid expression, returns an error
     with the parser report.
 
     This operation requires `space_manage_qos` privilege.
   description: |
-    Parses given QoS expression and evaluates it against the parameters of storages supporting the space.
-    Returns the list of storages that match the expression. In case of invalid expression, returns an error
+    Parses given QoS expression and evaluates it against the parameters of storage backends supporting the space.
+    Returns the list of storage backends that match the expression. In case of invalid expression, returns an error
     with the parser report.
 
     This operation requires `space_manage_qos` privilege.
@@ -31,12 +31,20 @@ post:
     "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/evaluate_qos_expression"
 
     {
-      "matchingStorages": {
-        [{
+      "matchingStorageBackends": [
+        {
           "id": "$STORAGE_ID",
           "name": "storage_name",
           "providerId": "$PROVIDER_ID"
-        }]
+        }
+      ],
+      "matchingStorages": [
+        {
+          "id": "$STORAGE_ID",
+          "name": "storage_name",
+          "providerId": "$PROVIDER_ID"
+        }
+      ]
     }
     ```
   consumes:
@@ -45,11 +53,17 @@ post:
     - application/json
   responses:
     '200':
-      description: The list of storages matching given QoS expression (objects containing basic storage details)
+      description: The list of storage backends matching given QoS expression (objects containing basic storage details)
       schema:
         type: object
         properties:
+          matchingStorageBackends:
+            description: The list of storage backends matching given QoS expression (objects containing basic storage details)
+            type: array
+            items:
+              $ref: '#/definitions/StorageDetails'
           matchingStorages:
+            description: The list of storage backends matching given QoS expression (objects containing basic storage details) [deprecated]
             type: array
             items:
               $ref: '#/definitions/StorageDetails'

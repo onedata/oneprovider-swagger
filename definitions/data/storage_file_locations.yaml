@@ -8,19 +8,61 @@ properties:
       type: object
       description: File storage locations for a specific provider.
       properties:
-        locationsPerStorage:
+        success:
+          type: boolean
+          description: Indicates whether fetching file storage locations for this provider was successful.
+        error:
+          $ref: '#/definitions/Error'
+          description: Error that occurred for this provider (only if `success` = false).
+        locationsPerStorageBackend:
           type: object
           description: >
-            Map with file storage location per storage.
+            Map with file storage location per storage (only when `success` = true).
           additionalProperties:
-            type: string
-            description: File storage location for a specific storage.
+            type: object
+            description: Information about file location on each storage. 
+            properties:
+              success:
+                type: boolean
+                description: Indicates whether fetching file location for this storage was successful. 
+              location:
+                type: string
+                description: >
+                  File location on this storage (only if `success` = true). 
+                  `null` value for a storage means that there is no file replica on this storage.
+              error:
+                $ref: '#/definitions/Error'
+                description: Error that occurred for this storage (only if `success` = false).
+
 example:
   locationsPerProvider:
     $PROVIDER_ID1:
-      locationsPerStorage:
-        $STORAGE_ID: "path/to/file"
+      success: true
+      locationsPerStorageBackend:
+        $STORAGE_ID: 
+          success: true
+          location: "path/to/file"
     $PROVIDER_ID2:
-      locationsPerStorage:
-        $STORAGE_ID: null
-  
+      success: true
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          location: null
+    $PROVIDER_ID3:
+      success: false
+      error:
+        description: "Operation failed with POSIX error: enoent."
+        details:
+          errno: "enoent"
+    $PROVIDER_ID4:
+      success: true
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: false
+          error:
+            id: "requiresPosixCompatibleStorage"
+            description: "Cannot apply for the storage backend \"b2ce3858c7267a9c016296e51dc9c41cch3618\". This operation 
+              requires a POSIX-compatible storage backend (any of: posix, glusterfs, nfs, nulldevice)."
+            details:
+              storageId: "$STORAGE_ID"
+              posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]

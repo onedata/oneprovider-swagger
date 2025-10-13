@@ -4,7 +4,7 @@ properties:
   spaceId:
     type: string
     description: >
-      Id of the space in which the file will be registered - the space must be supported by the storage hosting the file
+      Id of the space in which the file will be registered - the space must be supported by the storage backend hosting the file
       (`storageId`). The space support must have `manual import mode`.
   storageId:
     type: string
@@ -15,8 +15,8 @@ properties:
     type: string
     description: >
       Identifier of the file on storage, relevant for given storage backend:
-         * path on POSIX-compatible or canonical object storages, e.g. `/dir/file.txt`
-         * URL on HTTP based storages, e.g. `https://www.example.org/data/21/run123.tar`
+         * path on POSIX-compatible or canonical object storage backends, e.g. `/dir/file.txt`
+         * URL on HTTP based storage backends, e.g. `https://www.example.org/data/21/run123.tar`
   destinationPath:
     type: string
     description: An absolute path in space where file should be created.

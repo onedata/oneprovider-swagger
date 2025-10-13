@@ -8,8 +8,8 @@ post:
     - Miscellaneous
   summary: Register file
   x-bash-codegen-description: |
-    Registers a file located on an `imported storage`.
-    This operation is available only in spaces supported with `imported storages` with `manual import mode` enabled.
+    Registers a file located on an `imported storage backend`.
+    This operation is available only in spaces supported with `imported storage backends` with `manual import mode` enabled.
     In such setup, the files existing on the storage are not automatically visible
     in the space and must be registered manually by the space users -
     [learn more](https://onedata.org/#/home/documentation/stable/doc/using_onedata/file-registration.html).
@@ -26,8 +26,8 @@ post:
     This operation requires:
       * space_register_file privilege
   description: |
-    Registers a file located on an `imported storage`.
-    This operation is available only in spaces supported with `imported storages` with `manual import mode` enabled.
+    Registers a file located on an `imported storage backend`.
+    This operation is available only in spaces supported with `imported storage backends` with `manual import mode` enabled.
     In such setup, the files existing on the storage are not automatically visible
     in the space and must be registered manually by the space users -
     [learn more](https://onedata.org/#/home/documentation/stable/doc/using_onedata/file-registration.html).
@@ -81,7 +81,7 @@ post:
       schema:
         $ref: '#/definitions/Error'
     '404':
-      description: At lease one of the required resources (space, storage or file on the storage) does not exist.
+      description: At least one of the required resources (space, storage backend or file on the storage) does not exist.
       schema:
         $ref: '#/definitions/Error'
     '500':

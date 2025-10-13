@@ -40,9 +40,14 @@ GetRecursiveFileListRequest:
 
 RecursiveFileList:
   $ref: ./data/recursive_file_list.yaml
-
+  
+# Data distribution and its subclasses
 DataDistribution:
   $ref: ./data/data_distribution.yaml
+REG:
+  $ref: ./data/data_reg_distribution.yaml
+DIR:
+  $ref: ./data/data_dir_distribution.yaml
 
 StorageFileLocations:
   $ref: ./data/storage_file_locations.yaml
