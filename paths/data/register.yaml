@@ -46,10 +46,15 @@ post:
 
     ***Example cURL requests***
 
-    **Register file**
+    **Register file from a remote, read-only HTTP storage**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/register" \
-    -H 'Content-Type: application/json' -d "@./file_spec.json"
+      curl -H "X-Auth-Token: $TOKEN" -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/data/register" \
+      -H "Content-Type: application/json"  -d '{
+        "storageId": "$STORAGE_ID",
+        "spaceId": "$SPACE_ID",
+        "storageFileId": "https://example-files.online-convert.com/document/txt/example.txt",
+        "destinationPath": "example.txt"
+      }'  
     ```
 
   consumes:
