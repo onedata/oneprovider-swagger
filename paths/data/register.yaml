@@ -25,6 +25,15 @@ post:
 
     This operation requires:
       * space_register_file privilege
+    
+    **Notes for HTTP storage backends**:
+    * Regardless of the root server endpoint provided in the HTTP storage backend configuration, 
+       one can register **any valid URL**. The root endpoint is only relevant as far as custom
+       authorization credentials are required.
+    * For this kind of storage, the automatic detection of file metadata is **always forced** to ensure that the 
+       HTTP endpoint supports required operations: the `HEAD` method and `Range: bytes=...` header, allowing 
+       range reads. If the server lacks those, an error `statOperationNotSupported` is returned. If a request
+       with `autoDetectAttributes: false` is made, a data validation error is returned.
   description: |
     Registers a file located on an `imported storage backend`.
     This operation is available only in spaces supported with `imported storage backends` with `manual import mode` enabled.
@@ -43,6 +52,15 @@ post:
 
     This operation requires:
       * space_register_file privilege
+    
+    **Notes for HTTP storage backends**:
+    * Regardless of the root server endpoint provided in the HTTP storage backend configuration, 
+       one can register **any valid URL**. The root endpoint is only relevant as far as custom
+       authorization credentials are required.
+    * For this kind of storage, the automatic detection of file metadata is **always forced** to ensure that the 
+       HTTP endpoint supports required operations: the `HEAD` method and `Range: bytes=...` header, allowing 
+       range reads. If the server lacks those, an error `statOperationNotSupported` is returned. If a request
+       with `autoDetectAttributes: false` is made, a data validation error is returned.
 
     ***Example cURL requests***
 
