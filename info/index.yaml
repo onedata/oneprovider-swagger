@@ -309,7 +309,7 @@ x-bash-codegen-description: |
 
 contact:
   name: Onedata support
-  url: https://onedata.org/support
+  url: https://onedata.org
   email: info@onedata.org
 license:
   name: Apache 2.0
