@@ -11,7 +11,7 @@ example:
     description: This is an example error.
     ctx:
       timestamp: 1750762637248
-      serviceReleaseVersion: "21.02.8"
+      serviceReleaseVersion: "25.0"
       serviceId: a7ee2722915b8bf7fb064eb65087cc61ch9357
       serviceDomain: dev-oneprovider-krakow.default.svc.cluster.local
       serviceBuildVersion: 231-g8d26f953c3
