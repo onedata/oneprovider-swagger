@@ -64,7 +64,7 @@ get:
                 description: 'Operation failed with POSIX error: enodata.'
                 ctx:
                   timestamp: 1750762637248
-                  serviceReleaseVersion: "25.0"
+                  serviceReleaseVersion: "25.1"
                   serviceId: a7ee2722915b8bf7fb064eb65087cc61ch9357
                   serviceDomain: dev-oneprovider-krakow.default.svc.cluster.local
                   serviceBuildVersion: 231-g8d26f953c3
