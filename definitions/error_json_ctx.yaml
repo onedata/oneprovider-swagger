@@ -7,7 +7,7 @@ properties:
     description: Timestamp in milliseconds.
   serviceReleaseVersion:
     type: string
-    description: Release version of a product, for example "25.0".
+    description: Release version of a product, for example "25.1".
   serviceId:
     type: string
     description: Identifier of a service instance — either Oneprovider Id or "onezone".
