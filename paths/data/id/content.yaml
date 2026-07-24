@@ -158,7 +158,8 @@ head:
     the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
     advertises support for partial content download via the
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
-    HEAD is not supported for directories (there is no single content to describe).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
 
   description: |
     Returns the headers that a corresponding GET request for the content of the
@@ -169,7 +170,8 @@ head:
     the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
     advertises support for partial content download via the
     [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
-    HEAD is not supported for directories (there is no single content to describe).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
 
     ***Example cURL requests***
 
