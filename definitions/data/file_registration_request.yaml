@@ -74,17 +74,31 @@ properties:
   autoDetectAttributes:
     type: boolean
     description: >
-      Flag which determines whether additional `stat` operation (or equivalent) should be performed
+      Flag which determines whether an additional `stat` operation (or equivalent) should be performed
       on the storage to automatically detect file attributes - they will be used if not provided
-      explicitly in the request. The detection also ensures that the file exists - it is performed
-      if the flag is set to `true`, even if all attributes are provided.
+      explicitly in the request. The detection is performed if the flag is set to `true`, even if all
+      attributes are provided.
 
       If this flag is set to `false`, default attributes are used if not provided explicitly.
       The only exception is the `size` attribute, which is mandatory. The registration request will
       fail if `autoDetectAttributes` is set to `false` and `size` is not provided.
 
-      It is possible to register a file that does not exist on storage if `autoDetectAttributes` is
-      set to `false`. Such file will be visible in Onedata but not accessible.
+      Note that detecting the attributes requires a `stat`, which inherently also verifies the file's
+      existence on storage. The independent `verifyExistence` flag is therefore only relevant when
+      `autoDetectAttributes` is set to `false`.
+    default: true
+  verifyExistence:
+    type: boolean
+    description: >
+      Flag which determines whether the existence of the file on the storage is verified before
+      registration. If set to `true` and the file is missing on the storage, the registration request
+      fails. If set to `false`, the file is registered without consulting the storage - such a file
+      will be visible in Onedata but not accessible until its data is actually present on the storage.
+
+      This flag is independent of `autoDetectAttributes`. When `autoDetectAttributes` is `true`, the
+      existence is always verified (as a side effect of detecting the attributes), regardless of this
+      flag. Registering a file that does not exist on storage therefore requires BOTH
+      `autoDetectAttributes` and `verifyExistence` to be set to `false`.
     default: true
 example:
   spaceId: 761f76677f42ad5289d6472675d5ecf2dfd57be6
@@ -120,3 +134,4 @@ example:
     ZjpEZXNjcmlwdGlvbj4KICAgIDwvZXg6ZWRpdG9yPgogIDwvcmRmOkRlc2NyaXB0aW9uPgoKPC9y
     ZGY6UkRGPgo=
   autoDetectAttributes: true
+  verifyExistence: true

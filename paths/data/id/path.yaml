@@ -348,6 +348,100 @@ get:
       source: "oneprovider-rest-cli downloadFileContentByPath id=$SPACE_OR_PARENT_ID path=$PATH"
 
 
+head:
+  operationId: get_file_content_headers_by_path
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: file_at_path
+  tags:
+    - Basic File Operations
+  summary: Get file content headers by path
+  x-bash-codegen-description: |
+    Returns the headers that a corresponding GET request for the content of the
+    file by path (relative to the base directory given in the `id` parameter)
+    would produce, without the response body.
+
+    Only regular files (and symbolic links resolving to them) are supported;
+    the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
+    advertises support for partial content download via the
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
+
+  description: |
+    Returns the headers that a corresponding GET request for the content of the
+    file by path (relative to the base directory given in the `id` parameter)
+    would produce, without the response body.
+
+    Only regular files (and symbolic links resolving to them) are supported;
+    the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
+    advertises support for partial content download via the
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
+
+    ***Example cURL requests***
+
+    **Get file content headers**
+    ```bash
+    curl -I -H "X-Auth-Token: $TOKEN" \
+    -X HEAD "https://$PROVIDER_HOST/api/v3/oneprovider/data/$SPACE_OR_PARENT_ID/path/dir1/dir2/file"
+
+    HTTP/1.1 200 OK
+    content-length: 15
+    accept-ranges: bytes
+    ```
+
+    See also [Download file content by path](#operation/download_file_content_by_path).
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: File content headers.
+      headers:
+        Content-Length:
+          description: Size of the file content in bytes.
+          type: integer
+        Accept-Ranges:
+          description: Indicates that partial content download (byte ranges) is supported.
+          type: string
+    '400':
+      description: Invalid request (e.g. the file is a directory).
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: |
+        ID of the base directory, relative to which the path remainder will be resolved. It can be a **Space Id**
+        (in which case the space root directory is taken), or a **File Id** of any existing
+        directory (including the space root directory). See [Data](#section/Overview/Data-management-basics) section
+        for more information.
+      type: string
+      required: true
+    - name: path
+      in: path
+      description: Path relative to the base directory (specified in the id parameter).
+      required: true
+      type: string
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli getFileContentHeadersByPath id=$SPACE_OR_PARENT_ID path=$PATH"
+
+
 delete:
   operationId: remove_file_at_path
   x-onedata-gri:
