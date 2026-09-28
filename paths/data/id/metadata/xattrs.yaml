@@ -11,9 +11,15 @@ get:
     This method returns the selected extended attributes associated with file
     specified by [$FILE_ID](#operation/lookup_file_id).
 
+    If there are no extended attributes associated with the file, this method returns
+    HTTP 200 code with an empty JSON object.
+
   description: |
     This method returns the selected extended attributes associated with file
     specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If there are no extended attributes associated with the file, this method returns
+    HTTP 200 code with an empty JSON object.
 
     ***Example cURL requests***
 
@@ -76,7 +82,7 @@ get:
     in: query
     description: >
       When set to true, this operation returns all attributes including those
-      normally not shown (e.g. json/rdf metadata, acl and cdmi attributes).
+      normally not shown (e.g. JSON/RDF metadata, ACL and CDMI attributes).
     type: boolean
     default: false
     required: false

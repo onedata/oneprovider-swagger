@@ -196,29 +196,28 @@ put:
     This method allows to set a value of a regular file attribute
     for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    Currently only POSIX mode can be changed by
-    sending:
+    Currently only POSIX permissions can be changed by sending:
     ```
-      { "mode": "0777" }
+      { "posixPermissions": "0777" }
     ```
-    where the POSIX mode is specified in octal notation.
+    where the POSIX permissions are specified in octal notation.
 
   description: |
     This method allows to set a value of a regular file attribute
     for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    Currently only POSIX mode can be changed by sending:
+    Currently only POSIX permissions can be changed by sending:
     ```
-    { "mode": "0777" }
+      { "posixPermissions": "0777" }
     ```
-    where the POSIX mode is specified in octal notation.
+    where the POSIX permissions are specified in octal notation.
 
     ***Example cURL requests***
 
     **Set file POSIX mode**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" \
-    -H 'Content-Type: application/json' -d '{ "mode": "0777" }'
+    -H 'Content-Type: application/json' -d '{ "posixPermissions": "0777" }'
     ```
   consumes:
     - application/json
@@ -252,8 +251,13 @@ put:
     description: Attribute name and value.
     schema:
       type: object
-      additionalProperties:
-        type: string
+      properties:
+        posixPermissions:
+          description: New POSIX permissions of a file.
+          type: string
+        mode:
+          description: (deprecated) new POSIX permissions of a file.
+          type: string
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"

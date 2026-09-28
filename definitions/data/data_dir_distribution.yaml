@@ -1,0 +1,128 @@
+allOf:
+  - $ref: '#/definitions/DataDistribution'
+  - type: object
+    properties:
+      distributionPerProvider:
+        type: object
+        additionalProperties:
+          type: object
+          description: Data distribution for a specific provider.
+          properties:
+            success:
+              type: boolean
+              description: >
+                Indicates whether fetching directory distribution for this provider was successful.
+                If false, the `error` field carries the reason and the rest of the fields are absent. 
+                If true, the error field is absent.
+            error:
+              $ref: '#/definitions/Error'
+              description: Error that occurred for this provider.
+            logicalSize:
+              type: integer
+              description: >
+                Total size of file data contained in the directory, i.e. the sum of logical sizes of all regular files 
+                in its subtree. If a file has multiple hardlinks in the subtree, each hardlink is counted separately.
+                `null` if directory statistics collecting is disabled in a space.
+            virtualSize:
+              type: integer
+              description: >
+                Consolidated logical size, where hardlinks of the same file in the subtree are counted only once. 
+                Represents the storage space required for a complete replica of the directory.
+                `null` if directory statistics collecting is disabled in a space.
+            locationsPerStorageBackend:
+              type: object
+              description: >
+                Map with directory locations per storage backend.
+              additionalProperties:
+                type: object
+                description: Information about directory location on each storage backend.
+                properties:
+                  success:
+                    type: boolean
+                    description: >
+                      Indicates whether fetching directory location for this storage backend was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent.
+                      If true, the error field is absent.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this storage backend.
+                  location:
+                    type: string
+                    description: >
+                      Directory location on this storage backend.
+                      `null` value for a storage backend means that the directory was not yet created on this
+                      storage backend.
+            distributionPerStorageBackend:
+              type: object
+              description: >
+                Map with directory distribution per storage backend.
+              additionalProperties:
+                type: object
+                description: Directory distribution for a specific storage backend.
+                properties:
+                  success:
+                    type: boolean
+                    description: >
+                      Indicates whether fetching directory distribution for this storage backend was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent. 
+                      If true, the error field is absent.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this provider.
+                  physicalSize:
+                    type: integer
+                    description: > 
+                      Actual amount of storage consumed on a given storage backend by all regular files in the 
+                      directory’s subtree. May be smaller than the virtual size if some file replicas are incomplete.
+example:
+  type: "DIR"
+  distributionPerProvider:
+    $PROVIDER_ID1:
+      success: true
+      logicalSize: 8
+      virtualSize: 8
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: false
+          error:
+            id: "requiresPosixCompatibleStorage"
+            description: "Cannot apply for the storage backend \"b2ce3858c7267a9c016296e51dc9c41cch3618\". This operation requires a POSIX-compatible storage backend (any of: posix, glusterfs, nfs, nulldevice)."
+            details:
+              storageId: "$STORAGE_ID"
+              posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          physicalSize: 6
+    $PROVIDER_ID2:
+      success: true
+      logicalSize: 8
+      virtualSize: 8
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          location: null
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          physicalSize: 0
+    $PROVIDER_ID3:
+      success: true
+      logicalSize: null
+      virtualSize: null
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          location: "/file/location/on/storage"
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: false
+          error:
+            id: "dirStatsDisabledForSpace"
+            description: "Directory statistics collection is disabled for this space."
+    $PROVIDER_ID4:
+      success: false
+      error:
+        description: "Operation failed with POSIX error: enoent."
+        details:
+          errno: "enoent"
