@@ -3,8 +3,8 @@ description: >
   List of names of the attributes to be included in the result.
   For a shared file/directory accessed in public mode, only the following attributes are available: 
   `fileId`, `index`, `type`, `activePermissionsType`, `mode`, `name`, `conflictingName`, `parentFileId`, 
-  `creationTime`, `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, `hasCustomMetadata`, 
-  `hasJsonMetadata`, `jsonMetadata`, `xattr.*`.
+  `isImported`, `creationTime`, `atime`, `mtime`, `ctime`, `size`, `directShareIds`, `symlinkValue`, 
+  `hasCustomMetadata`, `hasJsonMetadata`, `jsonMetadata`, `xattr.*`.
   If not provided, by default all attributes are returned.
 items:
   type: string
@@ -19,6 +19,7 @@ items:
     - conflictingName
     - path
     - parentFileId
+    - isImported
     - displayGid
     - displayUid
     - creationTime
