@@ -1,0 +1,129 @@
+allOf:
+  - $ref: '#/definitions/DataDistribution'
+  - type: object
+    properties:
+      distributionPerProvider:
+        type: object
+        additionalProperties:
+          type: object
+          description: Data distribution for a specific provider.
+          properties:
+            success:
+              type: boolean
+              description: >
+                Indicates whether fetching file distribution for this provider was successful.
+                If false, the `error` field carries the reason and the rest of the fields are absent. 
+                If true, the error field is absent.
+            error:
+              $ref: '#/definitions/Error'
+              description: Error that occurred for this provider.
+            logicalSize: 
+              type: integer
+              description: >
+                Total number of bytes in the file content, from the point of view of the Onedata logical namespace. 
+                Independent of the file’s distribution or replication.
+            locationsPerStorageBackend:
+              type: object
+              description: >
+                Map with file locations per storage backend.
+              additionalProperties:
+                type: object
+                description: Information about file location on each storage backend. 
+                properties:
+                  success:
+                    type: boolean
+                    description: >
+                      Indicates whether fetching file location for this storage backend was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent.
+                      If true, the error field is absent.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this storage backend.
+                  location: 
+                    type: string
+                    description: > 
+                      File location on this storage backend.
+                      `null` value for a storage backend means that there is no file replica on this storage backend.
+            distributionPerStorageBackend:
+              type: object
+              description: > 
+                Map with file distribution per storage backend.
+              additionalProperties: 
+                type: object
+                description: File distribution for a specific storage backend.
+                properties:
+                  success:
+                    type: boolean
+                    description: >
+                      Indicates whether fetching file distribution for this storage backend was successful. 
+                      If false, the `error` field carries the reason and the rest of the fields are absent. 
+                      If true, the error field is absent.
+                  error:
+                    $ref: '#/definitions/Error'
+                    description: Error that occurred for this provider.
+                  blocks:
+                    type: array
+                    description: > 
+                      A list of blocks in byte ranges stored on this storage backend.
+                    items:
+                      type: array
+                      description: File block specified as a pair [offset, size].
+                      items:
+                        type: integer
+                      maxItems: 2
+                      minItems: 2
+                  physicalSize:
+                    type: integer
+                    description: > 
+                      Actual amount of storage consumed to store the file on a given storage backend. May be smaller 
+                      than the logical size if the file replica is incomplete.
+example:
+  type: "REG"
+  distributionPerProvider: 
+    $PROVIDER_ID1:
+      success: true
+      logicalSize: 8
+      locationsPerStorageBackend:
+        $STORAGE_ID: 
+          success: true
+          location: "/file/location/on/storage"
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          blocks: [[0, 4], [6, 2]]
+          physicalSize: 6
+    $PROVIDER_ID2:
+      success: true
+      logicalSize: 8
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          location: null
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          blocks: []
+          physicalSize: 0
+    $PROVIDER_ID3:
+      success: true
+      logicalSize: 8
+      locationsPerStorageBackend:
+        $STORAGE_ID:
+          success: false
+          error:
+            id: "requiresPosixCompatibleStorage"
+            description: "Cannot apply for the storage backend \"b2ce3858c7267a9c016296e51dc9c41cch3618\". This operation requires a POSIX-compatible storage backend (any of: posix, glusterfs, nfs, nulldevice)."
+            details:
+              storageId: "$STORAGE_ID"
+              posixCompatibleStorages": ["posix", "glusterfs", "nfs", "nulldevice"]
+      distributionPerStorageBackend:
+        $STORAGE_ID:
+          success: true
+          blocks: [[0, 4], [6, 2]]
+          physicalSize: 6
+    $PROVIDER_ID4:
+      success: false
+      error:
+        description: "Operation failed with POSIX error: enoent."
+        details: 
+          errno: "enoent"

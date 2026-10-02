@@ -1,85 +1,17 @@
 type: object
 description: >
   Describes distribution of a single file among different storage providers.
+discriminator: type
+x-onedata-oneof: true
+x-onedata-subclasses:
+  - REG
+  - DIR
 properties:
   type:
-    $ref: '#/definitions/FileType'
-  distributionPerProvider: 
-    type: object
-    additionalProperties: 
-      type: object
-      description: Data distribution for a specific provider.
-      properties:
-        success:
-          type: boolean
-          description: Indicates whether fetching file distribution for this provider was successful. 
-        virtualSize:
-          type: integer
-          description: > 
-            Virtual size of file/dir as seen by this provider (only if `success` = true).
-            See also [directory size statistics](#operation/get_directory_size_stats) for more information
-            about different data size metrics.
-        locationsPerStorage:
-          type: object
-          description: >
-            Map with file locations per storage (only for `type = REG`).
-          additionalProperties:
-            type: string
-            description: Information about regular file location on each storage. `null` value for a storage 
-              means that there is no file replica on this storage.
-        distributionPerStorage:
-          type: object
-          description: > 
-            Map with file distribution per storage.
-          additionalProperties: 
-            type: object
-            description: File distribution for a specific storage.
-            properties:
-              blocks:
-                type: array
-                description: > 
-                  A list of blocks in byte ranges stored on this storage (only for REG file type and `success` = true).
-                items:
-                  type: array
-                  description: File block specified as a pair [offset, size].
-                  items:
-                    type: integer
-                  maxItems: 2
-                  minItems: 2
-              physicalSize:
-                type: integer
-                description: Physical size of the file on this storage (only when `success` = true).
-              error: 
-                type: object
-                description: Error that occured for this storage (only when `success` = false).
-                properties:
-                  description:
-                    description: Detailed description of the error.
-                    type: string
-                  id:
-                    description: Id of the error.
-                    type: string
-                  details:
-                    description: Key value map with details describing the error.
-                    type: object
-example:
-  type: "REG"
-  distributionPerProvider: 
-    $PROVIDER_ID1:
-      success: true
-      logicalSize: 8
-      locationsPerStorage:
-        $STORAGE_ID: "/file/location/on/storage"
-      distributionPerStorage:
-        $STORAGE_ID:
-          blocks: [[0, 4], [6, 2]]
-          physicalSize: 6
-    $PROVIDER_ID2:
-      success: false
-      distributionPerStorage:
-        $STORAGE_ID:
-          error:
-            description: "Operation failed with POSIX error: enoent."
-            details: 
-              errno: "enoent"
-  
+    description: |
+      The type of the file:
+      * `REG` - regular file,
+      * `DIR` - directory,
+    enum:
+      - REG
+      - DIR

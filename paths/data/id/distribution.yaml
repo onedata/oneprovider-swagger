@@ -9,43 +9,88 @@ get:
   summary: Get data distribution
   x-bash-codegen-description: |
     Returns information about distribution of a specific file among different storage providers.
+    Symbolic links are not supported, since data distribution is not applicable for them.
+    The `locationsPerStorageBackend` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
+    endpoint.
 
 
   description: |
     Returns information about distribution of a specific file among different storage providers.
+    Symbolic links are not supported, since data distribution is not applicable for them.
+    The `locationsPerStorageBackend` field is the same as for the [Get file storage locations](#operation/get_file_storage_locations) 
+    endpoint.
 
     ***Example cURL requests***
 
     **Get file distribution**
     ```bash
     curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/distribution"
-
+    
     {
-      "type": "REG"
+      "type": "REG",
       "distributionPerProvider": {
         "$PROVIDER_ID1": {
-          "success": true
-          "virtualSize": 8
-          "locationsPerStorage": {
-            "$STORAGE_ID": "/file/location/on/storage"
-          },
-          "distributionPerStorage": {
+          "success": true,
+          "logicalSize": 8,
+          "locationsPerStorageBackend": {
             "$STORAGE_ID": {
-              "blocks": [[0, 4], [6, 2]]
+              "success": true,
+              "location": "/file/location/on/storage"
+            }
+          },
+          "distributionPerStorageBackend": {
+            "$STORAGE_ID": {
+              "success": true,
+              "blocks": [[0,4],[6,2]],
               "physicalSize": 6
             }
           }
-        }
+        },
         "$PROVIDER_ID2": {
-          "success": false
-          "distributionPerStorage": {
+          "success": false,
+          "error": {
+            "description": "Operation failed with POSIX error: enoent.",
+            "details": {"errno":"enoent"}
+          }
+        },
+        "$PROVIDER_ID3": {
+          "success": true,
+          "logicalSize": 8,
+          "locationsPerStorageBackend": {
             "$STORAGE_ID": {
+              "success": false,
               "error": {
-                "description": "Operation failed with POSIX error: enoent."
+                "id": "requiresPosixCompatibleStorage",
                 "details": {
-                  "errno": "enoent"
-                }
+                  "storageId": "b2ce3858c7267a9c016296e51dc9c41cch3618",
+                  "posixCompatibleStorages": ["posix","glusterfs","nfs","nulldevice"]
+                },
+                "description": "Cannot apply for the storage backend \"b2ce3858c7267a9c016296e51dc9c41cch3618\". This operation requires a POSIX-compatible storage backend (any of: posix, glusterfs, nfs, nulldevice)."
               }
+            }
+          },
+          "distributionPerStorageBackend": {
+            "$STORAGE_ID": {
+              "success": true,
+              "blocks": [[0,4],[6,2]],
+              "physicalSize": 6
+            }
+          }
+        },
+        "$PROVIDER_ID4": {
+          "success": true,
+          "logicalSize": 8,
+          "locationsPerStorageBackend": {
+            "$STORAGE_ID": {
+              "success": true,
+              "location": null
+            }
+          },
+          "distributionPerStorageBackend": {
+            "$STORAGE_ID": {
+              "success": true,
+              "blocks": [],
+              "physicalSize": 0
             }
           }
         }
