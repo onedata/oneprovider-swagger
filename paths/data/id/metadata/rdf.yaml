@@ -4,26 +4,28 @@ get:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Get file rdf metadata
+  summary: Get file RDF metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the rdf metadata for specified file, directory or space.
+    This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    If there is no RDF metadata associated with the file, this method returns HTTP 400
+    code with `enodata` POSIX error.
 
   description: |
-    This method returns the rdf metadata for specified file, directory or space.
+    This method returns the RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    If there is no RDF metadata associated with the file, this method returns HTTP 400
+    code with `enodata` POSIX error.
 
     ***Example cURL requests***
 
     **Get complete RDF metadata document for file**
 
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
 
     <RDF><homepage>https://www.onedata.org</homepage></RDF>
     ```
@@ -31,14 +33,21 @@ get:
     - application/rdf+xml
   responses:
     '200':
-      description: Rdf metadata returned successfully.
+      description: Rdf metadata.
       schema:
         type: string
         example: <RDF><homepage>https://www.onedata.org</homepage></RDF>
     '400':
-      description: Invalid request.
+      description: No RDF metadata associated with the file or invalid request.
       schema:
-        $ref: '#/definitions/Error'
+        allOf:
+          - $ref: '#/definitions/Error'
+          - example:
+              error:
+                id: posix
+                details:
+                  errno: enodata
+                description: 'Operation failed with POSIX error: enodata.'
     '403':
       description: Forbidden request.
       schema:
@@ -57,6 +66,13 @@ get:
     description: Id of the file.
     type: string
     required: true
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getRdfMetadata id=$FILE_ID"
@@ -69,31 +85,26 @@ put:
     type: op_file
     id: ?OBJECTID_BINDING(id)
     aspect: rdf_metadata
-  summary: Set file rdf metadata
+  summary: Set file RDF metadata
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set specific rdf metadata for a file, directory or space.
+    This method allows to set specific RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous rdf metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This operation will replace the previous RDF metadata if any.
 
   description: |
-    This method allows to set specific rdf metadata for a file, directory or space.
+    This method allows to set specific RDF metadata for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    This operation will replace the previous rdf metadata if any.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This operation will replace the previous RDF metadata if any.
 
     ***Example cURL requests***
 
     **Set RDF metadata for space from RDF file**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X PUT \
-    -H "Content-type: application/rdf+xml" \
-    -d "@./space1_dublincore.rdf"
-    https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf \
+    -H "Content-Type: application/rdf+xml" -d "@./space1_dublincore.rdf"
     ```
   consumes:
     - application/rdf+xml
@@ -124,10 +135,75 @@ put:
     required: true
   - name: metadata
     in: body
-    description: The rdf metadata.
+    description: The RDF metadata.
     required: true
     schema:
       type: string
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "cat metadata.rdf | oneprovider-rest-cli setRdfMetadata id=$FILE_ID -"
+
+
+delete:
+  operationId: remove_rdf_metadata
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: rdf_metadata
+  summary: Remove file RDF metadata
+  tags:
+    - Custom File Metadata
+  x-bash-codegen-description: |
+    Removes RDF metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+  description: |
+    Removes RDF metadata from the file specified by [$FILE_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Remove file RDF metadata**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/rdf
+    ```
+  responses:
+    '204':
+      description: File RDF metadata has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+    - name: resolve_symlink
+      in: query
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
+      type: boolean
+      default: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeRdfMetadata id=$FILE_ID"

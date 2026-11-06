@@ -16,15 +16,15 @@ get:
 
     **Get detailed information about QoS requirement**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/qos-requirements/$QOS_REQ_ID"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements/$QOS_REQ_ID"
 
     {
-      "qosRequirementId": "c84f669f9522c46976fee490d80651f0",
-      "fileId": "$FILE_ID",
-      "qosExpression": "country=FR",
-      "replicasNum": 2,
-      "status": "fulfilled"
+        "qosRequirementId": "c84f669f9522c46976fee490d80651f0",
+        "fileId": "$FILE_ID",
+        "qosExpression": "country=FR",
+        "replicasNum": 2,
+        "status": "fulfilled"
     }
 
     ```
@@ -54,7 +54,7 @@ get:
   parameters:
     - name: qid
       in: path
-      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id
       type: string
       required: true
   x-code-samples:
@@ -80,15 +80,12 @@ delete:
 
     **Remove QoS requirement.**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X DELETE \
-    -H "Content-type: application/json" \
-    "https://$HOST/api/v3/oneprovider/qos-requirements/$QOS_REQ_ID"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/qos_requirements/$QOS_REQ_ID"
     ```
-  consumes:
-    - application/json
   responses:
     '204':
-      description: QoS requirement has been deleted.
+      description: QoS requirement has been removed.
     '400':
       description: Invalid request.
       schema:
@@ -108,7 +105,7 @@ delete:
   parameters:
     - name: qid
       in: path
-      description: QoS requirement Id (e.g. 'c84f669f9522c46976fee490d80651f0')
+      description: QoS requirement Id
       type: string
       required: true
   x-code-samples:

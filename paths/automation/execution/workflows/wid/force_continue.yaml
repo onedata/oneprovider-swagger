@@ -1,0 +1,60 @@
+post:
+  operationId: force_continue_workflow_execution
+  x-onedata-gri:
+    type: op_atm_workflow_execution
+    id: ?BINDING(wid)
+    aspect: force_continue
+  summary: Force continue workflow execution
+  tags:
+    - Workflow execution
+  x-bash-codegen-description: |
+    Forcefully proceeds with a failed execution, commencing from the subsequent 
+    lane to the one that failed.
+
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
+
+  description: |
+    Forcefully proceeds with a failed execution, commencing from the subsequent 
+    lane to the one that failed.
+
+    This operation requires `space_schedule_atm_workflow_executions` when
+    invoked by scheduling user, or `space_manage_atm_workflow_executions` 
+    otherwise.
+
+    ***Example cURL requests***
+
+    **Force continue workflow execution**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X POST "https://$PROVIDER_HOST/api/v3/oneprovider/automation/execution/workflows/$ATM_WORKFLOW_EXECUTION_ID/force_continue"
+    ```
+  responses:
+    '204':
+      description: The workflow execution forced continuation has been initiated.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Workflow execution with provided Id was not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: wid
+      in: path
+      description: Workflow execution Id.
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli forceContinueWorkflowExecution wid=$ATM_WORKFLOW_SCHEMA_ID"

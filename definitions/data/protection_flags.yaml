@@ -1,0 +1,7 @@
+description: To learn more about protection flags, see the [Get dataset information](#operation/get_dataset) endpoint.
+type: array
+items:
+  type: string
+  enum:
+    - data_protection
+    - metadata_protection

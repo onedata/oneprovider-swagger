@@ -1,14 +1,16 @@
 SHELL = /bin/bash
 UID = $(shell id -u)
 
-SWAGGER_AGGREGATOR_IMAGE    ?= docker.onedata.org/swagger-aggregator:1.5.0
+SWAGGER_AGGREGATOR_IMAGE    ?= docker.onedata.org/swagger-aggregator:1.6.0
 SWAGGER_CLI_IMAGE           ?= docker.onedata.org/swagger-cli:1.5.0
 SWAGGER_BOOTPRINT_IMAGE     ?= docker.onedata.org/swagger-bootprint:1.5.0
 SWAGGER_MARKDOWN_IMAGE      ?= docker.onedata.org/swagger-gitbook:1.4.1
 SWAGGER_COWBOY_SERVER_IMAGE ?= docker.onedata.org/swagger-codegen:2.3.1-cowboy
-SWAGGER_PYTHON_CLIENT_IMAGE ?= docker.onedata.org/swagger-codegen-official:ID-507bde287c
 SWAGGER_BASH_CLIENT_IMAGE   ?= docker.onedata.org/swagger-codegen:VFS-6328
-SWAGGER_REDOC_IMAGE         ?= docker.onedata.org/swagger-redoc:1.0.0
+# Updated/newer docker images for swagger codegen v2 and v3
+SWAGGER_PYTHON_CLIENT_IMAGE ?= swaggerapi/swagger-codegen-cli:2.4.20
+SWAGGER_OPENAPI_CLIENT_IMAGE ?= swaggerapi/swagger-codegen-cli-v3:3.0.26
+
 
 .PHONY : all swagger.json
 all : cowboy-server python-client bash-client doc-static doc-markdown
@@ -33,7 +35,15 @@ cowboy-server: validate
 	./fix_generated.py
 
 python-client: validate
-	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/swagger -t ${SWAGGER_PYTHON_CLIENT_IMAGE} generate -i ./swagger.json -l python -o ./generated/python -c python-config.json
+	docker run --rm --user ${UID} -v `pwd`:/local -t ${SWAGGER_PYTHON_CLIENT_IMAGE} generate -i /local/swagger.json -l python -o /local/generated/python -c /local/python-config.json
+
+# Generate OpenAPI v3 stubs 
+python-client-openapi3:
+	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/local -t ${SWAGGER_OPENAPI_CLIENT_IMAGE} generate -i /local/openapi.json -l python -o /local/generated/python3 -c /local/python-config.json
+
+# Convert Swagger v2 to OpenAPI v3
+convert-swagger-v2tov3:
+	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/local -t ${SWAGGER_OPENAPI_CLIENT_IMAGE} generate -i /local/swagger.json -l openapi -o /local/
 
 bash-client: validate
 	docker run --rm -e CHOWNUID=${UID} -v `pwd`:/swagger -t ${SWAGGER_BASH_CLIENT_IMAGE} generate -i ./swagger.json -l bash -o ./generated/bash -c bash-config.json
@@ -47,42 +57,14 @@ doc-markdown: validate
 	docker run --rm -v `pwd`:/swagger -t ${SWAGGER_MARKDOWN_IMAGE} convert -i ./swagger.json -d ./generated/gitbook -c ./gitbook.properties
 
 preview: validate
-	$(info Open http://localhost:8088  (or http://$${DOCKER_MACHINE_IP}:8088))
-	@docker run --rm -v `pwd`/swagger.json:/usr/share/nginx/html/swagger.json:ro -p 8088:80 ${SWAGGER_REDOC_IMAGE}
+	./bamboos/scripts/build-redoc.sh preview
 
-bash-packages: RELEASES = $(shell git branch -a | grep "release/" | sed -n 's/.*release\/\(.*\)/\1/p')
 bash-packages:
-	@git checkout master
-	@releases=(${RELEASES});\
-	for release_branch in $${releases[@]}; do\
-		echo "#################################################";\
-		echo " Building Bash client release: $$release_branch";\
-		echo "#################################################";\
-		git checkout release/$$release_branch;\
-		rm -rf generated;\
-		docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_AGGREGATOR_IMAGE};\
-		docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_BASH_CLIENT_IMAGE} generate -i ./swagger.json -l bash -o ./generated/bash -c bash-config.json;\
-		mkdir -p "packages/bash/$$release_branch";\
-		cp generated/bash/oneprovider-rest-cli "packages/bash/$$release_branch/";\
-		cp generated/bash/_oneprovider-rest-cli "packages/bash/$$release_branch/";\
-		cp generated/bash/oneprovider-rest-cli.bash-completion "packages/bash/$$release_branch/";\
-	done;\
-    custom_releases=( develop );\
-    for release_branch in $${custom_releases[@]}; do\
-        echo "#################################################";\
-        echo " Building Bash client release: $$release_branch";\
-        echo "#################################################";\
-        git checkout $$release_branch;\
-        rm -rf generated;\
-        docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_AGGREGATOR_IMAGE};\
-        docker run --rm -e "CHOWNUID=${UID}" -v `pwd`:/swagger -t ${SWAGGER_BASH_CLIENT_IMAGE} generate -i ./swagger.json -l bash -o ./generated/bash -c bash-config.json;\
-        mkdir -p "packages/bash/$$release_branch";\
-        cp generated/bash/oneprovider-rest-cli "packages/bash/$$release_branch/";\
-        cp generated/bash/_oneprovider-rest-cli "packages/bash/$$release_branch/";\
-        cp generated/bash/oneprovider-rest-cli.bash-completion "packages/bash/$$release_branch/";\
-    done
-	@git checkout master
+	SWAGGER_AGGREGATOR_IMAGE=${SWAGGER_AGGREGATOR_IMAGE} SWAGGER_BASH_CLIENT_IMAGE=${SWAGGER_BASH_CLIENT_IMAGE} ./generate_bash_packages.sh
 
 submodules:
 	git submodule sync --recursive ${submodule}
 	git submodule update --init --recursive ${submodule}
+
+codetag-tracker:
+	./bamboos/scripts/codetag-tracker.sh --branch=${BRANCH}

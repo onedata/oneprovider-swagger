@@ -1,0 +1,316 @@
+get:
+  operationId: download_file_content
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: content
+  tags:
+    - Basic File Operations
+  summary: Download file content
+  x-bash-codegen-description: |
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+  description: |
+    Returns the content of a file or directory specified by [$FILE_ID](#operation/lookup_file_id).
+
+    If $FILE_ID is a regular file, returns its binary content. Partial content
+    download is also supported using
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+
+    If $FILE_ID is a directory, returns a TAR archive with its contents.
+    Any nested files or subdirectories to which the client does not have access
+    (e.g. due to insufficient POSIX permissions or ACLs) are omitted in the resulting archive.
+    Request for directory download results in a redirection URL (in Location header) that
+    contains the ID of a temporary download session. The URL can be used to download the
+    tarball, with support for resuming interrupted downloads using the Range header
+    (where the range start is the number of already downloaded bytes and the range end is omitted).
+
+
+    ***Example cURL requests***
+
+    **Download entire file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content"
+
+    abcdefghijklmno
+    ```
+
+    **Download only part of the file content**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content" \
+    -H "Range: bytes=5-8"
+
+    fghi
+    ```
+
+    **Download a directory as tar archive**
+    ```bash
+    curl -sD - -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content" | grep location
+    
+    location: https://$PROVIDER_HOST/download/$DOWNLOAD_ID
+    ```
+    
+    ```
+    curl https://$PROVIDER_HOST/download/$DOWNLOAD_ID > directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content"
+    ```
+
+    **Resume download of a directory (previous download failed after 12345678 bytes)**
+    ```bash
+    curl -H "Range: bytes=12345678-" https://$PROVIDER_HOST/download/$DOWNLOAD_ID >> directory.tar
+    ```
+
+    **Download a directory as tar archive in a single request without resolving symlinks**
+    ```bash
+    curl -L -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/content?follow_symlinks=false"
+    ```
+
+    See also [Download file content by path](#operation/download_file_content_by_path).
+
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: Entire file content.
+      schema:
+        type: string
+        format: binary
+    '206':
+      description: Part(s) of file content.
+      schema:
+        type: string
+        format: binary
+    '302':
+      description: Redirection URL for directory download.
+      headers:
+        Location:
+          description: URL with the ID of a temporary download session.
+          type: string
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+    - name: follow_symlinks
+      in: query
+      description: Flag controlling whether symbolic links in requested download should be resolved.
+      required: false
+      type: boolean
+      default: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli downloadFileContent id=$FILE_ID"
+
+
+head:
+  operationId: get_file_content_headers
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: content
+  tags:
+    - Basic File Operations
+  summary: Get file content headers
+  x-bash-codegen-description: |
+    Returns the headers that a corresponding GET request for the content of the
+    file specified by [$FILE_ID](#operation/lookup_file_id) would produce, without
+    the response body.
+
+    Only regular files (and symbolic links resolving to them) are supported;
+    the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
+    advertises support for partial content download via the
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
+
+  description: |
+    Returns the headers that a corresponding GET request for the content of the
+    file specified by [$FILE_ID](#operation/lookup_file_id) would produce, without
+    the response body.
+
+    Only regular files (and symbolic links resolving to them) are supported;
+    the `Content-Length` header carries the file size and `Accept-Ranges: bytes`
+    advertises support for partial content download via the
+    [Range header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range).
+    HEAD is not supported for directories, since the resulting TAR archive is created
+    on the fly and its `Content-Length` cannot be determined up front.
+
+    ***Example cURL requests***
+
+    **Get file content headers**
+    ```bash
+    curl -I -H "X-Auth-Token: $TOKEN" \
+    -X HEAD "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content"
+
+    HTTP/1.1 200 OK
+    content-length: 15
+    accept-ranges: bytes
+    ```
+
+    See also [Download file content](#operation/download_file_content).
+
+  produces:
+    - application/octet-stream
+  responses:
+    '200':
+      description: File content headers.
+      headers:
+        Content-Length:
+          description: Size of the file content in bytes.
+          type: integer
+        Accept-Ranges:
+          description: Indicates that partial content download (byte ranges) is supported.
+          type: string
+    '400':
+      description: Invalid request (e.g. the file is a directory).
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli getFileContentHeaders id=$FILE_ID"
+
+
+# @TODO VFS-8986 add option to create the file if it does not exist
+# @TODO VFS-8986 add a variant to update a file by path (similar to create)
+put:
+  operationId: update_file_content
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: content
+  summary: Update file content
+  tags:
+    - Basic File Operations
+  x-bash-codegen-description: |
+    Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    
+    The file must exist beforehand, otherwise the operation fails with an error.
+    
+    The `offset` query parameter can be used to start writing from a certain byte
+    in the file, in such case the file is NOT truncated (bytes beyond the overwritten
+    fragment will be preserved). If no `offset` query is given, the file is truncated 
+    and the previous file content is completely overwritten.
+
+  description: |
+    Updates content of file specified by [$FILE_ID](#operation/lookup_file_id).
+    
+    The file must exist beforehand, otherwise the operation fails with an error.
+    
+    The `offset` query parameter can be used to start writing from a certain byte
+    in the file, in such case the file is NOT truncated (bytes beyond the overwritten
+    fragment will be preserved). If no `offset` query is given, the file is truncated 
+    and the previous file content is completely overwritten.
+
+    ***Example cURL requests***
+
+    **Update file content starting from specified offset:**
+    ```bash
+    # originally, the file content is  "abcdefghijklmno"
+
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/content?offset=4" \
+    -H "Content-Type: application/octet-stream" -d "WXYZ"
+
+    # upon success, the file content is "abcdWXYZijklmno"
+    ```
+  consumes:
+    - application/octet-stream
+  responses:
+    '204':
+      description: File content updated successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      required: true
+      type: string
+    - name: offset
+      in: query
+      description: | 
+        Offset at which the data sent as request body will be written to the file.
+        If not specified, the file will be completely overwritten.
+      required: false
+      type: integer
+      default: 0
+    - name: content
+      in: body
+      description: File content to be written at specified offset.
+      required: false
+      schema:
+        type: string
+        format: binary
+  x-code-samples:
+    - lang: Shell
+      source: "cat new_content.txt | oneprovider-rest-cli updateFileContent id=$PARENT_ID -"

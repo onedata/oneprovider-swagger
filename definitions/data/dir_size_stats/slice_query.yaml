@@ -1,0 +1,53 @@
+allOf:
+  - $ref: '#/definitions/DirSizeStatsQuery'
+  - type: object
+    properties:
+      mode:
+        type: string
+        enum: [slice]
+        x-discriminator-value: "slice"
+        description: |
+          Indicates the mode of the query. The `slice` mode returns a collection of slices 
+          of requested time series and metrics that were specified in the `layout` field
+          (which may express a subset of the queried collection). A metric slice is a list
+          of time windows in descending order. The list may be incomplete, since windows are created
+          as needed - along with the first measurement falling in their timespan. Missing windows 
+          should be treated as windows with zero value.
+      layout:
+        $ref: '#/definitions/TimeSeriesLayout'
+      startTimestamp:
+        type: string
+        description: |
+          Latest timestamp used to determine the starting point for descending listing of time windows. 
+          The first window to be listed is the one that includes the given timestamp in its timespan. 
+          If no such window exists, the next existing one is taken.
+      stopTimestamp:
+        type: string
+        description: |
+          Oldest timestamp used to determine the end of descending listing of time windows.  
+          The last window to be listed is the one that includes the given timestamp in its timespan. 
+          If no such window exists, the previous existing one is taken.
+      windowLimit:
+        type: string
+        description: Maximum number of time windows to be listed.
+      extendedInfo:
+        type: string
+        description: If true, information about the first and last timestamp of measurements per window will be included.
+required:
+  - mode
+  - layout
+example:
+  mode: slice
+  layout:
+    dir_count:
+      - minute
+    reg_file_and_link_count:
+      - minute
+    total_size:
+      - minute
+    storage_use_7ab46e96fdb27a2694493c2c5bd7491dch8f55:
+      - minute
+  startTimestamp: 1687513285
+  stopTimestamp: 1687499802
+  windowLimit: 31
+  extendedInfo: true

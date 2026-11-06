@@ -1,0 +1,7 @@
+type: string
+description: |
+  This attribute determines which archive will be the base archive for incremental creation of a new archive
+  (consult description of the `incremental` parameter).
+  If not set, last successfully preserved archive will be used.
+  If `incremental` is not enabled this field is ignored.
+example: ae6f78c89a97c9e78e891105f703bcb8

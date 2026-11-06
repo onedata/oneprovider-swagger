@@ -1,0 +1,7 @@
+type: object
+description: Archive delete initialization request.
+properties:
+  deletedCallback:
+    $ref: '#/definitions/ArchiveDeletedCallback'
+example:
+  deletedCallback: https://example.org/deleted_archives

@@ -1,0 +1,18 @@
+type: boolean
+description: |
+  <!--- TODO VFS-7616 refine archive params and their description-->
+  This flag determines whether symbolic links **pointing to paths outside of the dataset**
+  should be resolved during archive creation. 
+
+  If set to `true`, valid links will be resolved and their target files/directories will be 
+  copied to the archive in their place. Invalid symbolic links (not resolvable to a valid path
+  in the space) will be ignored and not included in the archive.
+
+  If set to `false`, symbolic links will be copied to the resulting archive and their target
+  paths will not be modified. Note that these symbolic links may target modifiable files in the space.
+
+  **NOTE**: Symbolic links pointing to files inside the dataset are always preserved, 
+  regardless of this setting. Their target paths are reconstructed to point to the 
+  corresponding files in the resulting archive.
+default: true
+example: false

@@ -1,0 +1,140 @@
+get:
+  operationId: list_files_recursively
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: files
+  tags:
+    - Basic File Operations
+  summary: List files recursively
+  x-bash-codegen-description: |
+    Recursively lists non-directory files (i.e regular files, symbolic links, and hard links)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to the specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
+    
+    **NOTE**: the listing may contain files that are not fully synchronized or have been deleted in parallel.
+    For that reason, it's recommended to safeguard consecutive calls referring to the directory children
+    against `ENOENT` errors.
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
+
+  description: |
+    Recursively lists non-directory files (i.e regular files, symbolic links, and hard links)
+    in directory specified by [$DIR_ID](#operation/lookup_file_id) (listing root).
+    Files are listed in lexicographical order by their paths, which are relative to the listing root directory.
+    If there is no access to the specified directory, its own relative path (`"."`) will be included in the
+    `inaccessiblePaths` field and the listing result (i.e. `files` field) will be empty.
+    
+    **NOTE**: the listing may contain files that are not fully synchronized or have been deleted in parallel.
+    For that reason, it's recommended to safeguard consecutive calls referring to the directory children
+    against `ENOENT` errors.
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
+
+    ***Example cURL requests***
+
+    **List files recursively**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$DIR_ID/files" -d '{
+      "start_after": "ParentDirName/Dir1",
+      "attributes": ["fileId", "path"]
+    }'
+
+    {
+        "files": [
+            {
+                "fileId": "FILE_ID1",
+                "path": "ParentDirName/Dir2"
+            },
+            {
+                "fileId": "FILE_ID2",
+                "path": "ParentDirName/File1.txt"
+            },
+        ],
+        "inaccessiblePaths": [
+            "ParentDirName/Dir3"
+        ],
+        "isLast": false,
+        "nextPageToken": "$PAGING_TOKEN"
+    }
+    ```
+  consumes:
+    - application/json
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of directory files and subdirectories.
+      schema:
+        $ref: '#/definitions/RecursiveFileList'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Invalid path - file or directory not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the directory to be listed.
+      type: string
+      required: true
+
+    - name: data
+      in: body
+      required: false
+      schema:
+        $ref: '#/definitions/GetRecursiveFileListRequest'
+
+    - name: legacy_options
+      in: query
+      required: false
+      description: >
+        The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+        deletion in the future major release. You may refer to the 
+        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.4/oneprovider?anchor=operation/list_files_recursively),
+        but it's recommended to use the new API with options as JSON body.
+      type: string
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli listFilesRecursively id=$FILE_ID limit=100 start_after=dir1/dir2/filename.txt"

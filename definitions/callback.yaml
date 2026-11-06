@@ -1,9 +1,0 @@
-type: object
-description: Callback definition.
-properties:
-  url:
-    type: string
-    description: The URL which should be called, when requested action completed.
-example:
-  url: 'http://monitoring.example.com:8080/notifications'
-

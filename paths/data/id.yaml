@@ -1,35 +1,132 @@
-get:
-  operationId: get_attrs
+delete:
+  operationId: remove_file
   x-onedata-gri:
     type: op_file
     id: ?OBJECTID_BINDING(id)
-    aspect: attrs
+    aspect: instance
+  tags:
+    - Basic File Operations
+  summary: Remove file
+  x-bash-codegen-description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+  description: |
+    Removes file specified by [$FILE_ID](#operation/lookup_file_id).
+    In case of a directory, all its children are recursively removed - note that
+    the operation will fail part-way if the client does not have permissions to
+    remove some of the nested files/directories.
+
+    ***Example cURL requests***
+
+    **Remove specific file**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" -X DELETE "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID"
+    ```
+    See also [Remove file at path](#operation/remove_file_at_path).
+
+  responses:
+    '204':
+      description: The file has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: File or directory Id
+      type: string
+      required: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeFile id=$FILE_ID"
+
+
+# TODO VFS-11377 remove deprecated values after next major release
+get:
+  operationId: get_attrs
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: instance
   summary: Get file attributes
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method returns either all or only selected basic attributes associated
-    with specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    By default, all attributes are returned, except for extended attributes.
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
   description: |
-    This method returns either all or only selected basic attributes associated
-    with specified file, directory or space.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method returns attributes of a file specified by [$FILE_ID](#operation/lookup_file_id).
+    By default, all attributes are returned, except for extended attributes.
+    The list of requested attributes can be optionally narrowed down, and extended attributes can be retrieved
+    using the `xattr.*` attribute(s) (where * is an extended attribute key).
+    
+    **NOTE**: since version **21.02.5**, this endpoint accepts **options as JSON body** rather than in the query string.
+    Moreover, some of the attributes have been renamed and the list of available ones has been extended.
+    The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+    deletion in the future major release. The following changes in attribute names were introduced:
+    * `file_id` -> `fileId`
+    * `mode` -> `posixPermissions`
+    * `parent_id` -> `parentFileId`
+    * `storage_group_id` -> `displayGid`
+    * `storage_user_id` -> `displayUid`
+    * `is_fully_replicated` -> `isFullyReplicatedLocally`
+    * `provider_id` -> `originProviderId`
+    * `shares` -> `directShareIds`
+    * `owner_id` -> `ownerUserId`
+    * `hardlinks_count` -> `hardlinkCount`
 
     ***Example cURL requests***
 
-    **Get file size**
+    **Get selected file attributes**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID?attribute=size"
+    curl -H "X-Auth-Token: $TOKEN" -H 'Content-type: application/json' \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" -d '{
+      "attributes": ["name", "size", "xattr.key"]
+    }'
 
     {
-      "size": 100
+        "name": "File1.txt",
+        "size": 100,
+        "xattr.key": "extended_attribute_value"
     }
     ```
+  consumes:
+    - application/json
   produces:
     - application/json
   responses:
@@ -54,33 +151,32 @@ get:
       schema:
         $ref: '#/definitions/Error'
   parameters:
-  - name: id
-    in: path
-    description: File, directory or space Id
-    type: string
-    required: true
-  - name: attribute
-    in: query
-    description: >
-      Name of attribute to query for. When accessing file via share mode
-      following attributes are unavailable: `owner_id`, `storage_group_id`,
-      `storage_user_id`, `provider_id`
-    type: string
-    enum:
-      - name
-      - owner_id
-      - type
-      - mode
-      - size
-      - atime
-      - mtime
-      - ctime
-      - storage_group_id
-      - storage_user_id
-      - shares
-      - provider_id
-      - file_id
-    required: false
+    - name: id
+      in: path
+      description: File, directory or space Id.
+      type: string
+      required: true
+
+    - name: data
+      in: body
+      required: false
+      schema:
+        type: object
+        description: Get file attributes request.
+        properties:
+          attributes:
+            $ref: '#/definitions/FileAttributeNames'
+
+    - name: legacy_options
+      in: query
+      required: false
+      description: >
+        The old behaviour of the endpoint has been retained but is **DEPRECATED** and scheduled for
+        deletion in the future major release. You may refer to the 
+        [docs for 21.02.4](https://onedata.org/#/home/api/21.02.4/oneprovider?anchor=operation/list_files_recursively),
+        but it's recommended to use the new API with options as JSON body.
+      type: string
+
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getAttrs id=$FILE_ID"
@@ -97,35 +193,31 @@ put:
   tags:
     - Basic File Operations
   x-bash-codegen-description: |
-    This method allows to set a value of a regular file attribute.
+    This method allows to set a value of a regular file attribute
+    for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    Currently only POSIX mode can be changed by
-    sending:
+    Currently only POSIX permissions can be changed by sending:
     ```
-      { "mode": "0777" }
+      { "posixPermissions": "0777" }
     ```
-    where the POSIX mode is specified in octal notation.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    where the POSIX permissions are specified in octal notation.
 
   description: |
-    This method allows to set a value of a regular file attribute.
+    This method allows to set a value of a regular file attribute
+    for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
-    Currently only POSIX mode can be changed by sending:
-      ```
-      { "mode": "0777" }
-      ```
-    where the POSIX mode is specified in octal notation.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    Currently only POSIX permissions can be changed by sending:
+    ```
+      { "posixPermissions": "0777" }
+    ```
+    where the POSIX permissions are specified in octal notation.
 
     ***Example cURL requests***
 
     **Set file POSIX mode**
     ```bash
-    curl -X PUT -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "mode": "0777" }'
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID"
+    curl -H "X-Auth-Token: $TOKEN" -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID" \
+    -H 'Content-Type: application/json' -d '{ "posixPermissions": "0777" }'
     ```
   consumes:
     - application/json
@@ -159,8 +251,13 @@ put:
     description: Attribute name and value.
     schema:
       type: object
-      additionalProperties:
-        type: string
+      properties:
+        posixPermissions:
+          description: New POSIX permissions of a file.
+          type: string
+        mode:
+          description: (deprecated) new POSIX permissions of a file.
+          type: string
   x-code-samples:
   - lang: Shell
     source: "echo '{\"mode\": \"0777\"}' | oneprovider-rest-cli setAttr id=$FILE_ID -"

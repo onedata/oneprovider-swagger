@@ -8,26 +8,28 @@ get:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    If there are no extended attributes associated with the file, this method returns
+    HTTP 200 code with an empty JSON object.
 
   description: |
-    This method returns the selected extended attributes associated with specified file,
-    directory or space.
+    This method returns the selected extended attributes associated with file
+    specified by [$FILE_ID](#operation/lookup_file_id).
 
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    If there are no extended attributes associated with the file, this method returns
+    HTTP 200 code with an empty JSON object.
 
     ***Example cURL requests***
 
     **Get extended file attributes**
     ```bash
-    curl -H "X-Auth-Token: $TOKEN" -X GET \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs?attribute=license"
 
     {
-      "license": "CC-0"
+        "license": "CC-0"
     }
     ```
   produces:
@@ -80,10 +82,17 @@ get:
     in: query
     description: >
       When set to true, this operation returns all attributes including those
-      normally not shown (e.g. json/rdf metadata, acl and cdmi attributes).
+      normally not shown (e.g. JSON/RDF metadata, ACL and CDMI attributes).
     type: boolean
     default: false
     required: false
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli getXattrs id=$FILE_ID"
@@ -100,24 +109,20 @@ put:
   tags:
     - Custom File Metadata
   x-bash-codegen-description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
   description: |
-    This method allows to set a value of a specified extended file attribute
-    leaving other ones intact.
-
-    To lookup file Id using file path, please use [this endpoint](#operation/lookup_file_id).
+    This method allows to set a value of a given extended file attributes
+    (leaving other ones intact) for a file specified by [$FILE_ID](#operation/lookup_file_id).
 
     ***Example cURL requests***
 
     **Set extended file attribute**
     ```bash
-    curl -X PUT -H "X-Auth-Token: $TOKEN" \
-    -H 'Content-type: application/json' -d '{ "license": "CC-0" }' \
-    "https://$HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs"
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X PUT "https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs" \
+    -H 'Content-Type: application/json' -d '{ "license": "CC-0" }'
     ```
   consumes:
     - application/json
@@ -153,6 +158,85 @@ put:
       type: object
       additionalProperties:
         type: string
+  - name: resolve_symlink
+    in: query
+    description: >
+      Indicates whether the operation should be performed on the symbolic link itself (`false`)
+      or on the target file that it points to (`true`).
+    type: boolean
+    default: true
   x-code-samples:
   - lang: Shell
     source: "oneprovider-rest-cli setXattr id=$FILE_ID license==CC-0"
+
+
+delete:
+  operationId: remove_xattrs
+  x-onedata-parse_body: as_json_params
+  x-onedata-gri:
+    type: op_file
+    id: ?OBJECTID_BINDING(id)
+    aspect: xattrs
+  summary: Remove file extended attributes
+  tags:
+    - Custom File Metadata
+  x-bash-codegen-description: |
+    Removes specific extended attributes from the file specified by [$FILE_ID](#operation/lookup_file_id).
+  description: |
+    Removes specific extended attributes from the file specified by [$FILE_ID](#operation/lookup_file_id).
+
+    ***Example cURL requests***
+
+    **Remove specific file extended attributes**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X DELETE https://$PROVIDER_HOST/api/v3/oneprovider/data/$FILE_ID/metadata/xattrs \
+    -H 'Content-Type: application/json' -d '{ "keys": ["license"] }'
+    ```
+  responses:
+    '204':
+      description: Specific file extended attributes has been removed.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: File not found.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: id
+      in: path
+      description: Id of the file.
+      type: string
+      required: true
+    - name: data
+      in: body
+      description: The extended attributes to remove.
+      required: true
+      schema:
+        type: object
+        properties:
+          keys:
+            type: array
+            description: List of extended attributes to remove.
+            items:
+              type: string
+    - name: resolve_symlink
+      in: query
+      description: >
+        Indicates whether the operation should be performed on the symbolic link itself (`false`)
+        or on the target file that it points to (`true`).
+      type: boolean
+      default: true
+  x-code-samples:
+    - lang: Shell
+      source: "oneprovider-rest-cli removeXattrs id=$FILE_ID keys=='[\"license\"]'"

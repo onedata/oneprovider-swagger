@@ -1,0 +1,14 @@
+type: object
+description: Dataset establish request.
+properties:
+  rootFileId:
+    type: string
+    description: Id of file or directory for which dataset should be established.
+  protectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+required:
+  - rootFileId
+example:
+  rootFileId: 00000000005CF4706775696423745F772...
+  protectionFlags:
+    - data_protection

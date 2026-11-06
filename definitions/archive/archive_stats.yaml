@@ -1,0 +1,21 @@
+type: object
+description: >
+  Archivisation job statistics.
+properties:
+  filesArchived:
+    type: integer
+    description: Counter of successfully archived files.
+  filesFailed:
+    type: integer
+    description: Counter of files for which archiving process has failed.
+  bytesArchived:
+    type: integer
+    description: Total size of already archived files in bytes.
+required:
+  - filesArchived
+  - filesFailed
+  - bytesArchived
+example:
+  filesArchived: 7940
+  filesFailed: 3
+  bytesArchived: 879245378924537

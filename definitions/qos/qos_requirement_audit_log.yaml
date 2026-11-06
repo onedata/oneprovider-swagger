@@ -1,0 +1,86 @@
+description: Audit log of QoS requirement.
+type: object
+properties:
+  isLast:
+    type: boolean
+    description: >
+      Flag indicating whether last entry in audit log was listed.
+  logEntries:
+    type: array
+    items:
+      type: object
+      properties:
+        index:
+          type: integer
+          description: |
+            Index of this log entry, used to identify the position of this log
+            in a series of logs.
+        timestamp:
+          type: integer
+          description: UNIX epoch timestamp in seconds of event described by entry.
+        content:
+          type: object
+          properties:
+            fileId:
+              type: string
+              description: Id of file for which event occured.
+            status:
+              type: string
+              enum:
+                - scheduled
+                - completed
+                - failed
+                - skipped
+            severity: 
+              type: string
+              enum:
+                - info
+                - error
+            description:
+              type: string
+              description: Detailed description of the recorded event.
+            reason:
+              $ref: '#/definitions/ErrorJson'
+          required:
+            - fileId
+            - severity
+            - status
+            - description
+      required:
+        - index
+        - timestamp
+        - content
+required:
+  - isLast
+  - logEntries
+example:
+  isLast: false
+  logEntries: [
+    {
+      "index": 0,
+      "timestamp": 1626334701662,
+      "content": {
+        "fileId": "$FILE_ID",
+        "severity": "info",
+        "status": "completed",
+        "description": "Local replica reconciled."
+      }
+    },
+    {
+      "index": 1,
+      "timestamp": 1626334701672,
+      "content": {
+        "fileId": "$FILE_ID",
+        "severity": "error",
+        "status": "failed",
+        "description": "Failed to reconcile local replica: Operation failed with POSIX error: enoent.",
+        "reason": {
+          "description": "Operation failed with POSIX error: enoent.",
+          "details": {
+            "errno": "enoent"
+          },
+          "id": "posix"
+        }
+      }
+    }
+  ]

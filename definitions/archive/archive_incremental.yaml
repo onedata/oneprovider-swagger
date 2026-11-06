@@ -1,0 +1,20 @@
+type: object
+description: |
+  This field determines whether archive is incremental - storing only files that have
+  changed in comparison to the base archive (provided under the "basedOn" key).
+  Unchanged files are preserved as hard links to the corresponding files in the base archive.
+  If does not enabled, all files belonging to the dataset are stored directly in the archive.
+properties:
+  enabled: 
+    type: boolean
+  basedOn:
+    $ref: '#/definitions/ArchiveBase'
+default: {
+  enabled: false
+}
+example: {
+  enabled: true,
+  basedOn: ae6f78c89a97c9e78e891105f703bcb8
+}
+required:
+  - enabled

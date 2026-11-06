@@ -1,0 +1,11 @@
+type: object
+description: Dataset update request.
+properties:
+  state:
+    $ref: '#/definitions/DatasetState'
+  setProtectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+  unsetProtectionFlags:
+    $ref: '#/definitions/DatasetProtectionFlags'
+example:
+  setProtectionFlags: ["data_protection"]

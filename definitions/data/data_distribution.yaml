@@ -1,0 +1,17 @@
+type: object
+description: >
+  Describes distribution of a single file among different storage providers.
+discriminator: type
+x-onedata-oneof: true
+x-onedata-subclasses:
+  - REG
+  - DIR
+properties:
+  type:
+    description: |
+      The type of the file:
+      * `REG` - regular file,
+      * `DIR` - directory,
+    enum:
+      - REG
+      - DIR

@@ -5,27 +5,56 @@ get:
     aspect: list
   tags:
     - Space
-  summary: Get all user spaces
+  summary: List all user spaces
   x-bash-codegen-description: |
-    Returns the list of all user spaces.
+    Returns the list of user spaces and their details.
+    
+    If the token presented as authorization contains any caveats limiting data access
+    to specific spaces, only the available ones show up in the result.
   description: |
-    Returns the list of all user spaces.
+    Returns the list of user spaces and their details.
+    
+    If the token presented as authorization contains any caveats limiting data access
+    to specific spaces, only the available ones show up in the result.
 
     ***Example cURL requests***
 
-    **List all user spaces**
+    **List user spaces**
     ```bash
-    curl -X GET -H "X-Auth-Token: $TOKEN" \
-    "https://$HOST/api/v3/oneprovider/spaces"
+    curl -H "X-Auth-Token: $TOKEN" -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces"
 
     [
-      {
-        "spaceId": "51306215-674a-47b7-afd1-54fa45bcaff7",
-        "name": "Space1"
+        {
+            "name": "My Space 1",
+            "providers": [
+                {
+                    "providerId": "a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74",
+                    "providerName": "MyPrivateCloud"
+                },
+                {
+                    "providerId": "b107606a22f006b82f6f665a9e6f116cch0500",
+                    "providerName": "PublicCloud1"
+                }
+            ],
+            "spaceId": "fb519d81146bcc635b890ff03a5da0fdch34fe",
+            "fileId": "094576776E667431723230677767776C6B497031394E445F6E3868677873...",
+            "dirId": "094576776E667431723230677767776C6B497031394E445F6E3868677873...",
+            "trashDirId": "6C6B497031394E445F6E3868677873094576776E66743172323067776777...",
+            "archivesDirId": "723230677767776C6B497031394E445F6E3868677873094576776E667431..."
       },
       {
-        "spaceId": "0a568302-0f5e-454d-a6bc-7da7e1bfb985",
-        "name": "Space2"
+            "name": "My Space 2",
+            "providers": [
+                {
+                    "providerId": "a0b1d2e6ad583ba1b14caf3b71bc6129ch4f74",
+                    "providerName": "MyPrivateCloud"
+                }
+            ],
+            "spaceId": "e14039c53235c44f2f25dce4c90b1f0acha61c",
+            "fileId": "000000184465677569642373706163655F73706163653123737061636531...",
+            "dirId": "000000184465677569642373706163655F73706163653123737061636531...",
+            "trashDirId": "76776E667431723230677767776C6B497031394E445F6E38686778730945...",
+            "archivesDirId": "A094576776E667431723230677767776C6B497031394E445F6E386867787..."
       }
     ]
     ```
@@ -33,18 +62,11 @@ get:
     - application/json
   responses:
     '200':
-      description: The list of all user spaces - containining their names and Id's.
+      description: The list of all user spaces and their details.
       schema:
         type: array
         items:
-          type: object
-          properties:
-              name:
-                type: string
-                description: Space name.
-              spaceId:
-                type: string
-                description: Space Id.
+          $ref: '#/definitions/Space'
     '400':
       description: Invalid request.
       schema:

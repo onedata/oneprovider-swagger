@@ -1,0 +1,375 @@
+type: object
+description: File transfer status.
+properties:
+  type:
+    type: string
+    description: Requested type of transfer.
+    enum:
+      - replication
+      - eviction
+      - migration
+  userId:
+    type: string
+    description: Id of the user that started the transfer.
+  rerunId:
+    type: string
+    description: If the transfer was rerun, this field contains the Id of the new transfer, otherwise null.
+  effectiveJobTransferId:
+    type: string
+    description: Last transfer Id in chain made of `rerunId`.
+  spaceId:
+    type: string
+    description: Id of space in context of which transfer was performed.
+  dataSourceType:
+    type: string
+    description: |
+      Indicates the method of determining files to be transferred.
+            
+      `type = "file"` - this transfer covers a single file or a whole directory
+      (recursively). When scheduling such transfer, the user must have permissions to
+      access the file/directory.
+          
+      `type = "view"` - this transfer covers files that are returned as a result of
+      querying chosen view. The view must be defined on all providers involved in
+      the process and querying it must return a valid list of file ids to be transferred.
+      For more information about views, please see
+      [here](https://onedata.org/#/home/documentation/doc/using_onedata/replication_management.html#advanced-operations-using-views).
+    enum:
+      - file
+      - view
+  fileId:
+    type: string
+    description: Id of the transferred file or directory.
+  filePath:
+    type: string
+    description: Path to the file or directory in the virtual file system.
+  viewName:
+    type: string
+    description: |
+      Name of the view that was queried to obtain the list of files to transfer.
+  queryViewParams:
+    $ref: '#/definitions/QueryViewParams'
+  transferStatus:
+    type: string
+    description: Overall status of transfer.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - replicating
+      - evicting
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  effectiveJobStatus:
+    type: string
+    description: >
+      Overall status of effective transfer job (the last one in chain
+      made of `rerunId`).
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - replicating
+      - evicting
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  replicationStatus:
+    type: string
+    description: The status of transfer replication phase.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - active
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  evictionStatus:
+    type: string
+    description: The status of transfer eviction phase.
+    enum:
+      - scheduled
+      - enqueued
+      - skipped
+      - active
+      - completed
+      - aborting
+      - cancelled
+      - failed
+  replicatingProviderId:
+    type: string
+    description: |
+      Id of provider to which data was copied, ensuring that the provider
+      has a complete replica at the end of the process.
+  evictingProviderId:
+    type: string
+    description: Id of provider from which replica(s) were removed.
+  callback:
+    type: string
+    description: Optional callback URL, which will be invoked on transfer completion.
+  filesToProcess:
+    type: integer
+    description: Total number of files in this transfer.
+  filesProcessed:
+    type: integer
+    description: Number of files already processed.
+  filesReplicated:
+    type: integer
+    description: Number of files already replicated.
+  filesEvicted:
+    type: integer
+    description: Number of files already evicted.
+  filesFailed:
+    type: integer
+    description: Number of files for which eviction or replication has failed.
+  bytesReplicated:
+    type: integer
+    description: Number of bytes already replicated.
+  scheduleTime:
+    type: integer
+    description: Schedule time in seconds (POSIX epoch timestamp).
+  startTime:
+    type: integer
+    description: Start time in seconds (POSIX epoch timestamp).
+  finishTime:
+    type: integer
+    description: Finish time in seconds (POSIX epoch timestamp).
+  lastUpdate:
+    type: integer
+    description: Last transfer update time in seconds (POSIX epoch timestamp).
+  minHist:
+    type: object
+    description: Replication statistics within the last minute, per provider.
+    additionalProperties:
+      type: array
+      description: Bytes replicated histogram for the last minute with 5 seconds window.
+      items:
+        type: integer
+  hrHist:
+    type: object
+    description: Replication statistics within the last hour, per provider.
+    additionalProperties:
+      type: array
+      description: Bytes replicated histogram for the last hour with 1 minute window.
+      items:
+        type: integer
+  dyHist:
+    type: object
+    description: Replication statistics within the last day, per provider.
+    additionalProperties:
+      type: array
+      description: Bytes replicated histogram for the last day with 1 hour window.
+      items:
+        type: integer
+  mthHist:
+    type: object
+    description: Replication statistics within the last month, per provider.
+    additionalProperties:
+      type: array
+      description: Bytes replicated histogram for the last month with 1 day window.
+      items:
+        type: integer
+required:
+  - type
+  - userId
+  - rerunId
+  - spaceId
+  - dataSourceType
+  - transferStatus
+  - replicationStatus
+  - evictionStatus
+  - replicatingProviderId
+  - evictingProviderId
+  - callback
+  - filesToProcess
+  - filesProcessed
+  - filesReplicated
+  - filesEvicted
+  - filesFailed
+  - bytesReplicated
+  - scheduleTime
+  - startTime
+  - finishTime
+  - lastUpdate
+  - minHist
+  - hrHist
+  - dyHist
+  - mthHist
+example:
+  type: replication
+  userId: admin
+  rerunId: null
+  effectiveJobTransferId: c4798eb2dbd2486fae940e6fa0a5071d
+  spaceId: 6ec1a5413b6f4e2b01a5c85a8fd797e2
+  dataSourceType: file
+  fileId: 00000000005CF4706775696423745F772D67686431633765446F4D76546D6F2D67575F3361737A7670486B477A7936587734507265584A7723394A4F355F5F396E4C31623031594576776E667431723230677767776C6B497031394E445F6E3868677873
+  filePath: /My Space 1/Dir2/file3.txt
+  transferStatus: completed
+  effectiveJobStatus: completed
+  replicationStatus: completed
+  evictionStatus: skipped
+  replicatingProviderId: HICATChd8wzbFmB6qfGby9VN7MfdXgI1qC4pULGVm8Q
+  evictingProviderId: null
+  callback: null
+  filesToProcess: 1
+  filesProcessed: 1
+  filesReplicated: 1
+  filesEvicted: 0
+  filesFailed: 0
+  bytesReplicated: 10485760000
+  scheduleTime: 1504688800
+  startTime: 15046888765
+  finishTime: 1504688814
+  lastUpdate: 1504988814
+  minHist:
+    ASDxicvuisodr78w979879wer:
+      - 419430400
+      - 1153433600
+      - 1258291200
+      - 1468006400
+      - 1048576000
+      - 1048576000
+      - 1048576000
+      - 1153433600
+      - 629145600
+      - 1258291200
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+  hrHist:
+    ASDxicvuisodr78w979879wer:
+      - 10485760000
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+  dyHist:
+    ASDxicvuisodr78w979879wer:
+      - 10485760000
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+  mthHist:
+    ASDxicvuisodr78w979879wer:
+      - 10485760000
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0

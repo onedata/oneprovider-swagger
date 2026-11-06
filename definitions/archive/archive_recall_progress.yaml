@@ -1,0 +1,20 @@
+type: object
+description: Archive recall progress.
+properties:
+  filesCopied:
+    description: Number of files copied so far.
+    type: integer
+  bytesCopied:
+    description: Number of bytes copied so far.
+    type: integer
+  filesFailed:
+    description: Number of failed files.
+    type: integer
+required:
+  - filesCopied
+  - bytesCopied
+  - filesFailed
+example:
+  filesCopied: 8
+  bytesCopied: 16384
+  filesFailed: 1

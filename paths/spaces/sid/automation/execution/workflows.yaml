@@ -1,0 +1,126 @@
+get:
+  operationId: list_workflow_executions
+  x-onedata-gri:
+    type: op_space
+    id: ?BINDING(sid)
+    aspect: atm_workflow_executions
+  tags:
+    - Workflow execution
+  summary: List workflow executions
+  x-bash-codegen-description: |
+    Returns the list of workflow execution Ids with given phase within a space.
+    The list will include only workflow executions based on schemas from 
+    inventories to which user has access.
+
+    This operation requires `space_view_atm_workflow_executions` privilege.
+  description: |
+    Returns the list of workflow execution Ids with given phase within a space.
+    The list will include only workflow executions based on schemas from 
+    inventories to which user has access.
+
+    This operation requires `space_view_atm_workflow_executions` privilege.
+
+    ***Example cURL requests***
+
+    **List at most 3 ongoing workflow executions starting from page id 757136151113c2f**
+    ```bash
+    curl -H "X-Auth-Token: $TOKEN" \
+    -X GET "https://$PROVIDER_HOST/api/v3/oneprovider/spaces/$SPACE_ID/automation/execution/workflows?phase=ongoing&limit=3&token=757136151113c2f"
+
+    {
+        "atmWorkflowExecutions": [
+            "2727a9fe5f5df6b43a8033386d2990e8ch5df6",
+            "4bd9b58f6387622bf07f7388945e4fc4ch8762",
+            "579a785181331e618b26980166b6ba2fch331e"
+        ],
+        "isLast": false,
+        "nextPageToken": "8471726779817b3a"
+    }
+    ```
+  produces:
+    - application/json
+  responses:
+    '200':
+      description: The list of workflow execution Ids.
+      schema:
+        type: object
+        properties:
+          atmWorkflowExecutions:
+            type: array
+            description: The list of workflow execution Ids.
+            items:
+              type: string
+          isLast:
+            type: boolean
+            description: Indicates whether there are more workflow execution to be listed.
+            example: false
+          nextPageToken:
+            $ref: '#/definitions/ListPageToken'
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/Error'
+    '403':
+      description: Forbidden request.
+      schema:
+        $ref: '#/definitions/Error'
+    '404':
+      description: Oneprovider REST API not available.
+      schema:
+        $ref: '#/definitions/Error'
+    '500':
+      description: Internal server error.
+      schema:
+        $ref: '#/definitions/Error'
+  parameters:
+    - name: sid
+      in: path
+      description: >
+        Space Id in which to list workflow executions.
+      type: string
+      required: true
+    - name: phase
+      in: query
+      description: Specifies the phase of workflow executions to list.
+      type: string
+      enum:
+        - waiting
+        - ongoing
+        - suspended
+        - ended
+      required: false
+      default: ongoing
+    - name: limit
+      in: query
+      description: >
+        Allows specifying maximum number of entries that should be returned. 
+        If there are more workflow executions, they can be retrieved using 
+        `offset` or `token` query parameters.
+      type: integer
+      required: false
+      maximum: 1000
+      minimum: 1
+      default: 1000
+    - name: offset
+      in: query
+      description: >
+        Offset determining beginning of the list of workflow executions returned 
+        in the response. Expressed in number of entries, further adjusts the 
+        starting point of listing indicated by `token` parameter.
+        The value can be negative, in such case entries preceding the starting 
+        point will be returned.
+      type: integer
+      required: false
+      default: 0
+    - name: token
+      in: query
+      description: >
+        Determines the starting point for listing. The listing will start from 
+        the next page (batch) of entries which follows the page previously 
+        obtained along with the corresponding `nextPageToken`.
+      type: string
+      required: false
+      default: null
+  x-code-samples:
+  - lang: Shell
+    source: "oneprovider-rest-cli sid=$SPACE_ID listWorkflowExecutions phase=ongoing limit=20 token=757136151113c2f"
